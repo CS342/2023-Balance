@@ -22,7 +22,9 @@ let package = Package(
         .library(name: "BalanceMockDataStorageProvider", targets: ["BalanceMockDataStorageProvider"]),
         .library(name: "BalanceOnboardingFlow", targets: ["BalanceOnboardingFlow"]),
         .library(name: "BalanceSchedule", targets: ["BalanceSchedule"]),
-        .library(name: "BalanceSharedContext", targets: ["BalanceSharedContext"])
+        .library(name: "BalanceSharedContext", targets: ["BalanceSharedContext"]),
+        .library(name: "Diary", targets: ["Diary"]),
+        .library(name: "Meditation", targets: ["Meditation"]),
     ],
     dependencies: [
         .package(url: "https://github.com/StanfordBDHG/CardinalKit.git", .upToNextMinor(from: "0.2.1"))
@@ -72,6 +74,14 @@ let package = Package(
         ),
         .target(
             name: "BalanceSharedContext",
+            dependencies: []
+        ),
+        .target(
+            name: "Diary",
+            dependencies: []
+        ),
+        .target(
+            name: "Meditation",
             dependencies: []
         )
     ]

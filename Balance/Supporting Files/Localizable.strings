@@ -7,6 +7,10 @@
 //
 
 
+// MARK: - Main Menu
+"MENU_TAB_TITLE" = "Main Menu";
+
+
 // MARK: - Contacts
 "CONTACTS_TAB_TITLE" = "Contacts";
 

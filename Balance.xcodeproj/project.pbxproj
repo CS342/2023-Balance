@@ -29,6 +29,9 @@
 		2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */; };
 		2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FC9759E2978E39600BA99FE /* Localizable.strings */; };
 		2FC975A82978F11A00BA99FE /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC975A72978F11A00BA99FE /* Home.swift */; };
+		5EDB5666299E14DB0023F9BE /* Diary in Frameworks */ = {isa = PBXBuildFile; productRef = 5EDB5665299E14DB0023F9BE /* Diary */; };
+		5EDB5668299E14DB0023F9BE /* Meditation in Frameworks */ = {isa = PBXBuildFile; productRef = 5EDB5667299E14DB0023F9BE /* Meditation */; };
+		5EDB566A299E200F0023F9BE /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB5669299E200F0023F9BE /* MenuView.swift */; };
 		653A2551283387FE005D4D48 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A2550283387FE005D4D48 /* Balance.swift */; };
 		653A255528338800005D4D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653A255428338800005D4D48 /* Assets.xcassets */; };
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
@@ -64,6 +67,7 @@
 		2FC94CD4298B0A1D009C8209 /* Balance.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Balance.xctestplan; sourceTree = "<group>"; };
 		2FC9759E2978E39600BA99FE /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		2FC975A72978F11A00BA99FE /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		5EDB5669299E200F0023F9BE /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		653A254D283387FE005D4D48 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A2550283387FE005D4D48 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		653A255428338800005D4D48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,9 +88,11 @@
 				2F49B77E2980407C00BCB272 /* Scheduler in Frameworks */,
 				2F59B93F298C628800C5107F /* BalanceMockDataStorageProvider in Frameworks */,
 				2F49B77A2980407C00BCB272 /* HealthKitDataSource in Frameworks */,
+				5EDB5668299E14DB0023F9BE /* Meditation in Frameworks */,
 				2F59B945298C628800C5107F /* BalanceSharedContext in Frameworks */,
 				2F49B784298041F300BCB272 /* Contact in Frameworks */,
 				2F49B7782980407C00BCB272 /* FHIR in Frameworks */,
+				5EDB5666299E14DB0023F9BE /* Diary in Frameworks */,
 				2F49B7802980418400BCB272 /* Onboarding in Frameworks */,
 				2F59B943298C628800C5107F /* BalanceSchedule in Frameworks */,
 				2F49B7762980407C00BCB272 /* CardinalKit in Frameworks */,
@@ -162,6 +168,7 @@
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
 				2FC975A72978F11A00BA99FE /* Home.swift */,
+				5EDB5669299E200F0023F9BE /* MenuView.swift */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
 			);
 			path = Balance;
@@ -224,6 +231,8 @@
 				2F59B940298C628800C5107F /* BalanceOnboardingFlow */,
 				2F59B942298C628800C5107F /* BalanceSchedule */,
 				2F59B944298C628800C5107F /* BalanceSharedContext */,
+				5EDB5665299E14DB0023F9BE /* Diary */,
+				5EDB5667299E14DB0023F9BE /* Meditation */,
 			);
 			productName = TemplateApplication;
 			productReference = 653A254D283387FE005D4D48 /* Balance.app */;
@@ -350,6 +359,7 @@
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
 				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
+				5EDB566A299E200F0023F9BE /* MenuView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,6 +810,14 @@
 		2F59B944298C628800C5107F /* BalanceSharedContext */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BalanceSharedContext;
+		};
+		5EDB5665299E14DB0023F9BE /* Diary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Diary;
+		};
+		5EDB5667299E14DB0023F9BE /* Meditation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Meditation;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
