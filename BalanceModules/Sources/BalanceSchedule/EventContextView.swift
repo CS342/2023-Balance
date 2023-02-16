@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
-import SwiftUI
 import Foundation
+import SwiftUI
 
 
 struct EventContextView: View {

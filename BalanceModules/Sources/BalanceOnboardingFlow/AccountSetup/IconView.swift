@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
-import SwiftUI
 import BalanceSharedContext
+import SwiftUI
 
 
 struct IconView: View {

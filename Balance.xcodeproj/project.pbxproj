@@ -16,7 +16,6 @@
 		2F49B7822980419C00BCB272 /* Questionnaires in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7812980419C00BCB272 /* Questionnaires */; };
 		2F49B784298041F300BCB272 /* Contact in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B783298041F300BCB272 /* Contact */; };
 		2F4E237E2989A2FE0013F3D9 /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E237D2989A2FE0013F3D9 /* OnboardingTests.swift */; };
-		2F4E23812989C5930013F3D9 /* XCTHealthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F4E23802989C5930013F3D9 /* XCTHealthKit */; };
 		2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */; };
 		2F4E23872989DB360013F3D9 /* ContactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E23862989DB360013F3D9 /* ContactsTests.swift */; };
 		2F4E23892989DB400013F3D9 /* HealthKitUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E23882989DB400013F3D9 /* HealthKitUploadTests.swift */; };
@@ -27,10 +26,12 @@
 		2F59B945298C628800C5107F /* BalanceSharedContext in Frameworks */ = {isa = PBXBuildFile; productRef = 2F59B944298C628800C5107F /* BalanceSharedContext */; };
 		2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */; };
 		2F9056EA299E2D8A003D3802 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F9056E9299E2D8A003D3802 /* GoogleService-Info.plist */; };
-		2F9056ED299E312D003D3802 /* XCTestExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056EC299E312D003D3802 /* XCTestExtensions */; };
 		2F9056EF299E3180003D3802 /* FirebaseAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056EE299E3180003D3802 /* FirebaseAccount */; };
 		2F9056F1299E3181003D3802 /* FirestoreDataStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F0299E3181003D3802 /* FirestoreDataStorage */; };
 		2F9056F3299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */; };
+		2F9056F5299E3205003D3802 /* FHIRToFirestoreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */; };
+		2F9056F8299E3267003D3802 /* XCTHealthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F7299E3267003D3802 /* XCTHealthKit */; };
+		2F9056FB299E329C003D3802 /* XCTestExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056FA299E329C003D3802 /* XCTestExtensions */; };
 		2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FC9759E2978E39600BA99FE /* Localizable.strings */; };
 		2FC975A82978F11A00BA99FE /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC975A72978F11A00BA99FE /* Home.swift */; };
 		653A2551283387FE005D4D48 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A2550283387FE005D4D48 /* Balance.swift */; };
@@ -98,6 +99,7 @@
 				2F49B7762980407C00BCB272 /* CardinalKit in Frameworks */,
 				2F59B93D298C628800C5107F /* BalanceContacts in Frameworks */,
 				2F49B77C2980407C00BCB272 /* HealthKitToFHIRAdapter in Frameworks */,
+				2F9056F5299E3205003D3802 /* FHIRToFirestoreAdapter in Frameworks */,
 				2F9056EF299E3180003D3802 /* FirebaseAccount in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,8 +115,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F4E23812989C5930013F3D9 /* XCTHealthKit in Frameworks */,
-				2F9056ED299E312D003D3802 /* XCTestExtensions in Frameworks */,
+				2F9056F8299E3267003D3802 /* XCTHealthKit in Frameworks */,
+				2F9056FB299E329C003D3802 /* XCTestExtensions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +229,7 @@
 				2F9056EE299E3180003D3802 /* FirebaseAccount */,
 				2F9056F0299E3181003D3802 /* FirestoreDataStorage */,
 				2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */,
+				2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */,
 			);
 			productName = TemplateApplication;
 			productReference = 653A254D283387FE005D4D48 /* Balance.app */;
@@ -265,8 +268,8 @@
 			);
 			name = BalanceUITests;
 			packageProductDependencies = (
-				2F4E23802989C5930013F3D9 /* XCTHealthKit */,
-				2F9056EC299E312D003D3802 /* XCTestExtensions */,
+				2F9056F7299E3267003D3802 /* XCTHealthKit */,
+				2F9056FA299E329C003D3802 /* XCTestExtensions */,
 			);
 			productName = TemplateApplicationUITests;
 			productReference = 653A256728338800005D4D48 /* BalanceUITests.xctest */;
@@ -306,8 +309,8 @@
 			mainGroup = 653A2544283387FE005D4D48;
 			packageReferences = (
 				2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */,
-				2F4E237F2989C5930013F3D9 /* XCRemoteSwiftPackageReference "XCTHealthKit" */,
-				2F9056EB299E312D003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */,
+				2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */,
+				2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */,
 			);
 			productRefGroup = 653A254E283387FE005D4D48 /* Products */;
 			projectDirPath = "";
@@ -730,15 +733,15 @@
 				minimumVersion = 0.3.1;
 			};
 		};
-		2F4E237F2989C5930013F3D9 /* XCRemoteSwiftPackageReference "XCTHealthKit" */ = {
+		2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StanfordBDHG/XCTHealthKit";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.3.0;
+				minimumVersion = 0.3.1;
 			};
 		};
-		2F9056EB299E312D003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */ = {
+		2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StanfordBDHG/XCTestExtensions";
 			requirement = {
@@ -789,11 +792,6 @@
 			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
 			productName = Contact;
 		};
-		2F4E23802989C5930013F3D9 /* XCTHealthKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F4E237F2989C5930013F3D9 /* XCRemoteSwiftPackageReference "XCTHealthKit" */;
-			productName = XCTHealthKit;
-		};
 		2F59B93C298C628800C5107F /* BalanceContacts */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BalanceContacts;
@@ -814,11 +812,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = BalanceSharedContext;
 		};
-		2F9056EC299E312D003D3802 /* XCTestExtensions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F9056EB299E312D003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */;
-			productName = XCTestExtensions;
-		};
 		2F9056EE299E3180003D3802 /* FirebaseAccount */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
@@ -833,6 +826,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
 			productName = FirestoreStoragePrefixUserIdAdapter;
+		};
+		2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
+			productName = FHIRToFirestoreAdapter;
+		};
+		2F9056F7299E3267003D3802 /* XCTHealthKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */;
+			productName = XCTHealthKit;
+		};
+		2F9056FA299E329C003D3802 /* XCTestExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */;
+			productName = XCTestExtensions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

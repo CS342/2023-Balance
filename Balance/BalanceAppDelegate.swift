@@ -6,6 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
+import BalanceMockDataStorageProvider
+import BalanceSchedule
 import CardinalKit
 import FHIR
 import FHIRToFirestoreAdapter
@@ -19,8 +21,6 @@ import HealthKitToFHIRAdapter
 import Questionnaires
 import Scheduler
 import SwiftUI
-import BalanceMockDataStorageProvider
-import BalanceSchedule
 
 
 class BalanceAppDelegate: CardinalKitAppDelegate {
