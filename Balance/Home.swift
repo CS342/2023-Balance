@@ -46,8 +46,12 @@ struct HomeView: View {
 }
 
 
+#if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(BalanceScheduler())
+            .environmentObject(MockDataStorageProvider())
     }
 }
+#endif
