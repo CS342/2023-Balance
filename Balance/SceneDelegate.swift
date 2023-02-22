@@ -1,8 +1,9 @@
 //
-//  SceneDelegate.swift
-//  Balance
+// This source file is part of the CS342 2023 Balance Team Application project
 //
-//  Created by Vishnu Ravi on 2/22/23.
+// SPDX-FileCopyrightText: 2023 Stanford University
+//
+// SPDX-License-Identifier: MIT
 //
 
 import UIKit
@@ -10,14 +11,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var spotifyController = SpotifyViewController.shared
-
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window!.makeKeyAndVisible()
-//        window!.windowScene = windowScene
-//        window!.rootViewController = rootViewController
-//    }
 
     // For spotify authorization and authentication flow
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
