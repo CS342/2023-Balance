@@ -8,7 +8,8 @@
 import UIKit
 
 class SpotifyViewController: UIViewController {
-    // MARK: - Spotify Authorization & Configuration
+    static let shared = SpotifyViewController()
+
     var responseCode: String? {
         didSet {
             fetchAccessToken { (dictionary, error) in
@@ -32,15 +33,15 @@ class SpotifyViewController: UIViewController {
         return appRemote
     }()
 
-    var accessToken = UserDefaults.standard.string(forKey: accessTokenKey) {
+    var accessToken = UserDefaults.standard.string(forKey: SpotifyConfig.accessTokenKey) {
         didSet {
             let defaults = UserDefaults.standard
-            defaults.set(accessToken, forKey: accessTokenKey)
+            defaults.set(accessToken, forKey: SpotifyConfig.accessTokenKey)
         }
     }
 
     lazy var configuration: SPTConfiguration = {
-        let configuration = SPTConfiguration(clientID: spotifyClientId, redirectURL: redirectUri!)
+        let configuration = SPTConfiguration(clientID: SpotifyConfig.spotifyClientId, redirectURL: SpotifyConfig.redirectUri!)
         // Set the playURI to a non-nil value so that Spotify plays music after authenticating
         // otherwise another app switch will be required
         configuration.playURI = ""
@@ -111,7 +112,7 @@ class SpotifyViewController: UIViewController {
 
     @objc func didTapConnect(_ button: UIButton) {
         guard let sessionManager = sessionManager else { return }
-        sessionManager.initiateSession(with: scopes, options: .clientOnly)
+        sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
     }
 
     // MARK: - Private Helpers
@@ -136,7 +137,6 @@ extension SpotifyViewController {
         connectLabel.translatesAutoresizingMaskIntoConstraints = false
         connectLabel.text = "Connect your Spotify account"
         connectLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        connectLabel.textColor = .systemGreen
 
         connectButton.translatesAutoresizingMaskIntoConstraints = false
         connectButton.configuration = .filled()
@@ -161,7 +161,6 @@ extension SpotifyViewController {
     }
 
     func layout() {
-
         stackView.addArrangedSubview(connectLabel)
         stackView.addArrangedSubview(connectButton)
         stackView.addArrangedSubview(imageView)
@@ -255,18 +254,18 @@ extension SpotifyViewController {
         let url = URL(string: "https://accounts.spotify.com/api/token")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let spotifyAuthKey = "Basic \((spotifyClientId + ":" + spotifyClientSecretKey).data(using: .utf8)!.base64EncodedString())"
+        let spotifyAuthKey = "Basic \((SpotifyConfig.spotifyClientId + ":" + SpotifyConfig.spotifyClientSecretKey).data(using: .utf8)!.base64EncodedString())"
         request.allHTTPHeaderFields = ["Authorization": spotifyAuthKey,
                                        "Content-Type": "application/x-www-form-urlencoded"]
 
         var requestBodyComponents = URLComponents()
-        let scopeAsString = stringScopes.joined(separator: " ")
+        let scopeAsString = SpotifyConfig.stringScopes.joined(separator: " ")
 
         requestBodyComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: spotifyClientId),
+            URLQueryItem(name: "client_id", value: SpotifyConfig.spotifyClientId),
             URLQueryItem(name: "grant_type", value: "authorization_code"),
             URLQueryItem(name: "code", value: responseCode!),
-            URLQueryItem(name: "redirect_uri", value: redirectUri?.absoluteString),
+            URLQueryItem(name: "redirect_uri", value: SpotifyConfig.redirectUri?.absoluteString),
             URLQueryItem(name: "code_verifier", value: ""), // not currently used
             URLQueryItem(name: "scope", value: scopeAsString),
         ]
@@ -274,10 +273,10 @@ extension SpotifyViewController {
         request.httpBody = requestBodyComponents.query?.data(using: .utf8)
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data,                              // is there data
-                  let response = response as? HTTPURLResponse,  // is there HTTP response
-                  (200 ..< 300) ~= response.statusCode,         // is statusCode 2XX
-                  error == nil else {                           // was there no error, otherwise ...
+            guard let data = data,
+                  let response = response as? HTTPURLResponse,
+                  (200 ..< 300) ~= response.statusCode,
+                  error == nil else {
                       print("Error fetching token \(error?.localizedDescription ?? "")")
                       return completion(nil, error)
                   }
