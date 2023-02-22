@@ -48,11 +48,11 @@ struct HomeView: View {
                 .tabItem {
                     Label("Music", systemImage: "music.note")
                 }
-//            MockUploadList()
-//                .tag(Tabs.mockUpload)
-//                .tabItem {
-//                    Label("MOCK_UPLOAD_TAB_TITLE", systemImage: "server.rack")
-//                }
+            MockUploadList()
+                .tag(Tabs.mockUpload)
+                .tabItem {
+                    Label("MOCK_UPLOAD_TAB_TITLE", systemImage: "server.rack")
+                }
         }
     }
 }
