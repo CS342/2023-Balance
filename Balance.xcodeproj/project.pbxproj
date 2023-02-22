@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2761583B29A63BD4006C7AC1 /* SpotifyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583A29A63BD4006C7AC1 /* SpotifyConstants.swift */; };
+		2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */; };
 		2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */; };
 		2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584529A6448C006C7AC1 /* SceneDelegate.swift */; };
 		2761584929A6512E006C7AC1 /* SpotifyiOS in Frameworks */ = {isa = PBXBuildFile; productRef = 2761584829A6512E006C7AC1 /* SpotifyiOS */; };
+		2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584A29A6548B006C7AC1 /* SpotifyView.swift */; };
+		2761584D29A654FD006C7AC1 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584C29A654FD006C7AC1 /* Music.swift */; };
 		2F49B7762980407C00BCB272 /* CardinalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7752980407B00BCB272 /* CardinalKit */; };
 		2F49B7782980407C00BCB272 /* FHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7772980407C00BCB272 /* FHIR */; };
 		2F49B77A2980407C00BCB272 /* HealthKitDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7792980407C00BCB272 /* HealthKitDataSource */; };
@@ -62,10 +64,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2761583A29A63BD4006C7AC1 /* SpotifyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyConstants.swift; sourceTree = "<group>"; };
+		2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyConfig.swift; sourceTree = "<group>"; };
 		2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyViewController.swift; sourceTree = "<group>"; };
 		2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Balance-Bridging-Header.h"; sourceTree = "<group>"; };
 		2761584529A6448C006C7AC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2761584A29A6548B006C7AC1 /* SpotifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyView.swift; sourceTree = "<group>"; };
+		2761584C29A654FD006C7AC1 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		2F49B77329803E8F00BCB272 /* BalanceModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BalanceModules; sourceTree = "<group>"; };
 		2F4E237D2989A2FE0013F3D9 /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceAppTestingSetup.swift; sourceTree = "<group>"; };
@@ -132,6 +136,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2761584E29A662DE006C7AC1 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				2761584C29A654FD006C7AC1 /* Music.swift */,
+				2761584A29A6548B006C7AC1 /* SpotifyView.swift */,
+				2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */,
+				2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		2FC9759D2978E30800BA99FE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,13 +185,12 @@
 		653A254F283387FE005D4D48 /* Balance */ = {
 			isa = PBXGroup;
 			children = (
+				2761584E29A662DE006C7AC1 /* Music */,
 				653A2550283387FE005D4D48 /* Balance.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
 				2FC975A72978F11A00BA99FE /* Home.swift */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
-				2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */,
-				2761583A29A63BD4006C7AC1 /* SpotifyConstants.swift */,
 				2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */,
 				2761584529A6448C006C7AC1 /* SceneDelegate.swift */,
 			);
@@ -375,7 +389,9 @@
 				2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
-				2761583B29A63BD4006C7AC1 /* SpotifyConstants.swift in Sources */,
+				2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */,
+				2761584D29A654FD006C7AC1 /* Music.swift in Sources */,
+				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
 				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
 				2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */,
 			);

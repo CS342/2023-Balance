@@ -21,9 +21,9 @@ struct Balance: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
-                .sheet(isPresented: !$completedOnboardingFlow) {
-                    OnboardingFlow()
-                }
+                //.sheet(isPresented: !$completedOnboardingFlow) {
+                //    OnboardingFlow()
+                //}
                 .testingSetup()
                 .cardinalKit(appDelegate)
         }

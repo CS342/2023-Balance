@@ -18,6 +18,7 @@ struct HomeView: View {
         case schedule
         case contact
         case mockUpload
+        case music
     }
     
     
@@ -36,11 +37,16 @@ struct HomeView: View {
                 .tabItem {
                     Label("CONTACTS_TAB_TITLE", systemImage: "person.fill")
                 }
-            MockUploadList()
-                .tag(Tabs.mockUpload)
+            Music()
+                .tag(Tabs.music)
                 .tabItem {
-                    Label("MOCK_UPLOAD_TAB_TITLE", systemImage: "server.rack")
+                    Label("Music", systemImage: "music.note")
                 }
+//            MockUploadList()
+//                .tag(Tabs.mockUpload)
+//                .tabItem {
+//                    Label("MOCK_UPLOAD_TAB_TITLE", systemImage: "server.rack")
+//                }
         }
     }
 }
