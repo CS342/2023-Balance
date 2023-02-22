@@ -11,8 +11,8 @@ import Foundation
 struct SpotifyConfig {
     static let accessTokenKey = "access-token-key"
     static let redirectUri = URL(string: "balanceapp://")
-    static let spotifyClientId = "5ad120eaa5484078844d8be16d30909a"
-    static let spotifyClientSecretKey = "<KEY_REMOVED>"
+    static let spotifyClientId = "8ba603d39b824bca95c047d8f443d209"
+    static let spotifyClientSecretKey = "d84f48e46a1948bd943cbc9f1d47a429"
     
     static let scopes: SPTScope = [
         .userReadEmail,
