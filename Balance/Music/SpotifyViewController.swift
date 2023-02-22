@@ -98,7 +98,8 @@ class SpotifyViewController: UIViewController {
     }
 
     // MARK: - Actions
-    @objc func didTapPauseOrPlay(_ button: UIButton) {
+    @objc
+    func didTapPauseOrPlay(_ button: UIButton) {
         if let lastPlayerState = lastPlayerState, lastPlayerState.isPaused {
             appRemote.playerAPI?.resume(nil)
         } else {
@@ -106,14 +107,18 @@ class SpotifyViewController: UIViewController {
         }
     }
 
-    @objc func didTapSignOut(_ button: UIButton) {
+    @objc
+    func didTapSignOut(_ button: UIButton) {
         if appRemote.isConnected == true {
             appRemote.disconnect()
         }
     }
 
-    @objc func didTapConnect(_ button: UIButton) {
-        guard let sessionManager = sessionManager else { return }
+    @objc
+    func didTapConnect(_ button: UIButton) {
+        guard let sessionManager = sessionManager else {
+            return
+        }
         sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
     }
 

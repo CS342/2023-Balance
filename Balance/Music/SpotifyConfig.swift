@@ -10,7 +10,7 @@ import Foundation
 
 struct SpotifyConfig {
     static let accessTokenKey = "access-token-key"
-    static let redirectUri = URL(string:"balanceapp://")
+    static let redirectUri = URL(string: "balanceapp://")
     static let spotifyClientId = "5ad120eaa5484078844d8be16d30909a"
     static let spotifyClientSecretKey = "<KEY_REMOVED>"
     
@@ -32,7 +32,7 @@ struct SpotifyConfig {
         .userReadPlaybackState,
         .userReadCurrentlyPlaying,
         .userFollowRead,
-        .userFollowModify,
+        .userFollowModify
     ]
     
     static let stringScopes = [
@@ -53,6 +53,6 @@ struct SpotifyConfig {
         "user-read-playback-position",
         "user-read-recently-played",
         "user-follow-read",
-        "user-follow-modify",
+        "user-follow-modify"
     ]
 }

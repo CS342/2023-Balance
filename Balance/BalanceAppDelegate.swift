@@ -86,5 +86,4 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
         sceneConfig.delegateClass = SceneDelegate.self
         return sceneConfig
     }
-
 }
