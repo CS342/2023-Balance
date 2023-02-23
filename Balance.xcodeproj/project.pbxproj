@@ -34,6 +34,7 @@
 		2F9056FB299E329C003D3802 /* XCTestExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056FA299E329C003D3802 /* XCTestExtensions */; };
 		2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FC9759E2978E39600BA99FE /* Localizable.strings */; };
 		2FC975A82978F11A00BA99FE /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC975A72978F11A00BA99FE /* Home.swift */; };
+		5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAFCE1929A75990006CCD66 /* LocalStorage */; };
 		653A2551283387FE005D4D48 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A2550283387FE005D4D48 /* Balance.swift */; };
 		653A255528338800005D4D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653A255428338800005D4D48 /* Assets.xcassets */; };
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
@@ -90,6 +91,7 @@
 				2F59B93F298C628800C5107F /* BalanceMockDataStorageProvider in Frameworks */,
 				2F9056F1299E3181003D3802 /* FirestoreDataStorage in Frameworks */,
 				2F49B77A2980407C00BCB272 /* HealthKitDataSource in Frameworks */,
+				5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */,
 				2F9056F3299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter in Frameworks */,
 				2F59B945298C628800C5107F /* BalanceSharedContext in Frameworks */,
 				2F49B784298041F300BCB272 /* Contact in Frameworks */,
@@ -230,6 +232,7 @@
 				2F9056F0299E3181003D3802 /* FirestoreDataStorage */,
 				2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */,
 				2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */,
+				5AAFCE1929A75990006CCD66 /* LocalStorage */,
 			);
 			productName = TemplateApplication;
 			productReference = 653A254D283387FE005D4D48 /* Balance.app */;
@@ -841,6 +844,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */;
 			productName = XCTestExtensions;
+		};
+		5AAFCE1929A75990006CCD66 /* LocalStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
+			productName = LocalStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
