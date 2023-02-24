@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F39333729A8A5690035A05C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
 		2F49B7762980407C00BCB272 /* CardinalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7752980407B00BCB272 /* CardinalKit */; };
 		2F49B7782980407C00BCB272 /* FHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7772980407C00BCB272 /* FHIR */; };
 		2F49B77A2980407C00BCB272 /* HealthKitDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7792980407C00BCB272 /* HealthKitDataSource */; };
@@ -89,6 +90,7 @@
 				2F49B77E2980407C00BCB272 /* Scheduler in Frameworks */,
 				2F59B93F298C628800C5107F /* BalanceMockDataStorageProvider in Frameworks */,
 				2F9056F1299E3181003D3802 /* FirestoreDataStorage in Frameworks */,
+				2F39333729A8A5690035A05C /* FirebaseFirestore in Frameworks */,
 				2F49B77A2980407C00BCB272 /* HealthKitDataSource in Frameworks */,
 				2F9056F3299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter in Frameworks */,
 				2F59B945298C628800C5107F /* BalanceSharedContext in Frameworks */,
@@ -230,6 +232,7 @@
 				2F9056F0299E3181003D3802 /* FirestoreDataStorage */,
 				2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */,
 				2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */,
+				2F39333629A8A5690035A05C /* FirebaseFirestore */,
 			);
 			productName = TemplateApplication;
 			productReference = 653A254D283387FE005D4D48 /* Balance.app */;
@@ -311,6 +314,7 @@
 				2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */,
 				2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */,
 				2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */,
+				2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 653A254E283387FE005D4D48 /* Products */;
 			projectDirPath = "";
@@ -725,6 +729,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.5.0;
+			};
+		};
 		2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StanfordBDHG/CardinalKit";
@@ -752,6 +764,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2F39333629A8A5690035A05C /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		2F49B7752980407B00BCB272 /* CardinalKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;

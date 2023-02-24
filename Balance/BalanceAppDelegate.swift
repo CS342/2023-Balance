@@ -1,5 +1,5 @@
 //
-// This source file is part of the CS342 2023 Balance Team Application project
+// This source file is part of the CS342 2023 PAWS Team Application project
 //
 // SPDX-FileCopyrightText: 2023 Stanford University
 //
@@ -8,11 +8,12 @@
 
 import BalanceMockDataStorageProvider
 import BalanceSchedule
+import BalanceSharedContext
 import CardinalKit
 import FHIR
 import FHIRToFirestoreAdapter
 import FirebaseAccount
-import FirebaseAuth
+import class FirebaseFirestore.FirestoreSettings
 import FirestoreDataStorage
 import FirestoreStoragePrefixUserIdAdapter
 import HealthKit
@@ -26,8 +27,13 @@ import SwiftUI
 class BalanceAppDelegate: CardinalKitAppDelegate {
     override var configuration: Configuration {
         Configuration(standard: FHIR()) {
-            if !CommandLine.arguments.contains("--disableFirebase") {
-                FirebaseAccountConfiguration(emulatorSettings: (host: "localhost", port: 9099))
+            BalanceScheduler()
+            if !FeatureFlags.disableFirebase {
+                if FeatureFlags.useFirebaseEmulator {
+                    FirebaseAccountConfiguration(emulatorSettings: (host: "localhost", port: 9099))
+                } else {
+                    FirebaseAccountConfiguration()
+                }
                 firestore
             }
             if HKHealthStore.isHealthDataAvailable() {
@@ -35,18 +41,25 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
             }
             QuestionnaireDataSource()
             MockDataStorageProvider()
-            BalanceScheduler()
         }
     }
     
     
     private var firestore: Firestore<FHIR> {
-        Firestore(
+        var firestoreSettings = FirestoreSettings()
+        if FeatureFlags.useFirebaseEmulator {
+            let settings = FirestoreSettings()
+            settings.host = "localhost:8080"
+            settings.isPersistenceEnabled = false
+            settings.isSSLEnabled = false
+        }
+        
+        return Firestore(
             adapter: {
                 FHIRToFirestoreAdapter()
                 FirestoreStoragePrefixUserIdAdapter()
             },
-            settings: .emulator
+            settings: firestoreSettings
         )
     }
     
