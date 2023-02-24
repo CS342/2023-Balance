@@ -31,8 +31,11 @@ struct DiaryHomeView: View {
                     PastDiaryEntry(note)
                 }
             }
-        }.sheet(isPresented: $showingEditor) {
-            DiaryNoteEntryView(vm: vm)
+        }   .sheet(isPresented: $showingEditor) {
+                DiaryNoteEntryView(vm: vm)
+            .task {
+                await vm.readFromStorage()
+            }
         }
     }
 }

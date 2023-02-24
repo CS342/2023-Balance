@@ -41,6 +41,10 @@ struct DiaryNoteEntryView: View {
                     vm.notes.append(note)
                     title = ""
                     text = ""
+
+                    Task {
+                        await vm.saveToStorage()
+                    }
                 }.buttonStyle(.borderedProminent)
 
                 Button("Burn") {

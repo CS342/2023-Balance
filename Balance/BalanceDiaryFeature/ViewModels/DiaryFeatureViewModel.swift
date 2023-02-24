@@ -17,10 +17,10 @@ class DiaryFeatureViewModel: ObservableObject {
         Note(id: UUID().uuidString, title: "Note 1", text: "Sample note 1", date: Date().previousDate()),
     ]
 
-    func saveToStorage(_ notes: [Note]) async {
+    func saveToStorage() async {
         do {
             try await localStorage.store(
-                notes,
+                self.notes,
                 storageKey: storageKey,
                 settings: .encryptedUsingKeyChain()
             )
