@@ -8,6 +8,7 @@
 import SwiftUI
     
 struct DiaryHomeView: View {
+    @StateObject var vm = DiaryFeatureViewModel()
     @State private var showingEditor = false
 
     var body: some View {
@@ -26,14 +27,12 @@ struct DiaryHomeView: View {
                 .font(.title.bold())
 
             ScrollView {
-                PastDiaryEntry(
-                    date: String( "Date"),
-                    title: String("Note Name"),
-                    text: String("Note body text")
-                )
+                ForEach(vm.notes, id: \.self) { note in
+                    PastDiaryEntry(note)
+                }
             }
         }.sheet(isPresented: $showingEditor) {
-            DiaryNoteEntryView()
+            DiaryNoteEntryView(vm: vm)
         }
     }
 }

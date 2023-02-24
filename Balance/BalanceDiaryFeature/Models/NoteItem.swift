@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct NoteItem: Codable, Hashable, Identifiable {
-    let id: Int
+public struct NoteItem: Codable, Hashable, Identifiable {
+    public let id: Int
     let text: String
     var date = Date()
     var dateText: String {

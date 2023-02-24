@@ -9,22 +9,19 @@
 import SwiftUI
 
 public struct PastDiaryEntry: View {
-    private let date: String
-    private let title: String
-    private let text: String
+    private var note: Note
     
     public var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(date)
+                Text(note.date.timeSinceDate(fromDate: Date()))
                     .bold()
-                
-                Text(title)
+                Text(note.title)
                     .font(.title.bold())
-                Text(text)
+                Text(note.text)
                     .font(.title3)
                     .foregroundColor(.gray)
-                    . lineLimit(3)
+                    .lineLimit(3)
             }
             Image(systemName: "chevron.right")
                 .offset(x: 140)
@@ -36,20 +33,14 @@ public struct PastDiaryEntry: View {
         .cornerRadius(15)
         .shadow(color: Color.black.opacity(0.08), radius: 5)
     }
-    
-    public init(date: String, title: String, text: String) {
-        self.date = date
-        self.title = title
-        self.text = text
+
+    public init(_ note: Note) {
+        self.note = note
     }
 }
 
 struct PastDiaryEntry_Previews: PreviewProvider {
     static var previews: some View {
-        PastDiaryEntry(
-            date: String( "Date"),
-            title: String("Note Name"),
-            text: String("Note body text")
-        )
+        PastDiaryEntry(Note(id: "1234", title: "Title", text: "Text", date: Date().previousDate()))
     }
 }
