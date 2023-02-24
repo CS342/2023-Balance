@@ -9,12 +9,6 @@
 import SwiftUI
 import CardinalKit
 
-struct Note: Codable, Equatable  {
-    let title: String
-    let text: String
-    let date: Date
-}
-
 struct DiaryNoteEntryView: View {
     @State private var title = ""
     @State private var text: String = "This is some editable text..."

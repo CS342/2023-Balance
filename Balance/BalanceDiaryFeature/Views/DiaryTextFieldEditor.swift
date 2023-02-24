@@ -3,16 +3,6 @@ import SwiftUI
 //all code that I found online but uses TextField
 let dateFormatter = DateFormatter()
 
-struct NoteItem: Codable, Hashable, Identifiable {
-    let id: Int
-    let text: String
-    var date = Date()
-    var dateText: String {
-        dateFormatter.dateFormat = "MMM d yyyy, h:mm a"
-        return dateFormatter.string(from: date)
-    }
-}
-
 struct ContentView : View {
     @State var items: [NoteItem] = {
         guard let data = UserDefaults.standard.data(forKey: "notes") else { return [] }
