@@ -46,9 +46,8 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
     
     
     private var firestore: Firestore<FHIR> {
-        var firestoreSettings = FirestoreSettings()
+        let settings = FirestoreSettings()
         if FeatureFlags.useFirebaseEmulator {
-            let settings = FirestoreSettings()
             settings.host = "localhost:8080"
             settings.isPersistenceEnabled = false
             settings.isSSLEnabled = false
@@ -59,7 +58,7 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
                 FHIRToFirestoreAdapter()
                 FirestoreStoragePrefixUserIdAdapter()
             },
-            settings: firestoreSettings
+            settings: settings
         )
     }
     
