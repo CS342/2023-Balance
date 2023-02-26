@@ -9,7 +9,18 @@ import SwiftUI
 
 struct MeditationView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        //ScrollView(.vertical){
+            VStack{
+                VideoView(videoID: "0ZKqLcWdG-4")
+                    .frame(minHeight: 0, maxHeight: UIScreen.main.bounds.height * 0.3).cornerRadius(12).padding(.horizontal, 24)
+                VideoView(videoID: "iN6g2mr0p3Q")
+                    .frame(minHeight: 0, maxHeight: UIScreen.main.bounds.height * 0.3).cornerRadius(12).padding(.horizontal, 24)
+                VideoView(videoID: "F0WYFXxhPGY")
+                    .frame(minHeight: 0, maxHeight: UIScreen.main.bounds.height * 0.3).cornerRadius(12).padding(.horizontal, 24)
+                VideoView(videoID: "vQxTUQhVbg4")
+                    .frame(minHeight: 0, maxHeight: UIScreen.main.bounds.height * 0.3).cornerRadius(12).padding(.horizontal, 24)
+            }
+        //}
     }
 }
 
