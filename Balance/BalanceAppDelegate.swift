@@ -22,7 +22,6 @@ import Questionnaires
 import Scheduler
 import SwiftUI
 
-
 class BalanceAppDelegate: CardinalKitAppDelegate {
     override var configuration: Configuration {
         Configuration(standard: FHIR()) {
