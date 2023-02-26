@@ -10,10 +10,8 @@
 		2720083929A7E5790052908D /* HeaderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083429A7E4C20052908D /* HeaderMenu.swift */; };
 		2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083529A7E4C20052908D /* DiaryHomeView.swift */; };
 		2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */; };
-		2720083C29A7E5810052908D /* DiaryTextFieldEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083729A7E4C20052908D /* DiaryTextFieldEditor.swift */; };
 		2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083829A7E4C20052908D /* PastDiaryEntry.swift */; };
 		2720084329A843B90052908D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084229A843B90052908D /* Note.swift */; };
-		2720084529A843DF0052908D /* NoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084429A843DF0052908D /* NoteItem.swift */; };
 		2720084829A844250052908D /* DiaryFeatureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084729A844250052908D /* DiaryFeatureViewModel.swift */; };
 		2720084B29A84A980052908D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084A29A84A980052908D /* Date.swift */; };
 		2F49B7762980407C00BCB272 /* CardinalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7752980407B00BCB272 /* CardinalKit */; };
@@ -71,10 +69,8 @@
 		2720083429A7E4C20052908D /* HeaderMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMenu.swift; sourceTree = "<group>"; };
 		2720083529A7E4C20052908D /* DiaryHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryHomeView.swift; sourceTree = "<group>"; };
 		2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryNoteEntryView.swift; sourceTree = "<group>"; };
-		2720083729A7E4C20052908D /* DiaryTextFieldEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTextFieldEditor.swift; sourceTree = "<group>"; };
 		2720083829A7E4C20052908D /* PastDiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastDiaryEntry.swift; sourceTree = "<group>"; };
 		2720084229A843B90052908D /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		2720084429A843DF0052908D /* NoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteItem.swift; sourceTree = "<group>"; };
 		2720084729A844250052908D /* DiaryFeatureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryFeatureViewModel.swift; sourceTree = "<group>"; };
 		2720084A29A84A980052908D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		2F49B77329803E8F00BCB272 /* BalanceModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BalanceModules; sourceTree = "<group>"; };
@@ -166,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				2720084229A843B90052908D /* Note.swift */,
-				2720084429A843DF0052908D /* NoteItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -176,7 +171,6 @@
 			children = (
 				2720083529A7E4C20052908D /* DiaryHomeView.swift */,
 				2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */,
-				2720083729A7E4C20052908D /* DiaryTextFieldEditor.swift */,
 				2720083429A7E4C20052908D /* HeaderMenu.swift */,
 				2720083829A7E4C20052908D /* PastDiaryEntry.swift */,
 			);
@@ -425,7 +419,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2720084529A843DF0052908D /* NoteItem.swift in Sources */,
 				2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */,
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
 				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
@@ -434,7 +427,6 @@
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
 				2720084829A844250052908D /* DiaryFeatureViewModel.swift in Sources */,
 				2720083929A7E5790052908D /* HeaderMenu.swift in Sources */,
-				2720083C29A7E5810052908D /* DiaryTextFieldEditor.swift in Sources */,
 				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
 				2720084B29A84A980052908D /* Date.swift in Sources */,
 				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
