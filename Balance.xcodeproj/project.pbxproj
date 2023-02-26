@@ -742,7 +742,7 @@
 			repositoryURL = "https://github.com/StanfordBDHG/CardinalKit";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.3.1;
+				minimumVersion = 0.3.2;
 			};
 		};
 		2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */ = {
@@ -750,7 +750,7 @@
 			repositoryURL = "https://github.com/StanfordBDHG/XCTHealthKit";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.3.1;
+				minimumVersion = 0.3.3;
 			};
 		};
 		2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */ = {
