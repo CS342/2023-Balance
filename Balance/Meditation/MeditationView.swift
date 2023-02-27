@@ -11,7 +11,7 @@ struct MeditationView: View {
     var body: some View {
         VStack{
             HeaderMenu(title: "Guided Meditation")
-            Text("Liked").font(.title2).bold()
+            Text("Liked").font(.title).bold()
             ScrollView (.horizontal) {
                 HStack{
                     VideoView(videoID: "0ZKqLcWdG-4")
@@ -24,7 +24,7 @@ struct MeditationView: View {
                         .frame(width: 400, height: 250)
                 }
             }
-            Text("All Meditations").font(.title2).bold()
+            Text("All Meditations").font(.title).bold()
             ScrollView (.horizontal) {
                 HStack{
                     VideoView(videoID: "0ZKqLcWdG-4")
