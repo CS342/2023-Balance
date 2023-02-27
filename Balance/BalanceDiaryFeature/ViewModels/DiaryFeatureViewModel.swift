@@ -1,8 +1,9 @@
 //
-//  DiaryFeatureViewModel.swift
-//  Balance
+// This source file is part of the CS342 2023 Balance Team Application project
 //
-//  Created by Vishnu Ravi on 2/23/23.
+// SPDX-FileCopyrightText: 2023 Stanford University
+//
+// SPDX-License-Identifier: MIT
 //
 
 import Foundation
@@ -13,9 +14,7 @@ class DiaryFeatureViewModel: ObservableObject {
     var localStorage = LocalStorage<FHIR>()
     let storageKey = "BALANCE_NOTES"
     
-    @Published var notes: [Note] = [
-        Note(id: UUID().uuidString, title: "Note 1", text: "Sample note 1", date: Date().previousDate()),
-    ]
+    @Published var notes: [Note] = []
 
     func saveToStorage() async {
         do {

@@ -27,10 +27,8 @@ struct DiaryHomeView: View {
             Text("Previous Entries")
                 .font(.title.bold())
 
-            ScrollView {
-                ForEach(vm.notes, id: \.self) { note in
-                    PastDiaryEntry(note)
-                }
+            List($vm.notes, id: \.self, editActions: .delete) { $note in
+                PastDiaryEntry(note)
             }
         }   .sheet(isPresented: $showingEditor) {
                 DiaryNoteEntryView(vm: vm)
