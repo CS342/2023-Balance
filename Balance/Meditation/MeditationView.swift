@@ -9,8 +9,22 @@ import SwiftUI
 
 struct MeditationView: View {
     var body: some View {
-        NavigationView {
+        VStack{
             HeaderMenu(title: "Guided Meditation")
+            Text("Liked").font(.title2).bold()
+            ScrollView (.horizontal) {
+                HStack{
+                    VideoView(videoID: "0ZKqLcWdG-4")
+                        .frame(width: 400, height: 250)
+                    VideoView(videoID: "iN6g2mr0p3Q")
+                        .frame(width: 400, height: 250)
+                    VideoView(videoID: "F0WYFXxhPGY")
+                        .frame(width: 400, height: 250)
+                    VideoView(videoID: "vQxTUQhVbg4")
+                        .frame(width: 400, height: 250)
+                }
+            }
+            Text("All Meditations").font(.title2).bold()
             ScrollView (.horizontal) {
                 HStack{
                     VideoView(videoID: "0ZKqLcWdG-4")

@@ -47,9 +47,10 @@ public struct HeaderMenu: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.bottom, 20)
-        .padding(.top, 60)
+        .padding(.top, 100)
         .background(.blue)
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
+        .offset(y:-100)
     }
     
     public init(title: String) {

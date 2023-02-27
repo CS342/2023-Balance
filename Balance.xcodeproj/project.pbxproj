@@ -146,7 +146,6 @@
 		4ACC786029AC0B590048D1D1 /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
-				4ACC786529AC39A40048D1D1 /* HeaderMenu.swift */,
 				4ACC786129AC0BEC0048D1D1 /* Youtube.swift */,
 				4ACC786329AC0C070048D1D1 /* MeditationView.swift */,
 			);
@@ -179,6 +178,7 @@
 		653A254F283387FE005D4D48 /* Balance */ = {
 			isa = PBXGroup;
 			children = (
+				4ACC786529AC39A40048D1D1 /* HeaderMenu.swift */,
 				4ACC786029AC0B590048D1D1 /* Meditation */,
 				653A2550283387FE005D4D48 /* Balance.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
