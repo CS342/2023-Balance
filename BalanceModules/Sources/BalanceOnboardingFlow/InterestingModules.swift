@@ -42,7 +42,7 @@ struct InterestingModules: View {
                 print("PKCanvas view-related views are currently skipped on Intel-based iOS simulators due to a metal bug on the simulator.")
                 onboardingSteps.append(.accountSetup)
                 #else
-                onboardingSteps.append(.consent)
+                onboardingSteps.append(.accountSetup)
                 #endif
             }
         )

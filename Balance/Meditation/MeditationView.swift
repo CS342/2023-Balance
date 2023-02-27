@@ -10,6 +10,7 @@ import SwiftUI
 struct MeditationView: View {
     var body: some View {
         NavigationView {
+            HeaderMenu(title: "Guided Meditation")
             ScrollView (.horizontal) {
                 HStack{
                     VideoView(videoID: "0ZKqLcWdG-4")

@@ -78,8 +78,8 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "--showOnbarding"
-            isEnabled = "NO">
+            argument = "--showOnboarding"
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
