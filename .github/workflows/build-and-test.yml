@@ -26,7 +26,8 @@ jobs:
     with:
       artifactname: Balance.xcresult
       runsonlabels: '["macOS", "self-hosted"]'
-      fastlanelane: test
+      setupfirebaseemulator: true
+      customcommand: "firebase emulators:exec 'fastlane test'"
   uploadcoveragereport:
     name: Upload Coverage Report
     needs: buildandtest
