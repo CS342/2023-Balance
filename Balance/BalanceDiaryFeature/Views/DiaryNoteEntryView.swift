@@ -16,6 +16,7 @@ struct DiaryNoteEntryView: View {
     @State private var savedNotes: [Note] = []
     @State private var burningNote = false
     @State private var burnComplete = false
+    @Binding var showingEditor: Bool
     //@EnvironmentObject private var burningNote: Bool
     
     var body: some View {
@@ -50,6 +51,8 @@ struct DiaryNoteEntryView: View {
                         Task {
                             await vm.saveToStorage()
                         }
+
+                        self.showingEditor.toggle()
                     }.buttonStyle(.borderedProminent)
                     
                     Button("Burn") {
@@ -77,8 +80,7 @@ struct DiaryNoteEntryView: View {
 struct DiaryNoteEntryView_Previews: PreviewProvider {
     static var previews: some View {
         let vm = DiaryFeatureViewModel()
-
-        DiaryNoteEntryView(vm: vm)
+        DiaryNoteEntryView(vm: vm, showingEditor: .constant(false))
     }
 }
 

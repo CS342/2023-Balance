@@ -14,7 +14,6 @@ struct DiaryHomeView: View {
     var body: some View {
         VStack {
             HeaderMenu()
-            
 
             Spacer()
 
@@ -31,7 +30,10 @@ struct DiaryHomeView: View {
                 PastDiaryEntry(note)
             }
         }   .sheet(isPresented: $showingEditor) {
-                DiaryNoteEntryView(vm: vm)
+                DiaryNoteEntryView(
+                    vm: vm,
+                    showingEditor: self.$showingEditor
+                )
             .task {
                 await vm.readFromStorage()
             }
