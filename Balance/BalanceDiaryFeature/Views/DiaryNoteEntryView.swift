@@ -73,7 +73,7 @@ struct DiaryNoteEntryView: View {
                 }
             }
             if burningNote {
-                BurnedView(burningNote: $burningNote, text: $text)
+                BurnedView(burningNote: $burningNote, text: $text, title: $title)
             }
         }
     }

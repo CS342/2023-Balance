@@ -17,10 +17,9 @@ import UIKit
 
 struct BurnedView: View {
     @State var frameImage: String = ""
-    //@Environment(\.dismiss) var dismiss
     @Binding var burningNote: Bool
-    //@Binding var burnComplete: Bool
     @Binding var text: String
+    @Binding var title: String
     
     var body: some View {
         VStack(alignment: .center){
@@ -46,6 +45,7 @@ struct BurnedView: View {
                 Timer.invalidate()
                 burningNote.toggle()
                 text = "This is some editable text..."
+                title = ""
             }
         });
     }
@@ -53,7 +53,7 @@ struct BurnedView: View {
 
 struct BurnedView_Previews: PreviewProvider {
     static var previews: some View {
-        BurnedView(burningNote: .constant(true), text: .constant("Hi"))
+        BurnedView(burningNote: .constant(true), text: .constant("Hi"), title: .constant("My Diary Entry"))
     }
 }
 
