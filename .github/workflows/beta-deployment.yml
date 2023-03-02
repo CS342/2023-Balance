@@ -18,11 +18,10 @@ jobs:
   buildandtest:
     name: Build and Test
     uses: ./.github/workflows/build-and-test.yml
-    secrets: inherit
   iosapptestflightdeployment:
     name: iOS App TestFlight Deployment
     needs: buildandtest
-    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
+    uses: CS342/.github/.github/workflows/xcodebuild-or-fastlane.yml@v1
     secrets: inherit
     with:
       artifactname: Balance.xcresult
