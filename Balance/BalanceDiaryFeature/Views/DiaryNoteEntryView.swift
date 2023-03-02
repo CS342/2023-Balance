@@ -1,5 +1,5 @@
 //
-// This source file is part of the CS342 2023 Application project
+// This source file is part of the CS342 2023 Balance project
 //
 // SPDX-FileCopyrightText: 2023 Stanford University
 //
@@ -10,7 +10,7 @@ import SwiftUI
 import CardinalKit
 
 struct DiaryNoteEntryView: View {
-    @ObservedObject var vm: DiaryFeatureViewModel
+    @ObservedObject var store: NoteStore
     @State private var title = ""
     @State private var text: String = "This is some editable text..."
     @State private var savedNotes: [Note] = []
@@ -44,12 +44,14 @@ struct DiaryNoteEntryView: View {
                             text: text,
                             date: Date()
                         )
-                        vm.notes.append(note)
+                        store.notes.append(note)
                         title = ""
                         text = ""
                         
-                        Task {
-                            await vm.saveToStorage()
+                        NoteStore.save(notes: store.notes) { result in
+                            if case .failure(let error) = result {
+                                print(error.localizedDescription)
+                            }
                         }
 
                         self.showingEditor.toggle()
@@ -79,8 +81,8 @@ struct DiaryNoteEntryView: View {
 
 struct DiaryNoteEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        let vm = DiaryFeatureViewModel()
-        DiaryNoteEntryView(vm: vm, showingEditor: .constant(false))
+        let store = NoteStore()
+        DiaryNoteEntryView(store: store, showingEditor: .constant(false))
     }
 }
 

@@ -1,5 +1,5 @@
 //
-// This source file is part of the CS342 2023 Application project
+// This source file is part of the CS342 2023 Balance project
 //
 // SPDX-FileCopyrightText: 2023 Stanford University
 //

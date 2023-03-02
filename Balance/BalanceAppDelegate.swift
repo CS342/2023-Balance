@@ -37,6 +37,7 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
             QuestionnaireDataSource()
             MockDataStorageProvider()
             BalanceScheduler()
+            LocalStorage()
         }
     }
     

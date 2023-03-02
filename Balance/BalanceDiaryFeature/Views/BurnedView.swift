@@ -1,10 +1,13 @@
 //
-//  BurnedView.swift
-//  Balance
+// This source file is part of the CS342 2023 Balance project
 //
-//  Created by Alexis Lowber on 2/26/23.
+// SPDX-FileCopyrightText: 2023 Stanford University
 //
-//code based on: https://betterprogramming.pub/how-to-create-amazing-animations-in-swiftui-3c2970ee6e0
+// code based on: https://betterprogramming.pub/how-to-create-amazing-animations-in-swiftui-3c2970ee6e0
+//
+// SPDX-License-Identifier: MIT
+//
+
 
 import SwiftUI
 import UIKit
