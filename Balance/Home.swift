@@ -7,10 +7,10 @@
 //
 
 import BalanceContacts
-import BalanceMockDataStorageProvider
 import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
+import BalanceMockDataStorageProvider
 
 
 struct HomeView: View {
@@ -19,6 +19,7 @@ struct HomeView: View {
         case contact
         case mockUpload
         case music
+        case diary
     }
     
     
@@ -44,8 +45,10 @@ struct HomeView: View {
                 }
             MockUploadList()
                 .tag(Tabs.mockUpload)
+            DiaryHomeView()
+                .tag(Tabs.diary)
                 .tabItem {
-                    Label("MOCK_UPLOAD_TAB_TITLE", systemImage: "server.rack")
+                    Label("Diary", systemImage: "book")
                 }
         }
     }
