@@ -11,8 +11,9 @@ import CardinalKit
 
 struct DiaryNoteEntryView: View {
     @ObservedObject var store: NoteStore
-    @State private var title = ""
-    @State private var text: String = "This is some editable text..."
+    @State public var id = UUID().uuidString
+    @State public var title = ""
+    @State public var text: String = "This is some editable text..."
     @State private var savedNotes: [Note] = []
     @State private var burningNote = false
     @State private var burnComplete = false
@@ -39,7 +40,7 @@ struct DiaryNoteEntryView: View {
                 HStack(spacing: 100) {
                     Button("Save") {
                         let note = Note(
-                            id: UUID().uuidString,
+                            id: id,
                             title: title,
                             text: text,
                             date: Date()

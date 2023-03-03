@@ -10,6 +10,8 @@ import SwiftUI
 
 public struct PastDiaryEntry: View {
     private var note: Note
+    @StateObject var store = NoteStore()
+    @State private var showingEditor = false
     
     public var body: some View {
         HStack {
@@ -25,7 +27,24 @@ public struct PastDiaryEntry: View {
             }
             Image(systemName: "chevron.right")
                 .offset(x: 140)
+            
+            Spacer()
+            
+            Button("Edit") {
+                self.showingEditor.toggle()
+            }.buttonStyle(.borderedProminent)
+
+            Spacer()
         }
+        .sheet(isPresented: $showingEditor) {
+                DiaryNoteEntryView(
+                    store: store,
+                    id: note.id,
+                    title: note.title,
+                    text: note.text,
+                    showingEditor: self.$showingEditor
+                )
+            }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(20)
         .frame(width: 350)
