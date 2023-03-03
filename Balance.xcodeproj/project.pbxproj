@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2720083929A7E5790052908D /* HeaderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083429A7E4C20052908D /* HeaderMenu.swift */; };
+		2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083529A7E4C20052908D /* DiaryHomeView.swift */; };
+		2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */; };
+		2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083829A7E4C20052908D /* PastDiaryEntry.swift */; };
+		2720084329A843B90052908D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084229A843B90052908D /* Note.swift */; };
+		2720084B29A84A980052908D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084A29A84A980052908D /* Date.swift */; };
+		276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276222BC29B0E3E100FCB4C5 /* NoteStore.swift */; };
 		2F39333729A8A5690035A05C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
 		2F49B7762980407C00BCB272 /* CardinalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7752980407B00BCB272 /* CardinalKit */; };
 		2F49B7782980407C00BCB272 /* FHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7772980407C00BCB272 /* FHIR */; };
@@ -35,6 +42,8 @@
 		2F9056FB299E329C003D3802 /* XCTestExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056FA299E329C003D3802 /* XCTestExtensions */; };
 		2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FC9759E2978E39600BA99FE /* Localizable.strings */; };
 		2FC975A82978F11A00BA99FE /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC975A72978F11A00BA99FE /* Home.swift */; };
+		5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAFCE1929A75990006CCD66 /* LocalStorage */; };
+		5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9516F729AC387A0031F202 /* BurnedView.swift */; };
 		653A2551283387FE005D4D48 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A2550283387FE005D4D48 /* Balance.swift */; };
 		653A255528338800005D4D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653A255428338800005D4D48 /* Assets.xcassets */; };
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
@@ -59,6 +68,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2720083429A7E4C20052908D /* HeaderMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMenu.swift; sourceTree = "<group>"; };
+		2720083529A7E4C20052908D /* DiaryHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryHomeView.swift; sourceTree = "<group>"; };
+		2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryNoteEntryView.swift; sourceTree = "<group>"; };
+		2720083829A7E4C20052908D /* PastDiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastDiaryEntry.swift; sourceTree = "<group>"; };
+		2720084229A843B90052908D /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		2720084A29A84A980052908D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		276222BC29B0E3E100FCB4C5 /* NoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStore.swift; sourceTree = "<group>"; };
 		2F49B77329803E8F00BCB272 /* BalanceModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BalanceModules; sourceTree = "<group>"; };
 		2F4E237D2989A2FE0013F3D9 /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceAppTestingSetup.swift; sourceTree = "<group>"; };
@@ -70,6 +86,7 @@
 		2FC94CD4298B0A1D009C8209 /* Balance.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Balance.xctestplan; sourceTree = "<group>"; };
 		2FC9759E2978E39600BA99FE /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		2FC975A72978F11A00BA99FE /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		5E9516F729AC387A0031F202 /* BurnedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedView.swift; sourceTree = "<group>"; };
 		653A254D283387FE005D4D48 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A2550283387FE005D4D48 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		653A255428338800005D4D48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,6 +109,7 @@
 				2F9056F1299E3181003D3802 /* FirestoreDataStorage in Frameworks */,
 				2F39333729A8A5690035A05C /* FirebaseFirestore in Frameworks */,
 				2F49B77A2980407C00BCB272 /* HealthKitDataSource in Frameworks */,
+				5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */,
 				2F9056F3299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter in Frameworks */,
 				2F59B945298C628800C5107F /* BalanceSharedContext in Frameworks */,
 				2F49B784298041F300BCB272 /* Contact in Frameworks */,
@@ -125,6 +143,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2720083329A7E4C20052908D /* BalanceDiaryFeature */ = {
+			isa = PBXGroup;
+			children = (
+				276222BB29B0E3D300FCB4C5 /* Store */,
+				2720084929A84A800052908D /* Extensions */,
+				2720084629A844020052908D /* Views */,
+				2720084129A843B00052908D /* Models */,
+			);
+			path = BalanceDiaryFeature;
+			sourceTree = "<group>";
+		};
+		2720084129A843B00052908D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2720084229A843B90052908D /* Note.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2720084629A844020052908D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2720083529A7E4C20052908D /* DiaryHomeView.swift */,
+				2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */,
+				2720083429A7E4C20052908D /* HeaderMenu.swift */,
+				2720083829A7E4C20052908D /* PastDiaryEntry.swift */,
+				5E9516F729AC387A0031F202 /* BurnedView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2720084929A84A800052908D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2720084A29A84A980052908D /* Date.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		276222BB29B0E3D300FCB4C5 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				276222BC29B0E3E100FCB4C5 /* NoteStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
 		2FC9759D2978E30800BA99FE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +228,7 @@
 		653A254F283387FE005D4D48 /* Balance */ = {
 			isa = PBXGroup;
 			children = (
+				2720083329A7E4C20052908D /* BalanceDiaryFeature */,
 				653A2550283387FE005D4D48 /* Balance.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
@@ -232,6 +298,7 @@
 				2F9056F0299E3181003D3802 /* FirestoreDataStorage */,
 				2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */,
 				2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */,
+				5AAFCE1929A75990006CCD66 /* LocalStorage */,
 				2F39333629A8A5690035A05C /* FirebaseFirestore */,
 			);
 			productName = TemplateApplication;
@@ -359,10 +426,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */,
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
+				5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */,
+				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
+				2720084329A843B90052908D /* Note.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
+				2720083929A7E5790052908D /* HeaderMenu.swift in Sources */,
 				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
+				2720084B29A84A980052908D /* Date.swift in Sources */,
+				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
+				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,6 +933,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */;
 			productName = XCTestExtensions;
+		};
+		5AAFCE1929A75990006CCD66 /* LocalStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
+			productName = LocalStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
