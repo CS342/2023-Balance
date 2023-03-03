@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */; };
+		2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */; };
+		2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584529A6448C006C7AC1 /* SceneDelegate.swift */; };
+		2761584929A6512E006C7AC1 /* SpotifyiOS in Frameworks */ = {isa = PBXBuildFile; productRef = 2761584829A6512E006C7AC1 /* SpotifyiOS */; };
+		2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584A29A6548B006C7AC1 /* SpotifyView.swift */; };
+		2761584D29A654FD006C7AC1 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584C29A654FD006C7AC1 /* Music.swift */; };
 		2720083929A7E5790052908D /* HeaderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083429A7E4C20052908D /* HeaderMenu.swift */; };
 		2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083529A7E4C20052908D /* DiaryHomeView.swift */; };
 		2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */; };
@@ -68,13 +74,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2720083429A7E4C20052908D /* HeaderMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMenu.swift; sourceTree = "<group>"; };
-		2720083529A7E4C20052908D /* DiaryHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryHomeView.swift; sourceTree = "<group>"; };
-		2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryNoteEntryView.swift; sourceTree = "<group>"; };
-		2720083829A7E4C20052908D /* PastDiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastDiaryEntry.swift; sourceTree = "<group>"; };
-		2720084229A843B90052908D /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		2720084A29A84A980052908D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		276222BC29B0E3E100FCB4C5 /* NoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStore.swift; sourceTree = "<group>"; };
 		2F49B77329803E8F00BCB272 /* BalanceModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BalanceModules; sourceTree = "<group>"; };
 		2F4E237D2989A2FE0013F3D9 /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceAppTestingSetup.swift; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		653A256728338800005D4D48 /* BalanceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A256B28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerAndQuestionnaireTests.swift; sourceTree = "<group>"; };
 		653A258928339462005D4D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceDebug.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +120,7 @@
 				2F59B93D298C628800C5107F /* BalanceContacts in Frameworks */,
 				2F49B77C2980407C00BCB272 /* HealthKitToFHIRAdapter in Frameworks */,
 				2F9056F5299E3205003D3802 /* FHIRToFirestoreAdapter in Frameworks */,
+				2761584929A6512E006C7AC1 /* SpotifyiOS in Frameworks */,
 				2F9056EF299E3180003D3802 /* FirebaseAccount in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,53 +144,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2720083329A7E4C20052908D /* BalanceDiaryFeature */ = {
-			isa = PBXGroup;
-			children = (
-				276222BB29B0E3D300FCB4C5 /* Store */,
-				2720084929A84A800052908D /* Extensions */,
-				2720084629A844020052908D /* Views */,
-				2720084129A843B00052908D /* Models */,
-			);
-			path = BalanceDiaryFeature;
-			sourceTree = "<group>";
-		};
-		2720084129A843B00052908D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				2720084229A843B90052908D /* Note.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		2720084629A844020052908D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				2720083529A7E4C20052908D /* DiaryHomeView.swift */,
-				2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */,
-				2720083429A7E4C20052908D /* HeaderMenu.swift */,
-				2720083829A7E4C20052908D /* PastDiaryEntry.swift */,
-				5E9516F729AC387A0031F202 /* BurnedView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		2720084929A84A800052908D /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				2720084A29A84A980052908D /* Date.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		276222BB29B0E3D300FCB4C5 /* Store */ = {
-			isa = PBXGroup;
-			children = (
-				276222BC29B0E3E100FCB4C5 /* NoteStore.swift */,
-			);
-			path = Store;
-			sourceTree = "<group>";
-		};
 		2FC9759D2978E30800BA99FE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,12 +182,13 @@
 		653A254F283387FE005D4D48 /* Balance */ = {
 			isa = PBXGroup;
 			children = (
-				2720083329A7E4C20052908D /* BalanceDiaryFeature */,
 				653A2550283387FE005D4D48 /* Balance.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
 				2FC975A72978F11A00BA99FE /* Home.swift */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
+				2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */,
+				2761584529A6448C006C7AC1 /* SceneDelegate.swift */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -298,8 +253,6 @@
 				2F9056F0299E3181003D3802 /* FirestoreDataStorage */,
 				2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */,
 				2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */,
-				5AAFCE1929A75990006CCD66 /* LocalStorage */,
-				2F39333629A8A5690035A05C /* FirebaseFirestore */,
 			);
 			productName = TemplateApplication;
 			productReference = 653A254D283387FE005D4D48 /* Balance.app */;
@@ -357,6 +310,7 @@
 				TargetAttributes = {
 					653A254C283387FE005D4D48 = {
 						CreatedOnToolsVersion = 13.4;
+						LastSwiftMigration = 1420;
 					};
 					653A255C28338800005D4D48 = {
 						CreatedOnToolsVersion = 13.4;
@@ -381,7 +335,6 @@
 				2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */,
 				2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */,
 				2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */,
-				2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 653A254E283387FE005D4D48 /* Products */;
 			projectDirPath = "";
@@ -428,16 +381,10 @@
 			files = (
 				2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */,
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
-				5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */,
-				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2720084329A843B90052908D /* Note.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
-				2720083929A7E5790052908D /* HeaderMenu.swift in Sources */,
 				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
-				2720084B29A84A980052908D /* Date.swift in Sources */,
-				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
-				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,13 +542,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Balance/Supporting Files/Balance.entitlements";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Balance/BalanceDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Balance/Supporting\\ Files",
+					"$(PROJECT_DIR)/Balance",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Balance/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Balance;
@@ -624,6 +577,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -631,6 +585,8 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				"SWIFT_ELicenseRef-TemplateApplication_LOC_STRINGS" = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Balance/Balance-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -641,6 +597,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Balance/Supporting Files/Balance.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -649,6 +606,11 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 637867499T;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Balance/Supporting\\ Files",
+					"$(PROJECT_DIR)/Balance",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Balance/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Balance;
@@ -671,6 +633,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -679,6 +642,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				"SWIFT_ELicenseRef-TemplateApplication_LOC_STRINGS" = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Balance/Balance-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -804,14 +768,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.5.0;
-			};
-		};
 		2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StanfordBDHG/CardinalKit";
@@ -839,11 +795,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2F39333629A8A5690035A05C /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
 		2F49B7752980407B00BCB272 /* CardinalKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
