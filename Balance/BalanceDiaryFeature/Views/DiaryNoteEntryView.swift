@@ -15,9 +15,7 @@ struct DiaryNoteEntryView: View {
     @State private var text: String = "This is some editable text..."
     @State private var savedNotes: [Note] = []
     @State private var burningNote = false
-    @State private var burnComplete = false
     @Binding var showingEditor: Bool
-    //@EnvironmentObject private var burningNote: Bool
     
     var body: some View {
         ZStack {
@@ -32,7 +30,6 @@ struct DiaryNoteEntryView: View {
                         if (self.text == "This is some editable text...") {
                             self.text = ""
                         }
-                        burnComplete.toggle()
                     }
                     .padding()
                 
