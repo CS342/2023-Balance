@@ -68,6 +68,14 @@ struct DiaryNoteEntryView: View {
                     }.buttonStyle(.borderedProminent)
                     
                     Button("Burn") {
+                        let indexOfNote = store.notes.firstIndex { note in
+                            return note.id == currentNote.id
+                        }
+
+                        if let indexOfNote {
+                            store.notes.remove(at: indexOfNote)
+                        }
+                        
                         burningNote.toggle()
                     }
                 }
@@ -88,7 +96,11 @@ struct DiaryNoteEntryView: View {
             }
 
             if burningNote {
-                BurnedView(burningNote: $burningNote, text: $text)
+                BurnedView(
+                    burningNote: $burningNote,
+                    text: $text,
+                    showingEditor: $showingEditor
+                )
             }
         }
     }

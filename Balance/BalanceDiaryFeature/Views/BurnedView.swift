@@ -21,6 +21,7 @@ struct BurnedView: View {
     @Binding var burningNote: Bool
     //@Binding var burnComplete: Bool
     @Binding var text: String
+    @Binding var showingEditor: Bool
     
     var body: some View {
         VStack(alignment: .center){
@@ -45,17 +46,17 @@ struct BurnedView: View {
             if (frameIndex > numFrames) {
                 Timer.invalidate()
                 burningNote.toggle()
-                text = "This is some editable text..."
+                showingEditor.toggle()
             }
         });
     }
 }
 
-struct BurnedView_Previews: PreviewProvider {
-    static var previews: some View {
-        BurnedView(burningNote: .constant(true), text: .constant("Hi"))
-    }
-}
+//struct BurnedView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BurnedView(burningNote: .constant(true), text: .constant("Hi"))
+//    }
+//}
 
 /*func animatedImages(for name: String) -> [UIImage] {
     
