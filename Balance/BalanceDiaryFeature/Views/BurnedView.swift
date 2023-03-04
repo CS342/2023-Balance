@@ -12,15 +12,9 @@
 import SwiftUI
 import UIKit
 
-/*var fire_animation_images: [UIImage] = load("landmarkData.json")
-*/
-
 struct BurnedView: View {
     @State var frameImage: String = ""
-    //@Environment(\.dismiss) var dismiss
     @Binding var burningNote: Bool
-    //@Binding var burnComplete: Bool
-    @Binding var text: String
     @Binding var showingEditor: Bool
     
     var body: some View {
@@ -28,7 +22,6 @@ struct BurnedView: View {
             Image(frameImage)
                 .resizable()
                 .frame(width: 400, height: 875, alignment: .center)
-                //.scaledToFill()
                 .aspectRatio(contentMode: .fill)
                 .onAppear(perform: updateFrame)
                 .edgesIgnoringSafeArea(.all)
@@ -52,20 +45,11 @@ struct BurnedView: View {
     }
 }
 
-//struct BurnedView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BurnedView(burningNote: .constant(true), text: .constant("Hi"))
-//    }
-//}
-
-/*func animatedImages(for name: String) -> [UIImage] {
-    
-    var i = 0
-    var images = [UIImage]()
-    
-    while let image = UIImage(named: "\(name)/\(i)") {
-        images.append(image)
-        i += 1
+struct BurnedView_Previews: PreviewProvider {
+    static var previews: some View {
+        BurnedView(
+            burningNote: .constant(true),
+            showingEditor: .constant(false)
+        )
     }
-    return images
-*/
+}
