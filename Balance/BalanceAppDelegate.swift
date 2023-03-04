@@ -24,6 +24,7 @@ import Questionnaires
 import Scheduler
 import SwiftUI
 
+
 class BalanceAppDelegate: CardinalKitAppDelegate {
     override var configuration: Configuration {
         Configuration(standard: FHIR()) {
@@ -74,15 +75,5 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
         } adapter: {
             HealthKitToFHIRAdapter()
         }
-    }
-
-    func application(
-      _ application: UIApplication,
-      configurationForConnecting connectingSceneSession: UISceneSession,
-      options: UIScene.ConnectionOptions
-    ) -> UISceneConfiguration {
-        let sceneConfig = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
-        sceneConfig.delegateClass = SceneDelegate.self
-        return sceneConfig
     }
 }
