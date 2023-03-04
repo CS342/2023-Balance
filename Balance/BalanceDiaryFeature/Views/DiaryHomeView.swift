@@ -11,6 +11,7 @@ import SwiftUI
 struct DiaryHomeView: View {
     @StateObject var store = NoteStore()
     @State private var showingEditor = false
+    @State private var currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
@@ -20,6 +21,7 @@ struct DiaryHomeView: View {
             Spacer()
 
             Button("Write a Note") {
+                self.currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
                 self.showingEditor.toggle()
             }.buttonStyle(.borderedProminent)
 
@@ -30,7 +32,12 @@ struct DiaryHomeView: View {
 
             List {
                 ForEach(store.notes, id: \.self) { note in
-                    PastDiaryEntry(note)
+                    Button(action: {
+                        self.currentNote = note
+                        self.showingEditor.toggle()
+                    }) {
+                        PastDiaryEntry(note)
+                    }
                 }
                 .onDelete(perform: delete)
             }
@@ -38,7 +45,8 @@ struct DiaryHomeView: View {
         .sheet(isPresented: $showingEditor) {
                 DiaryNoteEntryView(
                     store: store,
-                    showingEditor: self.$showingEditor
+                    currentNote: $currentNote,
+                    showingEditor: $showingEditor
                 )
             }
         .onAppear {

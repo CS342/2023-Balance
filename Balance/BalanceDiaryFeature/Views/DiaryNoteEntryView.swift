@@ -11,14 +11,16 @@ import CardinalKit
 
 struct DiaryNoteEntryView: View {
     @ObservedObject var store: NoteStore
-    @State public var id = UUID().uuidString
-    @State public var title = ""
-    @State public var text: String = "This is some editable text..."
+    @Binding var currentNote: Note
+    @Binding var showingEditor: Bool
+
+    @State private var id = UUID().uuidString
+    @State private var title = ""
+    @State private var text: String = "This is some editable text..."
+
     @State private var savedNotes: [Note] = []
     @State private var burningNote = false
     @State private var burnComplete = false
-    @Binding var showingEditor: Bool
-    //@EnvironmentObject private var burningNote: Bool
     
     var body: some View {
         ZStack {
@@ -40,14 +42,21 @@ struct DiaryNoteEntryView: View {
                 HStack(spacing: 100) {
                     Button("Save") {
                         let note = Note(
-                            id: id,
+                            id: currentNote.id,
                             title: title,
                             text: text,
                             date: Date()
                         )
-                        store.notes.append(note)
-                        title = ""
-                        text = ""
+
+                        let indexOfNote = store.notes.firstIndex { note in
+                            return note.id == currentNote.id
+                        }
+
+                        if let indexOfNote {
+                            store.notes[indexOfNote] = note
+                        } else {
+                            store.notes.append(note)
+                        }
                         
                         NoteStore.save(notes: store.notes) { result in
                             if case .failure(let error) = result {
@@ -72,18 +81,26 @@ struct DiaryNoteEntryView: View {
                         Text(note.text)
                     }
                 }
+            }.onAppear {
+                self.title = currentNote.title
+                self.text = currentNote.text
+                self.id = currentNote.id
             }
+
             if burningNote {
                 BurnedView(burningNote: $burningNote, text: $text)
             }
         }
     }
+
 }
 
-struct DiaryNoteEntryView_Previews: PreviewProvider {
-    static var previews: some View {
-        let store = NoteStore()
-        DiaryNoteEntryView(store: store, showingEditor: .constant(false))
-    }
-}
+//struct DiaryNoteEntryView_Previews: PreviewProvider {
+//    @State var currentNote = Note(id: UUID().uuidString, title: "Sample Note", text: "Test", date: Date())
+//
+//    static var previews: some View {
+//        let store = NoteStore()
+//        DiaryNoteEntryView(store: store, currentNote: $currentNote, showingEditor: .constant(false))
+//    }
+//}
 
