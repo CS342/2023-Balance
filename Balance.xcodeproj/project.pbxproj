@@ -17,7 +17,8 @@
 		2F39333729A8A5690035A05C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
 		2761583B29A63BD4006C7AC1 /* SpotifyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583A29A63BD4006C7AC1 /* SpotifyConstants.swift */; };
 		2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */; };
-		2761583F29A63FBE006C7AC1 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2761583E29A63FBE006C7AC1 /* SpotifyiOS.framework */; };
+		2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584529A6448C006C7AC1 /* SceneDelegate.swift */; };
+		2761584929A6512E006C7AC1 /* SpotifyiOS in Frameworks */ = {isa = PBXBuildFile; productRef = 2761584829A6512E006C7AC1 /* SpotifyiOS */; };
 		2F49B7762980407C00BCB272 /* CardinalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7752980407B00BCB272 /* CardinalKit */; };
 		2F49B7782980407C00BCB272 /* FHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7772980407C00BCB272 /* FHIR */; };
 		2F49B77A2980407C00BCB272 /* HealthKitDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7792980407C00BCB272 /* HealthKitDataSource */; };
@@ -80,8 +81,8 @@
 		276222BC29B0E3E100FCB4C5 /* NoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStore.swift; sourceTree = "<group>"; };
 		2761583A29A63BD4006C7AC1 /* SpotifyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyConstants.swift; sourceTree = "<group>"; };
 		2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyViewController.swift; sourceTree = "<group>"; };
-		2761583E29A63FBE006C7AC1 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Balance-Bridging-Header.h"; sourceTree = "<group>"; };
+		2761584529A6448C006C7AC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2F49B77329803E8F00BCB272 /* BalanceModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BalanceModules; sourceTree = "<group>"; };
 		2F4E237D2989A2FE0013F3D9 /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceAppTestingSetup.swift; sourceTree = "<group>"; };
@@ -118,7 +119,6 @@
 				2F49B77A2980407C00BCB272 /* HealthKitDataSource in Frameworks */,
 				5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */,
 				2F9056F3299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter in Frameworks */,
-				2761583F29A63FBE006C7AC1 /* SpotifyiOS.framework in Frameworks */,
 				2F59B945298C628800C5107F /* BalanceSharedContext in Frameworks */,
 				2F49B784298041F300BCB272 /* Contact in Frameworks */,
 				2F49B7782980407C00BCB272 /* FHIR in Frameworks */,
@@ -128,6 +128,7 @@
 				2F59B93D298C628800C5107F /* BalanceContacts in Frameworks */,
 				2F49B77C2980407C00BCB272 /* HealthKitToFHIRAdapter in Frameworks */,
 				2F9056F5299E3205003D3802 /* FHIRToFirestoreAdapter in Frameworks */,
+				2761584929A6512E006C7AC1 /* SpotifyiOS in Frameworks */,
 				2F9056EF299E3180003D3802 /* FirebaseAccount in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,7 +202,6 @@
 		2FC9759D2978E30800BA99FE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2761583A29A63BD4006C7AC1 /* SpotifyConstants.swift */,
 				2FAEC07F297F583900C11C42 /* Balance.entitlements */,
 				653A258928339462005D4D48 /* Info.plist */,
 				2F9056E9299E2D8A003D3802 /* GoogleService-Info.plist */,
@@ -244,8 +244,9 @@
 				2FC975A72978F11A00BA99FE /* Home.swift */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
 				2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */,
+				2761583A29A63BD4006C7AC1 /* SpotifyConstants.swift */,
 				2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */,
-				2761583E29A63FBE006C7AC1 /* SpotifyiOS.framework */,
+				2761584529A6448C006C7AC1 /* SceneDelegate.swift */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -312,6 +313,7 @@
 				2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */,
 				5AAFCE1929A75990006CCD66 /* LocalStorage */,
 				2F39333629A8A5690035A05C /* FirebaseFirestore */,
+				2761584829A6512E006C7AC1 /* SpotifyiOS */,
 			);
 			productName = TemplateApplication;
 			productReference = 653A254D283387FE005D4D48 /* Balance.app */;
@@ -395,6 +397,7 @@
 				2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */,
 				2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */,
 				2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2761584729A6512E006C7AC1 /* XCRemoteSwiftPackageReference "ios-sdk" */,
 			);
 			productRefGroup = 653A254E283387FE005D4D48 /* Products */;
 			projectDirPath = "";
@@ -443,6 +446,7 @@
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
 				5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */,
 				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
+				2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */,Spotify via SPM
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2720084329A843B90052908D /* Note.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
@@ -845,6 +849,14 @@
 				minimumVersion = 10.5.0;
 			};
 		};
+		2761584729A6512E006C7AC1 /* XCRemoteSwiftPackageReference "ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spotify/ios-sdk.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StanfordBDHG/CardinalKit";
@@ -876,6 +888,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		2761584829A6512E006C7AC1 /* SpotifyiOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2761584729A6512E006C7AC1 /* XCRemoteSwiftPackageReference "ios-sdk" */;
+			productName = SpotifyiOS;
 		};
 		2F49B7752980407B00BCB272 /* CardinalKit */ = {
 			isa = XCSwiftPackageProductDependency;
