@@ -57,9 +57,9 @@ struct AccountSetup: View {
     private var accountImage: some View {
         Group {
             if account.signedIn {
-                Image(systemName: "BalanceLogo.BalanceLogo")
+                Image("BalanceLogo")
             } else {
-                Image(systemName: "BalanceLogo.BalanceLogo")
+                Image("BalanceLogo")
             }
         }
             .font(.system(size: 150))

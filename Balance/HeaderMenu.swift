@@ -47,10 +47,9 @@ public struct HeaderMenu: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.bottom, 20)
-        .padding(.top, 100)
-        .background(.blue)
+        .padding(.top, 50)
+        .background(Color(UIColor(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
-        .offset(y:-100)
     }
     
     public init(title: String) {
