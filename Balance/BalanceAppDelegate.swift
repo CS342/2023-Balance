@@ -8,18 +8,16 @@
 
 import BalanceMockDataStorageProvider
 import BalanceSchedule
-import BalanceSharedContext
 import CardinalKit
 import FHIR
 import FHIRToFirestoreAdapter
 import FirebaseAccount
-import class FirebaseFirestore.FirestoreSettings
+import FirebaseAuth
 import FirestoreDataStorage
 import FirestoreStoragePrefixUserIdAdapter
 import HealthKit
 import HealthKitDataSource
 import HealthKitToFHIRAdapter
-import LocalStorage
 import Questionnaires
 import Scheduler
 import SwiftUI
@@ -27,13 +25,8 @@ import SwiftUI
 class BalanceAppDelegate: CardinalKitAppDelegate {
     override var configuration: Configuration {
         Configuration(standard: FHIR()) {
-            BalanceScheduler()
-            if !FeatureFlags.disableFirebase {
-                if FeatureFlags.useFirebaseEmulator {
-                    FirebaseAccountConfiguration(emulatorSettings: (host: "localhost", port: 9099))
-                } else {
-                    FirebaseAccountConfiguration()
-                }
+            if !CommandLine.arguments.contains("--disableFirebase") {
+                FirebaseAccountConfiguration(emulatorSettings: (host: "localhost", port: 9099))
                 firestore
             }
             if HKHealthStore.isHealthDataAvailable() {
@@ -42,25 +35,17 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
             QuestionnaireDataSource()
             MockDataStorageProvider()
             BalanceScheduler()
-            LocalStorage()
         }
     }
     
     
     private var firestore: Firestore<FHIR> {
-        let settings = FirestoreSettings()
-        if FeatureFlags.useFirebaseEmulator {
-            settings.host = "localhost:8080"
-            settings.isPersistenceEnabled = false
-            settings.isSSLEnabled = false
-        }
-        
-        return Firestore(
+        Firestore(
             adapter: {
                 FHIRToFirestoreAdapter()
                 FirestoreStoragePrefixUserIdAdapter()
             },
-            settings: settings
+            settings: .emulator
         )
     }
     
