@@ -73,7 +73,7 @@ struct MeditationView: View {
                 }
             }
             if showingGuided {
-                SpotifyView()
+                MeditationSpotifyView()
                     .padding()
             }
             else if showingYoutube {

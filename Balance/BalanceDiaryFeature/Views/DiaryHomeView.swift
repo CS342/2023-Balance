@@ -15,7 +15,7 @@ struct DiaryHomeView: View {
 
     var body: some View {
         VStack {
-            HeaderMenu()
+            HeaderMenu(title: "Diary")
 
             Spacer()
 

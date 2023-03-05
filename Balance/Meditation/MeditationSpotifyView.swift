@@ -9,7 +9,7 @@
 import UIKit
 import SwiftUI
 
-struct SpotifyView: View {
+struct MeditationSpotifyView: View {
     @Environment(\.openURL) var openURL
     let SpotifyURLArray = ["https://open.spotify.com/track/7doeCRERLqKcAzEufAi44e?si=6fa0c7e046b4461e", "https://open.spotify.com/track/2JHBuWOMSGHOWCoLrXAriB?si=5f6d601ac0664d93", "https://open.spotify.com/track/46biZBPkwqTzB70Pabb9ks?si=f315155074864e1d", "https://open.spotify.com/track/3wdROXnP25gPoEKLyubpqc?si=e1400690922a48e4",
         "https://open.spotify.com/track/5aP4bQuGcZIWzSoGGQeN0S?si=e7730ac057c34bfa",
@@ -47,6 +47,6 @@ struct SpotifyView: View {
 
 struct SpotifyView_Previews: PreviewProvider {
     static var previews: some View {
-        SpotifyView()
+        MeditationSpotifyView()
     }
 }
