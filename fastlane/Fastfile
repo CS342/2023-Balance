@@ -18,7 +18,6 @@ platform :ios do
   lane :test do
     run_tests(
       code_coverage: true,
-      derived_data_path: ".derivedData",
       result_bundle: true,
       output_directory: "."
     )
@@ -26,9 +25,7 @@ platform :ios do
 
   desc "Build app"
   lane :build do
-    build_app(
-      derived_data_path: ".derivedData"
-    )
+    build_app
   end
 
   desc "Sign in to the App Store Connect API"
@@ -49,16 +46,6 @@ platform :ios do
       xcodeproj: "Balance.xcodeproj"
     })
     build
-    commit = last_git_commit
-    upload_to_testflight(
-      distribute_external: true,
-      groups: [
-        "CS342 2023"
-      ],
-      submit_beta_review: true,
-      notify_external_testers: true,
-      expire_previous_builds: true,
-      changelog: commit[:message]
-    )
+    upload_to_testflight
   end
 end

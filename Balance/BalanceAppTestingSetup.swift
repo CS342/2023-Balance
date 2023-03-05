@@ -17,10 +17,10 @@ private struct BalanceTestingSetup: ViewModifier {
     func body(content: Content) -> some View {
         content
             .task {
-                if FeatureFlags.skipOnboarding {
+                if CommandLine.arguments.contains("--skipOnboarding") {
                     completedOnboardingFlow = true
                 }
-                if FeatureFlags.showOnboarding {
+                if CommandLine.arguments.contains("--showOnboarding") {
                     completedOnboardingFlow = false
                 }
             }

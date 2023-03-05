@@ -6,7 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import BalanceSharedContext
 import Onboarding
 import SwiftUI
 
@@ -35,7 +34,7 @@ struct Consent: View {
                 consentDocument
             },
             action: {
-                if !FeatureFlags.disableFirebase {
+                if !CommandLine.arguments.contains("--disableFirebase") {
                     onboardingSteps.append(.accountSetup)
                 } else {
                     onboardingSteps.append(.healthKitPermissions)
