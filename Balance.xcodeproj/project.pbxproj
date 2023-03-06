@@ -53,13 +53,14 @@
 		4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786329AC0C070048D1D1 /* MeditationView.swift */; };
 		5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAFCE1929A75990006CCD66 /* LocalStorage */; };
 		5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9516F729AC387A0031F202 /* BurnedView.swift */; };
-		5EF9D78029B58CEB006C3B22 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF9D77F29B58CEA006C3B22 /* StorageManager.swift */; };
 		653A2551283387FE005D4D48 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A2550283387FE005D4D48 /* Balance.swift */; };
 		653A255528338800005D4D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653A255428338800005D4D48 /* Assets.xcassets */; };
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
 		653A256C28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256B28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift */; };
 		89EB7BAD29B45381000470FC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
 		89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EB7BB029B45D2B000470FC /* HeaderMenu.swift */; };
+		276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276222BC29B0E3E100FCB4C5 /* NoteStore.swift */; };
+		2F39333729A8A5690035A05C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,7 +110,6 @@
 		4ACC786129AC0BEC0048D1D1 /* Youtube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Youtube.swift; sourceTree = "<group>"; };
 		4ACC786329AC0C070048D1D1 /* MeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationView.swift; sourceTree = "<group>"; };
 		5E9516F729AC387A0031F202 /* BurnedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedView.swift; sourceTree = "<group>"; };
-		5EF9D77F29B58CEA006C3B22 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		653A254D283387FE005D4D48 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A2550283387FE005D4D48 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		653A255428338800005D4D48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -285,7 +285,6 @@
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
 				2FC975A72978F11A00BA99FE /* Home.swift */,
-				5EF9D77F29B58CEA006C3B22 /* StorageManager.swift */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
 				2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */,
 				2761584529A6448C006C7AC1 /* SceneDelegate.swift */,
@@ -353,6 +352,7 @@
 				2F9056F0299E3181003D3802 /* FirestoreDataStorage */,
 				2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */,
 				2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */,
+				5AAFCE1929A75990006CCD66 /* LocalStorage */,
 				2F39333629A8A5690035A05C /* FirebaseFirestore */,
 				2761584829A6512E006C7AC1 /* SpotifyiOS */,
 			);
@@ -488,7 +488,6 @@
 				5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */,
 				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
 				4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */,
-				5EF9D78029B58CEB006C3B22 /* StorageManager.swift in Sources */,
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
 				4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */,
 				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
