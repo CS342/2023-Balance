@@ -13,6 +13,9 @@ struct DiaryNoteEntryView: View {
     @ObservedObject var store: NoteStore
     @Binding var currentNote: Note
     @Binding var showingEditor: Bool
+    
+    @State private var title = ""
+    @State private var text: String = ""
 
     @State private var id = UUID().uuidString
 
