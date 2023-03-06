@@ -21,28 +21,6 @@ class NoteStore: ObservableObject {
         .appendingPathComponent("diary.data")
     }
 
-    func deleteNote(_ id: String) {
-        let indexOfNote = notes.firstIndex { note in
-            return note.id == id
-        }
-
-        if let indexOfNote {
-            notes.remove(at: indexOfNote)
-        }
-    }
-
-    func saveNote(_ note: Note) {
-        let indexOfNote = notes.firstIndex { currentNote in
-            currentNote.id == note.id
-        }
-
-        if let indexOfNote {
-            notes[indexOfNote] = note
-        } else {
-            notes.append(note)
-        }
-    }
-
     static func load(completion: @escaping (Result<[Note], Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
@@ -80,6 +58,28 @@ class NoteStore: ObservableObject {
                     completion(.failure(error))
                 }
             }
+        }
+    }
+
+    func deleteNote(_ id: String) {
+        let indexOfNote = notes.firstIndex { note in
+            note.id == id
+        }
+
+        if let indexOfNote {
+            notes.remove(at: indexOfNote)
+        }
+    }
+
+    func saveNote(_ note: Note) {
+        let indexOfNote = notes.firstIndex { currentNote in
+            currentNote.id == note.id
+        }
+
+        if let indexOfNote {
+            notes[indexOfNote] = note
+        } else {
+            notes.append(note)
         }
     }
 }

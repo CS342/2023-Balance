@@ -43,11 +43,7 @@ class SpotifyViewController: UIViewController {
     }
 
     lazy var configuration: SPTConfiguration = {
-        guard let redirectURL = SpotifyConfig.redirectUri else {
-            return
-        }
-
-        let configuration = SPTConfiguration(clientID: SpotifyConfig.spotifyClientId, redirectURL: redirectURL)
+        let configuration = SPTConfiguration(clientID: SpotifyConfig.spotifyClientId, redirectURL: SpotifyConfig.redirectUri)
         // Set the playURI to a non-nil value so that Spotify plays music after authenticating
         // otherwise another app switch will be required
         configuration.playURI = "spotify:album:3M7xLE04DvF9sM9gnTBPdY"
@@ -260,13 +256,22 @@ extension SpotifyViewController: SPTSessionManagerDelegate {
 
 // MARK: - Networking
 extension SpotifyViewController {
+    // swiftlint:disable discouraged_optional_collection
     func fetchAccessToken(completion: @escaping ([String: Any]?, Error?) -> Void) {
         guard let url = URL(string: "https://accounts.spotify.com/api/token") else {
             return
         }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let spotifyAuthKey = "Basic \((SpotifyConfig.spotifyClientId + ":" + SpotifyConfig.spotifyClientSecretKey).data(using: .utf8)!.base64EncodedString())"
+
+        let clientString = SpotifyConfig.spotifyClientId + ":" + SpotifyConfig.spotifyClientSecretKey
+
+        guard let clientStringData = clientString.data(using: .utf8) else {
+            return
+        }
+
+        let spotifyAuthKey = "Basic \((clientStringData).base64EncodedString())"
+
         request.allHTTPHeaderFields = [
             "Authorization": spotifyAuthKey,
             "Content-Type": "application/x-www-form-urlencoded"
@@ -283,7 +288,7 @@ extension SpotifyViewController {
             URLQueryItem(name: "client_id", value: SpotifyConfig.spotifyClientId),
             URLQueryItem(name: "grant_type", value: "authorization_code"),
             URLQueryItem(name: "code", value: responseCode),
-            URLQueryItem(name: "redirect_uri", value: SpotifyConfig.redirectUri?.absoluteString),
+            URLQueryItem(name: "redirect_uri", value: SpotifyConfig.redirectUri.absoluteString),
             URLQueryItem(name: "code_verifier", value: ""), // not currently used
             URLQueryItem(name: "scope", value: scopeAsString)
         ]

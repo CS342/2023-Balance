@@ -48,7 +48,7 @@ struct LocationQuestion: View {
                 )
             }
         )
-        .background(Color(UIColor(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
+        .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
     }
 }
 
