@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 struct MeditationSpotifyView: View {
     @Environment(\.openURL) var openURL

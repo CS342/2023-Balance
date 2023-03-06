@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083529A7E4C20052908D /* DiaryHomeView.swift */; };
 		2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */; };
 		2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083829A7E4C20052908D /* PastDiaryEntry.swift */; };
 		2720084329A843B90052908D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084229A843B90052908D /* Note.swift */; };
-		2720084B29A84A980052908D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084A29A84A980052908D /* Date.swift */; };
-		2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */; };
+		27525EB429B68B5100D1DF51 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084A29A84A980052908D /* Date.swift */; };
+		27525EB529B68B5400D1DF51 /* SpotifyConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */; };
+		27525EB629B68B6100D1DF51 /* BurnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9516F729AC387A0031F202 /* BurnedView.swift */; };
+		27525EB729B68B7100D1DF51 /* DiaryHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083529A7E4C20052908D /* DiaryHomeView.swift */; };
+		27525EB829B68BB300D1DF51 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A2550283387FE005D4D48 /* Balance.swift */; };
 		2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */; };
 		2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584529A6448C006C7AC1 /* SceneDelegate.swift */; };
 		2761584929A6512E006C7AC1 /* SpotifyiOS in Frameworks */ = {isa = PBXBuildFile; productRef = 2761584829A6512E006C7AC1 /* SpotifyiOS */; };
@@ -52,8 +54,6 @@
 		4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786129AC0BEC0048D1D1 /* Youtube.swift */; };
 		4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786329AC0C070048D1D1 /* MeditationView.swift */; };
 		5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAFCE1929A75990006CCD66 /* LocalStorage */; };
-		5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9516F729AC387A0031F202 /* BurnedView.swift */; };
-		653A2551283387FE005D4D48 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A2550283387FE005D4D48 /* Balance.swift */; };
 		653A255528338800005D4D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653A255428338800005D4D48 /* Assets.xcassets */; };
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
 		653A256C28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256B28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift */; };
@@ -407,7 +407,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					653A254C283387FE005D4D48 = {
 						CreatedOnToolsVersion = 13.4;
@@ -502,34 +502,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27525EB829B68BB300D1DF51 /* Balance.swift in Sources */,
+				27525EB729B68B7100D1DF51 /* DiaryHomeView.swift in Sources */,
+				27525EB629B68B6100D1DF51 /* BurnedView.swift in Sources */,
+				27525EB529B68B5400D1DF51 /* SpotifyConfig.swift in Sources */,
+				27525EB429B68B5100D1DF51 /* Date.swift in Sources */,
 				2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */,
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
-				5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */,
-				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
 				4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */,
-				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
 				4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */,
-				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
-				5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */,
 				2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2720084329A843B90052908D /* Note.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
-				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
-				2720084B29A84A980052908D /* Date.swift in Sources */,
 				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
 				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
 				4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */,
 				4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */,
 				4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */,
-				2720084B29A84A980052908D /* Date.swift in Sources */,
-				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
-				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
-				2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */,
-				2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */,
 				2761584D29A654FD006C7AC1 /* Music.swift in Sources */,
 				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
-				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
 				89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */,
 				2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */,
 			);

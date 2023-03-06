@@ -257,23 +257,31 @@ extension SpotifyViewController: SPTSessionManagerDelegate {
 // MARK: - Networking
 extension SpotifyViewController {
     func fetchAccessToken(completion: @escaping ([String: Any]?, Error?) -> Void) {
-        let url = URL(string: "https://accounts.spotify.com/api/token")!
+        guard let url = URL(string: "https://accounts.spotify.com/api/token") else {
+            return
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let spotifyAuthKey = "Basic \((SpotifyConfig.spotifyClientId + ":" + SpotifyConfig.spotifyClientSecretKey).data(using: .utf8)!.base64EncodedString())"
-        request.allHTTPHeaderFields = ["Authorization": spotifyAuthKey,
-                                       "Content-Type": "application/x-www-form-urlencoded"]
+        request.allHTTPHeaderFields = [
+            "Authorization": spotifyAuthKey,
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
 
         var requestBodyComponents = URLComponents()
         let scopeAsString = SpotifyConfig.stringScopes.joined(separator: " ")
 
+        guard let responseCode else {
+            return
+        }
+
         requestBodyComponents.queryItems = [
             URLQueryItem(name: "client_id", value: SpotifyConfig.spotifyClientId),
             URLQueryItem(name: "grant_type", value: "authorization_code"),
-            URLQueryItem(name: "code", value: responseCode!),
+            URLQueryItem(name: "code", value: responseCode),
             URLQueryItem(name: "redirect_uri", value: SpotifyConfig.redirectUri?.absoluteString),
             URLQueryItem(name: "code_verifier", value: ""), // not currently used
-            URLQueryItem(name: "scope", value: scopeAsString),
+            URLQueryItem(name: "scope", value: scopeAsString)
         ]
 
         request.httpBody = requestBodyComponents.query?.data(using: .utf8)
@@ -294,7 +302,7 @@ extension SpotifyViewController {
     }
 
     func fetchArtwork(for track: SPTAppRemoteTrack) {
-        appRemote.imageAPI?.fetchImage(forItem: track, with: CGSize.zero, callback: { [weak self] (image, error) in
+        appRemote.imageAPI?.fetchImage(forItem: track, with: CGSize.zero, callback: { [weak self] image, error in
             if let error = error {
                 print("Error fetching track image: " + error.localizedDescription)
             } else if let image = image as? UIImage {
@@ -304,12 +312,12 @@ extension SpotifyViewController {
     }
 
     func fetchPlayerState() {
-        appRemote.playerAPI?.getPlayerState({ [weak self] (playerState, error) in
+        appRemote.playerAPI?.getPlayerState { [weak self] playerState, error in
             if let error = error {
                 print("Error getting player state:" + error.localizedDescription)
             } else if let playerState = playerState as? SPTAppRemotePlayerState {
                 self?.update(playerState: playerState)
             }
-        })
+        }
     }
 }

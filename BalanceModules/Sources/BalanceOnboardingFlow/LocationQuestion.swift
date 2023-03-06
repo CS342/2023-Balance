@@ -29,6 +29,7 @@ struct LocationQuestion: View {
                                         
                     Image(uiImage: Bundle.module.image(withName: "CloudRight", fileExtension: "png"))
                         .offset(x: 100)
+                        .accessibility(hidden: true)
                 
                     LocationOption(option: "Hospital", illustration: "Hospital")
                     
@@ -36,6 +37,7 @@ struct LocationQuestion: View {
                     
                     Image(uiImage: Bundle.module.image(withName: "CloudLeft", fileExtension: "png"))
                         .offset(x: -100)
+                        .accessibility(hidden: true)
                 }
             }, actionView: {
                 OnboardingActionsView(

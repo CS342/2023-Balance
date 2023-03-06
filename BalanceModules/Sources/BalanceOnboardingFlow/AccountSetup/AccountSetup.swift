@@ -23,6 +23,7 @@ struct AccountSetup: View {
             contentView: {
                 VStack {
                     Image(uiImage: Bundle.module.image(withName: "BalanceLogo", fileExtension: "png"))
+                        .accessibilityLabel(Text("Balance Logo"))
                     Text("Welcome!")
                         .bold()
                         .font(.largeTitle)

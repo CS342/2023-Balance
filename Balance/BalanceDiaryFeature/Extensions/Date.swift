@@ -32,12 +32,20 @@ extension Date {
     func startOfMonth() -> Date {
         var components = Calendar.current.dateComponents([.year, .month], from: self)
         components.day = 1
-        let firstDateOfMonth: Date = Calendar.current.date(from: components)!
+        guard let firstDateOfMonth: Date = Calendar.current.date(from: components) else {
+            return Date()
+        }
         return firstDateOfMonth
     }
 
     func endOfMonth() -> Date {
-        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
+        guard let endOfMonth = Calendar.current.date(
+            byAdding: DateComponents(month: 1, day: -1),
+            to: self.startOfMonth()
+        ) else {
+            return Date()
+        }
+        return endOfMonth
     }
 
     func nextDate() -> Date {
@@ -81,6 +89,7 @@ extension Date {
     }
 
 
+    // swiftlint:disable cyclomatic_complexity
     func timeSinceDate(fromDate: Date) -> String {
         let earliest = self < fromDate ? self  : fromDate
         let latest = (earliest == self) ? fromDate : self

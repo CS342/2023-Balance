@@ -25,6 +25,7 @@ struct BurnedView: View {
                 .aspectRatio(contentMode: .fill)
                 .onAppear(perform: updateFrame)
                 .edgesIgnoringSafeArea(.all)
+                .accessibility(hidden: true)
         }
     }
     

@@ -16,6 +16,7 @@ struct BalanceSignUp: View {
         SignUp {
             Image(uiImage: Bundle.module.image(withName: "Balloon", fileExtension: "png"))
                 .padding(.top, 32)
+                .accessibility(hidden: true)
             Text("Sign up below to begin using Balance")
                 .multilineTextAlignment(.center)
                 .padding()

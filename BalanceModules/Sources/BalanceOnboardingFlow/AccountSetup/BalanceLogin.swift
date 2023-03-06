@@ -16,6 +16,7 @@ struct BalanceLogin: View {
         Login {
             Image(uiImage: Bundle.module.image(withName: "Balloon", fileExtension: "png"))
                 .padding(.top, 32)
+                .accessibility(hidden: true)
             Text("Login below to begin using Balance")
                 .multilineTextAlignment(.center)
                 .padding()

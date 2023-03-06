@@ -1,11 +1,13 @@
 import SwiftUI
 
-//all code that I found online but uses TextField
+// all code that I found online but uses TextField
 let dateFormatter = DateFormatter()
 
 struct ContentView: View {
     @State var items: [NoteItem] = {
-        guard let data = UserDefaults.standard.data(forKey: "notes") else { return [] }
+        guard let data = UserDefaults.standard.data(forKey: "notes") else {
+            return []
+        }
         if let json = try? JSONDecoder().decode([NoteItem].self, from: data) {
             return json
         }

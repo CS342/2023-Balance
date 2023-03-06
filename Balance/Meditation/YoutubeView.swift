@@ -31,7 +31,7 @@ struct YoutubeView: View {
     ]
     
     var body: some View {
-        ScrollView (.vertical) {
+        ScrollView(.vertical) {
             VStack {
                 ForEach(videoIDArray, id: \.self) { vidID in
                     VideoView(videoID: vidID)
