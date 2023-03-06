@@ -14,6 +14,8 @@ import BalanceMockDataStorageProvider
 
 
 struct HomeView: View {
+    @State var navigationPath = NavigationPath()
+    
     enum Tabs: String {
         case schedule
         case contact
@@ -23,31 +25,32 @@ struct HomeView: View {
         case music
     }
     
-    
-    @AppStorage(StorageKeys.homeTabSelection) var selectedTab = Tabs.schedule
-    
-    
     var body: some View {
-        TabView(selection: $selectedTab) {
-            MeditationView()
-                .tag(Tabs.meditation)
-                .tabItem {
-                    Label("Meditation",
-                          systemImage: "list.clipboard")
-                }
-            DiaryHomeView()
-                .tag(Tabs.diary)
-                .tabItem {
+        NavigationStack {
+            VStack{
+                NavigationLink{
+                    DiaryHomeView()
+                } label: {
                     Label("Diary", systemImage: "book")
                 }
-            Music()
-                .tag(Tabs.music)
-                .tabItem {
-                    Label("Music", systemImage: "music.note")
+                NavigationLink{
+                    MeditationView()
+                } label: {
+                    Label("Meditation", systemImage: "list.clipboard")
                 }
+                NavigationLink{
+                    SpotifyView()
+                } label: {
+                    Label("Distraction", systemImage: "music.note")
+                }
+                
+            }
         }
     }
+    
+    
 }
+  
 
 
 #if DEBUG
