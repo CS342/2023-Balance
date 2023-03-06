@@ -49,7 +49,7 @@ struct BurnedView_Previews: PreviewProvider {
     static var previews: some View {
         BurnedView(
             burningNote: .constant(true),
-            showingEditor: .constant(false)
+            showingEditor: .constant(false),
         )
     }
 }

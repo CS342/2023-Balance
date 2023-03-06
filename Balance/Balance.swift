@@ -17,6 +17,7 @@ struct Balance: App {
     @UIApplicationDelegateAdaptor(BalanceAppDelegate.self) var appDelegate
     @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
     
+    @State var started = false
     
     var body: some Scene {
         WindowGroup {

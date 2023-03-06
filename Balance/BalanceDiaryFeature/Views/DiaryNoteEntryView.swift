@@ -15,8 +15,6 @@ struct DiaryNoteEntryView: View {
     @Binding var showingEditor: Bool
 
     @State private var id = UUID().uuidString
-    @State private var title = ""
-    @State private var text = ""
 
     @State private var savedNotes: [Note] = []
     @State private var burningNote = false
@@ -68,7 +66,6 @@ struct DiaryNoteEntryView: View {
                                 print(error.localizedDescription)
                             }
                         }
-
                         burningNote.toggle()
                     }
                 }
@@ -111,4 +108,5 @@ struct DiaryNoteEntryView: View {
 //        )
 //    }
 //}
+
 

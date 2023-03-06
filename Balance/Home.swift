@@ -17,8 +17,10 @@ struct HomeView: View {
     enum Tabs: String {
         case schedule
         case contact
+        case meditation
         case mockUpload
         case diary
+        case music
     }
     
     
@@ -37,8 +39,24 @@ struct HomeView: View {
                 .tabItem {
                     Label("CONTACTS_TAB_TITLE", systemImage: "person.fill")
                 }
+            MeditationView()
+                .tag(Tabs.meditation)
+                .tabItem {
+                    Label("Meditation",
+                          systemImage: "list.clipboard")
+                }
             DiaryHomeView()
                 .tag(Tabs.diary)
+                .tabItem {
+                    Label("Diary", systemImage: "book")
+                }
+            Music()
+                .tag(Tabs.music)
+                .tabItem {
+                    Label("Music", systemImage: "music.note")
+                }
+            MockUploadList()
+                .tag(Tabs.mockUpload)
                 .tabItem {
                     Label("Diary", systemImage: "book")
                 }

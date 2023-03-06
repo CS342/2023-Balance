@@ -21,7 +21,7 @@
 "WELCOME_AREA3_TITLE" = "CardinalKit Modules";
 "WELCOME_AREA3_DESCRIPTION" = "CardinalKit offers several modules including HealthKit integration, questionnaires, and more ...";
 
-"WELCOME_BUTTON" = "Learn More";
+"WELCOME_BUTTON" = "Start";
 
 // MARK: Interesting Modules
 "INTERESTING_MODULES_TITLE" = "Interesting Modules";

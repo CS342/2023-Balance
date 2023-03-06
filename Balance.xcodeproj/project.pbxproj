@@ -13,6 +13,12 @@
 		2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083829A7E4C20052908D /* PastDiaryEntry.swift */; };
 		2720084329A843B90052908D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084229A843B90052908D /* Note.swift */; };
 		2720084B29A84A980052908D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084A29A84A980052908D /* Date.swift */; };
+		2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */; };
+		2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */; };
+		2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584529A6448C006C7AC1 /* SceneDelegate.swift */; };
+		2761584929A6512E006C7AC1 /* SpotifyiOS in Frameworks */ = {isa = PBXBuildFile; productRef = 2761584829A6512E006C7AC1 /* SpotifyiOS */; };
+		2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584A29A6548B006C7AC1 /* SpotifyView.swift */; };
+		2761584D29A654FD006C7AC1 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584C29A654FD006C7AC1 /* Music.swift */; };
 		276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276222BC29B0E3E100FCB4C5 /* NoteStore.swift */; };
 		2F49B7762980407C00BCB272 /* CardinalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7752980407B00BCB272 /* CardinalKit */; };
 		2F49B7782980407C00BCB272 /* FHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7772980407C00BCB272 /* FHIR */; };
@@ -59,11 +65,20 @@
 		5A9AD37C29B44CE60096E36F /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A9AD36C29B44CE60096E36F /* Nunito-SemiBoldItalic.ttf */; };
 		5A9AD37D29B44CE60096E36F /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A9AD36D29B44CE60096E36F /* Nunito-Italic.ttf */; };
 		5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAFCE1929A75990006CCD66 /* LocalStorage */; };
+		4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88429B3F9F2006A52A1 /* MeditationSpotifyView.swift */; };
+		4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88A29B413F4006A52A1 /* YoutubeView.swift */; };
+		4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88C29B4151B006A52A1 /* SleepView.swift */; };
+		4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786129AC0BEC0048D1D1 /* Youtube.swift */; };
+		4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786329AC0C070048D1D1 /* MeditationView.swift */; };
 		5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9516F729AC387A0031F202 /* BurnedView.swift */; };
 		653A2551283387FE005D4D48 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A2550283387FE005D4D48 /* Balance.swift */; };
 		653A255528338800005D4D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653A255428338800005D4D48 /* Assets.xcassets */; };
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
 		653A256C28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256B28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift */; };
+		89EB7BAD29B45381000470FC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
+		89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EB7BB029B45D2B000470FC /* HeaderMenu.swift */; };
+		276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276222BC29B0E3E100FCB4C5 /* NoteStore.swift */; };
+		2F39333729A8A5690035A05C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +105,12 @@
 		2720083829A7E4C20052908D /* PastDiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastDiaryEntry.swift; sourceTree = "<group>"; };
 		2720084229A843B90052908D /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		2720084A29A84A980052908D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyConfig.swift; sourceTree = "<group>"; };
+		2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyViewController.swift; sourceTree = "<group>"; };
+		2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Balance-Bridging-Header.h"; sourceTree = "<group>"; };
+		2761584529A6448C006C7AC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2761584A29A6548B006C7AC1 /* SpotifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyView.swift; sourceTree = "<group>"; };
+		2761584C29A654FD006C7AC1 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		276222BC29B0E3E100FCB4C5 /* NoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStore.swift; sourceTree = "<group>"; };
 		2F49B77329803E8F00BCB272 /* BalanceModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BalanceModules; sourceTree = "<group>"; };
 		2F4E237D2989A2FE0013F3D9 /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
@@ -119,6 +140,11 @@
 		5A9AD36B29B44CE60096E36F /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Regular.ttf"; path = "../../Downloads/Nunito/static/Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		5A9AD36C29B44CE60096E36F /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-SemiBoldItalic.ttf"; path = "../../Downloads/Nunito/static/Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		5A9AD36D29B44CE60096E36F /* Nunito-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Italic.ttf"; path = "../../Downloads/Nunito/static/Nunito-Italic.ttf"; sourceTree = "<group>"; };
+		4A45C88429B3F9F2006A52A1 /* MeditationSpotifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationSpotifyView.swift; sourceTree = "<group>"; };
+		4A45C88A29B413F4006A52A1 /* YoutubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeView.swift; sourceTree = "<group>"; };
+		4A45C88C29B4151B006A52A1 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
+		4ACC786129AC0BEC0048D1D1 /* Youtube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Youtube.swift; sourceTree = "<group>"; };
+		4ACC786329AC0C070048D1D1 /* MeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationView.swift; sourceTree = "<group>"; };
 		5E9516F729AC387A0031F202 /* BurnedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedView.swift; sourceTree = "<group>"; };
 		653A254D283387FE005D4D48 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A2550283387FE005D4D48 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
@@ -128,6 +154,8 @@
 		653A256728338800005D4D48 /* BalanceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A256B28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerAndQuestionnaireTests.swift; sourceTree = "<group>"; };
 		653A258928339462005D4D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceDebug.entitlements; sourceTree = "<group>"; };
+		89EB7BB029B45D2B000470FC /* HeaderMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89EB7BAD29B45381000470FC /* FirebaseFirestore in Frameworks */,
 				2F59B941298C628800C5107F /* BalanceOnboardingFlow in Frameworks */,
 				2F49B7822980419C00BCB272 /* Questionnaires in Frameworks */,
 				2F49B77E2980407C00BCB272 /* Scheduler in Frameworks */,
@@ -152,6 +181,7 @@
 				2F59B93D298C628800C5107F /* BalanceContacts in Frameworks */,
 				2F49B77C2980407C00BCB272 /* HealthKitToFHIRAdapter in Frameworks */,
 				2F9056F5299E3205003D3802 /* FHIRToFirestoreAdapter in Frameworks */,
+				2761584929A6512E006C7AC1 /* SpotifyiOS in Frameworks */,
 				2F9056EF299E3180003D3802 /* FirebaseAccount in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,6 +244,17 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2761584E29A662DE006C7AC1 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				2761584C29A654FD006C7AC1 /* Music.swift */,
+				2761584A29A6548B006C7AC1 /* SpotifyView.swift */,
+				2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */,
+				2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		276222BB29B0E3D300FCB4C5 /* Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +273,18 @@
 				2FC9759E2978E39600BA99FE /* Localizable.strings */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4ACC786029AC0B590048D1D1 /* Meditation */ = {
+			isa = PBXGroup;
+			children = (
+				4ACC786129AC0BEC0048D1D1 /* Youtube.swift */,
+				4ACC786329AC0C070048D1D1 /* MeditationView.swift */,
+				4A45C88429B3F9F2006A52A1 /* MeditationSpotifyView.swift */,
+				4A45C88C29B4151B006A52A1 /* SleepView.swift */,
+				4A45C88A29B413F4006A52A1 /* YoutubeView.swift */,
+			);
+			path = Meditation;
 			sourceTree = "<group>";
 		};
 		653A2544283387FE005D4D48 = {
@@ -278,11 +331,18 @@
 			isa = PBXGroup;
 			children = (
 				2720083329A7E4C20052908D /* BalanceDiaryFeature */,
+				89EB7BB029B45D2B000470FC /* HeaderMenu.swift */,
+				4ACC786029AC0B590048D1D1 /* Meditation */,
+				2720083329A7E4C20052908D /* BalanceDiaryFeature */,
+				8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */,
+				2761584E29A662DE006C7AC1 /* Music */,
 				653A2550283387FE005D4D48 /* Balance.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
 				2FC975A72978F11A00BA99FE /* Home.swift */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
+				2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */,
+				2761584529A6448C006C7AC1 /* SceneDelegate.swift */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -348,6 +408,8 @@
 				2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */,
 				2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */,
 				5AAFCE1929A75990006CCD66 /* LocalStorage */,
+				2F39333629A8A5690035A05C /* FirebaseFirestore */,
+				2761584829A6512E006C7AC1 /* SpotifyiOS */,
 			);
 			productName = TemplateApplication;
 			productReference = 653A254D283387FE005D4D48 /* Balance.app */;
@@ -405,6 +467,7 @@
 				TargetAttributes = {
 					653A254C283387FE005D4D48 = {
 						CreatedOnToolsVersion = 13.4;
+						LastSwiftMigration = 1420;
 					};
 					653A255C28338800005D4D48 = {
 						CreatedOnToolsVersion = 13.4;
@@ -429,6 +492,8 @@
 				2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */,
 				2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */,
 				2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */,
+				2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2761584729A6512E006C7AC1 /* XCRemoteSwiftPackageReference "ios-sdk" */,
 			);
 			productRefGroup = 653A254E283387FE005D4D48 /* Products */;
 			projectDirPath = "";
@@ -494,6 +559,12 @@
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
 				5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */,
 				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
+				4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */,
+				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
+				4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */,
+				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
+				5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */,
+				2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2720084329A843B90052908D /* Note.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
@@ -502,6 +573,19 @@
 				2720084B29A84A980052908D /* Date.swift in Sources */,
 				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
 				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
+				4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */,
+				4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */,
+				4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */,
+				2720084B29A84A980052908D /* Date.swift in Sources */,
+				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
+				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
+				2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */,
+				2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */,
+				2761584D29A654FD006C7AC1 /* Music.swift in Sources */,
+				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
+				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
+				89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */,
+				2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,13 +743,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Balance/Supporting Files/Balance.entitlements";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Balance/BalanceDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Balance/Supporting\\ Files",
+					"$(PROJECT_DIR)/Balance",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Balance/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Balance;
@@ -688,6 +778,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -695,6 +786,8 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				"SWIFT_ELicenseRef-TemplateApplication_LOC_STRINGS" = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Balance/Balance-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -705,6 +798,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Balance/Supporting Files/Balance.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -713,6 +807,11 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 637867499T;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Balance/Supporting\\ Files",
+					"$(PROJECT_DIR)/Balance",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Balance/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Balance;
@@ -735,6 +834,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -743,6 +843,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				"SWIFT_ELicenseRef-TemplateApplication_LOC_STRINGS" = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Balance/Balance-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -868,6 +969,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2761584729A6512E006C7AC1 /* XCRemoteSwiftPackageReference "ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spotify/ios-sdk.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.5.0;
+			};
+		};
 		2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StanfordBDHG/CardinalKit";
@@ -895,6 +1012,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2761584829A6512E006C7AC1 /* SpotifyiOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2761584729A6512E006C7AC1 /* XCRemoteSwiftPackageReference "ios-sdk" */;
+			productName = SpotifyiOS;
+		};
+		2F39333629A8A5690035A05C /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		2F49B7752980407B00BCB272 /* CardinalKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
