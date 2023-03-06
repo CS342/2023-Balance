@@ -29,16 +29,6 @@ struct HomeView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            ScheduleView()
-                .tag(Tabs.schedule)
-                .tabItem {
-                    Label("SCHEDULE_TAB_TITLE", systemImage: "list.clipboard")
-                }
-            Contacts()
-                .tag(Tabs.contact)
-                .tabItem {
-                    Label("CONTACTS_TAB_TITLE", systemImage: "person.fill")
-                }
             MeditationView()
                 .tag(Tabs.meditation)
                 .tabItem {
@@ -54,11 +44,6 @@ struct HomeView: View {
                 .tag(Tabs.music)
                 .tabItem {
                     Label("Music", systemImage: "music.note")
-                }
-            MockUploadList()
-                .tag(Tabs.mockUpload)
-                .tabItem {
-                    Label("Diary", systemImage: "book")
                 }
         }
     }
