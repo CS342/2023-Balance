@@ -43,7 +43,11 @@ class SpotifyViewController: UIViewController {
     }
 
     lazy var configuration: SPTConfiguration = {
-        let configuration = SPTConfiguration(clientID: SpotifyConfig.spotifyClientId, redirectURL: SpotifyConfig.redirectUri!)
+        guard let redirectURL = SpotifyConfig.redirectUri else {
+            return
+        }
+
+        let configuration = SPTConfiguration(clientID: SpotifyConfig.spotifyClientId, redirectURL: redirectURL)
         // Set the playURI to a non-nil value so that Spotify plays music after authenticating
         // otherwise another app switch will be required
         configuration.playURI = "spotify:album:3M7xLE04DvF9sM9gnTBPdY"
@@ -207,7 +211,7 @@ extension SpotifyViewController: SPTAppRemoteDelegate {
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
         updateViewBasedOnConnected()
         appRemote.playerAPI?.delegate = self
-        appRemote.playerAPI?.subscribe(toPlayerState: { success, error in
+        appRemote.playerAPI?.subscribe(toPlayerState: { _, error in
             if let error = error {
                 print("Error subscribing to player state:" + error.localizedDescription)
             }

@@ -22,7 +22,7 @@ struct MeditationSpotifyView: View {
     ]
     
     var body: some View {
-        ScrollView (.vertical) {
+        ScrollView(.vertical) {
             VStack {
                 ForEach(spotifyURLArray, id: \.self) { spotifyID in
                     if let url = URL(string: spotifyID) {
@@ -34,6 +34,7 @@ struct MeditationSpotifyView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 150, height: 20)
+                                    .accessibilityLabel(Text("Balance Logo"))
                                 Text("Open in Spotify").font(.custom("Nunito-Bold", size: 25))
                             }
                             .frame(width: 360, height: 200)

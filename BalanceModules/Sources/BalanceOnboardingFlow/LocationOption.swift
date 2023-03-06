@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct LocationOption: View {
-    public var option: String
-    public var illustration: String
+    var option: String
+    var illustration: String
 
-    public var body: some View {
+    var body: some View {
         HStack(spacing: 72) {
             Text(option)
                 .font(.title.bold())
@@ -27,7 +27,7 @@ struct LocationOption: View {
         .shadow(color: Color.black.opacity(0.08), radius: 5)
     }
 
-    public init(option: String, illustration: String) {
+    init(option: String, illustration: String) {
         self.option = option
         self.illustration = illustration
     }
