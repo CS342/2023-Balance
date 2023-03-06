@@ -19,10 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let parameters = spotifyController.appRemote.authorizationParameters(from: url)
         if let code = parameters?["code"] {
             spotifyController.responseCode = code
-        } else if let access_token = parameters?[SPTAppRemoteAccessTokenKey] {
-            spotifyController.accessToken = access_token
-        } else if let error_description = parameters?[SPTAppRemoteErrorDescriptionKey] {
-            print("No access token error =", error_description)
+        } else if let accessToken = parameters?[SPTAppRemoteAccessTokenKey] {
+            spotifyController.accessToken = accessToken
+        } else if let errorDescription = parameters?[SPTAppRemoteErrorDescriptionKey] {
+            print("No access token error =", errorDescription)
         }
     }
 

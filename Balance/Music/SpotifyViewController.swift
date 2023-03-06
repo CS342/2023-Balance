@@ -14,12 +14,12 @@ class SpotifyViewController: UIViewController {
 
     var responseCode: String? {
         didSet {
-            fetchAccessToken { (dictionary, error) in
+            fetchAccessToken { dictionary, error in
                 if let error = error {
                     print("Fetching token request error \(error)")
                     return
                 }
-                let accessToken = dictionary!["access_token"] as! String
+                let accessToken = dictionary?["access_token"] as? String
                 DispatchQueue.main.async {
                     self.appRemote.connectionParameters.accessToken = accessToken
                     self.appRemote.connect()
@@ -179,7 +179,7 @@ extension SpotifyViewController {
 
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 
@@ -191,8 +191,7 @@ extension SpotifyViewController {
             imageView.isHidden = false
             trackLabel.isHidden = false
             playPauseButton.isHidden = false
-        }
-        else { // show login
+        } else { // show login
             signOutButton.isHidden = true
             connectButton.isHidden = false
             connectLabel.isHidden = false
@@ -208,7 +207,7 @@ extension SpotifyViewController: SPTAppRemoteDelegate {
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
         updateViewBasedOnConnected()
         appRemote.playerAPI?.delegate = self
-        appRemote.playerAPI?.subscribe(toPlayerState: { (success, error) in
+        appRemote.playerAPI?.subscribe(toPlayerState: { success, error in
             if let error = error {
                 print("Error subscribing to player state:" + error.localizedDescription)
             }

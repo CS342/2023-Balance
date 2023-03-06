@@ -40,7 +40,7 @@ public struct HeaderMenu: View {
                     .font(.title.bold())
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .offset(x:-32)
+                    .offset(x: -32)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)

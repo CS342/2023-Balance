@@ -3,7 +3,7 @@ import SwiftUI
 //all code that I found online but uses TextField
 let dateFormatter = DateFormatter()
 
-struct ContentView : View {
+struct ContentView: View {
     @State var items: [NoteItem] = {
         guard let data = UserDefaults.standard.data(forKey: "notes") else { return [] }
         if let json = try? JSONDecoder().decode([NoteItem].self, from: data) {
@@ -19,10 +19,12 @@ struct ContentView : View {
     @State var itemToDelete: NoteItem?
     
     var alert: Alert {
-        Alert(title: Text("Hey!"),
-              message: Text("Are you sure you want to delete this item?"),
-              primaryButton: .destructive(Text("Delete"), action: deleteNote),
-              secondaryButton: .cancel())
+        Alert(
+            title: Text("Hey!"),
+            message: Text("Are you sure you want to delete this item?"),
+            primaryButton: .destructive(Text("Delete"), action: deleteNote),
+            secondaryButton: .cancel()
+        )
     }
     
     var inputView: some View {
@@ -62,13 +64,17 @@ struct ContentView : View {
     }
     
     func deleteNote() {
-        guard let itemToDelete = itemToDelete else { return }
+        guard let itemToDelete = itemToDelete else {
+            return
+        }
         items = items.filter { $0 != itemToDelete }
         save()
     }
     
     func save() {
-        guard let data = try? JSONEncoder().encode(items) else { return }
+        guard let data = try? JSONEncoder().encode(items) else {
+            return
+        }
         UserDefaults.standard.set(data, forKey: "notes")
     }
 }

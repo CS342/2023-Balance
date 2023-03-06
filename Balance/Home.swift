@@ -7,10 +7,10 @@
 //
 
 import BalanceContacts
+import BalanceMockDataStorageProvider
 import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
-import BalanceMockDataStorageProvider
 
 
 struct HomeView: View {

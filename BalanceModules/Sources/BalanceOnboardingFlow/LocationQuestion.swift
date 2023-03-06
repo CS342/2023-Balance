@@ -15,12 +15,11 @@ import SwiftUI
 
 struct LocationQuestion: View {
     @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
-    
-    
+
     var body: some View {
         OnboardingView(
             contentView: {
-                VStack (alignment: .center){
+                VStack(alignment: .center) {
                     Text("Where are you at?")
                         .bold()
                         .font(.largeTitle)
@@ -29,14 +28,14 @@ struct LocationQuestion: View {
                         .padding(.top, 30)
                                         
                     Image(uiImage: Bundle.module.image(withName: "CloudRight", fileExtension: "png"))
-                        .offset(x:100)
+                        .offset(x: 100)
                 
                     LocationOption(option: "Hospital", illustration: "Hospital")
                     
                     LocationOption(option: "Home", illustration: "Home")
                     
                     Image(uiImage: Bundle.module.image(withName: "CloudLeft", fileExtension: "png"))
-                        .offset(x:-100)
+                        .offset(x: -100)
                 }
             }, actionView: {
                 OnboardingActionsView(

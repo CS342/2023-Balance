@@ -17,7 +17,8 @@ class NoteStore: ObservableObject {
             in: .userDomainMask,
             appropriateFor: nil,
             create: false
-        ).appendingPathComponent("diary.data")
+        )
+        .appendingPathComponent("diary.data")
     }
 
     func deleteNote(_ id: String) {
@@ -31,8 +32,8 @@ class NoteStore: ObservableObject {
     }
 
     func saveNote(_ note: Note) {
-        let indexOfNote = notes.firstIndex { n in
-            return n.id == note.id
+        let indexOfNote = notes.firstIndex { currentNote in
+            currentNote.id == note.id
         }
 
         if let indexOfNote {
