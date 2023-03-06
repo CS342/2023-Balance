@@ -91,7 +91,7 @@ extension Date {
 
     // swiftlint:disable cyclomatic_complexity
     func timeSinceDate(fromDate: Date) -> String {
-        let earliest = self < fromDate ? self  : fromDate
+        let earliest = self < fromDate ? self : fromDate
         let latest = (earliest == self) ? fromDate : self
 
         let components: DateComponents = Calendar.current.dateComponents(
