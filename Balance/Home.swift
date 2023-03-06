@@ -27,8 +27,8 @@ struct HomeView: View {
     
     var body: some View {
         VStack{
-            HeaderMenu(title: "Home")
-            NavigationView {
+            NavigationStack {
+                HeaderMenu(title: "Home")
                 ScrollView(.vertical){
                     VStack{
                         NavigationLink(destination: DiaryHomeView()) {
@@ -75,8 +75,8 @@ struct HomeView: View {
                         }
                     }
                 }
+                .ignoresSafeArea(.all)
             }
-            .ignoresSafeArea()
         }
         
         }
