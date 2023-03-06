@@ -67,6 +67,7 @@ struct DiaryHomeView: View {
                 }
             }
         }
+        .edgesIgnoringSafeArea(.top)
     }
 
     func delete(indexSet: IndexSet) {
