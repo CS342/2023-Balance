@@ -12,6 +12,7 @@ struct MeditationView: View {
     @State private var showingYoutube = false
     @State private var showingSleep = false
     let videoIDArray = ["0ZKqLcWdG-4", "iN6g2mr0p3Q", "F0WYFXxhPGY", "vQxTUQhVbg4"]
+//    @Binding var navigationPath: NavigationPath
     
     var body: some View {
         VStack{
@@ -89,7 +90,11 @@ struct MeditationView: View {
 }
 
 struct MeditationView_Previews: PreviewProvider {
+//    @State private static var navigationPath = NavigationPath()
+
     static var previews: some View {
-        MeditationView()
+//        NavigationStack {
+            MeditationView()
+//        }
     }
 }

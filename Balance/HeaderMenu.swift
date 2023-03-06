@@ -31,9 +31,10 @@ public struct HeaderMenu: View {
         VStack(spacing: 4) {
             HStack(spacing: 16) {
                 HStack(spacing: 8) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                    Text("Back")
+//                    Image(systemName: "chevron.left")
+//                        .foregroundColor(.white)
+//                    Text("Back")
+                    Text("       ")
                         .foregroundColor(.white)
                 }
                 Text(title)
@@ -50,6 +51,7 @@ public struct HeaderMenu: View {
         .padding(.top, 50)
         .background(Color(UIColor(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
+        .ignoresSafeArea(edges: .top)
     }
     
     public init(title: String) {

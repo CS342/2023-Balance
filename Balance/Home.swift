@@ -26,30 +26,66 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            VStack{
-                NavigationLink{
-                    DiaryHomeView()
-                } label: {
-                    Label("Diary", systemImage: "book")
+        VStack{
+            HeaderMenu(title: "Home")
+            NavigationView {
+                ScrollView(.vertical){
+                    VStack{
+                        NavigationLink(destination: DiaryHomeView()) {
+                            HStack {
+                                Image("BalanceLogo") //TO BE REPLACED LATER
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 150, height: 20)
+                                Text("Diary")
+                            }
+                            .frame(width: 360, height: 200)
+                            .foregroundColor(Color(UIColor(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
+                            .background(Color(UIColor(red: 0.30, green: 0.79, blue: 0.94, alpha: 0.05)))
+                            .cornerRadius(40)
+                            .padding()
+                        }
+                        NavigationLink(destination: MeditationView()) {
+                            HStack {
+                                Image("BalanceLogo") //TO BE REPLACED LATER
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 150, height: 20)
+                                Text("Meditation")
+                            }
+                            .frame(width: 360, height: 200)
+                            .foregroundColor(Color(UIColor(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
+                            .background(Color(UIColor(red: 0.30, green: 0.79, blue: 0.94, alpha: 0.05)))
+                            .cornerRadius(40)
+                            .padding()
+                        }
+                        NavigationLink(destination: Music()) {
+                            HStack {
+                                Image("BalanceLogo") //TO BE REPLACED LATER
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 150, height: 20)
+                                Text("Distraction")
+                            }
+                            .frame(width: 360, height: 200)
+                            .foregroundColor(Color(UIColor(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
+                            .background(Color(UIColor(red: 0.30, green: 0.79, blue: 0.94, alpha: 0.05)))
+                            .cornerRadius(40)
+                            .padding()
+                        }
+                    }
                 }
-                NavigationLink{
-                    MeditationView()
-                } label: {
-                    Label("Meditation", systemImage: "list.clipboard")
-                }
-                NavigationLink{
-                    SpotifyView()
-                } label: {
-                    Label("Distraction", systemImage: "music.note")
-                }
-                
             }
+            .ignoresSafeArea()
         }
-    }
-    
-    
-}
+        
+        }
+        
+                    
+            }
+            
+        
+
   
 
 

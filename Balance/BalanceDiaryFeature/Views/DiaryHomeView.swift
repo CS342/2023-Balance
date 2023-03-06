@@ -13,6 +13,7 @@ struct DiaryHomeView: View {
     @State private var showingEditor = false
     @State private var currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
     @Environment(\.scenePhase) private var scenePhase
+    //@Binding var navigationPath: NavigationPath
 
     var body: some View {
         VStack {
@@ -82,10 +83,18 @@ struct DiaryHomeView: View {
             }
         }
     }
+//    public init(navigationPath: Binding<NavigationPath>) {
+//        self._navigationPath = navigationPath
+//    }
 }
 
 struct DiaryHomeView_Previews: PreviewProvider {
+//    @State private static var navigationPath = NavigationPath()
+    
     static var previews: some View {
+//        NavigationStack{
         DiaryHomeView()
-    }
+        }
+        
+//    }
 }

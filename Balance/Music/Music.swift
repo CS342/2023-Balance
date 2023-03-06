@@ -15,7 +15,11 @@ struct Music: View {
 }
 
 struct Music_Previews: PreviewProvider {
+    
+
     static var previews: some View {
-        Music()
+//        NavigationStack {
+            Music()
+//        }
     }
 }

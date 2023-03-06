@@ -12,6 +12,7 @@ import UIKit
 
 struct SpotifyView: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIViewController
+    
 
     func makeUIViewController(context: Context) -> UIViewController {
         SpotifyViewController.shared

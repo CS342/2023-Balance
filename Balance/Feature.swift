@@ -8,22 +8,47 @@
 
 import SwiftUI
 
-enum Feature: String, Identifiable, CaseIterable {
-    case diary = "diary"
-    case meditation = "meditation"
-    case distraction = "distraction"
+public enum Feature: String, Identifiable, Hashable, CaseIterable {
     
-    static var allFeatures: [(Feature, RawValue)] {
-        var allFeatures: [(Feature, RawValue)] = []
+//    let id = UUID()
+    case diary = "Diary"
+    case meditation = "Meditation"
+    case spotify = "Distraction"
+    
+//    let name: String
+//    let icon: String
+    
+    static var allFeatures: [String] {
+        var allFeaturesArray: [String] = []
         
         for feature in Feature.allCases {
-            allFeatures.append((feature, feature.rawValue))
+            allFeaturesArray.append(feature.rawValue)
         }
         
-        return allFeatures
+        return allFeaturesArray
     }
     
-    var id: RawValue {
+    public var id: RawValue {
         rawValue
     }
+    
+    
 }
+
+//extension Feature {
+//    func featureView(with navigationPath: Binding<NavigationPath>) -> some View {
+//        @ViewBuilder
+//        var featureView: some View {
+//            switch self{
+//            case .diary:
+//                //DiaryHomeView(navigationPath: navigationPath)
+//                DiaryHomeView
+//            case .meditation:
+//                MeditationView(navigationPath: navigationPath)
+//            case .spotify:
+//                Music(navigationPath: navigationPath)
+//            }
+//        }
+//        return featureView
+//    }
+//}
