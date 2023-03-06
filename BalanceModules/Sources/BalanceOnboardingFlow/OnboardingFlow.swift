@@ -13,10 +13,9 @@ import SwiftUI
 /// Displays an multi-step onboarding flow for the CS342 2023 Balance Team Application.
 public struct OnboardingFlow: View {
     enum Step: String, Codable {
-        case accountSetup
         case login
         case signUp
-        case healthKitPermissions
+        case locationQuestion
     }
     
     
@@ -25,17 +24,15 @@ public struct OnboardingFlow: View {
     
     public var body: some View {
         NavigationStack(path: $onboardingSteps) {
-            Welcome(onboardingSteps: $onboardingSteps)
+            AccountSetup(onboardingSteps: $onboardingSteps)
                 .navigationDestination(for: Step.self) { onboardingStep in
                     switch onboardingStep {
-                    case .accountSetup:
-                        AccountSetup(onboardingSteps: $onboardingSteps)
                     case .login:
                         BalanceLogin()
                     case .signUp:
                         BalanceSignUp()
-                    case .healthKitPermissions:
-                        HealthKitPermissions()
+                    case .locationQuestion:
+                        LocationQuestion()
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)

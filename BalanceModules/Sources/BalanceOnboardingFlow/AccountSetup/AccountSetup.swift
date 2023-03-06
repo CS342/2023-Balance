@@ -22,14 +22,15 @@ struct AccountSetup: View {
         OnboardingView(
             contentView: {
                 VStack {
-                    OnboardingTitleView(
-                        title: "ACCOUNT_TITLE".moduleLocalized,
-                        subtitle: "ACCOUNT_SUBTITLE".moduleLocalized
-                    )
-                    Spacer(minLength: 0)
-                    accountImage
-                    accountDescription
-                    Spacer(minLength: 0)
+                    Image(uiImage: Bundle.module.image(withName: "BalanceLogo", fileExtension: "png"))
+                    Text("Welcome!")
+                        .bold()
+                        .font(.largeTitle)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom)
+                        .padding(.top, 30)
+                    Text("Sign up or login to continue.")
+                        .multilineTextAlignment(.center)
                 }
             }, actionView: {
                 actionView
@@ -37,7 +38,7 @@ struct AccountSetup: View {
         )
             .onReceive(account.objectWillChange) {
                 if account.signedIn {
-                    onboardingSteps.append(.healthKitPermissions)
+                    onboardingSteps.append(.locationQuestion)
                     // Unfortunately, SwiftUI currently animates changes in the navigation path that do not change
                     // the current top view. Therefore we need to do the following async procedure to remove the
                     // `.login` and `.signUp` steps while disabling the animations before and re-enabling them
@@ -51,50 +52,21 @@ struct AccountSetup: View {
                     }
                 }
             }
+            .background(Color(UIColor(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
     }
     
-    @ViewBuilder
-    private var accountImage: some View {
-        Group {
-            if account.signedIn {
-                Image("BalanceLogo")
-            } else {
-                Image("BalanceLogo")
-            }
-        }
-            .font(.system(size: 150))
-            .foregroundColor(.accentColor)
-    }
-    
-    @ViewBuilder
-    private var accountDescription: some View {
-        VStack {
-            Group {
-                if account.signedIn {
-                    Text("ACCOUNT_SIGNED_IN_DESCRIPTION", bundle: .module)
-                } else {
-                    Text("ACCOUNT_SETUP_DESCRIPTION", bundle: .module)
-                }
-            }
-                .multilineTextAlignment(.center)
-                .padding(.vertical, 16)
-            if account.signedIn {
-                UserView()
-                    .padding()
-            }
-        }
-    }
     
     @ViewBuilder
     private var actionView: some View {
-        if account.signedIn {
-            OnboardingActionsView(
-                "ACCOUNT_NEXT".moduleLocalized,
-                action: {
-                    onboardingSteps.append(.healthKitPermissions)
-                }
-            )
-        } else {
+//        if account.signedIn {
+//            OnboardingActionsView(
+//                "ACCOUNT_NEXT".moduleLocalized,
+//                action: {
+//                    onboardingSteps.append(.locationQuestion)
+//                }
+//            )
+//        }
+//        else {
             OnboardingActionsView(
                 primaryText: "ACCOUNT_SIGN_UP".moduleLocalized,
                 primaryAction: {
@@ -105,7 +77,7 @@ struct AccountSetup: View {
                     onboardingSteps.append(.login)
                 }
             )
-        }
+//        }
     }
     
     

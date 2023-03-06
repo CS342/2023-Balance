@@ -11,11 +11,15 @@ import CardinalKit
 
 struct DiaryNoteEntryView: View {
     @ObservedObject var store: NoteStore
-    @State private var title = ""
-    @State private var text: String = "This is some editable text..."
+    @Binding var currentNote: Note
+    @Binding var showingEditor: Bool
+
+    @State private var id = UUID().uuidString
+
     @State private var savedNotes: [Note] = []
     @State private var burningNote = false
-    @Binding var showingEditor: Bool
+    @State private var burnComplete = false
+    @State private var emptyNoteAlert = false
     
     var body: some View {
         ZStack {
@@ -24,26 +28,23 @@ struct DiaryNoteEntryView: View {
                     .padding()
                 
                 TextEditor(text: $text)
-                    .foregroundColor(self.text == "This is some editable text..." ? .gray : .primary)
-                //TextEditor doesn't allow placeholder text so found this patch online
-                    .onTapGesture {
-                        if (self.text == "This is some editable text...") {
-                            self.text = ""
-                        }
-                    }
+                    .border(.black, width: 1)
                     .padding()
                 
                 HStack(spacing: 100) {
                     Button("Save") {
-                        let note = Note(
-                            id: UUID().uuidString,
+                        if text.isEmpty {
+                            self.emptyNoteAlert = true
+                        }
+
+                        let newNote = Note(
+                            id: currentNote.id,
                             title: title,
                             text: text,
                             date: Date()
                         )
-                        store.notes.append(note)
-                        title = ""
-                        text = ""
+
+                        store.saveNote(newNote)
                         
                         NoteStore.save(notes: store.notes) { result in
                             if case .failure(let error) = result {
@@ -53,14 +54,24 @@ struct DiaryNoteEntryView: View {
 
                         self.showingEditor.toggle()
                     }.buttonStyle(.borderedProminent)
+                        .alert("Please enter a text before you save.", isPresented: $emptyNoteAlert){
+                            Button("OK", role: .cancel) { }
+                        }
                     
                     Button("Burn") {
+                        store.deleteNote(currentNote.id)
+
+                        NoteStore.save(notes: store.notes) { result in
+                            if case .failure(let error) = result {
+                                print(error.localizedDescription)
+                            }
+                        }
                         burningNote.toggle()
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding()
-                // found online how to get notes saved right below
+
                 List(savedNotes, id: \.title) { note in
                     VStack(alignment: .leading) {
                         Text(note.title)
@@ -68,18 +79,34 @@ struct DiaryNoteEntryView: View {
                         Text(note.text)
                     }
                 }
+            }.onAppear {
+                self.title = currentNote.title
+                self.text = currentNote.text
+                self.id = currentNote.id
             }
+
             if burningNote {
-                BurnedView(burningNote: $burningNote, text: $text, title: $title)
+                BurnedView(
+                    burningNote: $burningNote,
+                    showingEditor: $showingEditor
+                )
             }
         }
     }
+
 }
 
-struct DiaryNoteEntryView_Previews: PreviewProvider {
-    static var previews: some View {
-        let store = NoteStore()
-        DiaryNoteEntryView(store: store, showingEditor: .constant(false))
-    }
-}
+//struct DiaryNoteEntryView_Previews: PreviewProvider {
+//    @State var currentNote = Note(id: UUID().uuidString, title: "Sample Note", text: "Test", date: Date())
+//
+//    static var previews: some View {
+//        let store = NoteStore()
+//        DiaryNoteEntryView(
+//            store: store,
+//            currentNote: $currentNote,
+//            showingEditor: .constant(false)
+//        )
+//    }
+//}
+
 

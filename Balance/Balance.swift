@@ -21,10 +21,13 @@ struct Balance: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .sheet(isPresented: !$completedOnboardingFlow) {
+            Group {
+                if completedOnboardingFlow {
+                    HomeView()
+                } else {
                     OnboardingFlow()
                 }
+            }
                 .testingSetup()
                 .cardinalKit(appDelegate)
         }

@@ -18,6 +18,7 @@ import FirestoreStoragePrefixUserIdAdapter
 import HealthKit
 import HealthKitDataSource
 import HealthKitToFHIRAdapter
+import LocalStorage
 import Questionnaires
 import Scheduler
 import SwiftUI
@@ -35,6 +36,7 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
             QuestionnaireDataSource()
             MockDataStorageProvider()
             BalanceScheduler()
+            LocalStorage()
         }
     }
     

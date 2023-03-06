@@ -23,7 +23,7 @@ struct Welcome: View {
             ],
             actionText: "WELCOME_BUTTON".moduleLocalized,
             action: {
-                onboardingSteps.append(.accountSetup)
+                onboardingSteps.append(.login)
             }
         )
     }
@@ -37,8 +37,8 @@ struct Welcome: View {
 
 struct Welcome_Previews: PreviewProvider {
     @State private static var path: [OnboardingFlow.Step] = []
-    
-    
+
+
     static var previews: some View {
         Welcome(onboardingSteps: $path)
     }
