@@ -59,8 +59,6 @@
 		653A256C28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256B28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift */; };
 		89EB7BAD29B45381000470FC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
 		89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EB7BB029B45D2B000470FC /* HeaderMenu.swift */; };
-		276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276222BC29B0E3E100FCB4C5 /* NoteStore.swift */; };
-		2F39333729A8A5690035A05C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
