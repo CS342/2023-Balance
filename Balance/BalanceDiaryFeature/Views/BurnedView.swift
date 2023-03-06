@@ -12,12 +12,10 @@
 import SwiftUI
 import UIKit
 
-
 struct BurnedView: View {
     @State var frameImage: String = ""
     @Binding var burningNote: Bool
-    @Binding var text: String
-    @Binding var title: String
+    @Binding var showingEditor: Bool
     
     var body: some View {
         VStack(alignment: .center){
@@ -41,8 +39,7 @@ struct BurnedView: View {
             if (frameIndex > numFrames) {
                 Timer.invalidate()
                 burningNote.toggle()
-                text = "This is some editable text..."
-                title = ""
+                showingEditor.toggle()
             }
         });
     }
@@ -50,6 +47,9 @@ struct BurnedView: View {
 
 struct BurnedView_Previews: PreviewProvider {
     static var previews: some View {
-        BurnedView(burningNote: .constant(true), text: .constant("Hi"), title: .constant("My Diary Entry"))
+        BurnedView(
+            burningNote: .constant(true),
+            showingEditor: .constant(false)
+        )
     }
 }

@@ -14,15 +14,16 @@ import SwiftUI
 struct BalanceLogin: View {
     var body: some View {
         Login {
-            IconView()
+            Image(uiImage: Bundle.module.image(withName: "Balloon", fileExtension: "png"))
                 .padding(.top, 32)
-            Text("LOGIN_SUBTITLE", bundle: .module)
+            Text("Login below to begin using Balance")
                 .multilineTextAlignment(.center)
                 .padding()
                 .padding()
             Spacer(minLength: 0)
         }
-            .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.large)
+        .background(Color(UIColor(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
     }
 }
 

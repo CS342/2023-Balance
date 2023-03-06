@@ -7,16 +7,17 @@
 //
 
 import BalanceContacts
-import BalanceMockDataStorageProvider
 import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
+import BalanceMockDataStorageProvider
 
 
 struct HomeView: View {
     enum Tabs: String {
         case schedule
         case contact
+        case meditation
         case mockUpload
         case diary
         case music
@@ -28,15 +29,11 @@ struct HomeView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            ScheduleView()
-                .tag(Tabs.schedule)
+            MeditationView()
+                .tag(Tabs.meditation)
                 .tabItem {
-                    Label("SCHEDULE_TAB_TITLE", systemImage: "list.clipboard")
-                }
-            Contacts()
-                .tag(Tabs.contact)
-                .tabItem {
-                    Label("CONTACTS_TAB_TITLE", systemImage: "person.fill")
+                    Label("Meditation",
+                          systemImage: "list.clipboard")
                 }
             DiaryHomeView()
                 .tag(Tabs.diary)
@@ -47,11 +44,6 @@ struct HomeView: View {
                 .tag(Tabs.music)
                 .tabItem {
                     Label("Music", systemImage: "music.note")
-                }
-            MockUploadList()
-                .tag(Tabs.mockUpload)
-                .tabItem {
-                    Label("MOCK_UPLOAD_TAB_TITLE", systemImage: "server.rack")
                 }
         }
     }

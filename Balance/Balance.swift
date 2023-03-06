@@ -17,13 +17,17 @@ struct Balance: App {
     @UIApplicationDelegateAdaptor(BalanceAppDelegate.self) var appDelegate
     @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
     
+    @State var started = false
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .sheet(isPresented: !$completedOnboardingFlow) {
+            Group {
+                if completedOnboardingFlow {
+                    HomeView()
+                } else {
                     OnboardingFlow()
                 }
+            }
                 .testingSetup()
                 .cardinalKit(appDelegate)
         }

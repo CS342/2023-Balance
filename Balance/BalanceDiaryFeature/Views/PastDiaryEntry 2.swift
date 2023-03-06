@@ -1,0 +1,46 @@
+//
+// This source file is part of the CS342 2023 Balance project
+//
+// SPDX-FileCopyrightText: 2023 Stanford University
+//
+// SPDX-License-Identifier: MIT
+//
+
+import SwiftUI
+
+public struct PastDiaryEntry: View {
+    private var note: Note
+    
+    public var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(note.date.timeSinceDate(fromDate: Date()))
+                    .bold()
+                Text(note.title)
+                    .font(.title.bold())
+                Text(note.text)
+                    .font(.title3)
+                    .foregroundColor(.gray)
+                    .lineLimit(3)
+            }
+            Image(systemName: "chevron.right")
+                .offset(x: 140)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(20)
+        .frame(width: 350)
+        .background()
+        .cornerRadius(15)
+        .shadow(color: Color.black.opacity(0.08), radius: 5)
+    }
+
+    public init(_ note: Note) {
+        self.note = note
+    }
+}
+
+struct PastDiaryEntry_Previews: PreviewProvider {
+    static var previews: some View {
+        PastDiaryEntry(Note(id: "1234", title: "Title", text: "Text", date: Date().previousDate()))
+    }
+}
