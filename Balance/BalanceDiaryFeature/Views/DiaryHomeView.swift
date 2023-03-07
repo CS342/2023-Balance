@@ -47,7 +47,7 @@ struct DiaryHomeView: View {
                     currentNote: $currentNote,
                     showingEditor: $showingEditor
                 )
-            }
+        }
         .onAppear {
             NoteStore.load { result in
                 switch result {
