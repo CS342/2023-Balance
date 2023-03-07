@@ -14,12 +14,12 @@ class SpotifyViewController: UIViewController {
 
     var responseCode: String? {
         didSet {
-            fetchAccessToken { (dictionary, error) in
+            fetchAccessToken { dictionary, error in
                 if let error = error {
                     print("Fetching token request error \(error)")
                     return
                 }
-                let accessToken = dictionary!["access_token"] as! String
+                let accessToken = dictionary?["access_token"] as? String
                 DispatchQueue.main.async {
                     self.appRemote.connectionParameters.accessToken = accessToken
                     self.appRemote.connect()
@@ -43,7 +43,7 @@ class SpotifyViewController: UIViewController {
     }
 
     lazy var configuration: SPTConfiguration = {
-        let configuration = SPTConfiguration(clientID: SpotifyConfig.spotifyClientId, redirectURL: SpotifyConfig.redirectUri!)
+        let configuration = SPTConfiguration(clientID: SpotifyConfig.spotifyClientId, redirectURL: SpotifyConfig.redirectUri)
         // Set the playURI to a non-nil value so that Spotify plays music after authenticating
         // otherwise another app switch will be required
         configuration.playURI = "spotify:album:3M7xLE04DvF9sM9gnTBPdY"
@@ -179,7 +179,7 @@ extension SpotifyViewController {
 
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 
@@ -191,8 +191,7 @@ extension SpotifyViewController {
             imageView.isHidden = false
             trackLabel.isHidden = false
             playPauseButton.isHidden = false
-        }
-        else { // show login
+        } else { // show login
             signOutButton.isHidden = true
             connectButton.isHidden = false
             connectLabel.isHidden = false
@@ -208,7 +207,7 @@ extension SpotifyViewController: SPTAppRemoteDelegate {
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
         updateViewBasedOnConnected()
         appRemote.playerAPI?.delegate = self
-        appRemote.playerAPI?.subscribe(toPlayerState: { (success, error) in
+        appRemote.playerAPI?.subscribe(toPlayerState: { _, error in
             if let error = error {
                 print("Error subscribing to player state:" + error.localizedDescription)
             }
@@ -257,24 +256,41 @@ extension SpotifyViewController: SPTSessionManagerDelegate {
 
 // MARK: - Networking
 extension SpotifyViewController {
+    // swiftlint:disable discouraged_optional_collection
     func fetchAccessToken(completion: @escaping ([String: Any]?, Error?) -> Void) {
-        let url = URL(string: "https://accounts.spotify.com/api/token")!
+        guard let url = URL(string: "https://accounts.spotify.com/api/token") else {
+            return
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let spotifyAuthKey = "Basic \((SpotifyConfig.spotifyClientId + ":" + SpotifyConfig.spotifyClientSecretKey).data(using: .utf8)!.base64EncodedString())"
-        request.allHTTPHeaderFields = ["Authorization": spotifyAuthKey,
-                                       "Content-Type": "application/x-www-form-urlencoded"]
+
+        let clientString = SpotifyConfig.spotifyClientId + ":" + SpotifyConfig.spotifyClientSecretKey
+
+        guard let clientStringData = clientString.data(using: .utf8) else {
+            return
+        }
+
+        let spotifyAuthKey = "Basic \((clientStringData).base64EncodedString())"
+
+        request.allHTTPHeaderFields = [
+            "Authorization": spotifyAuthKey,
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
 
         var requestBodyComponents = URLComponents()
         let scopeAsString = SpotifyConfig.stringScopes.joined(separator: " ")
 
+        guard let responseCode else {
+            return
+        }
+
         requestBodyComponents.queryItems = [
             URLQueryItem(name: "client_id", value: SpotifyConfig.spotifyClientId),
             URLQueryItem(name: "grant_type", value: "authorization_code"),
-            URLQueryItem(name: "code", value: responseCode!),
-            URLQueryItem(name: "redirect_uri", value: SpotifyConfig.redirectUri?.absoluteString),
+            URLQueryItem(name: "code", value: responseCode),
+            URLQueryItem(name: "redirect_uri", value: SpotifyConfig.redirectUri.absoluteString),
             URLQueryItem(name: "code_verifier", value: ""), // not currently used
-            URLQueryItem(name: "scope", value: scopeAsString),
+            URLQueryItem(name: "scope", value: scopeAsString)
         ]
 
         request.httpBody = requestBodyComponents.query?.data(using: .utf8)
@@ -295,7 +311,7 @@ extension SpotifyViewController {
     }
 
     func fetchArtwork(for track: SPTAppRemoteTrack) {
-        appRemote.imageAPI?.fetchImage(forItem: track, with: CGSize.zero, callback: { [weak self] (image, error) in
+        appRemote.imageAPI?.fetchImage(forItem: track, with: CGSize.zero, callback: { [weak self] image, error in
             if let error = error {
                 print("Error fetching track image: " + error.localizedDescription)
             } else if let image = image as? UIImage {
@@ -305,12 +321,12 @@ extension SpotifyViewController {
     }
 
     func fetchPlayerState() {
-        appRemote.playerAPI?.getPlayerState({ [weak self] (playerState, error) in
+        appRemote.playerAPI?.getPlayerState { [weak self] playerState, error in
             if let error = error {
                 print("Error getting player state:" + error.localizedDescription)
             } else if let playerState = playerState as? SPTAppRemotePlayerState {
                 self?.update(playerState: playerState)
             }
-        })
+        }
     }
 }

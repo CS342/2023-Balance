@@ -66,8 +66,6 @@ only_rules:
   - discarded_notification_center_observer
   # Discouraged direct initialization of types that can be harmful. e.g. UIDevice(), Bundle()
   - discouraged_direct_init
-  # Prefer initializers over object literals.
-  - discouraged_object_literal
   # Prefer non-optional booleans over optional booleans.
   - discouraged_optional_boolean
   # Prefer empty collection over optional collection.

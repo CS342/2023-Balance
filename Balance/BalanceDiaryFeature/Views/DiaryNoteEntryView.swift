@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
-import SwiftUI
 import CardinalKit
+import SwiftUI
 
 struct DiaryNoteEntryView: View {
     @ObservedObject var store: NoteStore
@@ -23,7 +23,8 @@ struct DiaryNoteEntryView: View {
     @State private var burningNote = false
     @State private var burnComplete = false
     @State private var emptyNoteAlert = false
-    
+
+    // swiftlint:disable closure_body_length
     var body: some View {
         ZStack {
             VStack {
@@ -57,7 +58,7 @@ struct DiaryNoteEntryView: View {
 
                         self.showingEditor.toggle()
                     }.buttonStyle(.borderedProminent)
-                        .alert("Please enter a text before you save.", isPresented: $emptyNoteAlert){
+                        .alert("Please enter a text before you save.", isPresented: $emptyNoteAlert) {
                             Button("OK", role: .cancel) { }
                         }
                     
@@ -96,20 +97,17 @@ struct DiaryNoteEntryView: View {
             }
         }
     }
-
 }
 
-//struct DiaryNoteEntryView_Previews: PreviewProvider {
-//    @State var currentNote = Note(id: UUID().uuidString, title: "Sample Note", text: "Test", date: Date())
-//
-//    static var previews: some View {
-//        let store = NoteStore()
-//        DiaryNoteEntryView(
-//            store: store,
-//            currentNote: $currentNote,
-//            showingEditor: .constant(false)
-//        )
-//    }
-//}
+struct DiaryNoteEntryView_Previews: PreviewProvider {
+    @State static var currentNote = Note(id: UUID().uuidString, title: "Sample Note", text: "Test", date: Date())
 
-
+    static var previews: some View {
+        let store = NoteStore()
+        DiaryNoteEntryView(
+            store: store,
+            currentNote: $currentNote,
+            showingEditor: .constant(false)
+        )
+    }
+}

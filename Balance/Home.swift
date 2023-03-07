@@ -7,10 +7,10 @@
 //
 
 import BalanceContacts
+import BalanceMockDataStorageProvider
 import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
-import BalanceMockDataStorageProvider
 
 
 struct HomeView: View {
@@ -32,8 +32,7 @@ struct HomeView: View {
             MeditationView()
                 .tag(Tabs.meditation)
                 .tabItem {
-                    Label("Meditation",
-                          systemImage: "list.clipboard")
+                    Label("Meditation", systemImage: "list.clipboard")
                 }
             DiaryHomeView()
                 .tag(Tabs.diary)
