@@ -9,14 +9,9 @@
 import SwiftUI
 
 public enum Feature: String, Identifiable, Hashable, CaseIterable {
-    
-//    let id = UUID()
     case diary = "Diary"
     case meditation = "Meditation"
     case spotify = "Distraction"
-    
-//    let name: String
-//    let icon: String
     
     static var allFeatures: [String] {
         var allFeaturesArray: [String] = []
@@ -34,21 +29,3 @@ public enum Feature: String, Identifiable, Hashable, CaseIterable {
     
     
 }
-
-//extension Feature {
-//    func featureView(with navigationPath: Binding<NavigationPath>) -> some View {
-//        @ViewBuilder
-//        var featureView: some View {
-//            switch self{
-//            case .diary:
-//                //DiaryHomeView(navigationPath: navigationPath)
-//                DiaryHomeView
-//            case .meditation:
-//                MeditationView(navigationPath: navigationPath)
-//            case .spotify:
-//                Music(navigationPath: navigationPath)
-//            }
-//        }
-//        return featureView
-//    }
-//}
