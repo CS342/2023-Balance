@@ -13,7 +13,6 @@ struct DiaryHomeView: View {
     @State private var showingEditor = false
     @State private var currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
     @Environment(\.scenePhase) private var scenePhase
-    //@Binding var navigationPath: NavigationPath
 
     var body: some View {
         VStack {

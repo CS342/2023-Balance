@@ -26,6 +26,4 @@ public enum Feature: String, Identifiable, Hashable, CaseIterable {
     public var id: RawValue {
         rawValue
     }
-    
-    
 }

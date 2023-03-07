@@ -10,16 +10,16 @@ import SwiftUI
 
 struct Music: View {
     var body: some View {
-        SpotifyView()
+        VStack{
+            HeaderMenu(title: "Distraction")
+            SpotifyView()
+                .offset(y: -50)
+        }
     }
 }
 
 struct Music_Previews: PreviewProvider {
-    
-
     static var previews: some View {
-//        NavigationStack {
-            Music()
-//        }
+        Music()
     }
 }
