@@ -18,13 +18,14 @@ struct BurnedView: View {
     @Binding var showingEditor: Bool
     
     var body: some View {
-        VStack(alignment: .center){
+        VStack(alignment: .center) {
             Image(frameImage)
                 .resizable()
                 .frame(width: 400, height: 875, alignment: .center)
                 .aspectRatio(contentMode: .fill)
                 .onAppear(perform: updateFrame)
                 .edgesIgnoringSafeArea(.all)
+                .accessibility(hidden: true)
         }
     }
     
@@ -33,15 +34,15 @@ struct BurnedView: View {
         let numFrames = 29
         let speed = 0.08
         
-        _ = Timer.scheduledTimer(withTimeInterval: speed, repeats: true, block: { (Timer) in
+        _ = Timer.scheduledTimer(withTimeInterval: speed, repeats: true, block: { timer in
             frameImage = "burningPaper\(frameIndex)"
             frameIndex += 1
-            if (frameIndex > numFrames) {
-                Timer.invalidate()
+            if frameIndex > numFrames {
+                timer.invalidate()
                 burningNote.toggle()
                 showingEditor.toggle()
             }
-        });
+        })
     }
 }
 

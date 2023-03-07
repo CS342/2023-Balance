@@ -16,7 +16,6 @@ struct Welcome: View {
     
     var body: some View {
         OnboardingView(
-            
             title: "WELCOME_TITLE".moduleLocalized,
             subtitle: "".moduleLocalized,
             areas: [

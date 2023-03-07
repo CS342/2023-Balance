@@ -8,12 +8,6 @@
 
 import SwiftUI
 
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-}
-
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
@@ -38,7 +32,7 @@ struct HeaderMenu: View {
                     .font(.title.bold())
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .offset(x:-32)
+                    .offset(x: -32)
                 Image(systemName: "")
                     .foregroundColor(.white)
             }
@@ -50,6 +44,12 @@ struct HeaderMenu: View {
         .padding(.top, 60)
         .background(.blue)
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }
 
