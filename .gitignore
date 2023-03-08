@@ -41,5 +41,3 @@ firebase-debug.*.log*
 
 # Firebase cache
 .firebase/
-
-Config.swift
