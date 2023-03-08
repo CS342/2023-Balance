@@ -54,6 +54,7 @@
 		653A255528338800005D4D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653A255428338800005D4D48 /* Assets.xcassets */; };
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
 		894A884529B7B27600CB347B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894A884429B7B27600CB347B /* NavigationView.swift */; };
+		896C65D629B92EF800F30BA2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896C65D529B92EF800F30BA2 /* Config.swift */; };
 		89EB7BAD29B45381000470FC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
 		89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EB7BB029B45D2B000470FC /* HeaderMenu.swift */; };
 		89F9619829B6646200513052 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9619729B6646200513052 /* Feature.swift */; };
@@ -112,6 +113,7 @@
 		653A258928339462005D4D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceDebug.entitlements; sourceTree = "<group>"; };
 		894A884429B7B27600CB347B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		896C65D529B92EF800F30BA2 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		89EB7BB029B45D2B000470FC /* HeaderMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderMenu.swift; sourceTree = "<group>"; };
 		89F9619729B6646200513052 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +210,7 @@
 				2761584A29A6548B006C7AC1 /* SpotifyView.swift */,
 				2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */,
 				2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */,
+				896C65D529B92EF800F30BA2 /* Config.swift */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2720084329A843B90052908D /* Note.swift in Sources */,
+				896C65D629B92EF800F30BA2 /* Config.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
 				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
 				4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */,
