@@ -21,6 +21,7 @@ struct NavView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 150, height: 20)
+                .accessibilityLabel(Text("Balance Logo"))
             Text(text)
         }
         .frame(width: 360, height: 200)

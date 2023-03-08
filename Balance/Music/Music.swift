@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Music: View {
     var body: some View {
-        VStack{
+        VStack {
             HeaderMenu(title: "Distraction")
             SpotifyView()
                 .offset(y: -50)
