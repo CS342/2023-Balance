@@ -10,4 +10,3 @@ enum SpotifyKeys {
     static var secretID = ""
     static var clientID = ""
 }
-
