@@ -42,7 +42,7 @@ struct MeditationView: View {
                 .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
                 .offset(x: -110)
             ScrollView(.horizontal) {
-                HStack (spacing: 16){
+                HStack(spacing: 24) {
                     Button(action: {
                         showingGuided = true
                         showingYoutube = false
