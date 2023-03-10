@@ -20,8 +20,8 @@ struct NavView: View {
             Image(image) // TO BE REPLACED LATER
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 150, height: 20)
-                .accessibilityLabel(Text("Balance Logo"))
+                .frame(width: 100, height: 20)
+                .accessibilityLabel(Text(text))
             Text(text)
         }
         .frame(width: 360, height: 200)

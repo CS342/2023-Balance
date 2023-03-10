@@ -29,13 +29,13 @@ struct HomeView: View {
             ScrollView(.vertical) {
                 VStack {
                     NavigationLink(destination: DiaryHomeView()) {
-                        NavView(image: "BalanceLogo", text: "Diary")
+                        NavView(image: "Diary", text: "Diary")
                     }
                     NavigationLink(destination: MeditationView()) {
-                        NavView(image: "BalanceLogo", text: "Meditation")
+                        NavView(image: "Meditation", text: "Meditation")
                     }
                     NavigationLink(destination: Music()) {
-                        NavView(image: "BalanceLogo", text: "Distraction")
+                        NavView(image: "DistractImage", text: "Distraction")
                     }
                 }
                 .ignoresSafeArea(.all)
