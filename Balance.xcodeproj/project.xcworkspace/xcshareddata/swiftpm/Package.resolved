@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/StanfordBDHG/CardinalKit",
       "state" : {
-        "revision" : "6e90348e30709f4b739fc3473c2fa54fbcf77eec",
-        "version" : "0.3.3"
+        "revision" : "6162a67a0b821c2be9358bec798d5d3e94cc5783",
+        "version" : "0.3.5"
       }
     },
     {
@@ -39,7 +39,7 @@
     {
       "identity" : "firebase-ios-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/firebase/firebase-ios-sdk",
+      "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
         "revision" : "60f9a33e7084482df67b48e16f315f4f7a6f5da9",
         "version" : "10.6.0"
@@ -131,14 +131,14 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
       "state" : {
-        "revision" : "3e4e743631e86c8c70dbc6efdc7beaa6e90fd3bb",
-        "version" : "2.1.1"
+        "revision" : "ec957ccddbcc710ccc64c9dcbd4c7006fcf8b73a",
+        "version" : "2.2.0"
       }
     },
     {
       "identity" : "researchkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/StanfordBDHG/ResearchKit.git",
+      "location" : "https://github.com/StanfordBDHG/ResearchKit",
       "state" : {
         "revision" : "52a9bd8bcf2112b2f70479cd192f8c5fa9850c31",
         "version" : "2.2.8"
@@ -158,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
-        "revision" : "ab3a58b7209a17d781c0d1dbb3e1ff3da306bae8",
-        "version" : "1.20.3"
+        "revision" : "0af9125c4eae12a4973fb66574c53a54962a9e1e",
+        "version" : "1.21.0"
       }
     },
     {
