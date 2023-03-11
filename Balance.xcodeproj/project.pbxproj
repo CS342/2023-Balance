@@ -52,6 +52,8 @@
 		4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786129AC0BEC0048D1D1 /* Youtube.swift */; };
 		4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786329AC0C070048D1D1 /* MeditationView.swift */; };
 		5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAFCE1929A75990006CCD66 /* LocalStorage */; };
+		5E03E99F29BC15740041DD1C /* ActivityLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E03E99E29BC15740041DD1C /* ActivityLogViewController.swift */; };
+		5E03E9A129BC15CF0041DD1C /* ActivityLogBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E03E9A029BC15CF0041DD1C /* ActivityLogBaseView.swift */; };
 		5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9516F729AC387A0031F202 /* BurnedView.swift */; };
 		5EF9D78429B5AFF1006C3B22 /* ActivityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF9D78329B5AFF1006C3B22 /* ActivityStorageManager.swift */; };
 		5EF9D78629B5CC58006C3B22 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5EF9D78529B5CC58006C3B22 /* FirebaseStorage */; };
@@ -109,6 +111,8 @@
 		4A45C88C29B4151B006A52A1 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		4ACC786129AC0BEC0048D1D1 /* Youtube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Youtube.swift; sourceTree = "<group>"; };
 		4ACC786329AC0C070048D1D1 /* MeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationView.swift; sourceTree = "<group>"; };
+		5E03E99E29BC15740041DD1C /* ActivityLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogViewController.swift; sourceTree = "<group>"; };
+		5E03E9A029BC15CF0041DD1C /* ActivityLogBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogBaseView.swift; sourceTree = "<group>"; };
 		5E9516F729AC387A0031F202 /* BurnedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedView.swift; sourceTree = "<group>"; };
 		5EF9D78329B5AFF1006C3B22 /* ActivityStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStorageManager.swift; sourceTree = "<group>"; };
 		653A254D283387FE005D4D48 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,6 +256,16 @@
 			path = Meditation;
 			sourceTree = "<group>";
 		};
+		5E03E99D29BC14FA0041DD1C /* ActivityLogging */ = {
+			isa = PBXGroup;
+			children = (
+				5EF9D78329B5AFF1006C3B22 /* ActivityStorageManager.swift */,
+				5E03E9A029BC15CF0041DD1C /* ActivityLogBaseView.swift */,
+				5E03E99E29BC15740041DD1C /* ActivityLogViewController.swift */,
+			);
+			path = ActivityLogging;
+			sourceTree = "<group>";
+		};
 		653A2544283387FE005D4D48 = {
 			isa = PBXGroup;
 			children = (
@@ -279,12 +293,12 @@
 			isa = PBXGroup;
 			children = (
 				89EB7BB029B45D2B000470FC /* HeaderMenu.swift */,
+				5E03E99D29BC14FA0041DD1C /* ActivityLogging */,
 				4ACC786029AC0B590048D1D1 /* Meditation */,
 				2720083329A7E4C20052908D /* BalanceDiaryFeature */,
 				8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */,
 				2761584E29A662DE006C7AC1 /* Music */,
 				653A2550283387FE005D4D48 /* Balance.swift */,
-				5EF9D78329B5AFF1006C3B22 /* ActivityStorageManager.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
 				2FC975A72978F11A00BA99FE /* Home.swift */,
@@ -503,6 +517,7 @@
 				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
 				2720084B29A84A980052908D /* Date.swift in Sources */,
 				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
+				5E03E9A129BC15CF0041DD1C /* ActivityLogBaseView.swift in Sources */,
 				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
 				4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */,
 				4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */,
@@ -515,6 +530,7 @@
 				2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */,
 				2761584D29A654FD006C7AC1 /* Music.swift in Sources */,
 				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
+				5E03E99F29BC15740041DD1C /* ActivityLogViewController.swift in Sources */,
 				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
 				89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */,
 				2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */,
