@@ -9,7 +9,7 @@
 
 import UIKit
 
-class SpotifyViewController: UIViewController {
+class SpotifyViewController: ActivityLogManager {
     static let shared = SpotifyViewController()
 
     var responseCode: String? {
@@ -75,6 +75,7 @@ class SpotifyViewController: UIViewController {
         super.viewDidLoad()
         style()
         layout()
+        print("Spotify view start")
     }
 
     override func viewDidAppear(_ animated: Bool) {
