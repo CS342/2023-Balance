@@ -9,7 +9,7 @@ import Foundation
 
 // Views utilizing UIViewController can inherit this to have activity loggin functionality
 class ActivityLogViewController: UIViewController {
-    var activityLogEntry: ActivityLogEntry!
+    var activityLogEntry: ActivityLogEntry
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -20,25 +20,21 @@ class ActivityLogViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        resetLog()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        endLog()
-    }
-    
-    func resetLog() {
-        activityLogEntry = ActivityLogEntry(startTime: Date.now, actions: [])
+        activityLogEntry.reset()
         print("view appeared: starting log")
     }
     
-    func recordAction(actionStr: String) {
-        activityLogEntry.actions.append(actionStr)
+    override func viewDidDisappear(_ animated: Bool) {
+        activityLogEntry.endLog()
+        print("view disappeared, ending/sending log")
     }
     
-    func endLog() {
-        print("view disappeared, ending/sending log")
-        activityLogEntry.endTime = Date.now
-        ActivityStorageManager.shared.uploadActivity(activityLogEntry: activityLogEntry)
+    func sendActivityLog() {
+        guard activityLogEntry.endTime != nil else {
+            //TODO: use logging functonality
+            print("Can't send log to storage because log is incomplete")
+        }
+        ActivityStorageManager.shared.uploadActivity(activityLogEntryString: activityLogEntry.toString())
     }
+
 }

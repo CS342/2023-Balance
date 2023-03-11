@@ -31,11 +31,64 @@ Feature
 import Foundation
 
 
-struct ActivityLogEntry {
+class ActivityLogEntry {
+    //TODO: add getter?
     var startTime: Date
     var endTime: Date?
-    var actions: [String]
+    var actions: [(Date, String)] = []
+    
+    init() {
+        self.restart()
+    }
+    
+    func restart() {
+        startTime = Date.now
+        endTime = nil
+        actions = []
+    }
+    
+    func addActivity(actionDescription: String) {
+        let currentDate = Date.now
+        actions.append((currentDate, actionDescription))
+    }
+    
+    func endLog() {
+        endTime = Date.now
+    }
+    
+    func toString() -> (String, String) {
+        
+        let duration = endTime!.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
+        
+        let idStr = dateToString(date: startTime)
+        let startStr = "start: " + idStr
+        let endStr = "end: " + dateToString(date: endTime!)
+        
+        // actions.joined(separator: "\n")
+        
+        var actionsStr = ""
+        
+        for (timestamp, action) in actions {
+            actionsStr.append(dateToString(date: timestamp) + " " + action)
+        }
+        
+        return (idStr, [startStr, actionsStr, endStr].joined(separator: "\n"))
+    }
+    
+    func dateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        formatter.timeZone = .current
+        
+        return formatter.string(from: date)
+    }
 }
+
+/*protocol ActivityLog {
+    var activityLogEntry: ActivityLogEntry { get set }
+    func sendActivityLog()
+    
+}*/
 
 class ActivityStorageManager {
     static let shared = ActivityStorageManager()
@@ -56,7 +109,7 @@ class ActivityStorageManager {
     
     //hold times in this class in case app is closed ->  can publish all times contained in this class
     
-    func uploadActivity(activityLogEntry: ActivityLogEntry) {
+    func uploadActivity(startID: String, activityLogEntryString: String) {
         //Authorize User: users should be signed in to use the app
         guard let user = Auth.auth().currentUser else {
             //TODO: switch to logging statement
@@ -64,17 +117,9 @@ class ActivityStorageManager {
             return
         }
         let userID = user.uid
-        
-        
-        //create log entry
-        guard activityLogEntry.endTime != nil else {
-            print("cannot create activity log without value for end time ")
-            return
-        }
-        
-        let (activityID, activityStr) = generateActivityLogString(activityLogEntry: activityLogEntry)
-        
-        guard let activityData = activityStr.data(using: .utf8) else {
+
+        //prepare data
+        guard let activityData = activityLogEntryString.data(using: .utf8) else {
             //TODO: switch to logging statement
             print("Error generating Data object from activity log")
             return
@@ -85,7 +130,7 @@ class ActivityStorageManager {
         let metadata = StorageMetadata()
         metadata.contentType = "activity/txt"
         
-        let storageRef = storage.reference().child("users/\(userID)/activity/\(activityID).txt")
+        let storageRef = storage.reference().child("users/\(userID)/activity/\(startID).txt")
 
         storageRef.putData(activityData, metadata: metadata) { (metadata, error) in
             if let error = error {
@@ -96,21 +141,5 @@ class ActivityStorageManager {
                 print("Metadata: ", metadata)
             }
         }
-    }
-    
-    func generateActivityLogString(activityLogEntry: ActivityLogEntry) -> (String, String) {
-        let duration = activityLogEntry.endTime!.timeIntervalSinceReferenceDate - activityLogEntry.startTime.timeIntervalSinceReferenceDate
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        formatter.timeZone = .current
-        
-        let idStr = formatter.string(from: activityLogEntry.startTime)
-        let startStr = "start: " + idStr
-        let endStr = "end: " + formatter.string(from: activityLogEntry.endTime!)
-        
-        let actionsStr = activityLogEntry.actions.joined(separator: "\n")
-        
-        return (idStr, [startStr, actionsStr, endStr].joined(separator: "\n"))
     }
 }

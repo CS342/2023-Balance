@@ -29,22 +29,28 @@ struct HomeView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            MeditationView()
-                .tag(Tabs.meditation)
-                .tabItem {
-                    Label("Meditation",
-                          systemImage: "list.clipboard")
-                }
-            DiaryHomeView()
-                .tag(Tabs.diary)
-                .tabItem {
-                    Label("Diary", systemImage: "book")
-                }
-            Music()
-                .tag(Tabs.music)
-                .tabItem {
-                    Label("Music", systemImage: "music.note")
-                }
+            ActivityLogBaseView(content: {
+                MeditationView()
+                    .tag(Tabs.meditation)
+                    .tabItem {
+                        Label("Meditation",
+                              systemImage: "list.clipboard")
+                    }
+            })
+            ActivityLogBaseView(content: {
+                DiaryHomeView()
+                    .tag(Tabs.diary)
+                    .tabItem {
+                        Label("Diary", systemImage: "book")
+                    }
+            })
+            ActivityLogBaseView(content: {
+                Music()
+                    .tag(Tabs.music)
+                    .tabItem {
+                        Label("Music", systemImage: "music.note")
+                    }
+            })
         }
     }
 }
