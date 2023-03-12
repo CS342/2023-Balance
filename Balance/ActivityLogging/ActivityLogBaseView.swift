@@ -49,12 +49,13 @@ struct ActivityLogBaseView<Content>: View where Content: View {
             .onAppear(perform: {
                 activityLogEntry.addAction(actionDescription: "Opened \(viewName)")
                 //TODO: remove print statement
-                print("Opened\(viewName): starting log")
+                print("Opened \(viewName)")
             })
             .onDisappear(perform: {
                 activityLogEntry.endLog(actionDescription: "Closed \(viewName)")
                 //TODO: remove print statement
-                print("view disappeared, ending/sending log")
+                print("Closed \(viewName)")
             })
     }
 }
+    

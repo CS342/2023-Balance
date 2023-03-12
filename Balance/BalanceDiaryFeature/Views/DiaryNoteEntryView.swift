@@ -60,16 +60,17 @@ struct DiaryNoteEntryView: View {
                         .alert("Please enter a text before you save.", isPresented: $emptyNoteAlert){
                             Button("OK", role: .cancel) { }
                         }
-                    
-                    Button("Burn") {
-                        store.deleteNote(currentNote.id)
+                    ActivityLogButtonWrapper(activityDescription: "Burned Diary Note") {
+                        Button("Burn") {
+                            store.deleteNote(currentNote.id)
 
-                        NoteStore.save(notes: store.notes) { result in
-                            if case .failure(let error) = result {
-                                print(error.localizedDescription)
+                            NoteStore.save(notes: store.notes) { result in
+                                if case .failure(let error) = result {
+                                    print(error.localizedDescription)
+                                }
                             }
+                            burningNote.toggle()
                         }
-                        burningNote.toggle()
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .center)

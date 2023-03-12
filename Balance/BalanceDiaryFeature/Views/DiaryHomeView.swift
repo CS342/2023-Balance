@@ -19,11 +19,13 @@ struct DiaryHomeView: View {
             HeaderMenu(title: "Diary")
             Spacer()
 
-            Button("Write a Note") {
-                self.currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
-                self.showingEditor.toggle()
-            }.buttonStyle(.borderedProminent)
-
+            ActivityLogButtonWrapper(activityDescription: "Created new diary note") {
+                Button("Write a Note") {
+                    self.currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
+                    self.showingEditor.toggle()
+                }.buttonStyle(.borderedProminent)
+            }
+           
             Spacer()
 
             Text("Previous Entries")
@@ -31,23 +33,27 @@ struct DiaryHomeView: View {
 
             List {
                 ForEach(store.notes, id: \.self) { note in
-                    Button(action: {
-                        self.currentNote = note
-                        self.showingEditor.toggle()
-                    }) {
-                        PastDiaryEntry(note)
+                    ActivityLogButtonWrapper(activityDescription: "Selected past diary note") {
+                        Button(action: {
+                            self.currentNote = note
+                            self.showingEditor.toggle()
+                        }) {
+                            PastDiaryEntry(note)
+                        }
                     }
                 }
                 .onDelete(perform: delete)
             }
         }
         .sheet(isPresented: $showingEditor) {
+            ActivityLogBaseView(viewName: "Diary Note Entry View") {
                 DiaryNoteEntryView(
                     store: store,
                     currentNote: $currentNote,
                     showingEditor: $showingEditor
                 )
             }
+        }
         .onAppear {
             NoteStore.load { result in
                 switch result {

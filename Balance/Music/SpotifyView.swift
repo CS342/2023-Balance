@@ -12,6 +12,8 @@ import UIKit
 
 struct SpotifyView: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIViewController
+    
+    @EnvironmentObject var activityLogEntry: ActivityLogEntry
 
     func makeUIViewController(context: Context) -> UIViewController {
         SpotifyViewController.shared

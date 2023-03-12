@@ -23,10 +23,12 @@ struct MeditationView: View {
             ScrollView (.horizontal) {
                 HStack{
                     ForEach(videoIDArray, id: \.self) { vidID in
-                        VideoView(videoID: vidID)
-                            .frame(width: 360, height: 200)
-                            .cornerRadius(40)
-                            .padding()
+                        ActivityLogButtonWrapper(activityDescription: "Selected Highlight Meditation Video") {
+                            VideoView(videoID: vidID)
+                                .frame(width: 360, height: 200)
+                                .cornerRadius(40)
+                                .padding()
+                        }
                     }
                 }
             }
@@ -73,15 +75,21 @@ struct MeditationView: View {
                 }
             }
             if showingGuided {
-                MeditationSpotifyView()
-                    .padding()
+                ActivityLogButtonWrapper(activityDescription: "Selected Meditation Spotify Track") {
+                    MeditationSpotifyView()
+                        .padding()
+                }
             }
             else if showingYoutube {
-                YoutubeView()
-                    .padding()
+                ActivityLogButtonWrapper(activityDescription: "Selected Meditation Youtube Track") {
+                    YoutubeView()
+                        .padding()
+                }
             } else if showingSleep {
-                SleepView()
-                    .padding()
+                ActivityLogButtonWrapper(activityDescription: "Selected Meditation Sleep Track") {
+                    SleepView()
+                        .padding()
+                }
             }
         }
         .edgesIgnoringSafeArea(.top)

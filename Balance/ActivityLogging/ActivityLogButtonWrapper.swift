@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import UIKit
+
+// This class only logs information when the user interacts with a button (or some selectable content). We don't care when the view appers or disappears.
 
 struct ActivityLogButtonWrapper<Content>: View where Content: View{
     
@@ -15,7 +18,7 @@ struct ActivityLogButtonWrapper<Content>: View where Content: View{
     
     var activityDescription: String
     
-    public init(activityDescription: String, @ViewBuilder content: () -> Content, activityLogEntry: Binding<ActivityLogEntry>) {
+    public init(activityDescription: String, @ViewBuilder content: () -> Content) {
         self.activityDescription = activityDescription
         self.content = content()
     }
@@ -24,6 +27,8 @@ struct ActivityLogButtonWrapper<Content>: View where Content: View{
         content
             .onTapGesture {
                 activityLogEntry.addAction(actionDescription: activityDescription)
+                //TODO: remove print when not debugging
+                print(activityDescription)
             }
     }
     
