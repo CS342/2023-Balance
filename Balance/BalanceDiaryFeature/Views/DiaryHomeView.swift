@@ -8,27 +8,42 @@
 
 import SwiftUI
 
+
 struct DiaryHomeView: View {
     @StateObject var store = NoteStore()
     @State private var showingEditor = false
     @State private var currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
     @Environment(\.scenePhase) private var scenePhase
-
+    let fcolor = Color(red: 0.25, green: 0.38, blue: 0.50, opacity: 1.00)
+    let bcolor = Color(red: 0.30, green: 0.79, blue: 0.94, opacity: 1.00)
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 35) {
             HeaderMenu(title: "Diary")
-            Spacer()
-
-            Button("Write a Note") {
-                self.currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
-                self.showingEditor.toggle()
-            }.buttonStyle(.borderedProminent)
-
-            Spacer()
-
+            HStack {
+                Image("DiaryIcon")
+                VStack(alignment: .leading) {
+                    Text("Write in your diary")
+                        .font(.custom("Nunito-Bold", size: 15))
+                    Button("Write") {
+                        self.currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
+                        self.showingEditor.toggle()
+                    }
+                    .font(.custom("Nunito-Bold", size: 15))
+                    .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
+//                    .foregroundColor(.white)
+                    .background(bcolor)
+                    .cornerRadius(14)
+                }
+            }
+            .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
+            .foregroundColor(fcolor)
+                .background(RoundedRectangle(cornerRadius: 20).fill(.white))
+//                .clipped()
+                .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
             Text("Previous Entries")
-                .font(.title.bold())
-
+                .font(.custom("Nunito-Bold", size: 18))
+                .foregroundColor(fcolor)
             List {
                 ForEach(store.notes, id: \.self) { note in
                     Button(action: {
