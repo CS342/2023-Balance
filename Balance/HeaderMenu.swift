@@ -32,7 +32,7 @@ public struct HeaderMenu: View {
                         .foregroundColor(.white)
                 }
                 Text(title)
-                    .font(.title.bold())
+                    .font(.custom("Nunito-Black", size: 25))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .offset(x: -32)
@@ -47,7 +47,7 @@ public struct HeaderMenu: View {
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
         .ignoresSafeArea(edges: .top)
     }
-    
+
     public init(title: String) {
         self.title = title
     }

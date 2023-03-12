@@ -50,6 +50,22 @@
 		4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88C29B4151B006A52A1 /* SleepView.swift */; };
 		4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786129AC0BEC0048D1D1 /* Youtube.swift */; };
 		4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786329AC0C070048D1D1 /* MeditationView.swift */; };
+		5A1EA8F929BD714300720915 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8F829BD714300720915 /* Nunito-Bold.ttf */; };
+		5A1EA90929BD718E00720915 /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FA29BD718C00720915 /* Nunito-ExtraLightItalic.ttf */; };
+		5A1EA90A29BD718E00720915 /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FB29BD718C00720915 /* Nunito-Black.ttf */; };
+		5A1EA90B29BD718E00720915 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FC29BD718D00720915 /* Nunito-Light.ttf */; };
+		5A1EA90C29BD718E00720915 /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FD29BD718D00720915 /* Nunito-ExtraBoldItalic.ttf */; };
+		5A1EA90D29BD718E00720915 /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FE29BD718D00720915 /* Nunito-BlackItalic.ttf */; };
+		5A1EA90E29BD718E00720915 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FF29BD718D00720915 /* Nunito-SemiBold.ttf */; };
+		5A1EA90F29BD718E00720915 /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90029BD718D00720915 /* Nunito-SemiBoldItalic.ttf */; };
+		5A1EA91029BD718E00720915 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90129BD718E00720915 /* Nunito-ExtraLight.ttf */; };
+		5A1EA91129BD718E00720915 /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90229BD718E00720915 /* Nunito-ExtraBold.ttf */; };
+		5A1EA91229BD718E00720915 /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90329BD718E00720915 /* Nunito-LightItalic.ttf */; };
+		5A1EA91329BD718E00720915 /* Nunito-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90429BD718E00720915 /* Nunito-BoldItalic.ttf */; };
+		5A1EA91429BD718E00720915 /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90529BD718E00720915 /* Nunito-Italic.ttf */; };
+		5A1EA91529BD718E00720915 /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90629BD718E00720915 /* Nunito-Medium.ttf */; };
+		5A1EA91629BD718E00720915 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90729BD718E00720915 /* Nunito-Regular.ttf */; };
+		5A1EA91729BD718E00720915 /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90829BD718E00720915 /* Nunito-MediumItalic.ttf */; };
 		5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAFCE1929A75990006CCD66 /* LocalStorage */; };
 		653A255528338800005D4D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653A255428338800005D4D48 /* Assets.xcassets */; };
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
@@ -103,6 +119,22 @@
 		4A45C88C29B4151B006A52A1 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		4ACC786129AC0BEC0048D1D1 /* Youtube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Youtube.swift; sourceTree = "<group>"; };
 		4ACC786329AC0C070048D1D1 /* MeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationView.swift; sourceTree = "<group>"; };
+		5A1EA8F829BD714300720915 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		5A1EA8FA29BD718C00720915 /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA8FB29BD718C00720915 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
+		5A1EA8FC29BD718D00720915 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Light.ttf"; sourceTree = "<group>"; };
+		5A1EA8FD29BD718D00720915 /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA8FE29BD718D00720915 /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA8FF29BD718D00720915 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		5A1EA90029BD718D00720915 /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA90129BD718E00720915 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
+		5A1EA90229BD718E00720915 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
+		5A1EA90329BD718E00720915 /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-LightItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA90429BD718E00720915 /* Nunito-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BoldItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA90529BD718E00720915 /* Nunito-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic.ttf"; sourceTree = "<group>"; };
+		5A1EA90629BD718E00720915 /* Nunito-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Medium.ttf"; sourceTree = "<group>"; };
+		5A1EA90729BD718E00720915 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		5A1EA90829BD718E00720915 /* Nunito-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-MediumItalic.ttf"; sourceTree = "<group>"; };
 		5E9516F729AC387A0031F202 /* BurnedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedView.swift; sourceTree = "<group>"; };
 		653A254D283387FE005D4D48 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A2550283387FE005D4D48 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
@@ -274,6 +306,22 @@
 			isa = PBXGroup;
 			children = (
 				89EB7BB029B45D2B000470FC /* HeaderMenu.swift */,
+				5A1EA8FB29BD718C00720915 /* Nunito-Black.ttf */,
+				5A1EA8FE29BD718D00720915 /* Nunito-BlackItalic.ttf */,
+				5A1EA90429BD718E00720915 /* Nunito-BoldItalic.ttf */,
+				5A1EA90229BD718E00720915 /* Nunito-ExtraBold.ttf */,
+				5A1EA8FD29BD718D00720915 /* Nunito-ExtraBoldItalic.ttf */,
+				5A1EA90129BD718E00720915 /* Nunito-ExtraLight.ttf */,
+				5A1EA8FA29BD718C00720915 /* Nunito-ExtraLightItalic.ttf */,
+				5A1EA90529BD718E00720915 /* Nunito-Italic.ttf */,
+				5A1EA8FC29BD718D00720915 /* Nunito-Light.ttf */,
+				5A1EA90329BD718E00720915 /* Nunito-LightItalic.ttf */,
+				5A1EA90629BD718E00720915 /* Nunito-Medium.ttf */,
+				5A1EA90829BD718E00720915 /* Nunito-MediumItalic.ttf */,
+				5A1EA90729BD718E00720915 /* Nunito-Regular.ttf */,
+				5A1EA8FF29BD718D00720915 /* Nunito-SemiBold.ttf */,
+				5A1EA90029BD718D00720915 /* Nunito-SemiBoldItalic.ttf */,
+				5A1EA8F829BD714300720915 /* Nunito-Bold.ttf */,
 				4ACC786029AC0B590048D1D1 /* Meditation */,
 				2720083329A7E4C20052908D /* BalanceDiaryFeature */,
 				8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */,
@@ -453,8 +501,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				653A255528338800005D4D48 /* Assets.xcassets in Resources */,
+				5A1EA90D29BD718E00720915 /* Nunito-BlackItalic.ttf in Resources */,
+				5A1EA90B29BD718E00720915 /* Nunito-Light.ttf in Resources */,
+				5A1EA91029BD718E00720915 /* Nunito-ExtraLight.ttf in Resources */,
+				5A1EA91229BD718E00720915 /* Nunito-LightItalic.ttf in Resources */,
+				5A1EA90F29BD718E00720915 /* Nunito-SemiBoldItalic.ttf in Resources */,
+				5A1EA91629BD718E00720915 /* Nunito-Regular.ttf in Resources */,
+				5A1EA91329BD718E00720915 /* Nunito-BoldItalic.ttf in Resources */,
+				5A1EA91129BD718E00720915 /* Nunito-ExtraBold.ttf in Resources */,
+				5A1EA90929BD718E00720915 /* Nunito-ExtraLightItalic.ttf in Resources */,
+				5A1EA90E29BD718E00720915 /* Nunito-SemiBold.ttf in Resources */,
+				5A1EA90C29BD718E00720915 /* Nunito-ExtraBoldItalic.ttf in Resources */,
 				2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */,
+				5A1EA8F929BD714300720915 /* Nunito-Bold.ttf in Resources */,
+				5A1EA91529BD718E00720915 /* Nunito-Medium.ttf in Resources */,
+				5A1EA91429BD718E00720915 /* Nunito-Italic.ttf in Resources */,
+				5A1EA91729BD718E00720915 /* Nunito-MediumItalic.ttf in Resources */,
 				2F9056EA299E2D8A003D3802 /* GoogleService-Info.plist in Resources */,
+				5A1EA90A29BD718E00720915 /* Nunito-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

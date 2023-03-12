@@ -16,18 +16,19 @@ struct NavView: View {
     let bcolor = Color(red: 0.30, green: 0.79, blue: 0.94, opacity: 0.05)
     
     var body: some View {
-        HStack {
-            Image(image) // TO BE REPLACED LATER
+        HStack(spacing: 130) {
+            Text(text)
+                .font(.custom("Nunito-Bold", size: 25))
+            Image(image)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+                .scaledToFill()
                 .frame(width: 100, height: 20)
                 .accessibilityLabel(Text(text))
-            Text(text)
         }
-        .frame(width: 360, height: 200)
+        .frame(width: 321, height: 114)
         .foregroundColor(fcolor)
         .background(bcolor)
-        .cornerRadius(40)
+        .cornerRadius(20)
         .padding()
     }
 }
