@@ -22,12 +22,14 @@ struct HomeView: View {
         case diary
         case music
     }
-    
+    var clipsToBounds = false
+
+
     var body: some View {
         NavigationStack {
             HeaderMenu(title: "Home")
             ScrollView(.vertical) {
-                VStack {
+                VStack(spacing: 20) {
                     NavigationLink(destination: DiaryHomeView()) {
                         NavView(image: "Diary", text: "Diary")
                     }
@@ -38,9 +40,12 @@ struct HomeView: View {
                         NavView(image: "DistractImage", text: "Distraction")
                     }
                 }
+                .padding(10)
                 .ignoresSafeArea(.all)
             }
         }
+        .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
+        .accentColor(.white)
     }
 }
 #if DEBUG

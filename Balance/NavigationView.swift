@@ -16,20 +16,23 @@ struct NavView: View {
     let bcolor = Color(red: 0.30, green: 0.79, blue: 0.94, opacity: 0.05)
     
     var body: some View {
-        HStack(spacing: 130) {
+        HStack {
             Text(text)
                 .font(.custom("Nunito-Bold", size: 25))
+                .frame(maxWidth: .infinity, alignment: .leading)
             Image(image)
                 .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 20)
+                .scaledToFit()
                 .accessibilityLabel(Text(text))
+                .frame(maxWidth: .infinity)
         }
-        .frame(width: 321, height: 114)
+        .padding(EdgeInsets(top: 24, leading: 24, bottom: 24, trailing: 0))
+        .frame(maxWidth: 311, maxHeight: 114)
         .foregroundColor(fcolor)
-        .background(bcolor)
-        .cornerRadius(20)
-        .padding()
+        .background(RoundedRectangle(cornerRadius: 20).fill(.white))
+        .clipped()
+        .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
+        .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
     }
 }
 
