@@ -12,7 +12,7 @@ public struct PastDiaryEntry: View {
     private var note: Note
     
     public var body: some View {
-        HStack {
+        HStack (spacing: 200){
             VStack(alignment: .leading, spacing: 4) {
                 Text(note.date.timeSinceDate(fromDate: Date()))
                     .font(.custom("Nunito-Bold", size: 11))
@@ -26,12 +26,10 @@ public struct PastDiaryEntry: View {
                     .lineLimit(3)
             }
             Image(systemName: "chevron.right")
-                .offset(x: 140)
                 .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: 270, alignment: .leading)
         .padding(20)
-        .frame(width: 350)
         .background()
         .cornerRadius(15)
         .shadow(color: Color.black.opacity(0.1), radius: 7)
