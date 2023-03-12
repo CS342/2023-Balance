@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ActivityLogButtonWrapper<Content>: View where Content: View{
     
-    @Binding var activityLogEntry: ActivityLogEntry
+    @EnvironmentObject var activityLogEntry: ActivityLogEntry
     
     private let content: Content
     
@@ -18,13 +18,12 @@ struct ActivityLogButtonWrapper<Content>: View where Content: View{
     public init(activityDescription: String, @ViewBuilder content: () -> Content, activityLogEntry: Binding<ActivityLogEntry>) {
         self.activityDescription = activityDescription
         self.content = content()
-        self._activityLogEntry = activityLogEntry
     }
     
     var body: some View {
         content
             .onTapGesture {
-                activityLogEntry.addActivity(actionDescription: activityDescription)
+                activityLogEntry.addAction(actionDescription: activityDescription)
             }
     }
     

@@ -28,29 +28,31 @@ struct HomeView: View {
     
     
     var body: some View {
-        TabView(selection: $selectedTab) {
-            ActivityLogBaseView(viewName: "Meditation Feature", content: {
-                MeditationView()
-                    .tag(Tabs.meditation)
-                    .tabItem {
-                        Label("Meditation",
-                              systemImage: "list.clipboard")
-                    }
-            })
-            ActivityLogBaseView(viewName: "Diary Feature", content: {
-                DiaryHomeView()
-                    .tag(Tabs.diary)
-                    .tabItem {
-                        Label("Diary", systemImage: "book")
-                    }
-            })
-            ActivityLogBaseView(viewName: "Distraction Music Feature", content: {
-                Music()
-                    .tag(Tabs.music)
-                    .tabItem {
-                        Label("Music", systemImage: "music.note")
-                    }
-            })
+        ActivityLogContainer {
+            TabView(selection: $selectedTab) {
+                ActivityLogBaseView(viewName: "Meditation Feature", content: {
+                    MeditationView()
+                        .tag(Tabs.meditation)
+                        .tabItem {
+                            Label("Meditation",
+                                  systemImage: "list.clipboard")
+                        }
+                })
+                ActivityLogBaseView(viewName: "Diary Feature", content: {
+                    DiaryHomeView()
+                        .tag(Tabs.diary)
+                        .tabItem {
+                            Label("Diary", systemImage: "book")
+                        }
+                })
+                ActivityLogBaseView(viewName: "Distraction Music Feature", content: {
+                    Music()
+                        .tag(Tabs.music)
+                        .tabItem {
+                            Label("Music", systemImage: "music.note")
+                        }
+                })
+            }
         }
     }
 }

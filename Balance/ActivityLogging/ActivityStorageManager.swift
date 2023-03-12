@@ -31,7 +31,7 @@ Feature
 import Foundation
 
 
-class ActivityLogEntry {
+class ActivityLogEntry: ObservableObject {
     var startTime: Date?
     var endTime: Date?
     var actions: [(Date, String)] = []
@@ -46,6 +46,10 @@ class ActivityLogEntry {
         startTime = nil
         endTime = nil
         actions = []
+    }
+    
+    func isEmpty() -> Bool {
+        return startTime == nil || endTime == nil
     }
     
     func addAction(actionDescription: String) {
