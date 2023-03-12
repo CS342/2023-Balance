@@ -22,6 +22,7 @@ struct DiaryHomeView: View {
             HeaderMenu(title: "Diary")
             HStack {
                 Image("DiaryIcon")
+                    .offset(x: -6, y: 2)
                 VStack(alignment: .leading) {
                     Text("Write in your diary")
                         .font(.custom("Nunito-Bold", size: 15))
@@ -31,19 +32,18 @@ struct DiaryHomeView: View {
                     }
                     .font(.custom("Nunito-Bold", size: 15))
                     .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
-//                    .foregroundColor(.white)
-                    .background(bcolor)
-                    .cornerRadius(14)
+                    .foregroundColor(.white)
+                    .background(bcolor).cornerRadius(14)
                 }
             }
             .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
             .foregroundColor(fcolor)
                 .background(RoundedRectangle(cornerRadius: 20).fill(.white))
-//                .clipped()
+                .clipped()
                 .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
             Text("Previous Entries")
-                .font(.custom("Nunito-Bold", size: 18))
-                .foregroundColor(fcolor)
+                .font(.custom("Nunito-Bold", size: 18)).foregroundColor(fcolor)
+                .offset(x: -100)
             List {
                 ForEach(store.notes, id: \.self) { note in
                     Button(action: {
