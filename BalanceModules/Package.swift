@@ -25,7 +25,7 @@ let package = Package(
         .library(name: "BalanceSharedContext", targets: ["BalanceSharedContext"])
     ],
     dependencies: [
-        .package(url: "https://github.com/StanfordBDHG/CardinalKit.git", .upToNextMinor(from: "0.3.1"))
+        .package(url: "https://github.com/StanfordBDHG/CardinalKit.git", .upToNextMinor(from: "0.3.5"))
     ],
     targets: [
         .target(

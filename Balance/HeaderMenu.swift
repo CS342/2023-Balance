@@ -31,7 +31,7 @@ public struct HeaderMenu: View {
                         .foregroundColor(.white)
                 }
                 Text(title)
-                    .font(.title.bold())
+                    .font(.custom("Nunito-Black", size: 25))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .offset(x: -32)
