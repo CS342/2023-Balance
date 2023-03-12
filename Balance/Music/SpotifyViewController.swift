@@ -9,7 +9,7 @@
 
 import UIKit
 
-class SpotifyViewController: ActivityLogViewController {
+class SpotifyViewController: UIViewController {
     static let shared = SpotifyViewController()
 
     var responseCode: String? {

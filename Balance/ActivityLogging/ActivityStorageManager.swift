@@ -32,35 +32,45 @@ import Foundation
 
 
 class ActivityLogEntry {
-    //TODO: add getter?
-    var startTime: Date
+    var startTime: Date?
     var endTime: Date?
     var actions: [(Date, String)] = []
     
     init() {
-        self.restart()
-    }
-    
-    func restart() {
-        startTime = Date.now
+        startTime = nil
         endTime = nil
         actions = []
     }
     
-    func addActivity(actionDescription: String) {
+    func reset() {
+        startTime = nil
+        endTime = nil
+        actions = []
+    }
+    
+    func addAction(actionDescription: String) {
         let currentDate = Date.now
         actions.append((currentDate, actionDescription))
+        
+        //set start time if this is the first action
+        startTime = startTime == nil ? currentDate : startTime
     }
     
-    func endLog() {
-        endTime = Date.now
+    func endLog(actionDescription: String) {
+        addAction(actionDescription: actionDescription)
+        endTime = actions.last!.0
     }
     
-    func toString() -> (String, String) {
+    func toString() -> (String, String)? {
+        guard startTime != nil && endTime != nil else {
+            //TODO: add logging instead of printing
+            print("Waning: cannot convert ActivityLogEntry to string without both start time and end time.")
+            return nil
+        }
         
-        let duration = endTime!.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
+        let durationStr = "duration: \(endTime!.timeIntervalSinceReferenceDate - startTime!.timeIntervalSinceReferenceDate)"
         
-        let idStr = dateToString(date: startTime)
+        let idStr = dateToString(date: startTime!)
         let startStr = "start: " + idStr
         let endStr = "end: " + dateToString(date: endTime!)
         
@@ -72,7 +82,7 @@ class ActivityLogEntry {
             actionsStr.append(dateToString(date: timestamp) + " " + action)
         }
         
-        return (idStr, [startStr, actionsStr, endStr].joined(separator: "\n"))
+        return (idStr, [startStr, actionsStr, durationStr, endStr].joined(separator: "\n"))
     }
     
     func dateToString(date: Date) -> String {

@@ -29,7 +29,7 @@ struct HomeView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            ActivityLogBaseView(content: {
+            ActivityLogBaseView(viewName: "Meditation Feature", content: {
                 MeditationView()
                     .tag(Tabs.meditation)
                     .tabItem {
@@ -37,14 +37,14 @@ struct HomeView: View {
                               systemImage: "list.clipboard")
                     }
             })
-            ActivityLogBaseView(content: {
+            ActivityLogBaseView(viewName: "Diary Feature", content: {
                 DiaryHomeView()
                     .tag(Tabs.diary)
                     .tabItem {
                         Label("Diary", systemImage: "book")
                     }
             })
-            ActivityLogBaseView(content: {
+            ActivityLogBaseView(viewName: "Distraction Music Feature", content: {
                 Music()
                     .tag(Tabs.music)
                     .tabItem {
