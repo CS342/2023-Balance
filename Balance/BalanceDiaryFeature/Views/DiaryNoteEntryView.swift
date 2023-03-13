@@ -87,7 +87,8 @@ struct DiaryNoteEntryView: View {
                         .background(.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 14)
-                                .stroke(bcolor, lineWidth: 1))
+                                .stroke(bcolor, lineWidth: 1)
+                                )
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding()
