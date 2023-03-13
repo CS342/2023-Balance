@@ -94,7 +94,11 @@ struct MeditationView: View {
 }
 
 struct MeditationView_Previews: PreviewProvider {
+//    @State private static var navigationPath = NavigationPath()
+
     static var previews: some View {
-        MeditationView()
+//        NavigationStack {
+            MeditationView()
+//        }
     }
 }
