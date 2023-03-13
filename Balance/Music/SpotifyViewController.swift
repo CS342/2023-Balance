@@ -8,12 +8,9 @@
 //
 
 import UIKit
-import SwiftUI
 
 class SpotifyViewController: UIViewController {
     static let shared = SpotifyViewController()
-    
-    let activityLogEntry: EnvironmentObject<ActivityLogEntry>
 
     var responseCode: String? {
         didSet {
