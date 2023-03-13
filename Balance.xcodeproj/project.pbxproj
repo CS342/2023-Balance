@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083529A7E4C20052908D /* DiaryHomeView.swift */; };
 		2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083629A7E4C20052908D /* DiaryNoteEntryView.swift */; };
 		2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083829A7E4C20052908D /* PastDiaryEntry.swift */; };
 		2720084329A843B90052908D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084229A843B90052908D /* Note.swift */; };
-		2720084B29A84A980052908D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084A29A84A980052908D /* Date.swift */; };
-		2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */; };
+		27525EB429B68B5100D1DF51 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720084A29A84A980052908D /* Date.swift */; };
+		27525EB529B68B5400D1DF51 /* SpotifyConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */; };
+		27525EB629B68B6100D1DF51 /* BurnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9516F729AC387A0031F202 /* BurnedView.swift */; };
+		27525EB729B68B7100D1DF51 /* DiaryHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2720083529A7E4C20052908D /* DiaryHomeView.swift */; };
+		27525EB829B68BB300D1DF51 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A2550283387FE005D4D48 /* Balance.swift */; };
 		2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */; };
 		2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584529A6448C006C7AC1 /* SceneDelegate.swift */; };
 		2761584929A6512E006C7AC1 /* SpotifyiOS in Frameworks */ = {isa = PBXBuildFile; productRef = 2761584829A6512E006C7AC1 /* SpotifyiOS */; };
@@ -27,10 +29,7 @@
 		2F49B7802980418400BCB272 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B77F2980418400BCB272 /* Onboarding */; };
 		2F49B7822980419C00BCB272 /* Questionnaires in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7812980419C00BCB272 /* Questionnaires */; };
 		2F49B784298041F300BCB272 /* Contact in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B783298041F300BCB272 /* Contact */; };
-		2F4E237E2989A2FE0013F3D9 /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E237D2989A2FE0013F3D9 /* OnboardingTests.swift */; };
 		2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */; };
-		2F4E23872989DB360013F3D9 /* ContactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E23862989DB360013F3D9 /* ContactsTests.swift */; };
-		2F4E23892989DB400013F3D9 /* HealthKitUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E23882989DB400013F3D9 /* HealthKitUploadTests.swift */; };
 		2F59B93D298C628800C5107F /* BalanceContacts in Frameworks */ = {isa = PBXBuildFile; productRef = 2F59B93C298C628800C5107F /* BalanceContacts */; };
 		2F59B93F298C628800C5107F /* BalanceMockDataStorageProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 2F59B93E298C628800C5107F /* BalanceMockDataStorageProvider */; };
 		2F59B941298C628800C5107F /* BalanceOnboardingFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 2F59B940298C628800C5107F /* BalanceOnboardingFlow */; };
@@ -51,18 +50,34 @@
 		4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88C29B4151B006A52A1 /* SleepView.swift */; };
 		4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786129AC0BEC0048D1D1 /* Youtube.swift */; };
 		4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786329AC0C070048D1D1 /* MeditationView.swift */; };
+		5A1EA8F929BD714300720915 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8F829BD714300720915 /* Nunito-Bold.ttf */; };
+		5A1EA90929BD718E00720915 /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FA29BD718C00720915 /* Nunito-ExtraLightItalic.ttf */; };
+		5A1EA90A29BD718E00720915 /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FB29BD718C00720915 /* Nunito-Black.ttf */; };
+		5A1EA90B29BD718E00720915 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FC29BD718D00720915 /* Nunito-Light.ttf */; };
+		5A1EA90C29BD718E00720915 /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FD29BD718D00720915 /* Nunito-ExtraBoldItalic.ttf */; };
+		5A1EA90D29BD718E00720915 /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FE29BD718D00720915 /* Nunito-BlackItalic.ttf */; };
+		5A1EA90E29BD718E00720915 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA8FF29BD718D00720915 /* Nunito-SemiBold.ttf */; };
+		5A1EA90F29BD718E00720915 /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90029BD718D00720915 /* Nunito-SemiBoldItalic.ttf */; };
+		5A1EA91029BD718E00720915 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90129BD718E00720915 /* Nunito-ExtraLight.ttf */; };
+		5A1EA91129BD718E00720915 /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90229BD718E00720915 /* Nunito-ExtraBold.ttf */; };
+		5A1EA91229BD718E00720915 /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90329BD718E00720915 /* Nunito-LightItalic.ttf */; };
+		5A1EA91329BD718E00720915 /* Nunito-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90429BD718E00720915 /* Nunito-BoldItalic.ttf */; };
+		5A1EA91429BD718E00720915 /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90529BD718E00720915 /* Nunito-Italic.ttf */; };
+		5A1EA91529BD718E00720915 /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90629BD718E00720915 /* Nunito-Medium.ttf */; };
+		5A1EA91629BD718E00720915 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90729BD718E00720915 /* Nunito-Regular.ttf */; };
+		5A1EA91729BD718E00720915 /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90829BD718E00720915 /* Nunito-MediumItalic.ttf */; };
 		5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAFCE1929A75990006CCD66 /* LocalStorage */; };
 		5E03E9A129BC15CF0041DD1C /* ActivityLogBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E03E9A029BC15CF0041DD1C /* ActivityLogBaseView.swift */; };
 		5E03E9A329BC933B0041DD1C /* ActivityLogButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E03E9A229BC933B0041DD1C /* ActivityLogButtonStyle.swift */; };
-		5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9516F729AC387A0031F202 /* BurnedView.swift */; };
 		5EF9D78429B5AFF1006C3B22 /* ActivityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF9D78329B5AFF1006C3B22 /* ActivityStorageManager.swift */; };
 		5EF9D78629B5CC58006C3B22 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5EF9D78529B5CC58006C3B22 /* FirebaseStorage */; };
-		653A2551283387FE005D4D48 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A2550283387FE005D4D48 /* Balance.swift */; };
 		653A255528338800005D4D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653A255428338800005D4D48 /* Assets.xcassets */; };
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
-		653A256C28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256B28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift */; };
+		894A884529B7B27600CB347B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894A884429B7B27600CB347B /* NavigationView.swift */; };
+		896C65D629B92EF800F30BA2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896C65D529B92EF800F30BA2 /* Config.swift */; };
 		89EB7BAD29B45381000470FC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
 		89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EB7BB029B45D2B000470FC /* HeaderMenu.swift */; };
+		89F9619829B6646200513052 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9619729B6646200513052 /* Feature.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,10 +111,7 @@
 		2761584C29A654FD006C7AC1 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		276222BC29B0E3E100FCB4C5 /* NoteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteStore.swift; sourceTree = "<group>"; };
 		2F49B77329803E8F00BCB272 /* BalanceModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BalanceModules; sourceTree = "<group>"; };
-		2F4E237D2989A2FE0013F3D9 /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceAppTestingSetup.swift; sourceTree = "<group>"; };
-		2F4E23862989DB360013F3D9 /* ContactsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTests.swift; sourceTree = "<group>"; };
-		2F4E23882989DB400013F3D9 /* HealthKitUploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitUploadTests.swift; sourceTree = "<group>"; };
 		2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceAppDelegate.swift; sourceTree = "<group>"; };
 		2F9056E9299E2D8A003D3802 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2FAEC07F297F583900C11C42 /* Balance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Balance.entitlements; sourceTree = "<group>"; };
@@ -113,6 +125,22 @@
 		4ACC786329AC0C070048D1D1 /* MeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationView.swift; sourceTree = "<group>"; };
 		5E03E9A029BC15CF0041DD1C /* ActivityLogBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogBaseView.swift; sourceTree = "<group>"; };
 		5E03E9A229BC933B0041DD1C /* ActivityLogButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogButtonStyle.swift; sourceTree = "<group>"; };
+		5A1EA8F829BD714300720915 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		5A1EA8FA29BD718C00720915 /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA8FB29BD718C00720915 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
+		5A1EA8FC29BD718D00720915 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Light.ttf"; sourceTree = "<group>"; };
+		5A1EA8FD29BD718D00720915 /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA8FE29BD718D00720915 /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA8FF29BD718D00720915 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		5A1EA90029BD718D00720915 /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA90129BD718E00720915 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
+		5A1EA90229BD718E00720915 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
+		5A1EA90329BD718E00720915 /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-LightItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA90429BD718E00720915 /* Nunito-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BoldItalic.ttf"; sourceTree = "<group>"; };
+		5A1EA90529BD718E00720915 /* Nunito-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic.ttf"; sourceTree = "<group>"; };
+		5A1EA90629BD718E00720915 /* Nunito-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Medium.ttf"; sourceTree = "<group>"; };
+		5A1EA90729BD718E00720915 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		5A1EA90829BD718E00720915 /* Nunito-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-MediumItalic.ttf"; sourceTree = "<group>"; };
 		5E9516F729AC387A0031F202 /* BurnedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedView.swift; sourceTree = "<group>"; };
 		5EF9D78329B5AFF1006C3B22 /* ActivityStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStorageManager.swift; sourceTree = "<group>"; };
 		653A254D283387FE005D4D48 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,10 +149,12 @@
 		653A255D28338800005D4D48 /* BalanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A256128338800005D4D48 /* BalanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTests.swift; sourceTree = "<group>"; };
 		653A256728338800005D4D48 /* BalanceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		653A256B28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerAndQuestionnaireTests.swift; sourceTree = "<group>"; };
 		653A258928339462005D4D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceDebug.entitlements; sourceTree = "<group>"; };
+		894A884429B7B27600CB347B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		896C65D529B92EF800F30BA2 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		89EB7BB029B45D2B000470FC /* HeaderMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderMenu.swift; sourceTree = "<group>"; };
+		89F9619729B6646200513052 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +250,7 @@
 				2761584A29A6548B006C7AC1 /* SpotifyView.swift */,
 				2761583A29A63BD4006C7AC1 /* SpotifyConfig.swift */,
 				2761583C29A63D6E006C7AC1 /* SpotifyViewController.swift */,
+				896C65D529B92EF800F30BA2 /* Config.swift */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -294,6 +325,22 @@
 			children = (
 				89EB7BB029B45D2B000470FC /* HeaderMenu.swift */,
 				5E03E99D29BC14FA0041DD1C /* ActivityLogging */,
+				5A1EA8FB29BD718C00720915 /* Nunito-Black.ttf */,
+				5A1EA8FE29BD718D00720915 /* Nunito-BlackItalic.ttf */,
+				5A1EA90429BD718E00720915 /* Nunito-BoldItalic.ttf */,
+				5A1EA90229BD718E00720915 /* Nunito-ExtraBold.ttf */,
+				5A1EA8FD29BD718D00720915 /* Nunito-ExtraBoldItalic.ttf */,
+				5A1EA90129BD718E00720915 /* Nunito-ExtraLight.ttf */,
+				5A1EA8FA29BD718C00720915 /* Nunito-ExtraLightItalic.ttf */,
+				5A1EA90529BD718E00720915 /* Nunito-Italic.ttf */,
+				5A1EA8FC29BD718D00720915 /* Nunito-Light.ttf */,
+				5A1EA90329BD718E00720915 /* Nunito-LightItalic.ttf */,
+				5A1EA90629BD718E00720915 /* Nunito-Medium.ttf */,
+				5A1EA90829BD718E00720915 /* Nunito-MediumItalic.ttf */,
+				5A1EA90729BD718E00720915 /* Nunito-Regular.ttf */,
+				5A1EA8FF29BD718D00720915 /* Nunito-SemiBold.ttf */,
+				5A1EA90029BD718D00720915 /* Nunito-SemiBoldItalic.ttf */,
+				5A1EA8F829BD714300720915 /* Nunito-Bold.ttf */,
 				4ACC786029AC0B590048D1D1 /* Meditation */,
 				2720083329A7E4C20052908D /* BalanceDiaryFeature */,
 				8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */,
@@ -301,7 +348,9 @@
 				653A2550283387FE005D4D48 /* Balance.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
+				89F9619729B6646200513052 /* Feature.swift */,
 				2FC975A72978F11A00BA99FE /* Home.swift */,
+				894A884429B7B27600CB347B /* NavigationView.swift */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
 				2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */,
 				2761584529A6448C006C7AC1 /* SceneDelegate.swift */,
@@ -320,10 +369,6 @@
 		653A256A28338800005D4D48 /* BalanceUITests */ = {
 			isa = PBXGroup;
 			children = (
-				2F4E237D2989A2FE0013F3D9 /* OnboardingTests.swift */,
-				653A256B28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift */,
-				2F4E23862989DB360013F3D9 /* ContactsTests.swift */,
-				2F4E23882989DB400013F3D9 /* HealthKitUploadTests.swift */,
 			);
 			path = BalanceUITests;
 			sourceTree = "<group>";
@@ -345,6 +390,7 @@
 				653A2549283387FE005D4D48 /* Sources */,
 				653A254A283387FE005D4D48 /* Frameworks */,
 				653A254B283387FE005D4D48 /* Resources */,
+				27525EB329B673BD00D1DF51 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -426,7 +472,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					653A254C283387FE005D4D48 = {
 						CreatedOnToolsVersion = 13.4;
@@ -475,8 +521,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				653A255528338800005D4D48 /* Assets.xcassets in Resources */,
+				5A1EA90D29BD718E00720915 /* Nunito-BlackItalic.ttf in Resources */,
+				5A1EA90B29BD718E00720915 /* Nunito-Light.ttf in Resources */,
+				5A1EA91029BD718E00720915 /* Nunito-ExtraLight.ttf in Resources */,
+				5A1EA91229BD718E00720915 /* Nunito-LightItalic.ttf in Resources */,
+				5A1EA90F29BD718E00720915 /* Nunito-SemiBoldItalic.ttf in Resources */,
+				5A1EA91629BD718E00720915 /* Nunito-Regular.ttf in Resources */,
+				5A1EA91329BD718E00720915 /* Nunito-BoldItalic.ttf in Resources */,
+				5A1EA91129BD718E00720915 /* Nunito-ExtraBold.ttf in Resources */,
+				5A1EA90929BD718E00720915 /* Nunito-ExtraLightItalic.ttf in Resources */,
+				5A1EA90E29BD718E00720915 /* Nunito-SemiBold.ttf in Resources */,
+				5A1EA90C29BD718E00720915 /* Nunito-ExtraBoldItalic.ttf in Resources */,
 				2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */,
+				5A1EA8F929BD714300720915 /* Nunito-Bold.ttf in Resources */,
+				5A1EA91529BD718E00720915 /* Nunito-Medium.ttf in Resources */,
+				5A1EA91429BD718E00720915 /* Nunito-Italic.ttf in Resources */,
+				5A1EA91729BD718E00720915 /* Nunito-MediumItalic.ttf in Resources */,
 				2F9056EA299E2D8A003D3802 /* GoogleService-Info.plist in Resources */,
+				5A1EA90A29BD718E00720915 /* Nunito-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,41 +558,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		27525EB329B673BD00D1DF51 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n  export PATH=\"$PATH:/opt/homebrew/bin\"\n  if which swiftlint > /dev/null; then\n    swiftlint\n  else\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		653A2549283387FE005D4D48 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27525EB829B68BB300D1DF51 /* Balance.swift in Sources */,
+				27525EB729B68B7100D1DF51 /* DiaryHomeView.swift in Sources */,
+				27525EB629B68B6100D1DF51 /* BurnedView.swift in Sources */,
+				27525EB529B68B5400D1DF51 /* SpotifyConfig.swift in Sources */,
+				27525EB429B68B5100D1DF51 /* Date.swift in Sources */,
 				2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */,
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
-				5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */,
-				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
 				4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */,
-				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
 				4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */,
-				2720083A29A7E57D0052908D /* DiaryHomeView.swift in Sources */,
-				5E9516F829AC387A0031F202 /* BurnedView.swift in Sources */,
 				2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2720084329A843B90052908D /* Note.swift in Sources */,
+				896C65D629B92EF800F30BA2 /* Config.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
-				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
-				2720084B29A84A980052908D /* Date.swift in Sources */,
-				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
 				5E03E9A129BC15CF0041DD1C /* ActivityLogBaseView.swift in Sources */,
 				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
 				4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */,
 				4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */,
 				4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */,
-				2720084B29A84A980052908D /* Date.swift in Sources */,
 				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
 				5EF9D78429B5AFF1006C3B22 /* ActivityStorageManager.swift in Sources */,
-				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
-				2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */,
-				2761583B29A63BD4006C7AC1 /* SpotifyConfig.swift in Sources */,
+				89F9619829B6646200513052 /* Feature.swift in Sources */,
 				2761584D29A654FD006C7AC1 /* Music.swift in Sources */,
+				894A884529B7B27600CB347B /* NavigationView.swift in Sources */,
 				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
-				653A2551283387FE005D4D48 /* Balance.swift in Sources */,
 				89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */,
 				5E03E9A329BC933B0041DD1C /* ActivityLogButtonStyle.swift in Sources */,
 				2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */,
@@ -549,10 +626,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F4E23872989DB360013F3D9 /* ContactsTests.swift in Sources */,
-				2F4E23892989DB400013F3D9 /* HealthKitUploadTests.swift in Sources */,
-				2F4E237E2989A2FE0013F3D9 /* OnboardingTests.swift in Sources */,
-				653A256C28338800005D4D48 /* SchedulerAndQuestionnaireTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,7 +770,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = CGLLL85S5P;
+				DEVELOPMENT_TEAM = ZJZGU3H9BZ;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -727,7 +800,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = lowbaj21.cs342.balance;
+				PRODUCT_BUNDLE_IDENTIFIER = adam.cs342.2023.balance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

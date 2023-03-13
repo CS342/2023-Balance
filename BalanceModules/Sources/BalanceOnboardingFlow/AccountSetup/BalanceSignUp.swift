@@ -15,14 +15,17 @@ struct BalanceSignUp: View {
     var body: some View {
         SignUp {
             Image(uiImage: Bundle.module.image(withName: "Balloon", fileExtension: "png"))
+                .resizable()
+                .scaledToFit()
                 .padding(.top, 32)
+                .accessibility(hidden: true)
             Text("Sign up below to begin using Balance")
                 .multilineTextAlignment(.center)
                 .padding()
             Spacer(minLength: 0)
         }
         .navigationBarTitleDisplayMode(.large)
-        .background(Color(UIColor(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
+        .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
     }
 }
 

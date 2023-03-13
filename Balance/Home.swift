@@ -7,10 +7,10 @@
 //
 
 import BalanceContacts
+import BalanceMockDataStorageProvider
 import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
-import BalanceMockDataStorageProvider
 
 
 struct HomeView: View {
@@ -22,42 +22,34 @@ struct HomeView: View {
         case diary
         case music
     }
-    
-    
-    @AppStorage(StorageKeys.homeTabSelection) var selectedTab = Tabs.schedule
-    
-    
+    var clipsToBounds = false
+
+
     var body: some View {
         ActivityLogContainer {
-            TabView(selection: $selectedTab) {
-                ActivityLogBaseView(viewName: "Meditation Feature", content: {
-                    MeditationView()
-                        .tag(Tabs.meditation)
-                        .tabItem {
-                            Label("Meditation",
-                                  systemImage: "list.clipboard")
+            NavigationStack {
+                HeaderMenu(title: "Home")
+                ScrollView(.vertical) {
+                    VStack(spacing: 20) {
+                        NavigationLink(destination: ActivityLogBaseView(viewName: "Diary Feature", content: { DiaryHomeView()})) {
+                            NavView(image: "Diary", text: "Diary")
                         }
-                })
-                ActivityLogBaseView(viewName: "Diary Feature", content: {
-                    DiaryHomeView()
-                        .tag(Tabs.diary)
-                        .tabItem {
-                            Label("Diary", systemImage: "book")
+                        NavigationLink(destination: ActivityLogBaseView(viewName: "Meditation Feature", content: { MeditationView()})) {
+                            NavView(image: "Meditation", text: "Meditation")
                         }
-                })
-                ActivityLogBaseView(viewName: "Distraction Music Feature", content: {
-                    Music()
-                        .tag(Tabs.music)
-                        .tabItem {
-                            Label("Music", systemImage: "music.note")
+                        NavigationLink(destination: ActivityLogBaseView(viewName: "Distraction Music Feature", content: { Music()})) {
+                            NavView(image: "DistractImage", text: "Distraction")
                         }
-                })
+                    }
+                    .padding(10)
+                    .ignoresSafeArea(.all)
+                }
             }
+            .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
+            .accentColor(.white)
         }
     }
 }
-
-
 #if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {

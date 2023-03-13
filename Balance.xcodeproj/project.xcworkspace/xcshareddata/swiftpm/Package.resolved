@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/StanfordBDHG/CardinalKit",
       "state" : {
-        "revision" : "6e90348e30709f4b739fc3473c2fa54fbcf77eec",
-        "version" : "0.3.3"
+        "revision" : "6162a67a0b821c2be9358bec798d5d3e94cc5783",
+        "version" : "0.3.5"
       }
     },
     {

@@ -1,8 +1,9 @@
 //
-//  MeditationView.swift
-//  Balance
+// This source file is part of the CS342 2023 Balance project
 //
-//  Created by Daniel Guo on 2/26/23.
+// SPDX-FileCopyrightText: 2023 Stanford University
+//
+// SPDX-License-Identifier: MIT
 //
 
 import SwiftUI
@@ -11,31 +12,38 @@ struct MeditationView: View {
     @State private var showingGuided = true
     @State private var showingYoutube = false
     @State private var showingSleep = false
-    let videoIDArray = ["0ZKqLcWdG-4", "iN6g2mr0p3Q", "F0WYFXxhPGY", "vQxTUQhVbg4"]
-    
+
+    let videoIDArray = [
+        "0ZKqLcWdG-4",
+        "iN6g2mr0p3Q",
+        "F0WYFXxhPGY",
+        "vQxTUQhVbg4"
+    ]
+
+    // swiftlint:disable closure_body_length
     var body: some View {
-        VStack{
+        VStack {
             HeaderMenu(title: "Guided Meditation")
             Text("Highlights").font(.custom("Nunito-Bold", size: 25))
-                .foregroundColor(Color(UIColor(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
+                .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
                 .padding()
-                .offset(x:-110)
-            ScrollView (.horizontal) {
-                HStack{
+                .offset(x: -110)
+            ScrollView(.horizontal) {
+                HStack {
                     ForEach(videoIDArray, id: \.self) { vidID in
                         //TODO: enable logging for a specific video being selected
                         VideoView(videoID: vidID)
                             .frame(width: 360, height: 200)
-                            .cornerRadius(40)
+                            .cornerRadius(20)
                             .padding()
                     }
                 }
             }
-            Text("Categories").font(.custom("Nunito-Bold", size: 25))
-                .foregroundColor(Color(UIColor(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
-                .offset(x:-110)
-            ScrollView (.horizontal) {
-                HStack{
+            Text("Categories").font(.custom("Nunito-Bold", size: 20))
+                .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
+                .offset(x: -110)
+            ScrollView(.horizontal) {
+                HStack(spacing: 24) {
                     Button(action: {
                         showingGuided = true
                         showingYoutube = false
@@ -44,8 +52,8 @@ struct MeditationView: View {
                         Text("Self Guided")
                             .frame(width: 120, height: 30)
                             .foregroundColor(.white)
-                            .background(Color(UIColor(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
-                            .cornerRadius(40)
+                            .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
+                            .cornerRadius(20)
                     }
                     .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Self Guided Meditations"))
                     Button(action: {
@@ -56,9 +64,8 @@ struct MeditationView: View {
                         Text("Youtube")
                             .frame(width: 120, height: 30)
                             .foregroundColor(.white)
-                            .background(Color(UIColor(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
-                            .cornerRadius(40)
-                        
+                            .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
+                            .cornerRadius(20)
                     }
                     .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Youtube Meditations"))
                     Button(action: {
@@ -69,18 +76,20 @@ struct MeditationView: View {
                         Text("Sleep")
                             .frame(width: 120, height: 30)
                             .foregroundColor(.white)
-                            .background(Color(UIColor(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
-                            .cornerRadius(40)
-                        
+                            .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
+                            .cornerRadius(20)
                     }
+<<<<<<< HEAD
                     .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Sleep Meditations"))
                 }
+=======
+                } .padding()
+>>>>>>> main
             }
             if showingGuided {
                 MeditationSpotifyView()
                     .padding()
-            }
-            else if showingYoutube {
+            } else if showingYoutube {
                 YoutubeView()
                     .padding()
             } else if showingSleep {
@@ -93,7 +102,11 @@ struct MeditationView: View {
 }
 
 struct MeditationView_Previews: PreviewProvider {
+//    @State private static var navigationPath = NavigationPath()
+
     static var previews: some View {
-        MeditationView()
+//        NavigationStack {
+            MeditationView()
+//        }
     }
 }

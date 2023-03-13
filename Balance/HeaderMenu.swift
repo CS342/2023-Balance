@@ -8,12 +8,6 @@
 
 import SwiftUI
 
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-}
-
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
@@ -28,39 +22,36 @@ public struct HeaderMenu: View {
     private let title: String
     
     public var body: some View {
-        VStack(spacing: 4) {
-            HStack(spacing: 16) {
-                HStack(spacing: 8) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                    Text("Back")
-                        .foregroundColor(.white)
-                }
+        VStack {
                 Text(title)
-                    .font(.title.bold())
+                    .font(.custom("Nunito-Black", size: 25))
                     .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .offset(x:-32)
-            }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .center)
+                    .frame(maxWidth: 150)
+                    .multilineTextAlignment(.center)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.bottom, 20)
-        .padding(.top, 50)
-        .background(Color(UIColor(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(.bottom, 30)
+        .padding(.top, 80)
+        .background(Color(#colorLiteral(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
+        .ignoresSafeArea(edges: .top)
     }
-    
+
     public init(title: String) {
         self.title = title
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }
 
 struct HeaderMenu_Previews: PreviewProvider {
     static var previews: some View {
         HeaderMenu(
-            title: String("Diary")
+            title: String("Guided Meditation")
         )
     }
 }
