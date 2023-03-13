@@ -17,7 +17,6 @@ struct DiaryHomeView: View {
     let fcolor = Color(red: 0.25, green: 0.38, blue: 0.50, opacity: 1.00)
     let bcolor = Color(red: 0.30, green: 0.79, blue: 0.94, opacity: 1.00)
     
-// swiftlint:disable closure_body_length
     var body: some View {
         VStack(alignment: .center, spacing: 35) {
             HeaderMenu(title: "Diary")
