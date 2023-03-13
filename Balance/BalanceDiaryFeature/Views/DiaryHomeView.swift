@@ -17,11 +17,13 @@ struct DiaryHomeView: View {
     let fcolor = Color(red: 0.25, green: 0.38, blue: 0.50, opacity: 1.00)
     let bcolor = Color(red: 0.30, green: 0.79, blue: 0.94, opacity: 1.00)
     
+// swiftlint:disable closure_body_length
     var body: some View {
-        VStack(spacing: 35) {
+        VStack(alignment: .center, spacing: 35) {
             HeaderMenu(title: "Diary")
             HStack {
                 Image("DiaryIcon")
+                    .accessibilityLabel(Text("Diary icon"))
                     .offset(x: -6, y: 2)
                 VStack(alignment: .leading) {
                     Text("Write in your diary")
@@ -33,16 +35,18 @@ struct DiaryHomeView: View {
                     .font(.custom("Nunito-Bold", size: 15))
                     .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
                     .foregroundColor(.white)
-                    .background(bcolor).cornerRadius(14)
+                    .background(bcolor)
+                    .cornerRadius(14)
                 }
             }
-            .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
-            .foregroundColor(fcolor)
+                .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
+                .foregroundColor(fcolor)
                 .background(RoundedRectangle(cornerRadius: 20).fill(.white))
                 .clipped()
                 .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
             Text("Previous Entries")
-                .font(.custom("Nunito-Bold", size: 18)).foregroundColor(fcolor)
+                .font(.custom("Nunito-Bold", size: 18))
+                .foregroundColor(fcolor)
                 .offset(x: -100)
             List {
                 ForEach(store.notes, id: \.self) { note in
@@ -52,16 +56,19 @@ struct DiaryHomeView: View {
                     }) {
                         PastDiaryEntry(note)
                     }
+                    .listRowSeparator(.hidden)
                 }
                 .onDelete(perform: delete)
             }
+            .listStyle(.plain)
+            .offset(y: -20)
         }
         .sheet(isPresented: $showingEditor) {
-                DiaryNoteEntryView(
-                    store: store,
-                    currentNote: $currentNote,
-                    showingEditor: $showingEditor
-                )
+            DiaryNoteEntryView(
+                store: store,
+                currentNote: $currentNote,
+                showingEditor: $showingEditor
+            )
         }
         .onAppear {
             NoteStore.load { result in
@@ -84,11 +91,11 @@ struct DiaryHomeView: View {
         }
         .edgesIgnoringSafeArea(.top)
     }
-
+    
     func delete(indexSet: IndexSet) {
         // remove the note from the notes array
         store.notes.remove(atOffsets: indexSet)
-
+        
         // save the updated array to local storage
         // asynchronously
         NoteStore.save(notes: store.notes) { result in
@@ -97,18 +104,10 @@ struct DiaryHomeView: View {
             }
         }
     }
-//    public init(navigationPath: Binding<NavigationPath>) {
-//        self._navigationPath = navigationPath
-//    }
 }
 
 struct DiaryHomeView_Previews: PreviewProvider {
-//    @State private static var navigationPath = NavigationPath()
-    
     static var previews: some View {
-//        NavigationStack{
         DiaryHomeView()
-        }
-        
-//    }
+    }
 }
