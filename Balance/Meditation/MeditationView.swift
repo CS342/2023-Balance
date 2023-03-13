@@ -31,6 +31,7 @@ struct MeditationView: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(videoIDArray, id: \.self) { vidID in
+                        //TODO: enable logging for a specific video being selected
                         VideoView(videoID: vidID)
                             .frame(width: 360, height: 200)
                             .cornerRadius(20)
@@ -54,6 +55,7 @@ struct MeditationView: View {
                             .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
                             .cornerRadius(20)
                     }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Self Guided Meditations"))
                     Button(action: {
                         showingGuided = false
                         showingYoutube = true
@@ -65,6 +67,7 @@ struct MeditationView: View {
                             .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
                             .cornerRadius(20)
                     }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Youtube Meditations"))
                     Button(action: {
                         showingGuided = false
                         showingYoutube = false
@@ -76,6 +79,7 @@ struct MeditationView: View {
                             .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
                             .cornerRadius(20)
                     }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Sleep Meditations"))
                 } .padding()
             }
             if showingGuided {

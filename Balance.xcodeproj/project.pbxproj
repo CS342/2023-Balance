@@ -67,6 +67,10 @@
 		5A1EA91629BD718E00720915 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90729BD718E00720915 /* Nunito-Regular.ttf */; };
 		5A1EA91729BD718E00720915 /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A1EA90829BD718E00720915 /* Nunito-MediumItalic.ttf */; };
 		5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAFCE1929A75990006CCD66 /* LocalStorage */; };
+		5E03E9A129BC15CF0041DD1C /* ActivityLogBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E03E9A029BC15CF0041DD1C /* ActivityLogBaseView.swift */; };
+		5E03E9A329BC933B0041DD1C /* ActivityLogButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E03E9A229BC933B0041DD1C /* ActivityLogButtonStyle.swift */; };
+		5EF9D78429B5AFF1006C3B22 /* ActivityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF9D78329B5AFF1006C3B22 /* ActivityStorageManager.swift */; };
+		5EF9D78629B5CC58006C3B22 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5EF9D78529B5CC58006C3B22 /* FirebaseStorage */; };
 		653A255528338800005D4D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 653A255428338800005D4D48 /* Assets.xcassets */; };
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
 		894A884529B7B27600CB347B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894A884429B7B27600CB347B /* NavigationView.swift */; };
@@ -119,6 +123,8 @@
 		4A45C88C29B4151B006A52A1 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		4ACC786129AC0BEC0048D1D1 /* Youtube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Youtube.swift; sourceTree = "<group>"; };
 		4ACC786329AC0C070048D1D1 /* MeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationView.swift; sourceTree = "<group>"; };
+		5E03E9A029BC15CF0041DD1C /* ActivityLogBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogBaseView.swift; sourceTree = "<group>"; };
+		5E03E9A229BC933B0041DD1C /* ActivityLogButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogButtonStyle.swift; sourceTree = "<group>"; };
 		5A1EA8F829BD714300720915 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		5A1EA8FA29BD718C00720915 /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		5A1EA8FB29BD718C00720915 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 		5A1EA90729BD718E00720915 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		5A1EA90829BD718E00720915 /* Nunito-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-MediumItalic.ttf"; sourceTree = "<group>"; };
 		5E9516F729AC387A0031F202 /* BurnedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnedView.swift; sourceTree = "<group>"; };
+		5EF9D78329B5AFF1006C3B22 /* ActivityStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStorageManager.swift; sourceTree = "<group>"; };
 		653A254D283387FE005D4D48 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A2550283387FE005D4D48 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		653A255428338800005D4D48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -166,6 +173,7 @@
 				2F9056F3299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter in Frameworks */,
 				2F59B945298C628800C5107F /* BalanceSharedContext in Frameworks */,
 				2F49B784298041F300BCB272 /* Contact in Frameworks */,
+				5EF9D78629B5CC58006C3B22 /* FirebaseStorage in Frameworks */,
 				2F49B7782980407C00BCB272 /* FHIR in Frameworks */,
 				2F49B7802980418400BCB272 /* Onboarding in Frameworks */,
 				2F59B943298C628800C5107F /* BalanceSchedule in Frameworks */,
@@ -279,6 +287,16 @@
 			path = Meditation;
 			sourceTree = "<group>";
 		};
+		5E03E99D29BC14FA0041DD1C /* ActivityLogging */ = {
+			isa = PBXGroup;
+			children = (
+				5EF9D78329B5AFF1006C3B22 /* ActivityStorageManager.swift */,
+				5E03E9A029BC15CF0041DD1C /* ActivityLogBaseView.swift */,
+				5E03E9A229BC933B0041DD1C /* ActivityLogButtonStyle.swift */,
+			);
+			path = ActivityLogging;
+			sourceTree = "<group>";
+		};
 		653A2544283387FE005D4D48 = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				89EB7BB029B45D2B000470FC /* HeaderMenu.swift */,
+				5E03E99D29BC14FA0041DD1C /* ActivityLogging */,
 				5A1EA8FB29BD718C00720915 /* Nunito-Black.ttf */,
 				5A1EA8FE29BD718D00720915 /* Nunito-BlackItalic.ttf */,
 				5A1EA90429BD718E00720915 /* Nunito-BoldItalic.ttf */,
@@ -399,6 +418,7 @@
 				5AAFCE1929A75990006CCD66 /* LocalStorage */,
 				2F39333629A8A5690035A05C /* FirebaseFirestore */,
 				2761584829A6512E006C7AC1 /* SpotifyiOS */,
+				5EF9D78529B5CC58006C3B22 /* FirebaseStorage */,
 			);
 			productName = TemplateApplication;
 			productReference = 653A254D283387FE005D4D48 /* Balance.app */;
@@ -577,16 +597,19 @@
 				2720084329A843B90052908D /* Note.swift in Sources */,
 				896C65D629B92EF800F30BA2 /* Config.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
+				5E03E9A129BC15CF0041DD1C /* ActivityLogBaseView.swift in Sources */,
 				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
 				4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */,
 				4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */,
 				4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */,
 				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
+				5EF9D78429B5AFF1006C3B22 /* ActivityStorageManager.swift in Sources */,
 				89F9619829B6646200513052 /* Feature.swift in Sources */,
 				2761584D29A654FD006C7AC1 /* Music.swift in Sources */,
 				894A884529B7B27600CB347B /* NavigationView.swift in Sources */,
 				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
 				89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */,
+				5E03E9A329BC933B0041DD1C /* ActivityLogButtonStyle.swift in Sources */,
 				2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1114,6 +1137,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
 			productName = LocalStorage;
+		};
+		5EF9D78529B5CC58006C3B22 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

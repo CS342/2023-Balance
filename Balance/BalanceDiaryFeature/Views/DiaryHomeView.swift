@@ -32,6 +32,7 @@ struct DiaryHomeView: View {
                         self.currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
                         self.showingEditor.toggle()
                     }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Diary Note"))
                     .font(.custom("Nunito-Bold", size: 15))
                     .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
                     .foregroundColor(.white)
@@ -56,6 +57,7 @@ struct DiaryHomeView: View {
                     }) {
                         PastDiaryEntry(note)
                     }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Selected past diary note"))
                     .listRowSeparator(.hidden)
                 }
                 .onDelete(perform: delete)
@@ -64,11 +66,13 @@ struct DiaryHomeView: View {
             .offset(y: -20)
         }
         .sheet(isPresented: $showingEditor) {
-            DiaryNoteEntryView(
-                store: store,
-                currentNote: $currentNote,
-                showingEditor: $showingEditor
-            )
+            ActivityLogBaseView(viewName: "Diary Note Entry View") {
+                DiaryNoteEntryView(
+                    store: store,
+                    currentNote: $currentNote,
+                    showingEditor: $showingEditor
+                )
+            }
         }
         .onAppear {
             NoteStore.load { result in

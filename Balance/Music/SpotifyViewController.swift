@@ -75,6 +75,7 @@ class SpotifyViewController: UIViewController {
         super.viewDidLoad()
         style()
         layout()
+        print("Spotify view start")
     }
 
     override func viewDidAppear(_ animated: Bool) {

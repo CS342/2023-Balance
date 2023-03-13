@@ -35,7 +35,7 @@ struct YoutubeView: View {
             VStack {
                 ForEach(videoIDArray, id: \.self) { vidID in
                     VideoView(videoID: vidID)
-                        .frame(width: 360, height: 200)
+                        .frame(width: 360, height: 120)
                         .cornerRadius(40)
                         .padding()
                 }

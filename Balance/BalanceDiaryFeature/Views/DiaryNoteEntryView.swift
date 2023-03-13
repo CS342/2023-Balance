@@ -62,7 +62,9 @@ struct DiaryNoteEntryView: View {
                         }
 
                         self.showingEditor.toggle()
-                    }.font(.custom("Nunito-Bold", size: 17))
+                    }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Saved a Diary Note"))
+                    .font(.custom("Nunito-Bold", size: 17))
                         .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
                         .foregroundColor(.white)
                         .background(bcolor)
@@ -70,7 +72,6 @@ struct DiaryNoteEntryView: View {
                         .alert("Please enter a text before you save.", isPresented: $emptyNoteAlert) {
                             Button("OK", role: .cancel) { }
                         }
-                    
                     Button("Burn") {
                         store.deleteNote(currentNote.id)
 
@@ -81,6 +82,7 @@ struct DiaryNoteEntryView: View {
                         }
                         burningNote.toggle()
                     }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Burned Diary Note"))
                     .font(.custom("Nunito-Bold", size: 17))
                         .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
                         .foregroundColor(bcolor)
