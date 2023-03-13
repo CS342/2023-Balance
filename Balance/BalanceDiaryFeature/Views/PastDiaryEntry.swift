@@ -15,23 +15,25 @@ public struct PastDiaryEntry: View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(note.date.timeSinceDate(fromDate: Date()))
-                    .bold()
+                    .font(.custom("Nunito-Bold", size: 11))
+                    .foregroundColor(.gray)
                 Text(note.title)
-                    .font(.title.bold())
+                    .font(.custom("Nunito-Black", size: 18))
+                    .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
                 Text(note.text)
-                    .font(.title3)
+                    .font(.custom("Nunito", size: 14))
                     .foregroundColor(.gray)
                     .lineLimit(3)
+                    .frame(maxWidth: 270, alignment: .leading)
             }
             Image(systemName: "chevron.right")
-                .offset(x: 140)
+                .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(20)
-        .frame(width: 350)
         .background()
         .cornerRadius(15)
-        .shadow(color: Color.black.opacity(0.08), radius: 5)
+        .shadow(color: Color.black.opacity(0.1), radius: 5)
     }
 
     public init(_ note: Note) {

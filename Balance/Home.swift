@@ -22,33 +22,32 @@ struct HomeView: View {
         case diary
         case music
     }
-    
-    
-    @AppStorage(StorageKeys.homeTabSelection) var selectedTab = Tabs.schedule
-    
-    
+    var clipsToBounds = false
+
+
     var body: some View {
-        TabView(selection: $selectedTab) {
-            MeditationView()
-                .tag(Tabs.meditation)
-                .tabItem {
-                    Label("Meditation", systemImage: "list.clipboard")
+        NavigationStack {
+            HeaderMenu(title: "Home")
+            ScrollView(.vertical) {
+                VStack(spacing: 20) {
+                    NavigationLink(destination: DiaryHomeView()) {
+                        NavView(image: "Diary", text: "Diary")
+                    }
+                    NavigationLink(destination: MeditationView()) {
+                        NavView(image: "Meditation", text: "Meditation")
+                    }
+                    NavigationLink(destination: Music()) {
+                        NavView(image: "DistractImage", text: "Distraction")
+                    }
                 }
-            DiaryHomeView()
-                .tag(Tabs.diary)
-                .tabItem {
-                    Label("Diary", systemImage: "book")
-                }
-            Music()
-                .tag(Tabs.music)
-                .tabItem {
-                    Label("Music", systemImage: "music.note")
-                }
+                .padding(10)
+                .ignoresSafeArea(.all)
+            }
         }
+        .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
+        .accentColor(.white)
     }
 }
-
-
 #if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {

@@ -15,6 +15,8 @@ struct BalanceLogin: View {
     var body: some View {
         Login {
             Image(uiImage: Bundle.module.image(withName: "Balloon", fileExtension: "png"))
+                .resizable()
+                .scaledToFit()
                 .padding(.top, 32)
                 .accessibility(hidden: true)
             Text("Login below to begin using Balance")
