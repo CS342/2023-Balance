@@ -79,12 +79,8 @@ struct MeditationView: View {
                             .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
                             .cornerRadius(20)
                     }
-<<<<<<< HEAD
                     .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Sleep Meditations"))
-                }
-=======
                 } .padding()
->>>>>>> main
             }
             if showingGuided {
                 MeditationSpotifyView()
