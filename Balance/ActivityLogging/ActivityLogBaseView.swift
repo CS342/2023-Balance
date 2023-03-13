@@ -23,6 +23,8 @@ struct ActivityLogContainer<Content>: View where Content: View {
                 if !activityLogEntry.isEmpty() {
                     if let (startStr, activityLogEntryString) = activityLogEntry.toString() {
                         ActivityStorageManager.shared.uploadActivity(startID: startStr, activityLogEntryString: activityLogEntryString)
+                        //TODO: use logging
+                        print("Sending activity log to storage manager: \(activityLogEntryString)")
                     }
                     activityLogEntry.reset()
                 }

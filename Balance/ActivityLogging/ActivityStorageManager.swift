@@ -107,22 +107,6 @@ class ActivityLogEntry: ObservableObject {
 class ActivityStorageManager {
     static let shared = ActivityStorageManager()
     
-    //view disappears --> alert activity storage manager
-    //button clicked --> alert activity storage manager
-    
-    //storage manager
-    /*
-     distraction: spotify playing in app --> user clicks pause to stop it
-     meditation: spotify navigates outside of app (does view disappear?? --> user has to navigate back to app to end session (view appears) ?? or selects back button
-        - so view appears upon start and stop?
-        - we don't know excatly how long the user is listening to a song? (they could just open a different app (instead of listening to music)
-     */
-    
-    //when to publish a doc (when action is complete) ??
-    //publush upon entering and separately publish upon completion ???
-    
-    //hold times in this class in case app is closed ->  can publish all times contained in this class
-    
     func uploadActivity(startID: String, activityLogEntryString: String) {
         //Authorize User: users should be signed in to use the app
         guard let user = Auth.auth().currentUser else {
