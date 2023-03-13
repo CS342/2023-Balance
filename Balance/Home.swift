@@ -31,13 +31,22 @@ struct HomeView: View {
                 HeaderMenu(title: "Home")
                 ScrollView(.vertical) {
                     VStack(spacing: 20) {
-                        NavigationLink(destination: ActivityLogBaseView(viewName: "Diary Feature", isDirectChildToContainer: true, content: { DiaryHomeView()})) {
+                        NavigationLink(destination: ActivityLogBaseView (
+                                viewName: "Diary Feature",
+                                isDirectChildToContainer: true,
+                                content: {DiaryHomeView()})) {
                             NavView(image: "Diary", text: "Diary")
                         }
-                        NavigationLink(destination: ActivityLogBaseView(viewName: "Meditation Feature", isDirectChildToContainer: true, content: { MeditationView()})) {
+                        NavigationLink(destination: ActivityLogBaseView(
+                            viewName: "Meditation Feature",
+                            isDirectChildToContainer: true,
+                            content: { MeditationView()})) {
                             NavView(image: "Meditation", text: "Meditation")
                         }
-                        NavigationLink(destination: ActivityLogBaseView(viewName: "Distraction Music Feature", isDirectChildToContainer: true, content: { Music()})) {
+                        NavigationLink(destination: ActivityLogBaseView(
+                            viewName: "Distraction Music Feature",
+                            isDirectChildToContainer: true,
+                            content: { Music()})) {
                             NavView(image: "DistractImage", text: "Distraction")
                         }
                     }
