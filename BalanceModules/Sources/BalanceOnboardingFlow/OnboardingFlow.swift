@@ -15,7 +15,6 @@ public struct OnboardingFlow: View {
     enum Step: String, Codable {
         case login
         case signUp
-        case locationQuestion
     }
     
     
@@ -31,8 +30,6 @@ public struct OnboardingFlow: View {
                         BalanceLogin()
                     case .signUp:
                         BalanceSignUp()
-                    case .locationQuestion:
-                        LocationQuestion()
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)

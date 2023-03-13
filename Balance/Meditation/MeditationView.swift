@@ -33,16 +33,16 @@ struct MeditationView: View {
                     ForEach(videoIDArray, id: \.self) { vidID in
                         VideoView(videoID: vidID)
                             .frame(width: 360, height: 200)
-                            .cornerRadius(40)
+                            .cornerRadius(20)
                             .padding()
                     }
                 }
             }
-            Text("Categories").font(.custom("Nunito-Bold", size: 25))
+            Text("Categories").font(.custom("Nunito-Bold", size: 20))
                 .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
                 .offset(x: -110)
             ScrollView(.horizontal) {
-                HStack {
+                HStack(spacing: 24) {
                     Button(action: {
                         showingGuided = true
                         showingYoutube = false
@@ -52,7 +52,7 @@ struct MeditationView: View {
                             .frame(width: 120, height: 30)
                             .foregroundColor(.white)
                             .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
-                            .cornerRadius(40)
+                            .cornerRadius(20)
                     }
                     Button(action: {
                         showingGuided = false
@@ -63,7 +63,7 @@ struct MeditationView: View {
                             .frame(width: 120, height: 30)
                             .foregroundColor(.white)
                             .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
-                            .cornerRadius(40)
+                            .cornerRadius(20)
                     }
                     Button(action: {
                         showingGuided = false
@@ -74,9 +74,9 @@ struct MeditationView: View {
                             .frame(width: 120, height: 30)
                             .foregroundColor(.white)
                             .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
-                            .cornerRadius(40)
+                            .cornerRadius(20)
                     }
-                }
+                } .padding()
             }
             if showingGuided {
                 MeditationSpotifyView()
