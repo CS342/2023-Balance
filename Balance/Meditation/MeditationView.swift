@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+// swiftlint:disable todo
 struct MeditationView: View {
     @State private var showingGuided = true
     @State private var showingYoutube = false
@@ -31,7 +32,7 @@ struct MeditationView: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(videoIDArray, id: \.self) { vidID in
-                        //TODO: enable logging for a specific video being selected
+                        // TODO: enable logging for a specific video being selected
                         VideoView(videoID: vidID)
                             .frame(width: 360, height: 200)
                             .cornerRadius(20)
