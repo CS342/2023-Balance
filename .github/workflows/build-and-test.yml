@@ -14,6 +14,9 @@ on:
   workflow_call:
 
 jobs:
+  swiftlint:
+      name: SwiftLint
+      uses: StanfordBDHG/.github/.github/workflows/swiftlint.yml@v2
   buildandtest:
     name: Build and Test
     uses: CS342/.github/.github/workflows/xcodebuild-or-fastlane.yml@v1
