@@ -12,7 +12,7 @@ import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
 
-
+// swiftlint:disable closure_body_length
 struct HomeView: View {
     enum Tabs: String {
         case schedule
