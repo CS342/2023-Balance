@@ -56,22 +56,22 @@ struct DiaryNoteEntryView: View {
                         }
 
                         self.showingEditor.toggle()
-                    }.buttonStyle(.borderedProminent)
+                    }
+                    .buttonStyle(.borderedProminent)
                         .alert("Please enter a text before you save.", isPresented: $emptyNoteAlert){
                             Button("OK", role: .cancel) { }
                         }
-                    ActivityLogButtonWrapper(activityDescription: "Burned Diary Note") {
-                        Button("Burn") {
-                            store.deleteNote(currentNote.id)
+                    Button("Burn") {
+                        store.deleteNote(currentNote.id)
 
-                            NoteStore.save(notes: store.notes) { result in
-                                if case .failure(let error) = result {
-                                    print(error.localizedDescription)
-                                }
+                        NoteStore.save(notes: store.notes) { result in
+                            if case .failure(let error) = result {
+                                print(error.localizedDescription)
                             }
-                            burningNote.toggle()
                         }
+                        burningNote.toggle()
                     }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Burned Diary Note"))
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding()

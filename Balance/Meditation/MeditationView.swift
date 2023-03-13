@@ -23,12 +23,11 @@ struct MeditationView: View {
             ScrollView (.horizontal) {
                 HStack{
                     ForEach(videoIDArray, id: \.self) { vidID in
-                        ActivityLogButtonWrapper(activityDescription: "Selected Highlight Meditation Video") {
-                            VideoView(videoID: vidID)
-                                .frame(width: 360, height: 200)
-                                .cornerRadius(40)
-                                .padding()
-                        }
+                        //TODO: enable logging for a specific video being selected
+                        VideoView(videoID: vidID)
+                            .frame(width: 360, height: 200)
+                            .cornerRadius(40)
+                            .padding()
                     }
                 }
             }
@@ -48,6 +47,7 @@ struct MeditationView: View {
                             .background(Color(UIColor(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
                             .cornerRadius(40)
                     }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Self Guided Meditations"))
                     Button(action: {
                         showingGuided = false
                         showingYoutube = true
@@ -60,6 +60,7 @@ struct MeditationView: View {
                             .cornerRadius(40)
                         
                     }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Youtube Meditations"))
                     Button(action: {
                         showingGuided = false
                         showingYoutube = false
@@ -72,24 +73,19 @@ struct MeditationView: View {
                             .cornerRadius(40)
                         
                     }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Sleep Meditations"))
                 }
             }
             if showingGuided {
-                ActivityLogButtonWrapper(activityDescription: "Selected Meditation Spotify Track") {
-                    MeditationSpotifyView()
-                        .padding()
-                }
+                MeditationSpotifyView()
+                    .padding()
             }
             else if showingYoutube {
-                ActivityLogButtonWrapper(activityDescription: "Selected Meditation Youtube Track") {
-                    YoutubeView()
-                        .padding()
-                }
+                YoutubeView()
+                    .padding()
             } else if showingSleep {
-                ActivityLogButtonWrapper(activityDescription: "Selected Meditation Sleep Track") {
-                    SleepView()
-                        .padding()
-                }
+                SleepView()
+                    .padding()
             }
         }
         .edgesIgnoringSafeArea(.top)

@@ -1,5 +1,5 @@
 //
-//  ActivityLogButtonWrapper.swift
+//  ActivityLogButtonStyle.swift
 //  Balance
 //
 //  Created by Alexis Lowber on 3/11/23.
@@ -10,29 +10,19 @@ import UIKit
 
 // This class only logs information when the user interacts with a button (or some selectable content). We don't care when the view appers or disappears.
 
-struct ActivityLogButtonWrapper<Content>: View where Content: View{
+struct ActivityLogButtonStyle: PrimitiveButtonStyle {
     
     @EnvironmentObject var activityLogEntry: ActivityLogEntry
     
-    private let content: Content
+    let activityDescription: String
     
-    var activityDescription: String
-    
-    public init(activityDescription: String, @ViewBuilder content: () -> Content) {
-        self.activityDescription = activityDescription
-        self.content = content()
-    }
-    
-    var body: some View {
-        content
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
             .onTapGesture {
+                configuration.trigger()
                 activityLogEntry.addAction(actionDescription: activityDescription)
                 //TODO: remove print when not debugging
                 print(activityDescription)
             }
-    }
-    
-    mutating func setActivityDescription(activityDescription: String) {
-        self.activityDescription = activityDescription
     }
 }
