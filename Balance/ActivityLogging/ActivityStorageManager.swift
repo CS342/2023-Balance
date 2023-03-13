@@ -9,12 +9,9 @@ import Foundation
 import FirebaseAuth
 import FirebaseStorage
 
-//need activity loggers to run in background? want one instantiated pr class or a shared logger? bc u can nav to other pages while still playing meditation music. but you can also turn off spotify...
-//currently: we have individual tracks (so length based on length of tracks unless user pauses
 
-//Structure:
+//Activity Log Structure:
 /*
-Feature
     start timestamp (view appears)
     action (button press)
     action (button press)
@@ -22,12 +19,6 @@ Feature
     total duration:
 */
 
-//views can't keep their own logs
-//turn spotify off when: app registers pause
-
-//NOTE: spotify distraction feature: goes to safari quickly to login then reroutes to app
-
-//make custom button class? (nav can just use on view appear/disappear)
 import Foundation
 
 
@@ -78,8 +69,6 @@ class ActivityLogEntry: ObservableObject {
         let startStr = "start: " + idStr
         let endStr = "end: " + dateToString(date: endTime!)
         
-        // actions.joined(separator: "\n")
-        
         var actionsStr = ""
         
         for (timestamp, action) in actions {
@@ -98,11 +87,6 @@ class ActivityLogEntry: ObservableObject {
     }
 }
 
-/*protocol ActivityLog {
-    var activityLogEntry: ActivityLogEntry { get set }
-    func sendActivityLog()
-    
-}*/
 
 class ActivityStorageManager {
     static let shared = ActivityStorageManager()

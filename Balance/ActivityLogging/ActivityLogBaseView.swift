@@ -18,17 +18,6 @@ struct ActivityLogContainer<Content>: View where Content: View {
 
     var body: some View {
         content
-            // publish activity log if there is data (a subview has just disappeared)
-            .onAppear() {
-                if !activityLogEntry.isEmpty() {
-                    if let (startStr, activityLogEntryString) = activityLogEntry.toString() {
-                        ActivityStorageManager.shared.uploadActivity(startID: startStr, activityLogEntryString: activityLogEntryString)
-                        //TODO: use logging
-                        print("Sending activity log to storage manager: \(activityLogEntryString)")
-                    }
-                    activityLogEntry.reset()
-                }
-            }
             .environmentObject(activityLogEntry)
     }
 }
@@ -37,12 +26,14 @@ struct ActivityLogContainer<Content>: View where Content: View {
 struct ActivityLogBaseView<Content>: View where Content: View {
     
     private let viewName: String
+    private let isDirectChildToContainer: Bool
     private let content: Content
     
     @EnvironmentObject var activityLogEntry: ActivityLogEntry
     
-    public init(viewName: String, @ViewBuilder content: () -> Content) {
+    public init(viewName: String, isDirectChildToContainer: Bool = false, @ViewBuilder content: () -> Content) {
         self.viewName = viewName
+        self.isDirectChildToContainer = isDirectChildToContainer
         self.content = content()
     }
         
@@ -55,6 +46,13 @@ struct ActivityLogBaseView<Content>: View where Content: View {
             })
             .onDisappear(perform: {
                 activityLogEntry.endLog(actionDescription: "Closed \(viewName)")
+                if isDirectChildToContainer {
+                    if let (startStr, activityLogEntryString) = activityLogEntry.toString() {
+                        ActivityStorageManager.shared.uploadActivity(startID: startStr, activityLogEntryString: activityLogEntryString)
+                        //TODO: use logging
+                        print("Sending activity log to storage manager: \(activityLogEntryString)")
+                    }
+                }
                 //TODO: remove print statement
                 print("Closed \(viewName)")
             })
