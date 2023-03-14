@@ -71,7 +71,7 @@ class ActivityLogEntry: ObservableObject {
         var actionsStr = ""
         
         for (timestamp, action) in actions {
-            actionsStr.append(dateToString(date: timestamp) + " " + action)
+            actionsStr.append("\(dateToString(date: timestamp) + " " + action)\n")
         }
         
         return (idStr, [startStr, actionsStr, durationStr, endStr].joined(separator: "\n"))
@@ -123,4 +123,5 @@ class ActivityStorageManager {
             }
         }
     }
+    
 }
