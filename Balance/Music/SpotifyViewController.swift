@@ -61,6 +61,9 @@ class SpotifyViewController: UIViewController {
 
     private var lastPlayerState: SPTAppRemotePlayerState?
 
+    var activityLogEntry: ActivityLogEntry?
+    
+    
     // MARK: - Subviews
     let stackView = UIStackView()
     let connectLabel = UILabel()
@@ -92,6 +95,8 @@ class SpotifyViewController: UIViewController {
 
         let configuration = UIImage.SymbolConfiguration(pointSize: 50, weight: .bold, scale: .large)
         if playerState.isPaused {
+            activityLogEntry?.addAction(actionDescription: "Playing Spotify")
+            print("\(activityLogEntry?.actions.last?.1 ?? "NO_ENTRY")")
             playPauseButton.setImage(UIImage(systemName: "play.circle.fill", withConfiguration: configuration), for: .normal)
         } else {
             playPauseButton.setImage(UIImage(systemName: "pause.circle.fill", withConfiguration: configuration), for: .normal)

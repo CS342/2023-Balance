@@ -11,12 +11,14 @@ import UIKit
 
 
 struct SpotifyView: UIViewControllerRepresentable {
-    typealias UIViewControllerType = UIViewController
+    @EnvironmentObject var activityLogEntry: ActivityLogEntry
     
-
-    func makeUIViewController(context: Context) -> UIViewController {
-        SpotifyViewController.shared
+    
+    func makeUIViewController(context: Context) -> SpotifyViewController {
+        let spotifyViewController = SpotifyViewController.shared
+        spotifyViewController.activityLogEntry = activityLogEntry
+        return spotifyViewController
     }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+    
+    func updateUIViewController(_ uiViewController: SpotifyViewController, context: Context) {}
 }
