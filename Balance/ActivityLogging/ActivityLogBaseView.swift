@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+// swiftlint:disable lower_acl_than_parent
+// swiftlint:disable type_contents_order
+// swiftlint:disable todo
 struct ActivityLogContainer<Content>: View where Content: View {
-    
     private let content: Content
     @StateObject var activityLogEntry = ActivityLogEntry()
     
@@ -22,9 +24,8 @@ struct ActivityLogContainer<Content>: View where Content: View {
     }
 }
 
-//This base view implements functionality to log information that will be send to the ActivityStorageManager
+// This base view implements functionality to log information that will be send to the ActivityStorageManager
 struct ActivityLogBaseView<Content>: View where Content: View {
-    
     private let viewName: String
     private let isDirectChildToContainer: Bool
     private let content: Content
@@ -41,7 +42,7 @@ struct ActivityLogBaseView<Content>: View where Content: View {
         content
             .onAppear(perform: {
                 activityLogEntry.addAction(actionDescription: "Opened \(viewName)")
-                //TODO: remove print statement
+                // TODO: remove print statement
                 print("Opened \(viewName)")
             })
             .onDisappear(perform: {
@@ -49,11 +50,11 @@ struct ActivityLogBaseView<Content>: View where Content: View {
                 if isDirectChildToContainer {
                     if let (startStr, activityLogEntryString) = activityLogEntry.toString() {
                         ActivityStorageManager.shared.uploadActivity(startID: startStr, activityLogEntryString: activityLogEntryString)
-                        //TODO: use logging
+                        // TODO: use logging
                         print("Sending activity log to storage manager: \(activityLogEntryString)")
                     }
                 }
-                //TODO: remove print statement
+                // TODO: remove print statement
                 print("Closed \(viewName)")
             })
     }
