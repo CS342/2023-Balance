@@ -9,6 +9,7 @@
 import SwiftUI
 import UIKit
 
+// swiftlint:disable type_contents_order
 struct MeditationSpotifyView: View {
     @Environment(\.openURL) var openURL
     
@@ -22,14 +23,14 @@ struct MeditationSpotifyView: View {
     }
     
     let songs = [
-        Song(title: "Emotion Management 1", artist: "To calm you down", coverString:"meditationThumbnail 2", spotifyURL: "https://open.spotify.com/track/2JHBuWOMSGHOWCoLrXAriB?si=5f6d601ac0664d93"),
-        Song(title: "Emotion Management 2", artist: "To calm you down", coverString:"meditationThumbnail 3", spotifyURL: "https://open.spotify.com/track/46biZBPkwqTzB70Pabb9ks?si=f315155074864e1d"),
-        Song(title: "Emotion Management 3", artist: "To calm you down", coverString:"meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/3wdROXnP25gPoEKLyubpqc?si=e1400690922a48e4"),
-        Song(title: "Emotion Management 4", artist: "To calm you down", coverString:"meditationThumbnail 2", spotifyURL:  "https://open.spotify.com/track/1buvmZ3wdzJ2I7mqd1ifNs?si=da278ed097b64953"),
-        Song(title: "Emotion Management 5", artist: "To calm you down", coverString:"meditationThumbnail 3", spotifyURL: "https://open.spotify.com/track/5aP4bQuGcZIWzSoGGQeN0S?si=e7730ac057c34bfa"),
-        Song(title: "Emotion Management 6", artist: "To calm you down", coverString:"meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/3fd1dXUQ92rRnxKWyqgwcx?si=44e40d0ffd384cd9"),
-        Song(title: "Emotion Management 7", artist: "To calm you down", coverString:"meditationThumbnail 2", spotifyURL:  "https://open.spotify.com/track/1buvmZ3wdzJ2I7mqd1ifNs?si=da278ed097b64953"),
-        Song(title: "Emotion Management 8", artist: "To calm you down", coverString:"meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/7doeCRERLqKcAzEufAi44e?si=6fa0c7e046b4461e")
+        Song(title: "Emotion Management 1", artist: "To calm you down", coverString: "meditationThumbnail 2", spotifyURL: "https://open.spotify.com/track/2JHBuWOMSGHOWCoLrXAriB?si=5f6d601ac0664d93"),
+        Song(title: "Emotion Management 2", artist: "To calm you down", coverString: "meditationThumbnail 3", spotifyURL: "https://open.spotify.com/track/46biZBPkwqTzB70Pabb9ks?si=f315155074864e1d"),
+        Song(title: "Emotion Management 3", artist: "To calm you down", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/3wdROXnP25gPoEKLyubpqc?si=e1400690922a48e4"),
+        Song(title: "Emotion Management 4", artist: "To calm you down", coverString: "meditationThumbnail 2", spotifyURL: "https://open.spotify.com/track/1buvmZ3wdzJ2I7mqd1ifNs?si=da278ed097b64953"),
+        Song(title: "Emotion Management 5", artist: "To calm you down", coverString: "meditationThumbnail 3", spotifyURL: "https://open.spotify.com/track/5aP4bQuGcZIWzSoGGQeN0S?si=e7730ac057c34bfa"),
+        Song(title: "Emotion Management 6", artist: "To calm you down", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/3fd1dXUQ92rRnxKWyqgwcx?si=44e40d0ffd384cd9"),
+        Song(title: "Emotion Management 7", artist: "To calm you down", coverString: "meditationThumbnail 2", spotifyURL: "https://open.spotify.com/track/1buvmZ3wdzJ2I7mqd1ifNs?si=da278ed097b64953"),
+        Song(title: "Emotion Management 8", artist: "To calm you down", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/7doeCRERLqKcAzEufAi44e?si=6fa0c7e046b4461e")
     ]
     
     var body: some View {
@@ -45,6 +46,7 @@ struct MeditationSpotifyView: View {
                                     .resizable()
                                     .frame(width: 130, height: 130, alignment: .leading)
                                     .aspectRatio(contentMode: .fill)
+                                    .accessibilityLabel("Filler label")
                                 VStack(alignment: .leading) {
                                     Text(song.title).font(.custom("Nunito-Bold", size: 15))
                                     Text(song.artist).font(.custom("Nunito-Bold", size: 10))
