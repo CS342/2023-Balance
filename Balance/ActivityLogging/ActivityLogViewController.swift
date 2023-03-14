@@ -8,6 +8,11 @@
 import Foundation
 
 // Views utilizing UIViewController can inherit this to have activity loggin functionality
+
+// swiftlint:disable todo
+// swiftlint:disable unavailable_function
+// swiftlint:disable overridden_super_call
+
 class ActivityLogViewController: UIViewController {
     var activityLogEntry: ActivityLogEntry
     
@@ -31,10 +36,9 @@ class ActivityLogViewController: UIViewController {
     
     func sendActivityLog() {
         guard activityLogEntry.endTime != nil else {
-            //TODO: use logging functonality
+            // TODO: use logging functonality
             print("Can't send log to storage because log is incomplete")
         }
         ActivityStorageManager.shared.uploadActivity(activityLogEntryString: activityLogEntry.toString())
     }
-
 }

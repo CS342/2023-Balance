@@ -5,12 +5,11 @@
 //  Created by Alexis Lowber on 3/5/23.
 //  
 
-import Foundation
 import FirebaseAuth
 import FirebaseStorage
+import Foundation
 
-
-//Activity Log Structure:
+// Activity Log Structure:
 /*
     start timestamp (view appears)
     action (button press)
@@ -19,9 +18,9 @@ import FirebaseStorage
     total duration:
 */
 
-import Foundation
-
-
+// swiftlint:disable todo
+// swiftlint:disable force_unwrapping
+// swiftlint:disable implicit_return
 class ActivityLogEntry: ObservableObject {
     var startTime: Date?
     var endTime: Date?
@@ -47,7 +46,7 @@ class ActivityLogEntry: ObservableObject {
         let currentDate = Date.now
         actions.append((currentDate, actionDescription))
         
-        //set start time if this is the first action
+        // set start time if this is the first action
         startTime = startTime == nil ? currentDate : startTime
     }
     
@@ -58,7 +57,7 @@ class ActivityLogEntry: ObservableObject {
     
     func toString() -> (String, String)? {
         guard startTime != nil && endTime != nil else {
-            //TODO: add logging instead of printing
+            // TODO: add logging instead of printing
             print("Waning: cannot convert ActivityLogEntry to string without both start time and end time.")
             return nil
         }
@@ -92,29 +91,29 @@ class ActivityStorageManager {
     static let shared = ActivityStorageManager()
     
     func uploadActivity(startID: String, activityLogEntryString: String) {
-        //Authorize User: users should be signed in to use the app
+        // Authorize User: users should be signed in to use the app
         guard let user = Auth.auth().currentUser else {
-            //TODO: switch to logging statement
+            // TODO: switch to logging statement
             print("Error finding current user (FIRUser)")
             return
         }
         let userID = user.uid
 
-        //prepare data
+        // prepare data
         guard let activityData = activityLogEntryString.data(using: .utf8) else {
-            //TODO: switch to logging statement
+            // TODO: switch to logging statement
             print("Error generating Data object from activity log")
             return
         }
 
-        //prepare storage
+        // prepare storage
         let storage = Storage.storage()
         let metadata = StorageMetadata()
         metadata.contentType = "activity/txt"
         
         let storageRef = storage.reference().child("users/\(userID)/activity/\(startID).txt")
 
-        storageRef.putData(activityData, metadata: metadata) { (metadata, error) in
+        storageRef.putData(activityData, metadata: metadata) { metadata, error in
             if let error = error {
                 print("Error while uploading file: ", error)
             }

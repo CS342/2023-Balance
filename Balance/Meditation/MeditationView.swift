@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+// swiftlint:disable todo
+// swiftlint:disable closure_body_length
 struct MeditationView: View {
     @State private var showingGuided = true
     @State private var showingYoutube = false
@@ -19,8 +21,7 @@ struct MeditationView: View {
         "F0WYFXxhPGY",
         "vQxTUQhVbg4"
     ]
-
-    // swiftlint:disable closure_body_length
+    
     var body: some View {
         VStack {
             HeaderMenu(title: "Guided Meditation")
@@ -31,7 +32,7 @@ struct MeditationView: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(videoIDArray, id: \.self) { vidID in
-                        //TODO: enable logging for a specific video being selected
+                        // TODO: enable logging for a specific video being selected
                         VideoView(videoID: vidID)
                             .frame(width: 360, height: 200)
                             .cornerRadius(20)
