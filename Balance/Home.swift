@@ -57,7 +57,8 @@ struct HomeView: View {
                                 viewName: "Distraction Music Feature",
                                 isDirectChildToContainer: true,
                                 content: {
-                                    Music()
+//                                    Music()
+                                    SpotifyView()
                                 }
                         )
                         ) {
