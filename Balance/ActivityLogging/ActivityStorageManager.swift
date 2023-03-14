@@ -6,8 +6,10 @@
 //  
 
 import FirebaseAuth
-import FirebaseStorage
+//import FirebaseStorage
 import Foundation
+import FirebaseFirestore
+import FirebaseCore
 
 // Activity Log Structure:
 /*
@@ -21,57 +23,63 @@ import Foundation
 // swiftlint:disable implicit_return
 // swiftlint:disable force_unwrapping
 // swiftlint:disable todo
-class ActivityLogEntry: ObservableObject {
-    var startTime: Date?
-    var endTime: Date?
-    var actions: [(Date, String)] = []
+
+struct Action: Codable {
+    let time: Date
+    let description: String
+}
+class ActivityLogEntry: ObservableObject, Codable {
+    var startTime: Date = Date(timeIntervalSinceReferenceDate: 0)
+    var endTime: Date = Date(timeIntervalSinceReferenceDate: 0)
+    var duration: TimeInterval = 0
+    var actions: [Action] = []
     
-    init() {
-        startTime = nil
-        endTime = nil
-        actions = []
+    enum CodingKeys: String, CodingKey {
+        case startTime
+        case endTime
+        case duration
+        case actions
     }
     
     func reset() {
-        startTime = nil
-        endTime = nil
+        startTime = Date(timeIntervalSinceReferenceDate: 0)
+        endTime = startTime
+        duration = 0
         actions = []
     }
     
     func isEmpty() -> Bool {
-        return startTime == nil || endTime == nil
+        return getDuration() == TimeInterval(0)
     }
     
     func addAction(actionDescription: String) {
         let currentDate = Date.now
-        actions.append((currentDate, actionDescription))
+        actions.append(Action(time: currentDate, description: actionDescription))
         
         // set start time if this is the first action
-        startTime = startTime == nil ? currentDate : startTime
+        startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
     }
     
     func endLog(actionDescription: String) {
         addAction(actionDescription: actionDescription)
-        endTime = actions.last!.0
+        endTime = actions.last!.time
+    }
+    
+    func getDuration() -> TimeInterval {
+        return endTime.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
     }
     
     func toString() -> (String, String)? {
-        guard startTime != nil && endTime != nil else {
-            // TODO: add logging instead of printing
-            print("Waning: cannot convert ActivityLogEntry to string without both start time and end time.")
-            return nil
-        }
+        let durationStr = "duration: \(getDuration())"
         
-        let durationStr = "duration: \(endTime!.timeIntervalSinceReferenceDate - startTime!.timeIntervalSinceReferenceDate)"
-        
-        let idStr = dateToString(date: startTime!)
+        let idStr = dateToString(date: startTime)
         let startStr = "start: " + idStr
-        let endStr = "end: " + dateToString(date: endTime!)
+        let endStr = endTime != Date(timeIntervalSinceReferenceDate: 0) ? "end: " + dateToString(date: endTime) : ""
         
         var actionsStr = ""
         
-        for (timestamp, action) in actions {
-            actionsStr.append("\(dateToString(date: timestamp) + " " + action)\n")
+        for action in actions {
+            actionsStr.append("\(dateToString(date: action.time) + " " + action.description)\n")
         }
         
         return (idStr, [startStr, actionsStr, durationStr, endStr].joined(separator: "\n"))
@@ -79,7 +87,7 @@ class ActivityLogEntry: ObservableObject {
     
     func dateToString(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        formatter.dateFormat = "yyyy/MM/dd'T'HH:mm:ss"
         formatter.timeZone = .current
         
         return formatter.string(from: date)
@@ -90,7 +98,14 @@ class ActivityLogEntry: ObservableObject {
 class ActivityStorageManager {
     static let shared = ActivityStorageManager()
     
-    func uploadActivity(startID: String, activityLogEntryString: String) {
+    func uploadActivity(activityLogEntry: ActivityLogEntry) {
+        //make sure all fields are present
+        guard !activityLogEntry.isEmpty() else {
+            // TODO: switch to logging statement
+            print("Cannot send activity data without both start and end time fields")
+            return
+        }
+        
         // Authorize User: users should be signed in to use the app
         guard let user = Auth.auth().currentUser else {
             // TODO: switch to logging statement
@@ -100,27 +115,21 @@ class ActivityStorageManager {
         let userID = user.uid
 
         // prepare data
-        guard let activityData = activityLogEntryString.data(using: .utf8) else {
+        
+        /*guard let activityData = activityLogEntryString.data(using: .utf8) else {
             // TODO: switch to logging statement
             print("Error generating Data object from activity log")
             return
-        }
-
-        // prepare storage
-        let storage = Storage.storage()
-        let metadata = StorageMetadata()
-        metadata.contentType = "activity/txt"
+        }*/
         
-        let storageRef = storage.reference().child("users/\(userID)/activity/\(startID).txt")
-
-        storageRef.putData(activityData, metadata: metadata) { metadata, error in
-            if let error = error {
-                print("Error while uploading file: ", error)
-            }
-
-            if let metadata = metadata {
-                print("Metadata: ", metadata)
-            }
+        let db = Firestore.firestore()
+        
+        let startID = "\(activityLogEntry.dateToString(date: activityLogEntry.startTime))"
+        
+        do {
+            try db.collection("users").document("\(userID)/activity/\(startID)").setData(from: activityLogEntry)
+        } catch let error {
+            print("Error writing city to Firestore: \(error)")
         }
     }
 }
