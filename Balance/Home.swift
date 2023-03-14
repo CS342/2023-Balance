@@ -57,8 +57,8 @@ struct HomeView: View {
                                 viewName: "Distraction Music Feature",
                                 isDirectChildToContainer: true,
                                 content: {
-//                                    Music()
-                                    SpotifyView()
+                                    Music()
+//                                    SpotifyView()
                                 }
                         )
                         ) {
@@ -70,7 +70,6 @@ struct HomeView: View {
                 }
             }
             .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
-            .accentColor(.white)
         }
     }
 }
