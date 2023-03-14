@@ -12,7 +12,6 @@ import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
 
-// swiftlint:disable line_length
 struct HomeView: View {
     enum Tabs: String {
         case schedule
