@@ -23,6 +23,7 @@ import Foundation
 // swiftlint:disable implicit_return
 // swiftlint:disable force_unwrapping
 // swiftlint:disable todo
+// swiftlint:disable untyped_error_in_catch
 struct Action: Codable {
     let time: Date
     let description: String
