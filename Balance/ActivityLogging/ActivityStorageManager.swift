@@ -6,7 +6,6 @@
 //  
 
 import FirebaseAuth
-//import FirebaseStorage
 import Foundation
 import FirebaseFirestore
 import FirebaseCore
@@ -28,6 +27,7 @@ struct Action: Codable {
     let time: Date
     let description: String
 }
+
 class ActivityLogEntry: ObservableObject, Codable {
     var startTime: Date = Date(timeIntervalSinceReferenceDate: 0)
     var endTime: Date = Date(timeIntervalSinceReferenceDate: 0)
@@ -63,18 +63,19 @@ class ActivityLogEntry: ObservableObject, Codable {
     func endLog(actionDescription: String) {
         addAction(actionDescription: actionDescription)
         endTime = actions.last!.time
+        duration = getDuration()
     }
     
     func getDuration() -> TimeInterval {
         return endTime.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
     }
     
-    func toString() -> (String, String)? {
-        let durationStr = "duration: \(getDuration())"
-        
+    func toString() -> (String, String) {
         let idStr = dateToString(date: startTime)
+        
         let startStr = "start: " + idStr
         let endStr = endTime != Date(timeIntervalSinceReferenceDate: 0) ? "end: " + dateToString(date: endTime) : ""
+        let durationStr = "duration: \(duration)"
         
         var actionsStr = ""
         
@@ -87,7 +88,7 @@ class ActivityLogEntry: ObservableObject, Codable {
     
     func dateToString(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd'T'HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         formatter.timeZone = .current
         
         return formatter.string(from: date)
@@ -99,7 +100,7 @@ class ActivityStorageManager {
     static let shared = ActivityStorageManager()
     
     func uploadActivity(activityLogEntry: ActivityLogEntry) {
-        //make sure all fields are present
+
         guard !activityLogEntry.isEmpty() else {
             // TODO: switch to logging statement
             print("Cannot send activity data without both start and end time fields")
@@ -113,21 +114,13 @@ class ActivityStorageManager {
             return
         }
         let userID = user.uid
-
-        // prepare data
-        
-        /*guard let activityData = activityLogEntryString.data(using: .utf8) else {
-            // TODO: switch to logging statement
-            print("Error generating Data object from activity log")
-            return
-        }*/
         
         let db = Firestore.firestore()
         
         let startID = "\(activityLogEntry.dateToString(date: activityLogEntry.startTime))"
         
         do {
-            try db.collection("users").document("\(userID)/activity/\(startID)").setData(from: activityLogEntry)
+            try db.collection("users").document("\(userID)/activity/\(startID).txt").setData(from: activityLogEntry)
         } catch let error {
             print("Error writing city to Firestore: \(error)")
         }
