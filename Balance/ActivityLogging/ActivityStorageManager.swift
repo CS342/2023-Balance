@@ -24,13 +24,13 @@ import Foundation
 // swiftlint:disable force_unwrapping
 // swiftlint:disable todo
 // swiftlint:disable untyped_error_in_catch
+// swiftlint:disable type_contents_order
 struct Action: Codable {
     let time: Date
     let description: String
 }
 
 class ActivityLogEntry: ObservableObject, Codable {
-    
     enum CodingKeys: String, CodingKey {
         case startTime
         case endTime
@@ -38,8 +38,8 @@ class ActivityLogEntry: ObservableObject, Codable {
         case actions
     }
     
-    var startTime: Date = Date(timeIntervalSinceReferenceDate: 0)
-    var endTime: Date = Date(timeIntervalSinceReferenceDate: 0)
+    var startTime = Date(timeIntervalSinceReferenceDate: 0)
+    var endTime = Date(timeIntervalSinceReferenceDate: 0)
     var duration: TimeInterval = 0
     var actions: [Action] = []
     
