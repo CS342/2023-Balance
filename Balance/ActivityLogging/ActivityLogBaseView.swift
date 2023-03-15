@@ -51,7 +51,7 @@ struct ActivityLogBaseView<Content>: View where Content: View {
                 if isDirectChildToContainer {
                     ActivityStorageManager.shared.uploadActivity(activityLogEntry: activityLogEntry)
                     
-                    //for debugging
+                    // for debugging
                     let activityLogEntryString = activityLogEntry.toString()
                     // TODO: remove print statement
                     print("Sending activity log to storage manager: \(activityLogEntryString)")

@@ -25,7 +25,6 @@ struct HomeView: View {
     }
     var clipsToBounds = false
 
-
     var body: some View {
         ActivityLogContainer {
             NavigationStack {
@@ -47,8 +46,7 @@ struct HomeView: View {
                             destination: ActivityLogBaseView(
                                 viewName: "Meditation Feature",
                                 isDirectChildToContainer: true,
-                                content: 
-                                { 
+                                content: { 
                                     MeditationView()
                                 }
                         )

@@ -6,9 +6,9 @@
 //  
 
 import FirebaseAuth
-import Foundation
-import FirebaseFirestore
 import FirebaseCore
+import FirebaseFirestore
+import Foundation
 
 
 // Activity Log Structure:
@@ -29,8 +29,8 @@ struct Action: Codable {
 }
 
 class ActivityLogEntry: ObservableObject, Codable {
-    var startTime: Date = Date(timeIntervalSinceReferenceDate: 0)
-    var endTime: Date = Date(timeIntervalSinceReferenceDate: 0)
+    var startTime = Date(timeIntervalSinceReferenceDate: 0)
+    var endTime = Date(timeIntervalSinceReferenceDate: 0)
     var duration: TimeInterval = 0
     var actions: [Action] = []
     
@@ -114,12 +114,12 @@ class ActivityStorageManager {
         }
         let userID = user.uid
         
-        let db = Firestore.firestore()
+        let database = Firestore.firestore()
         
         let startID = "\(activityLogEntry.dateToString(date: activityLogEntry.startTime))"
         
         do {
-            try db.collection("users").document("\(userID)/activity/\(startID).txt").setData(from: activityLogEntry)
+            try database.collection("users").document("\(userID)/activity/\(startID).txt").setData(from: activityLogEntry)
         } catch let error {
             print("Error writing city to Firestore: \(error)")
         }
