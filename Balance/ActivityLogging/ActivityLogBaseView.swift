@@ -47,13 +47,16 @@ struct ActivityLogBaseView<Content>: View where Content: View {
             })
             .onDisappear(perform: {
                 activityLogEntry.endLog(actionDescription: "Closed \(viewName)")
+                
                 if isDirectChildToContainer {
-                    if let (startStr, activityLogEntryString) = activityLogEntry.toString() {
-                        ActivityStorageManager.shared.uploadActivity(startID: startStr, activityLogEntryString: activityLogEntryString)
-                        // TODO: use logging
-                        print("Sending activity log to storage manager: \(activityLogEntryString)")
-                    }
+                    ActivityStorageManager.shared.uploadActivity(activityLogEntry: activityLogEntry)
+                    
+                    // for debugging
+                    let activityLogEntryString = activityLogEntry.toString()
+                    // TODO: remove print statement
+                    print("Sending activity log to storage manager: \(activityLogEntryString)")
                 }
+                
                 // TODO: remove print statement
                 print("Closed \(viewName)")
             })

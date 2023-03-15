@@ -12,6 +12,7 @@ import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
 
+
 // swiftlint:disable closure_body_length
 struct HomeView: View {
     enum Tabs: String {
@@ -23,7 +24,6 @@ struct HomeView: View {
         case music
     }
     var clipsToBounds = false
-
 
     var body: some View {
         ActivityLogContainer {
@@ -46,7 +46,8 @@ struct HomeView: View {
                             destination: ActivityLogBaseView(
                                 viewName: "Meditation Feature",
                                 isDirectChildToContainer: true,
-                                content: { MeditationView()
+                                content: {
+                                    MeditationView()
                                 }
                         )
                         ) {
@@ -58,7 +59,6 @@ struct HomeView: View {
                                 isDirectChildToContainer: true,
                                 content: {
                                     Music()
-//                                    SpotifyView()
                                 }
                         )
                         ) {
