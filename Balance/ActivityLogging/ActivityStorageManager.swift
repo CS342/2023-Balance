@@ -10,6 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseCore
 
+
 // Activity Log Structure:
 /*
     start timestamp (view appears)
@@ -22,7 +23,6 @@ import FirebaseCore
 // swiftlint:disable implicit_return
 // swiftlint:disable force_unwrapping
 // swiftlint:disable todo
-
 struct Action: Codable {
     let time: Date
     let description: String
@@ -100,7 +100,6 @@ class ActivityStorageManager {
     static let shared = ActivityStorageManager()
     
     func uploadActivity(activityLogEntry: ActivityLogEntry) {
-
         guard !activityLogEntry.isEmpty() else {
             // TODO: switch to logging statement
             print("Cannot send activity data without both start and end time fields")

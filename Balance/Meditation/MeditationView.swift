@@ -9,6 +9,7 @@
 import SwiftUI
 
 // swiftlint:disable todo
+// swiftlint:disable closure_body_length
 struct MeditationView: View {
     @State private var showingGuided = true
     @State private var showingYoutube = false
@@ -20,8 +21,7 @@ struct MeditationView: View {
         "F0WYFXxhPGY",
         "vQxTUQhVbg4"
     ]
-
-    // swiftlint:disable closure_body_length
+    
     var body: some View {
         VStack {
             HeaderMenu(title: "Guided Meditation")

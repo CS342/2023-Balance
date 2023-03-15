@@ -12,6 +12,8 @@ import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
 
+
+// swiftlint:disable closure_body_length
 struct HomeView: View {
     enum Tabs: String {
         case schedule
@@ -30,25 +32,38 @@ struct HomeView: View {
                 HeaderMenu(title: "Home")
                 ScrollView(.vertical) {
                     VStack(spacing: 20) {
-                        NavigationLink(destination: ActivityLogBaseView(
-                            viewName: "Diary Feature",
-                            isDirectChildToContainer: true,
-                            content: { DiaryHomeView() }
-                        )) {
+                        NavigationLink(
+                            destination: ActivityLogBaseView(
+                                viewName: "Diary Feature",
+                                isDirectChildToContainer: true,
+                                content: {
+                                    DiaryHomeView()
+                                }
+                        )
+                        ) {
                             NavView(image: "Diary", text: "Diary")
                         }
-                        NavigationLink(destination: ActivityLogBaseView(
-                            viewName: "Meditation Feature",
-                            isDirectChildToContainer: true,
-                            content: { MeditationView() }
-                        )) {
+                        NavigationLink(
+                            destination: ActivityLogBaseView(
+                                viewName: "Meditation Feature",
+                                isDirectChildToContainer: true,
+                                content: 
+                                { 
+                                    MeditationView()
+                                }
+                        )
+                        ) {
                             NavView(image: "Meditation", text: "Meditation")
                         }
-                        NavigationLink(destination: ActivityLogBaseView(
-                            viewName: "Distraction Music Feature",
-                            isDirectChildToContainer: true,
-                            content: { Music() }
-                        )) {
+                        NavigationLink(
+                            destination: ActivityLogBaseView(
+                                viewName: "Distraction Music Feature",
+                                isDirectChildToContainer: true,
+                                content: {
+                                    Music()
+                                }
+                        )
+                        ) {
                             NavView(image: "DistractImage", text: "Distraction")
                         }
                     }
@@ -57,7 +72,6 @@ struct HomeView: View {
                 }
             }
             .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
-            .accentColor(.white)
         }
     }
 }
