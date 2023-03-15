@@ -51,6 +51,7 @@ struct MeditationView: View {
                         showingSleep = false
                     }) {
                         Text("Self Guided")
+                            .font(.custom("Nunito", size: 18))
                             .frame(width: 120, height: 30)
                             .foregroundColor(.white)
                             .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
@@ -63,6 +64,7 @@ struct MeditationView: View {
                         showingSleep = false
                     }) {
                         Text("Youtube")
+                            .font(.custom("Nunito", size: 18))
                             .frame(width: 120, height: 30)
                             .foregroundColor(.white)
                             .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
@@ -75,6 +77,7 @@ struct MeditationView: View {
                         showingSleep = true
                     }) {
                         Text("Sleep")
+                            .font(.custom("Nunito", size: 18))
                             .frame(width: 120, height: 30)
                             .foregroundColor(.white)
                             .background(Color(#colorLiteral(red: 0.45, green: 0.04, blue: 0.72, alpha: 1.00)))
