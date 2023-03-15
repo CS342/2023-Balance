@@ -58,6 +58,7 @@ struct HomeView: View {
                                 isDirectChildToContainer: true,
                                 content: {
                                     Music()
+//                                    SpotifyView()
                                 }
                         )
                         ) {
@@ -69,7 +70,6 @@ struct HomeView: View {
                 }
             }
             .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
-            .accentColor(.white)
         }
     }
 }
