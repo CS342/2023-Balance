@@ -46,7 +46,7 @@ struct HomeView: View {
                             destination: ActivityLogBaseView(
                                 viewName: "Meditation Feature",
                                 isDirectChildToContainer: true,
-                                content: { 
+                                content: {
                                     MeditationView()
                                 }
                         )

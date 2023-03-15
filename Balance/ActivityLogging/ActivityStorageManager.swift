@@ -29,10 +29,6 @@ struct Action: Codable {
 }
 
 class ActivityLogEntry: ObservableObject, Codable {
-    var startTime = Date(timeIntervalSinceReferenceDate: 0)
-    var endTime = Date(timeIntervalSinceReferenceDate: 0)
-    var duration: TimeInterval = 0
-    var actions: [Action] = []
     
     enum CodingKeys: String, CodingKey {
         case startTime
@@ -40,6 +36,11 @@ class ActivityLogEntry: ObservableObject, Codable {
         case duration
         case actions
     }
+    
+    var startTime: Date = Date(timeIntervalSinceReferenceDate: 0)
+    var endTime: Date = Date(timeIntervalSinceReferenceDate: 0)
+    var duration: TimeInterval = 0
+    var actions: [Action] = []
     
     func reset() {
         startTime = Date(timeIntervalSinceReferenceDate: 0)
