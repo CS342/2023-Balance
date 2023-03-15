@@ -61,6 +61,9 @@ class SpotifyViewController: UIViewController {
 
     private var lastPlayerState: SPTAppRemotePlayerState?
 
+    var activityLogEntry: ActivityLogEntry?
+    
+    
     // MARK: - Subviews
     let stackView = UIStackView()
     let connectLabel = UILabel()
@@ -92,8 +95,10 @@ class SpotifyViewController: UIViewController {
 
         let configuration = UIImage.SymbolConfiguration(pointSize: 50, weight: .bold, scale: .large)
         if playerState.isPaused {
+            activityLogEntry?.addAction(actionDescription: "Playing Spotify")
             playPauseButton.setImage(UIImage(systemName: "play.circle.fill", withConfiguration: configuration), for: .normal)
         } else {
+            activityLogEntry?.addAction(actionDescription: "Pausing Spotify")
             playPauseButton.setImage(UIImage(systemName: "pause.circle.fill", withConfiguration: configuration), for: .normal)
         }
     }
@@ -117,6 +122,7 @@ class SpotifyViewController: UIViewController {
 
     @objc
     func didTapConnect(_ button: UIButton) {
+        activityLogEntry?.addAction(actionDescription: "Connecting Spotify")
         guard let sessionManager = sessionManager else {
             return
         }
