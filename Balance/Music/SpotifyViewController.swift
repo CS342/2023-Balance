@@ -46,6 +46,8 @@ class SpotifyViewController: UIViewController {
         let configuration = SPTConfiguration(clientID: SpotifyConfig.spotifyClientId, redirectURL: SpotifyConfig.redirectUri)
         // Set the playURI to a non-nil value so that Spotify plays music after authenticating
         // otherwise another app switch will be required
+        
+        // replace this placeholder URI with the desired URI
         configuration.playURI = "spotify:album:3M7xLE04DvF9sM9gnTBPdY"
         // Set these url's to your backend which contains the secret to exchange for an access token
         // You can use the provided ruby script spotify_token_swap.rb for testing purposes
