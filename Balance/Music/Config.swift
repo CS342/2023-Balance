@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+// Go to spotify developer console in order to generate a client key and secret key for this project
 enum SpotifyKeys {
     static var secretID = ""
     static var clientID = ""
