@@ -91,7 +91,7 @@ struct LocationView: View {
                         }
                     )
                 ) {
-                    NavView(image: "Diary", text: "Hospital")
+                    NavView(image: "hospitalIcon", text: "Hospital")
                 }
                 NavigationLink(
                     destination: ActivityLogBaseView(
@@ -102,7 +102,7 @@ struct LocationView: View {
                         }
                     )
                 ) {
-                    NavView(image: "Meditation", text: "Home")
+                    NavView(image: "homeIcon", text: "Home")
                 }
                 Spacer()
                 Button(action: {

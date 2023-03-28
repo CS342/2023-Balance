@@ -59,6 +59,9 @@
 		653A256228338800005D4D48 /* BalanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653A256128338800005D4D48 /* BalanceTests.swift */; };
 		6C0F8E4929CA57B5003C7D8B /* HeaderHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F8E4829CA57B5003C7D8B /* HeaderHome.swift */; };
 		6C370AAB29D23B95001781B3 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C370AAA29D23B95001781B3 /* Constant.swift */; };
+		6C370AAD29D38F7F001781B3 /* ChillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C370AAC29D38F7F001781B3 /* ChillView.swift */; };
+		6C370AAF29D393FA001781B3 /* DistractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C370AAE29D393FA001781B3 /* DistractionView.swift */; };
+		6C370AB129D396B2001781B3 /* DistractionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C370AB029D396B2001781B3 /* DistractionCellView.swift */; };
 		6C39EA2129C9EA620095573E /* SOSCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C39EA1F29C9EA610095573E /* SOSCellView.swift */; };
 		6C39EA2229C9EA620095573E /* SOSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C39EA2029C9EA610095573E /* SOSView.swift */; };
 		6C80C00629CCF7F3003DD5B9 /* HeaderBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C80C00529CCF7F3003DD5B9 /* HeaderBar.swift */; };
@@ -142,6 +145,9 @@
 		653A258928339462005D4D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C0F8E4829CA57B5003C7D8B /* HeaderHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderHome.swift; sourceTree = "<group>"; };
 		6C370AAA29D23B95001781B3 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		6C370AAC29D38F7F001781B3 /* ChillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChillView.swift; sourceTree = "<group>"; };
+		6C370AAE29D393FA001781B3 /* DistractionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistractionView.swift; sourceTree = "<group>"; };
+		6C370AB029D396B2001781B3 /* DistractionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistractionCellView.swift; sourceTree = "<group>"; };
 		6C39EA1F29C9EA610095573E /* SOSCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSCellView.swift; sourceTree = "<group>"; };
 		6C39EA2029C9EA610095573E /* SOSView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSView.swift; sourceTree = "<group>"; };
 		6C80C00529CCF7F3003DD5B9 /* HeaderBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBar.swift; sourceTree = "<group>"; };
@@ -348,8 +354,11 @@
 				2761584529A6448C006C7AC1 /* SceneDelegate.swift */,
 				89F9619729B6646200513052 /* Feature.swift */,
 				2FC975A72978F11A00BA99FE /* Home.swift */,
+				6C370AAC29D38F7F001781B3 /* ChillView.swift */,
+				6C370AAE29D393FA001781B3 /* DistractionView.swift */,
 				6CF510BF29C8FD25008A2F55 /* LocationView.swift */,
 				894A884429B7B27600CB347B /* NavigationView.swift */,
+				6C370AB029D396B2001781B3 /* DistractionCellView.swift */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
 				2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */,
 				8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */,
@@ -640,6 +649,7 @@
 				2720084329A843B90052908D /* Note.swift in Sources */,
 				896C65D629B92EF800F30BA2 /* Config.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
+				6C370AAF29D393FA001781B3 /* DistractionView.swift in Sources */,
 				5E03E9A129BC15CF0041DD1C /* ActivityLogBaseView.swift in Sources */,
 				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
 				4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */,
@@ -651,6 +661,7 @@
 				89F9619829B6646200513052 /* Feature.swift in Sources */,
 				6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */,
 				2761584D29A654FD006C7AC1 /* Music.swift in Sources */,
+				6C370AB129D396B2001781B3 /* DistractionCellView.swift in Sources */,
 				894A884529B7B27600CB347B /* NavigationView.swift in Sources */,
 				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
 				6C39EA2229C9EA620095573E /* SOSView.swift in Sources */,
@@ -659,6 +670,7 @@
 				6C0F8E4929CA57B5003C7D8B /* HeaderHome.swift in Sources */,
 				6C39EA2129C9EA620095573E /* SOSCellView.swift in Sources */,
 				2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */,
+				6C370AAD29D38F7F001781B3 /* ChillView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

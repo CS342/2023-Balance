@@ -1,85 +1,75 @@
 //
-// This source file is part of the CS342 2023 Balance Team Application project
+//  ChillView.swift
+//  Balance
 //
-// SPDX-FileCopyrightText: 2023 Stanford University
-//
-// SPDX-License-Identifier: MIT
+//  Created by Gonzalo Perisset on 28/03/2023.
 //
 
-import BalanceContacts
-import BalanceMockDataStorageProvider
-import BalanceSchedule
-import BalanceSharedContext
 import SwiftUI
 
 // swiftlint:disable closure_body_length
-struct HomeView: View {
-    var clipsToBounds = false
-
+struct ChillView: View {
     var body: some View {
         ActivityLogContainer {
-            NavigationStack {
-                HeaderHome(name: "Home", avatar: "BalanceLogo", id: "00007")
+            HeaderBar(title: "Let's chill out")
+//            NavigationStack {
                 ScrollView(.vertical) {
                     VStack(spacing: 20) {
                         NavigationLink(
                             destination: ActivityLogBaseView(
-                                viewName: "Distraction Music Feature",
+                                viewName: "Body sensations Feature",
                                 isDirectChildToContainer: true,
                                 content: {
-                                    DistractionView()
+//                                    Music()
                                 }
-                        )
+                            )
                         ) {
-                            NavView(image: "distractMeIcon", text: "Distract me")
+                            NavView(image: "bodySensationIcon", text: "Body Sensations")
                         }
                         NavigationLink(
                             destination: ActivityLogBaseView(
-                                viewName: "Let's chill out Feature",
+                                viewName: "Breathing Feature",
+                                isDirectChildToContainer: true,
+                                content: {
+//                                    MeditationView()
+                                }
+                            )
+                        ) {
+                            NavView(image: "breathIcon", text: "Breathing")
+                        }
+                        NavigationLink(
+                            destination: ActivityLogBaseView(
+                                viewName: "Guided meditation Feature",
                                 isDirectChildToContainer: true,
                                 content: {
                                     MeditationView()
                                 }
-                        )
+                            )
                         ) {
-                            NavView(image: "chillIcon", text: "Let's chill out")
+                            NavView(image: "meditationIcon", text: "Guided Meditation")
                         }
                         NavigationLink(
                             destination: ActivityLogBaseView(
-                                viewName: "Feeling learning Feature",
+                                viewName: "Write Something Feature",
                                 isDirectChildToContainer: true,
                                 content: {
-                                    ChillView()
+//                                    DiaryHomeView()
                                 }
-                        )
+                            )
                         ) {
-                            NavView(image: "learningIcon", text: "Feeling learning")
-                        }
-                        NavigationLink(
-                            destination: ActivityLogBaseView(
-                                viewName: "Diary Feature",
-                                isDirectChildToContainer: true,
-                                content: {
-                                    DiaryHomeView()
-                                }
-                        )
-                        ) {
-                            NavView(image: "diaryIcon", text: "Diary")
+                            NavView(image: "writeIcon", text: "Write Something")
                         }
                     }
                     .padding(10)
                     .ignoresSafeArea(.all)
                 }
-            }.accentColor(.white)
+//            }.accentColor(.white)
         }
     }
 }
-#if DEBUG
-struct MainView_Previews: PreviewProvider {
+
+struct ChillView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
-            .environmentObject(BalanceScheduler())
-            .environmentObject(MockDataStorageProvider())
+        ChillView()
     }
 }
-#endif
