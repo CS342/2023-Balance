@@ -12,23 +12,22 @@ import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
 
-
 // swiftlint:disable closure_body_length
 struct HomeView: View {
-    enum Tabs: String {
-        case schedule
-        case contact
-        case meditation
-        case mockUpload
-        case diary
-        case music
-    }
+//    enum Tabs: String {
+//        case schedule
+//        case contact
+//        case meditation
+//        case mockUpload
+//        case diary
+//        case music
+//    }
     var clipsToBounds = false
 
     var body: some View {
         ActivityLogContainer {
             NavigationStack {
-                HeaderMenu(title: "Home")
+                HeaderHome(name: "Home", avatar: "BalanceLogo", id: "00007")
                 ScrollView(.vertical) {
                     VStack(spacing: 20) {
                         NavigationLink(
@@ -68,8 +67,8 @@ struct HomeView: View {
                     .padding(10)
                     .ignoresSafeArea(.all)
                 }
-            }
-            .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
+                Spacer()
+            }.accentColor(.white)
         }
     }
 }
