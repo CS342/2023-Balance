@@ -24,7 +24,7 @@ struct DistractionView: View {
                                 }
                             )
                         ) {
-                            DistractionCellView(image: "bodySensationIcon", text: "Look at pictures", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s")
+                            DistractionCellView(image: "picturesIcon", text: "Look at pictures", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
                         }
                         NavigationLink(
                             destination: ActivityLogBaseView(
@@ -35,7 +35,7 @@ struct DistractionView: View {
                                 }
                             )
                         ) {
-                            DistractionCellView(image: "breathIcon", text: "Listen to music", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s")
+                            DistractionCellView(image: "musicIcon", text: "Listen to music", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
                         }
                         NavigationLink(
                             destination: ActivityLogBaseView(
@@ -46,7 +46,7 @@ struct DistractionView: View {
                                 }
                             )
                         ) {
-                            DistractionCellView(image: "meditationIcon", text: "Look videos", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s")
+                            DistractionCellView(image: "videosIcon", text: "Look videos", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
                         }
                         NavigationLink(
                             destination: ActivityLogBaseView(
@@ -57,7 +57,7 @@ struct DistractionView: View {
                                 }
                             )
                         ) {
-                            DistractionCellView(image: "writeIcon", text: "Random notes", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s")
+                            DistractionCellView(image: "notesIcon", text: "Random notes", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
                         }
                         NavigationLink(
                             destination: ActivityLogBaseView(
@@ -68,7 +68,7 @@ struct DistractionView: View {
                                 }
                             )
                         ) {
-                            DistractionCellView(image: "writeIcon", text: "Sudoko", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s")
+                            DistractionCellView(image: "sudokoIcon", text: "Sudoko", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
                         }
                         NavigationLink(
                             destination: ActivityLogBaseView(
@@ -79,7 +79,7 @@ struct DistractionView: View {
                                 }
                             )
                         ) {
-                            DistractionCellView(image: "writeIcon", text: "Write something", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s")
+                            DistractionCellView(image: "writesIcon", text: "Write something", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
                         }
                     }
                     .padding(10)

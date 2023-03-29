@@ -33,6 +33,8 @@ public struct HeaderHome: View {
 //                            .stroke(Color.white, lineWidth: 8)  .shadow(color: .gray, radius: 2, x: 0, y: 1)
 //                    )
                     .padding(.leading, 20.0)
+                    .accessibilityLabel("avatar")
+
                 VStack {
                     Text("ID " + id)
                         .font(.custom("Nunito-Light", size: 18))
@@ -121,8 +123,7 @@ public struct HeaderHome: View {
                             .foregroundColor(Color.black)
                             .background(Color.white.opacity(0.8))
                             .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                        Image(systemName: "star.circle.fill")
-                            .foregroundColor(Color.yellow.opacity(0.8))
+                        Image("pointsStarIcon").accessibilityLabel("pointsStarIcon")
                             .padding(.trailing, 65.0)
                     }
                 }

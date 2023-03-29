@@ -34,7 +34,7 @@ public struct HeaderMenu: View {
                     .multilineTextAlignment(.center)
                     .padding(.leading, 60)
                 Spacer()
-                VStack {                    
+                VStack {
                     Button(action: {
                         print("SOS!")
                         showingSOSSheet.toggle()
@@ -68,7 +68,6 @@ public struct HeaderMenu: View {
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
         .ignoresSafeArea(edges: .all)
         .frame(height: 150.0)
-        
     }
     
     public init(title: String) {
