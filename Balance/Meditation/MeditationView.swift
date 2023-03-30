@@ -23,12 +23,15 @@ struct MeditationView: View {
     ]
     
     var body: some View {
-        VStack {
-            HeaderMenu(title: "Guided Meditation")
+//        HeaderBar(title: "Guided Meditation")
+        HeaderMenu(title: "Guided Meditation")
+        VStack(alignment: .center, spacing: 10) {
+//            HeaderMenu(title: "Guided Meditation")
             Text("Highlights").font(.custom("Nunito-Bold", size: 25))
                 .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
-                .padding()
-                .offset(x: -110)
+//                .padding()
+                .offset(x: 0)
+            Spacer()
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(videoIDArray, id: \.self) { vidID in
@@ -84,7 +87,8 @@ struct MeditationView: View {
                             .cornerRadius(20)
                     }
                     .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Sleep Meditations"))
-                } .padding()
+                }
+                .padding()
             }
             if showingGuided {
                 MeditationSpotifyView()
@@ -96,14 +100,14 @@ struct MeditationView: View {
                 SleepView()
                     .padding()
             }
+            Spacer()
         }
-        .edgesIgnoringSafeArea(.top)
+        .padding()
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
 struct MeditationView_Previews: PreviewProvider {
-//    @State private static var navigationPath = NavigationPath()
-
     static var previews: some View {
 //        NavigationStack {
             MeditationView()

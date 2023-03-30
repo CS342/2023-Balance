@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-
 struct DiaryHomeView: View {
     @StateObject var store = NoteStore()
     @State private var showingEditor = false
@@ -17,10 +16,10 @@ struct DiaryHomeView: View {
     let fcolor = Color(red: 0.25, green: 0.38, blue: 0.50, opacity: 1.00)
     let bcolor = Color(red: 0.30, green: 0.79, blue: 0.94, opacity: 1.00)
     
-// swiftlint:disable closure_body_length
+    // swiftlint:disable closure_body_length
     var body: some View {
-        VStack(alignment: .center, spacing: 35) {
-            HeaderMenu(title: "Diary")
+        HeaderMenu(title: "Diary")
+        VStack(alignment: .center, spacing: 10) {
             HStack {
                 Image("DiaryIcon")
                     .accessibilityLabel(Text("Diary icon"))
@@ -40,11 +39,12 @@ struct DiaryHomeView: View {
                     .cornerRadius(14)
                 }
             }
-                .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
-                .foregroundColor(fcolor)
-                .background(RoundedRectangle(cornerRadius: 20).fill(.white))
-                .clipped()
-                .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
+            .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
+            .foregroundColor(fcolor)
+            .background(RoundedRectangle(cornerRadius: 20).fill(.white))
+            .clipped()
+            .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
+//            .offset(y: -100)
             Text("Previous Entries")
                 .font(.custom("Nunito-Bold", size: 18))
                 .foregroundColor(fcolor)
@@ -62,8 +62,9 @@ struct DiaryHomeView: View {
                 }
                 .onDelete(perform: delete)
             }
+//            .offset(y: -50)
             .listStyle(.plain)
-            .offset(y: -20)
+            
         }
         .sheet(isPresented: $showingEditor) {
             ActivityLogBaseView(viewName: "Diary Note Entry View") {
@@ -93,7 +94,7 @@ struct DiaryHomeView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.all)
     }
     
     func delete(indexSet: IndexSet) {

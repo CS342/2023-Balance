@@ -11,7 +11,6 @@ import BalanceSharedContext
 import CardinalKit
 import SwiftUI
 
-
 @main
 struct Balance: App {
     @UIApplicationDelegateAdaptor(BalanceAppDelegate.self) var appDelegate

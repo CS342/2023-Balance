@@ -12,64 +12,74 @@ import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
 
-
 // swiftlint:disable closure_body_length
 struct HomeView: View {
-    enum Tabs: String {
-        case schedule
-        case contact
-        case meditation
-        case mockUpload
-        case diary
-        case music
-    }
     var clipsToBounds = false
 
     var body: some View {
         ActivityLogContainer {
             NavigationStack {
-                HeaderMenu(title: "Home")
-                ScrollView(.vertical) {
-                    VStack(spacing: 20) {
-                        NavigationLink(
-                            destination: ActivityLogBaseView(
-                                viewName: "Diary Feature",
-                                isDirectChildToContainer: true,
-                                content: {
-                                    DiaryHomeView()
-                                }
-                        )
-                        ) {
-                            NavView(image: "Diary", text: "Diary")
+                VStack {
+                    HeaderHome(name: "Home", avatar: "BalanceLogo", userID: "00007")
+                    ScrollView(.vertical) {
+                        VStack(spacing: 20) {
+                            NavigationLink(
+                                destination: ActivityLogBaseView(
+                                    viewName: "Distraction Music Feature",
+                                    isDirectChildToContainer: true,
+                                    content: {
+                                        DistractionView()
+                                    }
+                                )
+                            ) {
+                                NavView(image: "distractMeIcon", text: "Distract me")
+                            }
+                            NavigationLink(
+                                destination: ActivityLogBaseView(
+                                    viewName: "Let's chill out Feature",
+                                    isDirectChildToContainer: true,
+                                    content: {
+                                        MeditationView()
+                                    }
+                                )
+                            ) {
+                                NavView(image: "chillIcon", text: "Let's chill out")
+                            }
+                            NavigationLink(
+                                destination: ActivityLogBaseView(
+                                    viewName: "Feeling learning Feature",
+                                    isDirectChildToContainer: true,
+                                    content: {
+                                        ChillView()
+                                    }
+                                )
+                            ) {
+                                NavView(image: "learningIcon", text: "Feeling learning")
+                            }
+                            NavigationLink(
+                                destination: ActivityLogBaseView(
+                                    viewName: "Diary Feature",
+                                    isDirectChildToContainer: true,
+                                    content: {
+                                        DiaryHomeView()
+                                    }
+                                )
+                            ) {
+                                NavView(image: "diaryIcon", text: "Diary")
+                            }
                         }
-                        NavigationLink(
-                            destination: ActivityLogBaseView(
-                                viewName: "Meditation Feature",
-                                isDirectChildToContainer: true,
-                                content: {
-                                    MeditationView()
-                                }
-                        )
-                        ) {
-                            NavView(image: "Meditation", text: "Meditation")
-                        }
-                        NavigationLink(
-                            destination: ActivityLogBaseView(
-                                viewName: "Distraction Music Feature",
-                                isDirectChildToContainer: true,
-                                content: {
-                                    Music()
-                                }
-                        )
-                        ) {
-                            NavView(image: "DistractImage", text: "Distraction")
-                        }
+                        .padding(10)
+                        .ignoresSafeArea(.all)
                     }
-                    .padding(10)
-                    .ignoresSafeArea(.all)
+                    Spacer()
                 }
+                .navigationTitle("")
+                .navigationBarTitle("", displayMode: .inline)
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+                .ignoresSafeArea()
+                .accentColor(nil)
             }
-            .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
         }
     }
 }
