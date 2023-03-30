@@ -23,14 +23,14 @@ struct MeditationView: View {
     ]
     
     var body: some View {
-        HeaderBar(title: "Guided Meditation")
+//        HeaderBar(title: "Guided Meditation")
+        HeaderMenu(title: "Guided Meditation")
         VStack(alignment: .center, spacing: 10) {
 //            HeaderMenu(title: "Guided Meditation")
             Text("Highlights").font(.custom("Nunito-Bold", size: 25))
                 .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
 //                .padding()
                 .offset(x: 0)
-                .offset(y: -100)
             Spacer()
             ScrollView(.horizontal) {
                 HStack {
@@ -45,7 +45,7 @@ struct MeditationView: View {
             }
             Text("Categories").font(.custom("Nunito-Bold", size: 20))
                 .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
-//                .offset(x: -110)
+                .offset(x: -110)
             ScrollView(.horizontal) {
                 HStack(spacing: 24) {
                     Button(action: {
@@ -101,10 +101,9 @@ struct MeditationView: View {
                     .padding()
             }
             Spacer()
-
         }
-//        .padding()
-        .edgesIgnoringSafeArea(.top)
+        .padding()
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

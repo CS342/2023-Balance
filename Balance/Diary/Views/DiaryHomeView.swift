@@ -18,7 +18,7 @@ struct DiaryHomeView: View {
     
     // swiftlint:disable closure_body_length
     var body: some View {
-        HeaderBar(title: "Diary")
+        HeaderMenu(title: "Diary")
         VStack(alignment: .center, spacing: 10) {
             HStack {
                 Image("DiaryIcon")
@@ -44,7 +44,7 @@ struct DiaryHomeView: View {
             .background(RoundedRectangle(cornerRadius: 20).fill(.white))
             .clipped()
             .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
-            .offset(y: -100)
+//            .offset(y: -100)
             Text("Previous Entries")
                 .font(.custom("Nunito-Bold", size: 18))
                 .foregroundColor(fcolor)

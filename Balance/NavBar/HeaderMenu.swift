@@ -20,19 +20,28 @@ struct RoundedCorner: Shape {
 
 public struct HeaderMenu: View {
     @State private var showingSOSSheet = false
+    @Environment(\.presentationMode) var presentationMode
     private let title: String
     
     public var body: some View {
         VStack {
             Spacer()
             HStack {
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "arrow.left")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.clear)
+                }
                 Spacer()
                 Text(title)
                     .font(.custom("Nunito-Black", size: 25))
                     .foregroundColor(.white)
                     .frame(maxWidth: 150)
                     .multilineTextAlignment(.center)
-                    .padding(.leading, 60)
+//                    .padding(.leading, 60)
                 Spacer()
                 VStack {
                     Button(action: {
@@ -59,15 +68,16 @@ public struct HeaderMenu: View {
                             .allowsHitTesting(false)
                     )
                     .shadow(color: .gray, radius: 2, x: 0, y: 1)
-                    .padding(.trailing, 10)
+                    .padding()
             }
-            Spacer()
         }
         .frame(maxWidth: .infinity, alignment: .top)
-        .background(Color(#colorLiteral(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
+        .background(Constant.primaryColor)
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
         .ignoresSafeArea(edges: .all)
-        .frame(height: 150.0)
+        .frame(height: 70.0)
+        .navigationBarHidden(true)
+        .navigationTitle("")
     }
     
     public init(title: String) {

@@ -14,9 +14,9 @@ public struct HeaderHome: View {
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
     
-    private let name: String
-    private let id: String
-    private let avatar: String
+    let name: String
+    let avatar: String
+    let userID: String
     
     public var body: some View {
         VStack {
@@ -28,15 +28,10 @@ public struct HeaderHome: View {
                     .clipShape(Circle())
                     .frame(width: 100, height: 100)
                     .shadow(color: .gray, radius: 2, x: 0, y: 1)
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 50)
-//                            .stroke(Color.white, lineWidth: 8)  .shadow(color: .gray, radius: 2, x: 0, y: 1)
-//                    )
                     .padding(.leading, 20.0)
                     .accessibilityLabel("avatar")
-
                 VStack {
-                    Text("ID " + id)
+                    Text("ID " + userID)
                         .font(.custom("Nunito-Light", size: 18))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -135,7 +130,7 @@ public struct HeaderHome: View {
                 .padding(.horizontal, 5.0)
             }
             .padding(.top, -20.0)
-
+            
             Text("\"The things tht make me different are the things that make me who i am\"")
                 .font(.custom("Nunito-Light", size: 14))
                 .foregroundColor(.white)
@@ -147,21 +142,20 @@ public struct HeaderHome: View {
         .frame(maxWidth: .infinity, alignment: .center)
         .padding(.top, 40)
         .frame(height: 250.0)
-        .background(Color(#colorLiteral(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
+        .background(Constant.primaryColor)
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
-        .ignoresSafeArea(edges: .top)
-    }
-    
-    public init(name: String, avatar: String, id: String) {
-        self.name = name
-        self.avatar = avatar
-        self.id = id
+        .ignoresSafeArea(edges: .all)
+        .navigationTitle("")
+        .navigationBarTitle("", displayMode: .inline)
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea()
     }
 }
 
 
 struct HeaderHome_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderHome(name: "Gonzalo", avatar: "BalanceLogo", id: "00007")
+        HeaderHome(name: "Gonzalo", avatar: "BalanceLogo", userID: "00007")
     }
 }

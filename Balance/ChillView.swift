@@ -11,7 +11,7 @@ import SwiftUI
 struct ChillView: View {
     var body: some View {
         ActivityLogContainer {
-            HeaderBar(title: "Let's chill out")
+            HeaderMenu(title: "Let's chill out")
 //            NavigationStack {
                 ScrollView(.vertical) {
                     VStack(spacing: 20) {

@@ -11,27 +11,21 @@ import SwiftUI
 // swiftlint:disable todo
 struct HeaderBar: View {
     @State private var showingSOSSheet = false
-    private let title: String
-    private var radius: CGFloat = .infinity
-    private var corners: UIRectCorner = .allCorners
+    let title: String
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
     
     var body: some View {
-        //        GeometryReader { geometry in
-        //            VStack {
         Rectangle()
             .frame(maxWidth: .infinity, maxHeight: Constant.navigationBarHeight)
             .foregroundColor(Constant.primaryColor)
             .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
-        //                Spacer()
-        //            }
-        //            .frame(width: geometry.size.width, height: geometry.size.height)
-        //        }
             .edgesIgnoringSafeArea(.top)
             .navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 sosButtom
             }
-        
     }
     
     var sosButtom: some View {
@@ -61,10 +55,6 @@ struct HeaderBar: View {
         .shadow(color: .gray, radius: 2, x: 0, y: 1)
     }
     
-    public init(title: String) {
-        self.title = title
-    }
-    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
@@ -75,18 +65,14 @@ struct HeaderBar: View {
 extension UINavigationController {
     override open func viewDidLoad() {
         super.viewDidLoad()
-        let navigationColor = Constant.primaryColor
+        let navigationColor = UIColor(.clear)
         let uiTitleColor = UIColor(.white)
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        
-        appearance.backgroundColor = UIColor(navigationColor)
-        
+        appearance.backgroundColor = navigationColor
         appearance.largeTitleTextAttributes = [.foregroundColor: uiTitleColor]
-        appearance.titleTextAttributes = [.foregroundColor: uiTitleColor, .font: UIFont(name: "Nunito-Bold", size: 25)!]
-        
-        
+        appearance.titleTextAttributes = [.foregroundColor: uiTitleColor, .font: UIFont(name: "Nunito-Bold", size: 25)]
         navigationBar.prefersLargeTitles = false
         navigationBar.standardAppearance = appearance
         navigationBar.compactAppearance = appearance

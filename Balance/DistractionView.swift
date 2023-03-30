@@ -12,7 +12,7 @@ import SwiftUI
 struct DistractionView: View {
     var body: some View {
         ActivityLogContainer {
-            HeaderBar(title: "Distraction")
+            HeaderMenu(title: "Distraction")
                 ScrollView(.vertical) {
                     VStack(spacing: 20) {
                         NavigationLink(

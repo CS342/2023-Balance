@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Music: View {
     var body: some View {
-        HeaderBar(title: "Distraction")
+        HeaderMenu(title: "Music")
         VStack(alignment: .center, spacing: 10) {
             SpotifyView()
             Spacer()
