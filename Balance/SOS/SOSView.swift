@@ -12,7 +12,6 @@ import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
 
-// swiftlint:disable closure_body_length
 struct SOSView: View {
     @Environment(\.dismiss) var dismiss
     var clipsToBounds = false
@@ -25,6 +24,7 @@ struct SOSView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100.0, height: 100.0)
+                    .accessibilityLabel("Diary")
                 Text("Have you ever needed and extra help?")
                     .foregroundColor(.purple)
                     .font(.largeTitle)
@@ -47,24 +47,29 @@ struct SOSView: View {
                     SOSCellView(title: "Deep breating", subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing...")
                     SOSCellView(title: "Sensorial activity", subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing...")
                 }
-                Button(action: {
-                    dismiss()
-                }) {
-                    Text("Save")
-                        .font(.system(.title2))
-                        .padding(.horizontal, 10.0)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 44.0)
-                }
-                .buttonBorderShape(.roundedRectangle(radius: 10))
-                .background(Color(#colorLiteral(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
-                .cornerRadius(10)
-                .padding(.horizontal, 20.0)
+                saveButton
             }
         }
     }
+    
+    var saveButton: some View {
+        Button(action: {
+            dismiss()
+        }) {
+            Text("Save")
+                .font(.system(.title2))
+                .padding(.horizontal, 10.0)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .frame(height: 44.0)
+        }
+        .buttonBorderShape(.roundedRectangle(radius: 10))
+        .background(Color(#colorLiteral(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
+        .cornerRadius(10)
+        .padding(.horizontal, 20.0)
+    }
 }
+
 #if DEBUG
 struct SOSView_Previews: PreviewProvider {
     static var previews: some View {

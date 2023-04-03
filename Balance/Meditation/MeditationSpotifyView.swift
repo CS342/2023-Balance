@@ -9,10 +9,7 @@
 import SwiftUI
 import UIKit
 
-// swiftlint:disable type_contents_order
 struct MeditationSpotifyView: View {
-    @Environment(\.openURL) var openURL
-    
     // FOLLOWED A SPOTIFY YOUTUBE TUTORIAL
     struct Song: Identifiable {
         var id: String { title }
@@ -21,6 +18,8 @@ struct MeditationSpotifyView: View {
         let coverString: String
         let spotifyURL: String
     }
+    
+    @Environment(\.openURL) private var openURL
     
     let songs = [
         Song(title: "Balancing Emotions", artist: "To calm you down", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/2JHBuWOMSGHOWCoLrXAriB?si=5f6d601ac0664d93"),
@@ -65,9 +64,10 @@ struct MeditationSpotifyView: View {
     }
 }
 
-
+#if DEBUG
 struct SpotifyView_Previews: PreviewProvider {
     static var previews: some View {
         MeditationSpotifyView()
     }
 }
+#endif

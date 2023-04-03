@@ -88,7 +88,6 @@ extension Date {
         return weekdays[calendar - 1]
     }
 
-
     // swiftlint:disable cyclomatic_complexity
     func timeSinceDate(fromDate: Date) -> String {
         let earliest = self < fromDate ? self : fromDate

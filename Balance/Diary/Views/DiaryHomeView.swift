@@ -16,55 +16,18 @@ struct DiaryHomeView: View {
     let fcolor = Color(red: 0.25, green: 0.38, blue: 0.50, opacity: 1.00)
     let bcolor = Color(red: 0.30, green: 0.79, blue: 0.94, opacity: 1.00)
     
-    // swiftlint:disable closure_body_length
     var body: some View {
         HeaderMenu(title: "Diary")
         VStack(alignment: .center, spacing: 10) {
-            HStack {
-                Image("DiaryIcon")
-                    .accessibilityLabel(Text("Diary icon"))
-                    .offset(x: -6, y: 2)
-                VStack(alignment: .leading) {
-                    Text("Write in your diary")
-                        .font(.custom("Nunito-Bold", size: 15))
-                    Button("Write") {
-                        self.currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
-                        self.showingEditor.toggle()
-                    }
-                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Diary Note"))
-                    .font(.custom("Nunito-Bold", size: 15))
-                    .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
-                    .foregroundColor(.white)
-                    .background(bcolor)
-                    .cornerRadius(14)
-                }
-            }
-            .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
-            .foregroundColor(fcolor)
-            .background(RoundedRectangle(cornerRadius: 20).fill(.white))
-            .clipped()
-            .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
-//            .offset(y: -100)
-            Text("Previous Entries")
-                .font(.custom("Nunito-Bold", size: 18))
+            newDiaryView
+                .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
                 .foregroundColor(fcolor)
-                .offset(x: -100)
-            List {
-                ForEach(store.notes, id: \.self) { note in
-                    Button(action: {
-                        self.currentNote = note
-                        self.showingEditor.toggle()
-                    }) {
-                        PastDiaryEntry(note)
-                    }
-                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Selected past diary note"))
-                    .listRowSeparator(.hidden)
-                }
-                .onDelete(perform: delete)
-            }
-//            .offset(y: -50)
-            .listStyle(.plain)
-            
+                .background(RoundedRectangle(cornerRadius: 20).fill(.white))
+                .clipped()
+                .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
+            previusView
+            diaryList
+                .listStyle(.plain)
         }
         .sheet(isPresented: $showingEditor) {
             ActivityLogBaseView(viewName: "Diary Note Entry View") {
@@ -97,6 +60,51 @@ struct DiaryHomeView: View {
         .edgesIgnoringSafeArea(.all)
     }
     
+    var previusView: some View {
+        Text("Previous Entries")
+            .font(.custom("Nunito-Bold", size: 18))
+            .foregroundColor(fcolor)
+            .offset(x: -100)
+    }
+    
+    var newDiaryView: some View {
+        HStack {
+            Image("DiaryIcon")
+                .accessibilityLabel(Text("Diary icon"))
+                .offset(x: -6, y: 2)
+            VStack(alignment: .leading) {
+                Text("Write in your diary")
+                    .font(.custom("Nunito-Bold", size: 15))
+                Button("Write") {
+                    self.currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
+                    self.showingEditor.toggle()
+                }
+                .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Diary Note"))
+                .font(.custom("Nunito-Bold", size: 15))
+                .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
+                .foregroundColor(.white)
+                .background(bcolor)
+                .cornerRadius(14)
+            }
+        }
+    }
+    
+    var diaryList: some View {
+        List {
+            ForEach(store.notes, id: \.self) { note in
+                Button(action: {
+                    self.currentNote = note
+                    self.showingEditor.toggle()
+                }) {
+                    PastDiaryEntry(note)
+                }
+                .buttonStyle(ActivityLogButtonStyle(activityDescription: "Selected past diary note"))
+                .listRowSeparator(.hidden)
+            }
+            .onDelete(perform: delete)
+        }
+    }
+    
     func delete(indexSet: IndexSet) {
         // remove the note from the notes array
         store.notes.remove(atOffsets: indexSet)
@@ -111,8 +119,10 @@ struct DiaryHomeView: View {
     }
 }
 
+#if DEBUG
 struct DiaryHomeView_Previews: PreviewProvider {
     static var previews: some View {
         DiaryHomeView()
     }
 }
+#endif
