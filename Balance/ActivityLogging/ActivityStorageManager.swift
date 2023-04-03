@@ -13,12 +13,12 @@ import Foundation
 
 // Activity Log Structure:
 /*
-    start timestamp (view appears)
-    action (button press)
-    action (button press)
-    end timestamp (view disappears)
-    total duration:
-*/
+ start timestamp (view appears)
+ action (button press)
+ action (button press)
+ end timestamp (view disappears)
+ total duration:
+ */
 
 // swiftlint:disable implicit_return
 // swiftlint:disable force_unwrapping
@@ -109,8 +109,9 @@ class ActivityStorageManager {
         
         // Authorize User: users should be signed in to use the app
         guard let user = Auth.auth().currentUser else {
-            // TODO: switch to logging statement
+#if DEBUG
             print("Error finding current user (FIRUser)")
+#endif
             return
         }
         let userID = user.uid

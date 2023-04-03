@@ -9,9 +9,7 @@
 import SwiftUI
 
 struct SOSCellView: View {
-    @State var isChecked : Bool = false
-    func toggle() { isChecked = !isChecked }
-
+    @State var isChecked = false
     var title: String
     var subtitle: String
     
@@ -48,6 +46,10 @@ struct SOSCellView: View {
         .clipped()
         .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
         .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
+    }
+    
+    func toggle() {
+        isChecked.toggle()
     }
 }
 

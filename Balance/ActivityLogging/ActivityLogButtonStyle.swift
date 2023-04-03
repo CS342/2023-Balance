@@ -10,7 +10,6 @@ import UIKit
 
 // This class only logs information when the user interacts with a button (or some selectable content). We don't care when the view appers or disappears.
 
-// swiftlint:disable todo
 struct ActivityLogButtonStyle: PrimitiveButtonStyle {
     @EnvironmentObject var activityLogEntry: ActivityLogEntry
     
@@ -21,8 +20,9 @@ struct ActivityLogButtonStyle: PrimitiveButtonStyle {
             .onTapGesture {
                 configuration.trigger()
                 activityLogEntry.addAction(actionDescription: activityDescription)
-                // TODO: remove print when not debugging
+#if DEBUG
                 print(activityDescription)
+#endif
             }
     }
 }

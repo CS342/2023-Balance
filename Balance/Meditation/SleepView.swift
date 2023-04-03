@@ -8,10 +8,7 @@
 
 import SwiftUI
 
-// swiftlint:disable type_contents_order
 struct SleepView: View {
-    @Environment(\.openURL) var openURL
-    
     // FOLLOWED A SPOTIFY YOUTUBE TUTORIAL
     struct Song: Identifiable {
         var id: String { title }
@@ -20,6 +17,7 @@ struct SleepView: View {
         let coverString: String
         let spotifyURL: String
     }
+    @Environment(\.openURL) var openURL
     
     let songs = [
         Song(title: "Silent Night", artist: "To help you sleep", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/2sr8v2aNZ7lZ8tV3eAR5qt?si=bbbfa9d35a104ec7"),
@@ -64,8 +62,10 @@ struct SleepView: View {
     }
 }
 
+#if DEBUG
 struct SleepView_Previews: PreviewProvider {
     static var previews: some View {
         SleepView()
     }
 }
+#endif

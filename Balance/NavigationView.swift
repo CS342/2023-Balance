@@ -29,7 +29,7 @@ struct NavView: View {
         
         .padding(EdgeInsets(top: 24, leading: 24, bottom: 24, trailing: 0))
         .frame(maxWidth: 311, maxHeight: 114)
-        .foregroundColor(Constant.fcolor)
+        .foregroundColor(fcolor)
         .background(RoundedRectangle(cornerRadius: 20).fill(.white))
         .clipped()
         .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)

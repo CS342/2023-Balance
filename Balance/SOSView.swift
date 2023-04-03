@@ -48,7 +48,7 @@ struct LocationView: View {
                 }
                 Spacer()
                 Button(action: {
-                    //define action
+                    // define action
                 }) {
                     Text("Next")
                         .font(.system(.title2))
