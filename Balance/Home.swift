@@ -6,13 +6,20 @@
 // SPDX-License-Identifier: MIT
 //
 
+import Account
 import BalanceContacts
 import BalanceMockDataStorageProvider
 import BalanceSchedule
 import BalanceSharedContext
 import SwiftUI
+import class FHIR.FHIR
+import FirebaseAccount
 
 struct HomeView: View {
+    @EnvironmentObject var account: Account
+    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    @State var showMe = false
+    
     var clipsToBounds = false
 
     var body: some View {
@@ -38,8 +45,68 @@ struct HomeView: View {
                 .navigationBarBackButtonHidden(true)
                 .ignoresSafeArea()
                 .accentColor(nil)
+                .overlay(loadingOverlay)
             }
         }
+    }
+    
+    @ViewBuilder private var loadingOverlay: some View {
+        //        if account.signedIn {
+        let user = firebaseAccountConfiguration.user
+        let isFirstLoadKey = (user?.uid ?? "0") + "isFirstLoad"
+        let isFirstLoad = UserDefaults.standard.bool(forKey: isFirstLoadKey)
+        if !isFirstLoad {
+            Group {
+                Color.black
+                    .ignoresSafeArea()
+                    .opacity(0.8)
+                VStack {
+                    HStack {
+                        Spacer()
+                        sosButton
+                            .offset(x: 8, y: -20)
+                    }
+                    ZStack {
+                        Image("popHelp")
+                            .accessibilityLabel("popHelp")
+                            .offset(y: -40)
+                        Text("You can use it when you need help, we will guide you to help you control the emotions you are feeling at the moment.")
+                            .font(.custom("Nunito", size: 18))
+                            .padding()
+                            .offset(y: -30)
+                    }
+                    Spacer()
+                }
+            }.opacity(showMe ? 0 : 1)
+        }
+    }
+    
+    var sosButton: some View {
+        VStack {
+            Button(action: {
+                print("SOS!")
+                let user = firebaseAccountConfiguration.user
+                let isFirstLoadKey = (user?.uid ?? "0") + "isFirstLoad"
+                withAnimation(Animation.spring().speed(0.2)) {
+                    showMe.toggle()
+                }
+            }) {
+                Text("SOS")
+                    .font(.custom("Nunito-Bold", size: 14))
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(Color.white)
+                    .background(Color.pink)
+                    .clipShape(Circle())
+            }
+        }
+        .frame(width: 40, height: 40)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.white, lineWidth: 4)
+                .allowsHitTesting(false)
+        )
+        .shadow(color: .gray, radius: 2, x: 0, y: 1)
+        .padding()
     }
     
     var diaryOption: some View {
@@ -98,6 +165,7 @@ struct HomeView: View {
         }
     }
 }
+
 #if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
