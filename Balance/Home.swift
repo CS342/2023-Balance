@@ -87,6 +87,7 @@ struct HomeView: View {
                 print("SOS!")
                 let user = firebaseAccountConfiguration.user
                 let isFirstLoadKey = (user?.uid ?? "0") + "isFirstLoad"
+                UserDefaults.standard.set(true, forKey: isFirstLoadKey)
                 withAnimation(Animation.spring().speed(0.2)) {
                     showMe.toggle()
                 }
