@@ -80,6 +80,8 @@
 		6C80C02529CCF90B003DD5B9 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C01529CCF90A003DD5B9 /* Nunito-Regular.ttf */; };
 		6C80C02629CCF90B003DD5B9 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C01629CCF90B003DD5B9 /* Nunito-SemiBold.ttf */; };
 		6C80C02729CCF90B003DD5B9 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C01729CCF90B003DD5B9 /* Nunito-Bold.ttf */; };
+		6CB5180629DF553D007AADB4 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5180529DF553D007AADB4 /* WebView.swift */; };
+		6CB5180D29DF5800007AADB4 /* SudokoWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5180C29DF5800007AADB4 /* SudokoWebView.swift */; };
 		6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF510BF29C8FD25008A2F55 /* LocationView.swift */; };
 		894A884529B7B27600CB347B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894A884429B7B27600CB347B /* NavigationView.swift */; };
 		896C65D629B92EF800F30BA2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896C65D529B92EF800F30BA2 /* Config.swift */; };
@@ -165,6 +167,8 @@
 		6C80C01529CCF90A003DD5B9 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		6C80C01629CCF90B003DD5B9 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		6C80C01729CCF90B003DD5B9 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		6CB5180529DF553D007AADB4 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		6CB5180C29DF5800007AADB4 /* SudokoWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokoWebView.swift; sourceTree = "<group>"; };
 		6CF510BF29C8FD25008A2F55 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceDebug.entitlements; sourceTree = "<group>"; };
 		894A884429B7B27600CB347B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
@@ -346,6 +350,7 @@
 				4ACC786029AC0B590048D1D1 /* Meditation */,
 				2720083329A7E4C20052908D /* Diary */,
 				2761584E29A662DE006C7AC1 /* Music */,
+				6CB5180B29DF55F3007AADB4 /* WEB */,
 				653A2550283387FE005D4D48 /* Balance.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
@@ -426,6 +431,15 @@
 				6C0F8E4829CA57B5003C7D8B /* HeaderHome.swift */,
 			);
 			path = NavBar;
+			sourceTree = "<group>";
+		};
+		6CB5180B29DF55F3007AADB4 /* WEB */ = {
+			isa = PBXGroup;
+			children = (
+				6CB5180529DF553D007AADB4 /* WebView.swift */,
+				6CB5180C29DF5800007AADB4 /* SudokoWebView.swift */,
+			);
+			path = WEB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -631,6 +645,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CB5180629DF553D007AADB4 /* WebView.swift in Sources */,
 				27525EB829B68BB300D1DF51 /* Balance.swift in Sources */,
 				6C370AAB29D23B95001781B3 /* Constant.swift in Sources */,
 				27525EB729B68B7100D1DF51 /* DiaryHomeView.swift in Sources */,
@@ -657,6 +672,7 @@
 				89F9619829B6646200513052 /* Feature.swift in Sources */,
 				6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */,
 				2761584D29A654FD006C7AC1 /* Music.swift in Sources */,
+				6CB5180D29DF5800007AADB4 /* SudokoWebView.swift in Sources */,
 				6C370AB129D396B2001781B3 /* DistractionCellView.swift in Sources */,
 				894A884529B7B27600CB347B /* NavigationView.swift in Sources */,
 				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
