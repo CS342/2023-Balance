@@ -7,19 +7,26 @@
 
 import SwiftUI
 
-struct SudokuWebView: View {
+struct GamesWebView: View {
     @StateObject var webViewStore = WebViewStore()
-    
+    var gameLink: String
+    var titleGame: String
+
     var body: some View {
-        HeaderMenu(title: "Sudoku")
+        HeaderMenu(title: titleGame)
         WebView(webView: webViewStore.webView)
             .edgesIgnoringSafeArea(.bottom)
             .onAppear {
-                guard let sudokuLink = URL(string: "https://sudoku.com/") else {
+                guard let sudokuLink = URL(string: gameLink) else {
                     return
                 }
                 self.webViewStore.webView.load(URLRequest(url: sudokuLink))
             }
+    }
+    
+    init(gameLink: String, titleGame: String) {
+        self.gameLink = gameLink
+        self.titleGame = titleGame
     }
     
     func goBack() {
@@ -30,8 +37,9 @@ struct SudokuWebView: View {
         webViewStore.webView.goForward()
     }
 }
-struct ContentWebView_Previews: PreviewProvider {
+
+struct SudokuWebView_Previews: PreviewProvider {
     static var previews: some View {
-        SudokuWebView()
+        GamesWebView(gameLink: "https://sudoku.com/", titleGame: "Sudoku")
     }
 }
