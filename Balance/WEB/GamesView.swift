@@ -43,7 +43,7 @@ struct GamesView: View {
                 viewName: "Crossover Game",
                 isDirectChildToContainer: true,
                 content: {
-                    
+                    // define action
                 }
             )
         ) {
