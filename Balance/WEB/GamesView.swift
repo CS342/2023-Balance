@@ -43,7 +43,7 @@ struct GamesView: View {
                 viewName: "Crossover Game",
                 isDirectChildToContainer: true,
                 content: {
-                    // define action
+                    GamesWebView(gameLink: "https://www.bestcrosswords.com/bestcrosswords/guestconstructor/GuestConstructorPuzzle.external?sp=S252535", titleGame: "Crossover")
                 }
             )
         ) {
@@ -57,7 +57,7 @@ struct GamesView: View {
                 viewName: "Sudoko Game",
                 isDirectChildToContainer: true,
                 content: {
-                    SudokuWebView()
+                    GamesWebView(gameLink: "https://sudoku.com/", titleGame: "Sudoku")
                 }
             )
         ) {
