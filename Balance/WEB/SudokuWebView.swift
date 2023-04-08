@@ -30,7 +30,7 @@ struct SudokuWebView: View {
         webViewStore.webView.goForward()
     }
 }
-struct ContentWebView_Previews: PreviewProvider {
+struct SudokuWebView_Previews: PreviewProvider {
     static var previews: some View {
         SudokuWebView()
     }

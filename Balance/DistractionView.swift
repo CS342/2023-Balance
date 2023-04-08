@@ -18,7 +18,7 @@ struct DistractionView: View {
                     musicOption
                     videosOption
                     notesOption
-                    sudokuOption
+                    gamesOption
                     writeOption
                     drawingOption
                 }
@@ -56,17 +56,17 @@ struct DistractionView: View {
         }
     }
     
-    var sudokuOption: some View {
+    var gamesOption: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Sudoku Feature",
+                viewName: "Games Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    SudokuWebView()
+                    GamesView()
                 }
             )
         ) {
-            DistractionCellView(image: "sudokuIcon", text: "Sudoku", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+            DistractionCellView(image: "sudokuIcon", text: "Games", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
         }
     }
     
