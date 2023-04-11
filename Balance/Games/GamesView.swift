@@ -33,7 +33,7 @@ struct GamesView: View {
                 }
             )
         ) {
-            GamesCellView(image: "writesIcon", text: "Random Notes")
+            GamesCellView(image: "notesIcon", text: "Random Notes")
         }
     }
     

@@ -84,6 +84,10 @@
 		6CB5180D29DF5800007AADB4 /* GamesWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5180C29DF5800007AADB4 /* GamesWebView.swift */; };
 		6CB5181129E1B13E007AADB4 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181029E1B13E007AADB4 /* GamesView.swift */; };
 		6CB5181329E1B28C007AADB4 /* GamesCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181229E1B28C007AADB4 /* GamesCellView.swift */; };
+		6CB5181529E44E52007AADB4 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181429E44E52007AADB4 /* GalleryView.swift */; };
+		6CB5181829E451DF007AADB4 /* ImgHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181729E451DF007AADB4 /* ImgHighlightView.swift */; };
+		6CB5181A29E45678007AADB4 /* ImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181929E45678007AADB4 /* ImageCollectionView.swift */; };
+		6CB5181C29E45C0C007AADB4 /* BalanceExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181B29E45C0B007AADB4 /* BalanceExtentions.swift */; };
 		6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF510BF29C8FD25008A2F55 /* LocationView.swift */; };
 		894A884529B7B27600CB347B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894A884429B7B27600CB347B /* NavigationView.swift */; };
 		896C65D629B92EF800F30BA2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896C65D529B92EF800F30BA2 /* Config.swift */; };
@@ -173,6 +177,10 @@
 		6CB5180C29DF5800007AADB4 /* GamesWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesWebView.swift; sourceTree = "<group>"; };
 		6CB5181029E1B13E007AADB4 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
 		6CB5181229E1B28C007AADB4 /* GamesCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesCellView.swift; sourceTree = "<group>"; };
+		6CB5181429E44E52007AADB4 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		6CB5181729E451DF007AADB4 /* ImgHighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgHighlightView.swift; sourceTree = "<group>"; };
+		6CB5181929E45678007AADB4 /* ImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionView.swift; sourceTree = "<group>"; };
+		6CB5181B29E45C0B007AADB4 /* BalanceExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceExtentions.swift; sourceTree = "<group>"; };
 		6CF510BF29C8FD25008A2F55 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceDebug.entitlements; sourceTree = "<group>"; };
 		894A884429B7B27600CB347B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
@@ -354,7 +362,7 @@
 				4ACC786029AC0B590048D1D1 /* Meditation */,
 				2720083329A7E4C20052908D /* Diary */,
 				2761584E29A662DE006C7AC1 /* Music */,
-				6CB5180B29DF55F3007AADB4 /* WEB */,
+				6CB5180B29DF55F3007AADB4 /* Games */,
 				653A2550283387FE005D4D48 /* Balance.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
@@ -365,11 +373,13 @@
 				6C370AAE29D393FA001781B3 /* DistractionView.swift */,
 				6CF510BF29C8FD25008A2F55 /* LocationView.swift */,
 				894A884429B7B27600CB347B /* NavigationView.swift */,
+				6CB5181629E4518B007AADB4 /* Gallery */,
 				6C370AB029D396B2001781B3 /* DistractionCellView.swift */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
 				2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */,
 				8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */,
 				6C370AAA29D23B95001781B3 /* Constant.swift */,
+				6CB5181B29E45C0B007AADB4 /* BalanceExtentions.swift */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -437,7 +447,7 @@
 			path = NavBar;
 			sourceTree = "<group>";
 		};
-		6CB5180B29DF55F3007AADB4 /* WEB */ = {
+		6CB5180B29DF55F3007AADB4 /* Games */ = {
 			isa = PBXGroup;
 			children = (
 				6CB5180529DF553D007AADB4 /* WebView.swift */,
@@ -445,7 +455,17 @@
 				6CB5181029E1B13E007AADB4 /* GamesView.swift */,
 				6CB5181229E1B28C007AADB4 /* GamesCellView.swift */,
 			);
-			path = WEB;
+			path = Games;
+			sourceTree = "<group>";
+		};
+		6CB5181629E4518B007AADB4 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				6CB5181429E44E52007AADB4 /* GalleryView.swift */,
+				6CB5181729E451DF007AADB4 /* ImgHighlightView.swift */,
+				6CB5181929E45678007AADB4 /* ImageCollectionView.swift */,
+			);
+			path = Gallery;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -652,6 +672,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CB5180629DF553D007AADB4 /* WebView.swift in Sources */,
+				6CB5181829E451DF007AADB4 /* ImgHighlightView.swift in Sources */,
 				27525EB829B68BB300D1DF51 /* Balance.swift in Sources */,
 				6C370AAB29D23B95001781B3 /* Constant.swift in Sources */,
 				27525EB729B68B7100D1DF51 /* DiaryHomeView.swift in Sources */,
@@ -683,13 +704,16 @@
 				6C370AB129D396B2001781B3 /* DistractionCellView.swift in Sources */,
 				894A884529B7B27600CB347B /* NavigationView.swift in Sources */,
 				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
+				6CB5181C29E45C0C007AADB4 /* BalanceExtentions.swift in Sources */,
 				6C39EA2229C9EA620095573E /* SOSView.swift in Sources */,
+				6CB5181A29E45678007AADB4 /* ImageCollectionView.swift in Sources */,
 				89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */,
 				5E03E9A329BC933B0041DD1C /* ActivityLogButtonStyle.swift in Sources */,
 				6C0F8E4929CA57B5003C7D8B /* HeaderHome.swift in Sources */,
 				6C39EA2129C9EA620095573E /* SOSCellView.swift in Sources */,
 				2761583D29A63D6E006C7AC1 /* SpotifyViewController.swift in Sources */,
 				6CB5181329E1B28C007AADB4 /* GamesCellView.swift in Sources */,
+				6CB5181529E44E52007AADB4 /* GalleryView.swift in Sources */,
 				6C370AAD29D38F7F001781B3 /* ChillView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
