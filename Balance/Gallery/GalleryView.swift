@@ -20,9 +20,14 @@ struct GalleryView: View {
         VStack(alignment: .center, spacing: 10) {
             highlightsTitle
             ScrollView(.horizontal) {
-                HStack {
+                HStack(spacing: 0) {
                     imagesArrayView
                 }
+            }.onAppear {
+                UIScrollView.appearance().isPagingEnabled = true
+            }
+            .onDisappear {
+                UIScrollView.appearance().isPagingEnabled = false
             }
             categoriesTitle
             tagsView
@@ -57,11 +62,10 @@ struct GalleryView: View {
     
     var imagesArrayView: some View {
         ForEach(imageIDArray, id: \.self) { imgID in
-            // enable logging for a specific video being selected
-            ImgHighlightView(imgID: imgID)
-                .frame(width: 300, height: 200)
-//                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 200)
-                .cornerRadius(20)
+            // enable logging for a specific image being selected
+                ImgHighlightView(imgID: imgID)
+                    .frame(width: UIScreen.main.bounds.width, height: 200)
+                    .cornerRadius(20)
         }
     }
     
