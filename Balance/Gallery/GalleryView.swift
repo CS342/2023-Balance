@@ -35,10 +35,10 @@ struct GalleryView: View {
                 ImageCollectionView(imageArray: animalsArray)
                     .padding(.horizontal, 10.0)
             } else if landscapeTag {
-                YoutubeView()
+                ImageCollectionView(imageArray: animalsArray)
                     .padding(.horizontal, 10.0)
             } else if funnyTag {
-                SleepView()
+                ImageCollectionView(imageArray: animalsArray)
                     .padding(.horizontal, 10.0)
             }
             Spacer()

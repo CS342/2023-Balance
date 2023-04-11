@@ -9,18 +9,18 @@ import SwiftUI
 
 struct ImageCollectionView: View {
     var symbols = [String]()
-    var gridItemLayout = [GridItem(.fixed(100)), GridItem(.fixed(100)), GridItem(.fixed(100))]
+    var gridItemLayout = [GridItem(.fixed(110)), GridItem(.fixed(110)), GridItem(.fixed(110))]
 
     var body: some View {
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: gridItemLayout, alignment: .center, spacing: 10) {
-                ForEach((0...100), id: \.self) {
+                ForEach((0...30), id: \.self) {
                     Image(symbols[$0 % symbols.count])
                         .resizable()
                         .scaledToFit()
                         .aspectRatio(contentMode: .fill)
                         .clipped()
-                        .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 100)
+                        .frame(minWidth: 0, maxWidth: 110, minHeight: 0, maxHeight: 110)
                         .cornerRadius(10)
                         .accessibilityLabel(symbols[$0 % symbols.count])
                 }
