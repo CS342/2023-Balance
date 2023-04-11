@@ -7,14 +7,20 @@
 
 import SwiftUI
 
+struct Photo: Identifiable {
+    var id = UUID()
+    var name: String
+}
+
 struct GalleryView: View {
     @State private var animalsTag = true
     @State private var landscapeTag = false
     @State private var funnyTag = false
     
     let imageIDArray = ["118299", "100489", "130869", "115905", "115512", "131807", "102595"]
-    let animalsArray = ["img1", "img2", "img3", "img4", "img5", "img6", "img7", "img8"]
-    
+    let imgArray2 = (1...20).map { Photo(name: "coffee-\($0)") }
+    let imgArray1 = (1...8).map { Photo(name: "img\($0)") }
+
     var body: some View {
         HeaderMenu(title: "Look at Pictures")
         VStack(alignment: .center, spacing: 10) {
@@ -32,13 +38,13 @@ struct GalleryView: View {
             categoriesTitle
             tagsView
             if animalsTag {
-                ImageCollectionView(imageArray: animalsArray)
+                ImageCollectionView(imageArray: imgArray1)
                     .padding(.horizontal, 10.0)
             } else if landscapeTag {
-                ImageCollectionView(imageArray: animalsArray)
+                ImageCollectionView(imageArray: imgArray2)
                     .padding(.horizontal, 10.0)
             } else if funnyTag {
-                ImageCollectionView(imageArray: animalsArray)
+                ImageCollectionView(imageArray: imgArray1)
                     .padding(.horizontal, 10.0)
             }
             Spacer()
@@ -70,14 +76,14 @@ struct GalleryView: View {
     }
     
     var tagsView: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 10) {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                Spacer(minLength: 10)
                 animalsButton
                 landscapeButton
                 funnyButton
             }
         }
-        .padding(.leading, 10)
     }
     
     var animalsButton: some View {
