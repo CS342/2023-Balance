@@ -17,7 +17,6 @@ struct DistractionView: View {
                     picturesOption
                     musicOption
                     videosOption
-                    notesOption
                     gamesOption
                     writeOption
                     drawingOption
@@ -70,20 +69,6 @@ struct DistractionView: View {
         }
     }
     
-    var notesOption: some View {
-        NavigationLink(
-            destination: ActivityLogBaseView(
-                viewName: "Random notes Feature",
-                isDirectChildToContainer: true,
-                content: {
-                    // define action
-                }
-            )
-        ) {
-            DistractionCellView(image: "notesIcon", text: "Random notes", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
-        }
-    }
-    
     var videosOption: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
@@ -118,7 +103,7 @@ struct DistractionView: View {
                 viewName: "Look at pictures Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    // define action
+                    GalleryView()
                 }
             )
         ) {
