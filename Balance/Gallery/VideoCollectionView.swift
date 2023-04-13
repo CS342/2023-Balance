@@ -22,7 +22,16 @@ struct YoutubeModalView: View {
                     showControls: true
                 )
             )
-            YouTubePlayerView(youTubePlayer)
+            YouTubePlayerView(youTubePlayer) { state in
+                switch state {
+                case .idle:
+                    ProgressView().tint(.white)
+                case .ready:
+                    EmptyView()
+                case .error(let error):
+                    Text(verbatim: "YouTube player couldn't be loaded\(error)")
+                }
+            }
         }.background(.black)
     }
 }
@@ -45,13 +54,17 @@ struct VideoCollectionView: View {
                             }
                         )
                     ) {
-                        let path = URL(string: "http://img.youtube.com/vi/\(videos[index].videoId)/0.jpg")
-                        AsyncImage(url: path) { image in
-                            image.resizable()
-                                .scaledToFill()
-                        } placeholder: {
-                            Image(systemName: "photo.fill")
-                        }
+                        AsyncImage(
+                            url: URL(string: "http://img.youtube.com/vi/\(videos[index].videoId)/0.jpg"),
+                            content: { image in
+                                image.resizable()
+                                    .scaledToFill()
+                            },
+                            placeholder: {
+                                Image(systemName: "photo.fill")
+                                    .tint(lightGrayColor)
+                            }
+                        )
                         .clipped()
                         .frame(width: 110, height: 110, alignment: .center)
                         .cornerRadius(10)
