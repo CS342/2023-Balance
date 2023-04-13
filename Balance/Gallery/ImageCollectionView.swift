@@ -15,15 +15,24 @@ struct ImageCollectionView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: gridItemLayout, alignment: .center, spacing: 10) {
                 ForEach(images.indices, id: \.self) { index in
-                    Image(images[index].name)
-                        .resizable()
-                        .scaledToFit()
-                        .aspectRatio(contentMode: .fill)
-                        .clipped()
-                        .frame(width: 110, height: 110, alignment: .center)
-//                        .frame(minWidth: 0, maxWidth: 110, minHeight: 0, maxHeight: 110)
-                        .cornerRadius(10)
-                        .accessibilityLabel(images[index].name)
+                    NavigationLink(
+                        destination: ActivityLogBaseView(
+                            viewName: "Image Selected: " + images[index].name,
+                            isDirectChildToContainer: true,
+                            content: {
+                                ImageView(image: images[index].name)
+                            }
+                        )
+                    ) {
+                        Image(images[index].name)
+                            .resizable()
+                            .scaledToFit()
+                            .aspectRatio(contentMode: .fill)
+                            .clipped()
+                            .frame(width: 110, height: 110, alignment: .center)
+                            .cornerRadius(10)
+                            .accessibilityLabel(images[index].name)
+                    }
                 }
             }
         }

@@ -16,25 +16,28 @@ struct GalleryView: View {
     @State private var animalsTag = true
     @State private var landscapeTag = false
     @State private var funnyTag = false
+    @State var index = 0
     
     let imageIDArray = ["118299", "100489", "130869", "115905", "115512", "131807", "102595"]
     let imgArray2 = (1...20).map { Photo(name: "coffee-\($0)") }
     let imgArray1 = (1...8).map { Photo(name: "img\($0)") }
-
+    
     var body: some View {
         HeaderMenu(title: "Look at Pictures")
         VStack(alignment: .center, spacing: 10) {
             highlightsTitle
-            ScrollView(.horizontal) {
-                HStack(spacing: 0) {
-                    imagesArrayView
+            PagingView(index: $index.animation(), maxIndex: imgArray1.count - 1) {
+                ForEach(imgArray1.indices, id: \.self) { index in
+                    Image(imgArray1[index].name)
+                        .resizable()
+                        .scaledToFill()
+                        .accessibilityLabel(imgArray1[index].name)
                 }
-            }.onAppear {
-                UIScrollView.appearance().isPagingEnabled = true
             }
-            .onDisappear {
-                UIScrollView.appearance().isPagingEnabled = false
-            }
+            .aspectRatio(4 / 3, contentMode: .fit)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
+            PageControl(index: $index, maxIndex: imgArray1.count)
+                .padding(.top, 5.0)
             categoriesTitle
             tagsView
             if animalsTag {
@@ -69,9 +72,9 @@ struct GalleryView: View {
     var imagesArrayView: some View {
         ForEach(imageIDArray, id: \.self) { imgID in
             // enable logging for a specific image being selected
-                ImgHighlightView(imgID: imgID)
-                    .frame(width: UIScreen.main.bounds.width, height: 200)
-                    .cornerRadius(20)
+            ImgHighlightView(imgID: imgID)
+                .frame(width: UIScreen.main.bounds.width, height: 200)
+                .cornerRadius(20)
         }
     }
     
