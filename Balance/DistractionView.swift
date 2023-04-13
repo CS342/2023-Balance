@@ -75,7 +75,7 @@ struct DistractionView: View {
                 viewName: "Look Videos Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    MeditationView()
+                    VideoGalleryView()
                 }
             )
         ) {
