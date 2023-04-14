@@ -19,3 +19,15 @@ extension View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }
+
+extension UIApplication {
+    func currentUIWindow() -> UIWindow? {
+        let connectedScenes = UIApplication.shared.connectedScenes
+            .filter { $0.activationState == .foregroundActive }
+            .compactMap { $0 as? UIWindowScene }
+        guard let windowScene = connectedScenes.first(where: { $0.windows.contains(where: { $0.isKeyWindow }) }) else {
+            return nil
+        }
+        return windowScene.windows.first(where: { $0.isKeyWindow })
+    }
+}

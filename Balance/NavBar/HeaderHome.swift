@@ -12,7 +12,8 @@ public struct HeaderHome: View {
     @State private var showingSOSSheet = false
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
-    
+    @State private var showingAvatarSheet = false
+
     let name: String
     let avatar: String
     let userID: String
@@ -122,7 +123,14 @@ public struct HeaderHome: View {
     
     var headerView: some View {
         HStack {
-            avatarView
+            Button(action: {
+                showingAvatarSheet.toggle()
+                print("avatarView")
+            }) {
+                avatarView
+            }.sheet(isPresented: $showingAvatarSheet) {
+                AvatarSelectionView()
+            }
             profileNameView
             Spacer()
             sosButtonHome
