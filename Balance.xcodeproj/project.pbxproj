@@ -89,6 +89,7 @@
 		6CAA075229E83C0C00541F87 /* VideoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA075129E83C0C00541F87 /* VideoCollectionView.swift */; };
 		6CAA076329E8983A00541F87 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6CAA076229E8983A00541F87 /* YouTubePlayerKit */; };
 		6CAA076529E9FB3D00541F87 /* AvatarPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA076429E9FB3D00541F87 /* AvatarPreviewView.swift */; };
+		6CAA076729EAF04200541F87 /* FeelingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA076629EAF04100541F87 /* FeelingView.swift */; };
 		6CB5180629DF553D007AADB4 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5180529DF553D007AADB4 /* WebView.swift */; };
 		6CB5180D29DF5800007AADB4 /* GamesWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5180C29DF5800007AADB4 /* GamesWebView.swift */; };
 		6CB5181129E1B13E007AADB4 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181029E1B13E007AADB4 /* GamesView.swift */; };
@@ -191,6 +192,7 @@
 		6CAA074F29E8379800541F87 /* VideoGalleryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoGalleryView.swift; sourceTree = "<group>"; };
 		6CAA075129E83C0C00541F87 /* VideoCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCollectionView.swift; sourceTree = "<group>"; };
 		6CAA076429E9FB3D00541F87 /* AvatarPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPreviewView.swift; sourceTree = "<group>"; };
+		6CAA076629EAF04100541F87 /* FeelingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelingView.swift; sourceTree = "<group>"; };
 		6CB5180529DF553D007AADB4 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		6CB5180C29DF5800007AADB4 /* GamesWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesWebView.swift; sourceTree = "<group>"; };
 		6CB5181029E1B13E007AADB4 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				6C370AAA29D23B95001781B3 /* Constant.swift */,
 				6C370AB029D396B2001781B3 /* DistractionCellView.swift */,
 				6C370AAE29D393FA001781B3 /* DistractionView.swift */,
+				6CAA076629EAF04100541F87 /* FeelingView.swift */,
 				89F9619729B6646200513052 /* Feature.swift */,
 				2FC975A72978F11A00BA99FE /* Home.swift */,
 				6CF510BF29C8FD25008A2F55 /* LocationView.swift */,
@@ -723,6 +726,7 @@
 				2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */,
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
 				4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */,
+				6CAA076729EAF04200541F87 /* FeelingView.swift in Sources */,
 				4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */,
 				2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,

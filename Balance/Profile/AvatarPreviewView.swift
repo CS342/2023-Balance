@@ -11,27 +11,29 @@ struct AvatarPreviewView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        VStack {
-            Spacer().frame(height: 50)
-            titlePreview
-            Spacer()
-            Image("stars2")
-                .resizable()
-                .frame(width: 50.0, height: 50.0)
-                .clipped()
-                .accessibilityLabel("star2")
-                .offset(x: -100, y: -50)
-            avatarSelected
-            Image("stars1")
-                .resizable()
-                .frame(width: 50.0, height: 50.0)
-                .clipped()
-                .accessibilityLabel("star1")
-                .offset(x: 100, y: 50)
-            Spacer()
-            saveButton
-            cancelButton
-        }
+        ActivityLogContainer {
+            VStack {
+                Spacer().frame(height: 50)
+                titlePreview
+                Spacer()
+                Image("stars2")
+                    .resizable()
+                    .frame(width: 50.0, height: 50.0)
+                    .clipped()
+                    .accessibilityLabel("star2")
+                    .offset(x: -100, y: -50)
+                avatarSelected
+                Image("stars1")
+                    .resizable()
+                    .frame(width: 50.0, height: 50.0)
+                    .clipped()
+                    .accessibilityLabel("star1")
+                    .offset(x: 100, y: 50)
+                Spacer()
+                saveButton
+                cancelButton
+            }
+        }.background(backgoudColor)
     }
     
     var titlePreview: some View {

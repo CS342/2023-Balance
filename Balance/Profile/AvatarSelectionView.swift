@@ -15,32 +15,34 @@ struct AvatarSelectionView: View {
     private var gridItemLayout = [GridItem(.fixed(150)), GridItem(.fixed(150))]
 
     var body: some View {
-        VStack {
-            ScrollView {
-                Spacer().frame(height: 50)
-                Text("Choose your avatar")
-                    .foregroundColor(violetColor)
-                    .font(.custom("Nunito-Bold", size: 34))
-                Spacer().frame(height: 50)
-                LazyVGrid(columns: gridItemLayout, spacing: 40) {
-                    ForEach(avatars.indices, id: \.self) { index in
-                        AvatarView(avatar: avatars[index])
+        ActivityLogContainer {
+            VStack {
+                ScrollView {
+                    Spacer().frame(height: 50)
+                    Text("Choose your avatar")
+                        .foregroundColor(violetColor)
+                        .font(.custom("Nunito-Bold", size: 34))
+                    Spacer().frame(height: 50)
+                    LazyVGrid(columns: gridItemLayout, spacing: 40) {
+                        ForEach(avatars.indices, id: \.self) { index in
+                            AvatarView(avatar: avatars[index])
+                        }
+                    }
+                    .padding(10.0)
+                    Spacer().frame(height: 50)
+                    Text("Choose your accesory")
+                        .foregroundColor(violetColor)
+                        .font(.custom("Nunito-Bold", size: 24))
+                    Spacer().frame(height: 50)
+                    LazyVGrid(columns: gridItemLayout, spacing: 40) {
+                        ForEach(accesories.indices, id: \.self) { index in
+                            AvatarView(avatar: accesories[index])
+                        }
                     }
                 }
-                .padding(10.0)
-                Spacer().frame(height: 50)
-                Text("Choose your accesory")
-                    .foregroundColor(violetColor)
-                    .font(.custom("Nunito-Bold", size: 24))
-                Spacer().frame(height: 50)
-                LazyVGrid(columns: gridItemLayout, spacing: 40) {
-                    ForEach(accesories.indices, id: \.self) { index in
-                        AvatarView(avatar: accesories[index])
-                    }
-                }
+                selectButton.background(.clear)
             }
-            selectButton.background(.clear)
-        }
+        }.background(backgoudColor)
     }
     
     var selectButton: some View {

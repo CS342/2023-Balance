@@ -21,10 +21,11 @@ struct DistractionView: View {
                     writeOption
                     drawingOption
                 }
+                .background(backgoudColor)
                 .padding(10)
                 .ignoresSafeArea(.all)
             }
-        }
+        }.background(backgoudColor)
     }
     
     var drawingOption: some View {

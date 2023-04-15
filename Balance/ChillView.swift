@@ -11,6 +11,8 @@ struct ChillView: View {
     var body: some View {
         ActivityLogContainer {
             HeaderMenu(title: "Let's chill out")
+                .background(backgoudColor)
+            whatTitle
             ScrollView(.vertical) {
                 VStack(spacing: 20) {
                     bodySensationOption
@@ -21,7 +23,17 @@ struct ChillView: View {
                 .padding(10)
                 .ignoresSafeArea(.all)
             }
-        }
+        }.background(backgoudColor)
+    }
+    
+    var whatTitle: some View {
+        Text("What would you like to do?").font(.custom("Nunito-Bold", size: 25))
+            .foregroundColor(fcolor)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .padding(.horizontal, 30.0)
+            .background(.clear)
     }
     
     var writeSomethingOption: some View {

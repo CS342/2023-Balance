@@ -12,16 +12,18 @@ struct GamesCellView: View {
     var text: String
     
     var body: some View {
-        HStack {
-            iconView
-            textView
-        }
-        .frame(maxWidth: 311, maxHeight: 120)
-        .foregroundColor(fcolor)
-        .background(RoundedRectangle(cornerRadius: 20).fill(.white))
-        .clipped()
-        .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
-        .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
+        ActivityLogContainer {
+            HStack {
+                iconView
+                textView
+            }
+            .frame(maxWidth: 311, maxHeight: 120)
+            .foregroundColor(fcolor)
+            .background(RoundedRectangle(cornerRadius: 20).fill(.white))
+            .clipped()
+            .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
+            .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
+        }.background(backgoudColor)
     }
     
     var textView: some View {

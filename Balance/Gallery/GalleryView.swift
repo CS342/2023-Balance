@@ -23,36 +23,38 @@ struct GalleryView: View {
     let imgArray1 = (1...8).map { Photo(name: "img\($0)") }
     
     var body: some View {
-        HeaderMenu(title: "Look at Pictures")
-        VStack(alignment: .center, spacing: 10) {
-            highlightsTitle
-            PagingView(index: $index.animation(), maxIndex: imgArray1.count - 1) {
-                ForEach(imgArray1.indices, id: \.self) { index in
-                    Image(imgArray1[index].name)
-                        .resizable()
-                        .scaledToFill()
-                        .accessibilityLabel(imgArray1[index].name)
+        ActivityLogContainer {
+            HeaderMenu(title: "Look at Pictures")
+            VStack(alignment: .center, spacing: 10) {
+                highlightsTitle
+                PagingView(index: $index.animation(), maxIndex: imgArray1.count - 1) {
+                    ForEach(imgArray1.indices, id: \.self) { index in
+                        Image(imgArray1[index].name)
+                            .resizable()
+                            .scaledToFill()
+                            .accessibilityLabel(imgArray1[index].name)
+                    }
                 }
+                .aspectRatio(4 / 3, contentMode: .fit)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+                PageControl(index: $index, maxIndex: imgArray1.count)
+                    .padding(.top, 5.0)
+                categoriesTitle
+                tagsView
+                if animalsTag {
+                    ImageCollectionView(imageArray: imgArray1)
+                        .padding(.horizontal, 10.0)
+                } else if landscapeTag {
+                    ImageCollectionView(imageArray: imgArray2)
+                        .padding(.horizontal, 10.0)
+                } else if funnyTag {
+                    ImageCollectionView(imageArray: imgArray1)
+                        .padding(.horizontal, 10.0)
+                }
+                Spacer()
             }
-            .aspectRatio(4 / 3, contentMode: .fit)
-            .clipShape(RoundedRectangle(cornerRadius: 15))
-            PageControl(index: $index, maxIndex: imgArray1.count)
-                .padding(.top, 5.0)
-            categoriesTitle
-            tagsView
-            if animalsTag {
-                ImageCollectionView(imageArray: imgArray1)
-                    .padding(.horizontal, 10.0)
-            } else if landscapeTag {
-                ImageCollectionView(imageArray: imgArray2)
-                    .padding(.horizontal, 10.0)
-            } else if funnyTag {
-                ImageCollectionView(imageArray: imgArray1)
-                    .padding(.horizontal, 10.0)
-            }
-            Spacer()
-        }
-        .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
+        }.background(backgoudColor)
     }
     
     var highlightsTitle: some View {
