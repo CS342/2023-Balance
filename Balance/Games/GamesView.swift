@@ -20,7 +20,7 @@ struct GamesView: View {
                 .padding(10)
                 .ignoresSafeArea(.all)
             }
-        }.background(backgoudColor)
+        }.background(backgroudColor)
     }
     
     var notesGame: some View {

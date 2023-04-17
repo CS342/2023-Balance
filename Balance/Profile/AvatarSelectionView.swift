@@ -7,42 +7,83 @@
 
 import SwiftUI
 
+class AvatarManager: ObservableObject {
+    @Published var avatars = (1...6).map { Avatar(name: "avatar_\($0)") }
+}
+
+class AccesoryManager: ObservableObject {
+    @Published var accesories = (1...4).map { Accesory(name: "acc_\($0)") }
+}
+
 struct AvatarSelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showingAvatarPreviewSheet = false
-    private let avatars = (1...6).map { Avatar(name: "avatar_\($0)") }
-    private let accesories = (1...4).map { Avatar(name: "acc_\($0)") }
+    @ObservedObject var avatarManager = AvatarManager()
+    @State private var avatarSelection: Avatar.ID?
+    @State private var avatarSelected: Avatar?
+    @ObservedObject var accesoryManager = AccesoryManager()
+    @State private var accesorySelection: Accesory.ID?
+    @State private var accesorySelected: Accesory?
+    
     private var gridItemLayout = [GridItem(.fixed(150)), GridItem(.fixed(150))]
-
+    
     var body: some View {
         ActivityLogContainer {
             VStack {
                 ScrollView {
                     Spacer().frame(height: 50)
-                    Text("Choose your avatar")
-                        .foregroundColor(violetColor)
-                        .font(.custom("Nunito-Bold", size: 34))
+                    avatarListView
                     Spacer().frame(height: 50)
-                    LazyVGrid(columns: gridItemLayout, spacing: 40) {
-                        ForEach(avatars.indices, id: \.self) { index in
-                            AvatarView(avatar: avatars[index])
-                        }
-                    }
-                    .padding(10.0)
-                    Spacer().frame(height: 50)
-                    Text("Choose your accesory")
-                        .foregroundColor(violetColor)
-                        .font(.custom("Nunito-Bold", size: 24))
-                    Spacer().frame(height: 50)
-                    LazyVGrid(columns: gridItemLayout, spacing: 40) {
-                        ForEach(accesories.indices, id: \.self) { index in
-                            AvatarView(avatar: accesories[index])
-                        }
-                    }
+                    accesoryListView
                 }
                 selectButton.background(.clear)
             }
-        }.background(backgoudColor)
+        }.background(backgroudColor)
+    }
+    
+    var avatarListView: some View {
+        Group {
+            Text("Choose your avatar")
+                .foregroundColor(violetColor)
+                .font(.custom("Nunito-Bold", size: 34))
+            Spacer().frame(height: 50)
+            LazyVGrid(columns: gridItemLayout, spacing: 40) {
+                ForEach($avatarManager.avatars) { $item in
+                    AvatarView(item: $item, selectedItem: $avatarSelection)
+                        .onTapGesture {
+                            if let ndx = avatarManager.avatars.firstIndex(where: { $0.id == avatarSelection }) {
+                                avatarManager.avatars[ndx].state = false
+                            }
+                            avatarSelection = item.id
+                            item.state = true
+                            avatarSelected = item
+                        }
+                }
+            }
+            .padding(10.0)
+        }
+    }
+    
+    var accesoryListView: some View {
+        Group {
+            Text("Choose your accesory")
+                .foregroundColor(violetColor)
+                .font(.custom("Nunito-Bold", size: 24))
+            Spacer().frame(height: 50)
+            LazyVGrid(columns: gridItemLayout, spacing: 40) {
+                ForEach($accesoryManager.accesories) { $item in
+                    AccesoryView(item: $item, selectedItem: $accesorySelection)
+                        .onTapGesture {
+                            if let ndx = accesoryManager.accesories.firstIndex(where: { $0.id == accesorySelection }) {
+                                accesoryManager.accesories[ndx].state = false
+                            }
+                            accesorySelection = item.id
+                            item.state = true
+                            accesorySelected = item
+                        }
+                }
+            }
+        }
     }
     
     var selectButton: some View {
@@ -56,17 +97,11 @@ struct AvatarSelectionView: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: 44.0)
         }.sheet(isPresented: $showingAvatarPreviewSheet) {
-            AvatarPreviewView()
+            AvatarPreviewView(avatarSelection: $avatarSelected, accesorySelection: $accesorySelected)
         }
         .buttonBorderShape(.roundedRectangle(radius: 10))
         .background(primaryColor)
         .cornerRadius(10)
         .padding(.horizontal, 20.0)
-    }
-}
-
-struct AvatarSelectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        AvatarSelectionView()
     }
 }

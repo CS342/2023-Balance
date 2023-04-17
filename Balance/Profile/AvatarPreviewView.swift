@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AvatarPreviewView: View {
     @Environment(\.dismiss) private var dismiss
+    @Binding var avatarSelection: Avatar?
+    @Binding var accesorySelection: Accesory?
     
     var body: some View {
         ActivityLogContainer {
@@ -33,7 +35,7 @@ struct AvatarPreviewView: View {
                 saveButton
                 cancelButton
             }
-        }.background(backgoudColor)
+        }.background(backgroudColor)
     }
     
     var titlePreview: some View {
@@ -47,14 +49,16 @@ struct AvatarPreviewView: View {
     
     var avatarSelected: some View {
         ZStack {
-            Image("avatar_1")
+            Image(avatarSelection?.name ?? "avatar_1")
                 .resizable()
+                .scaledToFit()
                 .frame(width: 200, height: 200)
                 .clipped()
                 .accessibilityLabel("avatarPreview")
-            Image("acc_1")
+            Image(accesorySelection?.name ?? "acc_1")
                 .resizable()
-                 .frame(width: 130, height: 130)
+                .scaledToFit()
+                .frame(width: 130, height: 130)
                 .clipped()
                 .accessibilityLabel("accesoryPreview")
                 .offset(x: 80, y: 80)
@@ -73,6 +77,7 @@ struct AvatarPreviewView: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 44.0)
+                .font(.custom("Nunito-Bold", size: 16))
         }
         .buttonBorderShape(.roundedRectangle(radius: 10))
         .background(primaryColor)
@@ -90,16 +95,11 @@ struct AvatarPreviewView: View {
                 .foregroundColor(primaryColor)
                 .frame(maxWidth: .infinity)
                 .frame(height: 44.0)
+                .font(.custom("Nunito-Bold", size: 16))
         }
         .overlay( RoundedRectangle(cornerRadius: 10)
             .stroke(primaryColor, lineWidth: 2))
         .background(.white)
         .padding(.horizontal, 20.0)
-    }
-}
-
-struct AvatarPreviewView_Previews: PreviewProvider {
-    static var previews: some View {
-        AvatarPreviewView()
     }
 }

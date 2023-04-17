@@ -12,17 +12,19 @@ struct FeelingView: View {
     var body: some View {
         ActivityLogContainer {
             HeaderMenu(title: "Feeling learning")
+                 .background(backgroudColor)
             ScrollView(.vertical) {
                 VStack(spacing: 20) {
                     guessOption
                     mandalaOption
                     moodOption
                 }
-                .background(backgoudColor)
+                .background(backgroudColor)
                 .padding(10)
                 .ignoresSafeArea(.all)
             }
         }
+        .background(backgroudColor)
     }
     
     var guessOption: some View {

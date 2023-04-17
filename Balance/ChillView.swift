@@ -11,7 +11,7 @@ struct ChillView: View {
     var body: some View {
         ActivityLogContainer {
             HeaderMenu(title: "Let's chill out")
-                .background(backgoudColor)
+                .background(backgroudColor)
             whatTitle
             ScrollView(.vertical) {
                 VStack(spacing: 20) {
@@ -23,7 +23,7 @@ struct ChillView: View {
                 .padding(10)
                 .ignoresSafeArea(.all)
             }
-        }.background(backgoudColor)
+        }.background(backgroudColor)
     }
     
     var whatTitle: some View {

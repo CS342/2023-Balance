@@ -27,7 +27,7 @@ struct HomeView: View {
             NavigationStack {
                 VStack {
                     HeaderHome(name: "Home", avatar: "BalanceLogo", userID: "00007")
-                        .background(backgoudColor)
+                        .background(backgroudColor)
                     ZStack(alignment: .bottomLeading) {
                         ScrollView(.vertical) {
                             VStack(spacing: 20) {
@@ -43,7 +43,7 @@ struct HomeView: View {
                         cloudImage.zIndex(-1)
                     }
                 }
-                .background(backgoudColor)
+                .background(backgroudColor)
                 .navigationTitle("")
                 .navigationBarTitle("", displayMode: .inline)
                 .navigationBarHidden(true)

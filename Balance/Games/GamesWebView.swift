@@ -23,7 +23,7 @@ struct GamesWebView: View {
                     }
                     self.webViewStore.webView.load(URLRequest(url: sudokuLink))
                 }
-        }.background(backgoudColor)
+        }.background(backgroudColor)
     }
     
     init(gameLink: String, titleGame: String) {

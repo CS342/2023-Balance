@@ -9,5 +9,6 @@ import Foundation
 
 public struct Accesory: Codable, Equatable, Hashable, Identifiable {
     public var id = UUID()
-    let name: String
+    var name: String
+    var state = false
 }

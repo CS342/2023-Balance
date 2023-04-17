@@ -1,15 +1,15 @@
 //
-//  AvatarView.swift
+//  AccesoryView.swift
 //  Balance
 //
-//  Created by Gonzalo Perisset on 14/04/2023.
+//  Created by Gonzalo Perisset on 17/04/2023.
 //
 
 import SwiftUI
 
-struct AvatarView: View {
-    @Binding var item: Avatar
-    @Binding var selectedItem: Avatar.ID?
+struct AccesoryView: View {
+    @Binding var item: Accesory
+    @Binding var selectedItem: Accesory.ID?
     
     var body: some View {
         ZStack(alignment: .center) {

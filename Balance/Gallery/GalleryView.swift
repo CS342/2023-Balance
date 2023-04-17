@@ -54,7 +54,7 @@ struct GalleryView: View {
                 Spacer()
             }
             .edgesIgnoringSafeArea(.all)
-        }.background(backgoudColor)
+        }.background(backgroudColor)
     }
     
     var highlightsTitle: some View {

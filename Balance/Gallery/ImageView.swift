@@ -38,7 +38,7 @@ struct ImageView: View {
                 actionsButtons
             }
             Spacer()
-        }.background(backgoudColor)
+        }.background(backgroudColor)
     }
     
     var actionsButtons: some View {
