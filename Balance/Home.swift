@@ -24,33 +24,34 @@ struct HomeView: View {
     
     var body: some View {
         ActivityLogContainer {
-            NavigationStack {
-                VStack {
-                    HeaderHome(name: "Home", avatar: "BalanceLogo", userID: "00007")
-                        .background(backgroudColor)
-                    ZStack(alignment: .bottomLeading) {
-                        ScrollView(.vertical) {
-                            VStack(spacing: 20) {
-                                distractOption
-                                chillOption
-                                fealingLearningOption
-                                diaryOption
-                            }
-                            .padding(10)
-                            .ignoresSafeArea(.all)
-                        }.zIndex(1)
-                        Spacer()
-                        cloudImage.zIndex(-1)
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                NavigationStack {
+                    VStack {
+                        HeaderHome(name: "Home", avatar: "BalanceLogo", userID: "00007")
+                        ZStack(alignment: .bottomLeading) {
+                            ScrollView(.vertical) {
+                                VStack(spacing: 20) {
+                                    distractOption
+                                    chillOption
+                                    fealingLearningOption
+                                    diaryOption
+                                }
+                                .padding(10)
+                                .ignoresSafeArea(.all)
+                            }.zIndex(1)
+                            Spacer()
+                            cloudImage.zIndex(-1)
+                        }
                     }
+                    .navigationTitle("")
+                    .navigationBarTitle("", displayMode: .inline)
+                    .navigationBarHidden(true)
+                    .navigationBarBackButtonHidden(true)
+                    .ignoresSafeArea()
+                    .accentColor(nil)
+                    .overlay(loadingOverlay)
                 }
-                .background(backgroudColor)
-                .navigationTitle("")
-                .navigationBarTitle("", displayMode: .inline)
-                .navigationBarHidden(true)
-                .navigationBarBackButtonHidden(true)
-                .ignoresSafeArea()
-                .accentColor(nil)
-                .overlay(loadingOverlay)
             }
         }
     }

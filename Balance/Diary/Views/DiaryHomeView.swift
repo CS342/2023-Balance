@@ -17,47 +17,50 @@ struct DiaryHomeView: View {
     let bcolor = Color(red: 0.30, green: 0.79, blue: 0.94, opacity: 1.00)
     
     var body: some View {
-        HeaderMenu(title: "Diary")
-        VStack(alignment: .center, spacing: 10) {
-            newDiaryView
-                .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
-                .foregroundColor(fcolor)
-                .background(RoundedRectangle(cornerRadius: 20).fill(.white))
-                .clipped()
-                .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
-            previusView
-            diaryList
-                .listStyle(.plain)
-        }
-        .sheet(isPresented: $showingEditor) {
-            ActivityLogBaseView(viewName: "Diary Note Entry View") {
-                DiaryNoteEntryView(
-                    store: store,
-                    currentNote: $currentNote,
-                    showingEditor: $showingEditor
-                )
-            }
-        }
-        .onAppear {
-            NoteStore.load { result in
-                switch result {
-                case .failure(let error):
-                    print(error.localizedDescription)
-                case .success(let notes):
-                    store.notes = notes
+        ZStack {
+            backgroudColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Diary")
+                VStack(alignment: .center, spacing: 10) {
+                    newDiaryView
+                    previusView
+                    diaryList
                 }
-            }
-        }
-        .onChange(of: scenePhase) { phase in
-            if phase == .inactive {
-                NoteStore.save(notes: store.notes) { result in
-                    if case .failure(let error) = result {
-                        print(error.localizedDescription)
+                .sheet(isPresented: $showingEditor) {
+                    ActivityLogBaseView(viewName: "Diary Note Entry View") {
+                        diaryNoteView
                     }
                 }
+                .onAppear {
+                    NoteStore.load { result in
+                        switch result {
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        case .success(let notes):
+                            store.notes = notes
+                        }
+                    }
+                }
+                .onChange(of: scenePhase) { phase in
+                    if phase == .inactive {
+                        NoteStore.save(notes: store.notes) { result in
+                            if case .failure(let error) = result {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                }
+                .edgesIgnoringSafeArea(.all)
             }
         }
-        .edgesIgnoringSafeArea(.all)
+    }
+    
+    var diaryNoteView: some View {
+        DiaryNoteEntryView(
+            store: store,
+            currentNote: $currentNote,
+            showingEditor: $showingEditor
+        )
     }
     
     var previusView: some View {
@@ -87,6 +90,11 @@ struct DiaryHomeView: View {
                 .cornerRadius(14)
             }
         }
+        .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
+        .foregroundColor(fcolor)
+        .background(RoundedRectangle(cornerRadius: 20).fill(.white))
+        .clipped()
+        .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
     }
     
     var diaryList: some View {
@@ -103,6 +111,7 @@ struct DiaryHomeView: View {
             }
             .onDelete(perform: delete)
         }
+        .listStyle(.plain)
     }
     
     func delete(indexSet: IndexSet) {

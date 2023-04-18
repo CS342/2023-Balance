@@ -11,21 +11,24 @@ import SwiftUI
 struct DistractionView: View {
     var body: some View {
         ActivityLogContainer {
-            HeaderMenu(title: "Distraction")
-            ScrollView(.vertical) {
-                VStack(spacing: 20) {
-                    picturesOption
-                    musicOption
-                    videosOption
-                    gamesOption
-                    writeOption
-                    drawingOption
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Distraction")
+                    ScrollView(.vertical) {
+                        VStack(spacing: 20) {
+                            picturesOption
+                            musicOption
+                            videosOption
+                            gamesOption
+                            drawingOption
+                        }
+                        .padding(10)
+                        .ignoresSafeArea(.all)
+                    }
                 }
-                .background(backgroudColor)
-                .padding(10)
-                .ignoresSafeArea(.all)
             }
-        }.background(backgroudColor)
+        }
     }
     
     var drawingOption: some View {

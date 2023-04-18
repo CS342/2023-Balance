@@ -13,7 +13,7 @@ public struct HeaderHome: View {
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
     @State private var showingAvatarSheet = false
-
+    
     let name: String
     let avatar: String
     let userID: String
@@ -47,9 +47,9 @@ public struct HeaderHome: View {
                 homeButton
             }
             .buttonStyle(PlainButtonStyle())
-            .sheet(isPresented: $showingHomeSheet) {
-                LocationView()
-            }
+            // .sheet(isPresented: $showingHomeSheet) {
+            // LocationView()
+            // }
             .shadow(color: .gray, radius: 2, x: 0, y: 1)
             .padding(.horizontal, 5.0)
             Button(action: {
@@ -59,9 +59,9 @@ public struct HeaderHome: View {
                 pointsButton
             }
             .buttonStyle(PlainButtonStyle())
-            .sheet(isPresented: $showingPointsSheet) {
-                // PointsView()
-            }
+            // .sheet(isPresented: $showingPointsSheet) {
+            // PointsView()
+            // }
             .shadow(color: .gray, radius: 2, x: 0, y: 1)
             .padding(.horizontal, 5.0)
         }

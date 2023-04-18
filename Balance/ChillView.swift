@@ -10,20 +10,23 @@ import SwiftUI
 struct ChillView: View {
     var body: some View {
         ActivityLogContainer {
-            HeaderMenu(title: "Let's chill out")
-                .background(backgroudColor)
-            whatTitle
-            ScrollView(.vertical) {
-                VStack(spacing: 20) {
-                    bodySensationOption
-                    breathingOption
-                    guidedMeditationOption
-                    writeSomethingOption
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Let's chill out")
+                    whatTitle
+                    ScrollView(.vertical) {
+                        VStack(spacing: 20) {
+                            bodySensationOption
+                            breathingOption
+                            guidedMeditationOption
+                        }
+                        .padding(10)
+                        .ignoresSafeArea(.all)
+                    }
                 }
-                .padding(10)
-                .ignoresSafeArea(.all)
             }
-        }.background(backgroudColor)
+        }
     }
     
     var whatTitle: some View {

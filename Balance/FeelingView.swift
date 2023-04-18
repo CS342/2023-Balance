@@ -11,20 +11,21 @@ import SwiftUI
 struct FeelingView: View {
     var body: some View {
         ActivityLogContainer {
-            HeaderMenu(title: "Feeling learning")
-                 .background(backgroudColor)
-            ScrollView(.vertical) {
-                VStack(spacing: 20) {
-                    guessOption
-                    mandalaOption
-                    moodOption
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Feeling learning")
+                    ScrollView(.vertical) {
+                        VStack(spacing: 20) {
+                            guessOption
+                            moodOption
+                        }
+                        .padding(10)
+                        .ignoresSafeArea(.all)
+                    }
                 }
-                .background(backgroudColor)
-                .padding(10)
-                .ignoresSafeArea(.all)
             }
         }
-        .background(backgroudColor)
     }
     
     var guessOption: some View {

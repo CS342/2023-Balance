@@ -14,28 +14,31 @@ struct AvatarPreviewView: View {
     
     var body: some View {
         ActivityLogContainer {
-            VStack {
-                Spacer().frame(height: 50)
-                titlePreview
-                Spacer()
-                Image("stars2")
-                    .resizable()
-                    .frame(width: 50.0, height: 50.0)
-                    .clipped()
-                    .accessibilityLabel("star2")
-                    .offset(x: -100, y: -50)
-                avatarSelected
-                Image("stars1")
-                    .resizable()
-                    .frame(width: 50.0, height: 50.0)
-                    .clipped()
-                    .accessibilityLabel("star1")
-                    .offset(x: 100, y: 50)
-                Spacer()
-                saveButton
-                cancelButton
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    Spacer().frame(height: 50)
+                    titlePreview
+                    Spacer()
+                    Image("stars2")
+                        .resizable()
+                        .frame(width: 50.0, height: 50.0)
+                        .clipped()
+                        .accessibilityLabel("star2")
+                        .offset(x: -100, y: -50)
+                    avatarSelected
+                    Image("stars1")
+                        .resizable()
+                        .frame(width: 50.0, height: 50.0)
+                        .clipped()
+                        .accessibilityLabel("star1")
+                        .offset(x: 100, y: 50)
+                    Spacer()
+                    saveButton
+                    cancelButton
+                }
             }
-        }.background(backgroudColor)
+        }
     }
     
     var titlePreview: some View {

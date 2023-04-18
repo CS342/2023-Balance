@@ -13,32 +13,37 @@ struct ImageView: View {
     
     var body: some View {
         ActivityLogContainer {
-            HeaderMenu(title: "Distraction")
-            Spacer()
-            VStack {
-                ZStack {
-                    Group {
-                        Image(image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Distraction")
+                    Spacer()
+                    VStack {
+                        ZStack {
+                            Group {
+                                Image(image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+                                    .accessibilityLabel(image)
+                            }
+                            .frame(maxWidth: 300, maxHeight: 300)
+                            .foregroundColor(violetColor)
                             .clipped()
-                            .accessibilityLabel(image)
+                            .padding(EdgeInsets(top: 24, leading: 24, bottom: 24, trailing: 24))
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.white))
+                            .shadow(color: Color.black.opacity(0.50), radius: 3, x: 2, y: 2)
+                            Image("stiky")
+                                .offset(y: -190)
+                                .accessibilityLabel("stiky")
+                        }
+                        Spacer().frame(height: 50)
+                        actionsButtons
                     }
-                    .frame(maxWidth: 300, maxHeight: 300)
-                    .foregroundColor(violetColor)
-                    .clipped()
-                    .padding(EdgeInsets(top: 24, leading: 24, bottom: 24, trailing: 24))
-                    .background(RoundedRectangle(cornerRadius: 5).fill(.white))
-                    .shadow(color: Color.black.opacity(0.50), radius: 3, x: 2, y: 2)
-                    Image("stiky")
-                        .offset(y: -190)
-                        .accessibilityLabel("stiky")
+                    Spacer()
                 }
-                Spacer().frame(height: 50)
-                actionsButtons
             }
-            Spacer()
-        }.background(backgroudColor)
+        }
     }
     
     var actionsButtons: some View {

@@ -29,16 +29,19 @@ struct AvatarSelectionView: View {
     
     var body: some View {
         ActivityLogContainer {
-            VStack {
-                ScrollView {
-                    Spacer().frame(height: 50)
-                    avatarListView
-                    Spacer().frame(height: 50)
-                    accesoryListView
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    ScrollView {
+                        Spacer().frame(height: 50)
+                        avatarListView
+                        Spacer().frame(height: 50)
+                        accesoryListView
+                    }
+                    selectButton.background(.clear)
                 }
-                selectButton.background(.clear)
             }
-        }.background(backgroudColor)
+        }
     }
     
     var avatarListView: some View {
