@@ -9,72 +9,42 @@ import Foundation
 import PencilKit
 import SwiftUI
 
-// struct Line {
-//    var points = [CGPoint]()
-//    var color: Color = .red
-//    var lineWidth: Double = 1.0
-// }
-
-struct MyCanvas: UIViewRepresentable {
-    class Coordinator: NSObject, PKCanvasViewDelegate {
-        var parent: MyCanvas
-        
-        init(_ uiView: MyCanvas) {
-            self.parent = uiView
-        }
-        
-        func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
-            if !self.parent.cntrl.didRemove {
-                self.parent.cntrl.drawings.append(canvasView.drawing)
-            }
-        }
+struct DrawingView: UIViewRepresentable {
+    @Environment(\.undoManager) private var undoManager
+    @Binding var canvas: PKCanvasView
+    @Binding var isdraw: Bool
+    @Binding var type: PKInkingTool.InkType
+    @Binding var color: Color
+    @State var toolPicker = PKToolPicker()
+    
+    // Updating inktype
+    var ink: PKInkingTool {
+        PKInkingTool(type, color: UIColor(color))
     }
-    var cntrl: PKCanvasController
-
+    
+    let eraser = PKEraserTool(.bitmap)
+    
     func makeUIView(context: Context) -> PKCanvasView {
-        cntrl.canvas = PKCanvasView()
-        cntrl.canvas.delegate = context.coordinator
-        cntrl.canvas.becomeFirstResponder()
-        return cntrl.canvas
+        canvas.drawingPolicy = .anyInput
+        canvas.tool = isdraw ? ink : eraser
+        return canvas
     }
     
-    func updateUIView(_ uiView: PKCanvasView, context: Context) { }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+    func updateUIView(_ uiView: PKCanvasView, context: Context) {
+        // updating the tool whenever the view updates
+        uiView.tool = isdraw ? ink : eraser
     }
 }
 
-class PKCanvasController {
-    var canvas = PKCanvasView()
-    var drawings = [PKDrawing]()
-    var didRemove = false
-    
-    func clear() {
-        canvas.drawing = PKDrawing()
-        drawings = [PKDrawing]()
-    }
-    
-    func undoDrawing() {
-        if !drawings.isEmpty {
-            didRemove = true
-            drawings.removeLast()
-            canvas.drawing = drawings.last ?? PKDrawing()
-            didRemove = false
-        }
-    }
-}
 // swiftlint: disable closure_body_length
 struct DrawView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.undoManager) private var undoManager
-    let pkCntrl = PKCanvasController()
-    
-    //    @State private var canvasView = PKCanvasView()
-    
-//    @State private var currentLine = Line()
-//    @State private var lines: [Line] = []
-//    @State private var thickness: Double = 1.0
+    @State var canvas = PKCanvasView()
+    @State var isdraw = true
+    @State var color: Color = .black
+    @State var type: PKInkingTool.InkType = .pencil
+    @State var colorPicker = false
     
     var body: some View {
         ZStack {
@@ -82,44 +52,81 @@ struct DrawView: View {
             VStack(spacing: 10) {
                 HeaderMenu(title: "Drawing something")
                 toolkitView
-                MyCanvas(cntrl: pkCntrl)
+                DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
                 
+                    .navigationBarItems(leading: Button(action: {
+                        saveImage()
+                    }, label: {
+                        Image(systemName: "square.and.arrow.down.fill")
+                            .font(.title)
+                            .foregroundColor(Color.orange)
+                    }), trailing: HStack(spacing: 15) {
+                        Button(action: {
+                            // erase tool
+                            isdraw = false
+                            isdraw.toggle()
+                        }) {
+                            Image(systemName: "pencil.slash")
+                                .font(.title)
+                                .foregroundColor(Color.orange)
+                        }
+                        Menu {
+                            // ColorPicker
+                            ColorPicker(selection: $color) {
+                                Button(action: {
+                                    colorPicker.toggle()
+                                }) {
+                                    Label {
+                                        Text("Color")
+                                    } icon: {
+                                        Image(systemName: "eyedropper.full")
+                                            .foregroundColor(Color.orange)
+                                    }
+                                }
+                            }
+                            Button(action: {
+                                // changing type
+                                isdraw = true
+                                type = .pencil
+                            }) {
+                                Label {
+                                    Text("Pencil")
+                                } icon: {
+                                    Image(systemName: "pencil")
+                                }
+                            }
+                            Button(action: {
+                                isdraw = true
+                                type = .pen
+                            }) {
+                                Label {
+                                    Text("Pen")
+                                } icon: {
+                                    Image(systemName: "pencil.tip")
+                                }
+                            }
+                            Button(action: {
+                                isdraw = true
+                                type = .marker
+                            }) {
+                                Label {
+                                    Text("Marker")
+                                } icon: {
+                                    Image(systemName: "highlighter")
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "menubar.dock.rectangle")
+                                .resizable()
+                                .frame(width: 22, height: 22)
+                                .foregroundColor(Color.orange)
+                        }
+                    })
+                    .sheet(isPresented: $colorPicker) {
+                        ColorPicker("Pick Color", selection: $color)
+                            .padding()
+                    }
                 Spacer()
-                //                Canvas { context, size in
-                //                    for line in lines {
-                //                        var path = Path()
-                //                        path.addLines(line.points)
-                //                        context.stroke(path, with: .color(line.color), lineWidth: line.lineWidth)
-                //                    }
-                //                }
-                //                .frame(minWidth: 400, minHeight: 400)
-                //                .gesture(
-                //                    DragGesture(minimumDistance: 0,
-                //                                coordinateSpace: .local)
-                //                    .onChanged({ value in
-                //                        let newPoint = value.location
-                //                        currentLine.points.append(newPoint)
-                //                        self.lines.append(currentLine)
-                //                    })
-                //                    .onEnded({ value in
-                //                        self.lines.append(currentLine)
-                //                        self.currentLine = Line(points: [], color: currentLine.color, lineWidth: thickness)
-                //                    })
-                //                )
-                //                HStack {
-                //                    Slider(value: $thickness, in: 1...20) {
-                //                        Text("Thickness")
-                //                    }.frame(maxWidth: 200)
-                //                        .onChange(of: thickness) { newThickness in
-                //                            currentLine.lineWidth = newThickness
-                //                        }
-                //                    Divider()
-                //                    ColorPickerView(selectedColor: $currentLine.color)
-                //                        .onChange(of: currentLine.color) { newColor in
-                //                            print(newColor)
-                //                            currentLine.color = newColor
-                //                        }
-                //                }
                 saveButton
             }
         }
@@ -127,7 +134,7 @@ struct DrawView: View {
     
     var saveButton: some View {
         Button(action: {
-            dismiss()
+            saveImage()
         }) {
             Text("Save")
                 .font(.system(.title2))
@@ -146,14 +153,14 @@ struct DrawView: View {
         HStack {
             Spacer()
             Button {
-                self.pkCntrl.undoDrawing()
+                undoManager?.undo()
             } label: {
                 VStack {
                     Image("undoIcon")
                         .resizable()
                         .scaledToFit()
                         .clipped()
-                        .frame(width: 80, height: 80)
+                        .frame(width: 40, height: 40)
                         .accessibilityLabel("undoIcon")
                     Text("Undo")
                         .font(.custom("Nunito-Bold", size: 14))
@@ -164,14 +171,18 @@ struct DrawView: View {
             }
             Spacer()
             Button {
-                self.pkCntrl.clear()
+                // erase tool
+                isdraw = false
+                isdraw.toggle()
+                canvas.drawing = PKDrawing()
+                
             } label: {
                 VStack {
                     Image("eraseIcon")
                         .resizable()
                         .scaledToFit()
                         .clipped()
-                        .frame(width: 80, height: 80)
+                        .frame(width: 40, height: 40)
                         .accessibilityLabel("erasecon")
                     Text("Erase")
                         .font(.custom("Nunito-Bold", size: 14))
@@ -181,25 +192,94 @@ struct DrawView: View {
                 .padding(10.0)
             }
             Spacer()
-            Button { } label: {
+            Menu {
+                // ColorPicker
+                ColorPicker(selection: $color) {
+                    Button(action: {
+                        colorPicker.toggle()
+                    }) {
+                        Label {
+                            Text("Color")
+                        } icon: {
+                            Image(systemName: "eyedropper.full")
+                                .foregroundColor(Color.orange)
+                        }
+                    }
+                }
+                Button(action: {
+                    // changing type
+                    isdraw = true
+                    type = .pencil
+                }) {
+                    Label {
+                        Text("Pencil")
+                    } icon: {
+                        Image(systemName: "pencil")
+                    }
+                }
+                Button(action: {
+                    isdraw = true
+                    type = .pen
+                }) {
+                    Label {
+                        Text("Pen")
+                    } icon: {
+                        Image(systemName: "pencil.tip")
+                    }
+                }
+                Button(action: {
+                    isdraw = true
+                    type = .marker
+                }) {
+                    Label {
+                        Text("Marker")
+                    } icon: {
+                        Image(systemName: "highlighter")
+                    }
+                }
+            } label: {
                 VStack {
                     Image("pencilIcon")
                         .resizable()
                         .scaledToFit()
                         .clipped()
-                        .frame(width: 80, height: 80)
+                        .frame(width: 40, height: 40)
                         .accessibilityLabel("pencilIcon")
                     Text("Paint")
                         .font(.custom("Nunito-Bold", size: 14))
                         .foregroundColor(Color.gray)
                         .multilineTextAlignment(.center)
                 }
-                .padding(10.0)
             }
+            //            Button {
+            //
+            //            } label: {
+            //                VStack {
+            //                    Image("pencilIcon")
+            //                        .resizable()
+            //                        .scaledToFit()
+            //                        .clipped()
+            //                        .frame(width: 80, height: 80)
+            //                        .accessibilityLabel("pencilIcon")
+            //                    Text("Paint")
+            //                        .font(.custom("Nunito-Bold", size: 14))
+            //                        .foregroundColor(Color.gray)
+            //                        .multilineTextAlignment(.center)
+            //                }
+            //                .padding(10.0)
+            //            }
             Spacer()
         }
     }
+    
+    func saveImage() {
+        // getting image from Canvas
+        let image = canvas.drawing.image(from: canvas.drawing.bounds, scale: 1)
+        // saving to album
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+    }
 }
+
 
 struct DrawView_Previews: PreviewProvider {
     static var previews: some View {
