@@ -127,6 +127,11 @@ struct DrawView: View {
                             .padding()
                     }
                 Spacer()
+                HStack {
+                    ForEach([Color.green, .orange, .blue, .red, .pink, .black, .purple], id: \.self) { color in
+                        colorButton(color: color)
+                    }
+                }
                 saveButton
             }
         }
@@ -175,7 +180,6 @@ struct DrawView: View {
                 isdraw = false
                 isdraw.toggle()
                 canvas.drawing = PKDrawing()
-                
             } label: {
                 VStack {
                     Image("eraseIcon")
@@ -269,6 +273,21 @@ struct DrawView: View {
             //                .padding(10.0)
             //            }
             Spacer()
+        }
+    }
+    
+    @ViewBuilder
+    func colorButton(color: Color) -> some View {
+        Button {
+            self.color = color
+        } label: {
+            Image(systemName: "circle.fill")
+                .font(.largeTitle)
+                .foregroundColor(color)
+//                .mask {
+//                    Image(systemName: "pencil.tip")
+//                        .font(.largeTitle)
+//                }
         }
     }
     
