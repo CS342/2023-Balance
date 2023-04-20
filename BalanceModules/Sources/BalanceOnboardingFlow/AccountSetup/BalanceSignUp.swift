@@ -12,21 +12,41 @@ import SwiftUI
 
 
 struct BalanceSignUp: View {
+    @EnvironmentObject var account: Account
+    @EnvironmentObject var usernamePasswordAccountService: UsernamePasswordAccountService
+    static let parentEmail = SignUpOptions(rawValue: 1 << 4)
+
     var body: some View {
-        SignUp {
-            Image(uiImage: Bundle.module.image(withName: "Balloon", fileExtension: "png"))
-                .resizable()
-                .scaledToFit()
-                .padding(.top, 32)
-                .accessibility(hidden: true)
-            Text("Sign up below to begin using Balance")
-                .multilineTextAlignment(.center)
-                .padding()
-            Spacer(minLength: 0)
+        UsernamePasswordSignUpView(
+            signUpOptions: [.usernameAndPassword, .name, .genderIdentity, .dateOfBirth, BalanceSignUp.parentEmail],
+            passwordValidationRules: [
+                /* ... */
+            ],
+            header: {
+                //Text("A Header View ...")
+            },
+            footer: {
+                //Text("A Footer View ...")
+            }
+        )
+            .environmentObject(UsernamePasswordAccountService())
+
+//        UsernamePasswordSignUpView().environmentObject(account)
+        
+//        SignUp {
+//            Image(uiImage: Bundle.module.image(withName: "Balloon", fileExtension: "png"))
+//                .resizable()
+//                .scaledToFit()
+//                .padding(.top, 32)
+//                .accessibility(hidden: true)
+//            Text("Sign up below to begin using Balance")
+//                .multilineTextAlignment(.center)
+//                .padding()
+//            Spacer(minLength: 0)
         }
-        .navigationBarTitleDisplayMode(.large)
-        .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
-    }
+//        .navigationBarTitleDisplayMode(.large)
+//        .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
+//    }
 }
 
 

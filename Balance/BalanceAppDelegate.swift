@@ -75,7 +75,7 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
         }
     }
 
-    
+
     func application(
       _ application: UIApplication,
       configurationForConnecting connectingSceneSession: UISceneSession,

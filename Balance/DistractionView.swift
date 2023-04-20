@@ -37,7 +37,7 @@ struct DistractionView: View {
                 viewName: "Drawing Something Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    // define action
+                    DrawView()
                 }
             )
         ) {
