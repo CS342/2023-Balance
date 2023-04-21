@@ -51,9 +51,14 @@ struct DrawView: View {
                 toolkitView
                 DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
                 Spacer()
-                HStack {
-                    ForEach([Color.green, .orange, .blue, .red, .pink, .black, .purple], id: \.self) { color in
-                        colorButton(color: color)
+                ScrollView(.horizontal) {
+                    HStack(alignment: .center) {
+                        Spacer()
+                        ForEach([Color.yellow, .green, .orange, .blue, .red, .pink, .purple, .brown, .black], id: \.self) { color in
+                            colorButton(color: color)
+                        }
+                        ColorPicker("", selection: $color)
+//                        Spacer()
                     }
                 }
                 saveButton
@@ -188,6 +193,10 @@ struct DrawView: View {
             self.color = color
         } label: {
             Image(systemName: "circle.fill")
+                .resizable()
+                .scaledToFit()
+                .clipped()
+                .frame(width: 30, height: 30)
                 .font(.largeTitle)
                 .foregroundColor(color)
         }
