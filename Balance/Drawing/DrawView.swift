@@ -15,7 +15,6 @@ struct DrawingView: UIViewRepresentable {
     @Binding var isdraw: Bool
     @Binding var type: PKInkingTool.InkType
     @Binding var color: Color
-    @State var toolPicker = PKToolPicker()
     
     // Updating inktype
     var ink: PKInkingTool {
@@ -36,7 +35,6 @@ struct DrawingView: UIViewRepresentable {
     }
 }
 
-// swiftlint: disable closure_body_length
 struct DrawView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.undoManager) private var undoManager
@@ -44,7 +42,6 @@ struct DrawView: View {
     @State var isdraw = true
     @State var color: Color = .black
     @State var type: PKInkingTool.InkType = .pencil
-    @State var colorPicker = false
     
     var body: some View {
         ZStack {
@@ -53,79 +50,6 @@ struct DrawView: View {
                 HeaderMenu(title: "Drawing something")
                 toolkitView
                 DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
-                
-                    .navigationBarItems(leading: Button(action: {
-                        saveImage()
-                    }, label: {
-                        Image(systemName: "square.and.arrow.down.fill")
-                            .font(.title)
-                            .foregroundColor(Color.orange)
-                    }), trailing: HStack(spacing: 15) {
-                        Button(action: {
-                            // erase tool
-                            isdraw = false
-                            isdraw.toggle()
-                        }) {
-                            Image(systemName: "pencil.slash")
-                                .font(.title)
-                                .foregroundColor(Color.orange)
-                        }
-                        Menu {
-                            // ColorPicker
-                            ColorPicker(selection: $color) {
-                                Button(action: {
-                                    colorPicker.toggle()
-                                }) {
-                                    Label {
-                                        Text("Color")
-                                    } icon: {
-                                        Image(systemName: "eyedropper.full")
-                                            .foregroundColor(Color.orange)
-                                    }
-                                }
-                            }
-                            Button(action: {
-                                // changing type
-                                isdraw = true
-                                type = .pencil
-                            }) {
-                                Label {
-                                    Text("Pencil")
-                                } icon: {
-                                    Image(systemName: "pencil")
-                                }
-                            }
-                            Button(action: {
-                                isdraw = true
-                                type = .pen
-                            }) {
-                                Label {
-                                    Text("Pen")
-                                } icon: {
-                                    Image(systemName: "pencil.tip")
-                                }
-                            }
-                            Button(action: {
-                                isdraw = true
-                                type = .marker
-                            }) {
-                                Label {
-                                    Text("Marker")
-                                } icon: {
-                                    Image(systemName: "highlighter")
-                                }
-                            }
-                        } label: {
-                            Image(systemName: "menubar.dock.rectangle")
-                                .resizable()
-                                .frame(width: 22, height: 22)
-                                .foregroundColor(Color.orange)
-                        }
-                    })
-                    .sheet(isPresented: $colorPicker) {
-                        ColorPicker("Pick Color", selection: $color)
-                            .padding()
-                    }
                 Spacer()
                 HStack {
                     ForEach([Color.green, .orange, .blue, .red, .pink, .black, .purple], id: \.self) { color in
@@ -157,122 +81,104 @@ struct DrawView: View {
     var toolkitView: some View {
         HStack {
             Spacer()
-            Button {
-                undoManager?.undo()
-            } label: {
-                VStack {
-                    Image("undoIcon")
-                        .resizable()
-                        .scaledToFit()
-                        .clipped()
-                        .frame(width: 40, height: 40)
-                        .accessibilityLabel("undoIcon")
-                    Text("Undo")
-                        .font(.custom("Nunito-Bold", size: 14))
-                        .foregroundColor(Color.gray)
-                        .multilineTextAlignment(.center)
-                }
-                .padding(10.0)
-            }
+            undoButton
             Spacer()
-            Button {
-                // erase tool
-                isdraw = false
-                isdraw.toggle()
-                canvas.drawing = PKDrawing()
-            } label: {
-                VStack {
-                    Image("eraseIcon")
-                        .resizable()
-                        .scaledToFit()
-                        .clipped()
-                        .frame(width: 40, height: 40)
-                        .accessibilityLabel("erasecon")
-                    Text("Erase")
-                        .font(.custom("Nunito-Bold", size: 14))
-                        .foregroundColor(Color.gray)
-                        .multilineTextAlignment(.center)
-                }
-                .padding(10.0)
-            }
+            eraseButton
             Spacer()
-            Menu {
-                // ColorPicker
-                ColorPicker(selection: $color) {
-                    Button(action: {
-                        colorPicker.toggle()
-                    }) {
-                        Label {
-                            Text("Color")
-                        } icon: {
-                            Image(systemName: "eyedropper.full")
-                                .foregroundColor(Color.orange)
-                        }
-                    }
-                }
-                Button(action: {
-                    // changing type
-                    isdraw = true
-                    type = .pencil
-                }) {
-                    Label {
-                        Text("Pencil")
-                    } icon: {
-                        Image(systemName: "pencil")
-                    }
-                }
-                Button(action: {
-                    isdraw = true
-                    type = .pen
-                }) {
-                    Label {
-                        Text("Pen")
-                    } icon: {
-                        Image(systemName: "pencil.tip")
-                    }
-                }
-                Button(action: {
-                    isdraw = true
-                    type = .marker
-                }) {
-                    Label {
-                        Text("Marker")
-                    } icon: {
-                        Image(systemName: "highlighter")
-                    }
-                }
-            } label: {
-                VStack {
-                    Image("pencilIcon")
-                        .resizable()
-                        .scaledToFit()
-                        .clipped()
-                        .frame(width: 40, height: 40)
-                        .accessibilityLabel("pencilIcon")
-                    Text("Paint")
-                        .font(.custom("Nunito-Bold", size: 14))
-                        .foregroundColor(Color.gray)
-                        .multilineTextAlignment(.center)
+            pencilMenu
+            Spacer()
+        }
+    }
+    
+    var pencilMenu: some View {
+        Menu {
+            Button(action: {
+                // changing type
+                isdraw = true
+                type = .pencil
+            }) {
+                Label {
+                    Text("Pencil")
+                } icon: {
+                    Image(systemName: "pencil")
                 }
             }
-            //            Button {
-            //
-            //            } label: {
-            //                VStack {
-            //                    Image("pencilIcon")
-            //                        .resizable()
-            //                        .scaledToFit()
-            //                        .clipped()
-            //                        .frame(width: 80, height: 80)
-            //                        .accessibilityLabel("pencilIcon")
-            //                    Text("Paint")
-            //                        .font(.custom("Nunito-Bold", size: 14))
-            //                        .foregroundColor(Color.gray)
-            //                        .multilineTextAlignment(.center)
-            //                }
-            //                .padding(10.0)
-            //            }
-            Spacer()
+            Button(action: {
+                isdraw = true
+                type = .pen
+            }) {
+                Label {
+                    Text("Pen")
+                } icon: {
+                    Image(systemName: "pencil.tip")
+                }
+            }
+            Button(action: {
+                isdraw = true
+                type = .marker
+            }) {
+                Label {
+                    Text("Marker")
+                } icon: {
+                    Image(systemName: "highlighter")
+                }
+            }
+        } label: {
+            VStack {
+                Image("pencilIcon")
+                    .resizable()
+                    .scaledToFit()
+                    .clipped()
+                    .frame(width: 40, height: 40)
+                    .accessibilityLabel("pencilIcon")
+                Text("Paint")
+                    .font(.custom("Nunito-Bold", size: 14))
+                    .foregroundColor(Color.gray)
+                    .multilineTextAlignment(.center)
+            }
+        }
+    }
+    
+    var eraseButton: some View {
+        Button {
+            // erase tool
+            isdraw = false
+            isdraw.toggle()
+            canvas.drawing = PKDrawing()
+        } label: {
+            VStack {
+                Image("eraseIcon")
+                    .resizable()
+                    .scaledToFit()
+                    .clipped()
+                    .frame(width: 40, height: 40)
+                    .accessibilityLabel("erasecon")
+                Text("Erase")
+                    .font(.custom("Nunito-Bold", size: 14))
+                    .foregroundColor(Color.gray)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(10.0)
+        }
+    }
+    
+    var undoButton: some View {
+        Button {
+            undoManager?.undo()
+        } label: {
+            VStack {
+                Image("undoIcon")
+                    .resizable()
+                    .scaledToFit()
+                    .clipped()
+                    .frame(width: 40, height: 40)
+                    .accessibilityLabel("undoIcon")
+                Text("Undo")
+                    .font(.custom("Nunito-Bold", size: 14))
+                    .foregroundColor(Color.gray)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(10.0)
         }
     }
     
@@ -284,10 +190,6 @@ struct DrawView: View {
             Image(systemName: "circle.fill")
                 .font(.largeTitle)
                 .foregroundColor(color)
-//                .mask {
-//                    Image(systemName: "pencil.tip")
-//                        .font(.largeTitle)
-//                }
         }
     }
     
