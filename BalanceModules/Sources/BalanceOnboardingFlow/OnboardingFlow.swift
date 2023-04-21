@@ -9,12 +9,12 @@
 import BalanceSharedContext
 import SwiftUI
 
-
-/// Displays an multi-step onboarding flow for the CS342 2023 Balance Team Application.
+// Displays an multi-step onboarding flow for the CS342 2023 Balance Team Application.
 public struct OnboardingFlow: View {
     enum Step: String, Codable {
         case login
         case signUp
+        case avatar
     }
     
     
@@ -30,6 +30,8 @@ public struct OnboardingFlow: View {
                         BalanceLogin()
                     case .signUp:
                         BalanceSignUp()
+                    case .avatar:
+                        AvatarSelectionView()
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)

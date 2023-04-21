@@ -59,35 +59,42 @@ struct VideoGalleryView: View {
     ]
     
     var body: some View {
-        HeaderMenu(title: "Look Videos")
-        VStack(alignment: .center, spacing: 10) {
-            highlightsTitle
-            PagingView(index: $index.animation(), maxIndex: ids.count - 1) {
-                ForEach(ids, id: \.self) { idData in
-                    YouTubeGalleryView(videoId: idData)
-                        .frame(width: 300, height: 300)
-                        .padding()
+        ActivityLogContainer {
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Look Videos")
+                    VStack(alignment: .center, spacing: 10) {
+                        highlightsTitle
+                        PagingView(index: $index.animation(), maxIndex: ids.count - 1) {
+                            ForEach(ids, id: \.self) { idData in
+                                YouTubeGalleryView(videoId: idData)
+                                    .frame(width: 300, height: 300)
+                                    .padding()
+                            }
+                        }
+                        .aspectRatio(4 / 3, contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        PageControl(index: $index, maxIndex: ids.count)
+                            .padding(.top, 5.0)
+                        categoriesTitle
+                        tagsView
+                        if animalsTag {
+                            VideoCollectionView(videosArray: idsFunny)
+                                .padding(.horizontal, 10.0)
+                        } else if landscapeTag {
+                            VideoCollectionView(videosArray: idsLandscape)
+                                .padding(.horizontal, 10.0)
+                        } else if funnyTag {
+                            VideoCollectionView(videosArray: idsFunny)
+                                .padding(.horizontal, 10.0)
+                        }
+                        Spacer()
+                    }
+                    .edgesIgnoringSafeArea(.all)
                 }
             }
-            .aspectRatio(4 / 3, contentMode: .fit)
-            .clipShape(RoundedRectangle(cornerRadius: 15))
-            PageControl(index: $index, maxIndex: ids.count)
-                .padding(.top, 5.0)
-            categoriesTitle
-            tagsView
-            if animalsTag {
-                VideoCollectionView(videosArray: idsFunny)
-                    .padding(.horizontal, 10.0)
-            } else if landscapeTag {
-                VideoCollectionView(videosArray: idsLandscape)
-                    .padding(.horizontal, 10.0)
-            } else if funnyTag {
-                VideoCollectionView(videosArray: idsFunny)
-                    .padding(.horizontal, 10.0)
-            }
-            Spacer()
         }
-        .edgesIgnoringSafeArea(.all)
     }
     
     var highlightsTitle: some View {

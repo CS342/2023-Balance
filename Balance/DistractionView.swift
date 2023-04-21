@@ -11,18 +11,22 @@ import SwiftUI
 struct DistractionView: View {
     var body: some View {
         ActivityLogContainer {
-            HeaderMenu(title: "Distraction")
-            ScrollView(.vertical) {
-                VStack(spacing: 20) {
-                    picturesOption
-                    musicOption
-                    videosOption
-                    gamesOption
-                    writeOption
-                    drawingOption
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Distraction")
+                    ScrollView(.vertical) {
+                        VStack(spacing: 20) {
+                            picturesOption
+                            musicOption
+                            videosOption
+                            gamesOption
+                            drawingOption
+                        }
+                        .padding(10)
+                        .ignoresSafeArea(.all)
+                    }
                 }
-                .padding(10)
-                .ignoresSafeArea(.all)
             }
         }
     }
@@ -33,7 +37,7 @@ struct DistractionView: View {
                 viewName: "Drawing Something Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    // define action
+                    DrawView()
                 }
             )
         ) {

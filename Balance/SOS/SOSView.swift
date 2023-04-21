@@ -49,7 +49,7 @@ struct SOSView: View {
                 }
                 saveButton
             }
-        }
+        }.background(backgroudColor)
     }
     
     var saveButton: some View {

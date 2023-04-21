@@ -9,7 +9,6 @@ import SwiftUI
 import UIKit
 
 // This class only logs information when the user interacts with a button (or some selectable content). We don't care when the view appers or disappears.
-
 struct ActivityLogButtonStyle: PrimitiveButtonStyle {
     @EnvironmentObject var activityLogEntry: ActivityLogEntry
     

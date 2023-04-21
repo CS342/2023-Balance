@@ -14,23 +14,26 @@ struct DistractionCellView: View {
     var pointVal: String
     
     var body: some View {
-        HStack {
-            iconView
-            VStack {
-                HStack {
-                    Spacer()
-                    pointValueView
-                }.offset(y: 5)
-                textView
-                descriptionView
+        ActivityLogContainer {
+            HStack {
+                iconView
+                VStack {
+                    HStack {
+                        Spacer()
+                        pointValueView
+                    }.offset(y: 5)
+                    textView
+                    descriptionView
+                }
             }
+            .frame(maxWidth: 311, maxHeight: 120)
+            .foregroundColor(fcolor)
+            .background(RoundedRectangle(cornerRadius: 20).fill(.white))
+            .clipped()
+            .frame(height: 120.0)
+            .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
+            .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
         }
-        .frame(maxWidth: 311, maxHeight: 120)
-        .foregroundColor(fcolor)
-        .background(RoundedRectangle(cornerRadius: 20).fill(.white))
-        .clipped()
-        .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
-        .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
     }
     
     var textView: some View {
@@ -74,6 +77,7 @@ struct DistractionCellView: View {
             .resizable()
             .scaledToFit()
             .padding(15.0)
+            .frame(height: 120.0)
             .accessibilityLabel(Text(text))
             .frame(maxWidth: 120)
             .background(Color.random.opacity(0.4))

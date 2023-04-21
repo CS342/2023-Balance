@@ -21,31 +21,37 @@ struct HomeView: View {
     @State var showMe = false
     
     var clipsToBounds = false
-
+    
     var body: some View {
         ActivityLogContainer {
-            NavigationStack {
-                VStack {
-                    HeaderHome(name: "Home", avatar: "BalanceLogo", userID: "00007")
-                    ScrollView(.vertical) {
-                        VStack(spacing: 20) {
-                            distractOption
-                            chillOption
-                            fealingLearningOption
-                            diaryOption
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                NavigationStack {
+                    VStack {
+                        HeaderHome(name: "Home", avatar: "BalanceLogo", userID: "00007")
+                        ZStack(alignment: .bottomLeading) {
+                            ScrollView(.vertical) {
+                                VStack(spacing: 20) {
+                                    distractOption
+                                    chillOption
+                                    fealingLearningOption
+                                    diaryOption
+                                }
+                                .padding(10)
+                                .ignoresSafeArea(.all)
+                            }.zIndex(1)
+                            Spacer()
+                            cloudImage.zIndex(-1)
                         }
-                        .padding(10)
-                        .ignoresSafeArea(.all)
                     }
-                    Spacer()
+                    .navigationTitle("")
+                    .navigationBarTitle("", displayMode: .inline)
+                    .navigationBarHidden(true)
+                    .navigationBarBackButtonHidden(true)
+                    .ignoresSafeArea()
+                    .accentColor(nil)
+                    .overlay(loadingOverlay)
                 }
-                .navigationTitle("")
-                .navigationBarTitle("", displayMode: .inline)
-                .navigationBarHidden(true)
-                .navigationBarBackButtonHidden(true)
-                .ignoresSafeArea()
-                .accentColor(nil)
-                .overlay(loadingOverlay)
             }
         }
     }
@@ -79,6 +85,13 @@ struct HomeView: View {
                 }
             }.opacity(showMe ? 0 : 1)
         }
+    }
+    
+    var cloudImage: some View {
+        Image("cloud")
+            .accessibilityLabel("cloud")
+            .clipped()
+            .background(Color.clear)
     }
     
     var sosButton: some View {
@@ -130,7 +143,7 @@ struct HomeView: View {
                 viewName: "Feeling learning Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    ChillView()
+                    FeelingView()
                 }
             )
         ) {
@@ -144,7 +157,7 @@ struct HomeView: View {
                 viewName: "Let's chill out Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    MeditationView()
+                    ChillView()
                 }
             )
         ) {

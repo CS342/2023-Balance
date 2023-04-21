@@ -21,31 +21,36 @@ struct MeditationView: View {
     ]
     
     var body: some View {
-        HeaderMenu(title: "Guided Meditation")
-        VStack(alignment: .center, spacing: 10) {
-            highlightsTitle
-            Spacer()
-            ScrollView(.horizontal) {
-                HStack {
-                    videosArrayView
+        ZStack {
+            backgroudColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Guided Meditation")
+                VStack(alignment: .center, spacing: 10) {
+                    highlightsTitle
+                    Spacer()
+                    ScrollView(.horizontal) {
+                        HStack {
+                            videosArrayView
+                        }
+                    }
+                    categoriesTitle
+                    tagsView
+                    if showingGuided {
+                        MeditationSpotifyView()
+                            .padding()
+                    } else if showingYoutube {
+                        YoutubeView()
+                            .padding()
+                    } else if showingSleep {
+                        SleepView()
+                            .padding()
+                    }
+                    Spacer()
                 }
+                .padding()
+                .edgesIgnoringSafeArea(.all)
             }
-            categoriesTitle
-            tagsView
-            if showingGuided {
-                MeditationSpotifyView()
-                    .padding()
-            } else if showingYoutube {
-                YoutubeView()
-                    .padding()
-            } else if showingSleep {
-                SleepView()
-                    .padding()
-            }
-            Spacer()
         }
-        .padding()
-        .edgesIgnoringSafeArea(.all)
     }
     
     var highlightsTitle: some View {

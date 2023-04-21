@@ -46,7 +46,7 @@ struct LocationView: View {
                 Spacer()
                 nextButtonView
             }
-        }
+        }.background(backgroudColor)
     }
     
     var titleView: some View {
