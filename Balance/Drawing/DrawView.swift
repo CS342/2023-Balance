@@ -26,6 +26,8 @@ struct DrawingView: UIViewRepresentable {
     func makeUIView(context: Context) -> PKCanvasView {
         canvas.drawingPolicy = .anyInput
         canvas.tool = isdraw ? ink : eraser
+        let imageView = UIImageView(image: UIImage(systemName: "pencil"))
+        canvas.insertSubview(imageView, at: 1)
         return canvas
     }
     
@@ -38,11 +40,21 @@ struct DrawingView: UIViewRepresentable {
 struct DrawView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.undoManager) private var undoManager
+    @ObservedObject var store: DrawStore
+    @Binding var currentDraw: Draw
+    @Binding var showingEditor: Bool
     @State var canvas = PKCanvasView()
     @State var isdraw = true
     @State var color: Color = .black
     @State var type: PKInkingTool.InkType = .pencil
-    
+    @State private var id = UUID().uuidString
+    @State private var savedDraws: [Draw] = []
+    @State private var emptyDrawAlert = false
+    @State private var image = ""
+    @State private var title = ""
+    @State private var canvasImage = Image(base64String: "").accessibilityLabel("canvasImage")
+//    @Binding var imageCanvas: UIImage
+
     var body: some View {
         ZStack {
             backgroudColor.edgesIgnoringSafeArea(.all)
@@ -58,11 +70,55 @@ struct DrawView: View {
                             colorButton(color: color)
                         }
                         ColorPicker("", selection: $color)
-//                        Spacer()
                     }
+                }.onAppear {
+                    self.title = currentDraw.title
+                    self.image = currentDraw.image
+                    self.id = currentDraw.id
+                    let img = Image(base64String: currentDraw.image)?.accessibilityLabel("base64String")
                 }
-                saveButton
+                saveView
             }
+        }
+    }
+    
+    var saveView: some View {
+        HStack(spacing: 100) {
+            buttonSave
+                .buttonStyle(ActivityLogButtonStyle(activityDescription: "Saved a Draw"))
+                .font(.custom("Nunito-Bold", size: 17))
+                .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
+                .foregroundColor(.white)
+                .background(bcolor)
+                .cornerRadius(14)
+                .alert("Please enter a text before you save.", isPresented: $emptyDrawAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+        }
+    }
+    
+    var buttonSave: some View {
+        Button("Save") {
+//            if text.isEmpty {
+//                self.emptyDrawAlert = true
+//            }
+            let image = canvas.drawing.image(from: canvas.drawing.bounds, scale: 1)
+
+            let newDraw = Draw(
+                id: currentDraw.id,
+                title: "Draw id:" + currentDraw.id,
+                image: convertImageToBase64String(img: image),
+                date: Date()
+            )
+            
+            store.saveDraw(newDraw)
+            
+            DrawStore.save(draws: store.draws) { result in
+                if case .failure(let error) = result {
+                    print(error.localizedDescription)
+                }
+            }
+            self.showingEditor.toggle()
         }
     }
     
@@ -208,11 +264,28 @@ struct DrawView: View {
         // saving to album
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
+    
+    func convertImageToBase64String (img: UIImage) -> String {
+        let imageBase64String = img.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
+        return imageBase64String
+    }
+    
+    func convertBase64StringToImage (imageBase64String:String) -> UIImage {
+        let imageData = Data(base64Encoded: imageBase64String)
+        let image = UIImage(data: imageData!)
+        return image!
+    }
 }
 
-
 struct DrawView_Previews: PreviewProvider {
+    @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: "", date: Date())
+
     static var previews: some View {
-        DrawView()
+        let store = DrawStore()
+        DrawView(
+            store: store,
+            currentDraw: $currentDraw,
+            showingEditor: .constant(false)
+        )
     }
 }
