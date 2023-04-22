@@ -55,13 +55,13 @@ struct MeditationView: View {
     
     var highlightsTitle: some View {
         Text("Highlights").font(.custom("Nunito-Bold", size: 25))
-            .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
+            .foregroundColor(darkBlueColor)
             .offset(x: -110)
     }
     
     var categoriesTitle: some View {
         Text("Categories").font(.custom("Nunito-Bold", size: 20))
-            .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
+            .foregroundColor(darkBlueColor)
             .offset(x: -110)
     }
     

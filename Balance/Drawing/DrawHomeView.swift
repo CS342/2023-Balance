@@ -9,12 +9,8 @@ import SwiftUI
 
 struct DrawHomeView: View {
     @StateObject var store = DrawStore()
-    @State private var showingEditor = false
-    @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: "", date: Date())
-
+    @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date())
     @Environment(\.scenePhase) private var scenePhase
-    let fcolor = Color(red: 0.25, green: 0.38, blue: 0.50, opacity: 1.00)
-    let bcolor = Color(red: 0.30, green: 0.79, blue: 0.94, opacity: 1.00)
     
     var body: some View {
         ZStack {
@@ -22,14 +18,9 @@ struct DrawHomeView: View {
             VStack {
                 HeaderMenu(title: "Drawing Something")
                 VStack(alignment: .center, spacing: 10) {
-                    newDiaryView
+                    newDrawView
                     previusView
                     drawList
-                }
-                .sheet(isPresented: $showingEditor) {
-                    ActivityLogBaseView(viewName: "New draw view") {
-                        drawView
-                    }
                 }
                 .onAppear {
                     DrawStore.load { result in
@@ -58,19 +49,18 @@ struct DrawHomeView: View {
     var drawView: some View {
         DrawView(
             store: store,
-            currentDraw: $currentDraw,
-            showingEditor: $showingEditor
+            currentDraw: $currentDraw
         )
     }
     
     var previusView: some View {
         Text("Previous Entries")
             .font(.custom("Nunito-Bold", size: 18))
-            .foregroundColor(fcolor)
+            .foregroundColor(darkBlueColor)
             .offset(x: -100)
     }
     
-    var newDiaryView: some View {
+    var newDrawView: some View {
         HStack {
             Image("drawingIcon")
                 .accessibilityLabel(Text("Draw icon"))
@@ -78,20 +68,30 @@ struct DrawHomeView: View {
             VStack(alignment: .leading) {
                 Text("Draw something new...")
                     .font(.custom("Nunito-Bold", size: 15))
-                Button("New Draw") {
-                    self.currentDraw = Draw(id: UUID().uuidString, title: "", image: "", date: Date())
-                    self.showingEditor.toggle()
-                }
-                .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Draw"))
-                .font(.custom("Nunito-Bold", size: 15))
-                .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
-                .foregroundColor(.white)
-                .background(bcolor)
-                .cornerRadius(14)
+                NavigationLink(destination: ActivityLogBaseView(
+                    viewName: "Draw Something Feature",
+                    isDirectChildToContainer: true,
+                    content: {
+                        DrawView(store: store, currentDraw: $currentDraw)
+                    }
+                ), label: {
+                    Button(action: {
+                        self.currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date())
+                    }) {
+                        Text("New Draw")
+                    }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Draw"))
+                    .font(.custom("Nunito-Bold", size: 15))
+                    .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
+                    .foregroundColor(.white)
+                    .background(primaryColor)
+                    .cornerRadius(14)
+                    .allowsHitTesting(false)
+                })
             }
         }
         .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)
-        .foregroundColor(fcolor)
+        .foregroundColor(darkBlueColor)
         .background(RoundedRectangle(cornerRadius: 20).fill(.white))
         .clipped()
         .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
@@ -100,18 +100,44 @@ struct DrawHomeView: View {
     var drawList: some View {
         List {
             ForEach(store.draws, id: \.self) { draw in
-                Button(action: {
-                    self.currentDraw = draw
-                    self.showingEditor.toggle()
-                }) {
-                    PastDrawEntry(draw)
+                ZStack {
+                    Button(action: {
+                        self.currentDraw = draw
+                    }) {
+                        PastDrawEntry(draw)
+                    }
+                    
+                    NavigationLink(
+                        destination: ActivityLogBaseView(
+                            viewName: "Draw Something Feature",
+                            isDirectChildToContainer: true,
+                            content: {
+                                DrawView(store: store, currentDraw: $currentDraw)
+                            }
+                        )
+                    ) {
+                        EmptyView()
+                    }.opacity(0.0)
                 }
-                .buttonStyle(ActivityLogButtonStyle(activityDescription: "Selected past draw"))
                 .listRowSeparator(.hidden)
             }
             .onDelete(perform: delete)
         }
         .listStyle(.plain)
+    }
+    
+    var drawCell: some View {
+        NavigationLink(
+            destination: ActivityLogBaseView(
+                viewName: "Draw Something Feature",
+                isDirectChildToContainer: true,
+                content: {
+                    DrawView(store: store, currentDraw: $currentDraw)
+                }
+            )
+        ) {
+            EmptyView()
+        }
     }
     
     func delete(indexSet: IndexSet) {

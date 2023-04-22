@@ -27,7 +27,7 @@ struct DistractionCellView: View {
                 }
             }
             .frame(maxWidth: 311, maxHeight: 120)
-            .foregroundColor(fcolor)
+            .foregroundColor(darkBlueColor)
             .background(RoundedRectangle(cornerRadius: 20).fill(.white))
             .clipped()
             .frame(height: 120.0)

@@ -18,7 +18,7 @@ struct GamesCellView: View {
                 textView
             }
             .frame(maxWidth: 311, maxHeight: 120)
-            .foregroundColor(fcolor)
+            .foregroundColor(darkBlueColor)
             .background(RoundedRectangle(cornerRadius: 20).fill(.white))
             .clipped()
             .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)

@@ -64,7 +64,7 @@ struct SOSView: View {
                 .frame(height: 44.0)
         }
         .buttonBorderShape(.roundedRectangle(radius: 10))
-        .background(Color(#colorLiteral(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
+        .background(primaryColor)
         .cornerRadius(10)
         .padding(.horizontal, 20.0)
     }

@@ -31,7 +31,7 @@ struct ChillView: View {
     
     var whatTitle: some View {
         Text("What would you like to do?").font(.custom("Nunito-Bold", size: 25))
-            .foregroundColor(fcolor)
+            .foregroundColor(darkBlueColor)
             .multilineTextAlignment(.center)
             .lineLimit(2)
             .frame(minWidth: 0, maxWidth: .infinity)

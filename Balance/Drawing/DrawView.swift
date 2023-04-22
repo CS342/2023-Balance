@@ -26,8 +26,8 @@ struct DrawingView: UIViewRepresentable {
     func makeUIView(context: Context) -> PKCanvasView {
         canvas.drawingPolicy = .anyInput
         canvas.tool = isdraw ? ink : eraser
-        let imageView = UIImageView(image: UIImage(systemName: "pencil"))
-        canvas.insertSubview(imageView, at: 1)
+        canvas.minimumZoomScale = 1
+        canvas.maximumZoomScale = 1
         return canvas
     }
     
@@ -42,7 +42,6 @@ struct DrawView: View {
     @Environment(\.undoManager) private var undoManager
     @ObservedObject var store: DrawStore
     @Binding var currentDraw: Draw
-    @Binding var showingEditor: Bool
     @State var canvas = PKCanvasView()
     @State var isdraw = true
     @State var color: Color = .black
@@ -50,18 +49,23 @@ struct DrawView: View {
     @State private var id = UUID().uuidString
     @State private var savedDraws: [Draw] = []
     @State private var emptyDrawAlert = false
-    @State private var image = ""
+    @State private var image = Data()
     @State private var title = ""
-    @State private var canvasImage = Image(base64String: "").accessibilityLabel("canvasImage")
-//    @Binding var imageCanvas: UIImage
-
+    @State private var showingAlert = false
+    @State var drawingSize = CGSize(width: 350, height: 350)
+    
     var body: some View {
         ZStack {
-            backgroudColor.edgesIgnoringSafeArea(.all)
+            Color.white.edgesIgnoringSafeArea(.all)
             VStack(spacing: 10) {
                 HeaderMenu(title: "Drawing something")
+                Spacer().frame(height: 20)
                 toolkitView
+                Spacer()
                 DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
+                    .frame(width: drawingSize.width, height: drawingSize.height)
+                    .border(Color.gray, width: 5)
+                
                 Spacer()
                 ScrollView(.horizontal) {
                     HStack(alignment: .center) {
@@ -75,70 +79,59 @@ struct DrawView: View {
                     self.title = currentDraw.title
                     self.image = currentDraw.image
                     self.id = currentDraw.id
-                    let img = Image(base64String: currentDraw.image)?.accessibilityLabel("base64String")
+                    let drawing = try? PKDrawing(data: currentDraw.image)
+                    canvas.drawing = drawing ?? PKDrawing()
+//                    let img = Image(base64String: currentDraw.image)?
+//                        .resizable()
+//                        .scaledToFit()
+//                        .clipped()
+//                        .frame(width: drawingSize.width, height: drawingSize.height)
+//                        .accessibilityLabel("base64String")
+//
+//                    canvas.backgroundColor = UIColor.clear
+//                    canvas.isOpaque = false
+//                    canvas.becomeFirstResponder()
+//
+//                    let imageView = UIImageView(image: img.asUIImage())
+//                    imageView.contentMode = .scaleAspectFit
+//
+//                    let subView = self.canvas.subviews[0]
+//                    subView.addSubview(imageView)
+//                    subView.sendSubviewToBack(imageView)
                 }
+                Spacer()
                 saveView
             }
         }
     }
     
     var saveView: some View {
-        HStack(spacing: 100) {
-            buttonSave
-                .buttonStyle(ActivityLogButtonStyle(activityDescription: "Saved a Draw"))
-                .font(.custom("Nunito-Bold", size: 17))
-                .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
-                .foregroundColor(.white)
-                .background(bcolor)
-                .cornerRadius(14)
-                .alert("Please enter a text before you save.", isPresented: $emptyDrawAlert) {
-                    Button("OK", role: .cancel) { }
-                }
-        }
-    }
-    
-    var buttonSave: some View {
-        Button("Save") {
-//            if text.isEmpty {
-//                self.emptyDrawAlert = true
-//            }
-            let image = canvas.drawing.image(from: canvas.drawing.bounds, scale: 1)
-
-            let newDraw = Draw(
-                id: currentDraw.id,
-                title: "Draw id:" + currentDraw.id,
-                image: convertImageToBase64String(img: image),
-                date: Date()
-            )
-            
-            store.saveDraw(newDraw)
-            
-            DrawStore.save(draws: store.draws) { result in
-                if case .failure(let error) = result {
-                    print(error.localizedDescription)
-                }
+        Button {
+            if self.title.isEmpty {
+                self.emptyDrawAlert = true
+            } else {
+                saveImage()
             }
-            self.showingEditor.toggle()
-        }
-    }
-    
-    var saveButton: some View {
-        Button(action: {
-            saveImage()
-        }) {
+        } label: {
             Text("Save")
                 .font(.system(.title2))
                 .padding(.horizontal, 10.0)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 44.0)
+                .font(.custom("Nunito-Bold", size: 17))
         }
         .buttonBorderShape(.roundedRectangle(radius: 10))
-        .background(Color(#colorLiteral(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
+        .background(primaryColor)
         .cornerRadius(10)
         .padding(.horizontal, 20.0)
+        .buttonStyle(ActivityLogButtonStyle(activityDescription: "Saved a Draw"))
+        .alert("Enter the title of the drawing", isPresented: $emptyDrawAlert) {
+            TextField("Title", text: $title)
+            Button("OK", action: saveImage)
+        }
     }
-    
+
     var toolkitView: some View {
         HStack {
             Spacer()
@@ -259,10 +252,35 @@ struct DrawView: View {
     }
     
     func saveImage() {
-        // getting image from Canvas
-        let image = canvas.drawing.image(from: canvas.drawing.bounds, scale: 1)
-        // saving to album
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+//        let image = canvas.drawing.image(from: canvas.drawing.bounds, scale: 1)
+//        let img = Image("mandala01")
+//            .resizable()
+//            .scaledToFit()
+//            .clipped()
+//            .frame(width: drawingSize.width, height: drawingSize.height)
+//            .accessibilityLabel("base64String")
+//        let image = canvas.snapshot
+        
+//        let image = canvas
+//            .frame(width: 300, height: 300)
+//            .snapshot()
+        
+        let newDraw = Draw(
+            id: currentDraw.id,
+            title: title,
+            image: canvas.drawing.dataRepresentation(),
+//            image: convertImageToBase64String(img: img.asUIImage().mergeWith(topImage: image) ?? UIImage()),
+            date: Date()
+        )
+        
+        store.saveDraw(newDraw)
+        
+        DrawStore.save(draws: store.draws) { result in
+            if case .failure(let error) = result {
+                print(error.localizedDescription)
+            }
+        }
+        dismiss()
     }
     
     func convertImageToBase64String (img: UIImage) -> String {
@@ -270,22 +288,19 @@ struct DrawView: View {
         return imageBase64String
     }
     
-    func convertBase64StringToImage (imageBase64String:String) -> UIImage {
-        let imageData = Data(base64Encoded: imageBase64String)
-        let image = UIImage(data: imageData!)
-        return image!
+    func submit() {
+        print("You entered \(title)")
     }
 }
 
 struct DrawView_Previews: PreviewProvider {
-    @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: "", date: Date())
-
+    @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: Data(), date: Date())
+    
     static var previews: some View {
         let store = DrawStore()
         DrawView(
             store: store,
-            currentDraw: $currentDraw,
-            showingEditor: .constant(false)
+            currentDraw: $currentDraw
         )
     }
 }

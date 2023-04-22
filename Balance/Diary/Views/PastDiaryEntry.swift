@@ -19,7 +19,7 @@ public struct PastDiaryEntry: View {
                     .foregroundColor(.gray)
                 Text(note.title)
                     .font(.custom("Nunito-Black", size: 18))
-                    .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
+                    .foregroundColor(darkBlueColor)
                 Text(note.text)
                     .font(.custom("Nunito", size: 14))
                     .foregroundColor(.gray)
@@ -27,7 +27,7 @@ public struct PastDiaryEntry: View {
                     .frame(maxWidth: 270, alignment: .leading)
             }
             Image(systemName: "chevron.right")
-                .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
+                .foregroundColor(darkBlueColor)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(20)
