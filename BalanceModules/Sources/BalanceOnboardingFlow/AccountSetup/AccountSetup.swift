@@ -18,12 +18,12 @@ import FirebaseCore
 import Onboarding
 import SwiftUI
 
-// swiftlint: disable closure_body_length
 struct AccountSetup: View {
-    @Binding private var onboardingSteps: [OnboardingFlow.Step]
-    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
+    @AppStorage(StorageKeys.onboardingFlowComplete)
+    var completedOnboardingFlow = false
     @EnvironmentObject var account: Account
     @EnvironmentObject var usernamePasswordAccountService: UsernamePasswordAccountService
+    @Binding private var onboardingSteps: [OnboardingFlow.Step]
     @State private var email: String = ""
     @State private var password: String = ""
     
@@ -81,8 +81,7 @@ struct AccountSetup: View {
         .ignoresSafeArea()
     }
     
-    @ViewBuilder
-    private var actionView: some View {
+    @ViewBuilder private var actionView: some View {
         //        if account.signedIn {
         //            OnboardingActionsView(
         //                "ACCOUNT_NEXT".moduleLocalized,
@@ -121,17 +120,6 @@ struct AccountSetup: View {
     
     init(onboardingSteps: Binding<[OnboardingFlow.Step]>) {
         self._onboardingSteps = onboardingSteps
-    }
-}
-
-struct RedCapsuleBackground: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .padding()
-            .background(
-                Capsule()
-                    .foregroundColor(.red)
-            )
     }
 }
 

@@ -21,10 +21,7 @@ struct DiaryNoteEntryView: View {
     @State private var burningNote = false
     @State private var burnComplete = false
     @State private var emptyNoteAlert = false
-    
-    let fcolor = Color(red: 0.25, green: 0.38, blue: 0.50, opacity: 1.00)
-    let bcolor = Color(red: 0.30, green: 0.79, blue: 0.94, opacity: 1.00)
-    
+       
     var body: some View {
         ZStack {
             VStack {
@@ -71,7 +68,7 @@ struct DiaryNoteEntryView: View {
                 .font(.custom("Nunito-Bold", size: 17))
                 .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
                 .foregroundColor(.white)
-                .background(bcolor)
+                .background(primaryColor)
                 .cornerRadius(14)
                 .alert("Please enter a text before you save.", isPresented: $emptyNoteAlert) {
                     Button("OK", role: .cancel) { }
@@ -80,11 +77,11 @@ struct DiaryNoteEntryView: View {
                 .buttonStyle(ActivityLogButtonStyle(activityDescription: "Burned Diary Note"))
                 .font(.custom("Nunito-Bold", size: 17))
                 .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
-                .foregroundColor(bcolor)
+                .foregroundColor(darkBlueColor)
                 .background(.white)
                 .overlay(
                     RoundedRectangle(cornerRadius: 14)
-                        .stroke(bcolor, lineWidth: 1)
+                        .stroke(darkBlueColor, lineWidth: 1)
                 )
         }
     }

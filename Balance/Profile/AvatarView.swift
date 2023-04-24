@@ -26,7 +26,7 @@ struct AvatarView: View {
         }
         .padding(15.0)
         .frame(maxWidth: 100, maxHeight: 100)
-        .foregroundColor(fcolor)
+        .foregroundColor(darkBlueColor)
         .background(RoundedRectangle(cornerRadius: 20).fill(.white))
         .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
     }

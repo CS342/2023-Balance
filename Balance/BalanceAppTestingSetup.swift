@@ -11,7 +11,8 @@ import SwiftUI
 
 
 private struct BalanceTestingSetup: ViewModifier {
-    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
+    @AppStorage(StorageKeys.onboardingFlowComplete)
+    var completedOnboardingFlow = false
     
     
     func body(content: Content) -> some View {

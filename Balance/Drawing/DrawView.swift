@@ -26,6 +26,8 @@ struct DrawingView: UIViewRepresentable {
     func makeUIView(context: Context) -> PKCanvasView {
         canvas.drawingPolicy = .anyInput
         canvas.tool = isdraw ? ink : eraser
+        canvas.minimumZoomScale = 1
+        canvas.maximumZoomScale = 1
         return canvas
     }
     
@@ -38,49 +40,81 @@ struct DrawingView: UIViewRepresentable {
 struct DrawView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.undoManager) private var undoManager
+    @ObservedObject var store: DrawStore
+    @Binding var currentDraw: Draw
     @State var canvas = PKCanvasView()
     @State var isdraw = true
     @State var color: Color = .black
     @State var type: PKInkingTool.InkType = .pencil
+    @State private var id = UUID().uuidString
+    @State private var savedDraws: [Draw] = []
+    @State private var emptyDrawAlert = false
+    @State private var image = Data()
+    @State private var title = ""
+    @State private var showingAlert = false
+    @State var drawingSize = CGSize(width: 350, height: 350)
+    @State var backgroundImage = ""
+    @State var isNewDraw = false
     
     var body: some View {
         ZStack {
-            backgroudColor.edgesIgnoringSafeArea(.all)
+            Color.white.edgesIgnoringSafeArea(.all)
             VStack(spacing: 10) {
                 HeaderMenu(title: "Drawing something")
+                Spacer().frame(height: 20)
                 toolkitView
-                DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
                 Spacer()
-                ScrollView(.horizontal) {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        ForEach([Color.yellow, .green, .orange, .blue, .red, .pink, .purple, .brown, .black], id: \.self) { color in
-                            colorButton(color: color)
-                        }
-                        ColorPicker("", selection: $color)
-//                        Spacer()
+                DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
+                    .frame(width: drawingSize.width, height: drawingSize.height)
+                    .border(Color.gray, width: 5)
+                Spacer()
+                colorView
+                    .onAppear {
+                        loadCurrentDraw()
                     }
-                }
-                saveButton
+                Spacer()
+                saveView
             }
         }
     }
     
-    var saveButton: some View {
-        Button(action: {
-            saveImage()
-        }) {
+    var colorView: some View {
+        ScrollView(.horizontal) {
+            HStack(alignment: .center) {
+                Spacer()
+                ForEach([Color.yellow, .green, .orange, .blue, .red, .pink, .purple, .brown, .black], id: \.self) { color in
+                    colorButton(color: color)
+                }
+                ColorPicker("", selection: $color)
+            }
+        }
+    }
+    
+    var saveView: some View {
+        Button {
+            if self.title.isEmpty {
+                self.emptyDrawAlert = true
+            } else {
+                saveImage()
+            }
+        } label: {
             Text("Save")
                 .font(.system(.title2))
                 .padding(.horizontal, 10.0)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 44.0)
+                .font(.custom("Nunito-Bold", size: 17))
         }
         .buttonBorderShape(.roundedRectangle(radius: 10))
-        .background(Color(#colorLiteral(red: 0.30, green: 0.79, blue: 0.94, alpha: 1.00)))
+        .background(primaryColor)
         .cornerRadius(10)
         .padding(.horizontal, 20.0)
+        .buttonStyle(ActivityLogButtonStyle(activityDescription: "Saved a Draw"))
+        .alert("Enter the title of the drawing", isPresented: $emptyDrawAlert) {
+            TextField("Title", text: $title)
+            Button("OK", action: saveImage)
+        }
     }
     
     var toolkitView: some View {
@@ -187,6 +221,34 @@ struct DrawView: View {
         }
     }
     
+    func loadCurrentDraw() {
+        if self.currentDraw.backImage.isEmpty {
+            self.currentDraw.backImage = backgroundImage
+        }
+        self.title = currentDraw.title
+        self.image = currentDraw.image
+        self.id = currentDraw.id
+        let drawing = try? PKDrawing(data: currentDraw.image)
+        canvas.drawing = drawing ?? PKDrawing()
+        let img = Image(currentDraw.backImage)
+            .resizable()
+            .scaledToFit()
+            .clipped()
+            .frame(width: drawingSize.width, height: drawingSize.height)
+            .accessibilityLabel("base64String")
+        
+        canvas.backgroundColor = UIColor.clear
+        canvas.isOpaque = false
+        canvas.becomeFirstResponder()
+        
+        let imageView = UIImageView(image: img.asUIImage())
+        imageView.contentMode = .scaleAspectFit
+        
+        let subView = self.canvas.subviews[0]
+        subView.addSubview(imageView)
+        subView.sendSubviewToBack(imageView)
+    }
+    
     @ViewBuilder
     func colorButton(color: Color) -> some View {
         Button {
@@ -203,16 +265,38 @@ struct DrawView: View {
     }
     
     func saveImage() {
-        // getting image from Canvas
-        let image = canvas.drawing.image(from: canvas.drawing.bounds, scale: 1)
-        // saving to album
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        let newDraw = Draw(
+            id: currentDraw.id,
+            title: title,
+            image: canvas.drawing.dataRepresentation(),
+            date: Date(),
+            backImage: currentDraw.backImage
+        )
+        
+        store.saveDraw(newDraw)
+        
+        DrawStore.save(draws: store.draws) { result in
+            if case .failure(let error) = result {
+                print(error.localizedDescription)
+            }
+        }
+        
+        if isNewDraw {
+            NavigationUtil.popToRootView()
+        } else {
+            dismiss()
+        }
     }
 }
 
-
 struct DrawView_Previews: PreviewProvider {
+    @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: Data(), date: Date(), backImage: "mandala1")
+    
     static var previews: some View {
-        DrawView()
+        let store = DrawStore()
+        DrawView(
+            store: store,
+            currentDraw: $currentDraw
+        )
     }
 }
