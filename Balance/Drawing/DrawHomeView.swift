@@ -9,8 +9,9 @@ import SwiftUI
 
 struct DrawHomeView: View {
     @StateObject var store = DrawStore()
-    @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date())
+    @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
     @Environment(\.scenePhase) private var scenePhase
+    @State private var isShowingSecondView = false
     
     var body: some View {
         ZStack {
@@ -65,29 +66,30 @@ struct DrawHomeView: View {
             Image("drawingIcon")
                 .accessibilityLabel(Text("Draw icon"))
                 .offset(x: -6, y: 2)
-            VStack(alignment: .leading) {
+            VStack {
                 Text("Draw something new...")
                     .font(.custom("Nunito-Bold", size: 15))
-                NavigationLink(destination: ActivityLogBaseView(
+                Button(action: {
+                    isShowingSecondView = true
+                    self.currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
+                }) {
+                    Text("New Draw")
+                        .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Draw"))
+                        .font(.custom("Nunito-Bold", size: 15))
+                        .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
+                        .foregroundColor(.white)
+                        .background(primaryColor)
+                        .cornerRadius(14)
+                        .allowsHitTesting(false)
+                }
+            }.navigationDestination(isPresented: $isShowingSecondView) {
+                ActivityLogBaseView(
                     viewName: "Draw Something Feature",
                     isDirectChildToContainer: true,
                     content: {
-                        DrawView(store: store, currentDraw: $currentDraw)
+                        BackgroundDrawView(currentDraw: $currentDraw, store: store)
                     }
-                ), label: {
-                    Button(action: {
-                        self.currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date())
-                    }) {
-                        Text("New Draw")
-                    }
-                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Draw"))
-                    .font(.custom("Nunito-Bold", size: 15))
-                    .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
-                    .foregroundColor(.white)
-                    .background(primaryColor)
-                    .cornerRadius(14)
-                    .allowsHitTesting(false)
-                })
+                )
             }
         }
         .frame(maxWidth: 349, maxHeight: 112, alignment: .leading)

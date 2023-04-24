@@ -18,7 +18,6 @@ struct UserView: View {
     @EnvironmentObject var account: Account
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     
-    
     var body: some View {
         userInformation
             .padding()
@@ -30,8 +29,7 @@ struct UserView: View {
     }
     
     
-    @ViewBuilder
-    private var userInformation: some View {
+    @ViewBuilder var userInformation: some View {
         HStack(spacing: 16) {
             if account.signedIn,
                let user = firebaseAccountConfiguration.user,

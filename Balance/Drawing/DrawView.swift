@@ -53,6 +53,7 @@ struct DrawView: View {
     @State private var title = ""
     @State private var showingAlert = false
     @State var drawingSize = CGSize(width: 350, height: 350)
+    @State var backgroundImage = ""
     
     var body: some View {
         ZStack {
@@ -65,42 +66,25 @@ struct DrawView: View {
                 DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
                     .frame(width: drawingSize.width, height: drawingSize.height)
                     .border(Color.gray, width: 5)
-                
                 Spacer()
-                ScrollView(.horizontal) {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        ForEach([Color.yellow, .green, .orange, .blue, .red, .pink, .purple, .brown, .black], id: \.self) { color in
-                            colorButton(color: color)
-                        }
-                        ColorPicker("", selection: $color)
+                colorView
+                    .onAppear {
+                        loadCurrentDraw()
                     }
-                }.onAppear {
-                    self.title = currentDraw.title
-                    self.image = currentDraw.image
-                    self.id = currentDraw.id
-                    let drawing = try? PKDrawing(data: currentDraw.image)
-                    canvas.drawing = drawing ?? PKDrawing()
-//                    let img = Image(base64String: currentDraw.image)?
-//                        .resizable()
-//                        .scaledToFit()
-//                        .clipped()
-//                        .frame(width: drawingSize.width, height: drawingSize.height)
-//                        .accessibilityLabel("base64String")
-//
-//                    canvas.backgroundColor = UIColor.clear
-//                    canvas.isOpaque = false
-//                    canvas.becomeFirstResponder()
-//
-//                    let imageView = UIImageView(image: img.asUIImage())
-//                    imageView.contentMode = .scaleAspectFit
-//
-//                    let subView = self.canvas.subviews[0]
-//                    subView.addSubview(imageView)
-//                    subView.sendSubviewToBack(imageView)
-                }
                 Spacer()
                 saveView
+            }
+        }
+    }
+    
+    var colorView: some View {
+        ScrollView(.horizontal) {
+            HStack(alignment: .center) {
+                Spacer()
+                ForEach([Color.yellow, .green, .orange, .blue, .red, .pink, .purple, .brown, .black], id: \.self) { color in
+                    colorButton(color: color)
+                }
+                ColorPicker("", selection: $color)
             }
         }
     }
@@ -131,7 +115,7 @@ struct DrawView: View {
             Button("OK", action: saveImage)
         }
     }
-
+    
     var toolkitView: some View {
         HStack {
             Spacer()
@@ -236,6 +220,34 @@ struct DrawView: View {
         }
     }
     
+    func loadCurrentDraw() {
+        if self.currentDraw.backImage.isEmpty {
+            self.currentDraw.backImage = backgroundImage
+        }
+        self.title = currentDraw.title
+        self.image = currentDraw.image
+        self.id = currentDraw.id
+        let drawing = try? PKDrawing(data: currentDraw.image)
+        canvas.drawing = drawing ?? PKDrawing()
+        let img = Image(currentDraw.backImage)
+            .resizable()
+            .scaledToFit()
+            .clipped()
+            .frame(width: drawingSize.width, height: drawingSize.height)
+            .accessibilityLabel("base64String")
+        
+        canvas.backgroundColor = UIColor.clear
+        canvas.isOpaque = false
+        canvas.becomeFirstResponder()
+        
+        let imageView = UIImageView(image: img.asUIImage())
+        imageView.contentMode = .scaleAspectFit
+        
+        let subView = self.canvas.subviews[0]
+        subView.addSubview(imageView)
+        subView.sendSubviewToBack(imageView)
+    }
+    
     @ViewBuilder
     func colorButton(color: Color) -> some View {
         Button {
@@ -252,25 +264,12 @@ struct DrawView: View {
     }
     
     func saveImage() {
-//        let image = canvas.drawing.image(from: canvas.drawing.bounds, scale: 1)
-//        let img = Image("mandala01")
-//            .resizable()
-//            .scaledToFit()
-//            .clipped()
-//            .frame(width: drawingSize.width, height: drawingSize.height)
-//            .accessibilityLabel("base64String")
-//        let image = canvas.snapshot
-        
-//        let image = canvas
-//            .frame(width: 300, height: 300)
-//            .snapshot()
-        
         let newDraw = Draw(
             id: currentDraw.id,
             title: title,
             image: canvas.drawing.dataRepresentation(),
-//            image: convertImageToBase64String(img: img.asUIImage().mergeWith(topImage: image) ?? UIImage()),
-            date: Date()
+            date: Date(),
+            backImage: currentDraw.backImage
         )
         
         store.saveDraw(newDraw)
@@ -282,19 +281,10 @@ struct DrawView: View {
         }
         dismiss()
     }
-    
-    func convertImageToBase64String (img: UIImage) -> String {
-        let imageBase64String = img.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
-        return imageBase64String
-    }
-    
-    func submit() {
-        print("You entered \(title)")
-    }
 }
 
 struct DrawView_Previews: PreviewProvider {
-    @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: Data(), date: Date())
+    @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: Data(), date: Date(), backImage: "mandala1")
     
     static var previews: some View {
         let store = DrawStore()

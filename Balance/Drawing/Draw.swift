@@ -12,4 +12,5 @@ public struct Draw: Codable, Equatable, Hashable, Identifiable {
     let title: String
     let image: Data
     let date: Date
+    var backImage: String
 }

@@ -13,8 +13,10 @@ import SwiftUI
 
 @main
 struct Balance: App {
-    @UIApplicationDelegateAdaptor(BalanceAppDelegate.self) var appDelegate
-    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
+    @UIApplicationDelegateAdaptor(BalanceAppDelegate.self)
+    var appDelegate
+    @AppStorage(StorageKeys.onboardingFlowComplete)
+    var completedOnboardingFlow = false
     
     @State var started = false
     

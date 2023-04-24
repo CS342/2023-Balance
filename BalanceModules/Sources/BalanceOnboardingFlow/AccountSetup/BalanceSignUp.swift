@@ -12,9 +12,9 @@ import SwiftUI
 
 
 struct BalanceSignUp: View {
+    static let parentEmail = SignUpOptions(rawValue: 1 << 4)
     @EnvironmentObject var account: Account
     @EnvironmentObject var usernamePasswordAccountService: UsernamePasswordAccountService
-    static let parentEmail = SignUpOptions(rawValue: 1 << 4)
 
     var body: some View {
         UsernamePasswordSignUpView(
@@ -23,10 +23,10 @@ struct BalanceSignUp: View {
                 /* ... */
             ],
             header: {
-                //Text("A Header View ...")
+                // Text("A Header View ...")
             },
             footer: {
-                //Text("A Footer View ...")
+                // Text("A Footer View ...")
             }
         )
             .environmentObject(UsernamePasswordAccountService())

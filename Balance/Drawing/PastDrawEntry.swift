@@ -21,12 +21,25 @@ struct PastDrawEntry: View {
                 HStack {
                     let drawing = try? PKDrawing(data: draw.image)
                     let image = drawing?.image(from: .init(x: 0, y: 0, width: 350, height: 350), scale: 1)
-                    Image(uiImage: image ?? UIImage())
-                        .resizable()
-                        .scaledToFit()
-                        .clipped()
-                        .frame(width: 80, height: 80)
-                        .accessibilityLabel("base64Cell")
+
+                    ZStack {
+                        Image(draw.backImage)
+                            .resizable()
+                            .scaledToFit()
+                            .clipped()
+                            .frame(width: 80, height: 80)
+                            .accessibilityLabel("backString")
+                            .zIndex(0)
+                        
+                        Image(uiImage: image ?? UIImage())
+                            .resizable()
+                            .scaledToFit()
+                            .clipped()
+                            .background(.clear)
+                            .frame(width: 80, height: 80)
+                            .accessibilityLabel("base64Cell")
+                            .zIndex(1)
+                    }
                     Spacer().frame(width: 20)
                     Text(draw.title)
                         .font(.custom("Nunito-Black", size: 18))
@@ -51,6 +64,6 @@ struct PastDrawEntry: View {
 
 struct PastDrawEntry_Previews: PreviewProvider {
     static var previews: some View {
-        PastDrawEntry(Draw(id: "1234", title: "Title", image: Data(), date: Date().previousDate()))
+        PastDrawEntry(Draw(id: "1234", title: "Title", image: Data(), date: Date().previousDate(), backImage: "mandala1"))
     }
 }
