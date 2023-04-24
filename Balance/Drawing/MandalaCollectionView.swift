@@ -22,8 +22,7 @@ struct MandalaCollectionView: View {
                             viewName: "Image Selected: " + images[index].name,
                             isDirectChildToContainer: true,
                             content: {
-                                DrawView(store: store, currentDraw: $currentDraw, backgroundImage: images[index].name)
-//                                ImageView(image: images[index].name)
+                                DrawView(store: store, currentDraw: $currentDraw, backgroundImage: images[index].name, isNewDraw: true)
                             }
                         )
                     ) {
@@ -40,10 +39,6 @@ struct MandalaCollectionView: View {
             }
         }
     }
-    
-//    init(imageArray: [Photo]) {
-//        self.images = imageArray
-//    }
 }
 
 #if DEBUG

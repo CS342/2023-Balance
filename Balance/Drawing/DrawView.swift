@@ -54,6 +54,7 @@ struct DrawView: View {
     @State private var showingAlert = false
     @State var drawingSize = CGSize(width: 350, height: 350)
     @State var backgroundImage = ""
+    @State var isNewDraw = false
     
     var body: some View {
         ZStack {
@@ -279,7 +280,12 @@ struct DrawView: View {
                 print(error.localizedDescription)
             }
         }
-        dismiss()
+        
+        if isNewDraw {
+            NavigationUtil.popToRootView()
+        } else {
+            dismiss()
+        }
     }
 }
 

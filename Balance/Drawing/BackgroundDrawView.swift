@@ -15,7 +15,8 @@ struct BackgroundDrawView: View {
     @State private var funnyTag = false
     @State var index = 0
     
-    let imageIDArray = ["118299", "100489", "130869", "115905", "115512", "131807", "102595"]
+    let highlightsImages = (1...11).map { Photo(name: "mandala\($0)") }
+
     let imgArray2 = (1...20).map { Photo(name: "coffee-\($0)") }
     let imgArray1 = (1...11).map { Photo(name: "mandala\($0)") }
     let imgArray3 = (1...8).map { Photo(name: "img\($0)") }
@@ -28,9 +29,9 @@ struct BackgroundDrawView: View {
                     HeaderMenu(title: "Draw Something")
                     VStack(alignment: .center, spacing: 10) {
                         highlightsTitle
-                        PagingView(index: $index.animation(), maxIndex: imgArray1.count - 1) {
-                            ForEach(imgArray1.indices, id: \.self) { index in
-                                Image(imgArray1[index].name)
+                        PagingView(index: $index.animation(), maxIndex: highlightsImages.count - 1) {
+                            ForEach(highlightsImages.indices, id: \.self) { index in
+                                Image(highlightsImages[index].name)
                                     .resizable()
                                     .scaledToFill()
                                     .accessibilityLabel(imgArray1[index].name)
@@ -38,7 +39,7 @@ struct BackgroundDrawView: View {
                         }
                         .aspectRatio(4 / 3, contentMode: .fit)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
-                        PageControl(index: $index, maxIndex: imgArray1.count)
+                        PageControl(index: $index, maxIndex: highlightsImages.count)
                             .padding(.top, 5.0)
                         categoriesTitle
                         tagsView
@@ -72,15 +73,6 @@ struct BackgroundDrawView: View {
             .foregroundColor(violetColor)
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 10)
-    }
-    
-    var imagesArrayView: some View {
-        ForEach(imageIDArray, id: \.self) { imgID in
-            // enable logging for a specific image being selected
-            ImgHighlightView(imgID: imgID)
-                .frame(width: UIScreen.main.bounds.width, height: 200)
-                .cornerRadius(20)
-        }
     }
     
     var tagsView: some View {
