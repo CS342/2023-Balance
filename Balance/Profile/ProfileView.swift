@@ -60,7 +60,7 @@ struct ProfileView: View {
             ProfileCellView(image: "figure.walk.motion", text: "Logout")
         }.simultaneousGesture(TapGesture().onEnded {
             print("Logout")
-           //account = nil
+           // account = nil
         })
     }
     

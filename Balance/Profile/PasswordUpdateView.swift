@@ -15,14 +15,13 @@ struct PasswordUpdateView: View {
     var body: some View {
         ZStack {
             backgroudColor.edgesIgnoringSafeArea(.all)
-            VStack(alignment: .center) {
+            VStack {
                 HeaderMenu(title: "Password")
-                Spacer().frame(height: 100)
-                Text("Passord update: ")
+                Spacer().frame(height: 40)
+                Text("Password update: ")
                     .font(.custom("Nunito-Bold", size: 18))
                     .foregroundColor(darkBlueColor)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(20)
                 ShowHideSecureField("new password", text: $password)
                     .font(.custom("Nunito", size: 16))
