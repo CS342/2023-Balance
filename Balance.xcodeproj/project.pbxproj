@@ -68,6 +68,10 @@
 		6C370AB129D396B2001781B3 /* DistractionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C370AB029D396B2001781B3 /* DistractionCellView.swift */; };
 		6C39EA2129C9EA620095573E /* SOSCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C39EA1F29C9EA610095573E /* SOSCellView.swift */; };
 		6C39EA2229C9EA620095573E /* SOSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C39EA2029C9EA610095573E /* SOSView.swift */; };
+		6C5523F329F8013B00F802D9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5523F229F8013B00F802D9 /* ProfileView.swift */; };
+		6C5523F529F8094C00F802D9 /* PasswordUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5523F429F8094C00F802D9 /* PasswordUpdateView.swift */; };
+		6C5523F729F80E8800F802D9 /* ShowHideSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5523F629F80E8800F802D9 /* ShowHideSecureField.swift */; };
+		6C5523F929F8126000F802D9 /* ProfileCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5523F829F8126000F802D9 /* ProfileCellView.swift */; };
 		6C58B24C29F6B174000FE8DD /* BackgroundDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B24B29F6B174000FE8DD /* BackgroundDrawView.swift */; };
 		6C58B24E29F6B492000FE8DD /* MandalaCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B24D29F6B492000FE8DD /* MandalaCollectionView.swift */; };
 		6C58B25029F6B673000FE8DD /* DrawHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B24F29F6B673000FE8DD /* DrawHighlightView.swift */; };
@@ -182,6 +186,10 @@
 		6C370AB029D396B2001781B3 /* DistractionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistractionCellView.swift; sourceTree = "<group>"; };
 		6C39EA1F29C9EA610095573E /* SOSCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSCellView.swift; sourceTree = "<group>"; };
 		6C39EA2029C9EA610095573E /* SOSView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSView.swift; sourceTree = "<group>"; };
+		6C5523F229F8013B00F802D9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		6C5523F429F8094C00F802D9 /* PasswordUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordUpdateView.swift; sourceTree = "<group>"; };
+		6C5523F629F80E8800F802D9 /* ShowHideSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHideSecureField.swift; sourceTree = "<group>"; };
+		6C5523F829F8126000F802D9 /* ProfileCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellView.swift; sourceTree = "<group>"; };
 		6C58B24B29F6B174000FE8DD /* BackgroundDrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDrawView.swift; sourceTree = "<group>"; };
 		6C58B24D29F6B492000FE8DD /* MandalaCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandalaCollectionView.swift; sourceTree = "<group>"; };
 		6C58B24F29F6B673000FE8DD /* DrawHighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHighlightView.swift; sourceTree = "<group>"; };
@@ -461,6 +469,10 @@
 				6C0A4BF129E9B10F003007C7 /* Avatar.swift */,
 				6C0A4BF429E9BCC1003007C7 /* Accesory.swift */,
 				6CAA076429E9FB3D00541F87 /* AvatarPreviewView.swift */,
+				6C5523F229F8013B00F802D9 /* ProfileView.swift */,
+				6C5523F429F8094C00F802D9 /* PasswordUpdateView.swift */,
+				6C5523F629F80E8800F802D9 /* ShowHideSecureField.swift */,
+				6C5523F829F8126000F802D9 /* ProfileCellView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -764,8 +776,10 @@
 				27525EB629B68B6100D1DF51 /* BurnedView.swift in Sources */,
 				27525EB529B68B5400D1DF51 /* SpotifyConfig.swift in Sources */,
 				27525EB429B68B5100D1DF51 /* Date.swift in Sources */,
+				6C5523F729F80E8800F802D9 /* ShowHideSecureField.swift in Sources */,
 				2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */,
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
+				6C5523F929F8126000F802D9 /* ProfileCellView.swift in Sources */,
 				4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */,
 				6CAA076729EAF04200541F87 /* FeelingView.swift in Sources */,
 				4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */,
@@ -778,6 +792,7 @@
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
 				6CA4EFE629EDEBB000877850 /* AccesoryView.swift in Sources */,
 				6C58B24C29F6B174000FE8DD /* BackgroundDrawView.swift in Sources */,
+				6C5523F329F8013B00F802D9 /* ProfileView.swift in Sources */,
 				6C370AAF29D393FA001781B3 /* DistractionView.swift in Sources */,
 				5E03E9A129BC15CF0041DD1C /* ActivityLogBaseView.swift in Sources */,
 				6C58B25229F7293A000FE8DD /* NavigationUtil.swift in Sources */,
@@ -798,6 +813,7 @@
 				6C8C5F0329F2CECF00D4DF77 /* DrawHomeView.swift in Sources */,
 				6C370AB129D396B2001781B3 /* DistractionCellView.swift in Sources */,
 				894A884529B7B27600CB347B /* NavigationView.swift in Sources */,
+				6C5523F529F8094C00F802D9 /* PasswordUpdateView.swift in Sources */,
 				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
 				6CB5181C29E45C0C007AADB4 /* BalanceExtentions.swift in Sources */,
 				6C39EA2229C9EA620095573E /* SOSView.swift in Sources */,

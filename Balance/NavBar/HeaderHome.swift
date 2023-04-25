@@ -123,14 +123,7 @@ public struct HeaderHome: View {
     
     var headerView: some View {
         HStack {
-            Button(action: {
-                showingAvatarSheet.toggle()
-                print("avatarView")
-            }) {
-                avatarView
-            }.sheet(isPresented: $showingAvatarSheet) {
-                AvatarSelectionView()
-            }
+            profileOption
             profileNameView
             Spacer()
             sosButtonHome
@@ -142,6 +135,20 @@ public struct HeaderHome: View {
                 .shadow(color: .gray, radius: 2, x: 0, y: 1)
                 .padding(.trailing, 10)
                 .padding(.bottom, 50)
+        }
+    }
+    
+    var profileOption: some View {
+        NavigationLink(
+            destination: ActivityLogBaseView(
+                viewName: "Profile view",
+                isDirectChildToContainer: true,
+                content: {
+                    ProfileView()
+                }
+            )
+        ) {
+            avatarView
         }
     }
     

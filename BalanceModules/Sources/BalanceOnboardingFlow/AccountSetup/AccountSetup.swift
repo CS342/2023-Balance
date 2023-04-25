@@ -8,124 +8,81 @@
 
 import Account
 import BalanceSharedContext
-import CardinalKit
 import class FHIR.FHIR
-import Firebase
 import FirebaseAccount
-import FirebaseAuth
-import FirebaseConfiguration
-import FirebaseCore
 import Onboarding
 import SwiftUI
 
+
 struct AccountSetup: View {
-    @AppStorage(StorageKeys.onboardingFlowComplete)
-    var completedOnboardingFlow = false
-    @EnvironmentObject var account: Account
-    @EnvironmentObject var usernamePasswordAccountService: UsernamePasswordAccountService
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
+    @EnvironmentObject var account: Account
+    
     
     var body: some View {
         OnboardingView(
             contentView: {
                 VStack {
-                    Spacer().frame(height: 100)
                     Image(uiImage: Bundle.module.image(withName: "BalanceLogo", fileExtension: "png"))
                         .accessibilityLabel(Text("Balance Logo"))
-                    Text("Login")
+                    Text("Welcome!")
+                        .bold()
+                        .font(.largeTitle)
                         .multilineTextAlignment(.center)
-                        .font(.custom("Nunito-Bold", size: 34))
-                    Text("Welcome back,")
-                        .font(.custom("Nunito-Light", size: 18))
+                        .padding(.bottom)
+                        .padding(.top, 30)
+                    Text("Sign up or login to continue.")
                         .multilineTextAlignment(.center)
-                    Text("Sign in to continue.")
-                        .font(.custom("Nunito-Light", size: 18))
-                    Spacer()
-                        .multilineTextAlignment(.center)
-//                    TextField("Email", text: $email)
-//                        .font(.custom("Nunito-Light", size: 18))
-//                    Divider()
-//                    HStack {
-//                        SecureField("Password", text: $password)
-//                            .font(.custom("Nunito-Light", size: 18))
-//                        Spacer()
-//                        Text("Forgot password?")
-//                            .font(.custom("Nunito-Light", size: 18))
-//                            .foregroundColor(primaryColor)
-//                    }
-//
-//                    Divider()
-                    
-                    //                    AccountServicesView(button: account.accountServices.first)
-                    //                    usernamePasswordAccountService.resetPasswordButton
-                    
-                    //                    UsernamePasswordLoginView().environmentObject(usernamePasswordAccountService)
-                    
-                    //                    Spacer()
-                    
                 }
             }, actionView: {
                 actionView
             }
         )
-        .onReceive(account.objectWillChange) {
-            if account.signedIn {
-                completedOnboardingFlow = true
-            }
-        }
-        .background(.background)
-        .navigationBarHidden(true)
-        .navigationBarTitle("", displayMode: .inline)
-        .ignoresSafeArea()
-    }
-    
-    @ViewBuilder private var actionView: some View {
-        //        if account.signedIn {
-        //            OnboardingActionsView(
-        //                "ACCOUNT_NEXT".moduleLocalized,
-        //                action: {
-        //                    onboardingSteps.append(.locationQuestion)
-        //                }
-        //            )
-        //        }
-        //        else {
-        
-//        OnboardingActionsView(
-//            primaryText: "ACCOUNT_SIGN_UP".moduleLocalized,
-//            primaryAction: {
-//                onboardingSteps.append(.signUp)
-//            },
-//            secondaryText: "ACCOUNT_LOGIN".moduleLocalized,
-//            secondaryAction: {
-//                onboardingSteps.append(.login)
-//            }
-//        )
-        VStack {
-            Login()
-            HStack(alignment: .center) {
-                Text("Don't hace an account?")
-                    .font(.custom("Nunito-Light", size: 18))
-                Button {
-                    onboardingSteps.append(.signUp)
-                } label: {
-                    Text("Create account")
-                        .font(.custom("Nunito-Light", size: 18))
-                        .foregroundColor(primaryColor)
+            .onReceive(account.objectWillChange) {
+                if account.signedIn {
+                    completedOnboardingFlow = true
                 }
             }
-        }
+            .background(Color(#colorLiteral(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00)))
     }
+    
+    
+    @ViewBuilder
+    private var actionView: some View {
+//        if account.signedIn {
+//            OnboardingActionsView(
+//                "ACCOUNT_NEXT".moduleLocalized,
+//                action: {
+//                    onboardingSteps.append(.locationQuestion)
+//                }
+//            )
+//        }
+//        else {
+            OnboardingActionsView(
+                primaryText: "ACCOUNT_SIGN_UP".moduleLocalized,
+                primaryAction: {
+                    onboardingSteps.append(.signUp)
+                },
+                secondaryText: "ACCOUNT_LOGIN".moduleLocalized,
+                secondaryAction: {
+                    onboardingSteps.append(.login)
+                }
+            )
+//        }
+    }
+    
     
     init(onboardingSteps: Binding<[OnboardingFlow.Step]>) {
         self._onboardingSteps = onboardingSteps
     }
 }
 
+
 #if DEBUG
 struct AccountSetup_Previews: PreviewProvider {
     @State private static var path: [OnboardingFlow.Step] = []
+    
     
     static var previews: some View {
         AccountSetup(onboardingSteps: $path)
