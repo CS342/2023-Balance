@@ -28,7 +28,7 @@ struct ProfileView: View {
                 }
                 
                 Spacer().frame(height: 50)
-                Text("Gonzalo Perisset")
+                Text("")
                     .font(.custom("Nunito-Bold", size: 36))
                     .foregroundColor(darkBlueColor)
                 Spacer().frame(height: 20)
