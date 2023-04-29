@@ -18,6 +18,7 @@ import FirebaseAccount
 struct HomeView: View {
     @EnvironmentObject var account: Account
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    @EnvironmentObject var authModel: AuthViewModel
     @State var showMe = false
     
     var clipsToBounds = false
@@ -28,7 +29,7 @@ struct HomeView: View {
                 backgroudColor.edgesIgnoringSafeArea(.all)
                 NavigationStack {
                     VStack {
-                        HeaderHome(name: "Home", avatar: "BalanceLogo", userID: "00007")
+                        HeaderHome()
                         ZStack(alignment: .bottomLeading) {
                             ScrollView(.vertical) {
                                 VStack(spacing: 20) {
@@ -181,11 +182,11 @@ struct HomeView: View {
 }
 
 #if DEBUG
-struct MainView_Previews: PreviewProvider {
+struct Home_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject(BalanceScheduler())
-            .environmentObject(MockDataStorageProvider())
+            .environmentObject(Account(accountServices: []))
+            .environmentObject(FirebaseAccountConfiguration<FHIR>(emulatorSettings: (host: "localhost", port: 9099)))
     }
 }
 #endif

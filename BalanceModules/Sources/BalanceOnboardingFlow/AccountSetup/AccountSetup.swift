@@ -21,6 +21,7 @@ struct AccountSetup: View {
     
     
     var body: some View {
+        account
         OnboardingView(
             contentView: {
                 VStack {

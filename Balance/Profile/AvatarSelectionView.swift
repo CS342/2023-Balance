@@ -16,6 +16,7 @@ class AccesoryManager: ObservableObject {
 }
 
 struct AvatarSelectionView: View {
+    @EnvironmentObject private var authModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var showingAvatarPreviewSheet = false
     @ObservedObject var avatarManager = AvatarManager()
@@ -24,7 +25,8 @@ struct AvatarSelectionView: View {
     @ObservedObject var accesoryManager = AccesoryManager()
     @State private var accesorySelection: Accesory.ID?
     @State private var accesorySelected: Accesory?
-    
+    var firstLoad: Bool
+
     private var gridItemLayout = [GridItem(.fixed(150)), GridItem(.fixed(150))]
     
     var body: some View {
@@ -35,8 +37,10 @@ struct AvatarSelectionView: View {
                     ScrollView {
                         Spacer().frame(height: 50)
                         avatarListView
-                        Spacer().frame(height: 50)
-                        accesoryListView
+                        if !firstLoad {
+                            Spacer().frame(height: 50)
+                            accesoryListView
+                        }
                     }
                     selectButton.background(.clear)
                 }
@@ -100,11 +104,20 @@ struct AvatarSelectionView: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: 44.0)
         }.sheet(isPresented: $showingAvatarPreviewSheet) {
-            AvatarPreviewView(avatarSelection: $avatarSelected, accesorySelection: $accesorySelected)
+            AvatarPreviewView(
+                avatarSelection: $avatarSelected,
+                accesorySelection: $accesorySelected,
+                firstLoad: firstLoad
+            )
+            .environmentObject(AuthViewModel())
         }
         .buttonBorderShape(.roundedRectangle(radius: 10))
         .background(primaryColor)
         .cornerRadius(10)
         .padding(.horizontal, 20.0)
+    }
+    
+    init(firstLoad: Bool) {
+        self.firstLoad = firstLoad
     }
 }

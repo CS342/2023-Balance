@@ -45,9 +45,17 @@
 		<string>Nunito-SemiBold.ttf</string>
 		<string>Nunito-SemiBoldItalic.ttf</string>
 		<string>Nunito-Bold.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Montserrat-Light.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>Montserrat-Thin.ttf</string>
+		<string>Montserrat-Medium.ttf</string>
 	</array>
 	<key>UIUserInterfacesStyle</key>
 	<string>Light</string>
+	<key>View controller-based status bar appearance</key>
+	<string>NO</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>

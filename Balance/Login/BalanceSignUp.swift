@@ -18,17 +18,17 @@ struct BalanceSignUp: View {
 
     var body: some View {
         SignUp {
-            Image(uiImage: Bundle.module.image(withName: "Balloon", fileExtension: "png"))
+            Spacer().frame(height: 80)
+            Image("BalanceLogo")
                 .resizable()
-                .scaledToFit()
-                .padding(.top, 32)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 300.0, height: 300.0)
                 .accessibility(hidden: true)
             Text("Sign up below to begin using Balance")
                 .multilineTextAlignment(.center)
                 .padding()
             Spacer(minLength: 0)
         }
-        .navigationBarTitleDisplayMode(.large)
         .background(backgroudColor)
     }
 }

@@ -5,12 +5,20 @@
 //  Created by Gonzalo Perisset on 14/04/2023.
 //
 
+import Account
+import BalanceSharedContext
+import FirebaseAccount
+import class FHIR.FHIR
 import SwiftUI
 
 struct AvatarPreviewView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    @EnvironmentObject var authModel: AuthViewModel
     @Binding var avatarSelection: Avatar?
     @Binding var accesorySelection: Accesory?
+    @State var profile = ProfileUser()
+    var firstLoad: Bool
     
     var body: some View {
         ActivityLogContainer {
@@ -38,6 +46,15 @@ struct AvatarPreviewView: View {
                     cancelButton
                 }
             }
+            .onAppear {
+                authModel.listenAuthentificationState()
+                self.profile = authModel.profile ?? ProfileUser()
+            }
+            .onChange(of: authModel.profile ?? ProfileUser()) { profile in
+                withAnimation(.easeInOut(duration: 1.0)) {
+                    self.profile = profile
+                }
+            }
         }
     }
     
@@ -58,34 +75,77 @@ struct AvatarPreviewView: View {
                 .frame(width: 200, height: 200)
                 .clipped()
                 .accessibilityLabel("avatarPreview")
-            Image(accesorySelection?.name ?? "acc_1")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 130, height: 130)
-                .clipped()
-                .accessibilityLabel("accesoryPreview")
-                .offset(x: 80, y: 80)
+            if !firstLoad {
+                Image(accesorySelection?.name ?? "acc_1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 130, height: 130)
+                    .clipped()
+                    .accessibilityLabel("accesoryPreview")
+                    .offset(x: 80, y: 80)
+            }
         }
     }
     
     var saveButton: some View {
-        Button(action: {
-            if let rootViewController = UIApplication.shared.currentUIWindow()?.rootViewController {
-                rootViewController.dismiss(animated: true)
+        Button(
+            action: {
+                if firstLoad {
+                    var user = retrive()
+                    user.avatar = avatarSelection?.name ?? ""
+                    authModel.signUp(userData: user)
+                } else {
+                    if self.profile.displayName.isEmpty {
+                        print("Error profile is nil")
+                        return
+                    }
+                    
+                    self.profile.avatar = avatarSelection?.name ?? ""
+                    UserProfileRepository.shared.createProfile(profile: self.profile) { profile, error in
+                        if let error = error {
+                            print("Error while fetching the user profile: \(error)")
+                            return
+                        } else {
+                            self.profile = profile ?? ProfileUser()
+                            print("User: " + (profile?.description() ?? "-"))
+                            dismiss()
+                        }
+                    }
+                }
+            },
+            label: {
+                Text("Select")
+                    .font(.system(.title2))
+                    .padding(.horizontal, 10.0)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 44.0)
+                    .font(.custom("Nunito-Bold", size: 16))
             }
-        }) {
-            Text("Select")
-                .font(.system(.title2))
-                .padding(.horizontal, 10.0)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .frame(height: 44.0)
-                .font(.custom("Nunito-Bold", size: 16))
-        }
+        )
         .buttonBorderShape(.roundedRectangle(radius: 10))
         .background(primaryColor)
         .cornerRadius(10)
         .padding(.horizontal, 20.0)
+        //
+        //        Button(action: {
+        //            authModel.saveProfileImage(profilePic: avatarSelection?.name)
+        ////            if let rootViewController = UIApplication.shared.currentUIWindow()?.rootViewController {
+        ////                rootViewController.dismiss(animated: true)
+        ////            }
+        //        }) {
+        //            Text("Select")
+        //                .font(.system(.title2))
+        //                .padding(.horizontal, 10.0)
+        //                .foregroundColor(.white)
+        //                .frame(maxWidth: .infinity)
+        //                .frame(height: 44.0)
+        //                .font(.custom("Nunito-Bold", size: 16))
+        //        }
+        //        .buttonBorderShape(.roundedRectangle(radius: 10))
+        //        .background(primaryColor)
+        //        .cornerRadius(10)
+        //        .padding(.horizontal, 20.0)
     }
     
     var cancelButton: some View {
@@ -104,5 +164,18 @@ struct AvatarPreviewView: View {
             .stroke(primaryColor, lineWidth: 2))
         .background(.white)
         .padding(.horizontal, 20.0)
+    }
+    
+    func retrive() -> ProfileUser {
+        do {
+            if let data = UserDefaults.standard.data(forKey: "user") {
+                let user = try JSONDecoder().decode(ProfileUser.self, from: data)
+                print(user)
+                return user
+            }
+        } catch {
+            print("Error decoding: \(error)")
+        }
+        return ProfileUser()
     }
 }

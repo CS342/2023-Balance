@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-import BalanceOnboardingFlow
+// import BalanceOnboardingFlow
 import BalanceSharedContext
 import CardinalKit
 import SwiftUI
@@ -24,7 +24,7 @@ struct Balance: App {
         WindowGroup {
             Group {
                 if completedOnboardingFlow {
-                    HomeView()
+                    HomeView().environmentObject(AuthViewModel())
                 } else {
                     OnboardingFlow()
                 }

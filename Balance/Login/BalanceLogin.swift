@@ -10,34 +10,30 @@ import Account
 import Onboarding
 import SwiftUI
 
-
-struct BalanceSignUp: View {
-    static let parentEmail = SignUpOptions(rawValue: 1 << 4)
-    @EnvironmentObject var account: Account
-    @EnvironmentObject var usernamePasswordAccountService: UsernamePasswordAccountService
-
+struct BalanceLogin: View {
     var body: some View {
-        SignUp {
-            Image(uiImage: Bundle.module.image(withName: "Balloon", fileExtension: "png"))
+        Login {
+            Spacer().frame(height: 80)
+            Image("BalanceLogo")
                 .resizable()
-                .scaledToFit()
-                .padding(.top, 32)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 300.0, height: 300.0)
                 .accessibility(hidden: true)
-            Text("Sign up below to begin using Balance")
+            Text("Login below to begin using Balance")
                 .multilineTextAlignment(.center)
+                .padding()
                 .padding()
             Spacer(minLength: 0)
         }
-        .navigationBarTitleDisplayMode(.large)
         .background(backgroudColor)
     }
 }
 
 
 #if DEBUG
-struct BalanceSignUp_Previews: PreviewProvider {
+struct BalanceLogin_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceSignUp()
+        BalanceLogin()
             .environmentObject(Account(accountServices: []))
     }
 }

@@ -6,12 +6,20 @@
 //
 
 import Account
-import BalanceOnboardingFlow
+import BalanceSharedContext
+import FirebaseAccount
+import class FHIR.FHIR
 import SwiftUI
 
 struct ProfileView: View {
+    @Environment(\.dismiss) private var dismiss
+    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
     @State private var showingAvatarSheet = false
     @EnvironmentObject var account: Account
+    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    @EnvironmentObject var authModel: AuthViewModel
+    @State private var displayName = ""
+    @State private var avatar = ""
 
     var body: some View {
         ZStack {
@@ -24,16 +32,21 @@ struct ProfileView: View {
                 }) {
                     profileView
                 }.sheet(isPresented: $showingAvatarSheet) {
-                    AvatarSelectionView()
+                    AvatarSelectionView(firstLoad: false).environmentObject(authModel)
                 }
                 
                 Spacer().frame(height: 50)
-                Text("")
+                Text(self.displayName)
                     .font(.custom("Nunito-Bold", size: 36))
+                    .foregroundColor(darkBlueColor)
+                Spacer().frame(height: 10)
+                Text(firebaseAccountConfiguration.user?.email ?? "Mail")
+                    .font(.custom("Montserrat-Thin", size: 20))
                     .foregroundColor(darkBlueColor)
                 Spacer().frame(height: 20)
                 ScrollView(.vertical) {
                     VStack(spacing: 20) {
+                        infoOption
                         updateOption
                         logoutOption
                     }
@@ -42,6 +55,30 @@ struct ProfileView: View {
                 }
                 Spacer()
             }
+        }
+        .onAppear {
+            authModel.listenAuthentificationState()
+            self.displayName = authModel.profile?.displayName ?? ""
+            self.avatar = authModel.profile?.avatar ?? ""
+        }
+        .onReceive(account.objectWillChange) {
+            if account.signedIn {
+                completedOnboardingFlow = true
+            }
+        }
+        .onChange(of: authModel.profile) { profile in
+            withAnimation(.easeInOut(duration: 1.0)) {
+                self.displayName = profile?.displayName ?? ""
+                self.avatar = profile?.avatar ?? ""
+            }
+        }
+    }
+    
+    var infoOption: some View {
+        NavigationLink(
+            destination: PersonalDataView().environmentObject(authModel)
+        ) {
+            ProfileCellView(image: "info", text: "Personal Data")
         }
     }
     
@@ -54,44 +91,95 @@ struct ProfileView: View {
     }
     
     var logoutOption: some View {
-        NavigationLink(
-            destination: OnboardingFlow()
-        ) {
-            ProfileCellView(image: "figure.walk.motion", text: "Logout")
-        }.simultaneousGesture(TapGesture().onEnded {
+        Button {
             print("Logout")
-           // account = nil
-        })
+            dismiss()
+            account.signedIn = false
+            completedOnboardingFlow = false
+            authModel.signOut()
+        } label: {
+            ProfileCellView(image: "figure.walk.motion", text: "Logout")
+        }
     }
     
     var profileView: some View {
         ZStack(alignment: .top) {
-            Rectangle()
-                .foregroundColor(primaryColor)
-                .edgesIgnoringSafeArea(.top)
-                .frame(height: 100)
-                .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
-            ZStack(alignment: .bottomTrailing) {
-                Image("avatar_2")
-                    .resizable()
-                    .aspectRatio(1.0, contentMode: .fit)
-                    .shadow(color: .gray, radius: 5)
-                    .frame(width: 180, height: 180)
-                    .accessibilityLabel("profileImage")
-                Image(systemName: "plus")
-                    .foregroundColor(.white)
-                    .frame(width: 25, height: 25)
-                    .background(Color.blue)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                    .accessibilityLabel("profilePlus")
-            }
+            splitBackgroundView
+            avatarView
         }
     }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
+    
+    var splitBackgroundView: some View {
+        Rectangle()
+            .foregroundColor(primaryColor)
+            .edgesIgnoringSafeArea(.top)
+            .frame(height: 100)
+            .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
+    }
+    
+    var avatarView: some View {
+        ZStack(alignment: .bottomTrailing) {
+            Image(self.avatar)
+                .resizable()
+                .scaledToFit()
+                .tint(.gray)
+                .background(Color.white)
+                .clipShape(Circle())
+                .frame(width: 180, height: 180)
+                .accessibilityLabel("avatar")
+                .shadow(color: darkGrayColor, radius: 6)
+//                .overlay(
+//                    Circle()
+//                        .strokeBorder(Color.white, lineWidth: 6)
+//                )
+            
+//            AsyncImage(
+//                url: firebaseAccountConfiguration.user?.photoURL,
+//                content: { image in
+//                    image.resizable()
+//                        .scaledToFit()
+//                        .tint(.gray)
+//                        .background(Color.white)
+//                        .clipShape(Circle())
+//                        .frame(width: 180, height: 180)
+//                        .accessibilityLabel("avatar")
+//                        .shadow(color: darkGrayColor, radius: 6)
+//                        .overlay(
+//                            Circle()
+//                                .strokeBorder(Color.white, lineWidth: 6)
+//                        )
+//                },
+//                placeholder: {
+//                    placeholderImage
+//                }
+//            )
+            plusIcon
+        }
+    }
+    
+    var placeholderImage: some View {
+        Image(systemName: "person.fill")
+            .resizable()
+            .scaledToFit()
+            .tint(.gray)
+            .background(Color.white)
+            .clipShape(Circle())
+            .frame(width: 180, height: 180)
+            .accessibilityLabel("avatarPlaceholder")
+            .shadow(color: darkGrayColor, radius: 6)
+            .overlay(
+                Circle()
+                    .strokeBorder(Color.white, lineWidth: 6)
+            )
+    }
+    
+    var plusIcon: some View {
+        Image(systemName: "plus")
+            .foregroundColor(.white)
+            .frame(width: 25, height: 25)
+            .background(Color.blue)
+            .clipShape(Circle())
+            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+            .accessibilityLabel("profilePlus")
     }
 }
