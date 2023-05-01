@@ -15,7 +15,8 @@ import SwiftUI
 
 struct BalanceAccount: View {
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
-    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
+    @AppStorage(StorageKeys.onboardingFlowComplete)
+    var completedOnboardingFlow = false
     @EnvironmentObject var account: Account
     
     var body: some View {
@@ -35,8 +36,7 @@ struct BalanceAccount: View {
         .background(backgroudColor)
     }
     
-    @ViewBuilder
-    private var actionView: some View {
+    @ViewBuilder private var actionView: some View {
         HStack(alignment: .center) {
             Text("Don’t have an account?")
                 .foregroundColor(Color.gray)

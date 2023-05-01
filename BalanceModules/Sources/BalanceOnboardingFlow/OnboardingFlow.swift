@@ -18,7 +18,8 @@ public struct OnboardingFlow: View {
     }
     
     
-    @SceneStorage(StorageKeys.onboardingFlowStep) private var onboardingSteps: [Step] = []
+    @SceneStorage(StorageKeys.onboardingFlowStep)
+    private var onboardingSteps: [Step] = []
     
     
     public var body: some View {

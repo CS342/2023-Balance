@@ -39,7 +39,7 @@ struct PersonalDataView: View {
             self.parentEmail = authModel.profile?.parentEmail ?? ""
             self.birthday = authModel.profile?.birthday ?? ""
             self.country = authModel.profile?.country ?? ""
-            self.phone = authModel.profile?.phone ?? ""    
+            self.phone = authModel.profile?.phone ?? ""
         }
     }
     

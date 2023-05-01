@@ -17,7 +17,8 @@ public struct OnboardingFlow: View {
         case avatar
     }
     
-    @SceneStorage(StorageKeys.onboardingFlowStep) private var onboardingSteps: [Step] = []
+    @SceneStorage(StorageKeys.onboardingFlowStep)
+    private var onboardingSteps: [Step] = []
 
     public var body: some View {
         NavigationStack(path: $onboardingSteps) {

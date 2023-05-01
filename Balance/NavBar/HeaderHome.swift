@@ -42,6 +42,17 @@ public struct HeaderHome: View {
         .ignoresSafeArea()
         .onAppear {
             authModel.listenAuthentificationState()
+//            if authModel.profile == nil {
+                UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
+                    if let error = error {
+                        print("Error while fetching the user profile: \(error)")
+                        return
+                    } else {
+                        print("User: " + (profileUser?.description() ?? "-"))
+                        authModel.profile = profileUser
+                    }
+                }
+//            }
             self.displayName = authModel.profile?.displayName ?? ""
             self.avatar = authModel.profile?.avatar ?? ""
         }
@@ -194,8 +205,8 @@ public struct HeaderHome: View {
             .resizable()
             .scaledToFit()
             .tint(.gray)
-            .background(Color.white)
-            .clipShape(Circle())
+//            .background(Color.white)
+//            .clipShape(Circle())
             .frame(width: 100, height: 100)
             .padding(.leading, 20.0)
             .accessibilityLabel("avatar")

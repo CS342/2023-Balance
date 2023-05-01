@@ -75,15 +75,15 @@ struct AvatarPreviewView: View {
                 .frame(width: 200, height: 200)
                 .clipped()
                 .accessibilityLabel("avatarPreview")
-            if !firstLoad {
-                Image(accesorySelection?.name ?? "acc_1")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 130, height: 130)
-                    .clipped()
-                    .accessibilityLabel("accesoryPreview")
-                    .offset(x: 80, y: 80)
-            }
+//            if !firstLoad {
+//                Image(accesorySelection?.name ?? "acc_1")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: 130, height: 130)
+//                    .clipped()
+//                    .accessibilityLabel("accesoryPreview")
+//                    .offset(x: 80, y: 80)
+//            }
         }
     }
     
@@ -95,20 +95,25 @@ struct AvatarPreviewView: View {
                     user.avatar = avatarSelection?.name ?? ""
                     authModel.signUp(userData: user)
                 } else {
-                    if self.profile.displayName.isEmpty {
-                        print("Error profile is nil")
-                        return
-                    }
-                    
-                    self.profile.avatar = avatarSelection?.name ?? ""
-                    UserProfileRepository.shared.createProfile(profile: self.profile) { profile, error in
+                    UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
                         if let error = error {
                             print("Error while fetching the user profile: \(error)")
                             return
                         } else {
-                            self.profile = profile ?? ProfileUser()
-                            print("User: " + (profile?.description() ?? "-"))
-                            dismiss()
+                            print("User: " + (profileUser?.description() ?? "-"))
+                            var loadExistenceProfile = profileUser ?? ProfileUser()
+                            loadExistenceProfile.avatar = avatarSelection?.name ?? ""
+                            UserProfileRepository.shared.createProfile(profile: loadExistenceProfile) { profile, error in
+                                if let error = error {
+                                    print("Error while fetching the user profile: \(error)")
+                                    return
+                                } else {
+                                    self.profile = profile ?? ProfileUser()
+                                    authModel.profile = profile
+                                    print("User: " + (profile?.description() ?? "-"))
+                                    NavigationUtil.popToRootView()
+                                }
+                            }
                         }
                     }
                 }

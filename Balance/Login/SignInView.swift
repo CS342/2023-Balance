@@ -14,7 +14,8 @@ import SwiftUI
 
 struct SignInView: View {
     @EnvironmentObject var account: Account
-    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
+    @AppStorage(StorageKeys.onboardingFlowComplete)
+    var completedOnboardingFlow = false
     
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @Environment(\.dismiss) private var dismiss
@@ -43,8 +44,7 @@ struct SignInView: View {
         .ignoresSafeArea()
     }
     
-    @ViewBuilder
-    private var actionView: some View {
+    @ViewBuilder private var actionView: some View {
         VStack(alignment: .center) {
             signUpButton
             HStack(alignment: .center) {

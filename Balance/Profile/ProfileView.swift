@@ -13,7 +13,8 @@ import SwiftUI
 
 struct ProfileView: View {
     @Environment(\.dismiss) private var dismiss
-    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
+    @AppStorage(StorageKeys.onboardingFlowComplete)
+    var completedOnboardingFlow = false
     @State private var showingAvatarSheet = false
     @EnvironmentObject var account: Account
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
@@ -122,9 +123,9 @@ struct ProfileView: View {
             Image(self.avatar)
                 .resizable()
                 .scaledToFit()
-                .tint(.gray)
-                .background(Color.white)
-                .clipShape(Circle())
+//                .tint(.gray)
+//                .background(Color.white)
+//                .clipShape(Circle())
                 .frame(width: 180, height: 180)
                 .accessibilityLabel("avatar")
                 .shadow(color: darkGrayColor, radius: 6)

@@ -37,10 +37,10 @@ struct AvatarSelectionView: View {
                     ScrollView {
                         Spacer().frame(height: 50)
                         avatarListView
-                        if !firstLoad {
-                            Spacer().frame(height: 50)
-                            accesoryListView
-                        }
+//                        if !firstLoad {
+//                            Spacer().frame(height: 50)
+//                            accesoryListView
+//                        }
                     }
                     selectButton.background(.clear)
                 }

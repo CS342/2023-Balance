@@ -15,7 +15,8 @@ import SwiftUI
 struct LoginView: View {
     @EnvironmentObject private var authModel: AuthViewModel
     @EnvironmentObject var account: Account
-    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
+    @AppStorage(StorageKeys.onboardingFlowComplete)
+    var completedOnboardingFlow = false
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     
     @State private var emailAddress: String = ""

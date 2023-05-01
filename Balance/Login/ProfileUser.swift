@@ -57,7 +57,7 @@ struct ProfileUser: Codable, Equatable, Hashable, Identifiable {
     }
     
     func description() -> String {
-        let description = id + " - " + displayName + " - " + email + " - " + parentEmail + " - " + birthday + " - " + country + " - " + phone + " - "
+        let description = id + "-" + displayName + "-" + email + "-" + parentEmail + "-" + birthday + "-" + country + "-" + phone + "-" + avatar
         return description
     }
 }

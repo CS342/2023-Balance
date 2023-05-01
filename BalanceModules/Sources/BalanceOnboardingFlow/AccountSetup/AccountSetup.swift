@@ -16,7 +16,8 @@ import SwiftUI
 
 struct AccountSetup: View {
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
-    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
+    @AppStorage(StorageKeys.onboardingFlowComplete)
+    var completedOnboardingFlow = false
     @EnvironmentObject var account: Account
     
     
@@ -49,8 +50,7 @@ struct AccountSetup: View {
     }
     
     
-    @ViewBuilder
-    private var actionView: some View {
+    @ViewBuilder private var actionView: some View {
 //        if account.signedIn {
 //            OnboardingActionsView(
 //                "ACCOUNT_NEXT".moduleLocalized,

@@ -12,9 +12,26 @@ import FirebaseCore
 import FirebaseFirestore
 import SwiftUI
 
+struct User {
+    var uid: String
+    var email: String?
+    
+    init(uid: String, email: String?) {
+        self.uid = uid
+        self.email = email
+    }
+}
+
 final class AuthViewModel: ObservableObject {
     @Published var isLoggedIn = false
     @Published var profile: ProfileUser?
+    @Published var session: User? {
+        didSet {
+            self.didChange.send(self)
+        }
+    }
+    var handle: AuthStateDidChangeListenerHandle?
+    private var didChange = PassthroughSubject<AuthViewModel, Never>()
     
     var user: User? {
         didSet {
@@ -23,14 +40,27 @@ final class AuthViewModel: ObservableObject {
     }
     
     func listenAuthentificationState() {
-        Auth.auth().addStateDidChangeListener { auth, user in
+        handle = Auth.auth().addStateDidChangeListener { auth, user in
             if user != nil {
+                if let user = user {
+                    self.session = User(uid: user.uid, email: user.email)
+                    self.isLoggedIn = true
+                } else {
+                    self.session = nil
+                    self.isLoggedIn = false
+                }
+                
                 print(auth)
-                self.loadPersonalData(uid: user?.uid ?? "")
-                self.isLoggedIn = true
+                //                self.loadPersonalData(uid: user?.uid ?? "")
             } else {
                 self.isLoggedIn = false
             }
+        }
+    }
+    
+    func unbind() {
+        if let handle = handle {
+            Auth.auth().removeStateDidChangeListener(handle)
         }
     }
     
@@ -95,6 +125,8 @@ final class AuthViewModel: ObservableObject {
     func signOut() {
         do {
             try Auth.auth().signOut()
+            self.session = nil
+            self.profile = nil
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
@@ -136,27 +168,31 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
-    func compressImage(image: UIImage) -> UIImage {
-        let resizedImage = image.aspectFittedToHeight(200)
-        resizedImage.jpegData(compressionQuality: 0.2)
-        return resizedImage
-    }
+    //    func compressImage(image: UIImage) -> UIImage {
+    //        let resizedImage = image.aspectFittedToHeight(200)
+    //        resizedImage.jpegData(compressionQuality: 0.2)
+    //        return resizedImage
+    //    }
     
-    func updatePhotoURL(photoURL: URL) {
-        print(Auth.auth().currentUser?.photoURL ?? "")
-        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-        changeRequest?.photoURL = photoURL
-        changeRequest?.commitChanges(completion: { err in
-            if let err = err {
-                print(err.localizedDescription)
-            }
-            Auth.auth().currentUser?.reload(completion: { err in
-                if let err = err {
-                    print(err.localizedDescription)
-                }
-                print(Auth.auth().currentUser?.photoURL ?? "")
-            })
-        })
-        Auth.auth().currentUser?.reload()
+    //    func updatePhotoURL(photoURL: URL) {
+    //        print(Auth.auth().currentUser?.photoURL ?? "")
+    //        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+    //        changeRequest?.photoURL = photoURL
+    //        changeRequest?.commitChanges(completion: { err in
+    //            if let err = err {
+    //                print(err.localizedDescription)
+    //            }
+    //            Auth.auth().currentUser?.reload(completion: { err in
+    //                if let err = err {
+    //                    print(err.localizedDescription)
+    //                }
+    //                print(Auth.auth().currentUser?.photoURL ?? "")
+    //            })
+    //        })
+    //        Auth.auth().currentUser?.reload()
+    //    }
+    
+    deinit {
+        unbind()
     }
 }

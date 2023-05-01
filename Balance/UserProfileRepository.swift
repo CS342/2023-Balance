@@ -30,7 +30,7 @@ class UserProfileRepository: ObservableObject {
         let userID = user.uid
         let database = Firestore.firestore()
         do {
-            try database.collection("users").document("\(userID)/data/profile.txt").setData(from: profile)
+            try database.collection("users").document("\(userID)/data/profile.txt").setData(from: profile, merge: true)
             completion(profile, nil)
         } catch {
             print("Error writing to Firestore: \(error)")
@@ -42,6 +42,24 @@ class UserProfileRepository: ObservableObject {
                                                                 Error?) -> Void) {
         let database = Firestore.firestore()
         let userID = userId
+
+        database.collection("users").document("\(userID)/data/profile.txt").getDocument { snapshot, error in
+            let profile = try? snapshot?.data(as: ProfileUser.self)
+            completion(profile, error)
+        }
+    }
+    
+    func fetchCurrentProfile(completion: @escaping (_ profile: ProfileUser?, _ error:
+                                                                Error?) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+#if DEBUG
+            print("Error finding current user (FIRUser)")
+#endif
+            return
+        }
+        
+        let userID = user.uid
+        let database = Firestore.firestore()
 
         database.collection("users").document("\(userID)/data/profile.txt").getDocument { snapshot, error in
             let profile = try? snapshot?.data(as: ProfileUser.self)
