@@ -28,6 +28,7 @@ struct LoginView: View {
                 signInView
             } else {
                 Button {
+                    NavigationUtil.popToRootView()
                     completedOnboardingFlow = true
                 } label: {
                     Text("login...")
@@ -39,6 +40,7 @@ struct LoginView: View {
         .onChange(of: account.signedIn) { value in
             print(value)
             if account.signedIn {
+                NavigationUtil.popToRootView()
                 completedOnboardingFlow = true
             }
         }

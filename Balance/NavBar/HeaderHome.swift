@@ -17,11 +17,11 @@ public struct HeaderHome: View {
     @State private var showingAvatarSheet = false
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
-
+    
     @State private var displayName = ""
     @State private var avatar = ""
     @State private var userId = ""
-
+    
     public var body: some View {
         VStack {
             headerView
@@ -42,19 +42,7 @@ public struct HeaderHome: View {
         .ignoresSafeArea()
         .onAppear {
             authModel.listenAuthentificationState()
-//            if authModel.profile == nil {
-                UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
-                    if let error = error {
-                        print("Error while fetching the user profile: \(error)")
-                        return
-                    } else {
-                        print("User: " + (profileUser?.description() ?? "-"))
-                        authModel.profile = profileUser
-                    }
-                }
-//            }
-            self.displayName = authModel.profile?.displayName ?? ""
-            self.avatar = authModel.profile?.avatar ?? ""
+            loadUser()
         }
         .onChange(of: authModel.profile) { profile in
             withAnimation(.easeInOut(duration: 1.0)) {
@@ -205,53 +193,53 @@ public struct HeaderHome: View {
             .resizable()
             .scaledToFit()
             .tint(.gray)
-//            .background(Color.white)
-//            .clipShape(Circle())
+        //            .background(Color.white)
+        //            .clipShape(Circle())
             .frame(width: 100, height: 100)
             .padding(.leading, 20.0)
             .accessibilityLabel("avatar")
             .shadow(color: darkGrayColor, radius: 6)
-//            .overlay(
-//                Circle()
-//                    .strokeBorder(Color.white, lineWidth: 6)
-//                    .padding(.leading, 20.0)
-//            )
-//        AsyncImage(
-//            url: firebaseAccountConfiguration.user?.photoURL,
-//            content: { image in
-//                image.resizable()
-//                    .scaledToFit()
-//                    .tint(.gray)
-//                    .background(Color.white)
-//                    .clipShape(Circle())
-//                    .frame(width: 100, height: 100)
-//                    .padding(.leading, 20.0)
-//                    .accessibilityLabel("avatar")
-//                    .shadow(color: darkGrayColor, radius: 6)
-//                    .overlay(
-//                        Circle()
-//                            .strokeBorder(Color.white, lineWidth: 6)
-//                            .padding(.leading, 20.0)
-//                    )
-//            },
-//            placeholder: {
-//                Image(systemName: "person.fill")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .tint(.gray)
-//                    .background(Color.white)
-//                    .clipShape(Circle())
-//                    .frame(width: 100, height: 100)
-//                    .padding(.leading, 20.0)
-//                    .accessibilityLabel("avatarPlaceholder")
-//                    .shadow(color: darkGrayColor, radius: 6)
-//                    .overlay(
-//                        Circle()
-//                            .strokeBorder(Color.white, lineWidth: 6)
-//                            .padding(.leading, 20.0)
-//                    )
-//            }
-//        )
+        //            .overlay(
+        //                Circle()
+        //                    .strokeBorder(Color.white, lineWidth: 6)
+        //                    .padding(.leading, 20.0)
+        //            )
+        //        AsyncImage(
+        //            url: firebaseAccountConfiguration.user?.photoURL,
+        //            content: { image in
+        //                image.resizable()
+        //                    .scaledToFit()
+        //                    .tint(.gray)
+        //                    .background(Color.white)
+        //                    .clipShape(Circle())
+        //                    .frame(width: 100, height: 100)
+        //                    .padding(.leading, 20.0)
+        //                    .accessibilityLabel("avatar")
+        //                    .shadow(color: darkGrayColor, radius: 6)
+        //                    .overlay(
+        //                        Circle()
+        //                            .strokeBorder(Color.white, lineWidth: 6)
+        //                            .padding(.leading, 20.0)
+        //                    )
+        //            },
+        //            placeholder: {
+        //                Image(systemName: "person.fill")
+        //                    .resizable()
+        //                    .scaledToFit()
+        //                    .tint(.gray)
+        //                    .background(Color.white)
+        //                    .clipShape(Circle())
+        //                    .frame(width: 100, height: 100)
+        //                    .padding(.leading, 20.0)
+        //                    .accessibilityLabel("avatarPlaceholder")
+        //                    .shadow(color: darkGrayColor, radius: 6)
+        //                    .overlay(
+        //                        Circle()
+        //                            .strokeBorder(Color.white, lineWidth: 6)
+        //                            .padding(.leading, 20.0)
+        //                    )
+        //            }
+        //        )
     }
     
     var profileNameView: some View {
@@ -264,6 +252,20 @@ public struct HeaderHome: View {
                 .font(.custom("Nunito-Bold", size: 25))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+    
+    func loadUser() {
+        UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                print("User: " + (profileUser?.description() ?? "-"))
+                authModel.profile = profileUser
+                self.displayName = authModel.profile?.displayName ?? ""
+                self.avatar = authModel.profile?.avatar ?? ""
+            }
         }
     }
 }

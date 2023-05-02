@@ -59,8 +59,7 @@ struct ProfileView: View {
         }
         .onAppear {
             authModel.listenAuthentificationState()
-            self.displayName = authModel.profile?.displayName ?? ""
-            self.avatar = authModel.profile?.avatar ?? ""
+            loadUser()
         }
         .onReceive(account.objectWillChange) {
             if account.signedIn {
@@ -182,5 +181,19 @@ struct ProfileView: View {
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 2))
             .accessibilityLabel("profilePlus")
+    }
+    
+    func loadUser() {
+        UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                print("User: " + (profileUser?.description() ?? "-"))
+                authModel.profile = profileUser
+                self.displayName = authModel.profile?.displayName ?? ""
+                self.avatar = authModel.profile?.avatar ?? ""
+            }
+        }
     }
 }

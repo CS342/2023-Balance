@@ -138,6 +138,7 @@
 		6CB5181A29E45678007AADB4 /* ImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181929E45678007AADB4 /* ImageCollectionView.swift */; };
 		6CB5181C29E45C0C007AADB4 /* BalanceExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181B29E45C0B007AADB4 /* BalanceExtentions.swift */; };
 		6CB5181E29E6F395007AADB4 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181D29E6F395007AADB4 /* ImageView.swift */; };
+		6CE62D552A014BF300BB4F90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */; };
 		6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF510BF29C8FD25008A2F55 /* LocationView.swift */; };
 		894A884529B7B27600CB347B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894A884429B7B27600CB347B /* NavigationView.swift */; };
 		896C65D629B92EF800F30BA2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896C65D529B92EF800F30BA2 /* Config.swift */; };
@@ -281,6 +282,7 @@
 		6CB5181929E45678007AADB4 /* ImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionView.swift; sourceTree = "<group>"; };
 		6CB5181B29E45C0B007AADB4 /* BalanceExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceExtentions.swift; sourceTree = "<group>"; };
 		6CB5181D29E6F395007AADB4 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CF510BF29C8FD25008A2F55 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceDebug.entitlements; sourceTree = "<group>"; };
 		894A884429B7B27600CB347B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
@@ -488,6 +490,7 @@
 				6C0A4BF329E9B278003007C7 /* Profile */,
 				6C39EA1A29C9EA150095573E /* SOS */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
+				6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 				6C47338429FAB53400DC72D0 /* Montserrat-Thin.ttf in Resources */,
 				6C80C01929CCF90B003DD5B9 /* Nunito-BlackItalic.ttf in Resources */,
 				6C80C02529CCF90B003DD5B9 /* Nunito-Regular.ttf in Resources */,
+				6CE62D552A014BF300BB4F90 /* LaunchScreen.storyboard in Resources */,
 				6C47338629FAB53B00DC72D0 /* Montserrat-Medium.ttf in Resources */,
 				6C80C02129CCF90B003DD5B9 /* Nunito-ExtraLight.ttf in Resources */,
 			);
@@ -1118,11 +1122,13 @@
 				INFOPLIST_KEY_NSMotionUsageDescription = "This message should never appear. Please adjust this when you start using motion information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This message should never appear. Please adjust this when you start using speecg information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UITemplateApplicationlicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UITemplateApplicationlicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1175,11 +1181,13 @@
 				INFOPLIST_KEY_NSMotionUsageDescription = "This message should never appear. Please adjust this when you start using motion information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This message should never appear. Please adjust this when you start using speecg information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UITemplateApplicationlicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UITemplateApplicationlicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

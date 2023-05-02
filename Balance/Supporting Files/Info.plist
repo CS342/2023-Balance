@@ -56,7 +56,5 @@
 	<string>Light</string>
 	<key>View controller-based status bar appearance</key>
 	<string>NO</string>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 </dict>
 </plist>
