@@ -32,7 +32,6 @@
 		2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */; };
 		2F59B93D298C628800C5107F /* BalanceContacts in Frameworks */ = {isa = PBXBuildFile; productRef = 2F59B93C298C628800C5107F /* BalanceContacts */; };
 		2F59B93F298C628800C5107F /* BalanceMockDataStorageProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 2F59B93E298C628800C5107F /* BalanceMockDataStorageProvider */; };
-		2F59B941298C628800C5107F /* BalanceOnboardingFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 2F59B940298C628800C5107F /* BalanceOnboardingFlow */; };
 		2F59B943298C628800C5107F /* BalanceSchedule in Frameworks */ = {isa = PBXBuildFile; productRef = 2F59B942298C628800C5107F /* BalanceSchedule */; };
 		2F59B945298C628800C5107F /* BalanceSharedContext in Frameworks */ = {isa = PBXBuildFile; productRef = 2F59B944298C628800C5107F /* BalanceSharedContext */; };
 		2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */; };
@@ -68,10 +67,36 @@
 		6C370AB129D396B2001781B3 /* DistractionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C370AB029D396B2001781B3 /* DistractionCellView.swift */; };
 		6C39EA2129C9EA620095573E /* SOSCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C39EA1F29C9EA610095573E /* SOSCellView.swift */; };
 		6C39EA2229C9EA620095573E /* SOSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C39EA2029C9EA610095573E /* SOSView.swift */; };
+		6C47338429FAB53400DC72D0 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C47338029FAB27C00DC72D0 /* Montserrat-Thin.ttf */; };
+		6C47338529FAB53B00DC72D0 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C47337E29FAB27C00DC72D0 /* Montserrat-Light.ttf */; };
+		6C47338629FAB53B00DC72D0 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C47338129FAB27C00DC72D0 /* Montserrat-Medium.ttf */; };
+		6C47338729FAB53B00DC72D0 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C47337F29FAB27C00DC72D0 /* Montserrat-SemiBold.ttf */; };
+		6C47338829FAB53B00DC72D0 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C47338329FAB27C00DC72D0 /* Montserrat-Bold.ttf */; };
+		6C47338929FAB53B00DC72D0 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C47338229FAB27C00DC72D0 /* Montserrat-Regular.ttf */; };
+		6C47338B29FAB89900DC72D0 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C47338A29FAB89900DC72D0 /* SignInView.swift */; };
+		6C47338D29FB09E400DC72D0 /* ProfileUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C47338C29FB09E400DC72D0 /* ProfileUser.swift */; };
+		6C47338F29FC188A00DC72D0 /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C47338E29FC188A00DC72D0 /* UserProfileRepository.swift */; };
+		6C47339129FC5C7D00DC72D0 /* PersonalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C47339029FC5C7D00DC72D0 /* PersonalDataView.swift */; };
 		6C5523F329F8013B00F802D9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5523F229F8013B00F802D9 /* ProfileView.swift */; };
 		6C5523F529F8094C00F802D9 /* PasswordUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5523F429F8094C00F802D9 /* PasswordUpdateView.swift */; };
 		6C5523F729F80E8800F802D9 /* ShowHideSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5523F629F80E8800F802D9 /* ShowHideSecureField.swift */; };
 		6C5523F929F8126000F802D9 /* ProfileCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5523F829F8126000F802D9 /* ProfileCellView.swift */; };
+		6C55241D29F86C2700F802D9 /* ConsentDocument.md.license in Resources */ = {isa = PBXBuildFile; fileRef = 6C55241B29F86C2700F802D9 /* ConsentDocument.md.license */; };
+		6C55241E29F86C2700F802D9 /* ConsentDocument.md in Resources */ = {isa = PBXBuildFile; fileRef = 6C55241C29F86C2700F802D9 /* ConsentDocument.md */; };
+		6C55242429F86D9200F802D9 /* BalanceLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55241F29F86D9200F802D9 /* BalanceLogin.swift */; };
+		6C55242529F86D9200F802D9 /* BalanceSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242029F86D9200F802D9 /* BalanceSignUp.swift */; };
+		6C55242629F86D9200F802D9 /* BalanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242129F86D9200F802D9 /* BalanceAccount.swift */; };
+		6C55242729F86D9200F802D9 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242229F86D9200F802D9 /* IconView.swift */; };
+		6C55242829F86D9200F802D9 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242329F86D9200F802D9 /* UserView.swift */; };
+		6C55242E29F86DD800F802D9 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242929F86DD800F802D9 /* Consent.swift */; };
+		6C55242F29F86DD800F802D9 /* String+ModuleLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242A29F86DD800F802D9 /* String+ModuleLocalized.swift */; };
+		6C55243029F86DD800F802D9 /* InterestingModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242B29F86DD800F802D9 /* InterestingModules.swift */; };
+		6C55243129F86DD800F802D9 /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242C29F86DD800F802D9 /* OnboardingFlow.swift */; };
+		6C55243229F86DD800F802D9 /* HealthKitPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242D29F86DD800F802D9 /* HealthKitPermissions.swift */; };
+		6C55243729F8722B00F802D9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55243329F8722900F802D9 /* MainView.swift */; };
+		6C55243829F8722B00F802D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55243429F8722A00F802D9 /* ContentView.swift */; };
+		6C55243929F8722B00F802D9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55243529F8722A00F802D9 /* LoginView.swift */; };
+		6C55243A29F8722B00F802D9 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55243629F8722A00F802D9 /* AuthViewModel.swift */; };
 		6C58B24C29F6B174000FE8DD /* BackgroundDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B24B29F6B174000FE8DD /* BackgroundDrawView.swift */; };
 		6C58B24E29F6B492000FE8DD /* MandalaCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B24D29F6B492000FE8DD /* MandalaCollectionView.swift */; };
 		6C58B25029F6B673000FE8DD /* DrawHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B24F29F6B673000FE8DD /* DrawHighlightView.swift */; };
@@ -113,6 +138,7 @@
 		6CB5181A29E45678007AADB4 /* ImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181929E45678007AADB4 /* ImageCollectionView.swift */; };
 		6CB5181C29E45C0C007AADB4 /* BalanceExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181B29E45C0B007AADB4 /* BalanceExtentions.swift */; };
 		6CB5181E29E6F395007AADB4 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181D29E6F395007AADB4 /* ImageView.swift */; };
+		6CE62D552A014BF300BB4F90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */; };
 		6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF510BF29C8FD25008A2F55 /* LocationView.swift */; };
 		894A884529B7B27600CB347B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894A884429B7B27600CB347B /* NavigationView.swift */; };
 		896C65D629B92EF800F30BA2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896C65D529B92EF800F30BA2 /* Config.swift */; };
@@ -186,10 +212,36 @@
 		6C370AB029D396B2001781B3 /* DistractionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistractionCellView.swift; sourceTree = "<group>"; };
 		6C39EA1F29C9EA610095573E /* SOSCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSCellView.swift; sourceTree = "<group>"; };
 		6C39EA2029C9EA610095573E /* SOSView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSView.swift; sourceTree = "<group>"; };
+		6C47337E29FAB27C00DC72D0 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		6C47337F29FAB27C00DC72D0 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		6C47338029FAB27C00DC72D0 /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.ttf"; sourceTree = "<group>"; };
+		6C47338129FAB27C00DC72D0 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		6C47338229FAB27C00DC72D0 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		6C47338329FAB27C00DC72D0 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		6C47338A29FAB89900DC72D0 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		6C47338C29FB09E400DC72D0 /* ProfileUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUser.swift; sourceTree = "<group>"; };
+		6C47338E29FC188A00DC72D0 /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
+		6C47339029FC5C7D00DC72D0 /* PersonalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataView.swift; sourceTree = "<group>"; };
 		6C5523F229F8013B00F802D9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		6C5523F429F8094C00F802D9 /* PasswordUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordUpdateView.swift; sourceTree = "<group>"; };
 		6C5523F629F80E8800F802D9 /* ShowHideSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHideSecureField.swift; sourceTree = "<group>"; };
 		6C5523F829F8126000F802D9 /* ProfileCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellView.swift; sourceTree = "<group>"; };
+		6C55241B29F86C2700F802D9 /* ConsentDocument.md.license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ConsentDocument.md.license; sourceTree = "<group>"; };
+		6C55241C29F86C2700F802D9 /* ConsentDocument.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ConsentDocument.md; sourceTree = "<group>"; };
+		6C55241F29F86D9200F802D9 /* BalanceLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceLogin.swift; sourceTree = "<group>"; };
+		6C55242029F86D9200F802D9 /* BalanceSignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceSignUp.swift; sourceTree = "<group>"; };
+		6C55242129F86D9200F802D9 /* BalanceAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceAccount.swift; sourceTree = "<group>"; };
+		6C55242229F86D9200F802D9 /* IconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		6C55242329F86D9200F802D9 /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		6C55242929F86DD800F802D9 /* Consent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consent.swift; sourceTree = "<group>"; };
+		6C55242A29F86DD800F802D9 /* String+ModuleLocalized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ModuleLocalized.swift"; sourceTree = "<group>"; };
+		6C55242B29F86DD800F802D9 /* InterestingModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestingModules.swift; sourceTree = "<group>"; };
+		6C55242C29F86DD800F802D9 /* OnboardingFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
+		6C55242D29F86DD800F802D9 /* HealthKitPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitPermissions.swift; sourceTree = "<group>"; };
+		6C55243329F8722900F802D9 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		6C55243429F8722A00F802D9 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6C55243529F8722A00F802D9 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		6C55243629F8722A00F802D9 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		6C58B24B29F6B174000FE8DD /* BackgroundDrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDrawView.swift; sourceTree = "<group>"; };
 		6C58B24D29F6B492000FE8DD /* MandalaCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandalaCollectionView.swift; sourceTree = "<group>"; };
 		6C58B24F29F6B673000FE8DD /* DrawHighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHighlightView.swift; sourceTree = "<group>"; };
@@ -230,6 +282,7 @@
 		6CB5181929E45678007AADB4 /* ImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionView.swift; sourceTree = "<group>"; };
 		6CB5181B29E45C0B007AADB4 /* BalanceExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceExtentions.swift; sourceTree = "<group>"; };
 		6CB5181D29E6F395007AADB4 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CF510BF29C8FD25008A2F55 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceDebug.entitlements; sourceTree = "<group>"; };
 		894A884429B7B27600CB347B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
@@ -244,7 +297,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				89EB7BAD29B45381000470FC /* FirebaseFirestore in Frameworks */,
-				2F59B941298C628800C5107F /* BalanceOnboardingFlow in Frameworks */,
 				2F49B7822980419C00BCB272 /* Questionnaires in Frameworks */,
 				2F49B77E2980407C00BCB272 /* Scheduler in Frameworks */,
 				2F59B93F298C628800C5107F /* BalanceMockDataStorageProvider in Frameworks */,
@@ -348,6 +400,8 @@
 		2FC9759D2978E30800BA99FE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C55241C29F86C2700F802D9 /* ConsentDocument.md */,
+				6C55241B29F86C2700F802D9 /* ConsentDocument.md.license */,
 				6C80C00729CCF8D5003DD5B9 /* Fonts */,
 				2FAEC07F297F583900C11C42 /* Balance.entitlements */,
 				653A258928339462005D4D48 /* Info.plist */,
@@ -410,30 +464,33 @@
 				2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */,
 				653A2550283387FE005D4D48 /* Balance.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
+				6C47338E29FC188A00DC72D0 /* UserProfileRepository.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
-				6C58B25129F7293A000FE8DD /* NavigationUtil.swift */,
-				6C8C5EFF29F1D2AF00D4DF77 /* Drawing */,
 				6CB5181B29E45C0B007AADB4 /* BalanceExtentions.swift */,
 				6C370AAC29D38F7F001781B3 /* ChillView.swift */,
 				6C370AAA29D23B95001781B3 /* Constant.swift */,
 				6C370AB029D396B2001781B3 /* DistractionCellView.swift */,
 				6C370AAE29D393FA001781B3 /* DistractionView.swift */,
-				6CAA076629EAF04100541F87 /* FeelingView.swift */,
 				89F9619729B6646200513052 /* Feature.swift */,
+				6CAA076629EAF04100541F87 /* FeelingView.swift */,
 				2FC975A72978F11A00BA99FE /* Home.swift */,
 				6CF510BF29C8FD25008A2F55 /* LocationView.swift */,
+				6C58B25129F7293A000FE8DD /* NavigationUtil.swift */,
 				894A884429B7B27600CB347B /* NavigationView.swift */,
 				2761584529A6448C006C7AC1 /* SceneDelegate.swift */,
 				5E03E99D29BC14FA0041DD1C /* ActivityLogging */,
 				2720083329A7E4C20052908D /* Diary */,
+				6C8C5EFF29F1D2AF00D4DF77 /* Drawing */,
 				6CB5181629E4518B007AADB4 /* Gallery */,
 				6CB5180B29DF55F3007AADB4 /* Games */,
+				6C55240429F864B600F802D9 /* Login */,
 				4ACC786029AC0B590048D1D1 /* Meditation */,
 				2761584E29A662DE006C7AC1 /* Music */,
 				6C80C02829CCF912003DD5B9 /* NavBar */,
 				6C0A4BF329E9B278003007C7 /* Profile */,
 				6C39EA1A29C9EA150095573E /* SOS */,
 				2FC9759D2978E30800BA99FE /* Supporting Files */,
+				6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -473,6 +530,7 @@
 				6C5523F429F8094C00F802D9 /* PasswordUpdateView.swift */,
 				6C5523F629F80E8800F802D9 /* ShowHideSecureField.swift */,
 				6C5523F829F8126000F802D9 /* ProfileCellView.swift */,
+				6C47339029FC5C7D00DC72D0 /* PersonalDataView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -486,9 +544,38 @@
 			path = SOS;
 			sourceTree = "<group>";
 		};
+		6C55240429F864B600F802D9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				6C55243629F8722A00F802D9 /* AuthViewModel.swift */,
+				6C55243429F8722A00F802D9 /* ContentView.swift */,
+				6C55243329F8722900F802D9 /* MainView.swift */,
+				6C55243529F8722A00F802D9 /* LoginView.swift */,
+				6C47338A29FAB89900DC72D0 /* SignInView.swift */,
+				6C55242929F86DD800F802D9 /* Consent.swift */,
+				6C55242D29F86DD800F802D9 /* HealthKitPermissions.swift */,
+				6C55242B29F86DD800F802D9 /* InterestingModules.swift */,
+				6C55242C29F86DD800F802D9 /* OnboardingFlow.swift */,
+				6C55242A29F86DD800F802D9 /* String+ModuleLocalized.swift */,
+				6C55242129F86D9200F802D9 /* BalanceAccount.swift */,
+				6C55241F29F86D9200F802D9 /* BalanceLogin.swift */,
+				6C55242029F86D9200F802D9 /* BalanceSignUp.swift */,
+				6C55242229F86D9200F802D9 /* IconView.swift */,
+				6C55242329F86D9200F802D9 /* UserView.swift */,
+				6C47338C29FB09E400DC72D0 /* ProfileUser.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		6C80C00729CCF8D5003DD5B9 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				6C47338329FAB27C00DC72D0 /* Montserrat-Bold.ttf */,
+				6C47337E29FAB27C00DC72D0 /* Montserrat-Light.ttf */,
+				6C47338129FAB27C00DC72D0 /* Montserrat-Medium.ttf */,
+				6C47338229FAB27C00DC72D0 /* Montserrat-Regular.ttf */,
+				6C47337F29FAB27C00DC72D0 /* Montserrat-SemiBold.ttf */,
+				6C47338029FAB27C00DC72D0 /* Montserrat-Thin.ttf */,
 				6C80C00C29CCF901003DD5B9 /* Nunito-Black.ttf */,
 				6C80C00929CCF8FB003DD5B9 /* Nunito-BlackItalic.ttf */,
 				6C80C01729CCF90B003DD5B9 /* Nunito-Bold.ttf */,
@@ -586,7 +673,6 @@
 				2F49B783298041F300BCB272 /* Contact */,
 				2F59B93C298C628800C5107F /* BalanceContacts */,
 				2F59B93E298C628800C5107F /* BalanceMockDataStorageProvider */,
-				2F59B940298C628800C5107F /* BalanceOnboardingFlow */,
 				2F59B942298C628800C5107F /* BalanceSchedule */,
 				2F59B944298C628800C5107F /* BalanceSharedContext */,
 				2F9056EE299E3180003D3802 /* FirebaseAccount */,
@@ -700,24 +786,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C55241D29F86C2700F802D9 /* ConsentDocument.md.license in Resources */,
 				6C80C01A29CCF90B003DD5B9 /* Nunito-MediumItalic.ttf in Resources */,
 				6C80C01D29CCF90B003DD5B9 /* Nunito-Italic.ttf in Resources */,
 				6C80C01829CCF90B003DD5B9 /* Nunito-SemiBoldItalic.ttf in Resources */,
+				6C47338829FAB53B00DC72D0 /* Montserrat-Bold.ttf in Resources */,
 				6C80C01B29CCF90B003DD5B9 /* Nunito-BoldItalic.ttf in Resources */,
 				6C80C01F29CCF90B003DD5B9 /* Nunito-Light.ttf in Resources */,
 				6C80C02229CCF90B003DD5B9 /* Nunito-ExtraBoldItalic.ttf in Resources */,
 				6C80C01E29CCF90B003DD5B9 /* Nunito-Medium.ttf in Resources */,
+				6C47338929FAB53B00DC72D0 /* Montserrat-Regular.ttf in Resources */,
 				6C80C02729CCF90B003DD5B9 /* Nunito-Bold.ttf in Resources */,
+				6C47338729FAB53B00DC72D0 /* Montserrat-SemiBold.ttf in Resources */,
 				6C80C01C29CCF90B003DD5B9 /* Nunito-Black.ttf in Resources */,
+				6C47338529FAB53B00DC72D0 /* Montserrat-Light.ttf in Resources */,
 				6C80C02029CCF90B003DD5B9 /* Nunito-ExtraLightItalic.ttf in Resources */,
 				653A255528338800005D4D48 /* Assets.xcassets in Resources */,
 				6C80C02429CCF90B003DD5B9 /* Nunito-LightItalic.ttf in Resources */,
 				2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */,
 				6C80C02629CCF90B003DD5B9 /* Nunito-SemiBold.ttf in Resources */,
+				6C55241E29F86C2700F802D9 /* ConsentDocument.md in Resources */,
 				2F9056EA299E2D8A003D3802 /* GoogleService-Info.plist in Resources */,
 				6C80C02329CCF90B003DD5B9 /* Nunito-ExtraBold.ttf in Resources */,
+				6C47338429FAB53400DC72D0 /* Montserrat-Thin.ttf in Resources */,
 				6C80C01929CCF90B003DD5B9 /* Nunito-BlackItalic.ttf in Resources */,
 				6C80C02529CCF90B003DD5B9 /* Nunito-Regular.ttf in Resources */,
+				6CE62D552A014BF300BB4F90 /* LaunchScreen.storyboard in Resources */,
+				6C47338629FAB53B00DC72D0 /* Montserrat-Medium.ttf in Resources */,
 				6C80C02129CCF90B003DD5B9 /* Nunito-ExtraLight.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -771,23 +866,34 @@
 				6C0A4BF229E9B10F003007C7 /* Avatar.swift in Sources */,
 				6C8C5F0929F2CFBF00D4DF77 /* PastDrawEntry.swift in Sources */,
 				27525EB829B68BB300D1DF51 /* Balance.swift in Sources */,
+				6C55243129F86DD800F802D9 /* OnboardingFlow.swift in Sources */,
+				6C55243029F86DD800F802D9 /* InterestingModules.swift in Sources */,
+				6C47339129FC5C7D00DC72D0 /* PersonalDataView.swift in Sources */,
 				6C370AAB29D23B95001781B3 /* Constant.swift in Sources */,
 				27525EB729B68B7100D1DF51 /* DiaryHomeView.swift in Sources */,
 				27525EB629B68B6100D1DF51 /* BurnedView.swift in Sources */,
+				6C55242429F86D9200F802D9 /* BalanceLogin.swift in Sources */,
 				27525EB529B68B5400D1DF51 /* SpotifyConfig.swift in Sources */,
+				6C55242729F86D9200F802D9 /* IconView.swift in Sources */,
+				6C55243929F8722B00F802D9 /* LoginView.swift in Sources */,
+				6C47338F29FC188A00DC72D0 /* UserProfileRepository.swift in Sources */,
 				27525EB429B68B5100D1DF51 /* Date.swift in Sources */,
 				6C5523F729F80E8800F802D9 /* ShowHideSecureField.swift in Sources */,
 				2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */,
+				6C47338D29FB09E400DC72D0 /* ProfileUser.swift in Sources */,
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
 				6C5523F929F8126000F802D9 /* ProfileCellView.swift in Sources */,
 				4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */,
 				6CAA076729EAF04200541F87 /* FeelingView.swift in Sources */,
 				4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */,
 				2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */,
+				6C47338B29FAB89900DC72D0 /* SignInView.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2720084329A843B90052908D /* Note.swift in Sources */,
+				6C55243A29F8722B00F802D9 /* AuthViewModel.swift in Sources */,
 				6CB5181E29E6F395007AADB4 /* ImageView.swift in Sources */,
 				896C65D629B92EF800F30BA2 /* Config.swift in Sources */,
+				6C55243229F86DD800F802D9 /* HealthKitPermissions.swift in Sources */,
 				6CB5181129E1B13E007AADB4 /* GamesView.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
 				6CA4EFE629EDEBB000877850 /* AccesoryView.swift in Sources */,
@@ -796,11 +902,13 @@
 				6C370AAF29D393FA001781B3 /* DistractionView.swift in Sources */,
 				5E03E9A129BC15CF0041DD1C /* ActivityLogBaseView.swift in Sources */,
 				6C58B25229F7293A000FE8DD /* NavigationUtil.swift in Sources */,
+				6C55242529F86D9200F802D9 /* BalanceSignUp.swift in Sources */,
 				276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */,
 				4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */,
 				6C58B24E29F6B492000FE8DD /* MandalaCollectionView.swift in Sources */,
 				4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */,
 				4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */,
+				6C55243729F8722B00F802D9 /* MainView.swift in Sources */,
 				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
 				5EF9D78429B5AFF1006C3B22 /* ActivityStorageManager.swift in Sources */,
 				89F9619829B6646200513052 /* Feature.swift in Sources */,
@@ -808,7 +916,9 @@
 				6C0A4BEE29E9B053003007C7 /* AvatarSelectionView.swift in Sources */,
 				6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */,
 				2761584D29A654FD006C7AC1 /* Music.swift in Sources */,
+				6C55242829F86D9200F802D9 /* UserView.swift in Sources */,
 				6C0A4BF029E9B0CD003007C7 /* AvatarView.swift in Sources */,
+				6C55242E29F86DD800F802D9 /* Consent.swift in Sources */,
 				6CB5180D29DF5800007AADB4 /* GamesWebView.swift in Sources */,
 				6C8C5F0329F2CECF00D4DF77 /* DrawHomeView.swift in Sources */,
 				6C370AB129D396B2001781B3 /* DistractionCellView.swift in Sources */,
@@ -816,8 +926,11 @@
 				6C5523F529F8094C00F802D9 /* PasswordUpdateView.swift in Sources */,
 				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
 				6CB5181C29E45C0C007AADB4 /* BalanceExtentions.swift in Sources */,
+				6C55242629F86D9200F802D9 /* BalanceAccount.swift in Sources */,
 				6C39EA2229C9EA620095573E /* SOSView.swift in Sources */,
+				6C55242F29F86DD800F802D9 /* String+ModuleLocalized.swift in Sources */,
 				6CB5181A29E45678007AADB4 /* ImageCollectionView.swift in Sources */,
+				6C55243829F8722B00F802D9 /* ContentView.swift in Sources */,
 				89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */,
 				6C58B25029F6B673000FE8DD /* DrawHighlightView.swift in Sources */,
 				5E03E9A329BC933B0041DD1C /* ActivityLogButtonStyle.swift in Sources */,
@@ -1009,10 +1122,13 @@
 				INFOPLIST_KEY_NSMotionUsageDescription = "This message should never appear. Please adjust this when you start using motion information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This message should never appear. Please adjust this when you start using speecg information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UITemplateApplicationlicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UITemplateApplicationlicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1065,10 +1181,13 @@
 				INFOPLIST_KEY_NSMotionUsageDescription = "This message should never appear. Please adjust this when you start using motion information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This message should never appear. Please adjust this when you start using speecg information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UITemplateApplicationlicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UITemplateApplicationlicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1318,10 +1437,6 @@
 		2F59B93E298C628800C5107F /* BalanceMockDataStorageProvider */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BalanceMockDataStorageProvider;
-		};
-		2F59B940298C628800C5107F /* BalanceOnboardingFlow */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = BalanceOnboardingFlow;
 		};
 		2F59B942298C628800C5107F /* BalanceSchedule */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -14,7 +14,7 @@ import SwiftUI
 struct BalanceLogin: View {
     var body: some View {
         Login {
-            Image(uiImage: Bundle.module.image(withName: "Balloon", fileExtension: "png"))
+            Image("BalanceLogo")
                 .resizable()
                 .scaledToFit()
                 .padding(.top, 32)

@@ -7,16 +7,20 @@
 //
 
 import SwiftUI
+import class FHIR.FHIR
+import FirebaseAccount
 
 public struct HeaderHome: View {
     @State private var showingSOSSheet = false
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
     @State private var showingAvatarSheet = false
+    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    @EnvironmentObject var authModel: AuthViewModel
     
-    let name: String
-    let avatar: String
-    let userID: String
+    @State private var displayName = ""
+    @State private var avatar = ""
+    @State private var userId = ""
     
     public var body: some View {
         VStack {
@@ -36,6 +40,18 @@ public struct HeaderHome: View {
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .ignoresSafeArea()
+        .onAppear {
+            authModel.listenAuthentificationState()
+            loadUser()
+        }
+        .onChange(of: authModel.profile) { profile in
+            withAnimation(.easeInOut(duration: 1.0)) {
+                if profile != nil {
+                    self.displayName = profile?.displayName ?? ""
+                    self.avatar = profile?.avatar ?? ""
+                }
+            }
+        }
     }
     
     var buttonsView: some View {
@@ -173,27 +189,83 @@ public struct HeaderHome: View {
     }
     
     var avatarView: some View {
-        Image(avatar)
+        Image(self.avatar)
             .resizable()
             .scaledToFit()
-            .background(Color.white)
-            .clipShape(Circle())
+            .tint(.gray)
+        //            .background(Color.white)
+        //            .clipShape(Circle())
             .frame(width: 100, height: 100)
-            .shadow(color: .gray, radius: 2, x: 0, y: 1)
             .padding(.leading, 20.0)
             .accessibilityLabel("avatar")
+            .shadow(color: darkGrayColor, radius: 6)
+        //            .overlay(
+        //                Circle()
+        //                    .strokeBorder(Color.white, lineWidth: 6)
+        //                    .padding(.leading, 20.0)
+        //            )
+        //        AsyncImage(
+        //            url: firebaseAccountConfiguration.user?.photoURL,
+        //            content: { image in
+        //                image.resizable()
+        //                    .scaledToFit()
+        //                    .tint(.gray)
+        //                    .background(Color.white)
+        //                    .clipShape(Circle())
+        //                    .frame(width: 100, height: 100)
+        //                    .padding(.leading, 20.0)
+        //                    .accessibilityLabel("avatar")
+        //                    .shadow(color: darkGrayColor, radius: 6)
+        //                    .overlay(
+        //                        Circle()
+        //                            .strokeBorder(Color.white, lineWidth: 6)
+        //                            .padding(.leading, 20.0)
+        //                    )
+        //            },
+        //            placeholder: {
+        //                Image(systemName: "person.fill")
+        //                    .resizable()
+        //                    .scaledToFit()
+        //                    .tint(.gray)
+        //                    .background(Color.white)
+        //                    .clipShape(Circle())
+        //                    .frame(width: 100, height: 100)
+        //                    .padding(.leading, 20.0)
+        //                    .accessibilityLabel("avatarPlaceholder")
+        //                    .shadow(color: darkGrayColor, radius: 6)
+        //                    .overlay(
+        //                        Circle()
+        //                            .strokeBorder(Color.white, lineWidth: 6)
+        //                            .padding(.leading, 20.0)
+        //                    )
+        //            }
+        //        )
     }
     
     var profileNameView: some View {
         VStack {
-            Text("ID " + userID)
+            Text("ID " + (firebaseAccountConfiguration.user?.email ?? "xxxxxx"))
                 .font(.custom("Nunito-Light", size: 18))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Hi, " + name)
+            Text("Hi, " + self.displayName)
                 .font(.custom("Nunito-Bold", size: 25))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+    
+    func loadUser() {
+        UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                print("User: " + (profileUser?.description() ?? "-"))
+                authModel.profile = profileUser
+                self.displayName = authModel.profile?.displayName ?? ""
+                self.avatar = authModel.profile?.avatar ?? ""
+            }
         }
     }
 }
@@ -201,7 +273,7 @@ public struct HeaderHome: View {
 #if DEBUG
 struct HeaderHome_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderHome(name: "Gonzalo", avatar: "BalanceLogo", userID: "00007")
+        HeaderHome()
     }
 }
 #endif

@@ -20,7 +20,7 @@ let package = Package(
     products: [
         .library(name: "BalanceContacts", targets: ["BalanceContacts"]),
         .library(name: "BalanceMockDataStorageProvider", targets: ["BalanceMockDataStorageProvider"]),
-        .library(name: "BalanceOnboardingFlow", targets: ["BalanceOnboardingFlow"]),
+//        .library(name: "BalanceOnboardingFlow", targets: ["BalanceOnboardingFlow"]),
         .library(name: "BalanceSchedule", targets: ["BalanceSchedule"]),
         .library(name: "BalanceSharedContext", targets: ["BalanceSharedContext"])
     ],
@@ -49,21 +49,21 @@ let package = Package(
                 .process("Resources")
             ]
         ),
-        .target(
-            name: "BalanceOnboardingFlow",
-            dependencies: [
-                .target(name: "BalanceSharedContext"),
-                .product(name: "Account", package: "CardinalKit"),
-                .product(name: "FHIR", package: "CardinalKit"),
-                .product(name: "FirebaseAccount", package: "CardinalKit"),
-                .product(name: "HealthKitDataSource", package: "CardinalKit"),
-                .product(name: "Onboarding", package: "CardinalKit"),
-                .product(name: "Views", package: "CardinalKit")
-            ],
-            resources: [
-                .process("Resources")
-            ]
-        ),
+//        .target(
+//            name: "BalanceOnboardingFlow",
+//            dependencies: [
+//                .target(name: "BalanceSharedContext"),
+//                .product(name: "Account", package: "CardinalKit"),
+//                .product(name: "FHIR", package: "CardinalKit"),
+//                .product(name: "FirebaseAccount", package: "CardinalKit"),
+//                .product(name: "HealthKitDataSource", package: "CardinalKit"),
+//                .product(name: "Onboarding", package: "CardinalKit"),
+//                .product(name: "Views", package: "CardinalKit")
+//            ],
+//            resources: [
+//                .process("Resources")
+//            ]
+//        ),
         .target(
             name: "BalanceSchedule",
             dependencies: [
