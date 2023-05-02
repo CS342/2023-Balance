@@ -102,3 +102,10 @@ extension UIImage {
         }
     }
 }
+
+extension View {
+    func adaptsToKeyboard() -> some View {
+        let modifier = modifier(AdaptsToKeyboard())
+        return modifier
+    }
+}

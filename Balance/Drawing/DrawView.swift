@@ -281,11 +281,7 @@ struct DrawView: View {
             }
         }
         
-        if isNewDraw {
-            NavigationUtil.popToRootView()
-        } else {
-            dismiss()
-        }
+        dismiss()
     }
 }
 
