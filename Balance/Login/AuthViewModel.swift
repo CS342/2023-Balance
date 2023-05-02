@@ -145,29 +145,6 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
-    //    func compressImage(image: UIImage) -> UIImage {
-    //        let resizedImage = image.aspectFittedToHeight(200)
-    //        resizedImage.jpegData(compressionQuality: 0.2)
-    //        return resizedImage
-    //    }
-    
-    //    func updatePhotoURL(photoURL: URL) {
-    //        print(Auth.auth().currentUser?.photoURL ?? "")
-    //        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-    //        changeRequest?.photoURL = photoURL
-    //        changeRequest?.commitChanges(completion: { err in
-    //            if let err = err {
-    //                print(err.localizedDescription)
-    //            }
-    //            Auth.auth().currentUser?.reload(completion: { err in
-    //                if let err = err {
-    //                    print(err.localizedDescription)
-    //                }
-    //                print(Auth.auth().currentUser?.photoURL ?? "")
-    //            })
-    //        })
-    //        Auth.auth().currentUser?.reload()
-    //    }
     
     deinit {
         unbind()
