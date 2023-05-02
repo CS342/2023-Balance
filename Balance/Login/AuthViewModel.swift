@@ -132,29 +132,6 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
-    //    func saveProfileImage(profilePic: UIImage) {
-    //        guard let uid = Auth.auth().currentUser?.uid else {
-    //            return
-    //        }
-    //
-    //        var imageCompress = compressImage(image: profilePic)
-    //        let imageData = imageCompress.pngData()
-    //
-    //        let strBase64 = imageData?.base64EncodedString(options: .lineLength64Characters)
-    //        print(strBase64 ?? "")
-    //        //        guard let imageData = compressImage(image: profilePic) else {
-    //        //            return
-    //        //        }
-    //
-    //        let database = Firestore.firestore()
-    //        database.collection("users").document("\(uid)/avatar").setData(["avatar": "test"]) { err in
-    //            if let err = err {
-    //                print("Error writing document: \(err)")
-    //            } else {
-    //                print("Document successfully written!")
-    //            }
-    //        }
-    //    }
     
     func loadPersonalData(uid: String) {
         UserProfileRepository.shared.fetchProfile(userId: uid) { profile, error in
