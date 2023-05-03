@@ -28,17 +28,6 @@ struct BalanceAccount: View {
                     }
                 }
             
-            //        OnboardingView(
-            //            contentView: {
-            //                LoginView().environmentObject(AuthViewModel())
-            //            }, actionView: {
-            //                actionView
-            //            }
-            //        )
-            //        .onReceive(account.objectWillChange) {
-            //            if account.signedIn {
-            //                completedOnboardingFlow = true
-            //            }
         }
         .background(backgroudColor)
     }
