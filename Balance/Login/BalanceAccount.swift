@@ -40,7 +40,6 @@ struct BalanceAccount: View {
             //                completedOnboardingFlow = true
             //            }
         }
-//        .ignoresSafeArea()
         .background(backgroudColor)
     }
     
