@@ -51,7 +51,7 @@ struct ProfileUser: Codable, Equatable, Hashable, Identifiable {
         self.parentEmail = parentEmail
         self.birthday = birthday
         self.country = country
-        self.phone = country
+        self.phone = phone
         self.avatar = avatar
         self.password = password
     }

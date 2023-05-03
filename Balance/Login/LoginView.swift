@@ -113,8 +113,9 @@ struct LoginView: View {
             Spacer()
             Group {
                 loginButton
-                Spacer().frame(height: 10)
+                Spacer().frame(height: 20)
                 signupView
+                Spacer().frame(height: 20)
             }
         }
     }
