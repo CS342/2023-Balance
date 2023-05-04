@@ -204,42 +204,6 @@ public struct HeaderHome: View {
         //                    .strokeBorder(Color.white, lineWidth: 6)
         //                    .padding(.leading, 20.0)
         //            )
-        //        AsyncImage(
-        //            url: firebaseAccountConfiguration.user?.photoURL,
-        //            content: { image in
-        //                image.resizable()
-        //                    .scaledToFit()
-        //                    .tint(.gray)
-        //                    .background(Color.white)
-        //                    .clipShape(Circle())
-        //                    .frame(width: 100, height: 100)
-        //                    .padding(.leading, 20.0)
-        //                    .accessibilityLabel("avatar")
-        //                    .shadow(color: darkGrayColor, radius: 6)
-        //                    .overlay(
-        //                        Circle()
-        //                            .strokeBorder(Color.white, lineWidth: 6)
-        //                            .padding(.leading, 20.0)
-        //                    )
-        //            },
-        //            placeholder: {
-        //                Image(systemName: "person.fill")
-        //                    .resizable()
-        //                    .scaledToFit()
-        //                    .tint(.gray)
-        //                    .background(Color.white)
-        //                    .clipShape(Circle())
-        //                    .frame(width: 100, height: 100)
-        //                    .padding(.leading, 20.0)
-        //                    .accessibilityLabel("avatarPlaceholder")
-        //                    .shadow(color: darkGrayColor, radius: 6)
-        //                    .overlay(
-        //                        Circle()
-        //                            .strokeBorder(Color.white, lineWidth: 6)
-        //                            .padding(.leading, 20.0)
-        //                    )
-        //            }
-        //        )
     }
     
     var profileNameView: some View {

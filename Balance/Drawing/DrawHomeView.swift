@@ -75,7 +75,7 @@ struct DrawHomeView: View {
                 }) {
                     Text("New Draw")
                         .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Draw"))
-                        .font(.custom("Nunito-Bold", size: 15))
+                        .font(.custom("Montserrat-SemiBold", size: 17))
                         .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
                         .foregroundColor(.white)
                         .background(primaryColor)

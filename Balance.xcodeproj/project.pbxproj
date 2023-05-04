@@ -139,6 +139,7 @@
 		6CB5181C29E45C0C007AADB4 /* BalanceExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181B29E45C0B007AADB4 /* BalanceExtentions.swift */; };
 		6CB5181E29E6F395007AADB4 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181D29E6F395007AADB4 /* ImageView.swift */; };
 		6CE62D552A014BF300BB4F90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */; };
+		6CE62D572A028F3400BB4F90 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE62D562A028F3400BB4F90 /* Country.swift */; };
 		6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF510BF29C8FD25008A2F55 /* LocationView.swift */; };
 		894A884529B7B27600CB347B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894A884429B7B27600CB347B /* NavigationView.swift */; };
 		896C65D629B92EF800F30BA2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896C65D529B92EF800F30BA2 /* Config.swift */; };
@@ -283,6 +284,7 @@
 		6CB5181B29E45C0B007AADB4 /* BalanceExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceExtentions.swift; sourceTree = "<group>"; };
 		6CB5181D29E6F395007AADB4 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6CE62D562A028F3400BB4F90 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		6CF510BF29C8FD25008A2F55 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceDebug.entitlements; sourceTree = "<group>"; };
 		894A884429B7B27600CB347B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				6C55242229F86D9200F802D9 /* IconView.swift */,
 				6C55242329F86D9200F802D9 /* UserView.swift */,
 				6C47338C29FB09E400DC72D0 /* ProfileUser.swift */,
+				6CE62D562A028F3400BB4F90 /* Country.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				6C55242729F86D9200F802D9 /* IconView.swift in Sources */,
 				6C55243929F8722B00F802D9 /* LoginView.swift in Sources */,
 				6C47338F29FC188A00DC72D0 /* UserProfileRepository.swift in Sources */,
+				6CE62D572A028F3400BB4F90 /* Country.swift in Sources */,
 				27525EB429B68B5100D1DF51 /* Date.swift in Sources */,
 				6C5523F729F80E8800F802D9 /* ShowHideSecureField.swift in Sources */,
 				2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */,

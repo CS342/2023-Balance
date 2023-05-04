@@ -20,35 +20,16 @@ struct BalanceAccount: View {
     @EnvironmentObject var account: Account
     
     var body: some View {
-        OnboardingView(
-            contentView: {
-                LoginView().environmentObject(AuthViewModel())
-            }, actionView: {
-                actionView
-            }
-        )
-        .onReceive(account.objectWillChange) {
-            if account.signedIn {
-                completedOnboardingFlow = true
-            }
+        Group {
+            LoginView(onboardingSteps: $onboardingSteps).environmentObject(AuthViewModel())
+                .onReceive(account.objectWillChange) {
+                    if account.signedIn {
+                        completedOnboardingFlow = true
+                    }
+                }
+            
         }
-        .ignoresSafeArea()
         .background(backgroudColor)
-    }
-    
-    @ViewBuilder private var actionView: some View {
-        HStack(alignment: .center) {
-            Text("Don’t have an account?")
-                .foregroundColor(Color.gray)
-                .font(.custom("Montserrat-Regular", size: 15))
-            Button {
-                onboardingSteps.append(.signUp)
-            } label: {
-                Text("Create an account")
-                    .foregroundColor(primaryColor)
-                    .font(.custom("Montserrat-SemiBold", size: 15))
-            }
-        }
     }
     
     

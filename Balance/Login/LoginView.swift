@@ -7,10 +7,44 @@
 
 import Account
 import BalanceSharedContext
+import Combine
 import class FHIR.FHIR
 import FirebaseAccount
 import Onboarding
 import SwiftUI
+
+struct AdaptsToKeyboard: ViewModifier {
+    @State var currentHeight: CGFloat = 0
+    
+    func body(content: Content) -> some View {
+        GeometryReader { geometry in
+            content
+                .padding(.bottom, self.currentHeight)
+                .onAppear(perform: {
+                    NotificationCenter.Publisher(
+                        center: NotificationCenter.default, name: UIResponder.keyboardWillShowNotification
+                    )
+                    .merge(
+                        with: NotificationCenter.Publisher(center: NotificationCenter.default, name: UIResponder.keyboardWillChangeFrameNotification)
+                    )
+                    .compactMap { notification in
+                        withAnimation(.easeOut(duration: 0.16)) {
+                            notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+                        }
+                    }
+                    .map { rect in
+                        rect.height - geometry.safeAreaInsets.bottom
+                    }
+                    .subscribe(Subscribers.Assign(object: self, keyPath: \.currentHeight))
+                    NotificationCenter.Publisher(center: NotificationCenter.default, name: UIResponder.keyboardWillHideNotification)
+                        .compactMap { _ in
+                            CGFloat.zero
+                        }
+                        .subscribe(Subscribers.Assign(object: self, keyPath: \.currentHeight))
+                })
+        }
+    }
+}
 
 struct LoginView: View {
     @EnvironmentObject private var authModel: AuthViewModel
@@ -18,6 +52,7 @@ struct LoginView: View {
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    @Binding private var onboardingSteps: [OnboardingFlow.Step]
     
     @State private var emailAddress: String = ""
     @State private var password: String = ""
@@ -26,6 +61,7 @@ struct LoginView: View {
         Group {
             if !authModel.isLoggedIn {
                 signInView
+                    .adaptsToKeyboard()
             } else {
                 Button {
                     NavigationUtil.popToRootView()
@@ -53,13 +89,12 @@ struct LoginView: View {
             Image("Balance")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 150.0)
+                .frame(width: 120.0)
                 .accessibility(hidden: true)
             Image("Logo")
                 .resizable()
-                .frame(width: 300.0)
                 .scaledToFit()
-                .clipped()
+                .frame(width: 250)
                 .accessibility(hidden: true)
             Text("Login")
                 .multilineTextAlignment(.center)
@@ -76,7 +111,27 @@ struct LoginView: View {
             Spacer().frame(height: 30)
             fieldsView
             Spacer()
-            loginButton
+            Group {
+                loginButton
+                Spacer().frame(height: 20)
+                signupView
+                Spacer().frame(height: 20)
+            }
+        }
+    }
+    
+    var signupView: some View {
+        HStack(alignment: .center) {
+            Text("Don’t have an account?")
+                .foregroundColor(Color.gray)
+                .font(.custom("Montserrat-Regular", size: 15))
+            Button {
+                onboardingSteps.append(.signUp)
+            } label: {
+                Text("Create an account")
+                    .foregroundColor(primaryColor)
+                    .font(.custom("Montserrat-SemiBold", size: 15))
+            }
         }
     }
     
@@ -89,14 +144,18 @@ struct LoginView: View {
                 .keyboardType(.emailAddress)
                 .font(.custom("Montserrat", size: 17))
                 .foregroundColor(darkGrayColor)
+                .padding(.horizontal, 20)
             Divider()
+                .padding(.horizontal, 20)
             Spacer().frame(height: 20)
             SecureField("Password", text: $password)
                 .textContentType(.password)
                 .keyboardType(.default)
                 .font(.custom("Montserrat", size: 17))
                 .foregroundColor(darkGrayColor)
+                .padding(.horizontal, 20)
             Divider()
+                .padding(.horizontal, 20)
         }
     }
     
@@ -119,6 +178,11 @@ struct LoginView: View {
         .buttonBorderShape(.roundedRectangle(radius: 10))
         .background(primaryColor)
         .cornerRadius(10)
+        .padding(.horizontal, 20)
+    }
+    
+    init(onboardingSteps: Binding<[OnboardingFlow.Step]>) {
+        self._onboardingSteps = onboardingSteps
     }
     
     func listen() {
@@ -127,7 +191,9 @@ struct LoginView: View {
 }
 
 struct LoginView_Previews: PreviewProvider {
+    @State private static var path: [OnboardingFlow.Step] = []
+    
     static var previews: some View {
-        LoginView()
+        LoginView(onboardingSteps: $path)
     }
 }

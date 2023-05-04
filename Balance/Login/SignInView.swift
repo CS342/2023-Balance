@@ -9,9 +9,11 @@ import Account
 import BalanceSharedContext
 import class FHIR.FHIR
 import FirebaseAccount
+import Foundation
 import Onboarding
 import SwiftUI
 
+// swiftlint: disable type_body_length
 struct SignInView: View {
     @EnvironmentObject var account: Account
     @AppStorage(StorageKeys.onboardingFlowComplete)
@@ -23,41 +25,45 @@ struct SignInView: View {
     @State private var displayName: String = ""
     @State private var email: String = ""
     @State private var parentEmail: String = ""
-    @State private var birthday: String = ""
-    @State private var country: String = ""
     @State private var phone: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
+    @State private var showingAlert = false
+    @State private var alertMsg: String = ""
+    @State private var country = Country(id: UUID().uuidString, name: "")
+    @State private var birthDate = Date.now
+    let promptText: String = "Select"
     
     var body: some View {
-        OnboardingView(
-            contentView: {
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .center) {
+                Spacer().frame(height: 30)
                 headerView
                 formView
-            }, actionView: {
-                actionView
+                Spacer().frame(height: 20)
+                signUpButton
+                signInButton
+                Spacer().frame(height: 50)
             }
-        )
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("")
-        .background(backgroudColor)
-        .ignoresSafeArea()
+        }.padding(.horizontal, 20)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("")
+            .background(backgroudColor)
+            .ignoresSafeArea()
+            .adaptsToKeyboard()
     }
     
-    @ViewBuilder private var actionView: some View {
-        VStack(alignment: .center) {
-            signUpButton
-            HStack(alignment: .center) {
-                Text("Do you already have an account?")
-                    .foregroundColor(Color.gray)
-                    .font(.custom("Montserrat-Regular", size: 15))
-                Button {
-                    dismiss()
-                } label: {
-                    Text("Sign In")
-                        .foregroundColor(primaryColor)
-                        .font(.custom("Montserrat-SemiBold", size: 15))
-                }
+    var signInButton: some View {
+        HStack(alignment: .center) {
+            Text("Do you already have an account?")
+                .foregroundColor(Color.gray)
+                .font(.custom("Montserrat-Regular", size: 15))
+            Button {
+                dismiss()
+            } label: {
+                Text("Sign In")
+                    .foregroundColor(primaryColor)
+                    .font(.custom("Montserrat-SemiBold", size: 17))
             }
         }
     }
@@ -72,14 +78,16 @@ struct SignInView: View {
                             displayName: displayName,
                             email: email,
                             parentEmail: parentEmail,
-                            birthday: birthday,
-                            country: country,
+                            birthday: birthDate.formatted(date: .numeric, time: .omitted),
+                            country: country.name,
                             phone: phone,
                             avatar: "",
                             password: password
                         )
                 )
-                onboardingSteps.append(.avatar)
+                if !showingAlert {
+                    onboardingSteps.append(.avatar)
+                }
             }
         ) {
             Text("Sign Up")
@@ -88,6 +96,9 @@ struct SignInView: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 44.0)
+        }
+        .alert(alertMsg, isPresented: $showingAlert) {
+            Button("OK", role: .cancel) { }
         }
         .buttonBorderShape(.roundedRectangle(radius: 10))
         .background(primaryColor)
@@ -116,6 +127,7 @@ struct SignInView: View {
                     .stroke(lightGrayColor, lineWidth: 1)
             )
             .padding(5)
+            .keyboardType(.alphabet)
     }
     
     var emailField: some View {
@@ -128,11 +140,12 @@ struct SignInView: View {
                     .stroke(lightGrayColor, lineWidth: 1)
             )
             .padding(5)
+            .keyboardType(.emailAddress)
     }
     
     var passwordField: some View {
         Group {
-            ShowHideSecureField("new password", text: $password)
+            ShowHideSecureField("New password", text: $password)
                 .padding()
                 .font(.custom("Montserrat-Regular", size: 17))
                 .foregroundColor(darkGrayColor)
@@ -141,7 +154,7 @@ struct SignInView: View {
                         .stroke(lightGrayColor, lineWidth: 1)
                 )
                 .padding(5)
-            ShowHideSecureField("confirme password", text: $confirmPassword)
+            ShowHideSecureField("Confirm password", text: $confirmPassword)
                 .padding()
                 .font(.custom("Montserrat-Regular", size: 17))
                 .foregroundColor(darkGrayColor)
@@ -163,30 +176,39 @@ struct SignInView: View {
                     .stroke(lightGrayColor, lineWidth: 1)
             )
             .padding(5)
+            .keyboardType(.emailAddress)
     }
     
     var birthdayField: some View {
-        TextField("Birthday", text: $birthday)
-            .padding()
-            .font(.custom("Montserrat-Regular", size: 17))
-            .foregroundColor(darkGrayColor)
-            .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(lightGrayColor, lineWidth: 1)
-            )
-            .padding(5)
+        DatePicker(selection: $birthDate, in: ...Date.now, displayedComponents: .date) {
+            Text("Birthday")
+                .font(.custom("Montserrat-Regular", size: 17))
+                    .foregroundColor(darkGrayColor)
+                .padding(.leading, 5)
+        }.padding(5)
     }
     
     var countryField: some View {
-        TextField("Country", text: $country)
-            .padding()
-            .font(.custom("Montserrat-Regular", size: 17))
-            .foregroundColor(darkGrayColor)
-            .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(lightGrayColor, lineWidth: 1)
-            )
-            .padding(5)
+        VStack {
+            HStack {
+                Text("Country:")
+                    .font(.custom("Montserrat-Regular", size: 17))
+                    .foregroundColor(darkGrayColor)
+                Spacer()
+                Picker("Country", selection: $country) {
+                    if country.name.isEmpty {
+                        Text(promptText).tag(country.id)
+                    }
+                    ForEach(getLocales(), id: \.self) {
+                        Text($0.name).tag($0.id)
+                    }
+                }.font(.custom("Montserrat-Regular", size: 17))
+                    .foregroundColor(primaryColor)
+            }
+            // Text("Selected country: \(selection.name)")
+        }
+        .padding(5)
+        .padding(.leading, 5)
     }
     
     var phoneField: some View {
@@ -199,6 +221,7 @@ struct SignInView: View {
                     .stroke(lightGrayColor, lineWidth: 1)
             )
             .padding(5)
+            .keyboardType(.phonePad)
     }
     
     var headerView: some View {
@@ -232,11 +255,85 @@ struct SignInView: View {
     
     func save(value: ProfileUser) {
         do {
+            if $displayName.wrappedValue.isEmpty ||
+                $email.wrappedValue.isEmpty ||
+                $parentEmail.wrappedValue.isEmpty ||
+                $birthDate.wrappedValue.toString().isEmpty ||
+                $country.name.wrappedValue.isEmpty ||
+                $phone.wrappedValue.isEmpty ||
+                $password.wrappedValue.isEmpty ||
+                $confirmPassword.wrappedValue.isEmpty {
+                self.alertMsg = "All the information is required"
+                showingAlert = true
+                return
+            }
+            
+            if $password.wrappedValue !=
+                $confirmPassword.wrappedValue {
+                self.alertMsg = "The confirmation password mismatch"
+                showingAlert = true
+                return
+            }
+            
+            if !isValidPassword() {
+                self.alertMsg = "Password Error: \n" + getMissingValidation(str: $password.wrappedValue).rawValue
+                showingAlert = true
+                return
+            }
+            
             let data = try JSONEncoder().encode(value)
             UserDefaults.standard.set(data, forKey: "user")
         } catch {
             print("Unable to Encode User (\(error))")
         }
+    }
+    
+    func isValidPassword() -> Bool {
+        // least one uppercase,
+        // least one digit
+        // least one lowercase
+        // least one symbol
+        //  min 8 characters total
+        let password = $password.wrappedValue.trimmingCharacters(in: CharacterSet.whitespaces)
+        let passwordRegx = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$"
+        let passwordCheck = NSPredicate(format: "SELF MATCHES %@", passwordRegx)
+        return passwordCheck.evaluate(with: password)
+    }
+    
+    func getMissingValidation(str: String) -> [String] {
+        var errors: [String] = []
+        if !NSPredicate(format: "SELF MATCHES %@", ".*[A-Z]+.*").evaluate(with: str) {
+            errors.append("At least one uppercase")
+        }
+        
+        if !NSPredicate(format: "SELF MATCHES %@", ".*[0-9]+.*").evaluate(with: str) {
+            errors.append("At least one digit")
+        }
+
+        if !NSPredicate(format: "SELF MATCHES %@", ".*[!&^%$#@()/]+.*").evaluate(with: str) {
+            errors.append("At least one symbol")
+        }
+        
+        if !NSPredicate(format: "SELF MATCHES %@", ".*[a-z]+.*").evaluate(with: str) {
+            errors.append("At least one lowercase")
+        }
+        
+        if str.count < 8 {
+            errors.append("Min 8 characters total")
+        }
+        return errors
+    }
+    
+    
+    fileprivate func getLocales() -> [Country] {
+        let locales = Locale.isoRegionCodes
+            .filter {
+                $0 != "United States"
+            }
+            .compactMap {
+                Country(id: $0, name: Locale.current.localizedString(forRegionCode: $0) ?? $0)
+            }
+        return [Country(id: "US", name: Locale.current.localizedString(forRegionCode: "US") ?? "United States")] + locales
     }
 }
 

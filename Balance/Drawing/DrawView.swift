@@ -99,7 +99,7 @@ struct DrawView: View {
             }
         } label: {
             Text("Save")
-                .font(.system(.title2))
+                .font(.custom("Montserrat-SemiBold", size: 17))
                 .padding(.horizontal, 10.0)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
@@ -281,11 +281,7 @@ struct DrawView: View {
             }
         }
         
-        if isNewDraw {
-            NavigationUtil.popToRootView()
-        } else {
-            dismiss()
-        }
+        dismiss()
     }
 }
 

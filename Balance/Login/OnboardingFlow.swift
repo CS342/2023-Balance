@@ -26,7 +26,7 @@ public struct OnboardingFlow: View {
                 .navigationDestination(for: Step.self) { onboardingStep in
                     switch onboardingStep {
                     case .login:
-                        LoginView().environmentObject(AuthViewModel())
+                        LoginView(onboardingSteps: $onboardingSteps).environmentObject(AuthViewModel())
                     case .signUp:
                         SignInView(onboardingSteps: $onboardingSteps)
                     case .avatar:

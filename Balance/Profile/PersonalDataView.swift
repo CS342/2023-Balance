@@ -162,7 +162,7 @@ struct PersonalDataView: View {
             dismiss()
         }) {
             Text("Close")
-                .font(.system(.title2))
+                .font(.custom("Montserrat-SemiBold", size: 17))
                 .padding(.horizontal, 10.0)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)

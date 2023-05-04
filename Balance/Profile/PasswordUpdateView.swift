@@ -24,13 +24,25 @@ struct PasswordUpdateView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(20)
                 ShowHideSecureField("new password", text: $password)
-                    .font(.custom("Nunito", size: 16))
-                    .textFieldStyle(.roundedBorder)
                     .padding()
+                    .font(.custom("Montserrat-Regular", size: 17))
+                    .foregroundColor(darkGrayColor)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(lightGrayColor, lineWidth: 1)
+                    )
+                    .padding(5)
+                    .padding(.horizontal, 25)
                 ShowHideSecureField("confirme password", text: $confirmPassword)
-                    .font(.custom("Nunito", size: 16))
-                    .textFieldStyle(.roundedBorder)
                     .padding()
+                    .font(.custom("Montserrat-Regular", size: 17))
+                    .foregroundColor(darkGrayColor)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(lightGrayColor, lineWidth: 1)
+                    )
+                    .padding(5)
+                    .padding(.horizontal, 25)
                 Spacer()
                 saveButton
             }
@@ -42,7 +54,7 @@ struct PasswordUpdateView: View {
             dismiss()
         }) {
             Text("Save")
-                .font(.system(.title2))
+                .font(.custom("Montserrat-SemiBold", size: 17))
                 .padding(.horizontal, 10.0)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
