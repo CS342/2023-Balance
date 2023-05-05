@@ -205,7 +205,6 @@ struct SignInView: View {
                 }.font(.custom("Montserrat-Regular", size: 17))
                     .foregroundColor(primaryColor)
             }
-            // Text("Selected country: \(selection.name)")
         }
         .padding(5)
         .padding(.leading, 5)

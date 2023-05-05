@@ -27,7 +27,6 @@ struct BalanceAccount: View {
                         completedOnboardingFlow = true
                     }
                 }
-            
         }
         .background(backgroudColor)
     }

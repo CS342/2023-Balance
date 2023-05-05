@@ -193,17 +193,10 @@ public struct HeaderHome: View {
             .resizable()
             .scaledToFit()
             .tint(.gray)
-        //            .background(Color.white)
-        //            .clipShape(Circle())
             .frame(width: 100, height: 100)
             .padding(.leading, 20.0)
             .accessibilityLabel("avatar")
             .shadow(color: darkGrayColor, radius: 6)
-        //            .overlay(
-        //                Circle()
-        //                    .strokeBorder(Color.white, lineWidth: 6)
-        //                    .padding(.leading, 20.0)
-        //            )
     }
     
     var profileNameView: some View {

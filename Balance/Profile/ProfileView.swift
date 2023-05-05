@@ -122,16 +122,9 @@ struct ProfileView: View {
             Image(self.avatar)
                 .resizable()
                 .scaledToFit()
-//                .tint(.gray)
-//                .background(Color.white)
-//                .clipShape(Circle())
                 .frame(width: 180, height: 180)
                 .accessibilityLabel("avatar")
                 .shadow(color: darkGrayColor, radius: 6)
-//                .overlay(
-//                    Circle()
-//                        .strokeBorder(Color.white, lineWidth: 6)
-//                )
             plusIcon
         }
     }

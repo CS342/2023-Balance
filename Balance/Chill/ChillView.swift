@@ -30,7 +30,8 @@ struct ChillView: View {
     }
     
     var whatTitle: some View {
-        Text("What would you like to do?").font(.custom("Nunito-Bold", size: 25))
+        Text("What would you like to do?")
+            .font(.custom("Nunito-Bold", size: 25))
             .foregroundColor(darkBlueColor)
             .multilineTextAlignment(.center)
             .lineLimit(2)
@@ -73,7 +74,7 @@ struct ChillView: View {
                 viewName: "Breathing Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    // define action
+                    NewTimerView(chillType: .breathing, navTitleText: "Meditation", subTitleText: "Breathe deeply")
                 }
             )
         ) {

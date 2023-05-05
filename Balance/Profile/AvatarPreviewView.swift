@@ -132,25 +132,6 @@ struct AvatarPreviewView: View {
         .background(primaryColor)
         .cornerRadius(10)
         .padding(.horizontal, 20.0)
-        //
-        //        Button(action: {
-        //            authModel.saveProfileImage(profilePic: avatarSelection?.name)
-        ////            if let rootViewController = UIApplication.shared.currentUIWindow()?.rootViewController {
-        ////                rootViewController.dismiss(animated: true)
-        ////            }
-        //        }) {
-        //            Text("Select")
-        //                font(.custom("Montserrat-SemiBold", size: 17))
-        //                .padding(.horizontal, 10.0)
-        //                .foregroundColor(.white)
-        //                .frame(maxWidth: .infinity)
-        //                .frame(height: 44.0)
-        //                .font(.custom("Nunito-Bold", size: 16))
-        //        }
-        //        .buttonBorderShape(.roundedRectangle(radius: 10))
-        //        .background(primaryColor)
-        //        .cornerRadius(10)
-        //        .padding(.horizontal, 20.0)
     }
     
     var cancelButton: some View {
