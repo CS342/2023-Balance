@@ -127,35 +127,6 @@ struct PersonalDataView: View {
                 .padding(.horizontal, 30.0)
         }
     }
-//    var dataFields: some View {
-//        Group {
-//            TextField("Display Name", text: self.dis)
-//                            .font(.custom("Montserrat-Thin", size: 16))
-//                            .textFieldStyle(.roundedBorder)
-//                            .padding(.top, 5)
-//                            .padding(.horizontal, 30.0)
-//            TextField("Parent Email", text:$parentEmail)
-//                            .font(.custom("Montserrat-Thin", size: 16))
-//                            .textFieldStyle(.roundedBorder)
-//                            .padding(.top, 5)
-//                            .padding(.horizontal, 30.0)
-//                        TextField("Birthday", text: $birthday)
-//                            .font(.custom("Montserrat-Thin", size: 16))
-//                            .textFieldStyle(.roundedBorder)
-//                            .padding(.top, 5)
-//                            .padding(.horizontal, 30.0)
-//                        TextField("Country", text: $country)
-//                            .font(.custom("Montserrat-Thin", size: 16))
-//                            .textFieldStyle(.roundedBorder)
-//                            .padding(.top, 5)
-//                            .padding(.horizontal, 30.0)
-//                        TextField("Phone", text: authModel.profile.phone)
-//                            .font(.custom("Montserrat-Thin", size: 16))
-//                            .textFieldStyle(.roundedBorder)
-//                            .padding(.top, 5)
-//                            .padding(.horizontal, 30.0)
-//        }
-//    }
     
     var saveButton: some View {
         Button(action: {

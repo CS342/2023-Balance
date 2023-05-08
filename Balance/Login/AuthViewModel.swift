@@ -49,9 +49,7 @@ final class AuthViewModel: ObservableObject {
                     self.session = nil
                     self.isLoggedIn = false
                 }
-                
                 print(auth)
-                //                self.loadPersonalData(uid: user?.uid ?? "")
             } else {
                 self.isLoggedIn = false
             }

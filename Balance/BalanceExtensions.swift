@@ -58,7 +58,6 @@ extension View {
         controller.view.bounds = CGRect(origin: .zero, size: size)
         controller.view.sizeToFit()
         
-// here is the call to the function that converts UIView to UIImage: `.asUIImage()`
         let image = controller.view.asUIImage()
         controller.view.removeFromSuperview()
         return image
@@ -66,7 +65,6 @@ extension View {
 }
 
 extension UIView {
-// This is the function to convert UIView to UIImage
     func asUIImage() -> UIImage {
         let renderer = UIGraphicsImageRenderer(bounds: bounds)
         return renderer.image { rendererContext in
