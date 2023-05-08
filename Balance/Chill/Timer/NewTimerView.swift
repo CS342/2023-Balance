@@ -9,7 +9,7 @@ import SwiftUI
 
 enum ChillType {
     case breathing
-    case heart
+    case head
     case chest
     case shoulders
     case hands
@@ -48,6 +48,7 @@ struct NewTimerView: View {
     @State private var circleScale: CGFloat = 0.45
     @State var chillType: ChillType = .breathing
     @State var sliderValue: Float = 0.0
+    @State var shouldTransition = false
     var navTitleText: String
     var subTitleText: String
     var countTo: Int = 120 // 4 minutes 120 - 2minutes
@@ -114,14 +115,14 @@ struct NewTimerView: View {
             switch self.chillType {
             case .breathing:
                 centerAnimation
-            case .heart:
-                centerAnimation
+            case .head:
+                headAnimation
             case .chest:
                 centerAnimation
             case .shoulders:
-                centerAnimation
+                shouldersAnimation
             case .hands:
-                centerAnimation
+                handsAnimation
             case .knee:
                 centerAnimation
             case .legs:
@@ -139,6 +140,78 @@ struct NewTimerView: View {
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding(.horizontal, 30.0)
             .background(.clear)
+    }
+    
+    var handsAnimation: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if shouldTransition {
+                Image("hands1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("hands1")
+            } else {
+                Image("hands2")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("hands2")
+            }
+        }
+        .onReceive(timerAnimation) { _ in
+            completed() ? self.timerAnimation.upstream.connect().cancel() : shouldTransition.toggle()
+        }
+        .animation(.easeInOut(duration: 0.5), value: shouldTransition)
+    }
+    
+    var headAnimation: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if shouldTransition {
+                Image("head1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("head1")
+            } else {
+                Image("head2")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("head2")
+            }
+        }
+        .onReceive(timerAnimation) { _ in
+            completed() ? self.timerAnimation.upstream.connect().cancel() : shouldTransition.toggle()
+        }
+        .animation(.easeInOut(duration: 0.5), value: shouldTransition)
+    }
+    
+    var shouldersAnimation: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if shouldTransition {
+                Image("shoulders1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("shoulders1")
+            } else {
+                Image("shoulders2")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("shoulders2")
+            }
+        }
+        .onReceive(timerAnimation) { _ in
+            completed() ? self.timerAnimation.upstream.connect().cancel() : shouldTransition.toggle()
+        }
+        .animation(.easeInOut(duration: 0.5), value: shouldTransition)
     }
     
     var centerAnimation: some View {

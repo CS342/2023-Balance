@@ -27,7 +27,6 @@ struct MeditationView: View {
                 HeaderMenu(title: "Guided Meditation")
                 VStack(alignment: .center, spacing: 10) {
                     highlightsTitle
-                    Spacer()
                     ScrollView(.horizontal) {
                         HStack {
                             videosArrayView
@@ -37,17 +36,16 @@ struct MeditationView: View {
                     tagsView
                     if showingGuided {
                         MeditationSpotifyView()
-                            .padding()
+                            .padding(.horizontal, 10.0)
                     } else if showingYoutube {
                         YoutubeView()
-                            .padding()
+                            .padding(.horizontal, 10.0)
                     } else if showingSleep {
                         SleepView()
-                            .padding()
+                            .padding(.horizontal, 10.0)
                     }
                     Spacer()
                 }
-                .padding()
                 .edgesIgnoringSafeArea(.all)
             }
         }
@@ -56,13 +54,15 @@ struct MeditationView: View {
     var highlightsTitle: some View {
         Text("Highlights").font(.custom("Nunito-Bold", size: 25))
             .foregroundColor(darkBlueColor)
-            .offset(x: -110)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 10)
     }
     
     var categoriesTitle: some View {
         Text("Categories").font(.custom("Nunito-Bold", size: 20))
             .foregroundColor(darkBlueColor)
-            .offset(x: -110)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 10)
     }
     
     var videosArrayView: some View {
@@ -76,14 +76,14 @@ struct MeditationView: View {
     }
     
     var tagsView: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 24) {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                Spacer(minLength: 10)
                 selfGuidedButton
                 youtubeButton
                 sleepButton
             }
         }
-        .padding()
     }
     
     var selfGuidedButton: some View {

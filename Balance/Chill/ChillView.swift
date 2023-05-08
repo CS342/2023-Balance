@@ -88,7 +88,7 @@ struct ChillView: View {
                 viewName: "Body sensations Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    // define action
+                    BodySensationView()
                 }
             )
         ) {
