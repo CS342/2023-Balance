@@ -128,7 +128,7 @@ struct NewTimerView: View {
         Group {
             switch self.chillType {
             case .breathing:
-                breathAnimacion
+                breathAnimation
             case .head:
                 headAnimation
             case .chest:
