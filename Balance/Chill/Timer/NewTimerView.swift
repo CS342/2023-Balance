@@ -229,7 +229,7 @@ struct NewTimerView: View {
         .animation(.easeInOut(duration: 0.5), value: shouldTransition)
     }
     
-    var breathAnimacion: some View {
+    var breathAnimation: some View {
         ZStack {
             Circle().fill(primaryColor)
                 .frame(width: 60 * scale, height: 60 * scale)
