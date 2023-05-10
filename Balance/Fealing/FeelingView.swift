@@ -48,7 +48,7 @@ struct FeelingView: View {
                 viewName: "Feeling Mandala Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    // define content
+                    FacesScreenView()
                 }
             )
         ) {
@@ -62,7 +62,7 @@ struct FeelingView: View {
                 viewName: "How is your mood Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    // define content
+                    FacesScreenView()
                 }
             )
         ) {
