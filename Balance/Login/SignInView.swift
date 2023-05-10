@@ -16,9 +16,7 @@ import SwiftUI
 // swiftlint: disable type_body_length
 struct SignInView: View {
     @EnvironmentObject var account: Account
-    @AppStorage(StorageKeys.onboardingFlowComplete)
-    var completedOnboardingFlow = false
-    
+    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @Environment(\.dismiss) private var dismiss
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
@@ -221,6 +219,7 @@ struct SignInView: View {
             )
             .padding(5)
             .keyboardType(.phonePad)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
     var headerView: some View {

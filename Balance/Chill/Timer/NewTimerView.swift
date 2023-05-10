@@ -17,6 +17,14 @@ enum ChillType {
     case legs
 }
 
+enum BreathSteps {
+    case inhale
+    case holdInhale
+    case exhale
+    case holdExhale
+}
+
+
 struct Clock: View {
     var counter: Int
     var countTo: Int
@@ -50,29 +58,29 @@ struct NewTimerView: View {
     @State var sliderValue: Float = 0.0
     @State var shouldTransition = false
     var navTitleText: String
-    var subTitleText: String
+    @State var subTitleText: String
+    @State var stepTitleText = "Inhale"
     var countTo: Int = 120 // 4 minutes 120 - 2minutes
-    let timer = Timer
-        .publish(every: 1, on: .main, in: .common)
+    @State var timer = Timer
+        .publish(every: 1.0, on: .main, in: .common)
         .autoconnect()
     @State var timerAnimation = Timer
         .publish(every: 2.0, on: .main, in: .common)
         .autoconnect()
+    @State var scale: CGFloat = 1.0
+    @State var breathStp: Int = 0
     
     var body: some View {
         ZStack {
             backgroudColor.edgesIgnoringSafeArea(.all)
-            VStack {
+            VStack(alignment: .center) {
                 HeaderMenu(title: navTitleText)
                 Spacer()
                 subTitle
                 Spacer()
                 Clock(counter: counter, countTo: countTo)
                 Spacer()
-                ZStack {
-                    progressAnimation
-                    insideView
-                }
+                progressAnimation
                 Group {
                     Spacer()
                     actionButton
@@ -80,8 +88,14 @@ struct NewTimerView: View {
                     sliderView
                     Spacer()
                 }
-            }.onReceive(timer) { _ in
+            }
+            .onReceive(timer) { _ in
                receiveAction()
+            }
+            .onAppear {
+                timerAnimation = Timer
+                    .publish(every: (self.chillType == .breathing) ? 5.0 : 2.0, on: .main, in: .common)
+                    .autoconnect()
             }
         }
     }
@@ -114,7 +128,7 @@ struct NewTimerView: View {
         Group {
             switch self.chillType {
             case .breathing:
-                centerAnimation
+                breathAnimation
             case .head:
                 headAnimation
             case .chest:
@@ -140,6 +154,7 @@ struct NewTimerView: View {
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding(.horizontal, 30.0)
             .background(.clear)
+            .animation(.easeInOut(duration: 1), value: subTitleText)
     }
     
     var handsAnimation: some View {
@@ -214,6 +229,28 @@ struct NewTimerView: View {
         .animation(.easeInOut(duration: 0.5), value: shouldTransition)
     }
     
+    var breathAnimation: some View {
+        ZStack {
+            Circle().fill(primaryColor)
+                .frame(width: 60 * scale, height: 60 * scale)
+                .shadow(color: primaryColor.opacity(0.8), radius: 20)
+                .animation(.easeInOut(duration: 5), value: scale)
+                .onAppear {
+                    breath()
+                }
+                .onReceive(timerAnimation) { _ in
+                    completed() ? self.timerAnimation.upstream.connect().cancel() : breath()
+                }
+            Text(stepTitleText)
+                .font(.custom("Nunito-Bold", size: 25))
+                .foregroundColor(.white)
+                .frame(width: 80, height: 30)
+                .shadow(color: .gray, radius: 1)
+                .lineLimit(1, reservesSpace: true)
+                .animation(.easeInOut(duration: 1), value: stepTitleText)
+        }
+    }
+    
     var centerAnimation: some View {
         ZStack {
             Circle()
@@ -270,10 +307,16 @@ struct NewTimerView: View {
     
     var pauseButton: some View {
         Button {
+            if completed() {
+                self.counter = 0
+                timer = Timer
+                    .publish(every: 1.0, on: .main, in: .common)
+                    .autoconnect()
+            }
             self.pause.toggle()
             if !pause {
                 timerAnimation = Timer
-                    .publish(every: 2.0, on: .main, in: .common)
+                    .publish(every: (self.chillType == .breathing) ? 5.0 : 2.0, on: .main, in: .common)
                     .autoconnect()
             }
         } label: {
@@ -332,16 +375,48 @@ struct NewTimerView: View {
                             Animation.linear(duration: 1), value: UUID()
                         )
                 )
+            insideView
         }
     }
+    
+    func breath() {
+        switch breathStp {
+        case 0:
+            stepTitleText = "Inhale"
+            scale = 3.0
+            breathStp = 1
+        case 1:
+            stepTitleText = "Hold"
+            scale = 3.0
+            breathStp = 2
+        case 2:
+            stepTitleText = "Exhale"
+            scale = 1.0
+            breathStp = 3
+        case 3:
+            stepTitleText = "Hold"
+            scale = 1.0
+            breathStp = 0
+        default:
+            scale = 1.0
+            breathStp = 0
+            stepTitleText = "Inhale"
+        }
+    }
+    
     func receiveAction() {
-        if pause {
-            self.counter = self.counter
-            timerAnimation.upstream.connect().cancel()
+        if completed() {
+            self.pause.toggle()
+            timer.upstream.connect().cancel()
         } else {
-            if self.counter < self.countTo {
-                self.counter += 1
-                self.sliderValue = Float(self.counter)
+            if pause {
+                self.counter = self.counter
+                timerAnimation.upstream.connect().cancel()
+            } else {
+                if self.counter < self.countTo {
+                    self.counter += 1
+                    self.sliderValue = Float(self.counter)
+                }
             }
         }
     }
@@ -352,28 +427,28 @@ struct NewTimerView: View {
         shadowScale = 0.45
         withAnimation(
             Animation
-                .easeInOut(duration: 2.0 * 0.7)
+                .easeInOut(duration: 0.5)
         ) {
             circleScale = 0.25
             shadowScale = 0.5
         }
         withAnimation(
             Animation
-                .easeInOut(duration: 2.0 * 0.7)
+                .easeInOut(duration: 0.5)
         ) {
             circleScale = 0.5
             shadowScale = 0.7
         }
         withAnimation(
             Animation
-                .easeInOut(duration: 2.0 * 0.7)
+                .easeInOut(duration: 0.5)
         ) {
             circleScale = 0.7
             shadowScale = 1.0
         }
         withAnimation(
             Animation
-                .easeInOut(duration: 2.0 * 0.3)
+                .easeInOut(duration: 0.5)
                 .delay(2.0 * 0.7)
         ) {
             circleScale = 0.45
