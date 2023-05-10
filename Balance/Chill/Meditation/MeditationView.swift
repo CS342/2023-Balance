@@ -21,32 +21,34 @@ struct MeditationView: View {
     ]
     
     var body: some View {
-        ZStack {
-            backgroudColor.edgesIgnoringSafeArea(.all)
-            VStack {
-                HeaderMenu(title: "Guided Meditation")
-                VStack(alignment: .center, spacing: 10) {
-                    highlightsTitle
-                    ScrollView(.horizontal) {
-                        HStack {
-                            videosArrayView
+        ActivityLogContainer {
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Guided Meditation")
+                    VStack(alignment: .center, spacing: 10) {
+                        highlightsTitle
+                        ScrollView(.horizontal) {
+                            HStack {
+                                videosArrayView
+                            }
                         }
+                        categoriesTitle
+                        tagsView
+                        if showingGuided {
+                            MeditationSpotifyView()
+                                .padding(.horizontal, 10.0)
+                        } else if showingYoutube {
+                            YoutubeView()
+                                .padding(.horizontal, 10.0)
+                        } else if showingSleep {
+                            SleepView()
+                                .padding(.horizontal, 10.0)
+                        }
+                        Spacer()
                     }
-                    categoriesTitle
-                    tagsView
-                    if showingGuided {
-                        MeditationSpotifyView()
-                            .padding(.horizontal, 10.0)
-                    } else if showingYoutube {
-                        YoutubeView()
-                            .padding(.horizontal, 10.0)
-                    } else if showingSleep {
-                        SleepView()
-                            .padding(.horizontal, 10.0)
-                    }
-                    Spacer()
+                    .edgesIgnoringSafeArea(.all)
                 }
-                .edgesIgnoringSafeArea(.all)
             }
         }
     }

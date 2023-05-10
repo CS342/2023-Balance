@@ -71,31 +71,33 @@ struct NewTimerView: View {
     @State var breathStp: Int = 0
     
     var body: some View {
-        ZStack {
-            backgroudColor.edgesIgnoringSafeArea(.all)
-            VStack(alignment: .center) {
-                HeaderMenu(title: navTitleText)
-                Spacer()
-                subTitle
-                Spacer()
-                Clock(counter: counter, countTo: countTo)
-                Spacer()
-                progressAnimation
-                Group {
+        ActivityLogContainer {
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack(alignment: .center) {
+                    HeaderMenu(title: navTitleText)
                     Spacer()
-                    actionButton
+                    subTitle
                     Spacer()
-                    sliderView
+                    Clock(counter: counter, countTo: countTo)
                     Spacer()
+                    progressAnimation
+                    Group {
+                        Spacer()
+                        actionButton
+                        Spacer()
+                        sliderView
+                        Spacer()
+                    }
                 }
-            }
-            .onReceive(timer) { _ in
-               receiveAction()
-            }
-            .onAppear {
-                timerAnimation = Timer
-                    .publish(every: (self.chillType == .breathing) ? 5.0 : 2.0, on: .main, in: .common)
-                    .autoconnect()
+                .onReceive(timer) { _ in
+                    receiveAction()
+                }
+                .onAppear {
+                    timerAnimation = Timer
+                        .publish(every: (self.chillType == .breathing) ? 5.0 : 2.0, on: .main, in: .common)
+                        .autoconnect()
+                }
             }
         }
     }

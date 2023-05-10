@@ -14,26 +14,28 @@ struct MandalaCollectionView: View {
     var gridItemLayout = [GridItem(.fixed(110)), GridItem(.fixed(110)), GridItem(.fixed(110))]
 
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHGrid(rows: gridItemLayout, alignment: .center, spacing: 10) {
-                ForEach(images.indices, id: \.self) { index in
-                    NavigationLink(
-                        destination: ActivityLogBaseView(
-                            viewName: "Image Selected: " + images[index].name,
-                            isDirectChildToContainer: true,
-                            content: {
-                                DrawView(store: store, currentDraw: $currentDraw, backgroundImage: images[index].name, isNewDraw: true)
-                            }
-                        )
-                    ) {
-                        Image(images[index].name)
-                            .resizable()
-                            .scaledToFit()
-                            .aspectRatio(contentMode: .fill)
-                            .clipped()
-                            .frame(width: 110, height: 110, alignment: .center)
-                            .cornerRadius(10)
-                            .accessibilityLabel(images[index].name)
+        ActivityLogContainer {
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHGrid(rows: gridItemLayout, alignment: .center, spacing: 10) {
+                    ForEach(images.indices, id: \.self) { index in
+                        NavigationLink(
+                            destination: ActivityLogBaseView(
+                                viewName: "Image Selected: " + images[index].name,
+                                isDirectChildToContainer: true,
+                                content: {
+                                    DrawView(store: store, currentDraw: $currentDraw, backgroundImage: images[index].name, isNewDraw: true)
+                                }
+                            )
+                        ) {
+                            Image(images[index].name)
+                                .resizable()
+                                .scaledToFit()
+                                .aspectRatio(contentMode: .fill)
+                                .clipped()
+                                .frame(width: 110, height: 110, alignment: .center)
+                                .cornerRadius(10)
+                                .accessibilityLabel(images[index].name)
+                        }
                     }
                 }
             }

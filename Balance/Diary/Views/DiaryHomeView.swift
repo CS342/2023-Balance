@@ -9,46 +9,41 @@
 import SwiftUI
 
 struct DiaryHomeView: View {
-    @StateObject var store = NoteStore()
+    @EnvironmentObject var store: NoteStore
     @State private var showingEditor = false
     @State private var currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
     @Environment(\.scenePhase) private var scenePhase
-
+    
     var body: some View {
-        ZStack {
-            backgroudColor.edgesIgnoringSafeArea(.all)
-            VStack {
-                HeaderMenu(title: "Diary")
-                VStack(alignment: .center, spacing: 10) {
-                    newDiaryView
-                    previusView
-                    diaryList
-                }
-                .sheet(isPresented: $showingEditor) {
-                    ActivityLogBaseView(viewName: "Diary Note Entry View") {
-                        diaryNoteView
+        ActivityLogContainer {
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Diary")
+                    VStack(alignment: .center, spacing: 10) {
+                        newDiaryView
+                        previusView
+                        diaryList
                     }
-                }
-                .onAppear {
-                    NoteStore.load { result in
-                        switch result {
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        case .success(let notes):
-                            store.notes = notes
+                    .sheet(isPresented: $showingEditor) {
+                        ActivityLogBaseView(viewName: "Diary Note Entry View") {
+                            diaryNoteView
                         }
                     }
-                }
-                .onChange(of: scenePhase) { phase in
-                    if phase == .inactive {
-                        NoteStore.save(notes: store.notes) { result in
-                            if case .failure(let error) = result {
-                                print(error.localizedDescription)
+                    .onAppear {
+                        loadNote()
+                    }
+                    .onChange(of: scenePhase) { phase in
+                        if phase == .inactive {
+                            NoteStore.save(notes: store.notes) { result in
+                                if case .failure(let error) = result {
+                                    print(error.localizedDescription)
+                                }
                             }
                         }
                     }
+                    .edgesIgnoringSafeArea(.all)
                 }
-                .edgesIgnoringSafeArea(.all)
             }
         }
     }
@@ -121,6 +116,17 @@ struct DiaryHomeView: View {
         NoteStore.save(notes: store.notes) { result in
             if case .failure(let error) = result {
                 print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func loadNote() {
+        NoteStore.load { result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let notes):
+                store.notes = notes
             }
         }
     }

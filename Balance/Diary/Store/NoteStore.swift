@@ -9,6 +9,7 @@
 import SwiftUI
 
 class NoteStore: ObservableObject {
+    static let shared = NoteStore()
     @Published var notes: [Note] = []
     
     private static func fileURL() throws -> URL {
