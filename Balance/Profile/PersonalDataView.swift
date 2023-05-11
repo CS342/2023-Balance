@@ -25,21 +25,23 @@ struct PersonalDataView: View {
     @State private var phone = ""
     
     var body: some View {
-        ZStack {
-            backgroudColor.edgesIgnoringSafeArea(.all)
-            VStack {
-                HeaderMenu(title: "Personal Data")
-                Spacer().frame(height: 20)
-                dataView
-                Spacer()
-                saveButton
+        ActivityLogContainer {
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Personal Data")
+                    Spacer().frame(height: 20)
+                    dataView
+                    Spacer()
+                    saveButton
+                }
+            }.onAppear {
+                self.displayName = authModel.profile?.displayName ?? ""
+                self.parentEmail = authModel.profile?.parentEmail ?? ""
+                self.birthday = authModel.profile?.birthday ?? ""
+                self.country = authModel.profile?.country ?? ""
+                self.phone = authModel.profile?.phone ?? ""
             }
-        }.onAppear {
-            self.displayName = authModel.profile?.displayName ?? ""
-            self.parentEmail = authModel.profile?.parentEmail ?? ""
-            self.birthday = authModel.profile?.birthday ?? ""
-            self.country = authModel.profile?.country ?? ""
-            self.phone = authModel.profile?.phone ?? ""
         }
     }
     

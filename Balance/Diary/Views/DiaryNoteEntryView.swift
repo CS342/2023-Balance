@@ -23,30 +23,32 @@ struct DiaryNoteEntryView: View {
     @State private var emptyNoteAlert = false
        
     var body: some View {
-        ZStack {
-            VStack {
-                TextField("Note Title", text: $title)
-                    .font(.custom("Nunito-Bold", size: 18))
-                    .padding()
-                TextEditor(text: $text)
-                    .font(.custom("Nunito", size: 16))
-                    .border(.black.opacity(0.2), width: 1)
-                    .padding()
-                saveView
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding()
-                notesList
-            }.onAppear {
-                self.title = currentNote.title
-                self.text = currentNote.text
-                self.id = currentNote.id
-            }
-            
-            if burningNote {
-                BurnedView(
-                    burningNote: $burningNote,
-                    showingEditor: $showingEditor
-                )
+        ActivityLogContainer {
+            ZStack {
+                VStack {
+                    TextField("Note Title", text: $title)
+                        .font(.custom("Nunito-Bold", size: 18))
+                        .padding()
+                    TextEditor(text: $text)
+                        .font(.custom("Nunito", size: 16))
+                        .border(.black.opacity(0.2), width: 1)
+                        .padding()
+                    saveView
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding()
+                    notesList
+                }.onAppear {
+                    self.title = currentNote.title
+                    self.text = currentNote.text
+                    self.id = currentNote.id
+                }
+                
+                if burningNote {
+                    BurnedView(
+                        burningNote: $burningNote,
+                        showingEditor: $showingEditor
+                    )
+                }
             }
         }
     }

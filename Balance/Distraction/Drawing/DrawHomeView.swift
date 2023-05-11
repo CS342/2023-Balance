@@ -14,35 +14,37 @@ struct DrawHomeView: View {
     @State private var isShowingSecondView = false
     
     var body: some View {
-        ZStack {
-            backgroudColor.edgesIgnoringSafeArea(.all)
-            VStack {
-                HeaderMenu(title: "Drawing Something")
-                VStack(alignment: .center, spacing: 10) {
-                    newDrawView
-                    previusView
-                    drawList
-                }
-                .onAppear {
-                    DrawStore.load { result in
-                        switch result {
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        case .success(let draws):
-                            store.draws = draws
-                        }
+        ActivityLogContainer {
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Drawing Something")
+                    VStack(alignment: .center, spacing: 10) {
+                        newDrawView
+                        previusView
+                        drawList
                     }
-                }
-                .onChange(of: scenePhase) { phase in
-                    if phase == .inactive {
-                        DrawStore.save(draws: store.draws) { result in
-                            if case .failure(let error) = result {
+                    .onAppear {
+                        DrawStore.load { result in
+                            switch result {
+                            case .failure(let error):
                                 print(error.localizedDescription)
+                            case .success(let draws):
+                                store.draws = draws
                             }
                         }
                     }
+                    .onChange(of: scenePhase) { phase in
+                        if phase == .inactive {
+                            DrawStore.save(draws: store.draws) { result in
+                                if case .failure(let error) = result {
+                                    print(error.localizedDescription)
+                                }
+                            }
+                        }
+                    }
+                    .edgesIgnoringSafeArea(.all)
                 }
-                .edgesIgnoringSafeArea(.all)
             }
         }
     }

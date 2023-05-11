@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FacesScreenView: View {
+    @State private var currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -75,30 +77,39 @@ struct FacesScreenView: View {
         ActivityLogContainer {
             ZStack {
                 backgroudColor.edgesIgnoringSafeArea(.all)
-                VStack {
+                VStack(spacing: 30) {
                     HeaderMenu(title: "Feeling learning")
-                    Spacer().frame(height: 50)
                     titleText
-                    Spacer().frame(height: 50)
-                    LazyVGrid(columns: columns) {
-                        ForEach(faces) { face in
-                            NavigationLink(
-                                destination: ActivityLogBaseView(
-                                    viewName: "Mood Face: " + face.title,
-                                    isDirectChildToContainer: true,
-                                    content: {
-                                        // define content
-                                    }
-                                )
-                            ) {
-                                FaceView(faceImage: face.image, faceTitle: face.title, backColor: face.backColor)
-                                    .frame(width: 80, height: 120)
-                            }
-                        }
-                    }
-                    .padding(.horizontal, 40.0)
+                    gridView
+                        .padding(.horizontal, 40.0)
                     Spacer()
                 }
+            }
+        }
+    }
+    
+    var gridView: some View {
+        LazyVGrid(columns: columns) {
+            ForEach(faces) { face in
+                NavigationLink(
+                    destination: ActivityLogBaseView(
+                        viewName: "Mood Face: " + face.title,
+                        isDirectChildToContainer: true,
+                        content: {
+                            openDiary
+                        }
+                    )
+                ) {
+                    FaceView(faceImage: face.image, faceTitle: face.title, backColor: face.backColor)
+                        .frame(width: 80, height: 120)
+                }.simultaneousGesture(TapGesture().onEnded {
+                    currentNote = Note(
+                        id: UUID().uuidString,
+                        title: "Mood Face: " + face.title,
+                        text: "",
+                        date: Date()
+                    )
+                })
             }
         }
     }
@@ -112,6 +123,12 @@ struct FacesScreenView: View {
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding(.horizontal, 30.0)
             .background(.clear)
+    }
+    
+    var openDiary: some View {
+        MoodEditorView(
+            currentNote: $currentNote
+        )
     }
 }
 

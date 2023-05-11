@@ -17,6 +17,7 @@ struct Balance: App {
     var appDelegate
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
+    @StateObject var noteStore = NoteStore()
     
     @State var started = false
     
@@ -29,8 +30,9 @@ struct Balance: App {
                     OnboardingFlow()
                 }
             }
-                .testingSetup()
-                .cardinalKit(appDelegate)
+            .testingSetup()
+            .cardinalKit(appDelegate)
+            .environmentObject(noteStore)
         }
     }
 }

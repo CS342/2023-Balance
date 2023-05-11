@@ -13,38 +13,40 @@ struct PasswordUpdateView: View {
     @State private var confirmPassword: String = ""
     
     var body: some View {
-        ZStack {
-            backgroudColor.edgesIgnoringSafeArea(.all)
-            VStack {
-                HeaderMenu(title: "Password")
-                Spacer().frame(height: 40)
-                Text("Password update: ")
-                    .font(.custom("Nunito-Bold", size: 18))
-                    .foregroundColor(darkBlueColor)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(20)
-                ShowHideSecureField("new password", text: $password)
-                    .padding()
-                    .font(.custom("Montserrat-Regular", size: 17))
-                    .foregroundColor(darkGrayColor)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 14)
-                            .stroke(lightGrayColor, lineWidth: 1)
-                    )
-                    .padding(5)
-                    .padding(.horizontal, 25)
-                ShowHideSecureField("confirme password", text: $confirmPassword)
-                    .padding()
-                    .font(.custom("Montserrat-Regular", size: 17))
-                    .foregroundColor(darkGrayColor)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 14)
-                            .stroke(lightGrayColor, lineWidth: 1)
-                    )
-                    .padding(5)
-                    .padding(.horizontal, 25)
-                Spacer()
-                saveButton
+        ActivityLogContainer {
+            ZStack {
+                backgroudColor.edgesIgnoringSafeArea(.all)
+                VStack {
+                    HeaderMenu(title: "Password")
+                    Spacer().frame(height: 40)
+                    Text("Password update: ")
+                        .font(.custom("Nunito-Bold", size: 18))
+                        .foregroundColor(darkBlueColor)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(20)
+                    ShowHideSecureField("new password", text: $password)
+                        .padding()
+                        .font(.custom("Montserrat-Regular", size: 17))
+                        .foregroundColor(darkGrayColor)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 14)
+                                .stroke(lightGrayColor, lineWidth: 1)
+                        )
+                        .padding(5)
+                        .padding(.horizontal, 25)
+                    ShowHideSecureField("confirme password", text: $confirmPassword)
+                        .padding()
+                        .font(.custom("Montserrat-Regular", size: 17))
+                        .foregroundColor(darkGrayColor)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 14)
+                                .stroke(lightGrayColor, lineWidth: 1)
+                        )
+                        .padding(5)
+                        .padding(.horizontal, 25)
+                    Spacer()
+                    saveButton
+                }
             }
         }
     }

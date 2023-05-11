@@ -57,23 +57,25 @@ struct DrawView: View {
     @State var isNewDraw = false
     
     var body: some View {
-        ZStack {
-            Color.white.edgesIgnoringSafeArea(.all)
-            VStack(spacing: 10) {
-                HeaderMenu(title: "Drawing something")
-                Spacer().frame(height: 20)
-                toolkitView
-                Spacer()
-                DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
-                    .frame(width: drawingSize.width, height: drawingSize.height)
-                    .border(Color.gray, width: 5)
-                Spacer()
-                colorView
-                    .onAppear {
-                        loadCurrentDraw()
-                    }
-                Spacer()
-                saveView
+        ActivityLogContainer {
+            ZStack {
+                Color.white.edgesIgnoringSafeArea(.all)
+                VStack(spacing: 10) {
+                    HeaderMenu(title: "Drawing something")
+                    Spacer().frame(height: 20)
+                    toolkitView
+                    Spacer()
+                    DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
+                        .frame(width: drawingSize.width, height: drawingSize.height)
+                        .border(Color.gray, width: 5)
+                    Spacer()
+                    colorView
+                        .onAppear {
+                            loadCurrentDraw()
+                        }
+                    Spacer()
+                    saveView
+                }
             }
         }
     }

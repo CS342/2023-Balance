@@ -23,54 +23,62 @@ struct ProfileView: View {
     @State private var avatar = ""
 
     var body: some View {
-        ZStack {
-            VStack(alignment: .center, spacing: 0) {
-                HeaderMenu(title: "")
-                    .background(primaryColor)
-                Button(action: {
-                    showingAvatarSheet.toggle()
-                    print("avatarView")
-                }) {
-                    profileView
-                }.sheet(isPresented: $showingAvatarSheet) {
-                    AvatarSelectionView(firstLoad: false).environmentObject(authModel)
+        ActivityLogContainer {
+            ZStack {
+                VStack(alignment: .center, spacing: 0) {
+                    HeaderMenu(title: "")
+                        .background(primaryColor)
+                    avatarChangeView
+                    Spacer().frame(height: 50)
+                    Text(self.displayName)
+                        .font(.custom("Nunito-Bold", size: 36))
+                        .foregroundColor(darkBlueColor)
+                    Spacer().frame(height: 10)
+                    Text(firebaseAccountConfiguration.user?.email ?? "Mail")
+                        .font(.custom("Montserrat-Thin", size: 20))
+                        .foregroundColor(darkBlueColor)
+                    Spacer().frame(height: 20)
+                    cellsView
+                    Spacer()
                 }
-                
-                Spacer().frame(height: 50)
-                Text(self.displayName)
-                    .font(.custom("Nunito-Bold", size: 36))
-                    .foregroundColor(darkBlueColor)
-                Spacer().frame(height: 10)
-                Text(firebaseAccountConfiguration.user?.email ?? "Mail")
-                    .font(.custom("Montserrat-Thin", size: 20))
-                    .foregroundColor(darkBlueColor)
-                Spacer().frame(height: 20)
-                ScrollView(.vertical) {
-                    VStack(spacing: 20) {
-                        infoOption
-                        updateOption
-                        logoutOption
-                    }
-                    .padding(10)
-                    .ignoresSafeArea(.all)
+            }
+            .onAppear {
+                loadUser()
+            }
+            .onReceive(account.objectWillChange) {
+                if account.signedIn {
+                    completedOnboardingFlow = true
                 }
-                Spacer()
+            }
+            .onChange(of: authModel.profile) { profile in
+                withAnimation(.easeInOut(duration: 1.0)) {
+                    self.displayName = profile?.displayName ?? ""
+                    self.avatar = profile?.avatar ?? ""
+                }
             }
         }
-        .onAppear {
-            authModel.listenAuthentificationState()
-            loadUser()
-        }
-        .onReceive(account.objectWillChange) {
-            if account.signedIn {
-                completedOnboardingFlow = true
+    }
+    
+    var cellsView: some View {
+        ScrollView(.vertical) {
+            VStack(spacing: 20) {
+                infoOption
+                updateOption
+                logoutOption
             }
+            .padding(10)
+            .ignoresSafeArea(.all)
         }
-        .onChange(of: authModel.profile) { profile in
-            withAnimation(.easeInOut(duration: 1.0)) {
-                self.displayName = profile?.displayName ?? ""
-                self.avatar = profile?.avatar ?? ""
-            }
+    }
+    
+    var avatarChangeView: some View {
+        Button(action: {
+            showingAvatarSheet.toggle()
+            print("avatarView")
+        }) {
+            profileView
+        }.sheet(isPresented: $showingAvatarSheet) {
+            AvatarSelectionView(firstLoad: false).environmentObject(authModel)
         }
     }
     
@@ -156,6 +164,7 @@ struct ProfileView: View {
     }
     
     func loadUser() {
+        authModel.listenAuthentificationState()
         UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
             if let error = error {
                 print("Error while fetching the user profile: \(error)")
