@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FacesScreenView: View {
-//    @ObservedObject var store: NoteStore
     @State private var currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
     
     let columns = [
@@ -82,7 +81,7 @@ struct FacesScreenView: View {
                     HeaderMenu(title: "Feeling learning")
                     titleText
                     gridView
-                    .padding(.horizontal, 40.0)
+                        .padding(.horizontal, 40.0)
                     Spacer()
                 }
             }
@@ -128,7 +127,6 @@ struct FacesScreenView: View {
     
     var openDiary: some View {
         MoodEditorView(
-//            store: store,
             currentNote: $currentNote
         )
     }

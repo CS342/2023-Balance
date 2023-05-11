@@ -33,7 +33,6 @@ struct Balance: App {
             .testingSetup()
             .cardinalKit(appDelegate)
             .environmentObject(noteStore)
-            
         }
     }
 }
