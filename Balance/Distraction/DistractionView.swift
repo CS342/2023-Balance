@@ -48,8 +48,10 @@ struct DistractionView: View {
                 }
             )
         ) {
-            DistractionCellView(image: "drawingIcon", text: "Coloring", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
-        }
+            DistractionCellView(image: "writesIcon", text: "Coloring", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+        }.simultaneousGesture(TapGesture().onEnded {
+            currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
+        })
     }
     
     var drawingOption: some View {
