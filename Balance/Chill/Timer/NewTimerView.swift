@@ -7,24 +7,6 @@
 
 import SwiftUI
 
-enum ChillType {
-    case breathing
-    case head
-    case chest
-    case shoulders
-    case hands
-    case knee
-    case legs
-}
-
-enum BreathSteps {
-    case inhale
-    case holdInhale
-    case exhale
-    case holdExhale
-}
-
-
 struct Clock: View {
     var counter: Int
     var countTo: Int
@@ -51,16 +33,12 @@ struct NewTimerView: View {
     @State private var animationAmount: CGFloat = 1
     @State var counter: Int = 0
     @State var pause = false
-    @State var shadowColor = Color.clear
-    @State private var shadowScale: CGFloat = 0.45
-    @State private var circleScale: CGFloat = 0.45
     @State var chillType: ChillType = .breathing
     @State var sliderValue: Float = 0.0
     @State var shouldTransition = false
-    var navTitleText: String
+    @State var navTitleText: String
     @State var subTitleText: String
     @State var stepTitleText = "Inhale"
-    var countTo: Int = 120 // 4 minutes 120 - 2minutes
     @State var timer = Timer
         .publish(every: 1.0, on: .main, in: .common)
         .autoconnect()
@@ -69,7 +47,8 @@ struct NewTimerView: View {
         .autoconnect()
     @State var scale: CGFloat = 1.0
     @State var breathStp: Int = 0
-    
+    var countTo: Int = 120 // 4 minutes 120 - 2minutes
+   
     var body: some View {
         ActivityLogContainer {
             ZStack {
@@ -133,16 +112,16 @@ struct NewTimerView: View {
                 breathAnimation
             case .head:
                 headAnimation
-            case .chest:
-                centerAnimation
             case .shoulders:
                 shouldersAnimation
             case .hands:
                 handsAnimation
             case .knee:
-                centerAnimation
+                kneeAnimation
             case .legs:
-                centerAnimation
+                feetAnimation
+            case .feet:
+                feetAnimation
             }
         }
     }
@@ -159,22 +138,94 @@ struct NewTimerView: View {
             .animation(.easeInOut(duration: 1), value: subTitleText)
     }
     
+    var legsAnimation: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if shouldTransition {
+                Image("Pony1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("Pony1")
+            } else {
+                Image("Pony2")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("Pony2")
+            }
+        }
+        .onReceive(timerAnimation) { _ in
+            completed() ? self.timerAnimation.upstream.connect().cancel() : shouldTransition.toggle()
+        }
+        .animation(.easeInOut(duration: 0.5), value: shouldTransition)
+    }
+    
+    var feetAnimation: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if shouldTransition {
+                Image("Duck1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("Duck1")
+            } else {
+                Image("Duck2")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("Duck2")
+            }
+        }
+        .onReceive(timerAnimation) { _ in
+            completed() ? self.timerAnimation.upstream.connect().cancel() : shouldTransition.toggle()
+        }
+        .animation(.easeInOut(duration: 0.5), value: shouldTransition)
+    }
+    
+    var kneeAnimation: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if shouldTransition {
+                Image("Flamingo1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("Flamingo1")
+            } else {
+                Image("Flamingo2")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .clipped()
+                    .accessibilityLabel("Flamingo2")
+            }
+        }
+        .onReceive(timerAnimation) { _ in
+            completed() ? self.timerAnimation.upstream.connect().cancel() : shouldTransition.toggle()
+        }
+        .animation(.easeInOut(duration: 0.5), value: shouldTransition)
+    }
+    
     var handsAnimation: some View {
         VStack(alignment: .leading, spacing: 0) {
             if shouldTransition {
-                Image("hands1")
+                Image("Gecko1")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("hands1")
+                    .accessibilityLabel("Gecko1")
             } else {
-                Image("hands2")
+                Image("Gecko2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("hands2")
+                    .accessibilityLabel("Gecko2")
             }
         }
         .onReceive(timerAnimation) { _ in
@@ -186,19 +237,19 @@ struct NewTimerView: View {
     var headAnimation: some View {
         VStack(alignment: .leading, spacing: 0) {
             if shouldTransition {
-                Image("head1")
+                Image("Elephant1")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("head1")
+                    .accessibilityLabel("Elephant1")
             } else {
-                Image("head2")
+                Image("Elephant2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("head2")
+                    .accessibilityLabel("Elephant2")
             }
         }
         .onReceive(timerAnimation) { _ in
@@ -210,19 +261,19 @@ struct NewTimerView: View {
     var shouldersAnimation: some View {
         VStack(alignment: .leading, spacing: 0) {
             if shouldTransition {
-                Image("shoulders1")
+                Image("Gorilla1")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("shoulders1")
+                    .accessibilityLabel("Gorilla1")
             } else {
-                Image("shoulders2")
+                Image("Gorilla2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("shoulders2")
+                    .accessibilityLabel("Gorilla2")
             }
         }
         .onReceive(timerAnimation) { _ in
@@ -251,28 +302,6 @@ struct NewTimerView: View {
                 .lineLimit(1, reservesSpace: true)
                 .animation(.easeInOut(duration: 1), value: stepTitleText)
         }
-    }
-    
-    var centerAnimation: some View {
-        ZStack {
-            Circle()
-                .foregroundColor(shadowColor)
-                .scaleEffect(shadowScale)
-            Circle()
-                .foregroundColor(primaryColor.opacity(0.8))
-                .scaleEffect(circleScale)
-            Image(systemName: "play.fill")
-                .resizable()
-                .foregroundColor(Color.white)
-                .tint(Color.white)
-                .frame(width: 40, height: 40)
-                .opacity(0.9)
-                .shadow(color: .white, radius: 20)
-        }
-        .onReceive(timerAnimation) { _ in
-            completed() ? self.timerAnimation.upstream.connect().cancel() : animate()
-        }
-        .frame(width: 200, height: 200)
     }
     
     var actionButton: some View {
@@ -422,42 +451,7 @@ struct NewTimerView: View {
             }
         }
     }
-    
-    func animate() {
-        shadowColor = primaryColor.opacity(0.4)
         
-        shadowScale = 0.45
-        withAnimation(
-            Animation
-                .easeInOut(duration: 0.5)
-        ) {
-            circleScale = 0.25
-            shadowScale = 0.5
-        }
-        withAnimation(
-            Animation
-                .easeInOut(duration: 0.5)
-        ) {
-            circleScale = 0.5
-            shadowScale = 0.7
-        }
-        withAnimation(
-            Animation
-                .easeInOut(duration: 0.5)
-        ) {
-            circleScale = 0.7
-            shadowScale = 1.0
-        }
-        withAnimation(
-            Animation
-                .easeInOut(duration: 0.5)
-                .delay(2.0 * 0.7)
-        ) {
-            circleScale = 0.45
-            shadowColor = .clear
-        }
-    }
-    
     func completed() -> Bool {
         let value = progress() == 1
         return value

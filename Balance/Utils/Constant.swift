@@ -21,6 +21,23 @@ let lightGrayColor = Color(#colorLiteral(red: 0.7952535152, green: 0.7952535152,
 let facesGrayColor = Color(#colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1))
 let darkGrayColor = Color(#colorLiteral(red: 0.2352026105, green: 0.2347485423, blue: 0.2638042867, alpha: 1))
 
+enum ChillType {
+    case breathing
+    case head
+    case shoulders
+    case hands
+    case knee
+    case legs
+    case feet
+}
+
+enum BreathSteps {
+    case inhale
+    case holdInhale
+    case exhale
+    case holdExhale
+}
+
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners

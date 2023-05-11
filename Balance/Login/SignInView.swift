@@ -43,12 +43,12 @@ struct SignInView: View {
                 signInButton
                 Spacer().frame(height: 50)
             }
-        }.padding(.horizontal, 20)
+        }.adaptsToKeyboard()
+            .padding(.horizontal, 20)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("")
             .background(backgroudColor)
             .ignoresSafeArea()
-            .adaptsToKeyboard()
     }
     
     var signInButton: some View {

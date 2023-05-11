@@ -29,7 +29,7 @@ struct BodySensationView: View {
             HStack {
                 headButton
                 Spacer()
-                chestButton
+                feetButton
                 Spacer()
                 shouldersButton
             }.padding(10)
@@ -67,21 +67,21 @@ struct BodySensationView: View {
         }
     }
     
-    var chestButton: some View {
+    var feetButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Chest",
+                viewName: "Body sensations Feet",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
-                        chillType: .chest,
+                        chillType: .feet,
                         navTitleText: "Body sensations",
                         subTitleText: "Relax your self and focus on this part of your body"
                     )
                 }
             )
         ) {
-            Text("Chest")
+            Text("Feet")
                 .foregroundColor(primaryColor)
                 .padding()
                 .overlay(
