@@ -321,8 +321,7 @@ struct SignInView: View {
         }
         return errors
     }
-    
-    
+        
     fileprivate func getLocales() -> [Country] {
         let locales = Locale.isoRegionCodes
             .filter {

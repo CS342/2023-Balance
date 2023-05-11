@@ -19,6 +19,7 @@ struct Balance: App {
     var completedOnboardingFlow = false
     @StateObject var noteStore = NoteStore()
     @StateObject var drawStore = DrawStore()
+    @StateObject var coloringStore = ColoringStore()
 
     @State var started = false
     
@@ -35,6 +36,7 @@ struct Balance: App {
             .cardinalKit(appDelegate)
             .environmentObject(noteStore)
             .environmentObject(drawStore)
+            .environmentObject(coloringStore)
         }
     }
 }

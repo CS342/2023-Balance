@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BackgroundDrawView: View {
     @Binding var currentDraw: Draw
-    @ObservedObject var store: DrawStore
     @State private var animalsTag = true
     @State private var landscapeTag = false
     @State private var funnyTag = false
@@ -44,13 +43,13 @@ struct BackgroundDrawView: View {
                         categoriesTitle
                         tagsView
                         if animalsTag {
-                            MandalaCollectionView(currentDraw: $currentDraw, store: store, images: imgArray1)
+                            MandalaCollectionView(currentDraw: $currentDraw, images: imgArray1)
                                 .padding(.horizontal, 10.0)
                         } else if landscapeTag {
-                            MandalaCollectionView(currentDraw: $currentDraw, store: store, images: imgArray2)
+                            MandalaCollectionView(currentDraw: $currentDraw, images: imgArray2)
                                 .padding(.horizontal, 10.0)
                         } else if funnyTag {
-                            MandalaCollectionView(currentDraw: $currentDraw, store: store, images: imgArray1)
+                            MandalaCollectionView(currentDraw: $currentDraw, images: imgArray1)
                                 .padding(.horizontal, 10.0)
                         }
                         Spacer()
@@ -140,11 +139,8 @@ struct BackgroundDrawView_Previews: PreviewProvider {
     @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: Data(), date: Date(), backImage: "mandala1")
     
     static var previews: some View {
-        let store = DrawStore()
-
         BackgroundDrawView(
-            currentDraw: $currentDraw,
-            store: store
+            currentDraw: $currentDraw
         )
     }
 }

@@ -40,7 +40,8 @@ struct DrawingView: UIViewRepresentable {
 struct DrawView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.undoManager) private var undoManager
-    @ObservedObject var store: DrawStore
+    @EnvironmentObject var drawStore: DrawStore
+    @EnvironmentObject var coloringStore: ColoringStore
     @Binding var currentDraw: Draw
     @State var canvas = PKCanvasView()
     @State var isdraw = true
@@ -55,7 +56,8 @@ struct DrawView: View {
     @State var drawingSize = CGSize(width: 350, height: 350)
     @State var backgroundImage = ""
     @State var isNewDraw = false
-    
+    @State var isColoring = false
+
     var body: some View {
         ActivityLogContainer {
             ZStack {
@@ -275,13 +277,22 @@ struct DrawView: View {
             backImage: currentDraw.backImage
         )
         
-        store.saveDraw(newDraw)
-        
-        DrawStore.save(draws: store.draws) { result in
-            if case .failure(let error) = result {
-                print(error.localizedDescription)
+        if isColoring {
+            coloringStore.saveDraw(newDraw)
+            ColoringStore.save(draws: coloringStore.draws) { result in
+                if case .failure(let error) = result {
+                    print(error.localizedDescription)
+                }
+            }
+        } else {
+            drawStore.saveDraw(newDraw)
+            DrawStore.save(draws: drawStore.draws) { result in
+                if case .failure(let error) = result {
+                    print(error.localizedDescription)
+                }
             }
         }
+       
         
         dismiss()
     }
@@ -291,9 +302,7 @@ struct DrawView_Previews: PreviewProvider {
     @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: Data(), date: Date(), backImage: "mandala1")
     
     static var previews: some View {
-        let store = DrawStore()
         DrawView(
-            store: store,
             currentDraw: $currentDraw
         )
     }
