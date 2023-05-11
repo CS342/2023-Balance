@@ -136,7 +136,6 @@ struct MoodEditorViewView_Previews: PreviewProvider {
     @State static var currentNote = Note(id: UUID().uuidString, title: "Sample Note", text: "Test", date: Date())
     
     static var previews: some View {
-        let store = NoteStore()
         MoodEditorView(
             currentNote: $currentNote
         )
