@@ -18,7 +18,8 @@ struct Balance: App {
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
     @StateObject var noteStore = NoteStore()
-    
+    @StateObject var drawStore = DrawStore()
+
     @State var started = false
     
     var body: some Scene {
@@ -33,6 +34,7 @@ struct Balance: App {
             .testingSetup()
             .cardinalKit(appDelegate)
             .environmentObject(noteStore)
+            .environmentObject(drawStore)
         }
     }
 }

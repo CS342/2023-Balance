@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DrawHomeView: View {
-    @StateObject var store = DrawStore()
+    @EnvironmentObject var store: DrawStore
     @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
     @Environment(\.scenePhase) private var scenePhase
     @State private var isShowingSecondView = false
