@@ -20,6 +20,7 @@ struct Balance: App {
     @StateObject var noteStore = NoteStore()
     @StateObject var drawStore = DrawStore()
     @StateObject var coloringStore = ColoringStore()
+    @StateObject var userModel = AuthViewModel()
 
     @State var started = false
     
@@ -27,7 +28,7 @@ struct Balance: App {
         WindowGroup {
             Group {
                 if completedOnboardingFlow {
-                    HomeView().environmentObject(AuthViewModel())
+                    HomeView()
                 } else {
                     OnboardingFlow()
                 }
@@ -37,6 +38,7 @@ struct Balance: App {
             .environmentObject(noteStore)
             .environmentObject(drawStore)
             .environmentObject(coloringStore)
+            .environmentObject(userModel)
         }
     }
 }

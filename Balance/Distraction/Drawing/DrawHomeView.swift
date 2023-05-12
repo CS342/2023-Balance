@@ -62,7 +62,7 @@ struct DrawHomeView: View {
     
     var newDrawView: some View {
         HStack {
-            Image("drawingIcon")
+            Image("writesIcon")
                 .accessibilityLabel(Text("Draw icon"))
                 .frame(width: 110, height: 110, alignment: .center)
             VStack {

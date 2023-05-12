@@ -25,18 +25,18 @@ struct ColoringHomeView: View {
                         drawList
                     }
                     .onAppear {
-                        DrawStore.load { result in
+                        ColoringStore.load { result in
                             switch result {
                             case .failure(let error):
                                 print(error.localizedDescription)
                             case .success(let draws):
-                                store.draws = draws
+                                store.coloringDraws = draws
                             }
                         }
                     }
                     .onChange(of: scenePhase) { phase in
                         if phase == .inactive {
-                            DrawStore.save(draws: store.draws) { result in
+                            ColoringStore.save(coloringDraws: store.coloringDraws) { result in
                                 if case .failure(let error) = result {
                                     print(error.localizedDescription)
                                 }
@@ -102,7 +102,7 @@ struct ColoringHomeView: View {
     
     var drawList: some View {
         List {
-            ForEach(store.draws, id: \.self) { draw in
+            ForEach(store.coloringDraws, id: \.self) { draw in
                 ZStack {
                     Button(action: {
                         self.currentDraw = draw
@@ -145,11 +145,11 @@ struct ColoringHomeView: View {
     
     func delete(indexSet: IndexSet) {
         // remove the note from the notes array
-        store.draws.remove(atOffsets: indexSet)
+        store.coloringDraws.remove(atOffsets: indexSet)
         
         // save the updated array to local storage
         // asynchronously
-        ColoringStore.save(draws: store.draws) { result in
+        ColoringStore.save(coloringDraws: store.coloringDraws) { result in
             if case .failure(let error) = result {
                 print(error.localizedDescription)
             }

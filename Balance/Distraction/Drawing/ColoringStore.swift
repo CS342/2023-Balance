@@ -8,7 +8,7 @@
 import SwiftUI
 
 class ColoringStore: ObservableObject {
-    @Published var draws: [Draw] = []
+    @Published var coloringDraws: [Draw] = []
     
     private static func fileURL() throws -> URL {
         try FileManager.default.url(
@@ -43,14 +43,14 @@ class ColoringStore: ObservableObject {
         }
     }
 
-    static func save(draws: [Draw], completion: @escaping(Result<Int, Error>) -> Void) {
+    static func save(coloringDraws: [Draw], completion: @escaping(Result<Int, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
-                let data = try JSONEncoder().encode(draws)
+                let data = try JSONEncoder().encode(coloringDraws)
                 let outfile = try fileURL()
                 try data.write(to: outfile)
                 DispatchQueue.main.async {
-                    completion(.success(draws.count))
+                    completion(.success(coloringDraws.count))
                 }
             } catch {
                 DispatchQueue.main.async {
@@ -61,24 +61,24 @@ class ColoringStore: ObservableObject {
     }
 
     func deleteDraw(_ id: String) {
-        let indexOfNote = draws.firstIndex { draw in
+        let indexOfNote = coloringDraws.firstIndex { draw in
             draw.id == id
         }
 
         if let indexOfNote {
-            draws.remove(at: indexOfNote)
+            coloringDraws.remove(at: indexOfNote)
         }
     }
 
     func saveDraw(_ draw: Draw) {
-        let indexOfNote = draws.firstIndex { currentNote in
+        let indexOfNote = coloringDraws.firstIndex { currentNote in
             currentNote.id == draw.id
         }
 
         if let indexOfNote {
-            draws[indexOfNote] = draw
+            coloringDraws[indexOfNote] = draw
         } else {
-            draws.append(draw)
+            coloringDraws.append(draw)
         }
     }
 }

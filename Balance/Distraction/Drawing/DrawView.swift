@@ -279,7 +279,7 @@ struct DrawView: View {
         
         if isColoring {
             coloringStore.saveDraw(newDraw)
-            ColoringStore.save(draws: coloringStore.draws) { result in
+            ColoringStore.save(coloringDraws: coloringStore.coloringDraws) { result in
                 if case .failure(let error) = result {
                     print(error.localizedDescription)
                 }
