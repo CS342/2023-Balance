@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Photo: Identifiable {
+struct Photo: Identifiable, Hashable {
     var id = UUID()
     var name: String
 }
@@ -25,7 +25,7 @@ struct GalleryView: View {
     var body: some View {
         ActivityLogContainer {
             ZStack {
-                backgroudColor.edgesIgnoringSafeArea(.all)
+                backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack {
                     HeaderMenu(title: "Look at Pictures")
                     VStack(alignment: .center, spacing: 10) {

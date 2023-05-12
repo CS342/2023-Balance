@@ -47,7 +47,7 @@ struct SignInView: View {
             .padding(.horizontal, 20)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("")
-            .background(backgroudColor)
+            .background(backgroundColor)
             .ignoresSafeArea()
     }
     

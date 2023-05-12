@@ -23,7 +23,7 @@ struct AvatarPreviewView: View {
     var body: some View {
         ActivityLogContainer {
             ZStack {
-                backgroudColor.edgesIgnoringSafeArea(.all)
+                backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack {
                     Spacer().frame(height: 50)
                     titlePreview

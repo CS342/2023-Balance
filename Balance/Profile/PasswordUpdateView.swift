@@ -15,7 +15,7 @@ struct PasswordUpdateView: View {
     var body: some View {
         ActivityLogContainer {
             ZStack {
-                backgroudColor.edgesIgnoringSafeArea(.all)
+                backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack {
                     HeaderMenu(title: "Password")
                     Spacer().frame(height: 40)

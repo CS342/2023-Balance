@@ -76,7 +76,7 @@ struct FacesScreenView: View {
     var body: some View {
         ActivityLogContainer {
             ZStack {
-                backgroudColor.edgesIgnoringSafeArea(.all)
+                backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack(spacing: 30) {
                     HeaderMenu(title: "Feeling learning")
                     titleText

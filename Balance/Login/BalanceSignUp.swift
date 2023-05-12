@@ -29,7 +29,7 @@ struct BalanceSignUp: View {
                 .padding()
             Spacer(minLength: 0)
         }
-        .background(backgroudColor)
+        .background(backgroundColor)
     }
 }
 

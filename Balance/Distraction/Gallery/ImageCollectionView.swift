@@ -20,7 +20,7 @@ struct ImageCollectionView: View {
                             viewName: "Image Selected: " + images[index].name,
                             isDirectChildToContainer: true,
                             content: {
-                                ImageView(image: images[index].name)
+                                ImageView(imagesArray: images, currentIndex: index)
                             }
                         )
                     ) {

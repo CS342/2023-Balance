@@ -23,7 +23,7 @@ struct BackgroundDrawView: View {
     var body: some View {
         ActivityLogContainer {
             ZStack {
-                backgroudColor.edgesIgnoringSafeArea(.all)
+                backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack {
                     HeaderMenu(title: "Draw Something")
                     VStack(alignment: .center, spacing: 10) {

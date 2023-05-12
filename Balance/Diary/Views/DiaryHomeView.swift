@@ -17,7 +17,7 @@ struct DiaryHomeView: View {
     var body: some View {
         ActivityLogContainer {
             ZStack {
-                backgroudColor.edgesIgnoringSafeArea(.all)
+                backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack {
                     HeaderMenu(title: "Diary")
                     VStack(alignment: .center, spacing: 10) {
