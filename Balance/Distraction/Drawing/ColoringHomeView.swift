@@ -64,7 +64,7 @@ struct ColoringHomeView: View {
     
     var newDrawView: some View {
         HStack {
-            Image("writesIcon")
+            Image("drawingIcon")
                 .accessibilityLabel(Text("Coloring icon"))
                 .frame(width: 110, height: 110, alignment: .center)
             VStack {
