@@ -8,7 +8,7 @@
 import PencilKit
 import SwiftUI
 
-struct PastDrawEntry: View {
+struct PastEntryView: View {
     private var draw: Draw
     
     var body: some View {
@@ -68,8 +68,8 @@ struct PastDrawEntry: View {
     }
 }
 
-struct PastDrawEntry_Previews: PreviewProvider {
+struct PastEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        PastDrawEntry(Draw(id: "1234", title: "Title", image: Data(), date: Date().previousDate(), backImage: "mandala1"))
+        PastEntryView(Draw(id: "1234", title: "Title", image: Data(), date: Date().previousDate(), backImage: "mandala1"))
     }
 }

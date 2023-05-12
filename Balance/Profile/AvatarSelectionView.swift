@@ -109,7 +109,6 @@ struct AvatarSelectionView: View {
                 accesorySelection: $accesorySelected,
                 firstLoad: firstLoad
             )
-            .environmentObject(AuthViewModel())
         }
         .buttonBorderShape(.roundedRectangle(radius: 10))
         .background(primaryColor)

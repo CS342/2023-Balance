@@ -16,10 +16,13 @@ struct BodySensationView: View {
                     HeaderMenu(title: "Body sensations")
                     Spacer()
                     titleText
+                    Spacer()
                     imageView
+                    Spacer()
                     subTitleText
                     bodyButtons
                 }
+                Spacer()
             }
         }
     }

@@ -9,6 +9,9 @@ import SwiftUI
 
 // swiftlint:disable line_length
 struct DistractionView: View {
+    @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
+    @EnvironmentObject var store: DrawStore
+
     var body: some View {
         ActivityLogContainer {
             ZStack {
@@ -22,12 +25,46 @@ struct DistractionView: View {
                             videosOption
                             gamesOption
                             drawingOption
+                            coloringOption
                         }
                         .padding(10)
                         .ignoresSafeArea(.all)
                     }
                 }
             }
+        }
+    }
+    
+//    var coloringOption: some View {
+//        NavigationLink(
+//            destination: ActivityLogBaseView(
+//                viewName: "Coloring Something Feature",
+//                isDirectChildToContainer: true,
+//                content: {
+//                    DrawView(
+//                        store: store,
+//                        currentDraw: $currentDraw
+//                    )
+//                }
+//            )
+//        ) {
+//            DistractionCellView(image: "writesIcon", text: "Coloring", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+//        }.simultaneousGesture(TapGesture().onEnded {
+//            currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
+//        })
+//    }
+    
+    var coloringOption: some View {
+        NavigationLink(
+            destination: ActivityLogBaseView(
+                viewName: "Coloring Something Feature",
+                isDirectChildToContainer: true,
+                content: {
+                    ColoringHomeView()
+                }
+            )
+        ) {
+            DistractionCellView(image: "drawingIcon", text: "Coloring something", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
         }
     }
     
@@ -41,7 +78,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            DistractionCellView(image: "drawingIcon", text: "Drawing something", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+            DistractionCellView(image: "writesIcon", text: "Drawing something", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
         }
     }
     

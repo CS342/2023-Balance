@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct DrawHomeView: View {
-    @EnvironmentObject var store: DrawStore
+struct ColoringHomeView: View {
+    @EnvironmentObject var store: ColoringStore
     @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
     @Environment(\.scenePhase) private var scenePhase
     @State private var isShowingSecondView = false
@@ -18,25 +18,25 @@ struct DrawHomeView: View {
             ZStack {
                 backgroudColor.edgesIgnoringSafeArea(.all)
                 VStack {
-                    HeaderMenu(title: "Drawing Something")
+                    HeaderMenu(title: "Coloring Something")
                     VStack(alignment: .center, spacing: 10) {
                         newDrawView
                         previusView
                         drawList
                     }
                     .onAppear {
-                        DrawStore.load { result in
+                        ColoringStore.load { result in
                             switch result {
                             case .failure(let error):
                                 print(error.localizedDescription)
                             case .success(let draws):
-                                store.draws = draws
+                                store.coloringDraws = draws
                             }
                         }
                     }
                     .onChange(of: scenePhase) { phase in
                         if phase == .inactive {
-                            DrawStore.save(draws: store.draws) { result in
+                            ColoringStore.save(coloringDraws: store.coloringDraws) { result in
                                 if case .failure(let error) = result {
                                     print(error.localizedDescription)
                                 }
@@ -50,7 +50,9 @@ struct DrawHomeView: View {
     }
     
     var drawView: some View {
-        DrawView(currentDraw: $currentDraw)
+        DrawView(
+            currentDraw: $currentDraw
+        )
     }
     
     var previusView: some View {
@@ -62,18 +64,18 @@ struct DrawHomeView: View {
     
     var newDrawView: some View {
         HStack {
-            Image("writesIcon")
-                .accessibilityLabel(Text("Draw icon"))
+            Image("drawingIcon")
+                .accessibilityLabel(Text("Coloring icon"))
                 .frame(width: 110, height: 110, alignment: .center)
             VStack {
-                Text("Draw something new...")
+                Text("Coloring something new...")
                     .font(.custom("Nunito-Bold", size: 15))
                 Button(action: {
                     isShowingSecondView = true
                     self.currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
                 }) {
-                    Text("New Draw")
-                        .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Draw"))
+                    Text("New Coloring")
+                        .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Coloring"))
                         .font(.custom("Montserrat-SemiBold", size: 17))
                         .padding(EdgeInsets(top: 8, leading: 18, bottom: 8, trailing: 18))
                         .foregroundColor(.white)
@@ -83,10 +85,10 @@ struct DrawHomeView: View {
                 }
             }.navigationDestination(isPresented: $isShowingSecondView) {
                 ActivityLogBaseView(
-                    viewName: "Draw Something Feature",
+                    viewName: "Coloring Something Feature",
                     isDirectChildToContainer: true,
                     content: {
-                        DrawView(currentDraw: $currentDraw)
+                        BackgroundDrawView(currentDraw: $currentDraw)
                     }
                 )
             }
@@ -100,7 +102,7 @@ struct DrawHomeView: View {
     
     var drawList: some View {
         List {
-            ForEach(store.draws, id: \.self) { draw in
+            ForEach(store.coloringDraws, id: \.self) { draw in
                 ZStack {
                     Button(action: {
                         self.currentDraw = draw
@@ -110,10 +112,10 @@ struct DrawHomeView: View {
                     
                     NavigationLink(
                         destination: ActivityLogBaseView(
-                            viewName: "Draw Something Feature",
+                            viewName: "Coloring Something Feature",
                             isDirectChildToContainer: true,
                             content: {
-                                DrawView(currentDraw: $currentDraw)
+                                DrawView(currentDraw: $currentDraw, isColoring: true)
                             }
                         )
                     ) {
@@ -130,10 +132,10 @@ struct DrawHomeView: View {
     var drawCell: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Draw Something Feature",
+                viewName: "Coloring Something Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    DrawView(currentDraw: $currentDraw)
+                    DrawView(currentDraw: $currentDraw, isColoring: true)
                 }
             )
         ) {
@@ -143,11 +145,11 @@ struct DrawHomeView: View {
     
     func delete(indexSet: IndexSet) {
         // remove the note from the notes array
-        store.draws.remove(atOffsets: indexSet)
+        store.coloringDraws.remove(atOffsets: indexSet)
         
         // save the updated array to local storage
         // asynchronously
-        DrawStore.save(draws: store.draws) { result in
+        ColoringStore.save(coloringDraws: store.coloringDraws) { result in
             if case .failure(let error) = result {
                 print(error.localizedDescription)
             }
@@ -156,9 +158,9 @@ struct DrawHomeView: View {
 }
 
 #if DEBUG
-struct DrawHomeView_Previews: PreviewProvider {
+struct ColoringHomeView_Previews: PreviewProvider {
     static var previews: some View {
-        DrawHomeView()
+        ColoringHomeView()
     }
 }
 #endif

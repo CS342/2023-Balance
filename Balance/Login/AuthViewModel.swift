@@ -68,7 +68,7 @@ final class AuthViewModel: ObservableObject {
     ) {
         Auth.auth().signIn(withEmail: emailAddress, password: password) { result, error in
             if let error = error {
-                print("an error occured: \(error.localizedDescription)")
+                print("SIGNIN an error occured: \(error.localizedDescription)")
                 return
             } else {
                 print("LOGIN OK: " + (result?.description ?? ""))
@@ -86,7 +86,7 @@ final class AuthViewModel: ObservableObject {
     func signUp(userData: ProfileUser) {
         Auth.auth().createUser(withEmail: userData.email, password: userData.password) { result, error in
             if let error = error {
-                print("an error occured: \(error.localizedDescription)")
+                print("SIGNUP an error occured: \(error.localizedDescription)")
                 return
             } else {
                 print("SINGUP OK: " + (result?.description ?? ""))
@@ -126,7 +126,7 @@ final class AuthViewModel: ObservableObject {
             self.session = nil
             self.profile = nil
         } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
+            print("SIGNOUT Error signing out: %@", signOutError)
         }
     }
     
@@ -134,7 +134,7 @@ final class AuthViewModel: ObservableObject {
     func loadPersonalData(uid: String) {
         UserProfileRepository.shared.fetchProfile(userId: uid) { profile, error in
             if let error = error {
-                print("Error while fetching the user profile: \(error)")
+                print("LOADPERSONALDATA Error while fetching the user profile: \(error)")
                 return
             } else {
                 print("User: " + (profile?.description() ?? "-"))

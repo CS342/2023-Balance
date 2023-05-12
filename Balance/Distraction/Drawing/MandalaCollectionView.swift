@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MandalaCollectionView: View {
     @Binding var currentDraw: Draw
-    @ObservedObject var store: DrawStore
     @State var images = [Photo]()
     var gridItemLayout = [GridItem(.fixed(110)), GridItem(.fixed(110)), GridItem(.fixed(110))]
 
@@ -23,7 +22,7 @@ struct MandalaCollectionView: View {
                                 viewName: "Image Selected: " + images[index].name,
                                 isDirectChildToContainer: true,
                                 content: {
-                                    DrawView(store: store, currentDraw: $currentDraw, backgroundImage: images[index].name, isNewDraw: true)
+                                    DrawView(currentDraw: $currentDraw, backgroundImage: images[index].name, isNewDraw: true, isColoring: true)
                                 }
                             )
                         ) {
@@ -48,11 +47,8 @@ struct MandalaCollectionView_Previews: PreviewProvider {
     @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: Data(), date: Date(), backImage: "mandala1")
     
     static var previews: some View {
-        let store = DrawStore()
-        
         MandalaCollectionView(
             currentDraw: $currentDraw,
-            store: store,
             images: (1...11).map {
                 Photo(name: "mandala\($0)")
             }

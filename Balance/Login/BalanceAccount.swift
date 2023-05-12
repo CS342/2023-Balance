@@ -21,7 +21,7 @@ struct BalanceAccount: View {
     
     var body: some View {
         Group {
-            LoginView(onboardingSteps: $onboardingSteps).environmentObject(AuthViewModel())
+            LoginView(onboardingSteps: $onboardingSteps)
                 .onReceive(account.objectWillChange) {
                     if account.signedIn {
                         completedOnboardingFlow = true
