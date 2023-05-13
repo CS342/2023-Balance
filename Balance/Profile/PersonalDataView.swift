@@ -27,7 +27,7 @@ struct PersonalDataView: View {
     var body: some View {
         ActivityLogContainer {
             ZStack {
-                backgroudColor.edgesIgnoringSafeArea(.all)
+                backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack {
                     HeaderMenu(title: "Personal Data")
                     Spacer().frame(height: 20)

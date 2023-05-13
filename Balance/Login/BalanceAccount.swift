@@ -28,7 +28,7 @@ struct BalanceAccount: View {
                     }
                 }
         }
-        .background(backgroudColor)
+        .background(backgroundColor)
     }
     
     

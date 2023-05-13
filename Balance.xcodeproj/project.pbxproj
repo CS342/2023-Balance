@@ -150,6 +150,7 @@
 		6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF510BF29C8FD25008A2F55 /* LocationView.swift */; };
 		6CFDD58A2A0D9ECE009D7E56 /* ColoringHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFDD5892A0D9ECE009D7E56 /* ColoringHomeView.swift */; };
 		6CFDD58C2A0D9F4A009D7E56 /* ColoringStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFDD58B2A0D9F4A009D7E56 /* ColoringStore.swift */; };
+		6CFDD5922A0E7335009D7E56 /* CardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFDD5912A0E7335009D7E56 /* CardImageView.swift */; };
 		894A884529B7B27600CB347B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894A884429B7B27600CB347B /* NavigationView.swift */; };
 		896C65D629B92EF800F30BA2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896C65D529B92EF800F30BA2 /* Config.swift */; };
 		89EB7BAD29B45381000470FC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F39333629A8A5690035A05C /* FirebaseFirestore */; };
@@ -303,6 +304,7 @@
 		6CF510BF29C8FD25008A2F55 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		6CFDD5892A0D9ECE009D7E56 /* ColoringHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoringHomeView.swift; sourceTree = "<group>"; };
 		6CFDD58B2A0D9F4A009D7E56 /* ColoringStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoringStore.swift; sourceTree = "<group>"; };
+		6CFDD5912A0E7335009D7E56 /* CardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardImageView.swift; sourceTree = "<group>"; };
 		8900585629AC0DDA005339D9 /* BalanceDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BalanceDebug.entitlements; sourceTree = "<group>"; };
 		894A884429B7B27600CB347B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		896C65D529B92EF800F30BA2 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -653,6 +655,7 @@
 				6CAA075129E83C0C00541F87 /* VideoCollectionView.swift */,
 				6CB5181D29E6F395007AADB4 /* ImageView.swift */,
 				6CAA074D29E7653200541F87 /* GalleryPageView.swift */,
+				6CFDD5912A0E7335009D7E56 /* CardImageView.swift */,
 			);
 			path = Gallery;
 			sourceTree = "<group>";
@@ -943,6 +946,7 @@
 				27525EB529B68B5400D1DF51 /* SpotifyConfig.swift in Sources */,
 				6CBE75DD2A0C314900A1747D /* MoodEditorView.swift in Sources */,
 				6C55242729F86D9200F802D9 /* IconView.swift in Sources */,
+				6CFDD5922A0E7335009D7E56 /* CardImageView.swift in Sources */,
 				6C55243929F8722B00F802D9 /* LoginView.swift in Sources */,
 				6C47338F29FC188A00DC72D0 /* UserProfileRepository.swift in Sources */,
 				6CE62D572A028F3400BB4F90 /* Country.swift in Sources */,

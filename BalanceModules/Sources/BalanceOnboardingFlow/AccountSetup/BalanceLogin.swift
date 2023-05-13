@@ -26,7 +26,7 @@ struct BalanceLogin: View {
             Spacer(minLength: 0)
         }
         .navigationBarTitleDisplayMode(.large)
-        .background(backgroudColor)
+        .background(backgroundColor)
     }
 }
 

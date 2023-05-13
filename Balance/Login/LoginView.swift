@@ -47,7 +47,7 @@ struct LoginView: View {
                 completedOnboardingFlow = true
             }
         }
-        .background(backgroudColor)
+        .background(backgroundColor)
     }
     
     var signInView: some View {

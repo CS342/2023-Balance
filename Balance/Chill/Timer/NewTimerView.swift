@@ -52,7 +52,7 @@ struct NewTimerView: View {
     var body: some View {
         ActivityLogContainer {
             ZStack {
-                backgroudColor.edgesIgnoringSafeArea(.all)
+                backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack(alignment: .center) {
                     HeaderMenu(title: navTitleText)
                     Spacer()

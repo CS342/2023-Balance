@@ -11,7 +11,7 @@ import SwiftUI
 struct Music: View {
     var body: some View {
         ZStack {
-            backgroudColor.edgesIgnoringSafeArea(.all)
+            backgroundColor.edgesIgnoringSafeArea(.all)
             VStack {
                 HeaderMenu(title: "Music")
                 VStack(alignment: .center, spacing: 10) {
