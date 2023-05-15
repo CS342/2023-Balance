@@ -34,28 +34,14 @@ struct FeelingView: View {
                 viewName: "Guess the Emoticon Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    // define content
+                    GuessView()
                 }
             )
         ) {
             DistractionCellView(image: "guessIcon", text: "Guess Emoticon", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
         }
     }
-    
-    var mandalaOption: some View {
-        NavigationLink(
-            destination: ActivityLogBaseView(
-                viewName: "Feeling Mandala Feature",
-                isDirectChildToContainer: true,
-                content: {
-                    FacesScreenView()
-                }
-            )
-        ) {
-            DistractionCellView(image: "mandalaIcon", text: "Feeling Mandala", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
-        }
-    }
-    
+        
     var moodOption: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
