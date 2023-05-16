@@ -1,5 +1,5 @@
 //
-//  SignInView.swift
+//  SignUpView.swift
 //  Balance
 //
 //  Created by Gonzalo Perisset on 27/04/2023.
@@ -14,10 +14,11 @@ import Onboarding
 import SwiftUI
 
 // swiftlint: disable type_body_length
-struct SignInView: View {
+struct SignUpView: View {
     @EnvironmentObject var account: Account
-    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
+    @EnvironmentObject private var authModel: AuthViewModel
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    @AppStorage(StorageKeys.onboardingFlowComplete) var completedOnboardingFlow = false
     @Environment(\.dismiss) private var dismiss
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
     @State private var displayName: String = ""
@@ -30,6 +31,8 @@ struct SignInView: View {
     @State private var alertMsg: String = ""
     @State private var country = Country(id: UUID().uuidString, name: "")
     @State private var birthDate = Date.now
+    @State var alertMessage: String = ""
+    @State private var signUpAlert = false
     let promptText: String = "Select"
     
     var body: some View {
@@ -49,6 +52,17 @@ struct SignInView: View {
             .navigationTitle("")
             .background(backgroundColor)
             .ignoresSafeArea()
+            .onChange(of: authModel.authError) { value in
+                if !value.isEmpty {
+                    self.alertMessage = value
+                    self.signUpAlert = true
+                }
+            }
+            .alert(alertMessage, isPresented: $signUpAlert) {
+                Button("OK", role: .cancel) {
+                    authModel.authError = ""
+                }
+            }
     }
     
     var signInButton: some View {
@@ -334,10 +348,10 @@ struct SignInView: View {
     }
 }
 
-struct SignInView_Previews: PreviewProvider {
+struct SignUpView_Previews: PreviewProvider {
     @State private static var path: [OnboardingFlow.Step] = []
     
     static var previews: some View {
-        SignInView(onboardingSteps: $path)
+        SignUpView(onboardingSteps: $path)
     }
 }

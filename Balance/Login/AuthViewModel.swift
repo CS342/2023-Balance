@@ -23,7 +23,9 @@ struct User {
 }
 
 final class AuthViewModel: ObservableObject {
+    static let shared = AuthViewModel()
     @Published var isLoggedIn = false
+    @Published var authError: String = ""
     @Published var profile: ProfileUser?
     @Published var session: User? {
         didSet {
@@ -68,6 +70,7 @@ final class AuthViewModel: ObservableObject {
     ) {
         Auth.auth().signIn(withEmail: emailAddress, password: password) { result, error in
             if let error = error {
+                self.authError = error.localizedDescription
                 print("SIGNIN an error occured: \(error.localizedDescription)")
                 return
             } else {
@@ -79,6 +82,7 @@ final class AuthViewModel: ObservableObject {
                 print("User \(user.uid) signed in.")
                 
                 self.loadPersonalData(uid: user.uid)
+                self.authError = ""
             }
         }
     }
@@ -86,6 +90,7 @@ final class AuthViewModel: ObservableObject {
     func signUp(userData: ProfileUser) {
         Auth.auth().createUser(withEmail: userData.email, password: userData.password) { result, error in
             if let error = error {
+                self.authError = error.localizedDescription
                 print("SIGNUP an error occured: \(error.localizedDescription)")
                 return
             } else {
@@ -94,7 +99,7 @@ final class AuthViewModel: ObservableObject {
                     return
                 }
                 print("User \(user.uid) signed up.")
-                
+                self.authError = ""
                 let profileUser = ProfileUser(
                     id: user.uid,
                     displayName: userData.displayName,
