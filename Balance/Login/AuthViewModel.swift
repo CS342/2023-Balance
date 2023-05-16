@@ -135,6 +135,17 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
+    func resetPassword(password: String) {
+        Auth.auth().currentUser?.updatePassword(to: password) { error in
+            if let error = error as NSError? {
+                print("RESETPASSWORD error occured: \(error.localizedDescription)")
+                self.authError = error.localizedDescription
+            } else {
+                print("RESETPASSWORD OK")
+                self.authError = "OK"
+            }
+        }
+    }
     
     func loadPersonalData(uid: String) {
         UserProfileRepository.shared.fetchProfile(userId: uid) { profile, error in

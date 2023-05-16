@@ -9,6 +9,9 @@ import SwiftUI
 
 struct PasswordUpdateView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var authModel: AuthViewModel
+    @State private var alertMessage: String = ""
+    @State private var showingAlert = false
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
     
@@ -19,41 +22,89 @@ struct PasswordUpdateView: View {
                 VStack {
                     HeaderMenu(title: "Password")
                     Spacer().frame(height: 40)
-                    Text("Password update: ")
-                        .font(.custom("Nunito-Bold", size: 18))
-                        .foregroundColor(darkBlueColor)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(20)
-                    ShowHideSecureField("new password", text: $password)
-                        .padding()
-                        .font(.custom("Montserrat-Regular", size: 17))
-                        .foregroundColor(darkGrayColor)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 14)
-                                .stroke(lightGrayColor, lineWidth: 1)
-                        )
-                        .padding(5)
-                        .padding(.horizontal, 25)
-                    ShowHideSecureField("confirme password", text: $confirmPassword)
-                        .padding()
-                        .font(.custom("Montserrat-Regular", size: 17))
-                        .foregroundColor(darkGrayColor)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 14)
-                                .stroke(lightGrayColor, lineWidth: 1)
-                        )
-                        .padding(5)
-                        .padding(.horizontal, 25)
+                    titleView
+                    passwordFields
                     Spacer()
                     saveButton
+                }
+            }
+            .onAppear(perform: listen)
+            .onChange(of: authModel.authError) { value in
+                if !value.isEmpty {
+                    if value == "OK" {
+                        self.alertMessage = "Password saved successfully"
+                        password = ""
+                        confirmPassword = ""
+                    } else {
+                        self.alertMessage = value
+                    }
+                    self.showingAlert = true
+                }
+            }
+            .alert(alertMessage, isPresented: $showingAlert) {
+                Button("OK", role: .cancel) {
+                    authModel.authError = ""
                 }
             }
         }
     }
     
+    var passwordFields: some View {
+        Group {
+            ShowHideSecureField("New password", text: $password)
+                .padding()
+                .font(.custom("Montserrat-Regular", size: 17))
+                .foregroundColor(darkGrayColor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14)
+                        .stroke(lightGrayColor, lineWidth: 1)
+                )
+                .padding(5)
+                .padding(.horizontal, 25)
+            ShowHideSecureField("Confirm password", text: $confirmPassword)
+                .padding()
+                .font(.custom("Montserrat-Regular", size: 17))
+                .foregroundColor(darkGrayColor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14)
+                        .stroke(lightGrayColor, lineWidth: 1)
+                )
+                .padding(5)
+                .padding(.horizontal, 25)
+        }
+    }
+    
+    var titleView: some View {
+        Text("Password update: ")
+            .font(.custom("Nunito-Bold", size: 18))
+            .foregroundColor(darkBlueColor)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(20)
+    }
+    
     var saveButton: some View {
         Button(action: {
-            dismiss()
+                if $password.wrappedValue.isEmpty ||
+                    $confirmPassword.wrappedValue.isEmpty {
+                    self.alertMessage = "All the information is required"
+                    showingAlert = true
+                    return
+                }
+                
+                if $password.wrappedValue !=
+                    $confirmPassword.wrappedValue {
+                    self.alertMessage = "The confirmation password mismatch"
+                    showingAlert = true
+                    return
+                }
+                
+                if !isValidPassword() {
+                    self.alertMessage = "Password Error: \n" + getMissingValidation(str: $password.wrappedValue).rawValue
+                    showingAlert = true
+                    return
+                }
+                
+                authModel.resetPassword(password: password)
         }) {
             Text("Save")
                 .font(.custom("Montserrat-SemiBold", size: 17))
@@ -66,6 +117,46 @@ struct PasswordUpdateView: View {
         .background(primaryColor)
         .cornerRadius(10)
         .padding(.horizontal, 20.0)
+    }
+    
+    func listen() {
+        authModel.listenAuthentificationState()
+    }
+    
+    func isValidPassword() -> Bool {
+        // least one uppercase,
+        // least one digit
+        // least one lowercase
+        // least one symbol
+        //  min 8 characters total
+        let password = $password.wrappedValue.trimmingCharacters(in: CharacterSet.whitespaces)
+        let passwordRegx = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$"
+        let passwordCheck = NSPredicate(format: "SELF MATCHES %@", passwordRegx)
+        return passwordCheck.evaluate(with: password)
+    }
+    
+    func getMissingValidation(str: String) -> [String] {
+        var errors: [String] = []
+        if !NSPredicate(format: "SELF MATCHES %@", ".*[A-Z]+.*").evaluate(with: str) {
+            errors.append("At least one uppercase")
+        }
+        
+        if !NSPredicate(format: "SELF MATCHES %@", ".*[0-9]+.*").evaluate(with: str) {
+            errors.append("At least one digit")
+        }
+
+        if !NSPredicate(format: "SELF MATCHES %@", ".*[!&^%$#@()/]+.*").evaluate(with: str) {
+            errors.append("At least one symbol")
+        }
+        
+        if !NSPredicate(format: "SELF MATCHES %@", ".*[a-z]+.*").evaluate(with: str) {
+            errors.append("At least one lowercase")
+        }
+        
+        if str.count < 8 {
+            errors.append("Min 8 characters total")
+        }
+        return errors
     }
 }
 
