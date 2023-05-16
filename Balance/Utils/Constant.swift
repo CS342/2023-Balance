@@ -20,6 +20,9 @@ let lightVioletColor = Color(#colorLiteral(red: 0.8540708423, green: 0.670463800
 let lightGrayColor = Color(#colorLiteral(red: 0.7952535152, green: 0.7952535152, blue: 0.7952535152, alpha: 1))
 let facesGrayColor = Color(#colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1))
 let darkGrayColor = Color(#colorLiteral(red: 0.2352026105, green: 0.2347485423, blue: 0.2638042867, alpha: 1))
+let emotionColor = Color(#colorLiteral(red: 0.8635568023, green: 0.9771735072, blue: 0.9613562226, alpha: 1))
+let correctOption = Color(#colorLiteral(red: 0.6474730372, green: 1, blue: 0.8112064004, alpha: 1))
+let wrongOption = Color(#colorLiteral(red: 0.9673425555, green: 0.1463843882, blue: 0.5197440386, alpha: 1))
 
 enum ChillType {
     case breathing
