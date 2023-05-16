@@ -35,6 +35,7 @@ struct PasswordUpdateView: View {
                         self.alertMessage = "Password saved successfully"
                         password = ""
                         confirmPassword = ""
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     } else {
                         self.alertMessage = value
                     }

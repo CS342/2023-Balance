@@ -170,10 +170,10 @@ struct ProfileView: View {
                 print("Error while fetching the user profile: \(error)")
                 return
             } else {
-                print("User: " + (profileUser?.description() ?? "-"))
                 authModel.profile = profileUser
                 self.displayName = authModel.profile?.displayName ?? ""
                 self.avatar = authModel.profile?.avatar ?? ""
+                print("PROFILEVIEW User: " + (profileUser?.description() ?? "-"))
             }
         }
     }
