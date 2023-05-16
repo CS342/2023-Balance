@@ -78,7 +78,7 @@ struct MoodEditorView: View {
                 }
             }
         }) {
-            Text("Save")
+            Text("Save in Diary")
                 .font(.custom("Montserrat-SemiBold", size: 17))
                 .padding(.horizontal, 10.0)
                 .foregroundColor(.white)

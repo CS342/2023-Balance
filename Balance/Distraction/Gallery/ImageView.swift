@@ -26,7 +26,7 @@ struct ImageView: View {
                                 .tag(img)
                         }
                     }
-                    .tabViewStyle(.page)
+                    .tabViewStyle(.page(indexDisplayMode: .never))
                     .onAppear(perform: {
                         self.selected = self.imagesArray[currentIndex]
                     })

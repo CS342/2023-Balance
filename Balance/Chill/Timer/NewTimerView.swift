@@ -119,7 +119,7 @@ struct NewTimerView: View {
             case .knee:
                 kneeAnimation
             case .legs:
-                feetAnimation
+                legsAnimation
             case .feet:
                 feetAnimation
             }
