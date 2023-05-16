@@ -28,7 +28,7 @@ public struct OnboardingFlow: View {
                     case .login:
                         LoginView(onboardingSteps: $onboardingSteps)
                     case .signUp:
-                        SignInView(onboardingSteps: $onboardingSteps)
+                        SignUpView(onboardingSteps: $onboardingSteps)
                     case .avatar:
                         AvatarSelectionView(firstLoad: true)
                     }

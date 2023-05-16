@@ -76,7 +76,7 @@
 		6C47338729FAB53B00DC72D0 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C47337F29FAB27C00DC72D0 /* Montserrat-SemiBold.ttf */; };
 		6C47338829FAB53B00DC72D0 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C47338329FAB27C00DC72D0 /* Montserrat-Bold.ttf */; };
 		6C47338929FAB53B00DC72D0 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C47338229FAB27C00DC72D0 /* Montserrat-Regular.ttf */; };
-		6C47338B29FAB89900DC72D0 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C47338A29FAB89900DC72D0 /* SignInView.swift */; };
+		6C47338B29FAB89900DC72D0 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C47338A29FAB89900DC72D0 /* SignUpView.swift */; };
 		6C47338D29FB09E400DC72D0 /* ProfileUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C47338C29FB09E400DC72D0 /* ProfileUser.swift */; };
 		6C47338F29FC188A00DC72D0 /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C47338E29FC188A00DC72D0 /* UserProfileRepository.swift */; };
 		6C47339129FC5C7D00DC72D0 /* PersonalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C47339029FC5C7D00DC72D0 /* PersonalDataView.swift */; };
@@ -233,7 +233,7 @@
 		6C47338129FAB27C00DC72D0 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		6C47338229FAB27C00DC72D0 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		6C47338329FAB27C00DC72D0 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
-		6C47338A29FAB89900DC72D0 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		6C47338A29FAB89900DC72D0 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		6C47338C29FB09E400DC72D0 /* ProfileUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUser.swift; sourceTree = "<group>"; };
 		6C47338E29FC188A00DC72D0 /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
 		6C47339029FC5C7D00DC72D0 /* PersonalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataView.swift; sourceTree = "<group>"; };
@@ -566,7 +566,7 @@
 				6C55243429F8722A00F802D9 /* ContentView.swift */,
 				6C55243329F8722900F802D9 /* MainView.swift */,
 				6C55243529F8722A00F802D9 /* LoginView.swift */,
-				6C47338A29FAB89900DC72D0 /* SignInView.swift */,
+				6C47338A29FAB89900DC72D0 /* SignUpView.swift */,
 				6C55242929F86DD800F802D9 /* Consent.swift */,
 				6C55242D29F86DD800F802D9 /* HealthKitPermissions.swift */,
 				6C55242B29F86DD800F802D9 /* InterestingModules.swift */,
@@ -971,7 +971,7 @@
 				6CAA076729EAF04200541F87 /* FeelingView.swift in Sources */,
 				4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */,
 				2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */,
-				6C47338B29FAB89900DC72D0 /* SignInView.swift in Sources */,
+				6C47338B29FAB89900DC72D0 /* SignUpView.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2720084329A843B90052908D /* Note.swift in Sources */,
 				6C55243A29F8722B00F802D9 /* AuthViewModel.swift in Sources */,

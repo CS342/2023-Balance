@@ -19,16 +19,17 @@ struct LoginView: View {
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
-    @Binding private var onboardingSteps: [OnboardingFlow.Step]
-    
+    @Binding var onboardingSteps: [OnboardingFlow.Step]
     @State private var emailAddress: String = ""
     @State private var password: String = ""
-    
+    @State private var alertMessage: String = ""
+    @State private var showingAlert = false
+
     var body: some View {
         Group {
             if !authModel.isLoggedIn {
-                signInView
-                    .adaptsToKeyboard()
+                    signInView
+                        .adaptsToKeyboard()
             } else {
                 Button {
                     NavigationUtil.popToRootView()
@@ -47,7 +48,18 @@ struct LoginView: View {
                 completedOnboardingFlow = true
             }
         }
+        .onChange(of: authModel.authError) { value in
+            if !value.isEmpty {
+                self.alertMessage = value
+                self.showingAlert = true
+            }
+        }
         .background(backgroundColor)
+        .alert(alertMessage, isPresented: $showingAlert) {
+            Button("OK", role: .cancel) {
+                authModel.authError = ""
+            }
+        }
     }
     
     var signInView: some View {
