@@ -38,7 +38,7 @@ struct FeelingView: View {
                 }
             )
         ) {
-            DistractionCellView(image: "guessIcon", text: "Guess the emoticon", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+            DistractionCellView(image: "guessIcon", text: "Guess the emotion", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
         }
     }
         
