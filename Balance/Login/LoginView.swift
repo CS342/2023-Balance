@@ -163,7 +163,7 @@ struct LoginView: View {
             authModel.passwordReset(
                 email: emailAddress,
                 onSuccess: {
-                    alertMessage = "We send you and email to reset the password."
+                    alertMessage = "We sent you and email to reset the password."
                     self.showingAlert = false
                     loading = false
                 }, onError: { errorMessage in
