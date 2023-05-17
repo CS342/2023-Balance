@@ -20,8 +20,9 @@ struct SearchBar: View {
                     self.text = ""
                 }) {
                     Text("Cancel")
-                        .font(.custom("Nunito", size: 15))
+                        .font(.custom("Nunito-Bold", size: 17))
                         .foregroundColor(primaryColor)
+                        .offset(x: -10)
                 }
                 .padding(.trailing, 20)
                 .transition(.move(edge: .trailing))
