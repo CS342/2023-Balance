@@ -12,6 +12,7 @@ struct DiaryHomeView: View {
     @EnvironmentObject var store: NoteStore
     @State private var showingEditor = false
     @State private var currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
+    @State private var searchText = ""
     @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
@@ -91,20 +92,33 @@ struct DiaryHomeView: View {
     }
     
     var diaryList: some View {
-        List {
-            ForEach(store.notes, id: \.self) { note in
-                Button(action: {
-                    self.currentNote = note
-                    self.showingEditor.toggle()
-                }) {
-                    PastDiaryEntry(note)
+        Group {
+            SearchBar(text: $searchText)
+            List {
+                ForEach(searchResults) { note in
+                    Button(action: {
+                        self.currentNote = note
+                        self.showingEditor.toggle()
+                    }) {
+                        PastDiaryEntry(note)
+                    }
+                    .buttonStyle(ActivityLogButtonStyle(activityDescription: "Selected past diary note"))
+                    .listRowSeparator(.hidden)
                 }
-                .buttonStyle(ActivityLogButtonStyle(activityDescription: "Selected past diary note"))
-                .listRowSeparator(.hidden)
+                .onDelete(perform: delete)
             }
-            .onDelete(perform: delete)
+            .listStyle(.plain)
         }
-        .listStyle(.plain)
+    }
+    
+    var searchResults: [Note] {
+        if searchText.isEmpty {
+            return store.notes
+        } else {
+            return store.notes.filter {
+                $0.title.localizedCaseInsensitiveContains(searchText) || $0.text.localizedCaseInsensitiveContains(searchText)
+            }
+        }
     }
     
     func delete(indexSet: IndexSet) {

@@ -167,7 +167,7 @@ struct LoginView: View {
                     self.showingAlert = false
                     loading = false
                 }, onError: { errorMessage in
-                    alertMessage = "You must complete the email to reset the password."
+                    alertMessage = errorMessage
                     self.showingAlert = false
                     loading = false
                 }
