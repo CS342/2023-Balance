@@ -14,6 +14,7 @@ struct PasswordUpdateView: View {
     @State private var showingAlert = false
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
+    @State var loading = false
     
     var body: some View {
         ActivityLogContainer {
@@ -27,20 +28,21 @@ struct PasswordUpdateView: View {
                     Spacer()
                     saveButton
                 }
-            }
-            .onAppear(perform: listen)
-            .onChange(of: authModel.authError) { value in
-                if !value.isEmpty {
-                    if value == "OK" {
-                        self.alertMessage = "Password saved successfully"
-                        password = ""
-                        confirmPassword = ""
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    } else {
-                        self.alertMessage = value
-                    }
-                    self.showingAlert = true
+                if loading {
+                    ProgressView("Loading...")
+                        .tint(.white)
+                        .accentColor(.white)
+                        .foregroundColor(.white)
+                        .frame(width: 200, height: 200)
+                        .background(Color.black.opacity(0.8))
+                        .cornerRadius(20, corners: .allCorners)
+                        .ignoresSafeArea()
                 }
+            }
+            .disabled(loading)
+            .onAppear(perform: listen)
+            .onChange(of: authModel.authError) { response in
+                updateData(value: response)
             }
             .alert(alertMessage, isPresented: $showingAlert) {
                 Button("OK", role: .cancel) {
@@ -85,27 +87,27 @@ struct PasswordUpdateView: View {
     
     var saveButton: some View {
         Button(action: {
-                if $password.wrappedValue.isEmpty ||
-                    $confirmPassword.wrappedValue.isEmpty {
-                    self.alertMessage = "All the information is required"
-                    showingAlert = true
-                    return
-                }
-                
-                if $password.wrappedValue !=
-                    $confirmPassword.wrappedValue {
-                    self.alertMessage = "The confirmation password mismatch"
-                    showingAlert = true
-                    return
-                }
-                
-                if !isValidPassword() {
-                    self.alertMessage = "Password Error: \n" + getMissingValidation(str: $password.wrappedValue).rawValue
-                    showingAlert = true
-                    return
-                }
-                
-                authModel.resetPassword(password: password)
+            if $password.wrappedValue.isEmpty ||
+                $confirmPassword.wrappedValue.isEmpty {
+                self.alertMessage = "All the information is required"
+                showingAlert = true
+                return
+            }
+            
+            if $password.wrappedValue !=
+                $confirmPassword.wrappedValue {
+                self.alertMessage = "Confirmation password mismatch"
+                showingAlert = true
+                return
+            }
+            
+            if !isValidPassword() {
+                self.alertMessage = "Password Error: \n" + getMissingValidation(str: $password.wrappedValue).rawValue
+                showingAlert = true
+                return
+            }
+            loading = true
+            authModel.updatePassword(password: password)
         }) {
             Text("Save")
                 .font(.custom("Montserrat-SemiBold", size: 17))
@@ -145,7 +147,7 @@ struct PasswordUpdateView: View {
         if !NSPredicate(format: "SELF MATCHES %@", ".*[0-9]+.*").evaluate(with: str) {
             errors.append("At least one digit")
         }
-
+        
         if !NSPredicate(format: "SELF MATCHES %@", ".*[!&^%$#@()/]+.*").evaluate(with: str) {
             errors.append("At least one symbol")
         }
@@ -158,6 +160,21 @@ struct PasswordUpdateView: View {
             errors.append("Min 8 characters total")
         }
         return errors
+    }
+    
+    func updateData(value: String) {
+        loading = false
+        if !value.isEmpty {
+            if value == "OK" {
+                self.alertMessage = "Password saved successfully"
+                password = ""
+                confirmPassword = ""
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            } else {
+                self.alertMessage = value
+            }
+            self.showingAlert = true
+        }
     }
 }
 
