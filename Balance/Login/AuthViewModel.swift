@@ -135,14 +135,26 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
-    func resetPassword(password: String) {
+    func updatePassword(password: String) {
         Auth.auth().currentUser?.updatePassword(to: password) { error in
             if let error = error as NSError? {
-                print("RESETPASSWORD error occured: \(error.localizedDescription)")
+                print("UPDATEPASSWORD error occured: \(error.localizedDescription)")
                 self.authError = error.localizedDescription
             } else {
-                print("RESETPASSWORD OK")
+                print("UPDATEPASSWORD OK")
                 self.authError = "OK"
+            }
+        }
+    }
+    
+    func passwordReset(email: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error as NSError? {
+                print("RESETPASSWORD error occured: \(error.localizedDescription)")
+                onError(error.localizedDescription)
+            } else {
+                print("UPDATEPASSWORD OK")
+                onSuccess()
             }
         }
     }

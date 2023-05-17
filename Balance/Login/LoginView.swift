@@ -24,32 +24,47 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var alertMessage: String = ""
     @State private var showingAlert = false
-
+    @State var loading = false
+    
     var body: some View {
         Group {
             if !authModel.isLoggedIn {
+                ZStack {
                     signInView
                         .adaptsToKeyboard()
+                    if loading {
+                        ProgressView("Loading...")
+                            .tint(.white)
+                            .accentColor(.white)
+                            .foregroundColor(.white)
+                            .frame(width: 200, height: 200)
+                            .background(Color.black.opacity(0.8))
+                            .cornerRadius(20, corners: .allCorners)
+                            .ignoresSafeArea()
+                    }
+                }
             } else {
                 Button {
                     NavigationUtil.popToRootView()
                     completedOnboardingFlow = true
                 } label: {
-                    Text("login...")
-                        .bold()
+                    Text("")
                 }
             }
         }
+        .disabled(loading)
         .onAppear(perform: listen)
         .onChange(of: account.signedIn) { value in
             print(value)
             if account.signedIn {
+                loading = false
                 NavigationUtil.popToRootView()
                 completedOnboardingFlow = true
             }
         }
         .onChange(of: authModel.authError) { value in
             if !value.isEmpty {
+                loading = false
                 self.alertMessage = value
                 self.showingAlert = true
             }
@@ -60,6 +75,7 @@ struct LoginView: View {
                 authModel.authError = ""
             }
         }
+        .ignoresSafeArea()
     }
     
     var signInView: some View {
@@ -127,13 +143,39 @@ struct LoginView: View {
             Divider()
                 .padding(.horizontal, 20)
             Spacer().frame(height: 20)
-            SecureField("Password", text: $password)
-                .textContentType(.password)
-                .keyboardType(.default)
-                .font(.custom("Montserrat", size: 17))
-                .foregroundColor(darkGrayColor)
-                .padding(.horizontal, 20)
+            HStack {
+                SecureField("Password", text: $password)
+                    .textContentType(.password)
+                    .keyboardType(.default)
+                    .font(.custom("Montserrat", size: 17))
+                    .foregroundColor(darkGrayColor)
+                    .padding(.horizontal, 20)
+                passwordReset
+            }
             Divider()
+                .padding(.horizontal, 20)
+        }
+    }
+    
+    var passwordReset: some View {
+        Button {
+            loading = true
+            authModel.passwordReset(
+                email: emailAddress,
+                onSuccess: {
+                    alertMessage = "We send you and email to reset the password."
+                    self.showingAlert = false
+                    loading = false
+                }, onError: { errorMessage in
+                    alertMessage = "You must complete the email to reset the password."
+                    self.showingAlert = false
+                    loading = false
+                }
+            )
+        } label: {
+            Text("Forgot password")
+                .font(.custom("Nunito-Bold", size: 17))
+                .foregroundColor(primaryColor)
                 .padding(.horizontal, 20)
         }
     }
@@ -141,6 +183,7 @@ struct LoginView: View {
     var loginButton: some View {
         Button(
             action: {
+                loading = true
                 authModel.signIn(
                     emailAddress: emailAddress,
                     password: password

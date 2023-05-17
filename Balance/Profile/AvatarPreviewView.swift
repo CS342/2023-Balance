@@ -18,6 +18,7 @@ struct AvatarPreviewView: View {
     @Binding var avatarSelection: Avatar?
     @Binding var accesorySelection: Accesory?
     @State var profile = ProfileUser()
+    @State var loading = false
     var firstLoad: Bool
     
     var body: some View {
@@ -28,24 +29,23 @@ struct AvatarPreviewView: View {
                     Spacer().frame(height: 50)
                     titlePreview
                     Spacer()
-                    Image("stars2")
-                        .resizable()
-                        .frame(width: 50.0, height: 50.0)
-                        .clipped()
-                        .accessibilityLabel("star2")
-                        .offset(x: -100, y: -50)
                     avatarSelected
-                    Image("stars1")
-                        .resizable()
-                        .frame(width: 50.0, height: 50.0)
-                        .clipped()
-                        .accessibilityLabel("star1")
-                        .offset(x: 100, y: 50)
                     Spacer()
                     saveButton
                     cancelButton
                 }
+                if loading {
+                    ProgressView("Loading...")
+                        .tint(.white)
+                        .accentColor(.white)
+                        .foregroundColor(.white)
+                        .frame(width: 200, height: 200)
+                        .background(Color.black.opacity(0.8))
+                        .cornerRadius(20, corners: .allCorners)
+                        .ignoresSafeArea()
+                }
             }
+            .disabled(loading)
             .onAppear {
                 authModel.listenAuthentificationState()
                 self.profile = authModel.profile ?? ProfileUser()
@@ -53,6 +53,7 @@ struct AvatarPreviewView: View {
             .onChange(of: authModel.profile ?? ProfileUser()) { profile in
                 withAnimation(.easeInOut(duration: 1.0)) {
                     self.profile = profile
+                    loading = false
                 }
             }
         }
@@ -69,6 +70,12 @@ struct AvatarPreviewView: View {
     
     var avatarSelected: some View {
         ZStack {
+            Image("stars2")
+                .resizable()
+                .frame(width: 50.0, height: 50.0)
+                .clipped()
+                .accessibilityLabel("star2")
+                .offset(x: -100, y: -50)
             Image(avatarSelection?.name ?? "avatar_1")
                 .resizable()
                 .scaledToFit()
@@ -84,12 +91,19 @@ struct AvatarPreviewView: View {
 //                    .accessibilityLabel("accesoryPreview")
 //                    .offset(x: 80, y: 80)
 //            }
+            Image("stars1")
+                .resizable()
+                .frame(width: 50.0, height: 50.0)
+                .clipped()
+                .accessibilityLabel("star1")
+                .offset(x: 100, y: 50)
         }
     }
     
     var saveButton: some View {
         Button(
             action: {
+                loading = true
                 if firstLoad {
                     var user = retrive()
                     user.avatar = avatarSelection?.name ?? ""
@@ -104,6 +118,7 @@ struct AvatarPreviewView: View {
                             var loadExistenceProfile = profileUser ?? ProfileUser()
                             loadExistenceProfile.avatar = avatarSelection?.name ?? ""
                             UserProfileRepository.shared.createProfile(profile: loadExistenceProfile) { profile, error in
+                                loading = false
                                 if let error = error {
                                     print("Error while fetching the user profile: \(error)")
                                     return
