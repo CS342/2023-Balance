@@ -30,36 +30,39 @@ struct GalleryView: View {
                     HeaderMenu(title: "Look at Pictures")
                     VStack(alignment: .center, spacing: 10) {
                         highlightsTitle
-                        PagingView(index: $index.animation(), maxIndex: imgArray1.count - 1) {
-                            ForEach(imgArray1.indices, id: \.self) { index in
-                                Image(imgArray1[index].name)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .accessibilityLabel(imgArray1[index].name)
-                            }
-                        }
-                        .aspectRatio(4 / 3, contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        PageControl(index: $index, maxIndex: imgArray1.count)
-                            .padding(.top, 5.0)
+                        imagePaging
                         categoriesTitle
                         tagsView
-                        if animalsTag {
-                            ImageCollectionView(imageArray: imgArray1)
-                                .padding(.horizontal, 10.0)
-                        } else if landscapeTag {
-                            ImageCollectionView(imageArray: imgArray2)
-                                .padding(.horizontal, 10.0)
-                        } else if funnyTag {
-                            ImageCollectionView(imageArray: imgArray1)
-                                .padding(.horizontal, 10.0)
-                        }
                         Spacer()
                     }
                     .edgesIgnoringSafeArea(.all)
                 }
             }
         }
+    }
+    
+    var imagePaging: some View {
+        TabView {
+            ForEach(Array(imgArray1.enumerated()), id: \.element) { index, img in
+                NavigationLink(
+                    destination: ActivityLogBaseView(
+                        viewName: "Image Selected: " + img.name,
+                        isDirectChildToContainer: true,
+                        content: {
+                            ImageView(imagesArray: imgArray1, currentIndex: index)
+                        }
+                    )
+                ) {
+                    Image(img.name)
+                        .resizable()
+                        .cornerRadius(20)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(5)
+                        .accessibilityLabel(img.name)
+                        .tag(img)
+                }
+            }
+        }.tabViewStyle(.page(indexDisplayMode: .never))
     }
     
     var highlightsTitle: some View {
@@ -78,7 +81,6 @@ struct GalleryView: View {
     
     var imagesArrayView: some View {
         ForEach(imageIDArray, id: \.self) { imgID in
-            // enable logging for a specific image being selected
             ImgHighlightView(imgID: imgID)
                 .frame(width: UIScreen.main.bounds.width, height: 200)
                 .cornerRadius(20)
@@ -86,12 +88,24 @@ struct GalleryView: View {
     }
     
     var tagsView: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                Spacer(minLength: 10)
-                animalsButton
-                landscapeButton
-                funnyButton
+        Group {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    Spacer(minLength: 10)
+                    animalsButton
+                    landscapeButton
+                    funnyButton
+                }
+            }
+            if animalsTag {
+                ImageCollectionView(imageArray: imgArray1)
+                    .padding(.horizontal, 10.0)
+            } else if landscapeTag {
+                ImageCollectionView(imageArray: imgArray2)
+                    .padding(.horizontal, 10.0)
+            } else if funnyTag {
+                ImageCollectionView(imageArray: imgArray1)
+                    .padding(.horizontal, 10.0)
             }
         }
     }

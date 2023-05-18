@@ -10,7 +10,7 @@ import SwiftUI
 struct ImageView: View {
     @Environment(\.dismiss) var dismiss
     var imagesArray: [Photo]
-    var currentIndex = 0
+    @State var currentIndex = 0
     @State var selected = Photo(name: "")
 
     var body: some View {
@@ -42,7 +42,10 @@ struct ImageView: View {
         HStack(spacing: 50) {
             Button(action: {
                 print("DISLIKE tab = \(selected.name)")
-// dismiss()
+                if currentIndex < self.imagesArray.count - 1 {
+                    self.currentIndex += 1
+                    self.selected = self.imagesArray[currentIndex]
+                }
             }) {
                 Image("crossImage")
                     .resizable()
@@ -56,7 +59,10 @@ struct ImageView: View {
             }
             Button(action: {
                 print("LIKE tab = \(selected.name)")
-                // dismiss()
+                if currentIndex < self.imagesArray.count - 1 {
+                    self.currentIndex += 1
+                    self.selected = self.imagesArray[currentIndex]
+                }
             }) {
                 Image("heartImage")
                     .resizable()

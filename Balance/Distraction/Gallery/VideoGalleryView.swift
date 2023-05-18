@@ -66,17 +66,18 @@ struct VideoGalleryView: View {
                     HeaderMenu(title: "Look Videos")
                     VStack(alignment: .center, spacing: 10) {
                         highlightsTitle
-                        PagingView(index: $index.animation(), maxIndex: ids.count - 1) {
-                            ForEach(ids, id: \.self) { idData in
-                                YouTubeGalleryView(videoId: idData)
-                                    .frame(width: 300, height: 300)
-                                    .padding()
-                            }
-                        }
-                        .aspectRatio(4 / 3, contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        PageControl(index: $index, maxIndex: ids.count)
-                            .padding(.top, 5.0)
+                        videoPaging
+//                        PagingView(index: $index.animation(), maxIndex: ids.count - 1) {
+//                            ForEach(ids, id: \.self) { idData in
+//                                YouTubeGalleryView(videoId: idData)
+//                                    .frame(width: 300, height: 300)
+//                                    .padding()
+//                            }
+//                        }
+//                        .aspectRatio(4 / 3, contentMode: .fit)
+//                        .clipShape(RoundedRectangle(cornerRadius: 15))
+//                        PageControl(index: $index, maxIndex: ids.count)
+//                            .padding(.top, 5.0)
                         categoriesTitle
                         tagsView
                         if animalsTag {
@@ -95,6 +96,53 @@ struct VideoGalleryView: View {
                 }
             }
         }
+    }
+    
+    var videoPaging: some View {
+        TabView {
+            ForEach(ids, id: \.self) { idData in
+                NavigationLink(
+                    destination: ActivityLogBaseView(
+                        viewName: "Video Selected: " + idData,
+                        isDirectChildToContainer: true,
+                        content: {
+                            YoutubeModalView(videoID: idData)
+                        }
+                    )
+                ) {
+                    AsyncImage(
+                        url: URL(string: "http://img.youtube.com/vi/\(idData)/0.jpg"),
+                        content: { image in
+                            image.resizable()
+                                .scaledToFill()
+                        },
+                        placeholder: {
+                            Image(systemName: "photo.fill")
+                                .tint(lightGrayColor)
+                        }
+                    )
+                    .clipped()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(10)
+                    .accessibilityLabel(idData)
+                }
+//                YouTubeGalleryView(videoId: idData)
+////                    .frame(width: 300, height: 300)
+//                .aspectRatio(contentMode: .fit)
+//                .cornerRadius(20)
+//                .padding()
+            }
+            
+//            ForEach(self.imgArray1) { img in
+//                Image(img.name)
+//                    .resizable()
+//                    .cornerRadius(20)
+//                    .aspectRatio(contentMode: .fit)
+//                    .padding(5)
+//                    .accessibilityLabel(img.name)
+//                    .tag(img)
+//            }
+        }.tabViewStyle(.page(indexDisplayMode: .never))
     }
     
     var highlightsTitle: some View {
