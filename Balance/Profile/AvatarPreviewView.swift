@@ -9,17 +9,19 @@ import Account
 import BalanceSharedContext
 import FirebaseAccount
 import class FHIR.FHIR
+import Onboarding
 import SwiftUI
 
 struct AvatarPreviewView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
-    @Binding var avatarSelection: Avatar?
-    @Binding var accesorySelection: Accesory?
-    @State var profile = ProfileUser()
-    @State var loading = false
-    var firstLoad: Bool
+    @Binding private var onboardingSteps: [OnboardingFlow.Step]
+    @Binding private var avatarSelection: Avatar
+    @Binding private var accesorySelection: Accesory
+    @State private var profile = ProfileUser()
+    @State private var loading = false
+    private var firstLoad: Bool
     
     var body: some View {
         ActivityLogContainer {
@@ -35,13 +37,7 @@ struct AvatarPreviewView: View {
                     cancelButton
                 }
                 if loading {
-                    ProgressView("Loading...")
-                        .tint(.white)
-                        .accentColor(.white)
-                        .foregroundColor(.white)
-                        .frame(width: 200, height: 200)
-                        .background(Color.black.opacity(0.8))
-                        .cornerRadius(20, corners: .allCorners)
+                    loadingView
                         .ignoresSafeArea()
                 }
             }
@@ -51,12 +47,19 @@ struct AvatarPreviewView: View {
                 self.profile = authModel.profile ?? ProfileUser()
             }
             .onChange(of: authModel.profile ?? ProfileUser()) { profile in
-                withAnimation(.easeInOut(duration: 1.0)) {
-                    self.profile = profile
-                    loading = false
-                }
+                updateData(profile: profile)
             }
         }
+    }
+    
+    var loadingView: some View {
+        ProgressView("Loading...")
+            .tint(.white)
+            .accentColor(.white)
+            .foregroundColor(.white)
+            .frame(width: 200, height: 200)
+            .background(Color.black.opacity(0.8))
+            .cornerRadius(20, corners: .allCorners)
     }
     
     var titlePreview: some View {
@@ -76,21 +79,21 @@ struct AvatarPreviewView: View {
                 .clipped()
                 .accessibilityLabel("star2")
                 .offset(x: -100, y: -50)
-            Image(avatarSelection?.name ?? "avatar_1")
+            Image(avatarSelection.name)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 200, height: 200)
                 .clipped()
                 .accessibilityLabel("avatarPreview")
-//            if !firstLoad {
-//                Image(accesorySelection?.name ?? "acc_1")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: 130, height: 130)
-//                    .clipped()
-//                    .accessibilityLabel("accesoryPreview")
-//                    .offset(x: 80, y: 80)
-//            }
+            //            if !firstLoad {
+            //                Image(accesorySelection?.name ?? "acc_1")
+            //                    .resizable()
+            //                    .scaledToFit()
+            //                    .frame(width: 130, height: 130)
+            //                    .clipped()
+            //                    .accessibilityLabel("accesoryPreview")
+            //                    .offset(x: 80, y: 80)
+            //            }
             Image("stars1")
                 .resizable()
                 .frame(width: 50.0, height: 50.0)
@@ -106,17 +109,18 @@ struct AvatarPreviewView: View {
                 loading = true
                 if firstLoad {
                     var user = retrive()
-                    user.avatar = avatarSelection?.name ?? ""
+                    user.avatar = avatarSelection.name
                     authModel.signUp(userData: user)
                 } else {
                     UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
                         if let error = error {
+                            loading = false
                             print("Error while fetching the user profile: \(error)")
                             return
                         } else {
                             print("User: " + (profileUser?.description() ?? "-"))
                             var loadExistenceProfile = profileUser ?? ProfileUser()
-                            loadExistenceProfile.avatar = avatarSelection?.name ?? ""
+                            loadExistenceProfile.avatar = avatarSelection.name
                             UserProfileRepository.shared.createProfile(profile: loadExistenceProfile) { profile, error in
                                 loading = false
                                 if let error = error {
@@ -165,6 +169,27 @@ struct AvatarPreviewView: View {
             .stroke(primaryColor, lineWidth: 2))
         .background(.white)
         .padding(.horizontal, 20.0)
+    }
+    
+    init(onboardingSteps: Binding<[OnboardingFlow.Step]>, avatarSelection: Binding<Avatar>, accesorySelection: Binding<Accesory>, firstLoad: Bool) {
+        self._onboardingSteps = onboardingSteps
+        self._avatarSelection = avatarSelection
+        self._accesorySelection = accesorySelection
+        self.firstLoad = firstLoad
+    }
+    
+    func updateData(profile: ProfileUser) {
+        if firstLoad {
+            dismiss()
+            onboardingSteps.remove(at: 1)
+            onboardingSteps.remove(at: 0)
+        } else {
+            withAnimation(.easeInOut(duration: 1.0)) {
+                self.profile = profile
+                loading = false
+            }
+            dismiss()
+        }
     }
     
     func retrive() -> ProfileUser {

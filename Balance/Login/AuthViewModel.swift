@@ -135,6 +135,18 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
+    func signOut(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            self.session = nil
+            self.profile = nil
+            onSuccess()
+        } catch let signOutError as NSError {
+            print("SIGNOUT Error signing out: %@", signOutError)
+            onError(signOutError.localizedDescription)
+        }
+    }
+    
     func updatePassword(password: String) {
         Auth.auth().currentUser?.updatePassword(to: password) { error in
             if let error = error as NSError? {
@@ -157,6 +169,18 @@ final class AuthViewModel: ObservableObject {
                 onSuccess()
             }
         }
+    }
+    
+    func deleteUser(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+        Auth.auth().currentUser?.delete(completion: { error in
+            if let error = error as NSError? {
+                print("DELETEUSER error occured: \(error.localizedDescription)")
+                onError(error.localizedDescription)
+            } else {
+                print("DELETEUSER OK")
+                onSuccess()
+            }
+        })
     }
     
     func loadPersonalData(uid: String) {
