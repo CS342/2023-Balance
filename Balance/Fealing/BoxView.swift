@@ -8,16 +8,33 @@
 import SwiftUI
 
 struct BoxView: View {
-    var box: Box
+    @Environment(\.dismiss) var dismiss
     @Binding var selectedBtn: Int
+    @Binding var questionIndex: Int
+    @Binding var questions: [Question]
+    @Binding var stopUserInteraction: Bool
+    var box: Box
+
     var body: some View {
         Button(action: {
             self.selectedBtn = self.box.id
+            stopUserInteraction = true
+            if self.questionIndex < (questions.count - 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.questionIndex += 1
+                    self.selectedBtn = -1
+                    stopUserInteraction = false
+                }
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    dismiss()
+                }
+            }
         }) {
             Text(box.title)
                 .foregroundColor(self.selectedBtn == self.box.id ? Color.white : primaryColor)
         }
-        .frame(width: 100, height: 50)
+        .frame(width: 110, height: 50)
         .background(self.selectedBtn == self.box.id ? (self.box.correct ? correctOption : wrongOption) : Color.white)
         .cornerRadius(20)
         .overlay(

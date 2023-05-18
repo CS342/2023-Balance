@@ -68,6 +68,7 @@
 		6C39EA2129C9EA620095573E /* SOSCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C39EA1F29C9EA610095573E /* SOSCellView.swift */; };
 		6C39EA2229C9EA620095573E /* SOSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C39EA2029C9EA610095573E /* SOSView.swift */; };
 		6C3BB1F32A151D1F008FEB93 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3BB1F22A151D1F008FEB93 /* SearchBar.swift */; };
+		6C3BB1F52A1646C5008FEB93 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3BB1F42A1646C5008FEB93 /* PasswordResetView.swift */; };
 		6C3DD6E42A126DAF00456646 /* GuessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3DD6E32A126DAF00456646 /* GuessView.swift */; };
 		6C3DD6E62A12742D00456646 /* BoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3DD6E52A12742D00456646 /* BoxView.swift */; };
 		6C4676CB2A031C1200777421 /* NewTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4676CA2A031C1200777421 /* NewTimerView.swift */; };
@@ -105,6 +106,7 @@
 		6C58B24E29F6B492000FE8DD /* MandalaCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B24D29F6B492000FE8DD /* MandalaCollectionView.swift */; };
 		6C58B25029F6B673000FE8DD /* DrawHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B24F29F6B673000FE8DD /* DrawHighlightView.swift */; };
 		6C58B25229F7293A000FE8DD /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B25129F7293A000FE8DD /* NavigationUtil.swift */; };
+		6C60EFA12A16548F00A01862 /* ShakeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C60EFA02A16548F00A01862 /* ShakeGesture.swift */; };
 		6C80C01829CCF90B003DD5B9 /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C00829CCF8FA003DD5B9 /* Nunito-SemiBoldItalic.ttf */; };
 		6C80C01929CCF90B003DD5B9 /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C00929CCF8FB003DD5B9 /* Nunito-BlackItalic.ttf */; };
 		6C80C01A29CCF90B003DD5B9 /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C00A29CCF8FD003DD5B9 /* Nunito-MediumItalic.ttf */; };
@@ -226,6 +228,7 @@
 		6C39EA1F29C9EA610095573E /* SOSCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSCellView.swift; sourceTree = "<group>"; };
 		6C39EA2029C9EA610095573E /* SOSView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOSView.swift; sourceTree = "<group>"; };
 		6C3BB1F22A151D1F008FEB93 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		6C3BB1F42A1646C5008FEB93 /* PasswordResetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		6C3DD6E32A126DAF00456646 /* GuessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessView.swift; sourceTree = "<group>"; };
 		6C3DD6E52A12742D00456646 /* BoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxView.swift; sourceTree = "<group>"; };
 		6C4676CA2A031C1200777421 /* NewTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimerView.swift; sourceTree = "<group>"; };
@@ -263,6 +266,7 @@
 		6C58B24D29F6B492000FE8DD /* MandalaCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandalaCollectionView.swift; sourceTree = "<group>"; };
 		6C58B24F29F6B673000FE8DD /* DrawHighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHighlightView.swift; sourceTree = "<group>"; };
 		6C58B25129F7293A000FE8DD /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
+		6C60EFA02A16548F00A01862 /* ShakeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGesture.swift; sourceTree = "<group>"; };
 		6C80C00829CCF8FA003DD5B9 /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		6C80C00929CCF8FB003DD5B9 /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
 		6C80C00A29CCF8FD003DD5B9 /* Nunito-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -545,6 +549,7 @@
 				6CAA076429E9FB3D00541F87 /* AvatarPreviewView.swift */,
 				6C5523F229F8013B00F802D9 /* ProfileView.swift */,
 				6C5523F429F8094C00F802D9 /* PasswordUpdateView.swift */,
+				6C3BB1F42A1646C5008FEB93 /* PasswordResetView.swift */,
 				6C5523F629F80E8800F802D9 /* ShowHideSecureField.swift */,
 				6C5523F829F8126000F802D9 /* ProfileCellView.swift */,
 				6C47339029FC5C7D00DC72D0 /* PersonalDataView.swift */,
@@ -674,6 +679,7 @@
 				6C370AAA29D23B95001781B3 /* Constant.swift */,
 				6C58B25129F7293A000FE8DD /* NavigationUtil.swift */,
 				6C3BB1F22A151D1F008FEB93 /* SearchBar.swift */,
+				6C60EFA02A16548F00A01862 /* ShakeGesture.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1008,8 +1014,10 @@
 				6C55242829F86D9200F802D9 /* UserView.swift in Sources */,
 				6C0A4BF029E9B0CD003007C7 /* AvatarView.swift in Sources */,
 				6C55242E29F86DD800F802D9 /* Consent.swift in Sources */,
+				6C3BB1F52A1646C5008FEB93 /* PasswordResetView.swift in Sources */,
 				6CB5180D29DF5800007AADB4 /* GamesWebView.swift in Sources */,
 				6C8C5F0329F2CECF00D4DF77 /* DrawHomeView.swift in Sources */,
+				6C60EFA12A16548F00A01862 /* ShakeGesture.swift in Sources */,
 				6C370AB129D396B2001781B3 /* DistractionCellView.swift in Sources */,
 				894A884529B7B27600CB347B /* NavigationView.swift in Sources */,
 				6C5523F529F8094C00F802D9 /* PasswordUpdateView.swift in Sources */,

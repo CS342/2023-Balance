@@ -106,24 +106,8 @@ public struct HeaderHome: View {
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
             Image(systemName: "house.fill")
                 .foregroundColor(Color.purple.opacity(0.8))
+                .accessibilityLabel("house.fill")
                 .padding(.trailing, 65.0)
-            VStack {
-                Button(action: {
-                    showingHomeSheet.toggle()
-                    print("edit")
-                }) {
-                    Image(systemName: "pencil.circle.fill")
-                        .foregroundColor(Color.white)
-                }
-                .buttonStyle(PlainButtonStyle())
-                // .sheet(isPresented: $showingHomeSheet) {
-                // LocationView()
-                // }
-            }
-            .frame(width: 20, height: 20)
-            .shadow(color: .gray, radius: 2, x: 0, y: 1)
-            .padding(.leading, 90)
-            .padding(.top, 20.0)
         }
     }
     

@@ -15,6 +15,8 @@ struct ProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
+    @SceneStorage(StorageKeys.onboardingFlowStep)
+    private var onboardingSteps: [OnboardingFlow.Step] = []
     @State private var showingAvatarSheet = false
     @EnvironmentObject var account: Account
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
@@ -48,6 +50,8 @@ struct ProfileView: View {
             .onReceive(account.objectWillChange) {
                 if account.signedIn {
                     completedOnboardingFlow = true
+                } else {
+                    completedOnboardingFlow = false
                 }
             }
             .onChange(of: authModel.profile) { profile in
@@ -78,7 +82,7 @@ struct ProfileView: View {
         }) {
             profileView
         }.sheet(isPresented: $showingAvatarSheet) {
-            AvatarSelectionView(firstLoad: false).environmentObject(authModel)
+            AvatarSelectionView(onboardingSteps: $onboardingSteps, firstLoad: false).environmentObject(authModel)
         }
     }
     

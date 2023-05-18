@@ -103,14 +103,14 @@ struct LoginView: View {
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Thin", size: 17))
                 .foregroundColor(darkGrayColor)
-            Spacer().frame(height: 30)
+            Spacer()
             fieldsView
             Spacer()
             Group {
                 loginButton
                 Spacer().frame(height: 20)
                 signupView
-                Spacer().frame(height: 20)
+                Spacer().frame(height: 50)
             }
         }
     }
@@ -158,20 +158,8 @@ struct LoginView: View {
     }
     
     var passwordReset: some View {
-        Button {
-            loading = true
-            authModel.passwordReset(
-                email: emailAddress,
-                onSuccess: {
-                    alertMessage = "We sent you and email to reset the password."
-                    self.showingAlert = false
-                    loading = false
-                }, onError: { errorMessage in
-                    alertMessage = errorMessage
-                    self.showingAlert = false
-                    loading = false
-                }
-            )
+        NavigationLink {
+            PasswordResetView()
         } label: {
             Text("Forgot password")
                 .font(.custom("Nunito-Bold", size: 17))

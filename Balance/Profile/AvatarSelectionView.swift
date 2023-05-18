@@ -21,12 +21,13 @@ struct AvatarSelectionView: View {
     @State private var showingAvatarPreviewSheet = false
     @ObservedObject var avatarManager = AvatarManager()
     @State private var avatarSelection: Avatar.ID?
-    @State private var avatarSelected: Avatar?
+    @State private var avatarSelected = Avatar(name: "")
     @ObservedObject var accesoryManager = AccesoryManager()
     @State private var accesorySelection: Accesory.ID?
-    @State private var accesorySelected: Accesory?
+    @State private var accesorySelected = Accesory(name: "")
+    @Binding private var onboardingSteps: [OnboardingFlow.Step]
     var firstLoad: Bool
-
+    
     private var gridItemLayout = [GridItem(.fixed(150)), GridItem(.fixed(150))]
     
     var body: some View {
@@ -37,12 +38,19 @@ struct AvatarSelectionView: View {
                     ScrollView {
                         Spacer().frame(height: 50)
                         avatarListView
-//                        if !firstLoad {
-//                            Spacer().frame(height: 50)
-//                            accesoryListView
-//                        }
+                        // if !firstLoad {
+                        // Spacer().frame(height: 50)
+                        // accesoryListView
+                        // }
                     }
                     selectButton.background(.clear)
+                }.sheet(isPresented: $showingAvatarPreviewSheet) {
+                    AvatarPreviewView(
+                        onboardingSteps: $onboardingSteps,
+                        avatarSelection: $avatarSelected,
+                        accesorySelection: $accesorySelected,
+                        firstLoad: firstLoad
+                    )
                 }
             }
         }
@@ -94,29 +102,44 @@ struct AvatarSelectionView: View {
     }
     
     var selectButton: some View {
-        Button(action: {
-            showingAvatarPreviewSheet.toggle()
-        }) {
-            Text("Select")
-                .font(.custom("Montserrat-SemiBold", size: 17))
-                .padding(.horizontal, 10.0)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .frame(height: 44.0)
-        }.sheet(isPresented: $showingAvatarPreviewSheet) {
-            AvatarPreviewView(
-                avatarSelection: $avatarSelected,
-                accesorySelection: $accesorySelected,
-                firstLoad: firstLoad
-            )
+        Group {
+            if firstLoad {
+                NavigationLink {
+                    AvatarPreviewView(
+                        onboardingSteps: $onboardingSteps,
+                        avatarSelection: $avatarSelected,
+                        accesorySelection: $accesorySelected,
+                        firstLoad: firstLoad
+                    )
+                } label: {
+                    Text("Select")
+                        .font(.custom("Montserrat-SemiBold", size: 17))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 44.0)
+                        .background(primaryColor)
+                        .cornerRadius(10)
+                        .padding(.horizontal, 20.0)
+                }
+            } else {
+                Button(action: {
+                    showingAvatarPreviewSheet.toggle()
+                }) {
+                    Text("Select")
+                        .font(.custom("Montserrat-SemiBold", size: 17))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 44.0)
+                        .background(primaryColor)
+                        .cornerRadius(10)
+                        .padding(.horizontal, 20.0)
+                }
+            }
         }
-        .buttonBorderShape(.roundedRectangle(radius: 10))
-        .background(primaryColor)
-        .cornerRadius(10)
-        .padding(.horizontal, 20.0)
     }
     
-    init(firstLoad: Bool) {
+    init(onboardingSteps: Binding<[OnboardingFlow.Step]>, firstLoad: Bool) {
+        self._onboardingSteps = onboardingSteps
         self.firstLoad = firstLoad
     }
 }
