@@ -13,19 +13,148 @@ struct Box: Identifiable {
     var correct: Bool
 }
 
+struct Question: Identifiable {
+    var id = UUID()
+    var image: String
+    var options: [Box]
+}
+
 struct GuessView: View {
     @State var selected = 10
+    @State var questionIndex = 0
+    @State var stopUserInteraction = false
+    @State var questions: [Question] = [
+        Question(image: "happyEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Happy", correct: true),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "sadEmotion", options: [
+            Box(id: 0, title: "Sad", correct: true),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "angryEmotion", options: [
+            Box(id: 0, title: "Angry", correct: true),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "excitedEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Excited", correct: true),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "afraidEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Afraid", correct: true),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "shyEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Shy", correct: true),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "guiltyEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Guilty", correct: true),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "tiredEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: true)
+        ].shuffled()),
+        Question(image: "jealousEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Jealous", correct: true),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "lovedEmotion", options: [
+            Box(id: 0, title: "Sad", correct: false),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Loved", correct: true),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "hopefulEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Hopeful", correct: true),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "boredEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Excited", correct: false),
+            Box(id: 5, title: "Bored", correct: true)
+        ].shuffled()),
+        Question(image: "proudEmotion", options: [
+            Box(id: 0, title: "Proud", correct: true),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Afraid", correct: true),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "sorryEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Sorry", correct: true),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "embarrassedEmotion", options: [
+            Box(id: 0, title: "Embarrassed", correct: true),
+            Box(id: 1, title: "Guilty", correct: false),
+            Box(id: 2, title: "Happy", correct: false),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: false)
+        ].shuffled()),
+        Question(image: "surprisedEmotion", options: [
+            Box(id: 0, title: "Angry", correct: false),
+            Box(id: 1, title: "Nervous", correct: false),
+            Box(id: 2, title: "Surprised", correct: true),
+            Box(id: 3, title: "Calm", correct: false),
+            Box(id: 4, title: "Scared", correct: false),
+            Box(id: 5, title: "Tired", correct: false)
+        ])
+    ].shuffled()
     var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    
-    let boxes: [Box] = [
-        Box(id: 0, title: "Angry", correct: false),
-        Box(id: 1, title: "Nervous", correct: false),
-        Box(id: 2, title: "Happy", correct: false),
-        Box(id: 3, title: "Calm", correct: false),
-        Box(id: 4, title: "Scared", correct: true),
-        Box(id: 5, title: "Tired", correct: false)
-    ]
-    
+
     var body: some View {
         ActivityLogContainer {
             ZStack {
@@ -43,6 +172,7 @@ struct GuessView: View {
                     optionsButtons
                 }
             }
+            .disabled(stopUserInteraction)
         }
     }
     
@@ -55,10 +185,11 @@ struct GuessView: View {
                 .padding()
                 .shadow(color: Color.gray, radius: 5)
                 .zIndex(4)
-            Text("1/20")
+            Text(String(questionIndex + 1) + "/" + String(questions.count))
                 .foregroundColor(Color.white)
                 .font(.custom("Nunito-Medium", size: 16))
                 .zIndex(5)
+                .animation(.easeInOut(duration: 0.5), value: UUID())
         }.zIndex(3)
     }
     
@@ -84,20 +215,27 @@ struct GuessView: View {
                 .cornerRadius(100, corners: .bottomLeft)
                 .padding(40)
                 .zIndex(0)
-            Image("emotion1")
+            Image(questions[questionIndex].image)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 250, height: 250, alignment: .center)
-                .accessibilityLabel("emotion1")
+                .frame(width: 220, height: 220, alignment: .center)
+                .accessibilityLabel(questions[questionIndex].image)
                 .frame(alignment: .center)
                 .zIndex(1)
+                .animation(.easeInOut(duration: 0.5), value: UUID())
         }
     }
     
     var optionsButtons: some View {
         LazyVGrid(columns: gridItemLayout, spacing: 20) {
-            ForEach(boxes, id: \.id) { box in
-                BoxView(box: box, selectedBtn: self.$selected)  // 2
+            ForEach(questions[questionIndex].options, id: \.id) { box in
+                BoxView(
+                    selectedBtn: self.$selected,
+                    questionIndex: self.$questionIndex,
+                    questions: $questions,
+                    stopUserInteraction: $stopUserInteraction,
+                    box: box
+                ).animation(.easeInOut(duration: 0.5), value: UUID())
             }
         }.padding()
     }

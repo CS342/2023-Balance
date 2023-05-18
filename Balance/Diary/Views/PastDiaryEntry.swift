@@ -32,7 +32,7 @@ public struct PastDiaryEntry: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(20)
-            .background()
+            .background(.white)
             .cornerRadius(15)
             .shadow(color: Color.black.opacity(0.1), radius: 5)
         }

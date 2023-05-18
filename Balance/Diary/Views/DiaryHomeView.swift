@@ -104,11 +104,13 @@ struct DiaryHomeView: View {
                     }
                     .buttonStyle(ActivityLogButtonStyle(activityDescription: "Selected past diary note"))
                     .listRowSeparator(.hidden)
+                    .background(backgroundColor)
                 }
                 .onDelete(perform: delete)
             }
             .listStyle(.plain)
         }
+        .background(backgroundColor)
     }
     
     var searchResults: [Note] {
