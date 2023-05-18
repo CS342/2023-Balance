@@ -37,10 +37,19 @@ struct HeaderMenu: View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            Image(systemName: "arrow.left")
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.clear)
+            HStack {
+                Image(systemName: "chevron.backward")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.white)
+                    .padding(.leading, 20)
+                    .background(Color.clear)
+                    .frame(width: 33, height: 33)
+                Text("Back")
+                    .font(.custom("Nunito", size: 18))
+                    .foregroundColor(Color.white)
+                    .offset(x: -5)
+            }
         }
     }
     

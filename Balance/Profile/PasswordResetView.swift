@@ -20,9 +20,8 @@ struct PasswordResetView: View {
             ZStack {
                 backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack {
-                    HeaderMenu(title: "Forgot Password")
-                    Spacer().frame(height: 40)
-                    titleView
+                    headerView
+                    Spacer().frame(height: 20)
                     emailField
                     Spacer()
                     saveButton
@@ -45,6 +44,29 @@ struct PasswordResetView: View {
                     authModel.authError = ""
                 }
             }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    
+    var headerView: some View {
+        VStack(alignment: .center) {
+            Spacer().frame(height: 50)
+            Image("Balloon")
+                .resizable()
+                .scaledToFit()
+                .clipped()
+                .frame(width: 300.0)
+                .accessibility(hidden: true)
+            Text("Forgot Password")
+                .multilineTextAlignment(.center)
+                .font(.custom("Nunito-Bold", size: 30))
+                .foregroundColor(darkBlueColor)
+            Spacer().frame(height: 20)
+            Text("Please enter your email:")
+                .multilineTextAlignment(.leading)
+                .font(.custom("Montserrat-Thin", size: 17))
+                .foregroundColor(darkGrayColor)
         }
     }
     
