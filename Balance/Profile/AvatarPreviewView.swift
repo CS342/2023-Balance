@@ -49,6 +49,13 @@ struct AvatarPreviewView: View {
             .onChange(of: authModel.profile ?? ProfileUser()) { profile in
                 updateData(profile: profile)
             }
+            .onChange(of: authModel.authError) { value in
+                if !value.isEmpty {
+                    loading = false
+//                    self.alertMessage = value
+//                    self.showingAlert = true
+                }
+            }
         }
     }
     
@@ -144,12 +151,11 @@ struct AvatarPreviewView: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 44.0)
-                    .font(.custom("Nunito-Bold", size: 16))
             }
         )
-        .buttonBorderShape(.roundedRectangle(radius: 10))
+        .overlay( RoundedRectangle(cornerRadius: 10)
+            .stroke(primaryColor, lineWidth: 2))
         .background(primaryColor)
-        .cornerRadius(10)
         .padding(.horizontal, 20.0)
     }
     
@@ -163,7 +169,6 @@ struct AvatarPreviewView: View {
                 .foregroundColor(primaryColor)
                 .frame(maxWidth: .infinity)
                 .frame(height: 44.0)
-                .font(.custom("Nunito-Bold", size: 16))
         }
         .overlay( RoundedRectangle(cornerRadius: 10)
             .stroke(primaryColor, lineWidth: 2))
@@ -180,7 +185,7 @@ struct AvatarPreviewView: View {
     
     func updateData(profile: ProfileUser) {
         if firstLoad {
-            dismiss()
+//            dismiss()
             onboardingSteps.remove(at: 1)
             onboardingSteps.remove(at: 0)
         } else {

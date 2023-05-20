@@ -21,25 +21,26 @@ public struct HeaderHome: View {
     @State private var displayName = ""
     @State private var avatar = ""
     @State private var userId = ""
-    
+
     public var body: some View {
-        VStack {
+        VStack(spacing: 0) {
+            if UIDevice.current.hasNotch {
+                Spacer().frame(height: notch)
+            }
             headerView
+            Spacer()
             buttonsView
-                .padding(.top, -20.0)
+            Spacer()
             quotasView
+            Spacer()
         }
-        .frame(maxWidth: .infinity, alignment: .center)
-        .padding(.top, 40)
-        .frame(height: 250.0)
+        .frame(maxWidth: .infinity)
+        .ignoresSafeArea(edges: .all)
+        .frame(height: navigationBarHeightHome + (UIDevice.current.hasNotch ? notch : 0.0))
         .background(primaryColor)
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
-        .ignoresSafeArea(edges: .all)
-        .navigationTitle("")
-        .navigationBarTitle("", displayMode: .inline)
         .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
-        .ignoresSafeArea()
+        .navigationTitle("")
         .onAppear {
             authModel.listenAuthentificationState()
             loadUser()
@@ -126,15 +127,15 @@ public struct HeaderHome: View {
             profileOption
             profileNameView
             Spacer()
-            sosButtonHome
-                .frame(width: 40, height: 40)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.white, lineWidth: 4)
-                )
-                .shadow(color: .gray, radius: 2, x: 0, y: 1)
-                .padding(.trailing, 10)
-                .padding(.bottom, 50)
+//            sosButtonHome
+//                .frame(width: 40, height: 40)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 20)
+//                        .stroke(Color.white, lineWidth: 4)
+//                )
+//                .shadow(color: .gray, radius: 2, x: 0, y: 1)
+//                .padding(.trailing, 10)
+//                .padding(.bottom, 50)
         }
     }
     

@@ -12,23 +12,28 @@ struct HeaderMenu: View {
     @State private var showingSOSSheet = false
     @Environment(\.presentationMode) var presentationMode
     var title: String
-    
+    var notch = 50.0
     var body: some View {
         VStack {
+            if UIDevice.current.hasNotch {
+                Spacer().frame(height: notch)
+            }
             Spacer()
             HStack {
                 backButton
                 Spacer()
                 titleHeader
                 Spacer()
-                sosButton
+                Text("").frame(width: 90, height: 40)
             }
+            // sosButton
+            Spacer()
         }
-        .frame(maxWidth: .infinity, alignment: .top)
+        .frame(maxWidth: .infinity)
         .background(primaryColor)
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
         .ignoresSafeArea(edges: .all)
-        .frame(height: 70.0)
+        .frame(height: navigationBarHeight)
         .navigationBarHidden(true)
         .navigationTitle("")
     }

@@ -28,22 +28,24 @@ struct HomeView: View {
             ZStack {
                 backgroundColor.edgesIgnoringSafeArea(.all)
                 NavigationStack {
-                    VStack {
+                    VStack(spacing: 0) {
                         HeaderHome()
                         ZStack(alignment: .bottomLeading) {
                             ScrollView(.vertical) {
-                                VStack(spacing: 20) {
+                                VStack {
                                     distractOption
                                     chillOption
                                     fealingLearningOption
                                     diaryOption
                                 }
-                                .padding(10)
+                                .padding(20)
                                 .ignoresSafeArea(.all)
-                            }.zIndex(1)
+                            }
+                            .zIndex(1)
                             Spacer()
                             cloudImage.zIndex(-1)
                         }
+                        Spacer()
                     }
                     .navigationTitle("")
                     .navigationBarTitle("", displayMode: .inline)
