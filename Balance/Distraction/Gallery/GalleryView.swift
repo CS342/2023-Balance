@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct Photo: Identifiable, Hashable {
+struct Photo: Codable, Equatable, Hashable, Identifiable {
     var id = UUID()
     var name: String
+    var review = ""
 }
 
 struct GalleryView: View {

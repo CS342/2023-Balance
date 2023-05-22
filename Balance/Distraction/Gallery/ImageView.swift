@@ -40,40 +40,71 @@ struct ImageView: View {
     
     var actionsButtons: some View {
         HStack(spacing: 50) {
-            Button(action: {
-                print("DISLIKE tab = \(selected.name)")
-                if currentIndex < self.imagesArray.count - 1 {
-                    self.currentIndex += 1
-                    self.selected = self.imagesArray[currentIndex]
-                }
-            }) {
-                Image("crossImage")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.white)
-                    .padding(10)
-                    .background(Color.white)
-                    .clipShape(Circle())
-                    .shadow(color: Color.black.opacity(0.50), radius: 3, x: 0, y: 2)
-                    .accessibilityLabel("crossImage")
+            dislikeAction
+            likeAction
+        }
+    }
+    
+    var dislikeAction: some View {
+        Button(action: {
+            print("DISLIKE tab = \(selected.name)")
+            selected.review = "DISLIKE"
+            ImageReviewRepository.shared.createPhoto(photo: selected) { photo, error in
+                if let error = error {
+                    print("Error while fetching photo: \(error)")
+                    return
+                } else {
+                    print("Saved photo: \(String(describing: photo))")
+                    if currentIndex < self.imagesArray.count - 1 {
+                        self.currentIndex += 1
+                        self.selected = self.imagesArray[currentIndex]
+                    } else {
+                        self.currentIndex = 0
+                        self.selected = self.imagesArray[currentIndex]
+                    }                }
             }
-            Button(action: {
-                print("LIKE tab = \(selected.name)")
-                if currentIndex < self.imagesArray.count - 1 {
-                    self.currentIndex += 1
-                    self.selected = self.imagesArray[currentIndex]
+        }) {
+            Image("crossImage")
+                .resizable()
+                .frame(width: 30, height: 30)
+                .foregroundColor(.white)
+                .padding(10)
+                .background(Color.white)
+                .clipShape(Circle())
+                .shadow(color: Color.black.opacity(0.50), radius: 3, x: 0, y: 2)
+                .accessibilityLabel("crossImage")
+        }
+    }
+    
+    var likeAction: some View {
+        Button(action: {
+            print("LIKE tab = \(selected.name)")
+            selected.review = "LIKE"
+            ImageReviewRepository.shared.createPhoto(photo: selected) { photo, error in
+                if let error = error {
+                    print("Error while fetching photo: \(error)")
+                    return
+                } else {
+                    print("Saved photo: \(String(describing: photo))")
+                    if currentIndex < self.imagesArray.count - 1 {
+                        self.currentIndex += 1
+                        self.selected = self.imagesArray[currentIndex]
+                    } else {
+                        self.currentIndex = 0
+                        self.selected = self.imagesArray[currentIndex]
+                    }
                 }
-            }) {
-                Image("heartImage")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.white)
-                    .padding(10)
-                    .background(Color.white)
-                    .clipShape(Circle())
-                    .shadow(color: Color.black.opacity(0.50), radius: 3, x: 0, y: 2)
-                    .accessibilityLabel("heartImage")
             }
+        }) {
+            Image("heartImage")
+                .resizable()
+                .frame(width: 30, height: 30)
+                .foregroundColor(.white)
+                .padding(10)
+                .background(Color.white)
+                .clipShape(Circle())
+                .shadow(color: Color.black.opacity(0.50), radius: 3, x: 0, y: 2)
+                .accessibilityLabel("heartImage")
         }
     }
 }
