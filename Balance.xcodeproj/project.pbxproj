@@ -124,6 +124,7 @@
 		6C80C02629CCF90B003DD5B9 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C01629CCF90B003DD5B9 /* Nunito-SemiBold.ttf */; };
 		6C80C02729CCF90B003DD5B9 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C01729CCF90B003DD5B9 /* Nunito-Bold.ttf */; };
 		6C85C6DE2A0554610053F759 /* BodySensationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85C6DD2A0554610053F759 /* BodySensationView.swift */; };
+		6C893D822A1BB41600CC4BCD /* ImageReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C893D812A1BB41600CC4BCD /* ImageReviewRepository.swift */; };
 		6C8C5EFE29F1D04F00D4DF77 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8C5EFD29F1D04F00D4DF77 /* DrawView.swift */; };
 		6C8C5F0329F2CECF00D4DF77 /* DrawHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8C5F0229F2CECF00D4DF77 /* DrawHomeView.swift */; };
 		6C8C5F0529F2CF0B00D4DF77 /* DrawStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8C5F0429F2CF0B00D4DF77 /* DrawStore.swift */; };
@@ -285,6 +286,7 @@
 		6C80C01629CCF90B003DD5B9 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		6C80C01729CCF90B003DD5B9 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		6C85C6DD2A0554610053F759 /* BodySensationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodySensationView.swift; sourceTree = "<group>"; };
+		6C893D812A1BB41600CC4BCD /* ImageReviewRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageReviewRepository.swift; path = Balance/Distraction/Gallery/ImageReviewRepository.swift; sourceTree = SOURCE_ROOT; };
 		6C8C5EFD29F1D04F00D4DF77 /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		6C8C5F0229F2CECF00D4DF77 /* DrawHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHomeView.swift; sourceTree = "<group>"; };
 		6C8C5F0429F2CF0B00D4DF77 /* DrawStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawStore.swift; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 				6CB5181929E45678007AADB4 /* ImageCollectionView.swift */,
 				6CAA075129E83C0C00541F87 /* VideoCollectionView.swift */,
 				6CB5181D29E6F395007AADB4 /* ImageView.swift */,
+				6C893D812A1BB41600CC4BCD /* ImageReviewRepository.swift */,
 				6CAA074D29E7653200541F87 /* GalleryPageView.swift */,
 				6CFDD5912A0E7335009D7E56 /* CardImageView.swift */,
 			);
@@ -1047,6 +1050,7 @@
 				6CAA076529E9FB3D00541F87 /* AvatarPreviewView.swift in Sources */,
 				6C0A4BF529E9BCC1003007C7 /* Accesory.swift in Sources */,
 				6C370AAD29D38F7F001781B3 /* ChillView.swift in Sources */,
+				6C893D822A1BB41600CC4BCD /* ImageReviewRepository.swift in Sources */,
 				6CBE75D02A0AD70B00A1747D /* FacesScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
