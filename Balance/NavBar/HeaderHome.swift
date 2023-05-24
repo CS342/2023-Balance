@@ -11,13 +11,12 @@ import class FHIR.FHIR
 import FirebaseAccount
 
 public struct HeaderHome: View {
-    @State private var showingSOSSheet = false
+    @AppStorage("fromSOS") var fromSOS = false
+    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    @EnvironmentObject var authModel: AuthViewModel
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
     @State private var showingAvatarSheet = false
-    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
-    @EnvironmentObject var authModel: AuthViewModel
-    
     @State private var displayName = ""
     @State private var avatar = ""
     @State private var userId = ""
@@ -127,15 +126,7 @@ public struct HeaderHome: View {
             profileOption
             profileNameView
             Spacer()
-//            sosButtonHome
-//                .frame(width: 40, height: 40)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 20)
-//                        .stroke(Color.white, lineWidth: 4)
-//                )
-//                .shadow(color: .gray, radius: 2, x: 0, y: 1)
-//                .padding(.trailing, 10)
-//                .padding(.bottom, 50)
+            sosAction
         }
     }
     
@@ -153,24 +144,45 @@ public struct HeaderHome: View {
         }
     }
     
-    var sosButtonHome: some View {
-        VStack {
-            Button(action: {
-                showingSOSSheet.toggle()
-                print("SOS!")
-            }) {
-                Text("SOS")
-                    .font(.custom("Nunito-Bold", size: 14))
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(Color.white)
-                    .background(Color.pink)
-                    .clipShape(Circle())
-            }
-            .buttonStyle(PlainButtonStyle())
-            .sheet(isPresented: $showingSOSSheet) {
-                SOSView()
-            }
-        }
+    var sosAction: some View {
+        NavigationLink(
+            destination: ActivityLogBaseView(
+                viewName: "SOS ACTION",
+                isDirectChildToContainer: true,
+                content: {
+                    switch DistractMeOption.randomSection() {
+                    case .lookPictures:
+                        GalleryView()
+                    case .listenMusic:
+                        MusicListView()
+                    case .lookVideos:
+                        VideoGalleryView()
+                    case .games:
+                        GamesView()
+                    case .drawing:
+                        DrawHomeView()
+                    case .coloring:
+                        ColoringHomeView()
+                    }
+                }
+            )
+        ) {
+            Text("SOS")
+                .font(.custom("Nunito-Bold", size: 14))
+                .frame(width: 40, height: 40)
+                .foregroundColor(Color.white)
+                .background(Color.pink)
+                .clipShape(Circle())
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.white, lineWidth: 4)
+                        .allowsHitTesting(false)
+                )
+                .shadow(color: .gray, radius: 2, x: 0, y: 1)
+                .padding()
+        }.simultaneousGesture(TapGesture().onEnded {
+            self.fromSOS = true
+        })
     }
     
     var avatarView: some View {

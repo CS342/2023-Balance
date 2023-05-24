@@ -15,14 +15,29 @@
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>LSApplicationQueriesSchemas</key>
-	<array>
-		<string>spotify</string>
-	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>spotify</string>
-	</array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>Balance</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>spotify</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>spotify</string>
+            </array>
+        </dict>
+    </array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>spotify</string>
+    </array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

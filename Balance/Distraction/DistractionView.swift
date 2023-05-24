@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// swiftlint:disable line_length
 struct DistractionView: View {
     @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
     @EnvironmentObject var store: DrawStore
@@ -16,7 +15,7 @@ struct DistractionView: View {
         ActivityLogContainer {
             ZStack {
                 backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
+                VStack(spacing: 0) {
                     HeaderMenu(title: "Distraction")
                     ScrollView(.vertical) {
                         VStack(spacing: 20) {
@@ -27,32 +26,13 @@ struct DistractionView: View {
                             drawingOption
                             coloringOption
                         }
-                        .padding(10)
+                        .padding(20)
                         .ignoresSafeArea(.all)
                     }
                 }
             }
         }
     }
-    
-//    var coloringOption: some View {
-//        NavigationLink(
-//            destination: ActivityLogBaseView(
-//                viewName: "Coloring Something Feature",
-//                isDirectChildToContainer: true,
-//                content: {
-//                    DrawView(
-//                        store: store,
-//                        currentDraw: $currentDraw
-//                    )
-//                }
-//            )
-//        ) {
-//            DistractionCellView(image: "writesIcon", text: "Coloring", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
-//        }.simultaneousGesture(TapGesture().onEnded {
-//            currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
-//        })
-//    }
     
     var coloringOption: some View {
         NavigationLink(
@@ -64,7 +44,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            DistractionCellView(image: "drawingIcon", text: "Coloring something", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+            DistractionCellView(image: "drawingIcon", text: "Coloring something", pointVal: "+5")
         }
     }
     
@@ -78,21 +58,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            DistractionCellView(image: "writesIcon", text: "Drawing something", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
-        }
-    }
-    
-    var writeOption: some View {
-        NavigationLink(
-            destination: ActivityLogBaseView(
-                viewName: "Write Something Feature",
-                isDirectChildToContainer: true,
-                content: {
-                    // define action
-                }
-            )
-        ) {
-            DistractionCellView(image: "writesIcon", text: "Write something", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+            DistractionCellView(image: "writesIcon", text: "Drawing something", pointVal: "+5")
         }
     }
     
@@ -106,7 +72,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            DistractionCellView(image: "sudokuIcon", text: "Games", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+            DistractionCellView(image: "sudokuIcon", text: "Games", pointVal: "+5")
         }
     }
     
@@ -120,7 +86,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            DistractionCellView(image: "videosIcon", text: "Look videos", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+            DistractionCellView(image: "videosIcon", text: "Look videos", pointVal: "+5")
         }
     }
     
@@ -130,11 +96,11 @@ struct DistractionView: View {
                 viewName: "Listen music Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    Music()
+                    MusicListView()
                 }
             )
         ) {
-            DistractionCellView(image: "musicIcon", text: "Listen to music", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+            DistractionCellView(image: "musicIcon", text: "Listen to music", pointVal: "+5")
         }
     }
     
@@ -148,7 +114,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            DistractionCellView(image: "picturesIcon", text: "Look at pictures", textDescription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", pointVal: "+5")
+            DistractionCellView(image: "picturesIcon", text: "Look at pictures", pointVal: "+5")
         }
     }
 }

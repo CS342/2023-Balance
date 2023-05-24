@@ -55,13 +55,14 @@ struct ImageView: View {
                     return
                 } else {
                     print("Saved photo: \(String(describing: photo))")
-                    if currentIndex < self.imagesArray.count - 1 {
-                        self.currentIndex += 1
-                        self.selected = self.imagesArray[currentIndex]
-                    } else {
-                        self.currentIndex = 0
-                        self.selected = self.imagesArray[currentIndex]
-                    }                }
+//                    if currentIndex < self.imagesArray.count - 1 {
+//                        self.currentIndex += 1
+//                        self.selected = self.imagesArray[currentIndex]
+//                    } else {
+//                        self.currentIndex = 0
+//                        self.selected = self.imagesArray[currentIndex]
+//                    }
+                }
             }
         }) {
             Image("crossImage")
@@ -86,13 +87,13 @@ struct ImageView: View {
                     return
                 } else {
                     print("Saved photo: \(String(describing: photo))")
-                    if currentIndex < self.imagesArray.count - 1 {
-                        self.currentIndex += 1
-                        self.selected = self.imagesArray[currentIndex]
-                    } else {
-                        self.currentIndex = 0
-                        self.selected = self.imagesArray[currentIndex]
-                    }
+//                    if currentIndex < self.imagesArray.count - 1 {
+//                        self.currentIndex += 1
+//                        self.selected = self.imagesArray[currentIndex]
+//                    } else {
+//                        self.currentIndex = 0
+//                        self.selected = self.imagesArray[currentIndex]
+//                    }
                 }
             }
         }) {

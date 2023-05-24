@@ -110,7 +110,18 @@ extension View {
 
 extension UIDevice {
     var hasNotch: Bool {
-        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-        return bottom > 0
+        if let bottom = UIApplication.shared.mainKeyWindow?.safeAreaInsets.bottom {
+            return bottom > 0
+        }
+        return false
+    }
+}
+
+extension UIApplication {
+    var mainKeyWindow: UIWindow? {
+        let aux = connectedScenes
+            .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+            .first { $0.isKeyWindow }
+        return aux
     }
 }

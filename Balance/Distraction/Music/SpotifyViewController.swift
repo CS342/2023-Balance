@@ -11,6 +11,7 @@ import UIKit
 
 class SpotifyViewController: UIViewController {
     static let shared = SpotifyViewController()
+    @Published var connectedSpotify = false
 
     var responseCode: String? {
         didSet {
@@ -48,7 +49,7 @@ class SpotifyViewController: UIViewController {
         // otherwise another app switch will be required
         
         // replace this placeholder URI with the desired URI
-        configuration.playURI = "spotify:album:3M7xLE04DvF9sM9gnTBPdY"
+        configuration.playURI = ""
         // Set these url's to your backend which contains the secret to exchange for an access token
         // You can use the provided ruby script spotify_token_swap.rb for testing purposes
         configuration.tokenSwapURL = URL(string: "http://localhost:1234/swap")
@@ -131,6 +132,10 @@ class SpotifyViewController: UIViewController {
         sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
     }
 
+    func playUri(uri: String) {
+        self.appRemote.authorizeAndPlayURI(uri)
+    }
+    
     // MARK: - Private Helpers
     private func presentAlertController(title: String, message: String, buttonTitle: String) {
         DispatchQueue.main.async {
@@ -195,7 +200,7 @@ extension SpotifyViewController {
     func updateViewBasedOnConnected() {
         if appRemote.isConnected == true {
             connectButton.isHidden = true
-            signOutButton.isHidden = false
+//            signOutButton.isHidden = false
             connectLabel.isHidden = true
             imageView.isHidden = false
             trackLabel.isHidden = false

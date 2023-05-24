@@ -32,7 +32,7 @@ struct HomeView: View {
                         HeaderHome()
                         ZStack(alignment: .bottomLeading) {
                             ScrollView(.vertical) {
-                                VStack {
+                                VStack(spacing: 20) {
                                     distractOption
                                     chillOption
                                     fealingLearningOption

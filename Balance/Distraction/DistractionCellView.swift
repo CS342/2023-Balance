@@ -10,7 +10,6 @@ import SwiftUI
 struct DistractionCellView: View {
     var image: String
     var text: String
-    var textDescription: String
     var pointVal: String
     
     var body: some View {
@@ -21,9 +20,10 @@ struct DistractionCellView: View {
                     HStack {
                         Spacer()
                         pointValueView
-                    }.offset(y: 5)
+                    }
+                    Spacer()
                     textView
-                    descriptionView
+                    Spacer()
                 }
             }
             .frame(maxWidth: 311, maxHeight: 120)
@@ -42,18 +42,7 @@ struct DistractionCellView: View {
             .lineLimit(2)
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: 30)
-            .padding(.horizontal, 10.0)
-            .offset(y: -5)
-    }
-    
-    var descriptionView: some View {
-        Text(textDescription)
-            .font(.custom("Nunito", size: 14))
-            .lineLimit(2)
-            .multilineTextAlignment(.leading)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: 40)
+            .frame(height: 80)
             .padding(.horizontal, 10.0)
             .offset(y: -10)
     }
@@ -69,7 +58,7 @@ struct DistractionCellView: View {
                 .cornerRadius(5)
                 .offset(x: -10)
             Image("pointsStarIcon").accessibilityLabel("pointsStarIcon")
-        }
+        }.offset(y: 10)
     }
     
     var iconView: some View {
@@ -88,7 +77,7 @@ struct DistractionCellView: View {
 #if DEBUG
 struct DistractionCellView_Previews: PreviewProvider {
     static var previews: some View {
-        DistractionCellView(image: "BalanceLogo", text: "Listen to Music", textDescription: "Lorem Ipsum is simply dummy text of", pointVal: "+5")
+        DistractionCellView(image: "BalanceLogo", text: "Listen to Music", pointVal: "+5")
     }
 }
 #endif

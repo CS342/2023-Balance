@@ -9,14 +9,6 @@
 import SwiftUI
 
 struct SleepView: View {
-    // FOLLOWED A SPOTIFY YOUTUBE TUTORIAL
-    struct Song: Identifiable {
-        var id: String { title }
-        let title: String
-        let artist: String
-        let coverString: String
-        let spotifyURL: String
-    }
     @Environment(\.openURL) var openURL
     
     let songs = [
