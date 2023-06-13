@@ -16,16 +16,12 @@ class SpotifyViewController: UIViewController {
     private let myArray = [
         "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
         "spotify:track:7lEptt4wbM0yJTvSG5EBof",
-        "spotify:track:0EANQDy9R0iyVz27nGiDvQ",
         "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
         "spotify:track:7lEptt4wbM0yJTvSG5EBof",
-        "spotify:track:0EANQDy9R0iyVz27nGiDvQ",
         "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
         "spotify:track:7lEptt4wbM0yJTvSG5EBof",
-        "spotify:track:0EANQDy9R0iyVz27nGiDvQ",
         "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
         "spotify:track:7lEptt4wbM0yJTvSG5EBof",
-        "spotify:track:0EANQDy9R0iyVz27nGiDvQ"
     ]
     var currentUri = silentTrack
     
@@ -98,7 +94,7 @@ class SpotifyViewController: UIViewController {
     // MARK: App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        style()
+        layout()
         print("Spotify view start")
     }
 
@@ -163,10 +159,11 @@ class SpotifyViewController: UIViewController {
             })
         } else {
             activityLogEntry?.addAction(actionDescription: "Connecting Spotify")
-            sessionManager = nil
             configuration.playURI = currentUri
-            sessionManager = SPTSessionManager(configuration: configuration, delegate: self)
-            sessionManager?.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
+            guard let sessionManager = sessionManager else {
+                return
+            }
+            sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
         }
     }
     
@@ -183,7 +180,8 @@ class SpotifyViewController: UIViewController {
 
 // MARK: Style & Layout
 extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
-    func style() {
+    func layout() {
+        view.backgroundColor = UIColor(backgroundColor)
         installedApp()
         table()
         player()
@@ -285,30 +283,30 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func updateViewBasedOnConnected() {
-//        if isSpotifyInstalled() {
-//            stackInstallView.isHidden = false
-//            myTableView.isHidden = true
-//            safeArea.isHidden = true
-//            stackView.isHidden = true
-//           return
-//        }
+        if !isSpotifyInstalled() {
+            stackInstallView.isHidden = false
+            myTableView.isHidden = true
+            safeArea.isHidden = true
+            stackView.isHidden = true
+           return
+        }
     
         stackInstallView.isHidden = true
         
         if self.appRemote.isConnected == true {
             self.stackView.isHidden = false
             self.safeArea.isHidden = false
-            self.myTableView.frame = CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 330)
-//            self.imageView.isHidden = false
-//            self.trackLabel.isHidden = false
-//            self.playPauseButton.isHidden = false
+            self.myTableView.frame = CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 300)
+            self.imageView.isHidden = false
+            self.trackLabel.isHidden = false
+            self.playPauseButton.isHidden = false
         } else { // show login
             self.stackView.isHidden = true
             self.safeArea.isHidden = true
             self.myTableView.frame = CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 150)
-//            self.imageView.isHidden = true
-//            self.trackLabel.isHidden = true
-//            self.playPauseButton.isHidden = true
+            self.imageView.isHidden = true
+            self.trackLabel.isHidden = true
+            self.playPauseButton.isHidden = true
         }
     }
     
