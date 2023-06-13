@@ -96,7 +96,8 @@ struct DistractionView: View {
                 viewName: "Listen music Feature",
                 isDirectChildToContainer: true,
                 content: {
-                    MusicListView()
+//                    MusicListView()
+                    Music()
                 }
             )
         ) {

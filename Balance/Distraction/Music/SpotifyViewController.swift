@@ -7,12 +7,28 @@
 // SPDX-License-Identifier: MIT
 //
 
+import SwiftUI
 import UIKit
 
 class SpotifyViewController: UIViewController {
     static let shared = SpotifyViewController()
     @Published var connectedSpotify = false
-
+    private let myArray = [
+        "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
+        "spotify:track:7lEptt4wbM0yJTvSG5EBof",
+        "spotify:track:0EANQDy9R0iyVz27nGiDvQ",
+        "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
+        "spotify:track:7lEptt4wbM0yJTvSG5EBof",
+        "spotify:track:0EANQDy9R0iyVz27nGiDvQ",
+        "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
+        "spotify:track:7lEptt4wbM0yJTvSG5EBof",
+        "spotify:track:0EANQDy9R0iyVz27nGiDvQ",
+        "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
+        "spotify:track:7lEptt4wbM0yJTvSG5EBof",
+        "spotify:track:0EANQDy9R0iyVz27nGiDvQ"
+    ]
+    var currentUri = silentTrack
+    
     var responseCode: String? {
         didSet {
             fetchAccessToken { dictionary, error in
@@ -21,6 +37,7 @@ class SpotifyViewController: UIViewController {
                     return
                 }
                 let accessToken = dictionary?["access_token"] as? String
+                UserDefaults.standard.set(accessToken, forKey: "access_token")
                 DispatchQueue.main.async {
                     self.appRemote.connectionParameters.accessToken = accessToken
                     self.appRemote.connect()
@@ -49,7 +66,8 @@ class SpotifyViewController: UIViewController {
         // otherwise another app switch will be required
         
         // replace this placeholder URI with the desired URI
-        configuration.playURI = ""
+        configuration.playURI = currentUri
+        
         // Set these url's to your backend which contains the secret to exchange for an access token
         // You can use the provided ruby script spotify_token_swap.rb for testing purposes
         configuration.tokenSwapURL = URL(string: "http://localhost:1234/swap")
@@ -66,21 +84,32 @@ class SpotifyViewController: UIViewController {
 
     var activityLogEntry: ActivityLogEntry?
     
+    var titleSongsView: some View {
+        Text("These are some songs that will help you with your mood")
+            .font(.custom("Nunito-Bold", size: 25))
+            .foregroundColor(darkBlueColor)
+            .multilineTextAlignment(.center)
+            .lineLimit(3)
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .padding(.horizontal, 30.0)
+            .background(.clear)
+    }
     
     // MARK: - Subviews
     let stackView = UIStackView()
+    let safeArea = UIView()
     let connectLabel = UILabel()
     let connectButton = UIButton(type: .system)
     let imageView = UIImageView()
     let trackLabel = UILabel()
     let playPauseButton = UIButton(type: .system)
     let signOutButton = UIButton(type: .system)
+    var myTableView = UITableView()
 
     // MARK: App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
-        layout()
         print("Spotify view start")
     }
 
@@ -131,9 +160,25 @@ class SpotifyViewController: UIViewController {
         }
         sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
     }
-
-    func playUri(uri: String) {
-        self.appRemote.authorizeAndPlayURI(uri)
+        
+    @objc
+    func playTapped(uri: String) {
+        currentUri = uri
+        if appRemote.isConnected {
+            appRemote.playerAPI?.play(currentUri, asRadio: false, callback: { value, error in
+                if error == nil {
+                    print("Spotify playUri error")
+                } else {
+                    print("Spotify playUri" + value.debugDescription )
+                }
+            })
+        } else {
+            activityLogEntry?.addAction(actionDescription: "Connecting Spotify")
+            sessionManager = nil
+            configuration.playURI = currentUri
+            sessionManager = SPTSessionManager(configuration: configuration, delegate: self)
+            sessionManager?.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
+        }
     }
     
     // MARK: - Private Helpers
@@ -148,46 +193,95 @@ class SpotifyViewController: UIViewController {
 }
 
 // MARK: Style & Layout
-extension SpotifyViewController {
+extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
     func style() {
+        table()
+
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
+        stackView.axis = .horizontal
         stackView.spacing = 20
         stackView.alignment = .center
+        stackView.backgroundColor = UIColor(primaryColor)
 
-        connectLabel.translatesAutoresizingMaskIntoConstraints = false
-        connectLabel.text = "Connect your Spotify account"
-        connectLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-
-        connectButton.translatesAutoresizingMaskIntoConstraints = false
-        connectButton.configuration = .filled()
-        connectButton.setTitle("Continue with Spotify", for: [])
-        connectButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title3)
-        connectButton.addTarget(self, action: #selector(didTapConnect), for: .primaryActionTriggered)
-
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+//        let footer = UIView()
+//        footer.translatesAutoresizingMaskIntoConstraints = false
+//        footer.backgroundColor = UIColor.red
+//        view.addSubview(footer)
+//        NSLayoutConstraint.activate([
+//            footer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+//            footer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            footer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            footer.heightAnchor.constraint(equalToConstant: 100)
+//        ])
+//
+        safeArea.translatesAutoresizingMaskIntoConstraints = false
+        safeArea.backgroundColor = UIColor(primaryColor)
+        view.addSubview(safeArea)
+        NSLayoutConstraint.activate([
+            safeArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            safeArea.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            safeArea.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            safeArea.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
         imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+//        imageView.backgroundColor = UIColor.green
+//        imageView.image = UIImage(named: "Spotify_icon")
 
         trackLabel.translatesAutoresizingMaskIntoConstraints = false
-        trackLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        trackLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+        trackLabel.textColor = UIColor.white
         trackLabel.textAlignment = .center
+        trackLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        trackLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
+//        trackLabel.backgroundColor = UIColor.yellow
+//        trackLabel.text = "Hi World"
 
         playPauseButton.translatesAutoresizingMaskIntoConstraints = false
         playPauseButton.addTarget(self, action: #selector(didTapPauseOrPlay), for: .primaryActionTriggered)
+        playPauseButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        playPauseButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+//        playPauseButton.backgroundColor = UIColor.blue
 
-        signOutButton.translatesAutoresizingMaskIntoConstraints = false
-        signOutButton.setTitle("Sign out", for: .normal)
-        signOutButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        signOutButton.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
-    }
-
-    func layout() {
-        stackView.addArrangedSubview(connectLabel)
-        stackView.addArrangedSubview(connectButton)
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(trackLabel)
         stackView.addArrangedSubview(playPauseButton)
-        stackView.addArrangedSubview(signOutButton)
+
+        view.addSubview(stackView)
+
+        NSLayoutConstraint.activate([
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 100)
+            //            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+
+    func table() {
+        myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 300))
+        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        myTableView.dataSource = self
+        myTableView.delegate = self
+        myTableView.translatesAutoresizingMaskIntoConstraints = false
+        myTableView.separatorStyle = .none
+
+        view.addSubview(myTableView)
+    }
+    
+    func layout() {
+//        stackView.addArrangedSubview(myTableView)
+//        stackView.addArrangedSubview(connectLabel)
+//        stackView.addArrangedSubview(connectButton)
+        stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(trackLabel)
+        stackView.addArrangedSubview(playPauseButton)
+//        stackView.addArrangedSubview(signOutButton)
 
         view.addSubview(stackView)
 
@@ -198,21 +292,44 @@ extension SpotifyViewController {
     }
 
     func updateViewBasedOnConnected() {
-        if appRemote.isConnected == true {
-            connectButton.isHidden = true
-//            signOutButton.isHidden = false
-            connectLabel.isHidden = true
-            imageView.isHidden = false
-            trackLabel.isHidden = false
-            playPauseButton.isHidden = false
+        if self.appRemote.isConnected == true {
+            self.stackView.isHidden = false
+            self.safeArea.isHidden = false
+            self.myTableView.frame = CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 330)
+//            self.imageView.isHidden = false
+//            self.trackLabel.isHidden = false
+//            self.playPauseButton.isHidden = false
         } else { // show login
-            signOutButton.isHidden = true
-            connectButton.isHidden = false
-            connectLabel.isHidden = false
-            imageView.isHidden = true
-            trackLabel.isHidden = true
-            playPauseButton.isHidden = true
+            self.stackView.isHidden = true
+            self.safeArea.isHidden = true
+            self.myTableView.frame = CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 150)
+//            self.imageView.isHidden = true
+//            self.trackLabel.isHidden = true
+//            self.playPauseButton.isHidden = true
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Num: \(indexPath.row)")
+        print("Value: \(myArray[indexPath.row])")
+        playTapped(uri: myArray[indexPath.row])
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let rows = myArray.count
+        return rows
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
+        cell.selectionStyle = .none
+
+        cell.contentConfiguration = UIHostingConfiguration {
+            TrackCellView(image: "Spotify_icon", text: "\(myArray[indexPath.row])", duration: "3:21 segs")
+        }
+        
+        return cell
     }
 }
 

@@ -6,7 +6,6 @@
 //
 
 import Account
-import BalanceSharedContext
 import class FHIR.FHIR
 import FirebaseAccount
 import Foundation

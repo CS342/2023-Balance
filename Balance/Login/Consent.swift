@@ -6,7 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import BalanceSharedContext
 import Onboarding
 import SwiftUI
 

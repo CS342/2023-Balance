@@ -6,10 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import BalanceContacts
-import BalanceMockDataStorageProvider
-import BalanceSchedule
-import BalanceSharedContext
 import SwiftUI
 
 struct LocationView: View {
@@ -77,8 +73,6 @@ struct LocationView: View {
 struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
         LocationView()
-            .environmentObject(BalanceScheduler())
-            .environmentObject(MockDataStorageProvider())
     }
 }
 #endif

@@ -69,3 +69,5 @@ let darkGrayColor = Color(#colorLiteral(red: 0.2352026105, green: 0.2347485423, 
 let emotionColor = Color(#colorLiteral(red: 0.8635568023, green: 0.9771735072, blue: 0.9613562226, alpha: 1))
 let correctOption = Color(#colorLiteral(red: 0.6474730372, green: 1, blue: 0.8112064004, alpha: 1))
 let wrongOption = Color(#colorLiteral(red: 0.9673425555, green: 0.1463843882, blue: 0.5197440386, alpha: 1))
+
+let silentTrack = "spotify:track:7p5bQJB4XsZJEEn6Tb7EaL"

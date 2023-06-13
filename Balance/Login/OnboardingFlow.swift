@@ -6,7 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import BalanceSharedContext
 import SwiftUI
 
 /// Displays an multi-step onboarding flow for the CS342 2023 Balance Team Application.

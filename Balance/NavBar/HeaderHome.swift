@@ -154,7 +154,7 @@ public struct HeaderHome: View {
                     case .lookPictures:
                         GalleryView()
                     case .listenMusic:
-                        MusicListView()
+                        Music()
                     case .lookVideos:
                         VideoGalleryView()
                     case .games:
