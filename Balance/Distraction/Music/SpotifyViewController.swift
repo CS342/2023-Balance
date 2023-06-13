@@ -84,26 +84,15 @@ class SpotifyViewController: UIViewController {
 
     var activityLogEntry: ActivityLogEntry?
     
-    var titleSongsView: some View {
-        Text("These are some songs that will help you with your mood")
-            .font(.custom("Nunito-Bold", size: 25))
-            .foregroundColor(darkBlueColor)
-            .multilineTextAlignment(.center)
-            .lineLimit(3)
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .padding(.horizontal, 30.0)
-            .background(.clear)
-    }
-    
     // MARK: - Subviews
     let stackView = UIStackView()
+    let stackInstallView = UIStackView()
     let safeArea = UIView()
-    let connectLabel = UILabel()
-    let connectButton = UIButton(type: .system)
+    let appInstallImage = UIImageView()
+    let appInstallLabel = UILabel()
     let imageView = UIImageView()
     let trackLabel = UILabel()
     let playPauseButton = UIButton(type: .system)
-    let signOutButton = UIButton(type: .system)
     var myTableView = UITableView()
 
     // MARK: App Life Cycle
@@ -195,26 +184,18 @@ class SpotifyViewController: UIViewController {
 // MARK: Style & Layout
 extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
     func style() {
+        installedApp()
         table()
+        player()
+    }
 
+    func player() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.spacing = 20
         stackView.alignment = .center
         stackView.backgroundColor = UIColor(primaryColor)
 
-        
-//        let footer = UIView()
-//        footer.translatesAutoresizingMaskIntoConstraints = false
-//        footer.backgroundColor = UIColor.red
-//        view.addSubview(footer)
-//        NSLayoutConstraint.activate([
-//            footer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-//            footer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            footer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            footer.heightAnchor.constraint(equalToConstant: 100)
-//        ])
-//
         safeArea.translatesAutoresizingMaskIntoConstraints = false
         safeArea.backgroundColor = UIColor(primaryColor)
         view.addSubview(safeArea)
@@ -262,7 +243,36 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
             //            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
+    
+    func installedApp() {
+        stackInstallView.translatesAutoresizingMaskIntoConstraints = false
+        stackInstallView.axis = .vertical
+        stackInstallView.spacing = 20
+        stackInstallView.alignment = .center
+        
+        appInstallImage.image = UIImage(named: "Spotify_icon")
+        appInstallImage.contentMode = .scaleAspectFit
+        appInstallImage.translatesAutoresizingMaskIntoConstraints = false
+        appInstallImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        appInstallImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        appInstallLabel.text = "Please install Spotify to continue"
+        appInstallLabel.textColor = UIColor(darkBlueColor)
+        appInstallLabel.font = UIFont(name: "Nunito-Bold", size: 20)
+        appInstallLabel.translatesAutoresizingMaskIntoConstraints = false
+//        appInstallLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        appInstallLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 
+        stackInstallView.addArrangedSubview(appInstallImage)
+        stackInstallView.addArrangedSubview(appInstallLabel)
+        view.addSubview(stackInstallView)
+
+        NSLayoutConstraint.activate([
+            stackInstallView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackInstallView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
     func table() {
         myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 300))
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
@@ -273,25 +283,18 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
 
         view.addSubview(myTableView)
     }
-    
-    func layout() {
-//        stackView.addArrangedSubview(myTableView)
-//        stackView.addArrangedSubview(connectLabel)
-//        stackView.addArrangedSubview(connectButton)
-        stackView.addArrangedSubview(imageView)
-        stackView.addArrangedSubview(trackLabel)
-        stackView.addArrangedSubview(playPauseButton)
-//        stackView.addArrangedSubview(signOutButton)
-
-        view.addSubview(stackView)
-
-        NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-    }
 
     func updateViewBasedOnConnected() {
+//        if isSpotifyInstalled() {
+//            stackInstallView.isHidden = false
+//            myTableView.isHidden = true
+//            safeArea.isHidden = true
+//            stackView.isHidden = true
+//           return
+//        }
+    
+        stackInstallView.isHidden = true
+        
         if self.appRemote.isConnected == true {
             self.stackView.isHidden = false
             self.safeArea.isHidden = false
@@ -309,11 +312,15 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func isSpotifyInstalled() -> Bool {
+        let isSpotifyAppInstalled = ((sessionManager?.isSpotifyAppInstalled) != nil)
+        return isSpotifyAppInstalled
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Num: \(indexPath.row)")
         print("Value: \(myArray[indexPath.row])")
         playTapped(uri: myArray[indexPath.row])
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
