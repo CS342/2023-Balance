@@ -19,7 +19,7 @@ struct TrackCellView: View {
                 VStack {
                     Spacer()
                     textView
-                    durationView
+//                    durationView
                     Spacer()
                 }
             }
@@ -35,7 +35,7 @@ struct TrackCellView: View {
     
     var textView: some View {
         Text(text)
-            .font(.custom("Nunito-Bold", size: 12))
+            .font(.custom("Nunito-Bold", size: 16))
             .lineLimit(2)
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -45,7 +45,7 @@ struct TrackCellView: View {
     }
     
     var durationView: some View {
-        Text(text)
+        Text(duration)
             .font(.custom("Montserrat", size: 12))
             .lineLimit(1)
             .multilineTextAlignment(.leading)
@@ -57,15 +57,29 @@ struct TrackCellView: View {
     
     
     var iconView: some View {
-        Image(image)
-            .resizable()
-            .scaledToFit()
-            .padding(15.0)
+        ZStack(alignment: .bottomTrailing) {
+            AsyncImage(
+                url: URL(string: image),
+                content: { image in
+                    image.resizable()
+                        .scaledToFill()
+                },
+                placeholder: {
+                    Image(systemName: "headphones.circle.fill")
+                        .tint(lightGrayColor)
+                }
+            )
             .frame(height: 120.0)
             .accessibilityLabel(Text(text))
-            .frame(maxWidth: 120)
             .background(Color.random.opacity(0.4))
             .cornerRadius(15, corners: [.bottomLeft, .topLeft])
+            Image("Spotify_icon")
+                .resizable()
+                .frame(width: 30, height: 30)
+                .scaledToFit()
+                .padding(10)
+                .accessibilityLabel("Spotify_icon")
+        }
     }
 }
 

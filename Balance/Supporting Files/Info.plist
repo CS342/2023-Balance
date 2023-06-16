@@ -67,5 +67,9 @@
 	<string>Light</string>
 	<key>View controller-based status bar appearance</key>
 	<string>NO</string>
+	<key>SpotifyClientID</key>
+	<string>6897d8e8934a48c19a9f2129c7349a0c</string>
+	<key>SpotifySecretID</key>
+	<string>d389fb0d126f4960ba79b031145f6f49</string>
 </dict>
 </plist>

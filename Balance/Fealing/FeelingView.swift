@@ -37,7 +37,7 @@ struct FeelingView: View {
                 }
             )
         ) {
-            DistractionCellView(image: "guessIcon", text: "Guess the emotion", pointVal: "+5")
+            CellView(image: "guessIcon", text: "Guess the emotion")
         }
     }
         
@@ -51,7 +51,7 @@ struct FeelingView: View {
                 }
             )
         ) {
-            DistractionCellView(image: "moodIcon", text: "How is your mood", pointVal: "+5")
+            CellView(image: "moodIcon", text: "How is your mood")
         }
     }
 }

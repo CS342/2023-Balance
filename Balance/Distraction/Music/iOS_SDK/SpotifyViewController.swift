@@ -10,20 +10,28 @@
 import SwiftUI
 import UIKit
 
+struct Playlist {
+    var name: String
+    var description: String
+    var type: String
+    var images: CoverImage
+    var uri: String
+}
+
+struct CoverImage {
+    var url: String
+    var height: Int
+    var width: Int
+}
+
+// swiftlint:disable all
 class SpotifyViewController: UIViewController {
     static let shared = SpotifyViewController()
     @Published var connectedSpotify = false
-    private let myArray = [
-        "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
-        "spotify:track:7lEptt4wbM0yJTvSG5EBof",
-        "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
-        "spotify:track:7lEptt4wbM0yJTvSG5EBof",
-        "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
-        "spotify:track:7lEptt4wbM0yJTvSG5EBof",
-        "spotify:album:3M7xLE04DvF9sM9gnTBPdY",
-        "spotify:track:7lEptt4wbM0yJTvSG5EBof",
-    ]
+    private var myArray = [Playlist]()
+    
     var currentUri = silentTrack
+    var isPause = false
     
     var responseCode: String? {
         didSet {
@@ -41,21 +49,21 @@ class SpotifyViewController: UIViewController {
             }
         }
     }
-
+    
     lazy var appRemote: SPTAppRemote = {
         let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
         appRemote.connectionParameters.accessToken = self.accessToken
         appRemote.delegate = self
         return appRemote
     }()
-
+    
     var accessToken = UserDefaults.standard.string(forKey: SpotifyConfig.accessTokenKey) {
         didSet {
             let defaults = UserDefaults.standard
             defaults.set(accessToken, forKey: SpotifyConfig.accessTokenKey)
         }
     }
-
+    
     lazy var configuration: SPTConfiguration = {
         let configuration = SPTConfiguration(clientID: SpotifyConfig.spotifyClientId, redirectURL: SpotifyConfig.redirectUri)
         // Set the playURI to a non-nil value so that Spotify plays music after authenticating
@@ -70,14 +78,14 @@ class SpotifyViewController: UIViewController {
         configuration.tokenRefreshURL = URL(string: "http://localhost:1234/refresh")
         return configuration
     }()
-
+    
     lazy var sessionManager: SPTSessionManager? = {
         let manager = SPTSessionManager(configuration: configuration, delegate: self)
         return manager
     }()
-
+    
     private var lastPlayerState: SPTAppRemotePlayerState?
-
+    
     var activityLogEntry: ActivityLogEntry?
     
     // MARK: - Subviews
@@ -89,27 +97,88 @@ class SpotifyViewController: UIViewController {
     let imageView = UIImageView()
     let trackLabel = UILabel()
     let playPauseButton = UIButton(type: .system)
+    let openSpotifyButton = UIButton(type: .system)
     var myTableView = UITableView()
-
+    var contentItems = [SPTAppRemoteContentItem]()
+    
     // MARK: App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         print("Spotify view start")
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateViewBasedOnConnected()
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if appRemote.isConnected == true {
+            if (self.currentUri == silentTrack) {
+                appRemote.playerAPI?.pause(nil)
+            }
+        }
+    }
+    
+    @objc
+    func showTop() {
+        SpotifyDataController.shared.getMyTop(type: "tracks") { data in
+            guard let data = data else {
+                return
+            }
+            guard let itemsArray = data["items"] as? [[String: AnyObject]] else { return }
+            for track in itemsArray {
+                guard let trackName = track["name"] as? String else { return }
+                guard let trackDescription = track["description"] as? String else { return }
+                guard let trackType = track["type"] as? String else { return }
+                guard let trackUri = track["uri"] as? String else { return }
+                let images = track["images"]
+                let imageCover = (images as? [[String: AnyObject]])?.first
+                let image = CoverImage(url: imageCover?["url"] as! String, height: 100, width:100)
+                let trackObject = Playlist(name: trackName, description: trackDescription, type: trackType, images: image, uri: trackUri)
+                self.myArray.append(trackObject)
+            }
+            DispatchQueue.main.async {
+                self.myTableView.reloadData()
+            }
+        }
+    }
+    
+    @objc
+    func showPlaylists() {
+        SpotifyDataController.shared.getMyPlaylists { data in
+            guard let data = data else {
+                return
+            }
+            self.myArray.removeAll()
+            guard let itemsArray = data["items"] as? [[String: AnyObject]] else { return }
+            for track in itemsArray {
+                guard let trackName = track["name"] as? String else { return }
+                guard let trackDescription = track["description"] as? String else { return }
+                guard let trackType = track["type"] as? String else { return }
+                guard let trackUri = track["uri"] as? String else { return }
+                let images = track["images"]
+                let imageCover = (images as? [[String: AnyObject]])?.first
+                let image = CoverImage(url: imageCover?["url"] as! String, height: 100, width:100)
+                let playlist = Playlist(name: trackName, description: trackDescription, type: trackType, images: image, uri: trackUri)
+                self.myArray.append(playlist)
+            }
+            
+            DispatchQueue.main.async {
+                self.myTableView.reloadData()
+            }
+        }
+    }
+    
     func update(playerState: SPTAppRemotePlayerState) {
         if lastPlayerState?.track.uri != playerState.track.uri {
             fetchArtwork(for: playerState.track)
         }
         lastPlayerState = playerState
         trackLabel.text = playerState.track.name
-
+        
         let configuration = UIImage.SymbolConfiguration(pointSize: 50, weight: .bold, scale: .large)
         if playerState.isPaused {
             activityLogEntry?.addAction(actionDescription: "Playing Spotify")
@@ -119,24 +188,26 @@ class SpotifyViewController: UIViewController {
             playPauseButton.setImage(UIImage(systemName: "pause.circle.fill", withConfiguration: configuration), for: .normal)
         }
     }
-
+    
     // MARK: - Actions
     @objc
     func didTapPauseOrPlay(_ button: UIButton) {
         if let lastPlayerState = lastPlayerState, lastPlayerState.isPaused {
             appRemote.playerAPI?.resume(nil)
+            isPause = false
         } else {
             appRemote.playerAPI?.pause(nil)
+            isPause = true
         }
     }
-
+    
     @objc
     func didTapSignOut(_ button: UIButton) {
         if appRemote.isConnected == true {
             appRemote.disconnect()
         }
     }
-
+    
     @objc
     func didTapConnect(_ button: UIButton) {
         activityLogEntry?.addAction(actionDescription: "Connecting Spotify")
@@ -145,25 +216,23 @@ class SpotifyViewController: UIViewController {
         }
         sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
     }
-        
+    
     @objc
     func playTapped(uri: String) {
         currentUri = uri
         if appRemote.isConnected {
             appRemote.playerAPI?.play(currentUri, asRadio: false, callback: { value, error in
                 if error == nil {
-                    print("Spotify playUri error")
+                    print("Spotify playUri")
+                    self.isPause = false
+                    self.updateViewBasedOnConnected()
+                    
                 } else {
-                    print("Spotify playUri" + value.debugDescription )
+                    print("Spotify playUri error" + value.debugDescription )
                 }
             })
         } else {
-            activityLogEntry?.addAction(actionDescription: "Connecting Spotify")
-            configuration.playURI = currentUri
-            guard let sessionManager = sessionManager else {
-                return
-            }
-            sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
+            self.reconnect(uri: self.currentUri)
         }
     }
     
@@ -184,16 +253,50 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = UIColor(backgroundColor)
         installedApp()
         table()
+        spotify()
         player()
     }
-
+    
+    func spotify() {
+        openSpotifyButton.setTitle("Open Spotify", for: .normal)
+        openSpotifyButton.titleLabel!.font = UIFont(name: "Nunito-Bold" , size: 18)
+        openSpotifyButton.setTitleColor(UIColor.white, for: .normal)
+        openSpotifyButton.backgroundColor = UIColor(red: 20/255, green: 215/255, blue: 96/255, alpha: 1.0)
+        openSpotifyButton.roundCorners(.allCorners, radius: 25)
+        openSpotifyButton.addShadow(shadowColor: UIColor.gray.cgColor, shadowOffset: CGSize(width: 0, height: -3), shadowOpacity: 0.2, shadowRadius: 5)
+        openSpotifyButton.addTarget(self, action: #selector(self.pressed), for: .touchUpInside)
+        openSpotifyButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(openSpotifyButton)
+        
+        NSLayoutConstraint.activate([
+            openSpotifyButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            openSpotifyButton.heightAnchor.constraint(equalToConstant: 50),
+            openSpotifyButton.widthAnchor.constraint(equalToConstant: 300),
+            openSpotifyButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    @objc func pressed(sender : UIButton) {
+        guard let url = URL(string: "spotify://") else {
+            return
+        }
+        UIApplication.shared.open(url)
+    }
+    
     func player() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.spacing = 20
         stackView.alignment = .center
         stackView.backgroundColor = UIColor(primaryColor)
-
+        stackView.roundCorners([.topLeft, .topRight], radius: 15)
+        //        stackView.addShadow(shadowColor: UIColor.gray.cgColor, shadowOffset: CGSize(width: 0, height: -3), shadowOpacity: 0.2, shadowRadius: 5)
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeDown.direction = .down
+        stackView.addGestureRecognizer(swipeDown)
+        
+        stackView.isHidden = true
         safeArea.translatesAutoresizingMaskIntoConstraints = false
         safeArea.backgroundColor = UIColor(primaryColor)
         view.addSubview(safeArea)
@@ -203,43 +306,59 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
             safeArea.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             safeArea.heightAnchor.constraint(equalToConstant: 100)
         ])
+        safeArea.isHidden = true
         
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//        imageView.backgroundColor = UIColor.green
-//        imageView.image = UIImage(named: "Spotify_icon")
-
+        imageView.roundCorners(.allCorners, radius: 8)
+        imageView.addShadow(shadowColor: UIColor.gray.cgColor, shadowOffset: CGSize(width: 0, height: -3), shadowOpacity: 0.2, shadowRadius: 5)
+        imageView.clipsToBounds = true
+        
         trackLabel.translatesAutoresizingMaskIntoConstraints = false
         trackLabel.font = UIFont.preferredFont(forTextStyle: .title2)
         trackLabel.textColor = UIColor.white
         trackLabel.textAlignment = .center
         trackLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        trackLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
-//        trackLabel.backgroundColor = UIColor.yellow
-//        trackLabel.text = "Hi World"
-
+        trackLabel.widthAnchor.constraint(equalToConstant: 220).isActive = true
+        
+        playPauseButton.tintColor = UIColor.white
         playPauseButton.translatesAutoresizingMaskIntoConstraints = false
         playPauseButton.addTarget(self, action: #selector(didTapPauseOrPlay), for: .primaryActionTriggered)
         playPauseButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
         playPauseButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//        playPauseButton.backgroundColor = UIColor.blue
-
+        playPauseButton.addShadow(shadowColor: UIColor.gray.cgColor, shadowOffset: CGSize(width: 0, height: -3), shadowOpacity: 0.2, shadowRadius: 5)
+        
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(trackLabel)
         stackView.addArrangedSubview(playPauseButton)
-
+        
         view.addSubview(stackView)
-
+        
         NSLayoutConstraint.activate([
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             stackView.heightAnchor.constraint(equalToConstant: 100)
-            //            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizer.Direction.down:
+                print("Swiped down")
+                self.stackView.isHidden = true
+                self.safeArea.isHidden = true
+                self.myTableView.frame = CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 150)
+                self.imageView.isHidden = true
+                self.trackLabel.isHidden = true
+                self.playPauseButton.isHidden = true
+            default:
+                break
+            }
+        }
     }
     
     func installedApp() {
@@ -258,13 +377,11 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
         appInstallLabel.textColor = UIColor(darkBlueColor)
         appInstallLabel.font = UIFont(name: "Nunito-Bold", size: 20)
         appInstallLabel.translatesAutoresizingMaskIntoConstraints = false
-//        appInstallLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        appInstallLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-
+        
         stackInstallView.addArrangedSubview(appInstallImage)
         stackInstallView.addArrangedSubview(appInstallLabel)
         view.addSubview(stackInstallView)
-
+        
         NSLayoutConstraint.activate([
             stackInstallView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackInstallView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -272,34 +389,43 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func table() {
-        myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 300))
+        myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 150))
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
         myTableView.dataSource = self
         myTableView.delegate = self
         myTableView.translatesAutoresizingMaskIntoConstraints = false
         myTableView.separatorStyle = .none
-
+        
         view.addSubview(myTableView)
     }
-
+    
     func updateViewBasedOnConnected() {
         if !isSpotifyInstalled() {
             stackInstallView.isHidden = false
             myTableView.isHidden = true
             safeArea.isHidden = true
             stackView.isHidden = true
-           return
+            return
         }
-    
-        stackInstallView.isHidden = true
         
+        stackInstallView.isHidden = true
+        openSpotifyButton.isHidden = false
         if self.appRemote.isConnected == true {
-            self.stackView.isHidden = false
-            self.safeArea.isHidden = false
-            self.myTableView.frame = CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 300)
-            self.imageView.isHidden = false
-            self.trackLabel.isHidden = false
-            self.playPauseButton.isHidden = false
+            if currentUri != silentTrack {
+                self.stackView.isHidden = false
+                self.safeArea.isHidden = false
+                self.myTableView.frame = CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 300)
+                self.imageView.isHidden = false
+                self.trackLabel.isHidden = false
+                self.playPauseButton.isHidden = false
+            } else {
+                self.stackView.isHidden = true
+                self.safeArea.isHidden = true
+                self.myTableView.frame = CGRect(x: 0, y: 0, width: balWidth, height: balHeight - 150)
+                self.imageView.isHidden = true
+                self.trackLabel.isHidden = true
+                self.playPauseButton.isHidden = true
+            }
         } else { // show login
             self.stackView.isHidden = true
             self.safeArea.isHidden = true
@@ -307,6 +433,23 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
             self.imageView.isHidden = true
             self.trackLabel.isHidden = true
             self.playPauseButton.isHidden = true
+
+            if (isPause == false) {
+                self.currentUri = silentTrack
+                self.reconnect(uri: self.currentUri)
+            }
+        }
+    }
+    
+    func reconnect(uri: String) {
+        if self.isOnScreen {
+            activityLogEntry?.addAction(actionDescription: "Connecting Spotify")
+            self.currentUri = uri
+            configuration.playURI = self.currentUri
+            guard let sessionManager = sessionManager else {
+                return
+            }
+            sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
         }
     }
     
@@ -318,7 +461,7 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Num: \(indexPath.row)")
         print("Value: \(myArray[indexPath.row])")
-        playTapped(uri: myArray[indexPath.row])
+        playTapped(uri: myArray[indexPath.row].uri)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -329,9 +472,9 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
         cell.selectionStyle = .none
-
+        
         cell.contentConfiguration = UIHostingConfiguration {
-            TrackCellView(image: "Spotify_icon", text: "\(myArray[indexPath.row])", duration: "3:21 segs")
+            TrackCellView(image: myArray[indexPath.row].images.url, text: "\(myArray[indexPath.row].name)", duration: "\(myArray[indexPath.row].type)")
         }
         
         return cell
@@ -349,13 +492,17 @@ extension SpotifyViewController: SPTAppRemoteDelegate {
             }
         })
         fetchPlayerState()
+        showPlaylists()
     }
-
+    
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
-        updateViewBasedOnConnected()
         lastPlayerState = nil
+        if (self.currentUri == silentTrack) {
+            return
+        }
+        updateViewBasedOnConnected()
     }
-
+    
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
         updateViewBasedOnConnected()
         lastPlayerState = nil
@@ -379,11 +526,11 @@ extension SpotifyViewController: SPTSessionManagerDelegate {
             presentAlertController(title: "Authorization Failed", message: error.localizedDescription, buttonTitle: "Bummer")
         }
     }
-
+    
     func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
         presentAlertController(title: "Session Renewed", message: session.description, buttonTitle: "Sweet")
     }
-
+    
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
         appRemote.connectionParameters.accessToken = session.accessToken
         appRemote.connect()
@@ -399,27 +546,27 @@ extension SpotifyViewController {
         }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-
+        
         let clientString = SpotifyConfig.spotifyClientId + ":" + SpotifyConfig.spotifyClientSecretKey
-
+        
         guard let clientStringData = clientString.data(using: .utf8) else {
             return
         }
-
+        
         let spotifyAuthKey = "Basic \((clientStringData).base64EncodedString())"
-
+        
         request.allHTTPHeaderFields = [
             "Authorization": spotifyAuthKey,
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-
+        
         var requestBodyComponents = URLComponents()
         let scopeAsString = SpotifyConfig.stringScopes.joined(separator: " ")
-
+        
         guard let responseCode else {
             return
         }
-
+        
         requestBodyComponents.queryItems = [
             URLQueryItem(name: "client_id", value: SpotifyConfig.spotifyClientId),
             URLQueryItem(name: "grant_type", value: "authorization_code"),
@@ -428,24 +575,24 @@ extension SpotifyViewController {
             URLQueryItem(name: "code_verifier", value: ""), // not currently used
             URLQueryItem(name: "scope", value: scopeAsString)
         ]
-
+        
         request.httpBody = requestBodyComponents.query?.data(using: .utf8)
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
                   let response = response as? HTTPURLResponse,
                   (200 ..< 300) ~= response.statusCode,
                   error == nil else {
-                      print("Error fetching token \(error?.localizedDescription ?? "")")
-                      return completion(nil, error)
-                  }
+                print("Error fetching token \(error?.localizedDescription ?? "")")
+                return completion(nil, error)
+            }
             let responseObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
             print("Access Token Dictionary=", responseObject ?? "")
             completion(responseObject, nil)
         }
         task.resume()
     }
-
+    
     func fetchArtwork(for track: SPTAppRemoteTrack) {
         appRemote.imageAPI?.fetchImage(forItem: track, with: CGSize.zero, callback: { [weak self] image, error in
             if let error = error {
@@ -455,7 +602,7 @@ extension SpotifyViewController {
             }
         })
     }
-
+    
     func fetchPlayerState() {
         appRemote.playerAPI?.getPlayerState { [weak self] playerState, error in
             if let error = error {
@@ -464,5 +611,42 @@ extension SpotifyViewController {
                 self?.update(playerState: playerState)
             }
         }
+    }
+}
+
+extension UIView {
+    
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+        if #available(iOS 11.0, *) {
+            clipsToBounds = true
+            layer.cornerRadius = radius
+            layer.maskedCorners = CACornerMask(rawValue: corners.rawValue)
+        } else {
+            let path = UIBezierPath(
+                roundedRect: bounds,
+                byRoundingCorners: corners,
+                cornerRadii: CGSize(width: radius, height: radius)
+            )
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            layer.mask = mask
+        }
+    }
+    
+    func addShadow(shadowColor: CGColor = UIColor.label.cgColor,
+                   shadowOffset: CGSize = CGSize(width: 1.0, height: 2.0),
+                   shadowOpacity: Float = 0.4,
+                   shadowRadius: CGFloat = 3.0) {
+        self.layer.shadowColor = shadowColor
+        self.layer.shadowOffset = shadowOffset
+        self.layer.shadowOpacity = shadowOpacity
+        self.layer.shadowRadius = shadowRadius
+        self.layer.masksToBounds = false
+    }
+}
+
+extension UIViewController{
+    var isOnScreen: Bool{
+        return self.isViewLoaded && view.window != nil
     }
 }
