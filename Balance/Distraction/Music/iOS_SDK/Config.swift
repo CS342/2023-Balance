@@ -8,6 +8,6 @@
 
 // Go to spotify developer console in order to generate a client key and secret key for this project
 enum SpotifyKeys {
-    static var secretID = ""
-    static var clientID = ""
+    static var clientID = Bundle.main.object(forInfoDictionaryKey: "SpotifyClientID") as? String ?? ""
+    static var secretID = Bundle.main.object(forInfoDictionaryKey: "SpotifySecretID") as? String ?? ""
 }

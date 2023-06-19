@@ -10,18 +10,27 @@ import SwiftUI
 import class FHIR.FHIR
 import FirebaseAccount
 
+// swiftlint:disable line_length
 public struct HeaderHome: View {
-    @State private var showingSOSSheet = false
+    @AppStorage("fromSOS") var fromSOS = false
+    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    @EnvironmentObject var authModel: AuthViewModel
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
     @State private var showingAvatarSheet = false
-    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
-    @EnvironmentObject var authModel: AuthViewModel
-    
     @State private var displayName = ""
     @State private var avatar = ""
     @State private var userId = ""
-
+    private var quotes = [
+        "“We cannot solve problems with the kind of thinking we employed when we came up with them.” — Albert Einstein",
+        "“Learn as if you will live forever, live like you will die tomorrow.” — Mahatma Gandhi",
+        "“Stay away from those people who try to disparage your ambitions. Small minds will always do that, but great minds will give you a feeling that you can become great too.” — Mark Twain",
+        "“When you give joy to other people, you get more joy in return. You should give a good thought to happiness that you can give out.”— Eleanor Roosevelt",
+        "“When you change your thoughts, remember to also change your world.”—Norman Vincent Peale",
+        "“It is only when we take chances, when our lives improve. The initial and the most difficult risk that we need to take is to become honest. —Walter Anderson",
+        "“Nature has given us all the pieces required to achieve exceptional wellness and health, but has left it to us to put these pieces together.”—Diane McLaren"
+    ]
+    
     public var body: some View {
         VStack(spacing: 0) {
             if UIDevice.current.hasNotch {
@@ -29,8 +38,8 @@ public struct HeaderHome: View {
             }
             headerView
             Spacer()
-            buttonsView
-            Spacer()
+//            buttonsView
+//            Spacer()
             quotasView
             Spacer()
         }
@@ -113,8 +122,8 @@ public struct HeaderHome: View {
     }
     
     var quotasView: some View {
-        Text("\"The things tht make me different are the things that make me who i am\"")
-            .font(.custom("Nunito-Light", size: 14))
+        Text(quotes.randomElement() ?? "")
+            .font(.custom("Nunito-Regular", size: 14))
             .foregroundColor(.white)
             .multilineTextAlignment(.leading)
             .shadow(color: .gray, radius: 2, x: 0, y: 1)
@@ -127,15 +136,7 @@ public struct HeaderHome: View {
             profileOption
             profileNameView
             Spacer()
-//            sosButtonHome
-//                .frame(width: 40, height: 40)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 20)
-//                        .stroke(Color.white, lineWidth: 4)
-//                )
-//                .shadow(color: .gray, radius: 2, x: 0, y: 1)
-//                .padding(.trailing, 10)
-//                .padding(.bottom, 50)
+            sosAction
         }
     }
     
@@ -153,24 +154,45 @@ public struct HeaderHome: View {
         }
     }
     
-    var sosButtonHome: some View {
-        VStack {
-            Button(action: {
-                showingSOSSheet.toggle()
-                print("SOS!")
-            }) {
-                Text("SOS")
-                    .font(.custom("Nunito-Bold", size: 14))
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(Color.white)
-                    .background(Color.pink)
-                    .clipShape(Circle())
-            }
-            .buttonStyle(PlainButtonStyle())
-            .sheet(isPresented: $showingSOSSheet) {
-                SOSView()
-            }
-        }
+    var sosAction: some View {
+        NavigationLink(
+            destination: ActivityLogBaseView(
+                viewName: "SOS ACTION",
+                isDirectChildToContainer: true,
+                content: {
+                    switch DistractMeOption.randomSection() {
+                    case .lookPictures:
+                        GalleryView()
+                    case .listenMusic:
+                        Music()
+                    case .lookVideos:
+                        VideoGalleryView()
+                    case .games:
+                        GamesView()
+                    case .drawing:
+                        DrawHomeView()
+                    case .coloring:
+                        ColoringHomeView()
+                    }
+                }
+            )
+        ) {
+            Text("SOS")
+                .font(.custom("Nunito-Bold", size: 14))
+                .frame(width: 40, height: 40)
+                .foregroundColor(Color.white)
+                .background(Color.pink)
+                .clipShape(Circle())
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.white, lineWidth: 4)
+                        .allowsHitTesting(false)
+                )
+                .shadow(color: .gray, radius: 2, x: 0, y: 1)
+                .padding()
+        }.simultaneousGesture(TapGesture().onEnded {
+            self.fromSOS = true
+        })
     }
     
     var avatarView: some View {

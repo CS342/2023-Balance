@@ -20,6 +20,10 @@ struct BoxView: View {
             self.selectedBtn = self.box.id
             stopUserInteraction = true
             if self.questionIndex < (questions.count - 1) {
+                if !self.box.correct {
+                    stopUserInteraction = false
+                    return
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.questionIndex += 1
                     self.selectedBtn = -1

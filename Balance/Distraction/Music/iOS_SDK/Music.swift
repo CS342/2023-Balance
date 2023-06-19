@@ -14,6 +14,7 @@ struct Music: View {
             backgroundColor.edgesIgnoringSafeArea(.all)
             VStack {
                 HeaderMenu(title: "Music")
+                
                 VStack(alignment: .center, spacing: 10) {
                     SpotifyView()
                     Spacer()

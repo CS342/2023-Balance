@@ -6,9 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-import BalanceSharedContext
 import SwiftUI
-
 
 private struct BalanceTestingSetup: ViewModifier {
     @AppStorage(StorageKeys.onboardingFlowComplete)

@@ -11,8 +11,8 @@ import Foundation
 // swiftlint:disable convenience_type force_unwrapping
 struct SpotifyConfig {
     static let accessTokenKey = "access-token-key"
-    static let redirectUri = URL(string: "balanceapp://")!
-    static let spotifyClientId = SpotifyKeys.clientID // change these in the Config.swift file once the keys have been generated/obtained
+    static let redirectUri = URL(string: "balanceapp://spotify")!
+    static let spotifyClientId = SpotifyKeys.clientID
     static let spotifyClientSecretKey = SpotifyKeys.secretID
     
     static let scopes: SPTScope = [

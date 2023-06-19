@@ -7,10 +7,6 @@
 //
 
 import Account
-import BalanceContacts
-import BalanceMockDataStorageProvider
-import BalanceSchedule
-import BalanceSharedContext
 import SwiftUI
 import class FHIR.FHIR
 import FirebaseAccount
@@ -32,7 +28,7 @@ struct HomeView: View {
                         HeaderHome()
                         ZStack(alignment: .bottomLeading) {
                             ScrollView(.vertical) {
-                                VStack {
+                                VStack(spacing: 20) {
                                     distractOption
                                     chillOption
                                     fealingLearningOption

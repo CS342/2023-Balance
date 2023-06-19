@@ -6,9 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import BalanceMockDataStorageProvider
-import BalanceSchedule
-import BalanceSharedContext
 import CardinalKit
 import FHIR
 import FHIRToFirestoreAdapter
@@ -27,7 +24,6 @@ import SwiftUI
 class BalanceAppDelegate: CardinalKitAppDelegate {
     override var configuration: Configuration {
         Configuration(standard: FHIR()) {
-            BalanceScheduler()
             if !FeatureFlags.disableFirebase {
                 if FeatureFlags.useFirebaseEmulator {
                     FirebaseAccountConfiguration(emulatorSettings: (host: "localhost", port: 9099))
@@ -39,12 +35,9 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
             if HKHealthStore.isHealthDataAvailable() {
                 healthKit
             }
-            QuestionnaireDataSource()
-            MockDataStorageProvider()
             LocalStorage()
         }
     }
-    
     
     private var firestore: Firestore<FHIR> {
         let settings = FirestoreSettings()

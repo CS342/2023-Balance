@@ -6,19 +6,25 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>edu.stanford.cs342.2023.balance</string>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>balanceapp</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>spotify</string>
+			</array>
+		</dict>
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>LSApplicationQueriesSchemas</key>
-	<array>
-		<string>spotify</string>
-	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>spotify</string>
@@ -52,9 +58,18 @@
 		<string>Montserrat-Thin.ttf</string>
 		<string>Montserrat-Medium.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>processing</string>
+	</array>
 	<key>UIUserInterfacesStyle</key>
 	<string>Light</string>
 	<key>View controller-based status bar appearance</key>
 	<string>NO</string>
+	<key>SpotifyClientID</key>
+	<string>6897d8e8934a48c19a9f2129c7349a0c</string>
+	<key>SpotifySecretID</key>
+	<string>d389fb0d126f4960ba79b031145f6f49</string>
 </dict>
 </plist>

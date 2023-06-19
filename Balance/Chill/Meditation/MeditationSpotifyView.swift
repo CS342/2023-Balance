@@ -9,16 +9,15 @@
 import SwiftUI
 import UIKit
 
+struct Song: Identifiable {
+    var id: String { title }
+    let title: String
+    let artist: String
+    let coverString: String
+    let spotifyURL: String
+}
+
 struct MeditationSpotifyView: View {
-    // FOLLOWED A SPOTIFY YOUTUBE TUTORIAL
-    struct Song: Identifiable {
-        var id: String { title }
-        let title: String
-        let artist: String
-        let coverString: String
-        let spotifyURL: String
-    }
-    
     @Environment(\.openURL) private var openURL
     
     let songs = [

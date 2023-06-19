@@ -11,10 +11,11 @@ import SwiftUI
 struct HeaderMenu: View {
     @State private var showingSOSSheet = false
     @Environment(\.presentationMode) var presentationMode
+    @AppStorage("fromSOS") var fromSOS = false
     var title: String
     var notch = 50.0
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             if UIDevice.current.hasNotch {
                 Spacer().frame(height: notch)
             }
@@ -24,9 +25,8 @@ struct HeaderMenu: View {
                 Spacer()
                 titleHeader
                 Spacer()
-                Text("").frame(width: 90, height: 40)
+                sosAction
             }
-            // sosButton
             Spacer()
         }
         .frame(maxWidth: .infinity)
@@ -40,7 +40,12 @@ struct HeaderMenu: View {
     
     var backButton: some View {
         Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
+            if fromSOS {
+                NavigationUtil.popToRootView()
+                fromSOS = false
+            } else {
+                self.presentationMode.wrappedValue.dismiss()
+            }
         }) {
             HStack {
                 Image(systemName: "chevron.backward")
@@ -58,33 +63,45 @@ struct HeaderMenu: View {
         }
     }
     
-    var sosButton: some View {
-        VStack {
-            Button(action: {
-                print("SOS!")
-                showingSOSSheet.toggle()
-            }) {
-                Text("SOS")
-                    .font(.custom("Nunito-Bold", size: 14))
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(Color.white)
-                    .background(Color.pink)
-                    .clipShape(Circle())
-            }
-            
-            .buttonStyle(PlainButtonStyle())
-            .sheet(isPresented: $showingSOSSheet) {
-                SOSView()
-            }
-        }
-        .frame(width: 40, height: 40)
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.white, lineWidth: 4)
-                .allowsHitTesting(false)
-        )
-        .shadow(color: .gray, radius: 2, x: 0, y: 1)
-        .padding()
+    var sosAction: some View {
+        NavigationLink(
+            destination: ActivityLogBaseView(
+                viewName: "SOS ACTION",
+                isDirectChildToContainer: true,
+                content: {
+                    switch DistractMeOption.randomSection() {
+                    case .lookPictures:
+                        GalleryView()
+                    case .listenMusic:
+                        Music()
+                    case .lookVideos:
+                        VideoGalleryView()
+                    case .games:
+                        GamesView()
+                    case .drawing:
+                        DrawHomeView()
+                    case .coloring:
+                        ColoringHomeView()
+                    }
+                }
+            )
+        ) {
+            Text("SOS")
+                .font(.custom("Nunito-Bold", size: 14))
+                .frame(width: 40, height: 40)
+                .foregroundColor(Color.white)
+                .background(Color.pink)
+                .clipShape(Circle())
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.white, lineWidth: 4)
+                        .allowsHitTesting(false)
+                )
+                .shadow(color: .gray, radius: 2, x: 0, y: 1)
+                .padding()
+        }.simultaneousGesture(TapGesture().onEnded {
+            self.fromSOS = true
+        })
     }
     
     var titleHeader: some View {
