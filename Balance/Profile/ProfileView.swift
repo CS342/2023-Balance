@@ -81,7 +81,7 @@ struct ProfileView: View {
                 .font(.custom("Montserrat-Thin", size: 20))
                 .foregroundColor(darkBlueColor)
             Spacer().frame(height: 10)
-            Text("PatientID: " + self.patientID)
+            Text("ParticipantID: " + self.patientID)
                 .font(.custom("Montserrat-Thin", size: 20))
                 .foregroundColor(darkBlueColor)
             Spacer().frame(height: 20)
@@ -135,7 +135,7 @@ struct ProfileView: View {
         ShareLink(
             item: convertToCSV(),
             subject: Text("Balance Export"),
-            message: Text("PatientID: " + self.patientID + " - " + self.displayName + " - " + self.email)
+            message: Text("ParticipantID: " + self.patientID + " - " + self.displayName + " - " + self.email)
         ) {
             ProfileCellView(image: "directcurrent", text: "Share data")
         }
