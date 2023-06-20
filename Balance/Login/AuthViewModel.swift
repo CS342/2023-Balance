@@ -87,6 +87,38 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
+    func signInLocal
+    (
+        patientID: String,
+        name: String,
+        email: String,
+        onSuccess: @escaping() -> Void,
+        onError: @escaping(_ errorMessage: String) -> Void
+    ) async {
+        let profileUser = ProfileUser(
+            id: patientID,
+            displayName: name,
+            email: email,
+            parentEmail: "",
+            birthday: "",
+            country: "",
+            phone: "",
+            avatar: "avatar_" + String(Int.random(in: 1..<7)),
+            password: ""
+        )
+        
+        UserProfileRepositoryToLocal.shared.createProfile(profile: profileUser) { profile, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                onError(error.localizedDescription)
+            } else {
+                print("User: " + (profile?.description() ?? "-"))
+                self.profile = profile
+                onSuccess()
+            }
+        }
+    }
+    
     func signUp(userData: ProfileUser) {
         Auth.auth().createUser(withEmail: userData.email, password: userData.password) { result, error in
             if let error = error {
@@ -125,9 +157,14 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
+    
     func signOut() {
         do {
+#if !DEMO
             try Auth.auth().signOut()
+#else
+            UserDefaults.standard.removeObject(forKey: "lastPatient")
+#endif
             self.session = nil
             self.profile = nil
         } catch let signOutError as NSError {
@@ -137,7 +174,11 @@ final class AuthViewModel: ObservableObject {
     
     func signOut(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         do {
+#if !DEMO
             try Auth.auth().signOut()
+#else
+            UserDefaults.standard.removeObject(forKey: "lastPatient")
+#endif
             self.session = nil
             self.profile = nil
             onSuccess()

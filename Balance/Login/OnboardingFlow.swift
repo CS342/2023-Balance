@@ -25,7 +25,11 @@ public struct OnboardingFlow: View {
                 .navigationDestination(for: Step.self) { onboardingStep in
                     switch onboardingStep {
                     case .login:
+#if DEMO
+                        LoginViewLocal(onboardingSteps: $onboardingSteps)
+#else
                         LoginView(onboardingSteps: $onboardingSteps)
+#endif
                     case .signUp:
                         SignUpView(onboardingSteps: $onboardingSteps)
                     case .avatar:

@@ -20,12 +20,21 @@ struct BalanceAccount: View {
     
     var body: some View {
         Group {
+#if DEMO
+            LoginViewLocal(onboardingSteps: $onboardingSteps)
+                .onReceive(account.objectWillChange) {
+                    if account.signedIn {
+                        completedOnboardingFlow = true
+                    }
+                }
+#else
             LoginView(onboardingSteps: $onboardingSteps)
                 .onReceive(account.objectWillChange) {
                     if account.signedIn {
                         completedOnboardingFlow = true
                     }
                 }
+#endif
         }
         .background(backgroundColor)
     }

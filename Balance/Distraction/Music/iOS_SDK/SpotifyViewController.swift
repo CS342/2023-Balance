@@ -29,7 +29,6 @@ class SpotifyViewController: UIViewController {
     static let shared = SpotifyViewController()
     @Published var connectedSpotify = false
     private var myArray = [Playlist]()
-    
     var currentUri = silentTrack
     var isPause = false
     
@@ -367,7 +366,7 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
         stackInstallView.spacing = 20
         stackInstallView.alignment = .center
         
-        appInstallImage.image = UIImage(named: "Spotify_icon")
+        appInstallImage.image = #imageLiteral(resourceName: "Spotify_icon")
         appInstallImage.contentMode = .scaleAspectFit
         appInstallImage.translatesAutoresizingMaskIntoConstraints = false
         appInstallImage.heightAnchor.constraint(equalToConstant: 100).isActive = true

@@ -56,7 +56,7 @@ class ActivityLogLocal: ObservableObject, Codable {
     func toString() -> (String, String, String) {
         let idStr = dateToString(date: startTime)
         let id = id
-
+        
         let startStr = "start: " + idStr
         let endStr = endTime != Date(timeIntervalSinceReferenceDate: 0) ? "end: " + dateToString(date: endTime) : ""
         let durationStr = "duration: \(duration)"
@@ -93,7 +93,7 @@ class ActivityLogStore: ObservableObject {
         )
         .appendingPathComponent("activityLog.data")
     }
-
+    
     static func load(completion: @escaping (Result<[ActivityLogLocal], Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
@@ -104,10 +104,10 @@ class ActivityLogStore: ObservableObject {
                     }
                     return
                 }
-                let notes = try JSONDecoder().decode([ActivityLogLocal].self, from: file.availableData)
-
+                let logs = try JSONDecoder().decode([ActivityLogLocal].self, from: file.availableData)
+                
                 DispatchQueue.main.async {
-                    completion(.success(notes))
+                    completion(.success(logs))
                 }
             } catch {
                 DispatchQueue.main.async {
@@ -116,7 +116,7 @@ class ActivityLogStore: ObservableObject {
             }
         }
     }
-
+    
     static func save(logs: [ActivityLogLocal], completion: @escaping(Result<Int, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
@@ -133,22 +133,34 @@ class ActivityLogStore: ObservableObject {
             }
         }
     }
-
+    
+    func removeStore() {
+        do {
+            self.logs.removeAll()
+            let data = try JSONEncoder().encode(logs)
+            let outfile = try ActivityLogStore.fileURL()
+            try data.write(to: outfile)
+            print("ActivityLogStore removeStore OK")
+        } catch {
+            print("ActivityLogStore removeStore ERROR")
+        }
+    }
+    
     func deleteLog(_ id: String) {
         let indexOfLog = logs.firstIndex { log in
             log.id == id
         }
-
+        
         if let indexOfLog {
             logs.remove(at: indexOfLog)
         }
     }
-
+    
     func saveLog(_ log: ActivityLogLocal) {
         let indexOfLog = logs.firstIndex { currentLog in
             currentLog.id == log.id
         }
-
+        
         if let indexOfLog {
             logs[indexOfLog] = log
         } else {

@@ -21,7 +21,7 @@ class NoteStore: ObservableObject {
         )
         .appendingPathComponent("diary.data")
     }
-
+    
     static func load(completion: @escaping (Result<[Note], Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
@@ -33,7 +33,7 @@ class NoteStore: ObservableObject {
                     return
                 }
                 let notes = try JSONDecoder().decode([Note].self, from: file.availableData)
-
+                
                 DispatchQueue.main.async {
                     completion(.success(notes))
                 }
@@ -44,7 +44,7 @@ class NoteStore: ObservableObject {
             }
         }
     }
-
+    
     static func save(notes: [Note], completion: @escaping(Result<Int, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
@@ -61,22 +61,35 @@ class NoteStore: ObservableObject {
             }
         }
     }
-
+    
+    
+    func removeStore() {
+        do{
+            self.notes.removeAll()
+            let data = try JSONEncoder().encode(notes)
+            let outfile = try NoteStore.fileURL()
+            try data.write(to: outfile)
+            print("NoteStore removeStore OK")
+        } catch {
+            print("NoteStore removeStore ERROR")
+        }
+    }
+    
     func deleteNote(_ id: String) {
         let indexOfNote = notes.firstIndex { note in
             note.id == id
         }
-
+        
         if let indexOfNote {
             notes.remove(at: indexOfNote)
         }
     }
-
+    
     func saveNote(_ note: Note) {
         let indexOfNote = notes.firstIndex { currentNote in
             currentNote.id == note.id
         }
-
+        
         if let indexOfNote {
             notes[indexOfNote] = note
         } else {

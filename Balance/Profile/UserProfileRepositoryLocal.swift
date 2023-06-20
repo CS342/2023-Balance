@@ -1,0 +1,79 @@
+//
+//  StorageManager.swift
+//  Balance
+//
+//  Created by Gonzalo Perisset on 28/04/2023.
+//
+
+import FHIR
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
+import Foundation
+import LocalStorage
+import SwiftUI
+
+class UserProfileRepositoryToLocal: ObservableObject {
+    static let shared = UserProfileRepositoryToLocal()
+
+    func createProfile(profile: ProfileUser, completion: @escaping (_ profile: ProfileUser?, _
+                                                                    error: Error?) -> Void) {
+        if profile.displayName.isEmpty {
+            print("Error profile is nil")
+            return
+        }
+        
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(profile)
+            UserDefaults.standard.set(data, forKey: profile.id)
+            UserDefaults.standard.set(profile.id, forKey: "lastPatient")
+            completion(profile, nil)
+        } catch {
+            print("Unable to encode User (\(error))")
+            completion(nil, error)
+        }
+    }
+    
+    func fetchProfile(userId: String, completion: @escaping (_ profile: ProfileUser?, _ error:
+                                                                Error?) -> Void) {
+        let userID = userId
+
+        if let data = UserDefaults.standard.data(forKey: userID) {
+            do {
+                // Create JSON Decoder
+                let decoder = JSONDecoder()
+
+                // Decode Note
+                let profile = try decoder.decode(ProfileUser.self, from: data)
+                completion(profile, nil)
+            } catch {
+                print("Unable to Decode User (\(error))")
+                completion(nil, error)
+            }
+        }
+    }
+    
+    func fetchCurrentProfile(completion: @escaping (_ profile: ProfileUser?, _ error:
+                                                        Error?) -> Void) {
+//        guard let user = AuthViewModel.shared.user else {
+//            return
+//        }
+        
+        let userID = UserDefaults.standard.string(forKey: "lastPatient") ?? ""
+        if userID.isEmpty {
+            return
+        }
+        
+        if let data = UserDefaults.standard.data(forKey: userID) {
+            do {
+                let decoder = JSONDecoder()
+                let profile = try decoder.decode(ProfileUser.self, from: data)
+                completion(profile, nil)
+            } catch {
+                print("Unable to Decode User (\(error))")
+                completion(nil, error)
+            }
+        }
+    }
+}
