@@ -67,7 +67,7 @@ struct HeaderMenu: View {
     var sosAction: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "SOS ACTION",
+                viewName: "SOS Action",
                 isDirectChildToContainer: true,
                 content: {
                     switch DistractMeOption.randomSection() {

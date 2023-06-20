@@ -88,13 +88,10 @@ struct LoginViewLocal: View {
                 .multilineTextAlignment(.center)
                 .font(.custom("Montserrat-Thin", size: 17))
                 .foregroundColor(darkGrayColor)
-            Spacer()
+            Spacer().frame(height: 30)
             fieldsView
-            Spacer()
-            Group {
-                loginButton
-                Spacer().frame(height: 50)
-            }
+            Spacer().frame(height: 50)
+            loginButton
         }
     }
     

@@ -163,7 +163,8 @@ final class AuthViewModel: ObservableObject {
 #if !DEMO
             try Auth.auth().signOut()
 #else
-            UserDefaults.standard.removeObject(forKey: "lastPatient")
+            UserProfileRepositoryToLocal.shared.removeCurrentProfile()
+            isLoggedIn = false
 #endif
             self.session = nil
             self.profile = nil
@@ -177,7 +178,8 @@ final class AuthViewModel: ObservableObject {
 #if !DEMO
             try Auth.auth().signOut()
 #else
-            UserDefaults.standard.removeObject(forKey: "lastPatient")
+            UserProfileRepositoryToLocal.shared.removeCurrentProfile()
+            isLoggedIn = false
 #endif
             self.session = nil
             self.profile = nil

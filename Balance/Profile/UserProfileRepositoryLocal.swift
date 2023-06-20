@@ -76,4 +76,15 @@ class UserProfileRepositoryToLocal: ObservableObject {
             }
         }
     }
+    
+    func removeCurrentProfile() {
+        let userID = UserDefaults.standard.string(forKey: "lastPatient") ?? ""
+        
+        if userID.isEmpty {
+            return
+        }
+        
+        UserDefaults.standard.removeObject(forKey: userID)
+        UserDefaults.standard.removeObject(forKey: "lastPatient")
+    }
 }

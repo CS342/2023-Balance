@@ -144,7 +144,7 @@ struct ProfileView: View {
     var infoOption: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "SECTION USER INFO",
+                viewName: "Section user Info",
                 isDirectChildToContainer: true,
                 content: {
                     PersonalDataView().environmentObject(authModel)
@@ -158,7 +158,7 @@ struct ProfileView: View {
     var updateOption: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "SECTION PASSWORD UPDATE",
+                viewName: "Section password update",
                 isDirectChildToContainer: true,
                 content: {
                     PasswordUpdateView()
@@ -172,10 +172,10 @@ struct ProfileView: View {
     var logoutOption: some View {
         Button {
             print("Logout")
+//            dismiss()
             authModel.signOut()
             completedOnboardingFlow = false
-            account.signedIn = false
-            dismiss()
+//            account.signedIn = false
         } label: {
             ProfileCellView(image: "figure.walk.motion", text: "Logout")
         }
