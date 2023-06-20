@@ -12,6 +12,7 @@ import FirebaseAccount
 import Onboarding
 import SwiftUI
 
+// swiftlint:disable multiline_arguments
 struct LoginViewLocal: View {
     @EnvironmentObject private var authModel: AuthViewModel
     @EnvironmentObject var account: Account
