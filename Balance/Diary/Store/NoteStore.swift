@@ -64,7 +64,7 @@ class NoteStore: ObservableObject {
     
     
     func removeStore() {
-        do{
+        do {
             self.notes.removeAll()
             let data = try JSONEncoder().encode(notes)
             let outfile = try NoteStore.fileURL()

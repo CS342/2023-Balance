@@ -95,7 +95,7 @@ struct ProfileView: View {
                 infoOption
                 updateOption
 #else
-                //                resetOption
+                resetOption
                 shareOption
 #endif
                 logoutOption
@@ -121,10 +121,12 @@ struct ProfileView: View {
     }
     
     var resetOption: some View {
-        NavigationLink(
-            destination:
-                EmptyView()
-        ) {
+        Button {
+            logStore.removeStore()
+            noteStore.removeStore()
+            drawStore.removeStore()
+            coloringStore.removeStore()
+        } label: {
             ProfileCellView(image: "info", text: "Reset user")
         }
     }
@@ -170,18 +172,10 @@ struct ProfileView: View {
     var logoutOption: some View {
         Button {
             print("Logout")
-            logStore.removeStore()
-            noteStore.removeStore()
-            drawStore.removeStore()
-            coloringStore.removeStore()
-//            dismiss()
-//            authModel.signOut()
-//            completedOnboardingFlow = false
-//            account.signedIn = false
-//            NavigationUtil.popToRootView()
-
-#if !DEMO
-#endif
+            authModel.signOut()
+            completedOnboardingFlow = false
+            account.signedIn = false
+            dismiss()
         } label: {
             ProfileCellView(image: "figure.walk.motion", text: "Logout")
         }
