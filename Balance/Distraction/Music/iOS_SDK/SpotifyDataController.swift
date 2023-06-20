@@ -14,11 +14,6 @@ class SpotifyDataController: NSObject {
     // --------- Utility Functions --------- //
     var accessToken: String {
         var accessToken: String = ""
-//        SpotifyViewController.shared.getAccessToken { (token, error) in
-//            if token != nil {
-//                accessToken = token!
-//            }
-//        }
         accessToken  = UserDefaults.standard.string(forKey: "access_token") ?? ""
 
         return accessToken
