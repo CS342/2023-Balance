@@ -138,6 +138,9 @@ struct LoginViewLocal: View {
                         NavigationUtil.popToRootView()
                         authModel.isLoggedIn = true
                         completedOnboardingFlow = true
+                        name = ""
+                        patientID = ""
+                        email = ""
                     } onError: { errorMessage in
                         print("Login error " + errorMessage)
                     }
