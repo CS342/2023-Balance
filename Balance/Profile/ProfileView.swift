@@ -175,12 +175,12 @@ struct ProfileView: View {
             drawStore.removeStore()
             coloringStore.removeStore()
 //            dismiss()
-            authModel.signOut()
-            account.signedIn = false
-            NavigationUtil.popToRootView()
+//            authModel.signOut()
+//            completedOnboardingFlow = false
+//            account.signedIn = false
+//            NavigationUtil.popToRootView()
 
 #if !DEMO
-            completedOnboardingFlow = false
 #endif
         } label: {
             ProfileCellView(image: "figure.walk.motion", text: "Logout")
