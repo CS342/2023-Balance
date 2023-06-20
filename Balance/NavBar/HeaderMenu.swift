@@ -11,7 +11,8 @@ import SwiftUI
 struct HeaderMenu: View {
     @State private var showingSOSSheet = false
     @Environment(\.presentationMode) var presentationMode
-    @AppStorage("fromSOS") var fromSOS = false
+    @AppStorage("fromSOS")
+    var fromSOS = false
     var title: String
     var notch = 50.0
     var body: some View {
@@ -66,7 +67,7 @@ struct HeaderMenu: View {
     var sosAction: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "SOS ACTION",
+                viewName: "SOS Action",
                 isDirectChildToContainer: true,
                 content: {
                     switch DistractMeOption.randomSection() {

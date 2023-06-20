@@ -8,6 +8,7 @@
 import SwiftUI
 
 class ColoringStore: ObservableObject {
+    static let shared = ColoringStore()
     @Published var coloringDraws: [Draw] = []
     
     private static func fileURL() throws -> URL {
@@ -19,7 +20,7 @@ class ColoringStore: ObservableObject {
         )
         .appendingPathComponent("coloring.data")
     }
-
+    
     static func load(completion: @escaping (Result<[Draw], Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
@@ -31,7 +32,7 @@ class ColoringStore: ObservableObject {
                     return
                 }
                 let draws = try JSONDecoder().decode([Draw].self, from: file.availableData)
-
+                
                 DispatchQueue.main.async {
                     completion(.success(draws))
                 }
@@ -42,7 +43,7 @@ class ColoringStore: ObservableObject {
             }
         }
     }
-
+    
     static func save(coloringDraws: [Draw], completion: @escaping(Result<Int, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
@@ -59,22 +60,34 @@ class ColoringStore: ObservableObject {
             }
         }
     }
-
+    
+    func removeStore() {
+        do {
+            self.coloringDraws.removeAll()
+            let data = try JSONEncoder().encode(coloringDraws)
+            let outfile = try ColoringStore.fileURL()
+            try data.write(to: outfile)
+            print("ColoringStore removeStore OK")
+        } catch {
+            print("ColoringStore removeStore ERROR")
+        }
+    }
+    
     func deleteDraw(_ id: String) {
         let indexOfNote = coloringDraws.firstIndex { draw in
             draw.id == id
         }
-
+        
         if let indexOfNote {
             coloringDraws.remove(at: indexOfNote)
         }
     }
-
+    
     func saveDraw(_ draw: Draw) {
         let indexOfNote = coloringDraws.firstIndex { currentNote in
             currentNote.id == draw.id
         }
-
+        
         if let indexOfNote {
             coloringDraws[indexOfNote] = draw
         } else {

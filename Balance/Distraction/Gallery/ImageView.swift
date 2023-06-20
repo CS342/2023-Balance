@@ -74,7 +74,7 @@ struct ImageView: View {
                 .clipShape(Circle())
                 .shadow(color: Color.black.opacity(0.50), radius: 3, x: 0, y: 2)
                 .accessibilityLabel("crossImage")
-        }
+        }.buttonStyle(ActivityLogButtonStyle(activityDescription: "IMAGE REVIEW: " + selected.id.uuidString + "status: " + selected.review))
     }
     
     var likeAction: some View {
@@ -106,7 +106,7 @@ struct ImageView: View {
                 .clipShape(Circle())
                 .shadow(color: Color.black.opacity(0.50), radius: 3, x: 0, y: 2)
                 .accessibilityLabel("heartImage")
-        }
+        }.buttonStyle(ActivityLogButtonStyle(activityDescription: "IMAGE REVIEW: " + selected.id.uuidString + "status: " + selected.review))
     }
 }
 

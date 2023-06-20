@@ -68,10 +68,15 @@ struct DrawHomeView: View {
             VStack {
                 Text("Draw something new...")
                     .font(.custom("Nunito-Bold", size: 15))
-                Button(action: {
-                    isShowingSecondView = true
-                    self.currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
-                }) {
+                NavigationLink(
+                    destination: ActivityLogBaseView(
+                        viewName: "Draw Something Feature",
+                        isDirectChildToContainer: true,
+                        content: {
+                            DrawView(currentDraw: $currentDraw)
+                        }
+                    )
+                ) {
                     Text("New Draw")
                         .buttonStyle(ActivityLogButtonStyle(activityDescription: "Opened a New Draw"))
                         .font(.custom("Montserrat-SemiBold", size: 17))
@@ -80,15 +85,9 @@ struct DrawHomeView: View {
                         .background(primaryColor)
                         .cornerRadius(14)
                         .allowsHitTesting(false)
-                }
-            }.navigationDestination(isPresented: $isShowingSecondView) {
-                ActivityLogBaseView(
-                    viewName: "Draw Something Feature",
-                    isDirectChildToContainer: true,
-                    content: {
-                        DrawView(currentDraw: $currentDraw)
-                    }
-                )
+                }.simultaneousGesture(TapGesture().onEnded {
+                    self.currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
+                })
             }
         }
         .frame(maxWidth: 350, maxHeight: 110, alignment: .leading)

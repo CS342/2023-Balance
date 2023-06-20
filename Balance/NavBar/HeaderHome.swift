@@ -12,8 +12,8 @@ import FirebaseAccount
 
 // swiftlint:disable line_length
 public struct HeaderHome: View {
-    @AppStorage("fromSOS") var fromSOS = false
-    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    @AppStorage("fromSOS")
+    var fromSOS = false
     @EnvironmentObject var authModel: AuthViewModel
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
@@ -51,14 +51,19 @@ public struct HeaderHome: View {
         .navigationBarHidden(true)
         .navigationTitle("")
         .onAppear {
+#if !DEMO
             authModel.listenAuthentificationState()
-            loadUser()
+#endif
+            Task {
+                await loadUser()
+            }
         }
         .onChange(of: authModel.profile) { profile in
             withAnimation(.easeInOut(duration: 1.0)) {
                 if profile != nil {
-                    self.displayName = profile?.displayName ?? ""
-                    self.avatar = profile?.avatar ?? ""
+                    self.displayName = profile?.displayName ?? "Demo"
+                    self.avatar = profile?.avatar ?? "avatar_1"
+                    self.userId = profile?.id ?? "00000"
                 }
             }
         }
@@ -157,7 +162,7 @@ public struct HeaderHome: View {
     var sosAction: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "SOS ACTION",
+                viewName: "SOS Action",
                 isDirectChildToContainer: true,
                 content: {
                     switch DistractMeOption.randomSection() {
@@ -196,7 +201,7 @@ public struct HeaderHome: View {
     }
     
     var avatarView: some View {
-        Image(self.avatar)
+        Image(self.avatar.isEmpty ? "avatar_1" : self.avatar)
             .resizable()
             .scaledToFit()
             .tint(.gray)
@@ -208,18 +213,19 @@ public struct HeaderHome: View {
     
     var profileNameView: some View {
         VStack {
-            Text("ID " + (firebaseAccountConfiguration.user?.email ?? "xxxxxx"))
+            Text("PatientID: ".appending(self.userId))
                 .font(.custom("Nunito-Light", size: 18))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Hi, " + self.displayName)
+            Text("Hi, " + (self.displayName.isEmpty ? "Demo" : self.displayName))
                 .font(.custom("Nunito-Bold", size: 25))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
     
-    func loadUser() {
+    func loadUser() async {
+#if !DEMO
         UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
             if let error = error {
                 print("Error while fetching the user profile: \(error)")
@@ -229,8 +235,24 @@ public struct HeaderHome: View {
                 authModel.profile = profileUser
                 self.displayName = authModel.profile?.displayName ?? ""
                 self.avatar = authModel.profile?.avatar ?? ""
+                self.userId = authModel.profile?.id ?? "00000"
             }
         }
+#else
+        UserProfileRepositoryToLocal.shared.fetchCurrentProfile { profileUser, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                print("User: " + (profileUser?.description() ?? "-"))
+                authModel.profile = profileUser
+                self.displayName = authModel.profile?.displayName ?? "Demo"
+                self.avatar = authModel.profile?.avatar ??
+                "avatar_1"
+                self.userId = authModel.profile?.id ?? "00000"
+            }
+        }
+#endif
     }
 }
 

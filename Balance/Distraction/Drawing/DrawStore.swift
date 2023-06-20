@@ -8,6 +8,7 @@
 import SwiftUI
 
 class DrawStore: ObservableObject {
+    static let shared = DrawStore()
     @Published var draws: [Draw] = []
     
     private static func fileURL() throws -> URL {
@@ -19,7 +20,7 @@ class DrawStore: ObservableObject {
         )
         .appendingPathComponent("draw.data")
     }
-
+    
     static func load(completion: @escaping (Result<[Draw], Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
@@ -31,7 +32,7 @@ class DrawStore: ObservableObject {
                     return
                 }
                 let draws = try JSONDecoder().decode([Draw].self, from: file.availableData)
-
+                
                 DispatchQueue.main.async {
                     completion(.success(draws))
                 }
@@ -42,7 +43,7 @@ class DrawStore: ObservableObject {
             }
         }
     }
-
+    
     static func save(draws: [Draw], completion: @escaping(Result<Int, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
@@ -59,22 +60,34 @@ class DrawStore: ObservableObject {
             }
         }
     }
-
+    
+    func removeStore() {
+        do {
+            self.draws.removeAll()
+            let data = try JSONEncoder().encode(draws)
+            let outfile = try DrawStore.fileURL()
+            try data.write(to: outfile)
+            print("DrawStore removeStore OK")
+        } catch {
+            print("DrawStore removeStore ERROR")
+        }
+    }
+    
     func deleteDraw(_ id: String) {
         let indexOfNote = draws.firstIndex { draw in
             draw.id == id
         }
-
+        
         if let indexOfNote {
             draws.remove(at: indexOfNote)
         }
     }
-
+    
     func saveDraw(_ draw: Draw) {
         let indexOfNote = draws.firstIndex { currentNote in
             currentNote.id == draw.id
         }
-
+        
         if let indexOfNote {
             draws[indexOfNote] = draw
         } else {

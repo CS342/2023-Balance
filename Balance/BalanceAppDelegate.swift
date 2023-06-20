@@ -16,7 +16,6 @@ import FirestoreStoragePrefixUserIdAdapter
 import HealthKit
 import HealthKitDataSource
 import HealthKitToFHIRAdapter
-import LocalStorage
 import Questionnaires
 import Scheduler
 import SwiftUI
@@ -24,6 +23,7 @@ import SwiftUI
 class BalanceAppDelegate: CardinalKitAppDelegate {
     override var configuration: Configuration {
         Configuration(standard: FHIR()) {
+#if !DEMO
             if !FeatureFlags.disableFirebase {
                 if FeatureFlags.useFirebaseEmulator {
                     FirebaseAccountConfiguration(emulatorSettings: (host: "localhost", port: 9099))
@@ -35,7 +35,9 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
             if HKHealthStore.isHealthDataAvailable() {
                 healthKit
             }
-            LocalStorage()
+#else
+            FirebaseAccountConfiguration()
+#endif
         }
     }
     

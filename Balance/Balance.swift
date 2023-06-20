@@ -18,8 +18,10 @@ struct Balance: App {
     @StateObject var noteStore = NoteStore()
     @StateObject var drawStore = DrawStore()
     @StateObject var coloringStore = ColoringStore()
-    @StateObject var userModel = AuthViewModel()
-
+    @StateObject var userModel = AuthViewModel.shared
+#if DEMO
+    @StateObject var logStore = ActivityLogStore()
+#endif
     @State var started = false
     
     var body: some Scene {
@@ -37,6 +39,9 @@ struct Balance: App {
             .environmentObject(drawStore)
             .environmentObject(coloringStore)
             .environmentObject(userModel)
+#if DEMO
+            .environmentObject(logStore)
+#endif
         }
     }
 }

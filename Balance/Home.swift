@@ -12,8 +12,8 @@ import class FHIR.FHIR
 import FirebaseAccount
 
 struct HomeView: View {
-    @EnvironmentObject var account: Account
-    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+//    @EnvironmentObject var account: Account
+//    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
     @State var showMe = false
     
@@ -49,7 +49,9 @@ struct HomeView: View {
                     .navigationBarBackButtonHidden(true)
                     .ignoresSafeArea()
                     .accentColor(nil)
+#if !DEMO
                     .overlay(loadingOverlay)
+#endif
                 }
             }
         }
@@ -57,7 +59,7 @@ struct HomeView: View {
     
     @ViewBuilder private var loadingOverlay: some View {
         //        if account.signedIn {
-        let user = firebaseAccountConfiguration.user
+        let user = authModel.user
         let isFirstLoadKey = (user?.uid ?? "0") + "isFirstLoad"
         let isFirstLoad = UserDefaults.standard.bool(forKey: isFirstLoadKey)
         if !isFirstLoad {
@@ -97,9 +99,11 @@ struct HomeView: View {
         VStack {
             Button(action: {
                 print("SOS!")
+#if !DEMO
                 let user = firebaseAccountConfiguration.user
                 let isFirstLoadKey = (user?.uid ?? "0") + "isFirstLoad"
                 UserDefaults.standard.set(true, forKey: isFirstLoadKey)
+#endif
                 withAnimation(Animation.spring().speed(0.2)) {
                     showMe.toggle()
                 }
@@ -110,7 +114,7 @@ struct HomeView: View {
                     .foregroundColor(Color.white)
                     .background(Color.pink)
                     .clipShape(Circle())
-            }
+            }.buttonStyle(ActivityLogButtonStyle(activityDescription: "SOS ACTION CALLED"))
         }
         .frame(width: 40, height: 40)
         .overlay(
