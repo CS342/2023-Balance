@@ -213,7 +213,7 @@ public struct HeaderHome: View {
     
     var profileNameView: some View {
         VStack {
-            Text("PatientID: ".appending(self.userId))
+            Text("ParticipantID: ".appending(self.userId))
                 .font(.custom("Nunito-Light", size: 18))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)

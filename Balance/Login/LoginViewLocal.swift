@@ -118,7 +118,7 @@ struct LoginViewLocal: View {
             Divider()
                 .padding(.horizontal, 20)
             Spacer().frame(height: 20)
-            TextField("PatientID", text: $patientID)
+            TextField("ParticipantID", text: $patientID)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .keyboardType(.default)
