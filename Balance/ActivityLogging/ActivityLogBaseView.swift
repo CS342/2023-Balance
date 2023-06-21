@@ -42,7 +42,7 @@ struct ActivityLogBaseView<Content>: View where Content: View {
                 
                 if isDirectChildToContainer {
 #if DEMO
-                    var log = ActivityLogLocal()
+                    let log = ActivityLogLocal()
                     log.actions = activityLogEntry.actions
                     log.duration = activityLogEntry.duration
                     log.endTime = activityLogEntry.endTime
