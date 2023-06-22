@@ -747,13 +747,8 @@
 			isa = PBXGroup;
 			children = (
 				6CAA076629EAF04100541F87 /* FeelingView.swift */,
-				6CBE75CF2A0AD70B00A1747D /* FacesScreenView.swift */,
-				6CBE75D12A0BCA4E00A1747D /* FaceView.swift */,
-				6CBE75D32A0BCE5100A1747D /* Face.swift */,
-				6CBE75DC2A0C314900A1747D /* MoodEditorView.swift */,
-				6C3DD6E32A126DAF00456646 /* GuessView.swift */,
-				6C3DD6E52A12742D00456646 /* BoxView.swift */,
-				6C5014B12A40F38E004F84B3 /* QuestionArray.swift */,
+				6CFB02582A44DB89000045E1 /* Mood */,
+				6CFB02592A44DB97000045E1 /* Guess */,
 			);
 			path = Fealing;
 			sourceTree = "<group>";
@@ -801,6 +796,27 @@
 				6CFB02482A4486C1000045E1 /* VideoArray.swift */,
 			);
 			path = LookVideos;
+			sourceTree = "<group>";
+		};
+		6CFB02582A44DB89000045E1 /* Mood */ = {
+			isa = PBXGroup;
+			children = (
+				6CBE75CF2A0AD70B00A1747D /* FacesScreenView.swift */,
+				6CBE75D12A0BCA4E00A1747D /* FaceView.swift */,
+				6CBE75D32A0BCE5100A1747D /* Face.swift */,
+				6CBE75DC2A0C314900A1747D /* MoodEditorView.swift */,
+			);
+			path = Mood;
+			sourceTree = "<group>";
+		};
+		6CFB02592A44DB97000045E1 /* Guess */ = {
+			isa = PBXGroup;
+			children = (
+				6C3DD6E32A126DAF00456646 /* GuessView.swift */,
+				6C3DD6E52A12742D00456646 /* BoxView.swift */,
+				6C5014B12A40F38E004F84B3 /* QuestionArray.swift */,
+			);
+			path = Guess;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
