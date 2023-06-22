@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MandalaCollectionView: View {
     @Binding var currentDraw: Draw
-    @State var images = [Photo]()
+    @Binding var images: [Mandala]
     var gridItemLayout = [GridItem(.fixed(110)), GridItem(.fixed(110)), GridItem(.fixed(110))]
 
     var body: some View {
@@ -19,10 +19,10 @@ struct MandalaCollectionView: View {
                     ForEach(images.indices, id: \.self) { index in
                         NavigationLink(
                             destination: ActivityLogBaseView(
-                                viewName: "Image Selected: " + images[index].name,
+                                viewName: "Mandala Selected: " + images[index].name,
                                 isDirectChildToContainer: true,
                                 content: {
-                                    DrawView(currentDraw: $currentDraw, backgroundImage: images[index].name, isNewDraw: true, isColoring: true)
+                                    DrawView(currentDraw: $currentDraw, isNewDraw: true, isColoring: true)
                                 }
                             )
                         ) {
@@ -34,25 +34,12 @@ struct MandalaCollectionView: View {
                                 .frame(width: 110, height: 110, alignment: .center)
                                 .cornerRadius(10)
                                 .accessibilityLabel(images[index].name)
-                        }
+                        }.simultaneousGesture(TapGesture().onEnded {
+                            self.currentDraw.backImage = images[index].name
+                        })
                     }
                 }
             }
         }
     }
 }
-
-#if DEBUG
-struct MandalaCollectionView_Previews: PreviewProvider {
-    @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: Data(), date: Date(), backImage: "mandala1")
-    
-    static var previews: some View {
-        MandalaCollectionView(
-            currentDraw: $currentDraw,
-            images: (1...11).map {
-                Photo(name: "mandala\($0)")
-            }
-        )
-    }
-}
-#endif

@@ -27,23 +27,20 @@ struct MeditationView: View {
                 VStack {
                     HeaderMenu(title: "Guided Meditation")
                     VStack(alignment: .center, spacing: 10) {
-                        highlightsTitle
+                        highlightsTitle.padding(.horizontal, 10.0)
                         ScrollView(.horizontal) {
                             HStack {
                                 videosArrayView
                             }
                         }
-                        categoriesTitle
-                        tagsView
+                        categoriesTitle.padding(.horizontal, 10.0)
+                        tagsView.padding(.horizontal, 10.0)
                         if showingGuided {
-                            MeditationSpotifyView()
-                                .padding(.horizontal, 10.0)
+                            MeditationSpotifyView().padding(.horizontal, 10.0)
                         } else if showingYoutube {
-                            YoutubeView()
-                                .padding(.horizontal, 10.0)
+                            YoutubeView().padding(.horizontal, 10.0)
                         } else if showingSleep {
-                            SleepView()
-                                .padding(.horizontal, 10.0)
+                            SleepView().padding(.horizontal, 10.0)
                         }
                         Spacer()
                     }

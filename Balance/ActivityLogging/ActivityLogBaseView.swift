@@ -42,13 +42,7 @@ struct ActivityLogBaseView<Content>: View where Content: View {
                 
                 if isDirectChildToContainer {
 #if DEMO
-                    let log = ActivityLogLocal()
-                    log.actions = activityLogEntry.actions
-                    log.duration = activityLogEntry.duration
-                    log.endTime = activityLogEntry.endTime
-                    log.startTime = activityLogEntry.startTime
-
-                    logStore.saveLog(log)
+                    logStore.saveLog(activityLogEntry)
                     ActivityLogStore.save(logs: logStore.logs) { result in
                         if case .failure(let error) = result {
                             print(error.localizedDescription)

@@ -8,81 +8,9 @@
 
 import SwiftUI
 
-// swiftlint:disable all
-class ActivityLogLocal: ObservableObject, Codable {
-    enum CodingKeys: String, CodingKey {
-        case id
-        case startTime
-        case endTime
-        case duration
-        case actions
-    }
-    var id = UUID().uuidString
-    var startTime = Date(timeIntervalSinceReferenceDate: 0)
-    var endTime = Date(timeIntervalSinceReferenceDate: 0)
-    var duration: TimeInterval = 0
-    var actions: [Action] = []
-    
-    func reset() {
-        id = UUID().uuidString
-        startTime = Date(timeIntervalSinceReferenceDate: 0)
-        endTime = startTime
-        duration = 0
-        actions = []
-    }
-    
-    func isEmpty() -> Bool {
-        return getDuration() == TimeInterval(0)
-    }
-    
-    func addAction(actionDescription: String) {
-        let currentDate = Date.now
-        actions.append(Action(time: currentDate, description: actionDescription))
-        
-        // set start time if this is the first action
-        startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
-    }
-    
-    func endLog(actionDescription: String) {
-        addAction(actionDescription: actionDescription)
-        endTime = actions.last!.time
-        duration = getDuration()
-    }
-    
-    func getDuration() -> TimeInterval {
-        return endTime.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
-    }
-    
-    func toString() -> (String, String, String) {
-        let idStr = dateToString(date: startTime)
-        let id = id
-        
-        let startStr = "start: " + idStr
-        let endStr = endTime != Date(timeIntervalSinceReferenceDate: 0) ? "end: " + dateToString(date: endTime) : ""
-        let durationStr = "duration: \(duration)"
-        
-        var actionsStr = ""
-        
-        for action in actions {
-            actionsStr.append("\(dateToString(date: action.time) + " " + action.description)\n")
-        }
-        
-        return (id, idStr, [startStr, actionsStr, durationStr, endStr].joined(separator: "\n"))
-    }
-    
-    func dateToString(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        formatter.timeZone = .current
-        
-        return formatter.string(from: date)
-    }
-}
-
-
 class ActivityLogStore: ObservableObject {
     static let shared = ActivityLogStore()
-    @Published var logs: [ActivityLogLocal] = []
+    @Published var logs: [ActivityLogEntry] = []
     
     private static func fileURL() throws -> URL {
         try FileManager.default.url(
@@ -94,7 +22,7 @@ class ActivityLogStore: ObservableObject {
         .appendingPathComponent("activityLog.data")
     }
     
-    static func load(completion: @escaping (Result<[ActivityLogLocal], Error>) -> Void) {
+    static func load(completion: @escaping (Result<[ActivityLogEntry], Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
                 let fileURL = try fileURL()
@@ -104,7 +32,7 @@ class ActivityLogStore: ObservableObject {
                     }
                     return
                 }
-                let logs = try JSONDecoder().decode([ActivityLogLocal].self, from: file.availableData)
+                let logs = try JSONDecoder().decode([ActivityLogEntry].self, from: file.availableData)
                 
                 DispatchQueue.main.async {
                     completion(.success(logs))
@@ -117,7 +45,7 @@ class ActivityLogStore: ObservableObject {
         }
     }
     
-    static func save(logs: [ActivityLogLocal], completion: @escaping(Result<Int, Error>) -> Void) {
+    static func save(logs: [ActivityLogEntry], completion: @escaping(Result<Int, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {
                 let data = try JSONEncoder().encode(logs)
@@ -156,7 +84,7 @@ class ActivityLogStore: ObservableObject {
         }
     }
     
-    func saveLog(_ log: ActivityLogLocal) {
+    func saveLog(_ log: ActivityLogEntry) {
         let indexOfLog = logs.firstIndex { currentLog in
             currentLog.id == log.id
         }

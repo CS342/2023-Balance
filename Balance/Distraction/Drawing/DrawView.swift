@@ -54,7 +54,7 @@ struct DrawView: View {
     @State private var title = ""
     @State private var showingAlert = false
     @State var drawingSize = CGSize(width: 350, height: 350)
-    @State var backgroundImage = ""
+//    @State var backgroundImage = ""
     @State var isNewDraw = false
     @State var isColoring = false
 
@@ -227,7 +227,7 @@ struct DrawView: View {
     
     func loadCurrentDraw() {
         if self.currentDraw.backImage.isEmpty {
-            self.currentDraw.backImage = backgroundImage
+            self.currentDraw.backImage = ""
         }
         self.title = currentDraw.title
         self.image = currentDraw.image

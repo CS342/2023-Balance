@@ -56,10 +56,6 @@ class UserProfileRepositoryToLocal: ObservableObject {
     
     func fetchCurrentProfile(completion: @escaping (_ profile: ProfileUser?, _ error:
                                                         Error?) -> Void) {
-//        guard let user = AuthViewModel.shared.user else {
-//            return
-//        }
-        
         let userID = UserDefaults.standard.string(forKey: "lastPatient") ?? ""
         if userID.isEmpty {
             return
@@ -76,7 +72,7 @@ class UserProfileRepositoryToLocal: ObservableObject {
             }
         }
     }
-    
+        
     func removeCurrentProfile() {
         let userID = UserDefaults.standard.string(forKey: "lastPatient") ?? ""
         

@@ -7,19 +7,43 @@
 
 import SwiftUI
 
+struct MandalaTagView: View {
+    var selectedCategory: Category
+    @Binding var selectedBtn: Int
+    @Binding var filteredCat: [Mandala]
+    
+    var body: some View {
+        Button(action: {
+            self.selectedBtn = self.selectedCategory.id
+            filteredCat.removeAll()
+            for photo in mandalaArray {
+                for category in photo.category where category.name == self.selectedCategory.name {
+                    filteredCat.append(photo)
+                }
+            }
+        }) {
+            Text(selectedCategory.name)
+                .font(.custom("Nunito", size: 18))
+                .foregroundColor(.white)
+                .padding(20)
+        }
+        .frame(height: 30)
+        .background(self.selectedBtn == self.selectedCategory.id ? violetColor : lightVioletColor)
+        .cornerRadius(15)
+        .shadow(radius: 5)
+        .padding(5)
+    }
+}
+
 struct BackgroundDrawView: View {
     @Binding var currentDraw: Draw
-    @State private var animalsTag = true
-    @State private var landscapeTag = false
-    @State private var funnyTag = false
     @State var index = 0
+    @State var selectedCategory = mandalaCategoryArray[0]
+    @State var filtered = mandalaArray
+    @State var selected = 0
     
-    let highlightsImages = (1...11).map { Photo(name: "mandala\($0)") }
-
-    let imgArray2 = (1...20).map { Photo(name: "coffee-\($0)") }
-    let imgArray1 = (1...11).map { Photo(name: "mandala\($0)") }
-    let imgArray3 = (1...8).map { Photo(name: "img\($0)") }
-
+    let highlightArray = mandalaArray.filter { $0.highlight == true }
+    
     var body: some View {
         ActivityLogContainer {
             ZStack {
@@ -28,36 +52,41 @@ struct BackgroundDrawView: View {
                     HeaderMenu(title: "Draw Something")
                     VStack(alignment: .center, spacing: 10) {
                         highlightsTitle
-                        PagingView(index: $index.animation(), maxIndex: highlightsImages.count - 1) {
-                            ForEach(highlightsImages.indices, id: \.self) { index in
-                                Image(highlightsImages[index].name)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .accessibilityLabel(imgArray1[index].name)
-                            }
-                        }
-                        .aspectRatio(4 / 3, contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        PageControl(index: $index, maxIndex: highlightsImages.count)
-                            .padding(.top, 5.0)
+                        imagePaging
                         categoriesTitle
                         tagsView
-                        if animalsTag {
-                            MandalaCollectionView(currentDraw: $currentDraw, images: imgArray1)
-                                .padding(.horizontal, 10.0)
-                        } else if landscapeTag {
-                            MandalaCollectionView(currentDraw: $currentDraw, images: imgArray2)
-                                .padding(.horizontal, 10.0)
-                        } else if funnyTag {
-                            MandalaCollectionView(currentDraw: $currentDraw, images: imgArray1)
-                                .padding(.horizontal, 10.0)
-                        }
                         Spacer()
                     }
                     .edgesIgnoringSafeArea(.all)
                 }
             }
         }
+    }
+    
+    var imagePaging: some View {
+        TabView {
+            ForEach(highlightArray, id: \.self) { mandala in
+                NavigationLink(
+                    destination: ActivityLogBaseView(
+                        viewName: "Mandala Highlight Selected: " + mandala.name,
+                        isDirectChildToContainer: true,
+                        content: {
+                            DrawView(currentDraw: $currentDraw, isNewDraw: true, isColoring: true)
+                        }
+                    )
+                ) {
+                    Image(mandala.name)
+                        .resizable()
+                        .cornerRadius(20)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(5)
+                        .accessibilityLabel(mandala.name)
+                        .tag(mandala.id)
+                }.simultaneousGesture(TapGesture().onEnded {
+                    self.currentDraw.backImage = mandala.name
+                })
+            }
+        }.tabViewStyle(.page(indexDisplayMode: .never))
     }
     
     var highlightsTitle: some View {
@@ -75,62 +104,17 @@ struct BackgroundDrawView: View {
     }
     
     var tagsView: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                Spacer(minLength: 10)
-                animalsButton
-                landscapeButton
-                funnyButton
+        Group {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    Spacer(minLength: 10)
+                    ForEach(mandalaCategoryArray, id: \.self) { cat in
+                        MandalaTagView(selectedCategory: cat, selectedBtn: self.$selected, filteredCat: self.$filtered)
+                    }
+                }
             }
+            MandalaCollectionView(currentDraw: $currentDraw, images: $filtered).padding(.horizontal, 10.0)
         }
-    }
-    
-    var animalsButton: some View {
-        Button(action: {
-            animalsTag = true
-            landscapeTag = false
-            funnyTag = false
-        }) {
-            Text("Animals")
-                .font(.custom("Nunito", size: 18))
-                .frame(width: 120, height: 30)
-                .foregroundColor(.white)
-                .background(self.animalsTag ? violetColor : lightVioletColor)
-                .cornerRadius(20)
-        }
-        .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Animals"))
-    }
-    
-    var landscapeButton: some View {
-        Button(action: {
-            animalsTag = false
-            landscapeTag = true
-            funnyTag = false
-        }) {
-            Text("Landscape")
-                .font(.custom("Nunito", size: 18))
-                .frame(width: 120, height: 30)
-                .foregroundColor(.white)
-                .background(self.landscapeTag ? violetColor : lightVioletColor)
-                .cornerRadius(20)
-        }
-        .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Landscape"))
-    }
-    
-    var funnyButton: some View {
-        Button(action: {
-            animalsTag = false
-            landscapeTag = false
-            funnyTag = true
-        }) {
-            Text("Funny Images")
-                .font(.custom("Nunito", size: 18))
-                .frame(width: 120, height: 30)
-                .foregroundColor(.white)
-                .background(self.funnyTag ? violetColor : lightVioletColor)
-                .cornerRadius(20)
-        }
-        .buttonStyle(ActivityLogButtonStyle(activityDescription: "Viewing Funny Images"))
     }
 }
 

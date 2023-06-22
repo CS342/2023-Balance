@@ -31,18 +31,21 @@ struct Action: Codable {
 
 class ActivityLogEntry: ObservableObject, Codable {
     enum CodingKeys: String, CodingKey {
+        case id
         case startTime
         case endTime
         case duration
         case actions
     }
     
+    var id = UUID().uuidString
     var startTime = Date(timeIntervalSinceReferenceDate: 0)
     var endTime = Date(timeIntervalSinceReferenceDate: 0)
     var duration: TimeInterval = 0
     var actions: [Action] = []
     
     func reset() {
+        id = UUID().uuidString
         startTime = Date(timeIntervalSinceReferenceDate: 0)
         endTime = startTime
         duration = 0
