@@ -515,14 +515,10 @@
 				2761584429A64178006C7AC1 /* Balance-Bridging-Header.h */,
 				6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */,
 				653A2550283387FE005D4D48 /* Balance.swift */,
-				6CC177272A3A6BA900121B72 /* CellView.swift */,
 				2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */,
 				2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */,
-				2FC975A72978F11A00BA99FE /* Home.swift */,
-				6CF510BF29C8FD25008A2F55 /* LocationView.swift */,
-				894A884429B7B27600CB347B /* NavigationView.swift */,
 				2761584529A6448C006C7AC1 /* SceneDelegate.swift */,
-				5E03E99D29BC14FA0041DD1C /* ActivityLogging */,
+				6CFB025A2A44E34E000045E1 /* Home */,
 				6CE62D592A03089900BB4F90 /* Chill */,
 				2720083329A7E4C20052908D /* Diary */,
 				6CE62D582A03087400BB4F90 /* Distraction */,
@@ -531,9 +527,9 @@
 				6C80C02829CCF912003DD5B9 /* NavBar */,
 				6C0A4BF329E9B278003007C7 /* Profile */,
 				6C39EA1A29C9EA150095573E /* SOS */,
-				2FC9759D2978E30800BA99FE /* Supporting Files */,
 				6CBE75DB2A0BEBC400A1747D /* Utils */,
-				6CFB02462A43AD8D000045E1 /* UserImageCache.swift */,
+				5E03E99D29BC14FA0041DD1C /* ActivityLogging */,
+				2FC9759D2978E30800BA99FE /* Supporting Files */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -776,6 +772,7 @@
 		6CFB02522A449BE9000045E1 /* LookImages */ = {
 			isa = PBXGroup;
 			children = (
+				6CFB02462A43AD8D000045E1 /* UserImageCache.swift */,
 				6CFB02542A449C2A000045E1 /* ImageReviewRepository.swift */,
 				6CB5181429E44E52007AADB4 /* GalleryView.swift */,
 				6CB5181929E45678007AADB4 /* ImageCollectionView.swift */,
@@ -817,6 +814,17 @@
 				6C5014B12A40F38E004F84B3 /* QuestionArray.swift */,
 			);
 			path = Guess;
+			sourceTree = "<group>";
+		};
+		6CFB025A2A44E34E000045E1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6CC177272A3A6BA900121B72 /* CellView.swift */,
+				2FC975A72978F11A00BA99FE /* Home.swift */,
+				6CF510BF29C8FD25008A2F55 /* LocationView.swift */,
+				894A884429B7B27600CB347B /* NavigationView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

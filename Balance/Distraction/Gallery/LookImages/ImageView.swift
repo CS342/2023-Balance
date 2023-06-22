@@ -58,31 +58,6 @@ struct ImageView: View {
                 savedArray.append(selected)
                 UserImageCache.save(savedArray, key: self.profile.id.appending("RemovedArray"))
             }
-            selected.review = "DISLIKE"
-            selected.removed = true
-            selected.favorite = false
-            if currentIndex < self.imagesArray.count - 1 {
-                self.currentIndex += 1
-                self.selected = self.imagesArray[currentIndex]
-            } else {
-                self.currentIndex = 0
-                self.selected = self.imagesArray[currentIndex]
-            }
-            //            ImageReviewRepository.shared.createPhoto(photo: selected) { photo, error in
-            //                if let error = error {
-            //                    print("Error while fetching photo: \(error)")
-            //                    return
-            //                } else {
-            //                    print("Saved photo: \(String(describing: photo))")
-            //                    if currentIndex < self.imagesArray.count - 1 {
-            //                        self.currentIndex += 1
-            //                        self.selected = self.imagesArray[currentIndex]
-            //                    } else {
-            //                        self.currentIndex = 0
-            //                        self.selected = self.imagesArray[currentIndex]
-            //                    }
-            //                }
-            //            }
         }) {
             Image("crossImage")
                 .resizable()
@@ -105,31 +80,6 @@ struct ImageView: View {
                 savedArray.append(selected)
                 UserImageCache.save(savedArray, key: self.profile.id.appending("FavoritesArray"))
             }
-            selected.review = "LIKE"
-            selected.favorite = true
-            selected.removed = false
-            if currentIndex < self.imagesArray.count - 1 {
-                self.currentIndex += 1
-                self.selected = self.imagesArray[currentIndex]
-            } else {
-                self.currentIndex = 0
-                self.selected = self.imagesArray[currentIndex]
-            }
-            //            ImageReviewRepository.shared.createPhoto(photo: selected) { photo, error in
-            //                if let error = error {
-            //                    print("Error while fetching photo: \(error)")
-            //                    return
-            //                } else {
-            //                    print("Saved photo: \(String(describing: photo))")
-            //                    if currentIndex < self.imagesArray.count - 1 {
-            //                        self.currentIndex += 1
-            //                        self.selected = self.imagesArray[currentIndex]
-            //                    } else {
-            //                        self.currentIndex = 0
-            //                        self.selected = self.imagesArray[currentIndex]
-            //                    }
-            //                }
-            //            }
         }) {
             Image("heartImage")
                 .resizable()
