@@ -38,7 +38,7 @@ struct MandalaTagView: View {
 struct BackgroundDrawView: View {
     @Binding var currentDraw: Draw
     @State var index = 0
-    @State var selectedCategory = imageCategoryArray[0]
+    @State var selectedCategory = mandalaCategoryArray[0]
     @State var filtered = mandalaArray
     @State var selected = 0
     
@@ -71,7 +71,7 @@ struct BackgroundDrawView: View {
                         viewName: "Mandala Highlight Selected: " + mandala.name,
                         isDirectChildToContainer: true,
                         content: {
-                            DrawView(currentDraw: $currentDraw, backgroundImage: mandala.name, isNewDraw: true, isColoring: true)
+                            DrawView(currentDraw: $currentDraw, isNewDraw: true, isColoring: true)
                         }
                     )
                 ) {
@@ -82,7 +82,9 @@ struct BackgroundDrawView: View {
                         .padding(5)
                         .accessibilityLabel(mandala.name)
                         .tag(mandala.id)
-                }
+                }.simultaneousGesture(TapGesture().onEnded {
+                    self.currentDraw.backImage = mandala.name
+                })
             }
         }.tabViewStyle(.page(indexDisplayMode: .never))
     }
@@ -111,7 +113,7 @@ struct BackgroundDrawView: View {
                     }
                 }
             }
-            MandalaCollectionView(currentDraw: $currentDraw, images: filtered).padding(.horizontal, 10.0)
+            MandalaCollectionView(currentDraw: $currentDraw, images: $filtered).padding(.horizontal, 10.0)
         }
     }
 }

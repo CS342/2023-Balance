@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MandalaCollectionView: View {
     @Binding var currentDraw: Draw
-    @State var images = [Mandala]()
+    @Binding var images: [Mandala]
     var gridItemLayout = [GridItem(.fixed(110)), GridItem(.fixed(110)), GridItem(.fixed(110))]
 
     var body: some View {
@@ -22,7 +22,7 @@ struct MandalaCollectionView: View {
                                 viewName: "Mandala Selected: " + images[index].name,
                                 isDirectChildToContainer: true,
                                 content: {
-                                    DrawView(currentDraw: $currentDraw, backgroundImage: images[index].name, isNewDraw: true, isColoring: true)
+                                    DrawView(currentDraw: $currentDraw, isNewDraw: true, isColoring: true)
                                 }
                             )
                         ) {
@@ -34,7 +34,9 @@ struct MandalaCollectionView: View {
                                 .frame(width: 110, height: 110, alignment: .center)
                                 .cornerRadius(10)
                                 .accessibilityLabel(images[index].name)
-                        }
+                        }.simultaneousGesture(TapGesture().onEnded {
+                            self.currentDraw.backImage = images[index].name
+                        })
                     }
                 }
             }
