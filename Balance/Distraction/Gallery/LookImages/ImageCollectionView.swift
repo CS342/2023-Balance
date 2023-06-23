@@ -10,7 +10,7 @@ import SwiftUI
 struct ImageCollectionView: View {
     var images = [Photo]()
     var gridItemLayout = [GridItem(.fixed(110)), GridItem(.fixed(110)), GridItem(.fixed(110))]
-
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: gridItemLayout, alignment: .center, spacing: 10) {
@@ -24,14 +24,27 @@ struct ImageCollectionView: View {
                             }
                         )
                     ) {
-                        Image(images[index].name)
-                            .resizable()
-                            .scaledToFit()
-                            .aspectRatio(contentMode: .fill)
-                            .clipped()
-                            .frame(width: 110, height: 110, alignment: .center)
-                            .cornerRadius(10)
-                            .accessibilityLabel(images[index].name)
+                        if images[index].imageData.isEmpty {
+                            Image(images[index].name)
+                                .resizable()
+                                .scaledToFit()
+                                .aspectRatio(contentMode: .fill)
+                                .clipped()
+                                .frame(width: 110, height: 110, alignment: .center)
+                                .cornerRadius(10)
+                                .accessibilityLabel(images[index].name)
+                        } else {
+                            if let uiImage = UIImage(data: images[index].imageData) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+                                    .frame(width: 110, height: 110, alignment: .center)
+                                    .cornerRadius(10)
+                                    .accessibilityLabel(images[index].name)
+                            }
+                        }
                     }
                 }
             }

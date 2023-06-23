@@ -14,7 +14,8 @@ var imageCategoryArray: [Category] = [
     Category(id: 3, name: "Funny Images"),
     Category(id: 4, name: "Landscape"),
     Category(id: 5, name: "Inspirational Quotes"),
-    Category(id: 6, name: "Removed")
+    Category(id: 6, name: "Uploaded"),
+    Category(id: 7, name: "Removed")
 ]
 
 var photoArray: [Photo] = [
