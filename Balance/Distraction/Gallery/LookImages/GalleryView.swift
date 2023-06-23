@@ -11,16 +11,21 @@ struct ImageTagView: View {
     var selectedCategory: Category
     @Binding var selectedBtn: Int
     @Binding var filteredCat: [Photo]
-    @State var profile = ProfileUser()
-    
+    @Binding var isUpload: Bool
+    @Binding var profile: ProfileUser
+
     var body: some View {
         Button(action: {
+            self.isUpload = false
             self.selectedBtn = self.selectedCategory.id
             filteredCat.removeAll()
             if self.selectedCategory.name == "Favorites" {
                 filteredCat = UserImageCache.load(key: self.profile.id.appending("FavoritesArray"))
             } else if self.selectedCategory.name == "Removed" {
                 filteredCat = UserImageCache.load(key: self.profile.id.appending("RemovedArray"))
+            } else if self.selectedCategory.name == "Uploaded" {
+                filteredCat = UserImageCache.load(key: self.profile.id.appending("UploadedArray"))
+                self.isUpload = true
             } else {
                 for photo in photoArray {
                     for category in photo.category where category.name == self.selectedCategory.name {
@@ -39,20 +44,6 @@ struct ImageTagView: View {
         .cornerRadius(15)
         .shadow(radius: 5)
         .padding(5)
-        .onAppear {
-            loadUser()
-        }
-    }
-    
-    func loadUser() {
-        UserProfileRepositoryToLocal.shared.fetchCurrentProfile { profileUser, error in
-            if let error = error {
-                print("Error while fetching the user profile: \(error)")
-                return
-            } else {
-                self.profile = profileUser ?? ProfileUser()
-            }
-        }
     }
 }
 
@@ -61,7 +52,8 @@ struct GalleryView: View {
     @State var selectedCategory = imageCategoryArray[0]
     @State var filtered = photoArray
     @State var selected = 0
-    
+    @State var isUpload = false
+    @State var profile = ProfileUser()
     let highlightArray = photoArray.filter { $0.highlight == true }
     
     var body: some View {
@@ -73,14 +65,26 @@ struct GalleryView: View {
                     VStack(alignment: .center, spacing: 10) {
                         highlightsTitle
                         imagePaging
-                        categoriesTitle
+                        HStack {
+                            categoriesTitle.padding(10)
+                            Spacer()
+                            if isUpload == true {
+                                uploadButton.padding(10)
+                            }
+                        }
                         tagsView
                         Spacer()
                     }
                     .edgesIgnoringSafeArea(.all)
                 }
+            }.onAppear {
+                loadUser()
             }
         }
+    }
+    
+    var uploadButton: some View {
+        PhotoUploadView(savedArray: $filtered)
     }
     
     var imagePaging: some View {
@@ -127,11 +131,28 @@ struct GalleryView: View {
                 HStack {
                     Spacer(minLength: 10)
                     ForEach(imageCategoryArray, id: \.self) { cat in
-                        ImageTagView(selectedCategory: cat, selectedBtn: self.$selected, filteredCat: self.$filtered)
+                        ImageTagView(
+                            selectedCategory: cat,
+                            selectedBtn: self.$selected,
+                            filteredCat: self.$filtered,
+                            isUpload: self.$isUpload,
+                            profile: self.$profile
+                        )
                     }
                 }
             }
             ImageCollectionView(imageArray: filtered).padding(.horizontal, 10.0)
+        }
+    }
+    
+    func loadUser() {
+        UserProfileRepositoryToLocal.shared.fetchCurrentProfile { profileUser, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                self.profile = profileUser ?? ProfileUser()
+            }
         }
     }
 }

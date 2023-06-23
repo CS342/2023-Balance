@@ -9,16 +9,27 @@ import SwiftUI
 
 struct CardImageView: View {
     var image: String
-    
+    var imageData: Data
+
     var body: some View {
         VStack {
             ZStack {
                 Group {
-                    Image(image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipped()
-                        .accessibilityLabel(image)
+                    if imageData.isEmpty {
+                        Image(image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .clipped()
+                            .accessibilityLabel(image)
+                    } else {
+                        if let uiImage = UIImage(data: imageData) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .clipped()
+                                .accessibilityLabel(UUID().uuidString)
+                        }
+                    }
                 }
                 .frame(maxWidth: 300, maxHeight: 300)
                 .foregroundColor(violetColor)
@@ -36,6 +47,6 @@ struct CardImageView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardImageView(image: "")
+        CardImageView(image: "", imageData: Data())
     }
 }

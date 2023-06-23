@@ -24,7 +24,7 @@ struct ImageView: View {
                     Spacer()
                     TabView(selection: $selected) {
                         ForEach(self.imagesArray) { img in
-                            CardImageView(image: img.name)
+                            CardImageView(image: img.name, imageData: img.imageData)
                                 .tag(img)
                         }
                     }

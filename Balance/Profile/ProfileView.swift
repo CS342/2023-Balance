@@ -31,6 +31,7 @@ struct ProfileView: View {
     @State private var avatar = ""
     @State private var email = ""
     @State private var patientID = ""
+    @State private var showAlert = false
 
     var body: some View {
         ActivityLogContainer {
@@ -122,12 +123,18 @@ struct ProfileView: View {
     
     var resetOption: some View {
         Button {
+            UserImageCache.remove(key: self.patientID.appending("UploadedArray"))
+            UserImageCache.remove(key: self.patientID.appending("RemovedArray"))
+            UserImageCache.remove(key: self.patientID.appending("FavoritesArray"))
             logStore.removeStore()
             noteStore.removeStore()
             drawStore.removeStore()
             coloringStore.removeStore()
+            showAlert = true
         } label: {
             ProfileCellView(image: "info", text: "Reset user")
+        }.alert("Reset", isPresented: $showAlert) {
+            Button("Done", role: .cancel) { }
         }
     }
     

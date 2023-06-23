@@ -15,4 +15,5 @@ struct Photo: Codable, Equatable, Hashable, Identifiable {
     var highlight = false
     var favorite = false
     var removed = false
+    var imageData = Data()
 }
