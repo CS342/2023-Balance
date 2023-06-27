@@ -44,8 +44,7 @@ struct SleepView: View {
                             .frame(width: 360, height: 120, alignment: .leading)
                             .foregroundColor(Color(#colorLiteral(red: 0.25, green: 0.38, blue: 0.50, alpha: 1.00)))
                             .background(Color(#colorLiteral(red: 0.30, green: 0.79, blue: 0.94, alpha: 0.05)))
-                            .cornerRadius(40)
-                            .padding()
+                            .cornerRadius(10)
                         }
                     }
                 }

@@ -28,11 +28,7 @@ struct MeditationView: View {
                     HeaderMenu(title: "Guided Meditation")
                     VStack(alignment: .center, spacing: 10) {
                         highlightsTitle.padding(.horizontal, 10.0)
-                        ScrollView(.horizontal) {
-                            HStack {
-                                videosArrayView
-                            }
-                        }
+                        videoPaging
                         categoriesTitle.padding(.horizontal, 10.0)
                         tagsView.padding(.horizontal, 10.0)
                         if showingGuided {
@@ -72,6 +68,38 @@ struct MeditationView: View {
                 .cornerRadius(20)
                 .padding()
         }
+    }
+    
+    var videoPaging: some View {
+        TabView {
+            ForEach(videoIDArray, id: \.self) { vidID in
+                NavigationLink(
+                    destination: ActivityLogBaseView(
+                        viewName: "Guided Meditation Highlight Selected: " + vidID,
+                        isDirectChildToContainer: true,
+                        content: {
+                            YoutubeModalView(videoID: vidID)
+                        }
+                    )
+                ) {
+                    AsyncImage(
+                        url: URL(string: "http://img.youtube.com/vi/\(vidID)/0.jpg"),
+                        content: { image in
+                            image.resizable()
+                                .scaledToFill()
+                        },
+                        placeholder: {
+                            Image(systemName: "photo.fill")
+                                .tint(lightGrayColor)
+                        }
+                    )
+                    .clipped()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(10)
+                    .accessibilityLabel(vidID)
+                }
+            }
+        }.tabViewStyle(.page(indexDisplayMode: .never))
     }
     
     var tagsView: some View {
