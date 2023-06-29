@@ -51,8 +51,8 @@ struct AvatarPreviewView: View {
             .onChange(of: authModel.authError) { value in
                 if !value.isEmpty {
                     loading = false
-//                    self.alertMessage = value
-//                    self.showingAlert = true
+                    //                    self.alertMessage = value
+                    //                    self.showingAlert = true
                 }
             }
         }
@@ -118,29 +118,11 @@ struct AvatarPreviewView: View {
                     user.avatar = avatarSelection.name
                     authModel.signUp(userData: user)
                 } else {
-                    UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
-                        if let error = error {
-                            loading = false
-                            print("Error while fetching the user profile: \(error)")
-                            return
-                        } else {
-                            print("User: " + (profileUser?.description() ?? "-"))
-                            var loadExistenceProfile = profileUser ?? ProfileUser()
-                            loadExistenceProfile.avatar = avatarSelection.name
-                            UserProfileRepository.shared.createProfile(profile: loadExistenceProfile) { profile, error in
-                                loading = false
-                                if let error = error {
-                                    print("Error while fetching the user profile: \(error)")
-                                    return
-                                } else {
-                                    self.profile = profile ?? ProfileUser()
-                                    authModel.profile = profile
-                                    print("User: " + (profile?.description() ?? "-"))
-                                    NavigationUtil.popToRootView()
-                                }
-                            }
-                        }
-                    }
+#if DEMO
+                    updateLocalProfile()
+#else
+                    updateProfile()
+#endif
                 }
             },
             label: {
@@ -184,7 +166,6 @@ struct AvatarPreviewView: View {
     
     func updateData(profile: ProfileUser) {
         if firstLoad {
-//            dismiss()
             onboardingSteps.remove(at: 1)
             onboardingSteps.remove(at: 0)
         } else {
@@ -207,5 +188,57 @@ struct AvatarPreviewView: View {
             print("Error decoding: \(error)")
         }
         return ProfileUser()
+    }
+    
+    func updateLocalProfile() {
+        UserProfileRepositoryToLocal.shared.fetchCurrentProfile { profileUser, error in
+            if let error = error {
+                loading = false
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                print("User: " + (profileUser?.description() ?? "-"))
+                var loadExistenceProfile = profileUser ?? ProfileUser()
+                loadExistenceProfile.avatar = avatarSelection.name
+                UserProfileRepositoryToLocal.shared.createProfile(profile: loadExistenceProfile) { profile, error in
+                    loading = false
+                    if let error = error {
+                        print("Error while fetching the user profile: \(error)")
+                        return
+                    } else {
+                        self.profile = profile ?? ProfileUser()
+                        authModel.profile = profile
+                        print("User: " + (profile?.description() ?? "-"))
+                        NavigationUtil.popToRootView()
+                    }
+                }
+            }
+        }
+    }
+    
+    func updateProfile() {
+        UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
+            if let error = error {
+                loading = false
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                print("User: " + (profileUser?.description() ?? "-"))
+                var loadExistenceProfile = profileUser ?? ProfileUser()
+                loadExistenceProfile.avatar = avatarSelection.name
+                UserProfileRepository.shared.createProfile(profile: loadExistenceProfile) { profile, error in
+                    loading = false
+                    if let error = error {
+                        print("Error while fetching the user profile: \(error)")
+                        return
+                    } else {
+                        self.profile = profile ?? ProfileUser()
+                        authModel.profile = profile
+                        print("User: " + (profile?.description() ?? "-"))
+                        NavigationUtil.popToRootView()
+                    }
+                }
+            }
+        }
     }
 }

@@ -107,7 +107,6 @@ struct ProfileView: View {
     }
     
     var avatarChangeView: some View {
-#if !DEMO
         Button(action: {
             showingAvatarSheet.toggle()
             print("avatarView")
@@ -116,9 +115,6 @@ struct ProfileView: View {
         }.sheet(isPresented: $showingAvatarSheet) {
             AvatarSelectionView(onboardingSteps: $onboardingSteps, firstLoad: false).environmentObject(authModel)
         }
-#else
-        profileView
-#endif
     }
     
     var resetOption: some View {
@@ -211,9 +207,7 @@ struct ProfileView: View {
                 .frame(width: 180, height: 180)
                 .accessibilityLabel("avatar")
                 .shadow(color: darkGrayColor, radius: 6)
-#if !DEMO
             plusIcon
-#endif
         }
     }
     

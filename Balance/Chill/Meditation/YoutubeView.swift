@@ -34,10 +34,31 @@ struct YoutubeView: View {
         ScrollView(.vertical) {
             VStack {
                 ForEach(videoIDArray, id: \.self) { vidID in
-                    VideoView(videoID: vidID)
-                        .frame(width: 360, height: 120)
-                        .cornerRadius(40)
-                        .padding()
+                    NavigationLink(
+                        destination: ActivityLogBaseView(
+                            viewName: "Video Selected: " + vidID,
+                            isDirectChildToContainer: true,
+                            content: {
+                                YoutubeModalView(videoID: vidID)
+                            }
+                        )
+                    ) {
+                        AsyncImage(
+                            url: URL(string: "http://img.youtube.com/vi/\(vidID)/0.jpg"),
+                            content: { image in
+                                image.resizable()
+                                    .scaledToFill()
+                            },
+                            placeholder: {
+                                Image(systemName: "photo.fill")
+                                    .tint(lightGrayColor)
+                            }
+                        )
+                        .clipped()
+                        .frame(width: 360, height: 120, alignment: .center)
+                        .cornerRadius(10)
+                        .accessibilityLabel(vidID)
+                    }
                 }
             }
         }

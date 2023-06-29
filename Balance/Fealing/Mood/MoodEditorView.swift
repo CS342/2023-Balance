@@ -44,7 +44,7 @@ struct MoodEditorView: View {
     }
     
     var titleText: some View {
-        Text("Write how you feel, describe your emotion")
+        Text("Write below how you feel, describe your emotion")
             .font(.custom("Nunito-Bold", size: 25))
             .foregroundColor(violetColor)
             .multilineTextAlignment(.center)

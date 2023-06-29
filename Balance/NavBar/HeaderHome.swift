@@ -40,7 +40,7 @@ public struct HeaderHome: View {
             Spacer()
 //            buttonsView
 //            Spacer()
-            quotasView
+//            quotasView
             Spacer()
         }
         .frame(maxWidth: .infinity)
