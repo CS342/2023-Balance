@@ -63,7 +63,6 @@ struct DrawView: View {
     @State private var title = ""
     @State private var showingAlert = false
     @State var drawingSize = CGSize(width: 350, height: 350)
-//    @State var backgroundImage = ""
     @State var isNewDraw = false
     @State var isColoring = false
 
@@ -76,7 +75,7 @@ struct DrawView: View {
                     Spacer().frame(height: 20)
                     toolkitView
                     Spacer()
-                    DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
+                    DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color, isColoring: $isColoring)
                         .frame(width: drawingSize.width, height: drawingSize.height)
                         .border(Color.gray, width: 5)
                     Spacer()
