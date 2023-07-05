@@ -15,7 +15,8 @@ struct DrawingView: UIViewRepresentable {
     @Binding var isdraw: Bool
     @Binding var type: PKInkingTool.InkType
     @Binding var color: Color
-    
+    @Binding var isColoring: Bool
+
     // Updating inktype
     var ink: PKInkingTool {
         PKInkingTool(type, color: UIColor(color))
@@ -26,8 +27,16 @@ struct DrawingView: UIViewRepresentable {
     func makeUIView(context: Context) -> PKCanvasView {
         canvas.drawingPolicy = .anyInput
         canvas.tool = isdraw ? ink : eraser
-        canvas.minimumZoomScale = 1
-        canvas.maximumZoomScale = 1
+        if isColoring == false {
+            canvas.minimumZoomScale = 0.2
+            canvas.maximumZoomScale = 4
+            canvas.contentSize = CGSize(width: 1000, height: 1000)
+            canvas.contentInset = UIEdgeInsets(top: 500, left: 500, bottom: 500, right: 500)
+        } else {
+            canvas.minimumZoomScale = 1
+            canvas.maximumZoomScale = 1
+        }
+        
         return canvas
     }
     

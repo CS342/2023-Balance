@@ -277,10 +277,13 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func pressed(sender : UIButton) {
-        guard let url = URL(string: "spotify://") else {
-            return
+        if UIApplication.shared.canOpenURL(URL(string: "spotify:")!) {
+            // spotify is installed.
+            UIApplication.shared.open(URL(string: "spotify:")!)
+        } else {
+            // spotify is not installed. Launch AppStore to install spotify app
+            UIApplication.shared.open(URL(string: spotifyURL)!)
         }
-        UIApplication.shared.open(url)
     }
     
     func player() {

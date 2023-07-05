@@ -71,3 +71,6 @@ let correctOption = Color(#colorLiteral(red: 0.6474730372, green: 1, blue: 0.811
 let wrongOption = Color(#colorLiteral(red: 0.9673425555, green: 0.1463843882, blue: 0.5197440386, alpha: 1))
 
 let silentTrack = "spotify:track:7p5bQJB4XsZJEEn6Tb7EaL"
+let cantAnswer = 10
+
+let spotifyURL = "https://itunes.com/apps/spotifyltd"
