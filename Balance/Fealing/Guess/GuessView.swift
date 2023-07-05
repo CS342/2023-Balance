@@ -20,10 +20,14 @@ struct Question: Identifiable {
 }
 
 struct GuessView: View {
+    @Environment(\.dismiss) var dismiss
     @State var selected = 10
     @State var questionIndex = 0
     @State var stopUserInteraction = false
-    @State var questions = questionArray.prefix(10).shuffled()
+    @State var questions = [Question]()
+    @State var showingAlert = false
+    @State var firstTry = true
+    @State var correctAnswer = 0
     var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
 
     var body: some View {
@@ -43,7 +47,19 @@ struct GuessView: View {
                     optionsButtons
                 }
             }
+            .onAppear(perform: {
+                questions = questionArray.prefix(cantAnswer).shuffled()
+            })
             .disabled(stopUserInteraction)
+            .alert("You got \(correctAnswer)/\(cantAnswer) right on the first try!", isPresented: $showingAlert) {
+                Button("Close", role: .cancel) {
+                    correctAnswer = 0
+                    firstTry = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
     
@@ -86,27 +102,34 @@ struct GuessView: View {
                 .cornerRadius(100, corners: .bottomLeft)
                 .padding(40)
                 .zIndex(0)
-            Image(questions[questionIndex].image)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 220, height: 220, alignment: .center)
-                .accessibilityLabel(questions[questionIndex].image)
-                .frame(alignment: .center)
-                .zIndex(1)
-                .animation(.easeInOut(duration: 0.5), value: UUID())
+            if !questions.isEmpty {
+                Image(questions[questionIndex].image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 220, height: 220, alignment: .center)
+                    .accessibilityLabel(questions[questionIndex].image)
+                    .frame(alignment: .center)
+                    .zIndex(1)
+                    .animation(.easeInOut(duration: 0.5), value: UUID())
+            }
         }
     }
     
     var optionsButtons: some View {
         LazyVGrid(columns: gridItemLayout, spacing: 20) {
-            ForEach(questions[questionIndex].options, id: \.id) { box in
-                BoxView(
-                    selectedBtn: self.$selected,
-                    questionIndex: self.$questionIndex,
-                    questions: $questions,
-                    stopUserInteraction: $stopUserInteraction,
-                    box: box
-                ).animation(.easeInOut(duration: 0.5), value: UUID())
+            if !questions.isEmpty {
+                ForEach(questions[questionIndex].options, id: \.id) { box in
+                    BoxView(
+                        selectedBtn: self.$selected,
+                        questionIndex: self.$questionIndex,
+                        questions: $questions,
+                        stopUserInteraction: $stopUserInteraction,
+                        showingAlert: $showingAlert,
+                        correctAnswers: $correctAnswer,
+                        firstTry: $firstTry,
+                        box: box
+                    ).animation(.easeInOut(duration: 0.5), value: UUID())
+                }
             }
         }.padding()
     }

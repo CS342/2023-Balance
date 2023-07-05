@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct BoxView: View {
-    @Environment(\.dismiss) var dismiss
     @Binding var selectedBtn: Int
     @Binding var questionIndex: Int
     @Binding var questions: [Question]
     @Binding var stopUserInteraction: Bool
+    @Binding var showingAlert: Bool
+    @Binding var correctAnswers: Int
+    @Binding var firstTry: Bool
     var box: Box
 
     var body: some View {
@@ -22,16 +24,29 @@ struct BoxView: View {
             if self.questionIndex < (questions.count - 1) {
                 if !self.box.correct {
                     stopUserInteraction = false
+                    firstTry = false
                     return
+                }
+                if firstTry == true {
+                    correctAnswers += 1
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.questionIndex += 1
                     self.selectedBtn = -1
                     stopUserInteraction = false
+                    firstTry = true
                 }
             } else {
+                if !self.box.correct {
+                    stopUserInteraction = false
+                    firstTry = false
+                    return
+                }
+                if firstTry == true {
+                    correctAnswers += 1
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    dismiss()
+                    showingAlert = true
                 }
             }
         }) {

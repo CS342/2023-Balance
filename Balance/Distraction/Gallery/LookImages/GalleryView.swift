@@ -11,6 +11,7 @@ struct ImageTagView: View {
     var selectedCategory: Category
     @Binding var selectedBtn: Int
     @Binding var filteredCat: [Photo]
+    @Binding var selectedCat: Category
     @Binding var isUpload: Bool
     @Binding var profile: ProfileUser
 
@@ -19,6 +20,7 @@ struct ImageTagView: View {
             self.isUpload = false
             self.selectedBtn = self.selectedCategory.id
             filteredCat.removeAll()
+            self.selectedCat = self.selectedCategory
             if self.selectedCategory.name == "Favorites" {
                 filteredCat = UserImageCache.load(key: self.profile.id.appending("FavoritesArray"))
             } else if self.selectedCategory.name == "Removed" {
@@ -27,9 +29,20 @@ struct ImageTagView: View {
                 filteredCat = UserImageCache.load(key: self.profile.id.appending("UploadedArray"))
                 self.isUpload = true
             } else {
+                if self.selectedCategory.name == "All" {
+                    filteredCat = UserImageCache.load(key: self.profile.id.appending("UploadedArray"))
+                }
+                let removedElements = UserImageCache.load(key: self.profile.id.appending("RemovedArray"))
+                var isRemoved = false
                 for photo in photoArray {
                     for category in photo.category where category.name == self.selectedCategory.name {
-                        filteredCat.append(photo)
+                        for removedPhoto in removedElements where removedPhoto.name == photo.name {
+                                isRemoved = true
+                        }
+                        if !isRemoved {
+                            filteredCat.append(photo)
+                        }
+                        isRemoved = false
                     }
                 }
             }
@@ -50,12 +63,12 @@ struct ImageTagView: View {
 struct GalleryView: View {
     @State var index = 0
     @State var selectedCategory = imageCategoryArray[0]
-    @State var filtered = photoArray
+    @State var filtered = [Photo]()
     @State var selected = 0
     @State var isUpload = false
     @State var profile = ProfileUser()
     let highlightArray = photoArray.filter { $0.highlight == true }
-    
+
     var body: some View {
         ActivityLogContainer {
             ZStack {
@@ -79,6 +92,7 @@ struct GalleryView: View {
                 }
             }.onAppear {
                 loadUser()
+                loadData()
             }
         }
     }
@@ -95,7 +109,12 @@ struct GalleryView: View {
                         viewName: "Image Highlight Selected: " + img.name,
                         isDirectChildToContainer: true,
                         content: {
-                            ImageView(imagesArray: highlightArray, currentIndex: index, selected: highlightArray[index])
+                            ImageView(
+                                imagesArray: highlightArray,
+                                currentIndex: index,
+                                selected: highlightArray[index],
+                                selectedCategory: selectedCategory
+                            )
                         }
                     )
                 ) {
@@ -135,13 +154,14 @@ struct GalleryView: View {
                             selectedCategory: cat,
                             selectedBtn: self.$selected,
                             filteredCat: self.$filtered,
+                            selectedCat: self.$selectedCategory,
                             isUpload: self.$isUpload,
                             profile: self.$profile
                         )
                     }
                 }
             }
-            ImageCollectionView(imageArray: filtered).padding(.horizontal, 10.0)
+            ImageCollectionView(imageArray: filtered, category: selectedCategory).padding(.horizontal, 10.0)
         }
     }
     
@@ -153,6 +173,35 @@ struct GalleryView: View {
             } else {
                 self.profile = profileUser ?? ProfileUser()
             }
+        }
+    }
+    
+    func loadData() {
+        filtered.removeAll()
+        if selectedCategory.name == "All" {
+            filtered = UserImageCache.load(key: self.profile.id.appending("UploadedArray"))
+        }
+        if self.selectedCategory.name == "Favorites" {
+            filtered = UserImageCache.load(key: self.profile.id.appending("FavoritesArray"))
+        } else if self.selectedCategory.name == "Removed" {
+            filtered = UserImageCache.load(key: self.profile.id.appending("RemovedArray"))
+        } else if self.selectedCategory.name == "Uploaded" {
+            filtered = UserImageCache.load(key: self.profile.id.appending("UploadedArray"))
+        } else {
+            let removedElements = UserImageCache.load(key: self.profile.id.appending("RemovedArray"))
+            var isRemoved = false
+            for photo in photoArray {
+                for category in photo.category where category.name == self.selectedCategory.name {
+                    for removedPhoto in removedElements where removedPhoto.name == photo.name {
+                        isRemoved = true
+                    }
+                    if !isRemoved {
+                        filtered.append(photo)
+                    }
+                    isRemoved = false
+                }
+            }
+//            filtered.append(contentsOf: photoArray)
         }
     }
 }

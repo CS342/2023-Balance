@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ImageCollectionView: View {
     var images = [Photo]()
+    var category: Category
     var gridItemLayout = [GridItem(.fixed(110)), GridItem(.fixed(110)), GridItem(.fixed(110))]
     
     var body: some View {
@@ -20,7 +21,7 @@ struct ImageCollectionView: View {
                             viewName: "Image Selected: " + images[index].name,
                             isDirectChildToContainer: true,
                             content: {
-                                ImageView(imagesArray: images, currentIndex: index, selected: images[index])
+                                ImageView(imagesArray: images, currentIndex: index, selected: images[index], selectedCategory: category)
                             }
                         )
                     ) {
@@ -51,13 +52,14 @@ struct ImageCollectionView: View {
         }
     }
     
-    init(imageArray: [Photo]) {
+    init(imageArray: [Photo], category: Category) {
         self.images = imageArray
+        self.category = category
     }
 }
 
 struct ImageCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageCollectionView(imageArray: (1...8).map { Photo(category: [Category(id: 5, name: "Landscape")], name: "img\($0)") })
+        ImageCollectionView(imageArray: (1...8).map { Photo(category: [Category(id: 5, name: "Landscape")], name: "img\($0)") }, category: Category(id: 0, name: "Removed"))
     }
 }

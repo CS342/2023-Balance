@@ -15,7 +15,8 @@ struct DrawingView: UIViewRepresentable {
     @Binding var isdraw: Bool
     @Binding var type: PKInkingTool.InkType
     @Binding var color: Color
-    
+    @Binding var isColoring: Bool
+
     // Updating inktype
     var ink: PKInkingTool {
         PKInkingTool(type, color: UIColor(color))
@@ -26,8 +27,16 @@ struct DrawingView: UIViewRepresentable {
     func makeUIView(context: Context) -> PKCanvasView {
         canvas.drawingPolicy = .anyInput
         canvas.tool = isdraw ? ink : eraser
-        canvas.minimumZoomScale = 1
-        canvas.maximumZoomScale = 1
+        if isColoring == false {
+            canvas.minimumZoomScale = 0.2
+            canvas.maximumZoomScale = 4
+            canvas.contentSize = CGSize(width: 1000, height: 1000)
+            canvas.contentInset = UIEdgeInsets(top: 500, left: 500, bottom: 500, right: 500)
+        } else {
+            canvas.minimumZoomScale = 1
+            canvas.maximumZoomScale = 1
+        }
+        
         return canvas
     }
     
@@ -54,7 +63,6 @@ struct DrawView: View {
     @State private var title = ""
     @State private var showingAlert = false
     @State var drawingSize = CGSize(width: 350, height: 350)
-//    @State var backgroundImage = ""
     @State var isNewDraw = false
     @State var isColoring = false
 
@@ -67,7 +75,7 @@ struct DrawView: View {
                     Spacer().frame(height: 20)
                     toolkitView
                     Spacer()
-                    DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color)
+                    DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color, isColoring: $isColoring)
                         .frame(width: drawingSize.width, height: drawingSize.height)
                         .border(Color.gray, width: 5)
                     Spacer()
