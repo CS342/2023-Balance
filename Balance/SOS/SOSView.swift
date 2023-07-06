@@ -21,31 +21,52 @@ struct SOSView: View {
                     .scaledToFit()
                     .frame(width: 100.0, height: 100.0)
                     .accessibilityLabel("Diary")
-                Text("Have you ever needed and extra help?")
-                    .foregroundColor(.purple)
-                    .font(.largeTitle)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20.0)
-                Text("Let's create your own sos button")
-                    .foregroundColor(.gray)
-                    .font(.title3)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20.0)
-                Text("Choose the five ways in wich you would like to get help when you need it")
-                    .foregroundColor(.gray)
-                    .font(.title3)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20.0)
+                textView
                 ScrollView {
-                    SOSCellView(title: "Body sensations", subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing...")
-                    SOSCellView(title: "Guided meditation", subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing...")
-                    SOSCellView(title: "Distraction", subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing...")
-                    SOSCellView(title: "Deep breating", subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing...")
-                    SOSCellView(title: "Sensorial activity", subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing...")
+                    SOSCellView(
+                        title: "Body sensations",
+                        subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
+                    )
+                    SOSCellView(
+                        title: "Guided meditation",
+                        subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
+                    )
+                    SOSCellView(
+                        title: "Distraction",
+                        subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
+                    )
+                    SOSCellView(
+                        title: "Deep breating",
+                        subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
+                    )
+                    SOSCellView(
+                        title: "Sensorial activity",
+                        subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
+                    )
                 }
                 saveButton
             }
         }.background(backgroundColor)
+    }
+    
+    var textView: some View {
+        Group {
+            Text("Have you ever needed and extra help?")
+                .foregroundColor(.purple)
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20.0)
+            Text("Let's create your own sos button")
+                .foregroundColor(.gray)
+                .font(.title3)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20.0)
+            Text("Choose the five ways in wich you would like to get help when you need it")
+                .foregroundColor(.gray)
+                .font(.title3)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20.0)
+        }
     }
     
     var saveButton: some View {

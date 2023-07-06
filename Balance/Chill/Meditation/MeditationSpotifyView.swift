@@ -21,14 +21,54 @@ struct MeditationSpotifyView: View {
     @Environment(\.openURL) private var openURL
     
     let songs = [
-        Song(title: "Balancing Emotions", artist: "To calm you down", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/2JHBuWOMSGHOWCoLrXAriB?si=5f6d601ac0664d93"),
-        Song(title: "Blowin' Off Steam", artist: "To calm you down", coverString: "meditationThumbnail 2", spotifyURL: "https://open.spotify.com/track/46biZBPkwqTzB70Pabb9ks?si=a1fd50e708d04512"),
-        Song(title: "Recenter and Realign", artist: "To calm you down", coverString: "meditationThumbnail 3", spotifyURL: "https://open.spotify.com/track/3wdROXnP25gPoEKLyubpqc?si=e1400690922a48e4"),
-        Song(title: "Chillin' Out", artist: "To calm you down", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/1buvmZ3wdzJ2I7mqd1ifNs?si=da278ed097b64953"),
-        Song(title: "Peace of Mind", artist: "To calm you down", coverString: "meditationThumbnail 2", spotifyURL: "https://open.spotify.com/track/5aP4bQuGcZIWzSoGGQeN0S?si=e7730ac057c34bfa"),
-        Song(title: "Serenity", artist: "To calm you down", coverString: "meditationThumbnail 3", spotifyURL: "https://open.spotify.com/track/3fd1dXUQ92rRnxKWyqgwcx?si=44e40d0ffd384cd9"),
-        Song(title: "The Jedi Way", artist: "To calm you down", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/1buvmZ3wdzJ2I7mqd1ifNs?si=da278ed097b64953"),
-        Song(title: "Hold yo Horses: Being Stable", artist: "To calm you down", coverString: "meditationThumbnail 2", spotifyURL: "https://open.spotify.com/track/7doeCRERLqKcAzEufAi44e?si=6fa0c7e046b4461e")
+        Song(
+            title: "Balancing Emotions",
+            artist: "To calm you down",
+            coverString: "meditationThumbnail 1",
+            spotifyURL: "https://open.spotify.com/track/2JHBuWOMSGHOWCoLrXAriB?si=5f6d601ac0664d93"
+        ),
+        Song(
+            title: "Blowin' Off Steam",
+            artist: "To calm you down",
+            coverString: "meditationThumbnail 2",
+            spotifyURL: "https://open.spotify.com/track/46biZBPkwqTzB70Pabb9ks?si=a1fd50e708d04512"
+        ),
+        Song(
+            title: "Recenter and Realign",
+            artist: "To calm you down",
+            coverString: "meditationThumbnail 3",
+            spotifyURL: "https://open.spotify.com/track/3wdROXnP25gPoEKLyubpqc?si=e1400690922a48e4"
+        ),
+        Song(
+            title: "Chillin' Out",
+            artist: "To calm you down",
+            coverString: "meditationThumbnail 1",
+            spotifyURL: "https://open.spotify.com/track/1buvmZ3wdzJ2I7mqd1ifNs?si=da278ed097b64953"
+        ),
+        Song(
+            title: "Peace of Mind",
+            artist: "To calm you down",
+            coverString: "meditationThumbnail 2",
+            spotifyURL: "https://open.spotify.com/track/5aP4bQuGcZIWzSoGGQeN0S?si=e7730ac057c34bfa"
+        ),
+        Song(
+            title: "Serenity",
+            artist: "To calm you down",
+            coverString: "meditationThumbnail 3",
+            spotifyURL: "https://open.spotify.com/track/3fd1dXUQ92rRnxKWyqgwcx?si=44e40d0ffd384cd9"
+        ),
+        Song(
+            title: "The Jedi Way",
+            artist: "To calm you down",
+            coverString: "meditationThumbnail 1",
+            spotifyURL: "https://open.spotify.com/track/1buvmZ3wdzJ2I7mqd1ifNs?si=da278ed097b64953"
+        ),
+        Song(
+            title: "Hold yo Horses: Being Stable",
+            artist: "To calm you down",
+            coverString: "meditationThumbnail 2",
+            spotifyURL: "https://open.spotify.com/track/7doeCRERLqKcAzEufAi44e?si=6fa0c7e046b4461e"
+        )
     ]
     
     var body: some View {

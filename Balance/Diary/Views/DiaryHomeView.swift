@@ -9,11 +9,16 @@
 import SwiftUI
 
 struct DiaryHomeView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject var store: NoteStore
     @State private var showingEditor = false
-    @State private var currentNote = Note(id: UUID().uuidString, title: "", text: "", date: Date())
     @State private var searchText = ""
-    @Environment(\.scenePhase) private var scenePhase
+    @State private var currentNote = Note(
+        id: UUID().uuidString,
+        title: "",
+        text: "",
+        date: Date()
+    )
     
     var body: some View {
         ActivityLogContainer {

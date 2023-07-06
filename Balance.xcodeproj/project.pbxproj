@@ -134,6 +134,8 @@
 		6CAA076329E8983A00541F87 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6CAA076229E8983A00541F87 /* YouTubePlayerKit */; };
 		6CAA076529E9FB3D00541F87 /* AvatarPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA076429E9FB3D00541F87 /* AvatarPreviewView.swift */; };
 		6CAA076729EAF04200541F87 /* FeelingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA076629EAF04100541F87 /* FeelingView.swift */; };
+		6CADE43F2A563E720074F6A6 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CADE43E2A563E720074F6A6 /* Box.swift */; };
+		6CADE4412A563E8B0074F6A6 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CADE4402A563E8B0074F6A6 /* Question.swift */; };
 		6CB5180629DF553D007AADB4 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5180529DF553D007AADB4 /* WebView.swift */; };
 		6CB5180D29DF5800007AADB4 /* GamesWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5180C29DF5800007AADB4 /* GamesWebView.swift */; };
 		6CB5181129E1B13E007AADB4 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5181029E1B13E007AADB4 /* GamesView.swift */; };
@@ -310,6 +312,8 @@
 		6CAA075129E83C0C00541F87 /* VideoCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCollectionView.swift; sourceTree = "<group>"; };
 		6CAA076429E9FB3D00541F87 /* AvatarPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPreviewView.swift; sourceTree = "<group>"; };
 		6CAA076629EAF04100541F87 /* FeelingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeelingView.swift; sourceTree = "<group>"; };
+		6CADE43E2A563E720074F6A6 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		6CADE4402A563E8B0074F6A6 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		6CB5180529DF553D007AADB4 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		6CB5180C29DF5800007AADB4 /* GamesWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesWebView.swift; sourceTree = "<group>"; };
 		6CB5181029E1B13E007AADB4 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
@@ -815,6 +819,8 @@
 				6C3DD6E32A126DAF00456646 /* GuessView.swift */,
 				6C3DD6E52A12742D00456646 /* BoxView.swift */,
 				6C5014B12A40F38E004F84B3 /* QuestionArray.swift */,
+				6CADE43E2A563E720074F6A6 /* Box.swift */,
+				6CADE4402A563E8B0074F6A6 /* Question.swift */,
 			);
 			path = Guess;
 			sourceTree = "<group>";
@@ -1070,6 +1076,7 @@
 				6CE62D572A028F3400BB4F90 /* Country.swift in Sources */,
 				6CBE75D42A0BCE5100A1747D /* Face.swift in Sources */,
 				6C85C6DE2A0554610053F759 /* BodySensationView.swift in Sources */,
+				6CADE4412A563E8B0074F6A6 /* Question.swift in Sources */,
 				27525EB429B68B5100D1DF51 /* Date.swift in Sources */,
 				6CF6BEEA2A31103A00A337F3 /* Binding+Negate.swift in Sources */,
 				6CBE75D62A0BE5B000A1747D /* AdaptsToKeyboard.swift in Sources */,
@@ -1108,6 +1115,7 @@
 				4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */,
 				4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */,
 				6C55243729F8722B00F802D9 /* MainView.swift in Sources */,
+				6CADE43F2A563E720074F6A6 /* Box.swift in Sources */,
 				2720083D29A7E5830052908D /* PastDiaryEntry.swift in Sources */,
 				5EF9D78429B5AFF1006C3B22 /* ActivityStorageManager.swift in Sources */,
 				6CFDD58A2A0D9ECE009D7E56 /* ColoringHomeView.swift in Sources */,
