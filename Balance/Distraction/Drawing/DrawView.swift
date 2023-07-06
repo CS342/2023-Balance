@@ -9,6 +9,7 @@ import Foundation
 import PencilKit
 import SwiftUI
 
+// swiftlint:disable attributes
 struct DrawingView: UIViewRepresentable {
     @Environment(\.undoManager) private var undoManager
     @Binding var canvas: PKCanvasView
@@ -46,6 +47,7 @@ struct DrawingView: UIViewRepresentable {
     }
 }
 
+// swiftlint:disable attributes
 struct DrawView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.undoManager) private var undoManager

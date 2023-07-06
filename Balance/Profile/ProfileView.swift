@@ -11,6 +11,7 @@ import class FHIR.FHIR
 import SwiftUI
 
 // swiftlint:disable type_body_length
+// swiftlint:disable attributes
 struct ProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(StorageKeys.onboardingFlowComplete)

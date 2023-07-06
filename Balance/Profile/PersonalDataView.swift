@@ -10,6 +10,7 @@ import SwiftUI
 import class FHIR.FHIR
 import FirebaseAccount
 
+// swiftlint:disable attributes
 struct PersonalDataView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>

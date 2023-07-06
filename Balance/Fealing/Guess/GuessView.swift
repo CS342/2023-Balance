@@ -7,18 +7,7 @@
 
 import SwiftUI
 
-struct Box: Identifiable {
-    var id: Int
-    var title: String
-    var correct: Bool
-}
-
-struct Question: Identifiable {
-    var id = UUID()
-    var image: String
-    var options: [Box]
-}
-
+// swiftlint:disable attributes
 struct GuessView: View {
     @Environment(\.dismiss) var dismiss
     @State var selected = 10
@@ -28,8 +17,12 @@ struct GuessView: View {
     @State var showingAlert = false
     @State var firstTry = true
     @State var correctAnswer = 0
-    var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-
+    var gridItemLayout = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+  
     var body: some View {
         ActivityLogContainer {
             ZStack {

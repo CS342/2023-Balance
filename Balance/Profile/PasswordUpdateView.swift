@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// swiftlint:disable attributes
 struct PasswordUpdateView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var authModel: AuthViewModel

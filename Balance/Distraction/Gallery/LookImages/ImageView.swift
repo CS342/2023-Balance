@@ -29,6 +29,7 @@ struct ScaleButtonStyle: ButtonStyle {
     }
 }
 
+// swiftlint:disable attributes
 struct ImageView: View {
     @Environment(\.dismiss) var dismiss
     var imagesArray: [Photo]

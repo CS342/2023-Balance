@@ -8,18 +8,59 @@
 
 import SwiftUI
 
+// swiftlint:disable attributes
 struct SleepView: View {
     @Environment(\.openURL) var openURL
     
     let songs = [
-        Song(title: "Silent Night", artist: "To help you sleep", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/2sr8v2aNZ7lZ8tV3eAR5qt?si=bbbfa9d35a104ec7"),
-        Song(title: "Sweet Dreams", artist: "To help you sleep", coverString: "meditationThumbnail 2", spotifyURL: "https://open.spotify.com/track/475L4j7qFaZE0jlcvrsScN?si=04f4eb003ce94c66"),
-        Song(title: "Catching Zzz's", artist: "To help you sleep", coverString: "meditationThumbnail 3", spotifyURL: "https://open.spotify.com/track/0N5NNIaNs3YVhiyt22ZYhG?si=5ecc0e2fc507461f"),
-        Song(title: "Counting Sheep", artist: "To help you sleep", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/0CMYUXTTTmI6Lwc0opH2XG?si=3399143e6a154fb9"),
-        Song(title: "Power Nap", artist: "To help you sleep", coverString: "meditationThumbnail 2", spotifyURL: "https://open.spotify.com/track/5F820xSuKiMLpGOV04Xs3c?si=8601ea70e87744d8"),
-        Song(title: "Hittin' the Hay", artist: "To help you sleep", coverString: "meditationThumbnail 3", spotifyURL: "https://open.spotify.com/track/6MePLoqcI97WjWyx5Sq2JV?si=6cee5d6e859542ad"),
-        Song(title: "Nighty Night", artist: "To help you sleep", coverString: "meditationThumbnail 1", spotifyURL: "https://open.spotify.com/track/1SucXU3xTOCyBAAqE22E8B?si=3147950d3de04a52"),
-        Song(title: "Mimimimimi", artist: "To help you sleep", coverString: "meditationThumbnail 2", spotifyURL: "https://open.spotify.com/track/5NWOEqOSCqHebuRMjYEn1i?si=bc627872f8d14624")
+        Song(
+            title: "Silent Night",
+            artist: "To help you sleep",
+            coverString: "meditationThumbnail 1",
+            spotifyURL: "https://open.spotify.com/track/2sr8v2aNZ7lZ8tV3eAR5qt?si=bbbfa9d35a104ec7"
+        ),
+        Song(
+            title: "Sweet Dreams",
+            artist: "To help you sleep",
+            coverString: "meditationThumbnail 2",
+            spotifyURL: "https://open.spotify.com/track/475L4j7qFaZE0jlcvrsScN?si=04f4eb003ce94c66"
+        ),
+        Song(
+            title: "Catching Zzz's",
+            artist: "To help you sleep",
+            coverString: "meditationThumbnail 3",
+            spotifyURL: "https://open.spotify.com/track/0N5NNIaNs3YVhiyt22ZYhG?si=5ecc0e2fc507461f"
+        ),
+        Song(
+            title: "Counting Sheep",
+            artist: "To help you sleep",
+            coverString: "meditationThumbnail 1",
+            spotifyURL: "https://open.spotify.com/track/0CMYUXTTTmI6Lwc0opH2XG?si=3399143e6a154fb9"
+        ),
+        Song(
+            title: "Power Nap",
+            artist: "To help you sleep",
+            coverString: "meditationThumbnail 2",
+            spotifyURL: "https://open.spotify.com/track/5F820xSuKiMLpGOV04Xs3c?si=8601ea70e87744d8"
+        ),
+        Song(
+            title: "Hittin' the Hay",
+            artist: "To help you sleep",
+            coverString: "meditationThumbnail 3",
+            spotifyURL: "https://open.spotify.com/track/6MePLoqcI97WjWyx5Sq2JV?si=6cee5d6e859542ad"
+        ),
+        Song(
+            title: "Nighty Night",
+            artist: "To help you sleep",
+            coverString: "meditationThumbnail 1",
+            spotifyURL: "https://open.spotify.com/track/1SucXU3xTOCyBAAqE22E8B?si=3147950d3de04a52"
+        ),
+        Song(
+            title: "Mimimimimi",
+            artist: "To help you sleep",
+            coverString: "meditationThumbnail 2",
+            spotifyURL: "https://open.spotify.com/track/5NWOEqOSCqHebuRMjYEn1i?si=bc627872f8d14624"
+        )
     ]
     
     var body: some View {

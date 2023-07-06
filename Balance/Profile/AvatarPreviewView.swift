@@ -11,6 +11,7 @@ import class FHIR.FHIR
 import Onboarding
 import SwiftUI
 
+// swiftlint:disable attributes
 struct AvatarPreviewView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>

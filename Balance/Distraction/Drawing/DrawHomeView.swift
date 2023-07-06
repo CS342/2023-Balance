@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// swiftlint:disable attributes
 struct DrawHomeView: View {
     @EnvironmentObject var store: DrawStore
     @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
