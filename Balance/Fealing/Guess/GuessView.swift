@@ -21,7 +21,7 @@ struct GuessView: View {
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
-    
+  
     var body: some View {
         ActivityLogContainer {
             ZStack {
