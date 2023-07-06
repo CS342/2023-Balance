@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// swiftlint:disable attributes
 struct MoodEditorView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var store: NoteStore

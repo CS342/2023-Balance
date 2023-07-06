@@ -13,6 +13,7 @@ import Onboarding
 import SwiftUI
 
 // swiftlint: disable type_body_length
+// swiftlint:disable attributes
 struct SignUpView: View {
     @EnvironmentObject var account: Account
     @EnvironmentObject private var authModel: AuthViewModel

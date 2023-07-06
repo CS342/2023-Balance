@@ -15,6 +15,7 @@ class AccesoryManager: ObservableObject {
     @Published var accesories = (1...4).map { Accesory(name: "acc_\($0)") }
 }
 
+// swiftlint:disable attributes
 struct AvatarSelectionView: View {
     @EnvironmentObject private var authModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss

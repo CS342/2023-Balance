@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+// swiftlint:disable attributes
 struct DiaryHomeView: View {
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject var store: NoteStore

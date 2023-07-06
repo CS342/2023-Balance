@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+// swiftlint:disable attributes
 struct SOSView: View {
     @Environment(\.dismiss) var dismiss
     var clipsToBounds = false

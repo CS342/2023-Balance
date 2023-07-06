@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+// swiftlint:disable attributes
 struct SleepView: View {
     @Environment(\.openURL) var openURL
     

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// swiftlint:disable attributes
 struct GuessView: View {
     @Environment(\.dismiss) var dismiss
     @State var selected = 10
