@@ -201,7 +201,6 @@ struct GalleryView: View {
                     isRemoved = false
                 }
             }
-//            filtered.append(contentsOf: photoArray)
         }
     }
 }

@@ -98,7 +98,11 @@ struct ImageView: View {
                 deleteAction
                 likeAction
             } else {
-                dislikeAction
+                if !selected.imageData.isEmpty {
+                    deleteAction
+                } else {
+                    dislikeAction
+                }
                 likeAction
             }
         }
@@ -110,9 +114,10 @@ struct ImageView: View {
             showingHUD.toggle()
             self.strMsg = "Deleted!"
             self.imgMsg = "trash.fill"
-            savedArray = UserImageCache.load(key: self.profile.id.appending("UploadedArray"))
-            let result = savedArray.filter { $0.name != selected.name }
-            UserImageCache.save(result, key: self.profile.id.appending("UploadedArray"))
+             
+            removeFrom(type: "FavoritesArray", name: selected.name)
+            removeFrom(type: "RemovedArray", name: selected.name)
+            removeFrom(type: "UploadedArray", name: selected.name)
         }) {
             Image(systemName: "trash.fill")
                 .resizable()
@@ -136,12 +141,8 @@ struct ImageView: View {
             showingHUD.toggle()
             self.strMsg = "Removed!"
             self.imgMsg = "xmark.circle.fill"
-            savedArray = UserImageCache.load(key: self.profile.id.appending("RemovedArray"))
-            let result = savedArray.filter { $0.name == selected.name }
-            if result.isEmpty {
-                savedArray.append(selected)
-                UserImageCache.save(savedArray, key: self.profile.id.appending("RemovedArray"))
-            }
+            removeFrom(type: "FavoritesArray", name: selected.name)
+            appendFrom(type: "RemovedArray", photo: selected)
         }) {
             Image("crossImage")
                 .resizable()
@@ -164,12 +165,7 @@ struct ImageView: View {
             showingHUD.toggle()
             self.strMsg = "Added!"
             self.imgMsg = "heart.fill"
-            savedArray = UserImageCache.load(key: self.profile.id.appending("FavoritesArray"))
-            let result = savedArray.filter { $0.name == selected.name }
-            if result.isEmpty {
-                savedArray.append(selected)
-                UserImageCache.save(savedArray, key: self.profile.id.appending("FavoritesArray"))
-            }
+            appendFrom(type: "FavoritesArray", photo: selected)
         }) {
             Image("heartImage")
                 .resizable()
@@ -192,9 +188,7 @@ struct ImageView: View {
             showingHUD.toggle()
             self.strMsg = "Removed from favorites!"
             self.imgMsg = "heart.slash.fill"
-            savedArray = UserImageCache.load(key: self.profile.id.appending("FavoritesArray"))
-            let result = savedArray.filter { $0.name != selected.name }
-            UserImageCache.save(result, key: self.profile.id.appending("FavoritesArray"))
+            removeFrom(type: "FavoritesArray", name: selected.name)
         }) {
             Image(systemName: "heart.slash.fill")
                 .resizable()
@@ -218,11 +212,7 @@ struct ImageView: View {
             showingHUD.toggle()
             self.strMsg = "Return to list!"
             self.imgMsg = "arrowshape.turn.up.backward.circle.fill"
-            let removedArray = UserImageCache.load(key: self.profile.id.appending("RemovedArray"))
-            let result = removedArray.filter { $0.name != selected.name }
-            if !result.isEmpty {
-                UserImageCache.save(result, key: self.profile.id.appending("RemovedArray"))
-            }
+            removeFrom(type: "RemovedArray", name: selected.name)
         }) {
             Image(systemName: "arrowshape.turn.up.backward.circle.fill")
                 .resizable()
@@ -250,5 +240,18 @@ struct ImageView: View {
                 self.profile = profileUser ?? ProfileUser()
             }
         }
+    }
+    
+    func removeFrom(type: String, name: String) {
+        savedArray = UserImageCache.load(key: self.profile.id.appending(type))
+        let result = savedArray.filter { $0.name != name }
+        UserImageCache.save(result, key: self.profile.id.appending(type))
+    }
+    
+    func appendFrom(type: String, photo: Photo) {
+        savedArray = UserImageCache.load(key: self.profile.id.appending(type))
+        var result = savedArray.filter { $0.name != photo.name }
+        result.append(photo)
+        UserImageCache.save(result, key: self.profile.id.appending(type))
     }
 }
