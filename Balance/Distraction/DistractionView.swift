@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DistractionView: View {
-    @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
+    @State private var currentDraw = Draw()
     @EnvironmentObject var store: DrawStore
 
     var body: some View {

@@ -70,6 +70,6 @@ struct PastEntryView: View {
 
 struct PastEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        PastEntryView(Draw(id: "1234", title: "Title", image: Data(), date: Date().previousDate(), backImage: "mandala1"))
+        PastEntryView(Draw(id: "1234", title: "Title", image: Data(), date: Date().previousDate(), backImage: "mandala1", zoom: 1.0))
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 // swiftlint:disable attributes
 struct ColoringHomeView: View {
     @EnvironmentObject var store: ColoringStore
-    @State private var currentDraw = Draw(id: UUID().uuidString, title: "", image: Data(), date: Date(), backImage: "")
+    @State private var currentDraw = Draw()
     @Environment(\.scenePhase) private var scenePhase
     @State private var isShowingSecondView = false
     
