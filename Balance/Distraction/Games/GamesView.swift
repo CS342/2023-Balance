@@ -58,14 +58,14 @@ struct GamesView: View {
     var sudokuGame: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Sudoko Game",
+                viewName: "Sudoku Game",
                 isDirectChildToContainer: true,
                 content: {
                     GamesWebView(gameLink: "https://sudoku.com/", titleGame: "Sudoku")
                 }
             )
         ) {
-            GamesCellView(image: "sudokuIcon", text: "Sudoko")
+            GamesCellView(image: "sudokuIcon", text: "Sudoku")
         }
     }
 }
