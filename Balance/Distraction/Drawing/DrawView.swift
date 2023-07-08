@@ -10,6 +10,7 @@ import PencilKit
 import SwiftUI
 
 // swiftlint:disable attributes
+// swiftlint:disable type_body_length
 struct DrawingView: UIViewRepresentable {
     @Environment(\.undoManager) private var undoManager
     @Binding var canvas: PKCanvasView
@@ -17,27 +18,17 @@ struct DrawingView: UIViewRepresentable {
     @Binding var type: PKInkingTool.InkType
     @Binding var color: Color
     @Binding var isColoring: Bool
-
-    // Updating inktype
-    var ink: PKInkingTool {
-        PKInkingTool(type, color: UIColor(color))
-    }
+    @Binding var ink: PKInkingTool
     
     let eraser = PKEraserTool(.bitmap)
     
     func makeUIView(context: Context) -> PKCanvasView {
         canvas.drawingPolicy = .anyInput
         canvas.tool = isdraw ? ink : eraser
-        if isColoring == false {
-            canvas.minimumZoomScale = 0.2
-            canvas.maximumZoomScale = 4
-            canvas.contentSize = CGSize(width: 1000, height: 1000)
-            canvas.contentInset = UIEdgeInsets(top: 500, left: 500, bottom: 500, right: 500)
-        } else {
-            canvas.minimumZoomScale = 1
-            canvas.maximumZoomScale = 1
-        }
-        
+        canvas.minimumZoomScale = 0.2
+        canvas.maximumZoomScale = 10
+        canvas.contentSize = CGSize(width: 1000, height: 1000)
+        canvas.contentInset = UIEdgeInsets(top: 500, left: 500, bottom: 500, right: 500)
         return canvas
     }
     
@@ -67,17 +58,29 @@ struct DrawView: View {
     @State var drawingSize = CGSize(width: 350, height: 350)
     @State var isNewDraw = false
     @State var isColoring = false
-
+    @State var ink = PKInkingTool(.pencil, color: .black)
+    @State var isEraser = false
+    @State var eraserWidth: Double = 99.0
+    @State var lineWidth: CGFloat = 1.0
+    @State var showLineWith = false
+    
     var body: some View {
         ActivityLogContainer {
             ZStack {
                 Color.white.edgesIgnoringSafeArea(.all)
                 VStack(spacing: 10) {
-                    HeaderMenu(title: "Drawing something")
+                    if isColoring == true {
+                        HeaderMenu(title: "Coloring Something")
+                    } else {
+                        HeaderMenu(title: "Drawing something")
+                    }
                     Spacer().frame(height: 20)
                     toolkitView
+                    if showLineWith == true {
+                        sliderLineView
+                    }
                     Spacer()
-                    DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color, isColoring: $isColoring)
+                    DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color, isColoring: $isColoring, ink: $ink)
                         .frame(width: drawingSize.width, height: drawingSize.height)
                         .border(Color.gray, width: 5)
                     Spacer()
@@ -92,6 +95,20 @@ struct DrawView: View {
         }
     }
     
+    var sliderLineView: some View {
+        Slider(
+            value: $lineWidth,
+            in: 3...30,
+            step: 5
+        ) { didChange in
+            print("Did change: \(didChange)")
+            if didChange == false {
+                ink = PKInkingTool(.pen, color: UIColor(color), width: lineWidth)
+            }
+        }
+        .padding(.horizontal, 60)
+        .tint(primaryColor)
+    }
     var colorView: some View {
         ScrollView(.horizontal) {
             HStack(alignment: .center) {
@@ -132,58 +149,83 @@ struct DrawView: View {
     }
     
     var toolkitView: some View {
-        HStack {
-            Spacer()
-            undoButton
-            Spacer()
-            eraseButton
-            Spacer()
-            pencilMenu
-            Spacer()
+        Group {
+            HStack(alignment: .center) {
+                eraseButton
+                Spacer()
+                undoButton
+                Spacer()
+                redoButton
+                Spacer()
+                rubberButton
+                Spacer()
+                pencilMenu
+            }.padding(.horizontal, 20)
+        }
+    }
+    
+    var pencilView: some View {
+        Button(action: {
+            showLineWith = false
+            isEraser = false
+            isdraw = true
+            type = .pencil
+            ink = PKInkingTool(type, color: UIColor(color))
+        }) {
+            Label {
+                Text("Pencil")
+            } icon: {
+                Image(systemName: "pencil")
+            }
+        }
+    }
+    
+    var penView: some View {
+        Button(action: {
+            showLineWith = true
+            isEraser = false
+            isdraw = true
+            type = .pen
+            ink = PKInkingTool(type, color: UIColor(color), width: lineWidth)
+        }) {
+            Label {
+                Text("Pen")
+            } icon: {
+                Image(systemName: "pencil.tip")
+            }
+        }
+    }
+    
+    var markerView: some View {
+        Button(action: {
+            showLineWith = false
+            isEraser = false
+            isdraw = true
+            type = .marker
+            ink = PKInkingTool(type, color: UIColor(color))
+        }) {
+            Label {
+                Text("Marker")
+            } icon: {
+                Image(systemName: "highlighter")
+            }
         }
     }
     
     var pencilMenu: some View {
         Menu {
-            Button(action: {
-                // changing type
-                isdraw = true
-                type = .pencil
-            }) {
-                Label {
-                    Text("Pencil")
-                } icon: {
-                    Image(systemName: "pencil")
-                }
-            }
-            Button(action: {
-                isdraw = true
-                type = .pen
-            }) {
-                Label {
-                    Text("Pen")
-                } icon: {
-                    Image(systemName: "pencil.tip")
-                }
-            }
-            Button(action: {
-                isdraw = true
-                type = .marker
-            }) {
-                Label {
-                    Text("Marker")
-                } icon: {
-                    Image(systemName: "highlighter")
-                }
-            }
+            pencilView
+            penView
+            markerView
         } label: {
             VStack {
-                Image("pencilIcon")
+                Image(systemName: "paintbrush.pointed")
                     .resizable()
                     .scaledToFit()
                     .clipped()
                     .frame(width: 40, height: 40)
                     .accessibilityLabel("pencilIcon")
+                    .foregroundColor(.gray)
                 Text("Paint")
                     .font(.custom("Nunito-Bold", size: 14))
                     .foregroundColor(Color.gray)
@@ -192,20 +234,49 @@ struct DrawView: View {
         }
     }
     
+    
     var eraseButton: some View {
         Button {
             // erase tool
+            showLineWith = false
+            isEraser = false
             isdraw = false
             isdraw.toggle()
             canvas.drawing = PKDrawing()
         } label: {
             VStack {
-                Image("eraseIcon")
+                Image(systemName: "trash")
+                    .resizable()
+                    .scaledToFit()
+                    .clipped()
+                    .frame(width: 40, height: 40)
+                    .accessibilityLabel("trashIcon")
+                    .foregroundColor(.gray)
+                Text("Clear")
+                    .font(.custom("Nunito-Bold", size: 14))
+                    .foregroundColor(Color.gray)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(10.0)
+        }
+    }
+    
+    var rubberButton: some View {
+        Button {
+            showLineWith = false
+            isEraser = true
+            isdraw = true
+            type = .pen
+            ink = PKInkingTool(type, color: .white, width: eraserWidth)
+        } label: {
+            VStack {
+                Image(systemName: "eraser")
                     .resizable()
                     .scaledToFit()
                     .clipped()
                     .frame(width: 40, height: 40)
                     .accessibilityLabel("erasecon")
+                    .foregroundColor(.gray)
                 Text("Erase")
                     .font(.custom("Nunito-Bold", size: 14))
                     .foregroundColor(Color.gray)
@@ -217,15 +288,18 @@ struct DrawView: View {
     
     var undoButton: some View {
         Button {
+            showLineWith = false
+            isEraser = false
             undoManager?.undo()
         } label: {
             VStack {
-                Image("undoIcon")
+                Image(systemName: "arrow.uturn.backward")
                     .resizable()
                     .scaledToFit()
                     .clipped()
                     .frame(width: 40, height: 40)
                     .accessibilityLabel("undoIcon")
+                    .foregroundColor(.gray)
                 Text("Undo")
                     .font(.custom("Nunito-Bold", size: 14))
                     .foregroundColor(Color.gray)
@@ -235,38 +309,64 @@ struct DrawView: View {
         }
     }
     
-    func loadCurrentDraw() {
-        if self.currentDraw.backImage.isEmpty {
-            self.currentDraw.backImage = ""
+    var redoButton: some View {
+        Button {
+            showLineWith = false
+            isEraser = false
+            undoManager?.redo()
+        } label: {
+            VStack {
+                Image(systemName: "arrow.uturn.forward")
+                    .resizable()
+                    .scaledToFit()
+                    .clipped()
+                    .frame(width: 40, height: 40)
+                    .accessibilityLabel("redoIcon")
+                    .foregroundColor(.gray)
+                Text("Redo")
+                    .font(.custom("Nunito-Bold", size: 14))
+                    .foregroundColor(Color.gray)
+                    .multilineTextAlignment(.center)
+            }
+            .padding(10.0)
         }
+    }
+    
+    func loadCurrentDraw() {
         self.title = currentDraw.title
         self.image = currentDraw.image
         self.id = currentDraw.id
+        
         let drawing = try? PKDrawing(data: currentDraw.image)
         canvas.drawing = drawing ?? PKDrawing()
-        let img = Image(currentDraw.backImage)
-            .resizable()
-            .scaledToFit()
-            .clipped()
-            .frame(width: drawingSize.width, height: drawingSize.height)
-            .accessibilityLabel("base64String")
-        
+        canvas.setZoomScale(currentDraw.zoom, animated: true)
         canvas.backgroundColor = UIColor.clear
         canvas.isOpaque = false
         canvas.becomeFirstResponder()
-        
-        let imageView = UIImageView(image: img.asUIImage())
-        imageView.contentMode = .scaleAspectFit
-        
-        let subView = self.canvas.subviews[0]
-        subView.addSubview(imageView)
-        subView.sendSubviewToBack(imageView)
+        canvas.contentOffset = CGPoint(x: currentDraw.offsetX, y: currentDraw.offsetY)
+        if !self.currentDraw.backImage.isEmpty {
+            let img = Image(currentDraw.backImage)
+                .resizable()
+                .scaledToFit()
+                .clipped()
+                .frame(width: drawingSize.width, height: drawingSize.height)
+                .accessibilityLabel("base64String")
+            let imageView = UIImageView(image: img.asUIImage())
+            let subView = self.canvas.subviews[0]
+            subView.addSubview(imageView)
+            subView.sendSubviewToBack(imageView)
+        }
     }
     
     @ViewBuilder
     func colorButton(color: Color) -> some View {
         Button {
             self.color = color
+            if type == .pen {
+                ink = PKInkingTool(type, color: UIColor(color), width: lineWidth)
+            } else {
+                ink = PKInkingTool(type, color: UIColor(color))
+            }
         } label: {
             Image(systemName: "circle.fill")
                 .resizable()
@@ -284,7 +384,10 @@ struct DrawView: View {
             title: title,
             image: canvas.drawing.dataRepresentation(),
             date: Date(),
-            backImage: currentDraw.backImage
+            backImage: currentDraw.backImage,
+            zoom: canvas.zoomScale,
+            offsetX: canvas.contentOffset.x,
+            offsetY: canvas.contentOffset.y
         )
         
         if isColoring {
@@ -302,8 +405,6 @@ struct DrawView: View {
                 }
             }
         }
-       
-        
         dismiss()
     }
 }

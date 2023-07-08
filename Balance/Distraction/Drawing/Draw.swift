@@ -8,9 +8,12 @@
 import SwiftUI
 
 public struct Draw: Codable, Equatable, Hashable, Identifiable {
-    public let id: String
-    let title: String
-    let image: Data
-    let date: Date
-    var backImage: String
+    public var id: String = UUID().uuidString
+    var title: String = ""
+    var image = Data()
+    var date = Date()
+    var backImage: String = ""
+    var zoom: CGFloat = 1.0
+    var offsetX: Double = 0.0
+    var offsetY: Double = 0.0
 }

@@ -49,7 +49,7 @@ struct BackgroundDrawView: View {
             ZStack {
                 backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack {
-                    HeaderMenu(title: "Draw Something")
+                    HeaderMenu(title: "Coloring Something")
                     VStack(alignment: .center, spacing: 10) {
                         highlightsTitle
                         imagePaging
@@ -120,7 +120,7 @@ struct BackgroundDrawView: View {
 
 #if DEBUG
 struct BackgroundDrawView_Previews: PreviewProvider {
-    @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: Data(), date: Date(), backImage: "mandala1")
+    @State static var currentDraw = Draw(id: UUID().uuidString, title: "Sample draw", image: Data(), date: Date(), backImage: "mandala1", zoom: 1.0)
     
     static var previews: some View {
         BackgroundDrawView(
