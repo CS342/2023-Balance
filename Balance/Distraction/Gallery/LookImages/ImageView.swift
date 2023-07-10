@@ -42,7 +42,12 @@ struct ImageView: View {
     @State private var strMsg = ""
     @State private var imgMsg = ""
     @State var selectedCategory: Category
-    
+    @State var tapRemove = false
+    @State var tapUnLike = false
+    @State var tapReturn = false
+    @State var tapLike = false
+    @State var tapDislike = false
+
     var body: some View {
         ActivityLogContainer {
             ZStack {
@@ -118,6 +123,11 @@ struct ImageView: View {
             removeFrom(type: "FavoritesArray", name: selected.name)
             removeFrom(type: "RemovedArray", name: selected.name)
             removeFrom(type: "UploadedArray", name: selected.name)
+            
+            tapRemove = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                tapRemove = false
+            }
         }) {
             Image(systemName: "trash.fill")
                 .resizable()
@@ -130,8 +140,9 @@ struct ImageView: View {
                 .accessibilityLabel("trash.fill")
                 .scaleEffect(scaleValue)
                 .tint(primaryColor)
+                .scaleEffect(tapRemove ? 1.2 : 1)
+                .animation(.spring(), value: tapRemove)
         }
-        .buttonStyle(ScaleButtonStyle())
         .buttonStyle(ActivityLogButtonStyle(activityDescription: "IMAGE REVIEW: " + selected.name + " status: DELETE"))
     }
     
@@ -143,6 +154,10 @@ struct ImageView: View {
             self.imgMsg = "xmark.circle.fill"
             removeFrom(type: "FavoritesArray", name: selected.name)
             appendFrom(type: "RemovedArray", photo: selected)
+            tapDislike = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                tapDislike = false
+            }
         }) {
             Image("crossImage")
                 .resizable()
@@ -153,9 +168,9 @@ struct ImageView: View {
                 .clipShape(Circle())
                 .shadow(color: Color.black.opacity(0.50), radius: 3, x: 0, y: 2)
                 .accessibilityLabel("crossImage")
-                .scaleEffect(scaleValue)
+                .scaleEffect(tapDislike ? 1.2 : 1)
+                .animation(.spring(), value: tapDislike)
         }
-        .buttonStyle(ScaleButtonStyle())
         .buttonStyle(ActivityLogButtonStyle(activityDescription: "IMAGE REVIEW: " + selected.id + "status: REMOVED"))
     }
     
@@ -166,6 +181,10 @@ struct ImageView: View {
             self.strMsg = "Added!"
             self.imgMsg = "heart.fill"
             appendFrom(type: "FavoritesArray", photo: selected)
+            tapLike = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                tapLike = false
+            }
         }) {
             Image("heartImage")
                 .resizable()
@@ -176,9 +195,9 @@ struct ImageView: View {
                 .clipShape(Circle())
                 .shadow(color: Color.black.opacity(0.50), radius: 3, x: 0, y: 2)
                 .accessibilityLabel("heartImage")
-                .scaleEffect(scaleValue)
+                .scaleEffect(tapLike ? 1.2 : 1)
+                .animation(.spring(), value: tapLike)
         }
-        .buttonStyle(ScaleButtonStyle())
         .buttonStyle(ActivityLogButtonStyle(activityDescription: "IMAGE REVIEW: " + selected.name + " status: FAVORITE"))
     }
     
@@ -189,6 +208,10 @@ struct ImageView: View {
             self.strMsg = "Removed from favorites!"
             self.imgMsg = "heart.slash.fill"
             removeFrom(type: "FavoritesArray", name: selected.name)
+            tapUnLike = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                tapUnLike = false
+            }
         }) {
             Image(systemName: "heart.slash.fill")
                 .resizable()
@@ -201,8 +224,9 @@ struct ImageView: View {
                 .accessibilityLabel("heart.slash.fill")
                 .scaleEffect(scaleValue)
                 .tint(primaryColor)
+                .scaleEffect(tapUnLike ? 1.2 : 1)
+                .animation(.spring(), value: tapUnLike)
         }
-        .buttonStyle(ScaleButtonStyle())
         .buttonStyle(ActivityLogButtonStyle(activityDescription: "IMAGE REVIEW: " + selected.name + " status: UNLIKE"))
     }
     
@@ -213,6 +237,10 @@ struct ImageView: View {
             self.strMsg = "Return to list!"
             self.imgMsg = "arrowshape.turn.up.backward.circle.fill"
             removeFrom(type: "RemovedArray", name: selected.name)
+            tapReturn = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                tapReturn = false
+            }
         }) {
             Image(systemName: "arrowshape.turn.up.backward.circle.fill")
                 .resizable()
@@ -225,8 +253,9 @@ struct ImageView: View {
                 .accessibilityLabel("backImage")
                 .scaleEffect(scaleValue)
                 .tint(primaryColor)
+                .scaleEffect(tapReturn ? 1.2 : 1)
+                .animation(.spring(), value: tapReturn)
         }
-        .buttonStyle(ScaleButtonStyle())
         .buttonStyle(ActivityLogButtonStyle(activityDescription: "IMAGE REVIEW: " + selected.name + " status: RETURN"))
     }
     
