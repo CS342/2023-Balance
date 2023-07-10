@@ -171,7 +171,7 @@ struct ImageView: View {
                 .scaleEffect(tapDislike ? 1.2 : 1)
                 .animation(.spring(), value: tapDislike)
         }
-        .buttonStyle(ActivityLogButtonStyle(activityDescription: "IMAGE REVIEW: " + selected.id + "status: REMOVED"))
+        .buttonStyle(ActivityLogButtonStyle(activityDescription: "IMAGE REVIEW: " + selected.id + " status: REMOVED"))
     }
     
     var likeAction: some View {
