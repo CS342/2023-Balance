@@ -423,6 +423,8 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
                 self.imageView.isHidden = true
                 self.trackLabel.isHidden = true
                 self.playPauseButton.isHidden = true
+                self.appRemote.playerAPI?.pause(nil)
+                self.isPause = true
             }
         } else { // show login
             self.stackView.isHidden = true
