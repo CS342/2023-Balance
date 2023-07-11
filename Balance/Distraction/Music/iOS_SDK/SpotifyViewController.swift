@@ -263,7 +263,7 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
         openSpotifyButton.backgroundColor = UIColor(red: 20/255, green: 215/255, blue: 96/255, alpha: 1.0)
         openSpotifyButton.roundCorners(.allCorners, radius: 25)
         openSpotifyButton.addShadow(shadowColor: UIColor.gray.cgColor, shadowOffset: CGSize(width: 0, height: -3), shadowOpacity: 0.2, shadowRadius: 5)
-        openSpotifyButton.addTarget(self, action: #selector(self.pressed), for: .touchUpInside)
+        openSpotifyButton.addTarget(self, action: #selector(handleRegister), for: .primaryActionTriggered)
         openSpotifyButton.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(openSpotifyButton)
@@ -276,14 +276,9 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
         ])
     }
     
-    @objc func pressed(sender : UIButton) {
-        if UIApplication.shared.canOpenURL(URL(string: "spotify:")!) {
-            // spotify is installed.
-            UIApplication.shared.open(URL(string: "spotify:")!)
-        } else {
-            // spotify is not installed. Launch AppStore to install spotify app
-            UIApplication.shared.open(URL(string: spotifyURL)!)
-        }
+    @objc
+    func handleRegister(_ button: UIButton) {
+        UIApplication.shared.open(URL(string: "https://open.spotify.com/")!, options: [:], completionHandler: nil)
     }
     
     func player() {

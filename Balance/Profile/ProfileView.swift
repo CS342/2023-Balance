@@ -138,8 +138,7 @@ struct ProfileView: View {
     var shareOption: some View {
         ShareLink(
             item: convertToCSV(),
-            subject: Text("Balance Export"),
-            message: Text("ParticipantID: " + self.patientID + " - " + self.displayName + " - " + self.email)
+            subject: Text("Balance Export")
         ) {
             ProfileCellView(image: "directcurrent", text: "Share data")
         }
@@ -283,8 +282,8 @@ struct ProfileView: View {
     }
     
     func convertToCSV() -> String {
-        var noteAsCSV = ""
-        noteAsCSV.append(contentsOf: "id, startTime, endTime, duration, actionTime, actionDescription\n")
+        var noteAsCSV = "ParticipantID: " + self.patientID + " - " + self.displayName + " - " + self.email + "\n"
+        noteAsCSV.append(contentsOf: "id, activeStartTime, activeEndTime, activeDuration, actionTime, actionDescription\n")
         
         for log in logStore.logs {
             for action in log.actions {
