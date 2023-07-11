@@ -284,11 +284,11 @@ struct ProfileView: View {
     
     func convertToCSV() -> String {
         var noteAsCSV = ""
-        noteAsCSV.append(contentsOf: "time, description\n")
+        noteAsCSV.append(contentsOf: "id, startTime, endTime, duration, actionTime, actionDescription\n")
         
         for log in logStore.logs {
             for action in log.actions {
-                noteAsCSV.append(contentsOf: "\"\(action.time)\",\"\(action.description)\"\n")
+                noteAsCSV.append(contentsOf: "\"\(log.id)\",\"\(log.startTime)\",\"\(log.endTime)\",\"\(log.duration)\",\"\(action.time)\",\"\(action.description)\"\n")
             }
         }
         
