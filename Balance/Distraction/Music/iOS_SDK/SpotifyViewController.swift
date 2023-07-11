@@ -177,6 +177,7 @@ class SpotifyViewController: UIViewController {
         }
         lastPlayerState = playerState
         trackLabel.text = playerState.track.name
+        currentUri = playerState.track.uri
         
         let configuration = UIImage.SymbolConfiguration(pointSize: 50, weight: .bold, scale: .large)
         if playerState.isPaused {
