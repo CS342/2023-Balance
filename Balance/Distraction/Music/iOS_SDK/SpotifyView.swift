@@ -15,7 +15,7 @@ struct SpotifyView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> SpotifyViewController {
         let spotifyViewController = SpotifyViewController.shared
-        spotifyViewController.activityLogEntry = activityLogEntry
+//        spotifyViewController.activityLogEntry = activityLogEntry
         return spotifyViewController
     }
     
