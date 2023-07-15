@@ -86,7 +86,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            CellView(image: "videosIcon", text: "Look videos")
+            CellView(image: "videosIcon", text: "Look at videos")
         }
     }
     
