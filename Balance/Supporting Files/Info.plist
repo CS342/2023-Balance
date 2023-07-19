@@ -68,5 +68,12 @@
 	<string>6897d8e8934a48c19a9f2129c7349a0c</string>
 	<key>SpotifySecretID</key>
 	<string>d389fb0d126f4960ba79b031145f6f49</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>googlegmail</string>
+        <string>ms-outlook</string>
+        <string>readdle-spark</string>
+        <string>ymail</string>
+    </array>
 </dict>
 </plist>

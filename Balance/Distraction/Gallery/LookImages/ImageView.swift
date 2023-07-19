@@ -53,7 +53,7 @@ struct ImageView: View {
             ZStack {
                 backgroundColor.edgesIgnoringSafeArea(.all)
                 VStack {
-                    HeaderMenu(title: "Distraction")
+                    HeaderMenu(title: "Look at Images")
                     Spacer()
                     tabImages
                         .tabViewStyle(.page(indexDisplayMode: .never))
