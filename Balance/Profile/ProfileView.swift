@@ -25,15 +25,15 @@ struct ProfileView: View {
     @EnvironmentObject var noteStore: NoteStore
     @EnvironmentObject var drawStore: DrawStore
     @EnvironmentObject var coloringStore: ColoringStore
-    #if DEMO
+#if DEMO
     @EnvironmentObject var logStore: ActivityLogStore
-    #endif
+#endif
     @State private var displayName = ""
     @State private var avatar = ""
     @State private var email = ""
     @State private var patientID = ""
     @State private var showAlert = false
-
+    
     var body: some View {
         ActivityLogContainer {
             ZStack {
@@ -136,6 +136,19 @@ struct ProfileView: View {
     }
     
     var shareOption: some View {
+        Button(action: {
+            EmailHelper.shared.send(
+                subject: "Balance Export",
+                body: "ParticipantID: " + self.patientID + " - Name: " + self.displayName + " - Email:" + self.email + "\n",
+                file: convertToCSV(),
+                to: ["cmirand@stanford.edu"]
+            )
+        }) {
+            ProfileCellView(image: "directcurrent", text: "Share data")
+        }
+    }
+    
+    var shareLink: some View {
         ShareLink(
             item: convertToCSV(),
             subject: Text("Balance Export")
@@ -175,10 +188,19 @@ struct ProfileView: View {
     var logoutOption: some View {
         Button {
             print("Logout")
-//            dismiss()
+#if DEMO
+            UserImageCache.remove(key: self.patientID.appending("UploadedArray"))
+            UserImageCache.remove(key: self.patientID.appending("RemovedArray"))
+            UserImageCache.remove(key: self.patientID.appending("FavoritesArray"))
+            logStore.removeStore()
+            noteStore.removeStore()
+            drawStore.removeStore()
+            coloringStore.removeStore()
+#endif
+            //            dismiss()
             authModel.signOut()
             completedOnboardingFlow = false
-//            account.signedIn = false
+            //            account.signedIn = false
         } label: {
             ProfileCellView(image: "figure.walk.motion", text: "Logout")
         }
@@ -281,7 +303,7 @@ struct ProfileView: View {
         }
     }
     
-    func convertToCSV() -> String {
+    func convertToCSV() -> URL {
         var noteAsCSV = "ParticipantID: " + self.patientID + " - " + self.displayName + " - " + self.email + "\n"
         noteAsCSV.append(contentsOf: "id, activeStartTime, activeEndTime, activeDuration, actionTime, actionDescription\n")
         
@@ -291,6 +313,16 @@ struct ProfileView: View {
             }
         }
         
-        return noteAsCSV
+        let fileManager = FileManager.default
+        do {
+            let path = try fileManager.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil, create: false)
+            let fileURL = path.appendingPathComponent("export.csv")
+            try noteAsCSV.write(to: fileURL, atomically: true, encoding: .utf8)
+            
+            return fileURL
+        } catch {
+            print("error creating file")
+        }
+        return URL(fileURLWithPath: "")
     }
 }
