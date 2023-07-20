@@ -18,7 +18,7 @@ class EmailHelper: NSObject {
 }
 
 extension EmailHelper {
-    func send(subject: String, body: String, file: URL, to: [String]) {
+    func send(subject: String, body: String, file: URL, plainText: String, to: [String]) {
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
         
@@ -27,8 +27,9 @@ extension EmailHelper {
         }
         
         if !MFMailComposeViewController.canSendMail() {
+            var bodyFix = body + "\n" + plainText
             let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-            let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            let bodyEncoded = bodyFix.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
             let mails = to.joined(separator: ",")
             
             let alert = UIAlertController(title: "Cannot open Mail!", message: "", preferredStyle: .actionSheet)
