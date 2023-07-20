@@ -141,7 +141,7 @@ struct ProfileView: View {
                 subject: "Balance Export",
                 body: "ParticipantID: " + self.patientID + " - Name: " + self.displayName + " - Email:" + self.email + "\n",
                 file: convertToCSV(),
-                to: ["gonzalo.perisset@gmail.com"]
+                to: ["cmirand@stanford.edu"]
             )
         }) {
             ProfileCellView(image: "directcurrent", text: "Share data")
