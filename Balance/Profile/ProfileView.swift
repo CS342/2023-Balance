@@ -99,6 +99,7 @@ struct ProfileView: View {
 #else
                 resetOption
                 shareOption
+                shareLink
 #endif
                 logoutOption
             }
@@ -141,10 +142,11 @@ struct ProfileView: View {
                 subject: "Balance Export",
                 body: "ParticipantID: " + self.patientID + " - Name: " + self.displayName + " - Email:" + self.email + "\n",
                 file: convertToCSV(),
+                plainText: convertToPlainText(),
                 to: ["cmirand@stanford.edu"]
             )
         }) {
-            ProfileCellView(image: "directcurrent", text: "Share data")
+            ProfileCellView(image: "mail", text: "Mail data")
         }
     }
     
@@ -153,7 +155,7 @@ struct ProfileView: View {
             item: convertToCSV(),
             subject: Text("Balance Export")
         ) {
-            ProfileCellView(image: "directcurrent", text: "Share data")
+            ProfileCellView(image: "square.and.arrow.up", text: "Share data")
         }
     }
     
@@ -324,5 +326,18 @@ struct ProfileView: View {
             print("error creating file")
         }
         return URL(fileURLWithPath: "")
+    }
+    
+    func convertToPlainText() -> String {
+        var noteAsCSV = "ParticipantID: " + self.patientID + " - " + self.displayName + " - " + self.email + "\n"
+        noteAsCSV.append(contentsOf: "id, activeStartTime, activeEndTime, activeDuration, actionTime, actionDescription\n")
+        
+        for log in logStore.logs {
+            for action in log.actions {
+                noteAsCSV.append(contentsOf: "\"\(log.id)\",\"\(log.startTime)\",\"\(log.endTime)\",\"\(log.duration)\",\"\(action.time)\",\"\(action.description)\"\n")
+            }
+        }
+        
+        return noteAsCSV
     }
 }
