@@ -18,7 +18,7 @@ struct ProfileCellView: View {
                 textView
             }
             .frame(maxWidth: 300)
-            .frame(height: 80)
+            .frame(height: 60)
             .foregroundColor(darkBlueColor)
             .background(RoundedRectangle(cornerRadius: 20).fill(.white))
             .clipped()
@@ -33,9 +33,8 @@ struct ProfileCellView: View {
             .lineLimit(2)
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: 80)
+            .frame(height: 60)
             .padding(.horizontal, 10.0)
-            .offset(y: -5)
     }
     
     var iconView: some View {
@@ -44,7 +43,7 @@ struct ProfileCellView: View {
             .scaledToFit()
             .padding(15.0)
             .accessibilityLabel(Text(text))
-            .frame(width: 80, height: 80)
+            .frame(width: 60, height: 60)
             .background(Color.random.opacity(0.4))
             .cornerRadius(15, corners: [.bottomLeft, .topLeft])
     }

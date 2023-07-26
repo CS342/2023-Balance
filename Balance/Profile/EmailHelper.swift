@@ -12,13 +12,14 @@ import SwiftUI
 // swiftlint:disable force_unwrapping
 // swiftlint:disable unused_closure_parameter
 // swiftlint:disable legacy_objc_type
+// swiftlint:disable function_parameter_count
 class EmailHelper: NSObject {
     static let shared = EmailHelper()
     private override init() {}
 }
 
 extension EmailHelper {
-    func send(subject: String, body: String, file: URL, plainText: String, to: [String]) {
+    func send(subject: String, body: String, file: URL, fileName: String, plainText: String, to: [String]) {
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
         
@@ -27,9 +28,9 @@ extension EmailHelper {
         }
         
         if !MFMailComposeViewController.canSendMail() {
-            var bodyFix = body + "\n" + plainText
-            let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-            let bodyEncoded = bodyFix.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            let bodyFix = body + "\n" + plainText
+            let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!.replacingOccurrences(of: "%20", with: "")
+            let bodyEncoded = bodyFix.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!.replacingOccurrences(of: "%20", with: "")
             let mails = to.joined(separator: ",")
             
             let alert = UIAlertController(title: "Cannot open Mail!", message: "", preferredStyle: .actionSheet)
@@ -68,7 +69,7 @@ extension EmailHelper {
         mailCompose.mailComposeDelegate = self
         
         if let data = NSData(contentsOf: file) {
-            mailCompose.addAttachmentData(data as Data, mimeType: "application/csv", fileName: "export.csv")
+            mailCompose.addAttachmentData(data as Data, mimeType: "application/csv", fileName: fileName)
         }
             
         viewController.present(mailCompose, animated: true, completion: nil)

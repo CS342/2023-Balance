@@ -19,7 +19,7 @@ struct ActivityLogButtonStyle: PrimitiveButtonStyle {
         configuration.label
             .onTapGesture {
                 configuration.trigger()
-                activityLogEntry.addAction(actionDescription: activityDescription)
+                activityLogEntry.addActionButton(actionDescription: "Button " + activityDescription)
 #if DEMO
                     logStore.saveLog(activityLogEntry)
                     ActivityLogStore.save(logs: logStore.logs) { result in

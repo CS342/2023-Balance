@@ -140,20 +140,21 @@ struct ProfileView: View {
         Button(action: {
             EmailHelper.shared.send(
                 subject: "Balance Export",
-                body: "ParticipantID: " + self.patientID + " - Name: " + self.displayName + " - Email:" + self.email + "\n",
+                body: "ParticipantID: " + self.patientID + "\n",
                 file: convertToCSV(),
+                fileName: self.patientID + ".csv",
                 plainText: convertToPlainText(),
                 to: ["cmirand@stanford.edu"]
             )
         }) {
-            ProfileCellView(image: "mail", text: "Mail data")
+            ProfileCellView(image: "mail", text: "E-Mail data")
         }
     }
     
     var shareLink: some View {
         ShareLink(
             item: convertToCSV(),
-            subject: Text("Balance Export")
+            subject: Text("Balance Export: ParticipantID: " + self.patientID)
         ) {
             ProfileCellView(image: "square.and.arrow.up", text: "Share data")
         }
@@ -190,15 +191,15 @@ struct ProfileView: View {
     var logoutOption: some View {
         Button {
             print("Logout")
-#if DEMO
-            UserImageCache.remove(key: self.patientID.appending("UploadedArray"))
-            UserImageCache.remove(key: self.patientID.appending("RemovedArray"))
-            UserImageCache.remove(key: self.patientID.appending("FavoritesArray"))
-            logStore.removeStore()
-            noteStore.removeStore()
-            drawStore.removeStore()
-            coloringStore.removeStore()
-#endif
+            // #if DEMO
+            //            UserImageCache.remove(key: self.patientID.appending("UploadedArray"))
+            //            UserImageCache.remove(key: self.patientID.appending("RemovedArray"))
+            //            UserImageCache.remove(key: self.patientID.appending("FavoritesArray"))
+            //            logStore.removeStore()
+            //            noteStore.removeStore()
+            //            drawStore.removeStore()
+            //            coloringStore.removeStore()
+            // #endif
             //            dismiss()
             authModel.signOut()
             completedOnboardingFlow = false
@@ -306,19 +307,32 @@ struct ProfileView: View {
     }
     
     func convertToCSV() -> URL {
-        var noteAsCSV = "ParticipantID: " + self.patientID + " - " + self.displayName + " - " + self.email + "\n"
-        noteAsCSV.append(contentsOf: "id, activeStartTime, activeEndTime, activeDuration, actionTime, actionDescription\n")
+        var logActions = [LogAction]()
         
+        var noteAsCSV = "id, activeStartTime, activeEndTime, activeDuration, actionTime, actionDescription\n"
         for log in logStore.logs {
             for action in log.actions {
-                noteAsCSV.append(contentsOf: "\"\(log.id)\",\"\(log.startTime)\",\"\(log.endTime)\",\"\(log.duration)\",\"\(action.time)\",\"\(action.description)\"\n")
+                logActions.append(
+                    LogAction(
+                        id: log.id,
+                        startTime: log.startTime,
+                        endTime: log.endTime,
+                        duration: log.duration,
+                        actionTime: action.time,
+                        actionDesc: action.description
+                    )
+                )
             }
+        }
+        
+        for action in logActions.sorted(by: { $0.actionTime.compare($1.actionTime) == .orderedAscending }) {
+            noteAsCSV.append(contentsOf: "\"\(action.id)\",\"\(action.startTime)\",\"\(action.endTime)\",\"\(action.duration)\",\"\(action.actionTime)\",\"\(action.actionDesc)\"\n")
         }
         
         let fileManager = FileManager.default
         do {
             let path = try fileManager.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil, create: false)
-            let fileURL = path.appendingPathComponent("export.csv")
+            let fileURL = path.appendingPathComponent(self.patientID + ".csv")
             try noteAsCSV.write(to: fileURL, atomically: true, encoding: .utf8)
             
             return fileURL
@@ -329,13 +343,28 @@ struct ProfileView: View {
     }
     
     func convertToPlainText() -> String {
-        var noteAsCSV = "ParticipantID: " + self.patientID + " - " + self.displayName + " - " + self.email + "\n"
+        var noteAsCSV = "ParticipantID: " + self.patientID + "\n"
         noteAsCSV.append(contentsOf: "id, activeStartTime, activeEndTime, activeDuration, actionTime, actionDescription\n")
+        
+        var logActions = [LogAction]()
         
         for log in logStore.logs {
             for action in log.actions {
-                noteAsCSV.append(contentsOf: "\"\(log.id)\",\"\(log.startTime)\",\"\(log.endTime)\",\"\(log.duration)\",\"\(action.time)\",\"\(action.description)\"\n")
+                logActions.append(
+                    LogAction(
+                        id: log.id,
+                        startTime: log.startTime,
+                        endTime: log.endTime,
+                        duration: log.duration,
+                        actionTime: action.time,
+                        actionDesc: action.description
+                    )
+                )
             }
+        }
+        
+        for action in logActions.sorted(by: { $0.actionTime.compare($1.actionTime) == .orderedAscending }) {
+            noteAsCSV.append(contentsOf: "\"\(action.id)\",\"\(action.startTime)\",\"\(action.endTime)\",\"\(action.duration)\",\"\(action.actionTime)\",\"\(action.actionDesc)\"\n")
         }
         
         return noteAsCSV
