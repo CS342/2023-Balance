@@ -171,7 +171,7 @@ struct HomeView: View {
     var distractOption: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Distraction Music Feature",
+                viewName: "Distraction Feature",
                 isDirectChildToContainer: true,
                 content: {
                     DistractionView()

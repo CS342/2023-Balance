@@ -23,7 +23,17 @@ import Foundation
 // swiftlint:disable implicit_return
 // swiftlint:disable force_unwrapping
 // swiftlint:disable todo
-// swiftlint:disable untyped_error_in_catch 
+// swiftlint:disable untyped_error_in_catch
+
+struct LogAction {
+    let id: String
+    let startTime: Date
+    let endTime: Date
+    let duration: TimeInterval
+    let actionTime: Date
+    let actionDesc: String
+}
+
 struct Action: Codable {
     let time: Date
     let description: String
@@ -62,6 +72,16 @@ class ActivityLogEntry: ObservableObject, Codable {
         
         // set start time if this is the first action
         startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
+    }
+    
+    func addActionButton(actionDescription: String) {
+        let currentDate = Date.now
+        actions.append(Action(time: currentDate, description: actionDescription))
+        
+        // set start time if this is the first action
+        startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
+        endTime = startTime
+        duration = getDuration()
     }
     
     func endLog(actionDescription: String) {
