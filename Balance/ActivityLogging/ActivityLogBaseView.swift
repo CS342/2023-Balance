@@ -32,6 +32,7 @@ struct ActivityLogBaseView<Content>: View where Content: View {
     var body: some View {
         content
             .onAppear(perform: {
+                UserDefaults.standard.set(activityLogEntry.id, forKey: "SessionID")
                 activityLogEntry.addAction(actionDescription: "Opened \(viewName)")
 #if DEBUG
                 print("Opened \(viewName)")

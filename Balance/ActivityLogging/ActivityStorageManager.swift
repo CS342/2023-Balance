@@ -35,8 +35,11 @@ struct LogAction {
 }
 
 struct Action: Codable {
-    let time: Date
+    var id = UUID().uuidString
     let description: String
+    let startTime: Date
+    var endTime = Date()
+    var duration: TimeInterval = 0
 }
 
 class ActivityLogEntry: ObservableObject, Codable {
@@ -68,16 +71,25 @@ class ActivityLogEntry: ObservableObject, Codable {
     
     func addAction(actionDescription: String) {
         let currentDate = Date.now
-        actions.append(Action(time: currentDate, description: actionDescription))
+        actions.append(Action(description: actionDescription, startTime: currentDate))
         
         // set start time if this is the first action
         startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
     }
     
     func addActionButton(actionDescription: String) {
+        let sessionID = UserDefaults.standard.string(forKey: "SessionID")
+
         let currentDate = Date.now
-        actions.append(Action(time: currentDate, description: actionDescription))
-        
+        actions.append(
+            Action(
+                description: actionDescription,
+                startTime: Date.now,
+                endTime: Date.now,
+                duration: getDuration(endDate: Date.now, startDate: Date.now)
+            )
+        )
+        id = sessionID!
         // set start time if this is the first action
         startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
         endTime = startTime
@@ -85,9 +97,35 @@ class ActivityLogEntry: ObservableObject, Codable {
     }
     
     func endLog(actionDescription: String) {
-        addAction(actionDescription: actionDescription)
-        endTime = actions.last!.time
+        let currentEndDate = Date.now
+        let startAction = actions.last(where: {
+            $0.description == actionDescription.replacingOccurrences(of: "Closed", with: "Opened")
+        })
+        
+        actions.append(
+            Action(
+                description: actionDescription.replacingOccurrences(of: "Closed", with: ""),
+                startTime: startAction!.startTime,
+                endTime: currentEndDate,
+                duration:
+                    getDuration(endDate: currentEndDate, startDate: startAction!.startTime)
+            )
+        )
+        actions = actions.filter( {
+            $0.id != startAction?.id
+        })
+
+        
+        // set start time if this is the first action
+//        startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
+        
+//        addAction(actionDescription: actionDescription)
+        endTime = actions.last!.startTime
         duration = getDuration()
+    }
+    
+    func getDuration(endDate: Date, startDate: Date) -> TimeInterval {
+        return endTime.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
     }
     
     func getDuration() -> TimeInterval {
@@ -104,7 +142,7 @@ class ActivityLogEntry: ObservableObject, Codable {
         var actionsStr = ""
         
         for action in actions {
-            actionsStr.append("\(dateToString(date: action.time) + " " + action.description)\n")
+            actionsStr.append("\(dateToString(date: action.startTime) + " " + action.description)\n")
         }
         
         return (idStr, [startStr, actionsStr, durationStr, endStr].joined(separator: "\n"))
