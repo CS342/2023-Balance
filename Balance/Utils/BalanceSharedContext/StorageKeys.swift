@@ -14,7 +14,8 @@ public enum StorageKeys {
     /// A `Step` flag indicating the current step in the onboarding process.
     public static let onboardingFlowStep = "onboardingFlow.step"
     
-    
+    /// A `spotifyConnect` flag indicating the current step in the onboarding process.
+    public static let spotifyConnect = "spotifyConnect"
     // MARK: - Home
     /// The currently selected home tab.
     public static let homeTabSelection = "home.tabselection"

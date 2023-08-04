@@ -10,25 +10,23 @@ import SwiftUI
 struct DistractionView: View {
     @State private var currentDraw = Draw()
     @EnvironmentObject var store: DrawStore
-
+    
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack(spacing: 0) {
-                    HeaderMenu(title: "Distraction")
-                    ScrollView(.vertical) {
-                        VStack(spacing: 20) {
-                            picturesOption
-                            musicOption
-                            videosOption
-                            gamesOption
-                            drawingOption
-                            coloringOption
-                        }
-                        .padding(20)
-                        .ignoresSafeArea(.all)
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack(spacing: 0) {
+                HeaderMenu(title: "Distraction")
+                ScrollView(.vertical) {
+                    VStack(spacing: 20) {
+                        picturesOption
+                        musicOption
+                        videosOption
+                        gamesOption
+                        drawingOption
+                        coloringOption
                     }
+                    .padding(20)
+                    .ignoresSafeArea(.all)
                 }
             }
         }

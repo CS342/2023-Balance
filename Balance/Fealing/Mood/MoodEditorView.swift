@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// swiftlint:disable attributes
 struct MoodEditorView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss)
+    var dismiss
     @EnvironmentObject var store: NoteStore
     @Binding var currentNote: Note
     @State private var title = ""
@@ -19,26 +19,24 @@ struct MoodEditorView: View {
     @State private var emptyNoteAlert = false
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Feeling learning")
-                    Spacer().frame(height: 20)
-                    titleText
-                    TextField("Note Title", text: $title)
-                        .font(.custom("Nunito-Bold", size: 18))
-                        .padding()
-                    TextEditor(text: $text)
-                        .font(.custom("Nunito", size: 16))
-                        .border(.black.opacity(0.2), width: 1)
-                        .padding()
-                    saveButton
-                }.onAppear {
-                    self.title = currentNote.title
-                    self.text = currentNote.text
-                    self.id = currentNote.id
-                }
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Feeling learning")
+                Spacer().frame(height: 20)
+                titleText
+                TextField("Note Title", text: $title)
+                    .font(.custom("Nunito-Bold", size: 18))
+                    .padding()
+                TextEditor(text: $text)
+                    .font(.custom("Nunito", size: 16))
+                    .border(.black.opacity(0.2), width: 1)
+                    .padding()
+                saveButton
+            }.onAppear {
+                self.title = currentNote.title
+                self.text = currentNote.text
+                self.id = currentNote.id
             }
         }
     }

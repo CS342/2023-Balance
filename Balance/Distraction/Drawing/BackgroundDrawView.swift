@@ -45,20 +45,18 @@ struct BackgroundDrawView: View {
     let highlightArray = mandalaArray.filter { $0.highlight == true }
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Coloring Something")
-                    VStack(alignment: .center, spacing: 10) {
-                        highlightsTitle
-                        imagePaging
-                        categoriesTitle
-                        tagsView
-                        Spacer()
-                    }
-                    .edgesIgnoringSafeArea(.all)
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Coloring Something")
+                VStack(alignment: .center, spacing: 10) {
+                    highlightsTitle
+                    imagePaging
+                    categoriesTitle
+                    tagsView
+                    Spacer()
                 }
+                .edgesIgnoringSafeArea(.all)
             }
         }
     }

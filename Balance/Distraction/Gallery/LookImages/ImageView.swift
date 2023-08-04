@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct HUD<Content: View>: View {
-  @ViewBuilder let content: Content
-
-  var body: some View {
-    content
-      .padding(.horizontal, 12)
-      .padding(16)
-      .background(
-        Capsule()
-          .foregroundColor(Color.white)
-          .shadow(color: Color(.black).opacity(0.16), radius: 12, x: 0, y: 5)
-      )
-  }
+    @ViewBuilder let content: Content
+    
+    var body: some View {
+        content
+            .padding(.horizontal, 12)
+            .padding(16)
+            .background(
+                Capsule()
+                    .foregroundColor(Color.white)
+                    .shadow(color: Color(.black).opacity(0.16), radius: 12, x: 0, y: 5)
+            )
+    }
 }
 
 struct ScaleButtonStyle: ButtonStyle {
@@ -29,9 +29,9 @@ struct ScaleButtonStyle: ButtonStyle {
     }
 }
 
-// swiftlint:disable attributes
 struct ImageView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss)
+    var dismiss
     var imagesArray: [Photo]
     @State var currentIndex = 0
     @State var selected: Photo
@@ -47,40 +47,38 @@ struct ImageView: View {
     @State var tapReturn = false
     @State var tapLike = false
     @State var tapDislike = false
-
+    
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Look at Images")
-                    Spacer()
-                    tabImages
-                        .tabViewStyle(.page(indexDisplayMode: .never))
-                        .onAppear(perform: {
-                            self.selected = self.imagesArray[currentIndex]
-                        })
-                    Spacer()
-                    actionsButtons
-                    Spacer()
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Look at Images")
+                Spacer()
+                tabImages
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .onAppear(perform: {
+                        self.selected = self.imagesArray[currentIndex]
+                    })
+                Spacer()
+                actionsButtons
+                Spacer()
+            }
+            if showingHUD {
+                HUD {
+                    Label(strMsg, systemImage: imgMsg)
                 }
-                if showingHUD {
-                    HUD {
-                        Label(strMsg, systemImage: imgMsg)
-                    }
-                    .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            withAnimation {
-                                showingHUD = false
-                            }
+                .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        withAnimation {
+                            showingHUD = false
                         }
                     }
-                    .zIndex(1)
                 }
-            }.onAppear {
-                loadUser()
+                .zIndex(1)
             }
+        }.onAppear {
+            loadUser()
         }
     }
     
@@ -119,7 +117,7 @@ struct ImageView: View {
             showingHUD.toggle()
             self.strMsg = "Deleted!"
             self.imgMsg = "trash.fill"
-             
+            
             removeFrom(type: "FavoritesArray", name: selected.name)
             removeFrom(type: "RemovedArray", name: selected.name)
             removeFrom(type: "UploadedArray", name: selected.name)

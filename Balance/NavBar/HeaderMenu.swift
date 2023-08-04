@@ -8,10 +8,10 @@
 
 import SwiftUI
 
-// swiftlint:disable attributes
 struct HeaderMenu: View {
     @State private var showingSOSSheet = false
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode)
+    var presentationMode
     @AppStorage("fromSOS")
     var fromSOS = false
     var title: String

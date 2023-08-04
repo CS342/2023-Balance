@@ -22,7 +22,10 @@ struct Balance: App {
 #if DEMO
     @StateObject var logStore = ActivityLogStore()
 #endif
-    @State var started = false
+    @StateObject var activityLogEntry = ActivityLogEntry()
+    
+    @Environment(\.scenePhase)
+    var scenePhase
     
     var body: some Scene {
         WindowGroup {
@@ -42,6 +45,25 @@ struct Balance: App {
 #if DEMO
             .environmentObject(logStore)
 #endif
+            .environmentObject(activityLogEntry)
+
+            .onChange(of: scenePhase) { phase in
+                switch phase {
+                case .active:
+                    print("ScenePhase: active")
+                    UserDefaults.standard.set(false, forKey: StorageKeys.spotifyConnect)
+                case .background:
+                    print("ScenePhase: background")
+                    let value = UserDefaults.standard.bool(forKey: StorageKeys.spotifyConnect)
+                    if value == false {
+                        activityLogEntry.reset()
+                    }
+                case .inactive:
+                    print("ScenePhase: inactive")
+                @unknown default:
+                    print("ScenePhase: unexpected state")
+                }
+            }
         }
     }
 }

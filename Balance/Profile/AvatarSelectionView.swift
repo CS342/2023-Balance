@@ -15,10 +15,10 @@ class AccesoryManager: ObservableObject {
     @Published var accesories = (1...4).map { Accesory(name: "acc_\($0)") }
 }
 
-// swiftlint:disable attributes
 struct AvatarSelectionView: View {
     @EnvironmentObject private var authModel: AuthViewModel
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss)
+    private var dismiss
     @State private var showingAvatarPreviewSheet = false
     @ObservedObject var avatarManager = AvatarManager()
     @State private var avatarSelection: Avatar.ID?
@@ -32,27 +32,25 @@ struct AvatarSelectionView: View {
     private var gridItemLayout = [GridItem(.fixed(150)), GridItem(.fixed(150))]
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    ScrollView {
-                        Spacer().frame(height: 50)
-                        avatarListView
-                        // if !firstLoad {
-                        // Spacer().frame(height: 50)
-                        // accesoryListView
-                        // }
-                    }
-                    selectButton.background(.clear)
-                }.sheet(isPresented: $showingAvatarPreviewSheet) {
-                    AvatarPreviewView(
-                        onboardingSteps: $onboardingSteps,
-                        avatarSelection: $avatarSelected,
-                        accesorySelection: $accesorySelected,
-                        firstLoad: firstLoad
-                    )
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                ScrollView {
+                    Spacer().frame(height: 50)
+                    avatarListView
+                    // if !firstLoad {
+                    // Spacer().frame(height: 50)
+                    // accesoryListView
+                    // }
                 }
+                selectButton.background(.clear)
+            }.sheet(isPresented: $showingAvatarPreviewSheet) {
+                AvatarPreviewView(
+                    onboardingSteps: $onboardingSteps,
+                    avatarSelection: $avatarSelected,
+                    accesorySelection: $accesorySelected,
+                    firstLoad: firstLoad
+                )
             }
         }
     }

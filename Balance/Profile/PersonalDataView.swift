@@ -10,9 +10,9 @@ import SwiftUI
 import class FHIR.FHIR
 import FirebaseAccount
 
-// swiftlint:disable attributes
 struct PersonalDataView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss)
+    var dismiss
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
     @EnvironmentObject var account: Account
@@ -27,42 +27,40 @@ struct PersonalDataView: View {
     @State private var loading = false
     @State private var deleteButton = false
     @State private var showingAlert = false
-
+    
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Personal Data")
-                    Spacer().frame(height: 20)
-                    dataView
-                    Spacer()
-                    if deleteButton {
-                        removeButton
-                    }
-                }
-                if loading {
-                    ProgressView("Loading...")
-                        .tint(.white)
-                        .accentColor(.white)
-                        .foregroundColor(.white)
-                        .frame(width: 200, height: 200)
-                        .background(Color.black.opacity(0.8))
-                        .cornerRadius(20, corners: .allCorners)
-                        .ignoresSafeArea()
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Personal Data")
+                Spacer().frame(height: 20)
+                dataView
+                Spacer()
+                if deleteButton {
+                    removeButton
                 }
             }
-            .onAppear {
-                cleanDataView()
+            if loading {
+                ProgressView("Loading...")
+                    .tint(.white)
+                    .accentColor(.white)
+                    .foregroundColor(.white)
+                    .frame(width: 200, height: 200)
+                    .background(Color.black.opacity(0.8))
+                    .cornerRadius(20, corners: .allCorners)
+                    .ignoresSafeArea()
             }
-            .onShake {
-                print("Device shaken!")
-                self.deleteButton = true
-            }
-            .alert(alertMessage, isPresented: $showingAlert) {
-                Button("OK", role: .cancel) {
-                    authModel.authError = ""
-                }
+        }
+        .onAppear {
+            cleanDataView()
+        }
+        .onShake {
+            print("Device shaken!")
+            self.deleteButton = true
+        }
+        .alert(alertMessage, isPresented: $showingAlert) {
+            Button("OK", role: .cancel) {
+                authModel.authError = ""
             }
         }
     }
@@ -192,6 +190,7 @@ struct PersonalDataView: View {
         self.deleteButton = false
     }
 }
+
 struct PersonalDataView_Previews: PreviewProvider {
     static var previews: some View {
         PersonalDataView()

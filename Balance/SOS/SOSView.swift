@@ -8,45 +8,43 @@
 
 import SwiftUI
 
-// swiftlint:disable attributes
 struct SOSView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss)
+    var dismiss
     var clipsToBounds = false
     
     var body: some View {
-        ActivityLogContainer {
-            VStack(spacing: 20) {
-                Spacer()
-                Image("Diary")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100.0, height: 100.0)
-                    .accessibilityLabel("Diary")
-                textView
-                ScrollView {
-                    SOSCellView(
-                        title: "Body sensations",
-                        subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
-                    )
-                    SOSCellView(
-                        title: "Guided meditation",
-                        subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
-                    )
-                    SOSCellView(
-                        title: "Distraction",
-                        subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
-                    )
-                    SOSCellView(
-                        title: "Deep breating",
-                        subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
-                    )
-                    SOSCellView(
-                        title: "Sensorial activity",
-                        subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
-                    )
-                }
-                saveButton
+        VStack(spacing: 20) {
+            Spacer()
+            Image("Diary")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100.0, height: 100.0)
+                .accessibilityLabel("Diary")
+            textView
+            ScrollView {
+                SOSCellView(
+                    title: "Body sensations",
+                    subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
+                )
+                SOSCellView(
+                    title: "Guided meditation",
+                    subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
+                )
+                SOSCellView(
+                    title: "Distraction",
+                    subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
+                )
+                SOSCellView(
+                    title: "Deep breating",
+                    subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
+                )
+                SOSCellView(
+                    title: "Sensorial activity",
+                    subtitle: "lrem ipsum dolor sit amet consecte tuer adipiscing..."
+                )
             }
+            saveButton
         }.background(backgroundColor)
     }
     

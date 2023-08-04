@@ -11,9 +11,9 @@ import class FHIR.FHIR
 import Onboarding
 import SwiftUI
 
-// swiftlint:disable attributes
 struct AvatarPreviewView: View {
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss)
+    private var dismiss
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
@@ -24,37 +24,35 @@ struct AvatarPreviewView: View {
     private var firstLoad: Bool
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    Spacer().frame(height: 50)
-                    titlePreview
-                    Spacer()
-                    avatarSelected
-                    Spacer()
-                    saveButton
-                    cancelButton
-                }
-                if loading {
-                    loadingView
-                        .ignoresSafeArea()
-                }
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                Spacer().frame(height: 50)
+                titlePreview
+                Spacer()
+                avatarSelected
+                Spacer()
+                saveButton
+                cancelButton
             }
-            .disabled(loading)
-            .onAppear {
-                authModel.listenAuthentificationState()
-                self.profile = authModel.profile ?? ProfileUser()
+            if loading {
+                loadingView
+                    .ignoresSafeArea()
             }
-            .onChange(of: authModel.profile ?? ProfileUser()) { profile in
-                updateData(profile: profile)
-            }
-            .onChange(of: authModel.authError) { value in
-                if !value.isEmpty {
-                    loading = false
-                    //                    self.alertMessage = value
-                    //                    self.showingAlert = true
-                }
+        }
+        .disabled(loading)
+        .onAppear {
+            authModel.listenAuthentificationState()
+            self.profile = authModel.profile ?? ProfileUser()
+        }
+        .onChange(of: authModel.profile ?? ProfileUser()) { profile in
+            updateData(profile: profile)
+        }
+        .onChange(of: authModel.authError) { value in
+            if !value.isEmpty {
+                loading = false
+                //                    self.alertMessage = value
+                //                    self.showingAlert = true
             }
         }
     }

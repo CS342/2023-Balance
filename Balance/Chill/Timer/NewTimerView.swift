@@ -48,35 +48,33 @@ struct NewTimerView: View {
     @State var scale: CGFloat = 1.0
     @State var breathStp: Int = 0
     var countTo: Int = 120 // 4 minutes 120 - 2minutes
-   
+    
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack(alignment: .center) {
-                    HeaderMenu(title: navTitleText)
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack(alignment: .center) {
+                HeaderMenu(title: navTitleText)
+                Spacer()
+                subTitle
+                Spacer()
+                Clock(counter: counter, countTo: countTo)
+                Spacer()
+                progressAnimation
+                Group {
                     Spacer()
-                    subTitle
+                    actionButton
                     Spacer()
-                    Clock(counter: counter, countTo: countTo)
+                    sliderView
                     Spacer()
-                    progressAnimation
-                    Group {
-                        Spacer()
-                        actionButton
-                        Spacer()
-                        sliderView
-                        Spacer()
-                    }
                 }
-                .onReceive(timer) { _ in
-                    receiveAction()
-                }
-                .onAppear {
-                    timerAnimation = Timer
-                        .publish(every: (self.chillType == .breathing) ? 5.0 : 2.0, on: .main, in: .common)
-                        .autoconnect()
-                }
+            }
+            .onReceive(timer) { _ in
+                receiveAction()
+            }
+            .onAppear {
+                timerAnimation = Timer
+                    .publish(every: (self.chillType == .breathing) ? 5.0 : 2.0, on: .main, in: .common)
+                    .autoconnect()
             }
         }
     }
@@ -451,7 +449,7 @@ struct NewTimerView: View {
             }
         }
     }
-        
+    
     func completed() -> Bool {
         let value = progress() == 1
         return value

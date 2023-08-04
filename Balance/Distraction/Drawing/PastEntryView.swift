@@ -12,25 +12,23 @@ struct PastEntryView: View {
     private var draw: Draw
     
     var body: some View {
-        ActivityLogContainer {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(draw.date.timeSinceDate(fromDate: Date()))
-                        .font(.custom("Nunito-Bold", size: 11))
-                        .foregroundColor(.gray)
-                    Spacer().frame(height: 10)
-                    loadImages
-                }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(darkBlueColor)
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(draw.date.timeSinceDate(fromDate: Date()))
+                    .font(.custom("Nunito-Bold", size: 11))
+                    .foregroundColor(.gray)
+                Spacer().frame(height: 10)
+                loadImages
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(20)
-            .background()
-            .cornerRadius(15)
-            .shadow(color: Color.black.opacity(0.1), radius: 5)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .foregroundColor(darkBlueColor)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(20)
+        .background()
+        .cornerRadius(15)
+        .shadow(color: Color.black.opacity(0.1), radius: 5)
     }
     
     var loadImages: some View {

@@ -10,7 +10,7 @@ import SwiftUI
 class DrawStore: ObservableObject {
     static let shared = DrawStore()
     @Published var draws: [Draw] = []
-    
+
     private static func fileURL() throws -> URL {
         try FileManager.default.url(
             for: .documentDirectory,
@@ -18,7 +18,7 @@ class DrawStore: ObservableObject {
             appropriateFor: nil,
             create: false
         )
-        .appendingPathComponent("draw.data")
+        .appendingPathComponent("\(UserDefaults.standard.string(forKey: "lastPatient") ?? "")_draw.data")
     }
     
     static func load(completion: @escaping (Result<[Draw], Error>) -> Void) {

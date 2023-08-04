@@ -9,21 +9,19 @@ import SwiftUI
 
 struct BodySensationView: View {
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Body sensations")
-                    Spacer()
-                    titleText
-                    Spacer()
-                    imageView
-                    Spacer()
-                    subTitleText
-                    bodyButtons
-                }
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Body sensations")
                 Spacer()
+                titleText
+                Spacer()
+                imageView
+                Spacer()
+                subTitleText
+                bodyButtons
             }
+            Spacer()
         }
     }
     
@@ -189,13 +187,13 @@ struct BodySensationView: View {
                 )
         }
     }
-
+    
     var imageView: some View {
-            Image("bodyAvatar")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 250, height: 250, alignment: .center)
-                .accessibilityLabel("imageBS")
+        Image("bodyAvatar")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 250, height: 250, alignment: .center)
+            .accessibilityLabel("imageBS")
     }
     
     var titleText: some View {

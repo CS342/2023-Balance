@@ -26,21 +26,7 @@ struct HomeView: View {
                 NavigationStack {
                     VStack(spacing: 0) {
                         HeaderHome()
-                        ZStack(alignment: .bottomLeading) {
-                            ScrollView(.vertical) {
-                                VStack(spacing: 20) {
-                                    distractOption
-                                    chillOption
-                                    fealingLearningOption
-                                    diaryOption
-                                }
-                                .padding(20)
-                                .ignoresSafeArea(.all)
-                            }
-                            .zIndex(1)
-                            Spacer()
-                            cloudImage.zIndex(-1)
-                        }
+                        menuOptions
                         Spacer()
                     }
                     .navigationTitle("")
@@ -85,6 +71,24 @@ struct HomeView: View {
                     Spacer()
                 }
             }.opacity(showMe ? 0 : 1)
+        }
+    }
+    
+    var menuOptions: some View {
+        ZStack(alignment: .bottomLeading) {
+            ScrollView(.vertical) {
+                VStack(spacing: 20) {
+                    distractOption
+                    chillOption
+                    fealingLearningOption
+                    diaryOption
+                }
+                .padding(20)
+                .ignoresSafeArea(.all)
+            }
+            .zIndex(1)
+            Spacer()
+            cloudImage.zIndex(-1)
         }
     }
     

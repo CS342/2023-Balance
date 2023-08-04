@@ -20,26 +20,25 @@ import Foundation
  total duration:
  */
 
-// swiftlint:disable implicit_return
-// swiftlint:disable force_unwrapping
-// swiftlint:disable todo
-// swiftlint:disable untyped_error_in_catch
+// swiftlint:disable all
 
 struct LogAction {
-    let id: String
+    let sessionID: String
+    let sessionStartTime: Date
+    let sessionEndTime: Date
+    let sessionDuration: Int
+    let description: String
     let startTime: Date
     let endTime: Date
-    let duration: TimeInterval
-    let actionTime: Date
-    let actionDesc: String
+    let duration: Int
 }
 
 struct Action: Codable {
     var id = UUID().uuidString
     let description: String
     let startTime: Date
-    var endTime = Date()
-    var duration: TimeInterval = 0
+    var endTime = Date.now
+    var duration: Int = 0
 }
 
 class ActivityLogEntry: ObservableObject, Codable {
@@ -50,50 +49,45 @@ class ActivityLogEntry: ObservableObject, Codable {
         case duration
         case actions
     }
-    
+
     var id = UUID().uuidString
-    var startTime = Date(timeIntervalSinceReferenceDate: 0)
-    var endTime = Date(timeIntervalSinceReferenceDate: 0)
-    var duration: TimeInterval = 0
+    var startTime = Date()
+    var endTime = Date.now
+    var duration: Int = 0
     var actions: [Action] = []
     
     func reset() {
         id = UUID().uuidString
-        startTime = Date(timeIntervalSinceReferenceDate: 0)
+        startTime = Date()
         endTime = startTime
         duration = 0
         actions = []
     }
     
     func isEmpty() -> Bool {
-        return getDuration() == TimeInterval(0)
+        return getDuration() == 0
     }
     
     func addAction(actionDescription: String) {
         let currentDate = Date.now
         actions.append(Action(description: actionDescription, startTime: currentDate))
-        
-        // set start time if this is the first action
-        startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
     }
     
     func addActionButton(actionDescription: String) {
-        let sessionID = UserDefaults.standard.string(forKey: "SessionID")
-
         let currentDate = Date.now
         actions.append(
             Action(
                 description: actionDescription,
-                startTime: Date.now,
-                endTime: Date.now,
-                duration: getDuration(endDate: Date.now, startDate: Date.now)
+                startTime: currentDate,
+                endTime: currentDate,
+                duration: 0
             )
         )
-        id = sessionID!
         // set start time if this is the first action
-        startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
-        endTime = startTime
-        duration = getDuration()
+        startTime = currentDate
+        endTime = currentDate
+
+        duration = 0
     }
     
     func endLog(actionDescription: String) {
@@ -102,32 +96,28 @@ class ActivityLogEntry: ObservableObject, Codable {
             $0.description == actionDescription.replacingOccurrences(of: "Closed", with: "Opened")
         })
         
+        if startAction == nil {
+            return
+        }
+        let interval = currentEndDate - startAction!.startTime
         actions.append(
             Action(
-                description: actionDescription.replacingOccurrences(of: "Closed", with: ""),
+                description: actionDescription.replacingOccurrences(of: "Closed ", with: ""),
                 startTime: startAction!.startTime,
                 endTime: currentEndDate,
-                duration:
-                    getDuration(endDate: currentEndDate, startDate: startAction!.startTime)
+                duration: interval.second ?? 0
             )
         )
         actions = actions.filter( {
             $0.id != startAction?.id
         })
-
         
-        // set start time if this is the first action
-//        startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
+        startTime = actions.first!.startTime
+        endTime = actions.last!.endTime
+        let intervalSession = endTime - startTime
+        duration = intervalSession.second ?? 0
+    }
         
-//        addAction(actionDescription: actionDescription)
-        endTime = actions.last!.startTime
-        duration = getDuration()
-    }
-    
-    func getDuration(endDate: Date, startDate: Date) -> TimeInterval {
-        return endTime.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
-    }
-    
     func getDuration() -> TimeInterval {
         return endTime.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
     }

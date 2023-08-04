@@ -21,27 +21,25 @@ struct MeditationView: View {
     ]
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Guided Meditation")
-                    VStack(alignment: .center, spacing: 10) {
-                        highlightsTitle.padding(.horizontal, 10.0)
-                        videoPaging
-                        categoriesTitle.padding(.horizontal, 10.0)
-                        tagsView.padding(.horizontal, 10.0)
-                        if showingGuided {
-                            MeditationSpotifyView().padding(.horizontal, 10.0)
-                        } else if showingYoutube {
-                            YoutubeView().padding(.horizontal, 10.0)
-                        } else if showingSleep {
-                            SleepView().padding(.horizontal, 10.0)
-                        }
-                        Spacer()
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Guided Meditation")
+                VStack(alignment: .center, spacing: 10) {
+                    highlightsTitle.padding(.horizontal, 10.0)
+                    videoPaging
+                    categoriesTitle.padding(.horizontal, 10.0)
+                    tagsView.padding(.horizontal, 10.0)
+                    if showingGuided {
+                        MeditationSpotifyView().padding(.horizontal, 10.0)
+                    } else if showingYoutube {
+                        YoutubeView().padding(.horizontal, 10.0)
+                    } else if showingSleep {
+                        SleepView().padding(.horizontal, 10.0)
                     }
-                    .edgesIgnoringSafeArea(.all)
+                    Spacer()
                 }
+                .edgesIgnoringSafeArea(.all)
             }
         }
     }

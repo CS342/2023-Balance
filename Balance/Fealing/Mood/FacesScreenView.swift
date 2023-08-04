@@ -74,16 +74,14 @@ struct FacesScreenView: View {
     ]
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack(spacing: 30) {
-                    HeaderMenu(title: "Feeling learning")
-                    titleText
-                    gridView
-                        .padding(.horizontal, 40.0)
-                    Spacer()
-                }
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack(spacing: 30) {
+                HeaderMenu(title: "Feeling learning")
+                titleText
+                gridView
+                    .padding(.horizontal, 40.0)
+                Spacer()
             }
         }
     }

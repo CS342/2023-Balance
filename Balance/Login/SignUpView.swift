@@ -13,14 +13,14 @@ import Onboarding
 import SwiftUI
 
 // swiftlint: disable type_body_length
-// swiftlint:disable attributes
 struct SignUpView: View {
     @EnvironmentObject var account: Account
     @EnvironmentObject private var authModel: AuthViewModel
     @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss)
+    private var dismiss
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
     @State private var displayName: String = ""
     @State private var email: String = ""

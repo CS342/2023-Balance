@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-// swiftlint:disable attributes
 struct SleepView: View {
-    @Environment(\.openURL) var openURL
+    @Environment(\.openURL)
+    var openURL
     
     let songs = [
         Song(

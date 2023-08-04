@@ -9,19 +9,17 @@ import SwiftUI
 
 struct FeelingView: View {
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Feeling learning")
-                    ScrollView(.vertical) {
-                        VStack(spacing: 20) {
-                            guessOption
-                            moodOption
-                        }
-                        .padding(10)
-                        .ignoresSafeArea(.all)
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Feeling learning")
+                ScrollView(.vertical) {
+                    VStack(spacing: 20) {
+                        guessOption
+                        moodOption
                     }
+                    .padding(10)
+                    .ignoresSafeArea(.all)
                 }
             }
         }
@@ -40,7 +38,7 @@ struct FeelingView: View {
             CellView(image: "guessIcon", text: "Guess the emotion")
         }
     }
-        
+    
     var moodOption: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
