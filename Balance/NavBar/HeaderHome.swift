@@ -14,6 +14,8 @@ import FirebaseAccount
 public struct HeaderHome: View {
     @AppStorage("fromSOS")
     var fromSOS = false
+    @SceneStorage(StorageKeys.onboardingFlowStep)
+    private var onboardingSteps: [OnboardingFlow.Step] = []
     @EnvironmentObject var authModel: AuthViewModel
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
@@ -21,6 +23,8 @@ public struct HeaderHome: View {
     @State private var displayName = ""
     @State private var avatar = ""
     @State private var userId = ""
+    @State private var coins = 0
+
     private var quotes = [
         "“We cannot solve problems with the kind of thinking we employed when we came up with them.” — Albert Einstein",
         "“Learn as if you will live forever, live like you will die tomorrow.” — Mahatma Gandhi",
@@ -38,7 +42,7 @@ public struct HeaderHome: View {
             }
             headerView
             Spacer()
-//            buttonsView
+            buttonsView
 //            Spacer()
 //            quotasView
             Spacer()
@@ -67,46 +71,56 @@ public struct HeaderHome: View {
                 }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.coinsUpdate)) { _ in
+            coins = UserDefaults.standard.integer(forKey: "\(userId)_coins")
+        }
     }
     
     var buttonsView: some View {
-        HStack {
+        HStack(alignment: .top) {
+//            Button(action: {
+//                showingHomeSheet.toggle()
+//                print("home")
+//            }) {
+//                homeButton
+//            }
+//            .buttonStyle(PlainButtonStyle())
+//            .sheet(isPresented: $showingHomeSheet) {
+//                LocationView()
+//            }
+//            .shadow(color: .gray, radius: 2, x: 0, y: 1)
+//            .padding(.horizontal, 5.0)
+            
             Button(action: {
-                showingHomeSheet.toggle()
-                print("home")
-            }) {
-                homeButton
-            }
-            .buttonStyle(PlainButtonStyle())
-            // .sheet(isPresented: $showingHomeSheet) {
-            // LocationView()
-            // }
-            .shadow(color: .gray, radius: 2, x: 0, y: 1)
-            .padding(.horizontal, 5.0)
-            Button(action: {
-                showingPointsSheet.toggle()
-                print("stars!")
+                showingAvatarSheet.toggle()
+                
+                UserDefaults.standard.set(150, forKey: "\(userId)_coins")
+                
+                NotificationCenter.default.post(name: Notification.Name.coinsUpdate, object: nil)
+                
+                print("avatarView")
             }) {
                 pointsButton
+            }.sheet(isPresented: $showingAvatarSheet) {
+                AvatarSelectionView(onboardingSteps: $onboardingSteps, firstLoad: false, accesoryLoad: true).environmentObject(authModel)
             }
             .buttonStyle(PlainButtonStyle())
-            // .sheet(isPresented: $showingPointsSheet) {
-            // PointsView()
-            // }
             .shadow(color: .gray, radius: 2, x: 0, y: 1)
-            .padding(.horizontal, 5.0)
+            .offset(y: -10)
         }
+        .padding(5.0)
     }
     
     var pointsButton: some View {
         ZStack {
-            Text("0")
+            Text("\(coins)")
                 .font(.custom("Nunito-Light", size: 12))
                 .frame(width: 100, height: 30)
                 .foregroundColor(Color.black)
                 .background(Color.white.opacity(0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-            Image("pointsStarIcon").accessibilityLabel("pointsStarIcon")
+            Image("pointsStarIcon")
+                .accessibilityLabel("pointsStarIcon")
                 .padding(.trailing, 65.0)
         }
     }

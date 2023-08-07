@@ -11,10 +11,10 @@ import class FHIR.FHIR
 import Onboarding
 import SwiftUI
 
+// swiftlint:disable all
 struct AvatarPreviewView: View {
     @Environment(\.dismiss)
     private var dismiss
-    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
     @Binding private var avatarSelection: Avatar
@@ -22,6 +22,7 @@ struct AvatarPreviewView: View {
     @State private var profile = ProfileUser()
     @State private var loading = false
     private var firstLoad: Bool
+    private var accesoryBuy: Bool
     
     var body: some View {
         ZStack {
@@ -42,8 +43,10 @@ struct AvatarPreviewView: View {
         }
         .disabled(loading)
         .onAppear {
+            loadUser()
+#if !DEMO
             authModel.listenAuthentificationState()
-            self.profile = authModel.profile ?? ProfileUser()
+#endif
         }
         .onChange(of: authModel.profile ?? ProfileUser()) { profile in
             updateData(profile: profile)
@@ -84,21 +87,39 @@ struct AvatarPreviewView: View {
                 .clipped()
                 .accessibilityLabel("star2")
                 .offset(x: -100, y: -50)
-            Image(avatarSelection.name)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 200, height: 200)
-                .clipped()
-                .accessibilityLabel("avatarPreview")
-            //            if !firstLoad {
-            //                Image(accesorySelection?.name ?? "acc_1")
-            //                    .resizable()
-            //                    .scaledToFit()
-            //                    .frame(width: 130, height: 130)
-            //                    .clipped()
-            //                    .accessibilityLabel("accesoryPreview")
-            //                    .offset(x: 80, y: 80)
-            //            }
+            if accesoryBuy {
+                Image(profile.avatar)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+                    .clipped()
+                    .accessibilityLabel("avatarPreview")
+            } else {
+                if avatarSelection.name.isEmpty {
+                    Image(profile.avatar)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .clipped()
+                        .accessibilityLabel("avatarPreview")
+                } else {
+                    Image(avatarSelection.name)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .clipped()
+                        .accessibilityLabel("avatarPreview")
+                }
+            }
+            if !firstLoad {
+                Image(accesorySelection.name)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 130, height: 130)
+                    .clipped()
+                    .accessibilityLabel("accesoryPreview")
+                    .offset(x: 80, y: 80)
+            }
             Image("stars1")
                 .resizable()
                 .frame(width: 50.0, height: 50.0)
@@ -156,11 +177,12 @@ struct AvatarPreviewView: View {
         .padding(.horizontal, 20.0)
     }
     
-    init(onboardingSteps: Binding<[OnboardingFlow.Step]>, avatarSelection: Binding<Avatar>, accesorySelection: Binding<Accesory>, firstLoad: Bool) {
+    init(onboardingSteps: Binding<[OnboardingFlow.Step]>, avatarSelection: Binding<Avatar>, accesorySelection: Binding<Accesory>, firstLoad: Bool, accesoryBuy: Bool) {
         self._onboardingSteps = onboardingSteps
         self._avatarSelection = avatarSelection
         self._accesorySelection = accesorySelection
         self.firstLoad = firstLoad
+        self.accesoryBuy = accesoryBuy
     }
     
     func updateData(profile: ProfileUser) {
@@ -172,7 +194,7 @@ struct AvatarPreviewView: View {
                 self.profile = profile
                 loading = false
             }
-            dismiss()
+            NavigationUtil.dismiss(2)
         }
     }
     
@@ -189,28 +211,47 @@ struct AvatarPreviewView: View {
         return ProfileUser()
     }
     
-    func updateLocalProfile() {
-        UserProfileRepositoryToLocal.shared.fetchCurrentProfile { profileUser, error in
+    func loadUser() {
+#if !DEMO
+        UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
             if let error = error {
-                loading = false
                 print("Error while fetching the user profile: \(error)")
                 return
             } else {
                 print("User: " + (profileUser?.description() ?? "-"))
-                var loadExistenceProfile = profileUser ?? ProfileUser()
-                loadExistenceProfile.avatar = avatarSelection.name
-                UserProfileRepositoryToLocal.shared.createProfile(profile: loadExistenceProfile) { profile, error in
-                    loading = false
-                    if let error = error {
-                        print("Error while fetching the user profile: \(error)")
-                        return
-                    } else {
-                        self.profile = profile ?? ProfileUser()
-                        authModel.profile = profile
-                        print("User: " + (profile?.description() ?? "-"))
-                        NavigationUtil.popToRootView()
-                    }
-                }
+                authModel.profile = profileUser
+                self.profile = profileUser
+            }
+        }
+#else
+        self.profile = authModel.profile ?? ProfileUser()
+#endif
+    }
+    
+    func updateLocalProfile() {
+        print("User: " + profile.description())
+        if avatarSelection.name != "" {
+            profile.avatar = avatarSelection.name
+        }
+        if accesorySelection.name != "" {
+            profile.accesory = accesorySelection.name
+        }
+        
+        if accesoryBuy {
+            if accesorySelection.name == "" {
+                profile.accesory = ""
+            }
+        }
+        
+        UserProfileRepositoryToLocal.shared.createProfile(profile: profile) { profile, error in
+            loading = false
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                self.profile = profile ?? ProfileUser()
+                authModel.profile = profile
+                print("User: " + (profile?.description() ?? "-"))
             }
         }
     }

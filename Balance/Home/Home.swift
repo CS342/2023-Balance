@@ -16,7 +16,7 @@ struct HomeView: View {
 //    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
     @State var showMe = false
-    
+    @State var profile = ProfileUser()
     var clipsToBounds = false
     
     var body: some View {
@@ -38,6 +38,11 @@ struct HomeView: View {
 #if !DEMO
                     .overlay(loadingOverlay)
 #endif
+                }
+            }
+            .onChange(of: authModel.profile) { _ in
+                withAnimation(.easeInOut(duration: 1.0)) {
+                    loadUser()
                 }
             }
         }
@@ -75,21 +80,35 @@ struct HomeView: View {
     }
     
     var menuOptions: some View {
-        ZStack(alignment: .bottomLeading) {
-            ScrollView(.vertical) {
-                VStack(spacing: 20) {
-                    distractOption
-                    chillOption
-                    fealingLearningOption
-                    diaryOption
+        ZStack(alignment: .bottomTrailing) {
+            ZStack(alignment: .bottomLeading) {
+                ScrollView(.vertical) {
+                    VStack(spacing: 20) {
+                        distractOption
+                        chillOption
+                        fealingLearningOption
+                        diaryOption
+                    }
+                    .padding(20)
+                    .ignoresSafeArea(.all)
                 }
-                .padding(20)
-                .ignoresSafeArea(.all)
+                .zIndex(1)
+                Spacer()
+                cloudImage.zIndex(-1)
             }
-            .zIndex(1)
-            Spacer()
-            cloudImage.zIndex(-1)
+            accesoryImage.zIndex(2)
         }
+    }
+    
+    var accesoryImage: some View {
+        Image(profile.accesory)
+            .resizable()
+            .accessibilityLabel("acc_icon")
+            .scaledToFit()
+            .clipped()
+            .frame(width: 150, height: 150)
+            .background(Color.clear)
+            .offset(x: -30, y: -10)
     }
     
     var cloudImage: some View {
@@ -184,6 +203,30 @@ struct HomeView: View {
         ) {
             NavView(image: "distractMeIcon", text: "Distract me")
         }
+    }
+    
+    func loadUser() {
+#if !DEMO
+        UserProfileRepository.shared.fetchCurrentProfile { profileUser, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                print("User: " + (profileUser?.description() ?? "-"))
+                self.profile = profileUser
+            }
+        }
+#else
+        UserProfileRepositoryToLocal.shared.fetchCurrentProfile { profileUser, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                print("User: " + (profileUser?.description() ?? "-"))
+                self.profile = profileUser ?? ProfileUser()
+            }
+        }
+#endif
     }
 }
 

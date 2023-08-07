@@ -118,7 +118,7 @@ struct ProfileView: View {
         }) {
             profileView
         }.sheet(isPresented: $showingAvatarSheet) {
-            AvatarSelectionView(onboardingSteps: $onboardingSteps, firstLoad: false).environmentObject(authModel)
+            AvatarSelectionView(onboardingSteps: $onboardingSteps, firstLoad: false, accesoryLoad: false).environmentObject(authModel)
         }
     }
     
@@ -133,7 +133,7 @@ struct ProfileView: View {
             }
             Button("Reset") {
                 activityLogEntry.reset()
-                //                NotificationCenter.default.post(name: Notification.Name.goBackground, object: nil)
+                // NotificationCenter.default.post(name: Notification.Name.goBackground, object: nil)
                 self.logs.removeAll()
                 logsIsEmpty = true
                 UserImageCache.remove(key: self.patientID.appending("UploadedArray"))

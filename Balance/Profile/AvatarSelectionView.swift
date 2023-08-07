@@ -11,10 +11,6 @@ class AvatarManager: ObservableObject {
     @Published var avatars = (1...6).map { Avatar(name: "avatar_\($0)") }
 }
 
-class AccesoryManager: ObservableObject {
-    @Published var accesories = (1...4).map { Accesory(name: "acc_\($0)") }
-}
-
 struct AvatarSelectionView: View {
     @EnvironmentObject private var authModel: AuthViewModel
     @Environment(\.dismiss)
@@ -27,8 +23,11 @@ struct AvatarSelectionView: View {
     @State private var accesorySelection: Accesory.ID?
     @State private var accesorySelected = Accesory(name: "")
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
+    @State private var profile = ProfileUser()
+    @State private var userCoins = 0
     var firstLoad: Bool
-    
+    var accesoryLoad: Bool
+
     private var gridItemLayout = [GridItem(.fixed(150)), GridItem(.fixed(150))]
     
     var body: some View {
@@ -37,11 +36,13 @@ struct AvatarSelectionView: View {
             VStack {
                 ScrollView {
                     Spacer().frame(height: 50)
-                    avatarListView
-                    // if !firstLoad {
-                    // Spacer().frame(height: 50)
-                    // accesoryListView
-                    // }
+                    if !accesoryLoad {
+                        avatarListView
+                    }
+                    if !firstLoad {
+                        Spacer().frame(height: 50)
+                        accesoryListView
+                    }
                 }
                 selectButton.background(.clear)
             }.sheet(isPresented: $showingAvatarPreviewSheet) {
@@ -49,8 +50,13 @@ struct AvatarSelectionView: View {
                     onboardingSteps: $onboardingSteps,
                     avatarSelection: $avatarSelected,
                     accesorySelection: $accesorySelected,
-                    firstLoad: firstLoad
+                    firstLoad: firstLoad,
+                    accesoryBuy: accesoryLoad
                 )
+            }
+            .onAppear {
+                self.profile = authModel.profile ?? ProfileUser()
+                userCoins = UserDefaults.standard.integer(forKey: "\(self.profile.id)_coins")
             }
         }
     }
@@ -88,12 +94,17 @@ struct AvatarSelectionView: View {
                 ForEach($accesoryManager.accesories) { $item in
                     AccesoryView(item: $item, selectedItem: $accesorySelection)
                         .onTapGesture {
-                            if let ndx = accesoryManager.accesories.firstIndex(where: { $0.id == accesorySelection }) {
-                                accesoryManager.accesories[ndx].state = false
+                            if userCoins >= item.value {
+                                if let ndx = accesoryManager.accesories.firstIndex(where: { $0.id == accesorySelection }) {
+                                    accesoryManager.accesories[ndx].state = false
+                                }
+                                accesorySelection = item.id
+                                item.state = true
+                                accesorySelected = item
+                            } else {
+                                accesorySelection = nil
+                                accesorySelected = Accesory(name: "")
                             }
-                            accesorySelection = item.id
-                            item.state = true
-                            accesorySelected = item
                         }
                 }
             }
@@ -108,7 +119,8 @@ struct AvatarSelectionView: View {
                         onboardingSteps: $onboardingSteps,
                         avatarSelection: $avatarSelected,
                         accesorySelection: $accesorySelected,
-                        firstLoad: firstLoad
+                        firstLoad: firstLoad,
+                        accesoryBuy: false
                     )
                 } label: {
                     Text("Select")
@@ -137,8 +149,9 @@ struct AvatarSelectionView: View {
         }
     }
     
-    init(onboardingSteps: Binding<[OnboardingFlow.Step]>, firstLoad: Bool) {
+    init(onboardingSteps: Binding<[OnboardingFlow.Step]>, firstLoad: Bool, accesoryLoad: Bool) {
         self._onboardingSteps = onboardingSteps
         self.firstLoad = firstLoad
+        self.accesoryLoad = accesoryLoad
     }
 }

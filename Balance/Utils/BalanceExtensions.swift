@@ -130,6 +130,10 @@ extension Notification.Name {
     static let goBackground = Notification.Name("goBackground")
 }
 
+extension Notification.Name {
+    static let coinsUpdate = Notification.Name("coinsUpdate")
+}
+
 // swiftlint:disable operator_whitespace
 // swiftlint:disable large_tuple
 extension Date {

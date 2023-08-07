@@ -95,6 +95,7 @@ struct SignUpView: View {
                             country: country.name,
                             phone: phone,
                             avatar: "",
+                            accesory: "",
                             password: password
                         )
                 )
