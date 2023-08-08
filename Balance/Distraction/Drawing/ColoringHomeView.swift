@@ -7,45 +7,43 @@
 
 import SwiftUI
 
-// swiftlint:disable attributes
 struct ColoringHomeView: View {
     @EnvironmentObject var store: ColoringStore
     @State private var currentDraw = Draw()
-    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.scenePhase)
+    private var scenePhase
     @State private var isShowingSecondView = false
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Coloring Something")
-                    VStack(alignment: .center, spacing: 10) {
-                        newDrawView
-                        previusView
-                        drawList
-                    }
-                    .onAppear {
-                        ColoringStore.load { result in
-                            switch result {
-                            case .failure(let error):
-                                print(error.localizedDescription)
-                            case .success(let draws):
-                                store.coloringDraws = draws
-                            }
-                        }
-                    }
-                    .onChange(of: scenePhase) { phase in
-                        if phase == .inactive {
-                            ColoringStore.save(coloringDraws: store.coloringDraws) { result in
-                                if case .failure(let error) = result {
-                                    print(error.localizedDescription)
-                                }
-                            }
-                        }
-                    }
-                    .edgesIgnoringSafeArea(.all)
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Coloring Something")
+                VStack(alignment: .center, spacing: 10) {
+                    newDrawView
+                    previusView
+                    drawList
                 }
+                .onAppear {
+                    ColoringStore.load { result in
+                        switch result {
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        case .success(let draws):
+                            store.coloringDraws = draws
+                        }
+                    }
+                }
+                .onChange(of: scenePhase) { phase in
+                    if phase == .inactive {
+                        ColoringStore.save(coloringDraws: store.coloringDraws) { result in
+                            if case .failure(let error) = result {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                }
+                .edgesIgnoringSafeArea(.all)
             }
         }
     }

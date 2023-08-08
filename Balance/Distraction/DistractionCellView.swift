@@ -13,27 +13,25 @@ struct DistractionCellView: View {
     var pointVal: String
     
     var body: some View {
-        ActivityLogContainer {
-            HStack {
-                iconView
-                VStack {
-                    HStack {
-                        Spacer()
-                        pointValueView
-                    }
+        HStack {
+            iconView
+            VStack {
+                HStack {
                     Spacer()
-                    textView
-                    Spacer()
+                    pointValueView
                 }
+                Spacer()
+                textView
+                Spacer()
             }
-            .frame(maxWidth: 311, maxHeight: 120)
-            .foregroundColor(darkBlueColor)
-            .background(RoundedRectangle(cornerRadius: 20).fill(.white))
-            .clipped()
-            .frame(height: 120.0)
-            .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
-            .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
         }
+        .frame(maxWidth: 311, maxHeight: 120)
+        .foregroundColor(darkBlueColor)
+        .background(RoundedRectangle(cornerRadius: 20).fill(.white))
+        .clipped()
+        .frame(height: 120.0)
+        .shadow(color: Color.black.opacity(0.10), radius: 7, x: 2, y: 2)
+        .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
     }
     
     var textView: some View {

@@ -12,36 +12,34 @@ struct LocationView: View {
     var clipsToBounds = false
     
     var body: some View {
-        ActivityLogContainer {
-            VStack(spacing: 20) {
-                Spacer()
-                titleView
-                Spacer()
-                NavigationLink(
-                    destination: ActivityLogBaseView(
-                        viewName: "Hospital Selection",
-                        isDirectChildToContainer: true,
-                        content: {
-                            HomeView()
-                        }
-                    )
-                ) {
-                    NavView(image: "hospitalIcon", text: "Hospital")
-                }
-                NavigationLink(
-                    destination: ActivityLogBaseView(
-                        viewName: "Home Selection",
-                        isDirectChildToContainer: true,
-                        content: {
-                            HomeView()
-                        }
-                    )
-                ) {
-                    NavView(image: "homeIcon", text: "Home")
-                }
-                Spacer()
-                nextButtonView
+        VStack(spacing: 20) {
+            Spacer()
+            titleView
+            Spacer()
+            NavigationLink(
+                destination: ActivityLogBaseView(
+                    viewName: "Hospital Selection",
+                    isDirectChildToContainer: true,
+                    content: {
+                        HomeView()
+                    }
+                )
+            ) {
+                NavView(image: "hospitalIcon", text: "Hospital")
             }
+            NavigationLink(
+                destination: ActivityLogBaseView(
+                    viewName: "Home Selection",
+                    isDirectChildToContainer: true,
+                    content: {
+                        HomeView()
+                    }
+                )
+            ) {
+                NavView(image: "homeIcon", text: "Home")
+            }
+            Spacer()
+            nextButtonView
         }.background(backgroundColor)
     }
     

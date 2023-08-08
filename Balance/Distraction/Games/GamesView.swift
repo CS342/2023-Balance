@@ -9,19 +9,17 @@ import SwiftUI
 
 struct GamesView: View {
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Games")
-                    ScrollView(.vertical) {
-                        VStack(spacing: 20) {
-                            sudokuGame
-                            crossoverGame
-                        }
-                        .padding(10)
-                        .ignoresSafeArea(.all)
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Games")
+                ScrollView(.vertical) {
+                    VStack(spacing: 20) {
+                        sudokuGame
+                        crossoverGame
                     }
+                    .padding(10)
+                    .ignoresSafeArea(.all)
                 }
             }
         }

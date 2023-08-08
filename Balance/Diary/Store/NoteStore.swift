@@ -11,7 +11,7 @@ import SwiftUI
 class NoteStore: ObservableObject {
     static let shared = NoteStore()
     @Published var notes: [Note] = []
-    
+
     private static func fileURL() throws -> URL {
         try FileManager.default.url(
             for: .documentDirectory,
@@ -19,7 +19,7 @@ class NoteStore: ObservableObject {
             appropriateFor: nil,
             create: false
         )
-        .appendingPathComponent("diary.data")
+        .appendingPathComponent("\(UserDefaults.standard.string(forKey: "lastPatient") ?? "")_diary.data")
     }
     
     static func load(completion: @escaping (Result<[Note], Error>) -> Void) {

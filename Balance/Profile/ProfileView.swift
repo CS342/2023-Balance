@@ -11,9 +11,9 @@ import class FHIR.FHIR
 import SwiftUI
 
 // swiftlint:disable type_body_length
-// swiftlint:disable attributes
 struct ProfileView: View {
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss)
+    private var dismiss
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
     @SceneStorage(StorageKeys.onboardingFlowStep)
@@ -25,6 +25,7 @@ struct ProfileView: View {
     @EnvironmentObject var noteStore: NoteStore
     @EnvironmentObject var drawStore: DrawStore
     @EnvironmentObject var coloringStore: ColoringStore
+    @EnvironmentObject var activityLogEntry: ActivityLogEntry
 #if DEMO
     @EnvironmentObject var logStore: ActivityLogStore
 #endif
@@ -33,41 +34,41 @@ struct ProfileView: View {
     @State private var email = ""
     @State private var patientID = ""
     @State private var showAlert = false
+    @State private var logs = [ActivityLogEntry]()
+    @State private var logsIsEmpty = true
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                VStack(alignment: .center, spacing: 0) {
-                    HeaderMenu(title: "")
-                        .background(primaryColor)
-                    avatarChangeView
-                    userData
-                    cellsView
-                    Spacer()
-                }
+        ZStack {
+            VStack(alignment: .center, spacing: 0) {
+                HeaderMenu(title: "")
+                    .background(primaryColor)
+                avatarChangeView
+                userData
+                cellsView
+                Spacer()
             }
-            .onAppear {
+        }
+        .onAppear {
 #if DEMO
-                loadUserLocal()
-                loadLogs()
+            loadUserLocal()
+            loadLogs()
 #else
-                loadUser()
+            loadUser()
 #endif
+        }
+        .onReceive(account.objectWillChange) {
+            if account.signedIn {
+                completedOnboardingFlow = true
+            } else {
+                completedOnboardingFlow = false
             }
-            .onReceive(account.objectWillChange) {
-                if account.signedIn {
-                    completedOnboardingFlow = true
-                } else {
-                    completedOnboardingFlow = false
-                }
-            }
-            .onChange(of: authModel.profile) { profile in
-                withAnimation(.easeInOut(duration: 1.0)) {
-                    self.displayName = profile?.displayName ?? ""
-                    self.email = profile?.email ?? ""
-                    self.patientID = profile?.id ?? "0000"
-                    self.avatar = profile?.avatar ?? ""
-                }
+        }
+        .onChange(of: authModel.profile) { profile in
+            withAnimation(.easeInOut(duration: 1.0)) {
+                self.displayName = profile?.displayName ?? ""
+                self.email = profile?.email ?? ""
+                self.patientID = profile?.id ?? "0000"
+                self.avatar = profile?.avatar ?? ""
             }
         }
     }
@@ -98,8 +99,10 @@ struct ProfileView: View {
                 updateOption
 #else
                 resetOption
-                shareOption
-                shareLink
+                if logsIsEmpty == false {
+                    shareOption
+                    shareLink
+                }
 #endif
                 logoutOption
             }
@@ -115,24 +118,32 @@ struct ProfileView: View {
         }) {
             profileView
         }.sheet(isPresented: $showingAvatarSheet) {
-            AvatarSelectionView(onboardingSteps: $onboardingSteps, firstLoad: false).environmentObject(authModel)
+            AvatarSelectionView(onboardingSteps: $onboardingSteps, firstLoad: false, accesoryLoad: false).environmentObject(authModel)
         }
     }
     
     var resetOption: some View {
         Button {
-            UserImageCache.remove(key: self.patientID.appending("UploadedArray"))
-            UserImageCache.remove(key: self.patientID.appending("RemovedArray"))
-            UserImageCache.remove(key: self.patientID.appending("FavoritesArray"))
-            logStore.removeStore()
-            noteStore.removeStore()
-            drawStore.removeStore()
-            coloringStore.removeStore()
             showAlert = true
         } label: {
             ProfileCellView(image: "info", text: "Reset user")
-        }.alert("Reset", isPresented: $showAlert) {
-            Button("Done", role: .cancel) { }
+        }.confirmationDialog("Reset User", isPresented: $showAlert) {
+            Button("Canel", role: .cancel) {
+                showAlert = false
+            }
+            Button("Reset") {
+                activityLogEntry.reset()
+                // NotificationCenter.default.post(name: Notification.Name.goBackground, object: nil)
+                self.logs.removeAll()
+                logsIsEmpty = true
+                UserImageCache.remove(key: self.patientID.appending("UploadedArray"))
+                UserImageCache.remove(key: self.patientID.appending("RemovedArray"))
+                UserImageCache.remove(key: self.patientID.appending("FavoritesArray"))
+                logStore.removeStore()
+                noteStore.removeStore()
+                drawStore.removeStore()
+                coloringStore.removeStore()
+            }
         }
     }
     
@@ -301,32 +312,38 @@ struct ProfileView: View {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let logs):
-                logStore.logs = logs
+                self.logs = logs
+                if self.logs.isEmpty {
+                    logsIsEmpty = true
+                } else {
+                    logsIsEmpty = false
+                }
             }
         }
     }
     
     func convertToCSV() -> URL {
         var logActions = [LogAction]()
-        
-        var noteAsCSV = "id, activeStartTime, activeEndTime, activeDuration, actionTime, actionDescription\n"
-        for log in logStore.logs {
+        var noteAsCSV = "sessionID, sessionStartTime, sessionEndTime, sessionDuration, description, startTime, endTime, duration\n"
+        for log in logs {
             for action in log.actions {
                 logActions.append(
                     LogAction(
-                        id: log.id,
-                        startTime: log.startTime,
-                        endTime: log.endTime,
-                        duration: log.duration,
-                        actionTime: action.time,
-                        actionDesc: action.description
+                        sessionID: log.id,
+                        sessionStartTime: log.startTime,
+                        sessionEndTime: log.endTime,
+                        sessionDuration: log.duration,
+                        description: action.description,
+                        startTime: action.startTime,
+                        endTime: action.endTime,
+                        duration: action.duration
                     )
                 )
             }
         }
         
-        for action in logActions.sorted(by: { $0.actionTime.compare($1.actionTime) == .orderedAscending }) {
-            noteAsCSV.append(contentsOf: "\"\(action.id)\",\"\(action.startTime)\",\"\(action.endTime)\",\"\(action.duration)\",\"\(action.actionTime)\",\"\(action.actionDesc)\"\n")
+        for action in logActions.sorted(by: { $0.startTime.compare($1.startTime) == .orderedAscending }) {
+            noteAsCSV.append(contentsOf: "\"\(action.sessionID)\",\"\(DateFormatter.sharedDateFormatter.string(from: action.sessionStartTime))\",\"\(DateFormatter.sharedDateFormatter.string(from: action.sessionEndTime))\",\"\(action.sessionDuration)\",\"\(action.description)\",\"\(DateFormatter.sharedDateFormatter.string(from: action.startTime))\",\"\(DateFormatter.sharedDateFormatter.string(from: action.endTime))\",\"\(action.duration)\"\n")
         }
         
         let fileManager = FileManager.default
@@ -344,29 +361,29 @@ struct ProfileView: View {
     
     func convertToPlainText() -> String {
         var noteAsCSV = "ParticipantID: " + self.patientID + "\n"
-        noteAsCSV.append(contentsOf: "id, activeStartTime, activeEndTime, activeDuration, actionTime, actionDescription\n")
+        noteAsCSV.append(contentsOf: "sessionID, sessionStartTime, sessionEndTime, sessionDuration, description, startTime, endTime, duration\n")
         
         var logActions = [LogAction]()
-        
-        for log in logStore.logs {
+        for log in logs {
             for action in log.actions {
                 logActions.append(
                     LogAction(
-                        id: log.id,
-                        startTime: log.startTime,
-                        endTime: log.endTime,
-                        duration: log.duration,
-                        actionTime: action.time,
-                        actionDesc: action.description
+                        sessionID: log.id,
+                        sessionStartTime: log.startTime,
+                        sessionEndTime: log.endTime,
+                        sessionDuration: log.duration,
+                        description: action.description,
+                        startTime: action.startTime,
+                        endTime: action.endTime,
+                        duration: action.duration
                     )
                 )
             }
         }
         
-        for action in logActions.sorted(by: { $0.actionTime.compare($1.actionTime) == .orderedAscending }) {
-            noteAsCSV.append(contentsOf: "\"\(action.id)\",\"\(action.startTime)\",\"\(action.endTime)\",\"\(action.duration)\",\"\(action.actionTime)\",\"\(action.actionDesc)\"\n")
+        for action in logActions.sorted(by: { $0.startTime.compare($1.startTime) == .orderedAscending }) {
+            noteAsCSV.append(contentsOf: "\"\(action.sessionID)\",\"\(DateFormatter.sharedDateFormatter.string(from: action.sessionStartTime))\",\"\(DateFormatter.sharedDateFormatter.string(from: action.sessionEndTime))\",\"\(action.sessionDuration)\",\"\(action.description)\",\"\(DateFormatter.sharedDateFormatter.string(from: action.startTime))\",\"\(DateFormatter.sharedDateFormatter.string(from: action.endTime))\",\"\(action.duration)\"\n")
         }
-        
         return noteAsCSV
     }
 }

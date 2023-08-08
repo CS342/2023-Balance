@@ -33,7 +33,7 @@ public struct OnboardingFlow: View {
                     case .signUp:
                         SignUpView(onboardingSteps: $onboardingSteps)
                     case .avatar:
-                        AvatarSelectionView(onboardingSteps: $onboardingSteps, firstLoad: true)
+                        AvatarSelectionView(onboardingSteps: $onboardingSteps, firstLoad: true, accesoryLoad: false)
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)

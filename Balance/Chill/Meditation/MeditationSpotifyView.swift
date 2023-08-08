@@ -17,9 +17,9 @@ struct Song: Identifiable {
     let spotifyURL: String
 }
 
-// swiftlint:disable attributes
 struct MeditationSpotifyView: View {
-    @Environment(\.openURL) private var openURL
+    @Environment(\.openURL)
+    private var openURL
     
     let songs = [
         Song(

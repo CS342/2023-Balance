@@ -12,32 +12,30 @@ public struct PastDiaryEntry: View {
     private var note: Note
     
     public var body: some View {
-        ActivityLogContainer {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(note.date.timeSinceDate(fromDate: Date()))
-                        .font(.custom("Nunito-Bold", size: 11))
-                        .foregroundColor(.gray)
-                    Text(note.title)
-                        .font(.custom("Nunito-Black", size: 18))
-                        .foregroundColor(darkBlueColor)
-                    Text(note.text)
-                        .font(.custom("Nunito", size: 14))
-                        .foregroundColor(.gray)
-                        .lineLimit(3)
-                        .frame(maxWidth: 270, alignment: .leading)
-                }
-                Image(systemName: "chevron.right")
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(note.date.timeSinceDate(fromDate: Date()))
+                    .font(.custom("Nunito-Bold", size: 11))
+                    .foregroundColor(.gray)
+                Text(note.title)
+                    .font(.custom("Nunito-Black", size: 18))
                     .foregroundColor(darkBlueColor)
+                Text(note.text)
+                    .font(.custom("Nunito", size: 14))
+                    .foregroundColor(.gray)
+                    .lineLimit(3)
+                    .frame(maxWidth: 270, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(20)
-            .background(.white)
-            .cornerRadius(15)
-            .shadow(color: Color.black.opacity(0.1), radius: 5)
+            Image(systemName: "chevron.right")
+                .foregroundColor(darkBlueColor)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(20)
+        .background(.white)
+        .cornerRadius(15)
+        .shadow(color: Color.black.opacity(0.1), radius: 5)
     }
-
+    
     public init(_ note: Note) {
         self.note = note
     }

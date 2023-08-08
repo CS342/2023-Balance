@@ -11,19 +11,18 @@ struct GamesWebView: View {
     @StateObject var webViewStore = WebViewStore()
     var gameLink: String
     var titleGame: String
-
+    
     var body: some View {
-        ActivityLogContainer {
-            HeaderMenu(title: titleGame)
-            WebView(webView: webViewStore.webView)
-                .edgesIgnoringSafeArea(.bottom)
-                .onAppear {
-                    guard let sudokuLink = URL(string: gameLink) else {
-                        return
-                    }
-                    self.webViewStore.webView.load(URLRequest(url: sudokuLink))
+        HeaderMenu(title: titleGame)
+        WebView(webView: webViewStore.webView)
+            .edgesIgnoringSafeArea(.bottom)
+            .onAppear {
+                guard let sudokuLink = URL(string: gameLink) else {
+                    return
                 }
-        }.background(backgroundColor)
+                self.webViewStore.webView.load(URLRequest(url: sudokuLink))
+            }
+            .background(backgroundColor)
     }
     
     init(gameLink: String, titleGame: String) {

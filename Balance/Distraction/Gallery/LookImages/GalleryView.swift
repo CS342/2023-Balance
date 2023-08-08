@@ -14,7 +14,7 @@ struct ImageTagView: View {
     @Binding var selectedCat: Category
     @Binding var isUpload: Bool
     @Binding var profile: ProfileUser
-
+    
     var body: some View {
         Button(action: {
             self.isUpload = false
@@ -37,7 +37,7 @@ struct ImageTagView: View {
                 for photo in photoArray {
                     for category in photo.category where category.name == self.selectedCategory.name {
                         for removedPhoto in removedElements where removedPhoto.name == photo.name {
-                                isRemoved = true
+                            isRemoved = true
                         }
                         if !isRemoved {
                             filteredCat.append(photo)
@@ -68,32 +68,30 @@ struct GalleryView: View {
     @State var isUpload = false
     @State var profile = ProfileUser()
     let highlightArray = photoArray.filter { $0.highlight == true }
-
+    
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Look at Pictures")
-                    VStack(alignment: .center, spacing: 10) {
-                        highlightsTitle
-                        imagePaging
-                        HStack {
-                            categoriesTitle.padding(10)
-                            Spacer()
-                            if isUpload == true {
-                                uploadButton.padding(10)
-                            }
-                        }
-                        tagsView
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Look at Pictures")
+                VStack(alignment: .center, spacing: 10) {
+                    highlightsTitle
+                    imagePaging
+                    HStack {
+                        categoriesTitle.padding(10)
                         Spacer()
+                        if isUpload == true {
+                            uploadButton.padding(10)
+                        }
                     }
-                    .edgesIgnoringSafeArea(.all)
+                    tagsView
+                    Spacer()
                 }
-            }.onAppear {
-                loadUser()
-                loadData()
+                .edgesIgnoringSafeArea(.all)
             }
+        }.onAppear {
+            loadUser()
+            loadData()
         }
     }
     

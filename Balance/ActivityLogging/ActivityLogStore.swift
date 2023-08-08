@@ -11,7 +11,7 @@ import SwiftUI
 class ActivityLogStore: ObservableObject {
     static let shared = ActivityLogStore()
     @Published var logs: [ActivityLogEntry] = []
-    
+
     private static func fileURL() throws -> URL {
         try FileManager.default.url(
             for: .documentDirectory,
@@ -19,7 +19,7 @@ class ActivityLogStore: ObservableObject {
             appropriateFor: nil,
             create: false
         )
-        .appendingPathComponent("activityLog.data")
+        .appendingPathComponent("\(UserDefaults.standard.string(forKey: "lastPatient") ?? "")_activityLog.data")
     }
     
     static func load(completion: @escaping (Result<[ActivityLogEntry], Error>) -> Void) {
@@ -85,14 +85,22 @@ class ActivityLogStore: ObservableObject {
     }
     
     func saveLog(_ log: ActivityLogEntry) {
-        let indexOfLog = logs.firstIndex { currentLog in
-            currentLog.id == log.id
-        }
-        
-        if let indexOfLog {
-            logs[indexOfLog] = log
-        } else {
-            logs.append(log)
+        ActivityLogStore.load { result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let logs):
+                self.logs = logs.filter({
+                    $0.id != log.id
+                })
+                self.logs.append(log)
+                
+                ActivityLogStore.save(logs: self.logs) { result in
+                    if case .failure(let error) = result {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 // swiftlint:disable lower_acl_than_parent
 struct ActivityLogContainer<Content>: View where Content: View {
-    @StateObject var activityLogEntry = ActivityLogEntry()
+    @EnvironmentObject var activityLogEntry: ActivityLogEntry
     private let content: Content
     
     var body: some View {
@@ -31,6 +31,9 @@ struct ActivityLogBaseView<Content>: View where Content: View {
     
     var body: some View {
         content
+            .onReceive(NotificationCenter.default.publisher(for: Notification.Name.goBackground)) { _ in
+                activityLogEntry.reset()
+            }
             .onAppear(perform: {
                 activityLogEntry.addAction(actionDescription: "Opened \(viewName)")
 #if DEBUG
@@ -43,11 +46,6 @@ struct ActivityLogBaseView<Content>: View where Content: View {
                 if isDirectChildToContainer {
 #if DEMO
                     logStore.saveLog(activityLogEntry)
-                    ActivityLogStore.save(logs: logStore.logs) { result in
-                        if case .failure(let error) = result {
-                            print(error.localizedDescription)
-                        }
-                    }
 #else
                     ActivityStorageManager.shared.uploadActivity(activityLogEntry: activityLogEntry)
 #endif

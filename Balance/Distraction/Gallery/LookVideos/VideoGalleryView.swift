@@ -62,20 +62,18 @@ struct VideoGalleryView: View {
     let highlightArray = videoArray.filter { $0.highlight == true }
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Look Videos")
-                    VStack(alignment: .center, spacing: 10) {
-                        highlightsTitle
-                        videoPaging
-                        categoriesTitle
-                        tagsView
-                        Spacer()
-                    }
-                    .edgesIgnoringSafeArea(.all)
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Look Videos")
+                VStack(alignment: .center, spacing: 10) {
+                    highlightsTitle
+                    videoPaging
+                    categoriesTitle
+                    tagsView
+                    Spacer()
                 }
+                .edgesIgnoringSafeArea(.all)
             }
         }
     }

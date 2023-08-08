@@ -10,7 +10,7 @@ import SwiftUI
 class ColoringStore: ObservableObject {
     static let shared = ColoringStore()
     @Published var coloringDraws: [Draw] = []
-    
+
     private static func fileURL() throws -> URL {
         try FileManager.default.url(
             for: .documentDirectory,
@@ -18,7 +18,7 @@ class ColoringStore: ObservableObject {
             appropriateFor: nil,
             create: false
         )
-        .appendingPathComponent("coloring.data")
+        .appendingPathComponent("\(UserDefaults.standard.string(forKey: "lastPatient") ?? "")_coloring.data")
     }
     
     static func load(completion: @escaping (Result<[Draw], Error>) -> Void) {

@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-// swiftlint:disable attributes
 struct DiaryHomeView: View {
-    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.scenePhase)
+    private var scenePhase
     @EnvironmentObject var store: NoteStore
     @State private var showingEditor = false
     @State private var searchText = ""
@@ -22,35 +22,33 @@ struct DiaryHomeView: View {
     )
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Diary")
-                    VStack(alignment: .center, spacing: 10) {
-                        newDiaryView
-                        previusView
-                        diaryList
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Diary")
+                VStack(alignment: .center, spacing: 10) {
+                    newDiaryView
+                    previusView
+                    diaryList
+                }
+                .sheet(isPresented: $showingEditor) {
+                    ActivityLogBaseView(viewName: "Diary Note Entry View") {
+                        diaryNoteView
                     }
-                    .sheet(isPresented: $showingEditor) {
-                        ActivityLogBaseView(viewName: "Diary Note Entry View") {
-                            diaryNoteView
-                        }
-                    }
-                    .onAppear {
-                        loadNote()
-                    }
-                    .onChange(of: scenePhase) { phase in
-                        if phase == .inactive {
-                            NoteStore.save(notes: store.notes) { result in
-                                if case .failure(let error) = result {
-                                    print(error.localizedDescription)
-                                }
+                }
+                .onAppear {
+                    loadNote()
+                }
+                .onChange(of: scenePhase) { phase in
+                    if phase == .inactive {
+                        NoteStore.save(notes: store.notes) { result in
+                            if case .failure(let error) = result {
+                                print(error.localizedDescription)
                             }
                         }
                     }
-                    .edgesIgnoringSafeArea(.all)
                 }
+                .edgesIgnoringSafeArea(.all)
             }
         }
     }

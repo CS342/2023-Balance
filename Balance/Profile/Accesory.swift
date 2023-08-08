@@ -11,4 +11,5 @@ public struct Accesory: Codable, Equatable, Hashable, Identifiable {
     public var id = UUID()
     var name: String
     var state = false
+    var value = 0
 }

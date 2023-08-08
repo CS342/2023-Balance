@@ -104,6 +104,7 @@ final class AuthViewModel: ObservableObject {
             country: "",
             phone: "",
             avatar: "avatar_" + String(Int.random(in: 1..<7)),
+            accesory: "",
             password: ""
         )
         
@@ -141,6 +142,7 @@ final class AuthViewModel: ObservableObject {
                     country: userData.country,
                     phone: userData.phone,
                     avatar: userData.avatar,
+                    accesory: userData.accesory,
                     password: ""
                 )
                 

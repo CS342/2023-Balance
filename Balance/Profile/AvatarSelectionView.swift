@@ -11,48 +11,76 @@ class AvatarManager: ObservableObject {
     @Published var avatars = (1...6).map { Avatar(name: "avatar_\($0)") }
 }
 
-class AccesoryManager: ObservableObject {
-    @Published var accesories = (1...4).map { Accesory(name: "acc_\($0)") }
-}
-
-// swiftlint:disable attributes
 struct AvatarSelectionView: View {
     @EnvironmentObject private var authModel: AuthViewModel
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss)
+    private var dismiss
     @State private var showingAvatarPreviewSheet = false
     @ObservedObject var avatarManager = AvatarManager()
     @State private var avatarSelection: Avatar.ID?
+    @State private var avatarNameSelection: String?
     @State private var avatarSelected = Avatar(name: "")
     @ObservedObject var accesoryManager = AccesoryManager()
     @State private var accesorySelection: Accesory.ID?
+    @State private var accesoryNameSelection: String?
     @State private var accesorySelected = Accesory(name: "")
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
+    @State private var profile = ProfileUser()
+    @State private var userCoins = 0
     var firstLoad: Bool
+    var accesoryLoad: Bool
     
     private var gridItemLayout = [GridItem(.fixed(150)), GridItem(.fixed(150))]
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    ScrollView {
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                ScrollView {
+                    if !accesoryLoad {
                         Spacer().frame(height: 50)
                         avatarListView
-                        // if !firstLoad {
-                        // Spacer().frame(height: 50)
-                        // accesoryListView
-                        // }
                     }
-                    selectButton.background(.clear)
-                }.sheet(isPresented: $showingAvatarPreviewSheet) {
-                    AvatarPreviewView(
-                        onboardingSteps: $onboardingSteps,
-                        avatarSelection: $avatarSelected,
-                        accesorySelection: $accesorySelected,
-                        firstLoad: firstLoad
-                    )
+                    if !firstLoad {
+                        Spacer().frame(height: 50)
+                        accesoryListView
+                    }
                 }
+                saveButton
+            }.sheet(isPresented: $showingAvatarPreviewSheet) {
+                AvatarPreviewView(
+                    onboardingSteps: $onboardingSteps,
+                    avatarSelection: $avatarSelected,
+                    accesorySelection: $accesorySelected,
+                    firstLoad: firstLoad,
+                    accesoryBuy: accesoryLoad
+                )
+            }
+            .onAppear {
+                self.profile = authModel.profile ?? ProfileUser()
+                userCoins = UserDefaults.standard.integer(forKey: "\(self.profile.id)_coins")
+                self.avatarNameSelection = self.profile.avatar
+                self.accesoryNameSelection = self.profile.accesory
+            }
+        }
+    }
+    
+    var saveButton: some View {
+        Group {
+            if accesoryLoad {
+                let minElement = accesoryManager.accesories.min(by: { lhs, rhs in
+                    if lhs.value < rhs.value {
+                        return true
+                    } else {
+                        return false
+                    }
+                })
+                
+                if userCoins >= minElement?.value ?? 25 {
+                    selectButton.background(.clear)
+                }
+            } else {
+                selectButton.background(.clear)
             }
         }
     }
@@ -63,14 +91,16 @@ struct AvatarSelectionView: View {
                 .foregroundColor(violetColor)
                 .font(.custom("Nunito-Bold", size: 34))
             Spacer().frame(height: 50)
+            
             LazyVGrid(columns: gridItemLayout, spacing: 40) {
                 ForEach($avatarManager.avatars) { $item in
-                    AvatarView(item: $item, selectedItem: $avatarSelection)
+                    AvatarView(item: $item, selectedItem: $avatarSelection, selectedNameItem: $avatarNameSelection)
                         .onTapGesture {
                             if let ndx = avatarManager.avatars.firstIndex(where: { $0.id == avatarSelection }) {
                                 avatarManager.avatars[ndx].state = false
                             }
                             avatarSelection = item.id
+                            avatarNameSelection = item.name
                             item.state = true
                             avatarSelected = item
                         }
@@ -82,20 +112,26 @@ struct AvatarSelectionView: View {
     
     var accesoryListView: some View {
         Group {
-            Text("Choose your accesory")
+            Text("Choose your accessory")
                 .foregroundColor(violetColor)
                 .font(.custom("Nunito-Bold", size: 24))
             Spacer().frame(height: 50)
             LazyVGrid(columns: gridItemLayout, spacing: 40) {
                 ForEach($accesoryManager.accesories) { $item in
-                    AccesoryView(item: $item, selectedItem: $accesorySelection)
+                    AccesoryView(item: $item, selectedItem: $accesorySelection, selectedNameItem: $accesoryNameSelection)
                         .onTapGesture {
-                            if let ndx = accesoryManager.accesories.firstIndex(where: { $0.id == accesorySelection }) {
-                                accesoryManager.accesories[ndx].state = false
+                            if userCoins >= item.value {
+                                if let ndx = accesoryManager.accesories.firstIndex(where: { $0.id == accesorySelection }) {
+                                    accesoryManager.accesories[ndx].state = false
+                                }
+                                accesorySelection = item.id
+                                accesoryNameSelection = item.name
+                                item.state = true
+                                accesorySelected = item
+                            } else {
+                                accesorySelection = nil
+                                accesorySelected = Accesory(name: "")
                             }
-                            accesorySelection = item.id
-                            item.state = true
-                            accesorySelected = item
                         }
                 }
             }
@@ -110,7 +146,8 @@ struct AvatarSelectionView: View {
                         onboardingSteps: $onboardingSteps,
                         avatarSelection: $avatarSelected,
                         accesorySelection: $accesorySelected,
-                        firstLoad: firstLoad
+                        firstLoad: firstLoad,
+                        accesoryBuy: false
                     )
                 } label: {
                     Text("Select")
@@ -139,8 +176,9 @@ struct AvatarSelectionView: View {
         }
     }
     
-    init(onboardingSteps: Binding<[OnboardingFlow.Step]>, firstLoad: Bool) {
+    init(onboardingSteps: Binding<[OnboardingFlow.Step]>, firstLoad: Bool, accesoryLoad: Bool) {
         self._onboardingSteps = onboardingSteps
         self.firstLoad = firstLoad
+        self.accesoryLoad = accesoryLoad
     }
 }

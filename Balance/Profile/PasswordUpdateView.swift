@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// swiftlint:disable attributes
 struct PasswordUpdateView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss)
+    var dismiss
     @EnvironmentObject private var authModel: AuthViewModel
     @State private var alertMessage: String = ""
     @State private var showingAlert = false
@@ -18,37 +18,35 @@ struct PasswordUpdateView: View {
     @State var loading = false
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Password")
-                    Spacer().frame(height: 40)
-                    titleView
-                    passwordFields
-                    Spacer()
-                    saveButton
-                }
-                if loading {
-                    ProgressView("Loading...")
-                        .tint(.white)
-                        .accentColor(.white)
-                        .foregroundColor(.white)
-                        .frame(width: 200, height: 200)
-                        .background(Color.black.opacity(0.8))
-                        .cornerRadius(20, corners: .allCorners)
-                        .ignoresSafeArea()
-                }
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Password")
+                Spacer().frame(height: 40)
+                titleView
+                passwordFields
+                Spacer()
+                saveButton
             }
-            .disabled(loading)
-            .onAppear(perform: listen)
-            .onChange(of: authModel.authError) { response in
-                updateData(value: response)
+            if loading {
+                ProgressView("Loading...")
+                    .tint(.white)
+                    .accentColor(.white)
+                    .foregroundColor(.white)
+                    .frame(width: 200, height: 200)
+                    .background(Color.black.opacity(0.8))
+                    .cornerRadius(20, corners: .allCorners)
+                    .ignoresSafeArea()
             }
-            .alert(alertMessage, isPresented: $showingAlert) {
-                Button("OK", role: .cancel) {
-                    authModel.authError = ""
-                }
+        }
+        .disabled(loading)
+        .onAppear(perform: listen)
+        .onChange(of: authModel.authError) { response in
+            updateData(value: response)
+        }
+        .alert(alertMessage, isPresented: $showingAlert) {
+            Button("OK", role: .cancel) {
+                authModel.authError = ""
             }
         }
     }

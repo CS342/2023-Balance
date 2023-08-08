@@ -9,10 +9,10 @@ import Foundation
 import PencilKit
 import SwiftUI
 
-// swiftlint:disable attributes
 // swiftlint:disable type_body_length
 struct DrawingView: UIViewRepresentable {
-    @Environment(\.undoManager) private var undoManager
+    @Environment(\.undoManager)
+    private var undoManager
     @Binding var canvas: PKCanvasView
     @Binding var isdraw: Bool
     @Binding var type: PKInkingTool.InkType
@@ -38,10 +38,11 @@ struct DrawingView: UIViewRepresentable {
     }
 }
 
-// swiftlint:disable attributes
 struct DrawView: View {
-    @Environment(\.dismiss) var dismiss
-    @Environment(\.undoManager) private var undoManager
+    @Environment(\.dismiss)
+    var dismiss
+    @Environment(\.undoManager)
+    private var undoManager
     @EnvironmentObject var drawStore: DrawStore
     @EnvironmentObject var coloringStore: ColoringStore
     @Binding var currentDraw: Draw
@@ -65,32 +66,30 @@ struct DrawView: View {
     @State var showLineWith = false
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                Color.white.edgesIgnoringSafeArea(.all)
-                VStack(spacing: 10) {
-                    if isColoring == true {
-                        HeaderMenu(title: "Coloring Something")
-                    } else {
-                        HeaderMenu(title: "Drawing something")
-                    }
-                    Spacer().frame(height: 20)
-                    toolkitView
-                    if showLineWith == true {
-                        sliderLineView
-                    }
-                    Spacer()
-                    DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color, isColoring: $isColoring, ink: $ink)
-                        .frame(width: drawingSize.width, height: drawingSize.height)
-                        .border(Color.gray, width: 5)
-                    Spacer()
-                    colorView
-                        .onAppear {
-                            loadCurrentDraw()
-                        }
-                    Spacer()
-                    saveView
+        ZStack {
+            Color.white.edgesIgnoringSafeArea(.all)
+            VStack(spacing: 10) {
+                if isColoring == true {
+                    HeaderMenu(title: "Coloring Something")
+                } else {
+                    HeaderMenu(title: "Drawing something")
                 }
+                Spacer().frame(height: 20)
+                toolkitView
+                if showLineWith == true {
+                    sliderLineView
+                }
+                Spacer()
+                DrawingView(canvas: $canvas, isdraw: $isdraw, type: $type, color: $color, isColoring: $isColoring, ink: $ink)
+                    .frame(width: drawingSize.width, height: drawingSize.height)
+                    .border(Color.gray, width: 5)
+                Spacer()
+                colorView
+                    .onAppear {
+                        loadCurrentDraw()
+                    }
+                Spacer()
+                saveView
             }
         }
     }
@@ -141,7 +140,7 @@ struct DrawView: View {
         .background(primaryColor)
         .cornerRadius(10)
         .padding(.horizontal, 20.0)
-        .buttonStyle(ActivityLogButtonStyle(activityDescription: "Saved a Draw"))
+        .buttonStyle(ActivityLogButtonStyle(activityDescription: isColoring == true ? "Coloring Draw SAVED" : "Draw SAVED"))
         .alert("Enter the title of the drawing", isPresented: $emptyDrawAlert) {
             TextField("Title", text: $title)
             Button("OK", action: saveImage)

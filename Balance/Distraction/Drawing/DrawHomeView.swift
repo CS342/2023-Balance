@@ -7,45 +7,43 @@
 
 import SwiftUI
 
-// swiftlint:disable attributes
 struct DrawHomeView: View {
     @EnvironmentObject var store: DrawStore
     @State private var currentDraw = Draw()
-    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.scenePhase)
+    private var scenePhase
     @State private var isShowingSecondView = false
     
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Drawing Something")
-                    VStack(alignment: .center, spacing: 10) {
-                        newDrawView
-                        previusView
-                        drawList
-                    }
-                    .onAppear {
-                        DrawStore.load { result in
-                            switch result {
-                            case .failure(let error):
-                                print(error.localizedDescription)
-                            case .success(let draws):
-                                store.draws = draws
-                            }
-                        }
-                    }
-                    .onChange(of: scenePhase) { phase in
-                        if phase == .inactive {
-                            DrawStore.save(draws: store.draws) { result in
-                                if case .failure(let error) = result {
-                                    print(error.localizedDescription)
-                                }
-                            }
-                        }
-                    }
-                    .edgesIgnoringSafeArea(.all)
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Drawing Something")
+                VStack(alignment: .center, spacing: 10) {
+                    newDrawView
+                    previusView
+                    drawList
                 }
+                .onAppear {
+                    DrawStore.load { result in
+                        switch result {
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        case .success(let draws):
+                            store.draws = draws
+                        }
+                    }
+                }
+                .onChange(of: scenePhase) { phase in
+                    if phase == .inactive {
+                        DrawStore.save(draws: store.draws) { result in
+                            if case .failure(let error) = result {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }
+                }
+                .edgesIgnoringSafeArea(.all)
             }
         }
     }

@@ -125,3 +125,30 @@ extension UIApplication {
         return aux
     }
 }
+
+extension Notification.Name {
+    static let goBackground = Notification.Name("goBackground")
+    static let coinsUpdate = Notification.Name("coinsUpdate")
+    static let coinsRefresh = Notification.Name("coinsRefresh")
+    static let coinsAlert = Notification.Name("coinsAlert")
+}
+
+// swiftlint:disable operator_whitespace
+// swiftlint:disable large_tuple
+extension Date {
+    static func -(recent: Date, previous: Date) -> (hour: Int?, minute: Int?, second: Int?) {
+        let hour = Calendar.current.dateComponents([.hour], from: previous, to: recent).hour
+        let minute = Calendar.current.dateComponents([.minute], from: previous, to: recent).minute
+        let second = Calendar.current.dateComponents([.second], from: previous, to: recent).second
+
+        return (hour: hour, minute: minute, second: second)
+    }
+}
+
+extension DateFormatter {
+    static var sharedDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter
+    }()
+}

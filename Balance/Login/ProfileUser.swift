@@ -20,6 +20,7 @@ struct ProfileUser: Codable, Equatable, Hashable, Identifiable {
     let country: String
     let phone: String
     var avatar: String
+    var accesory: String
     let password: String
 
     init() {
@@ -31,6 +32,7 @@ struct ProfileUser: Codable, Equatable, Hashable, Identifiable {
         self.country = ""
         self.phone = ""
         self.avatar = ""
+        self.accesory = ""
         self.password = ""
     }
     
@@ -43,6 +45,7 @@ struct ProfileUser: Codable, Equatable, Hashable, Identifiable {
         country: String,
         phone: String,
         avatar: String,
+        accesory: String,
         password: String
     ) {
         self.id = id
@@ -53,11 +56,20 @@ struct ProfileUser: Codable, Equatable, Hashable, Identifiable {
         self.country = country
         self.phone = phone
         self.avatar = avatar
+        self.accesory = accesory
         self.password = password
     }
     
     func description() -> String {
-        let description = id + "-" + displayName + "-" + email + "-" + parentEmail + "-" + birthday + "-" + country + "-" + phone + "-" + avatar
+        let description = id + "-" +
+        displayName + "-" +
+        email + "-" +
+        parentEmail + "-" +
+        birthday + "-" +
+        country + "-" +
+        phone + "-" +
+        avatar + "-" +
+        accesory
         return description
     }
 }

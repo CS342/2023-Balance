@@ -14,13 +14,19 @@ import FirebaseAccount
 public struct HeaderHome: View {
     @AppStorage("fromSOS")
     var fromSOS = false
+    @SceneStorage(StorageKeys.onboardingFlowStep)
+    private var onboardingSteps: [OnboardingFlow.Step] = []
     @EnvironmentObject var authModel: AuthViewModel
+    @EnvironmentObject var banerManager: PresentBannerManager
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
     @State private var showingAvatarSheet = false
     @State private var displayName = ""
     @State private var avatar = ""
     @State private var userId = ""
+    @State private var coins = 0
+    @State private var showingHUD = false
+
     private var quotes = [
         "“We cannot solve problems with the kind of thinking we employed when we came up with them.” — Albert Einstein",
         "“Learn as if you will live forever, live like you will die tomorrow.” — Mahatma Gandhi",
@@ -32,16 +38,18 @@ public struct HeaderHome: View {
     ]
     
     public var body: some View {
-        VStack(spacing: 0) {
-            if UIDevice.current.hasNotch {
-                Spacer().frame(height: notch)
-            }
-            headerView
-            Spacer()
-//            buttonsView
-//            Spacer()
-//            quotasView
-            Spacer()
+        ZStack {
+            VStack(spacing: 0) {
+                if UIDevice.current.hasNotch {
+                    Spacer().frame(height: notch)
+                }
+                headerView
+                Spacer()
+                buttonsView
+                //            Spacer()
+                //            quotasView
+                Spacer()
+            }.zIndex(-1)
         }
         .frame(maxWidth: .infinity)
         .ignoresSafeArea(edges: .all)
@@ -67,46 +75,66 @@ public struct HeaderHome: View {
                 }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.coinsUpdate)) { _ in
+            coins = UserDefaults.standard.integer(forKey: "\(userId)_coins")
+            coins += coinsValue
+            UserDefaults.standard.set(coins, forKey: "\(userId)_coins")
+            self.banerManager.banner = .init(
+                title: "Coins!",
+                message: "You have earned \(coinsValue) coins!!"
+            )
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.coinsRefresh)) { _ in
+            coins = UserDefaults.standard.integer(forKey: "\(userId)_coins")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.coinsAlert)) { _ in
+            self.banerManager.banner = .init(
+                title: "Coins!",
+                message: "You need moare coins to buy this accessory!!"
+            )
+        }
     }
     
     var buttonsView: some View {
-        HStack {
+        HStack(alignment: .top) {
+//            Button(action: {
+//                showingHomeSheet.toggle()
+//                print("home")
+//            }) {
+//                homeButton
+//            }
+//            .buttonStyle(PlainButtonStyle())
+//            .sheet(isPresented: $showingHomeSheet) {
+//                LocationView()
+//            }
+//            .shadow(color: .gray, radius: 2, x: 0, y: 1)
+//            .padding(.horizontal, 5.0)
+            
             Button(action: {
-                showingHomeSheet.toggle()
-                print("home")
-            }) {
-                homeButton
-            }
-            .buttonStyle(PlainButtonStyle())
-            // .sheet(isPresented: $showingHomeSheet) {
-            // LocationView()
-            // }
-            .shadow(color: .gray, radius: 2, x: 0, y: 1)
-            .padding(.horizontal, 5.0)
-            Button(action: {
-                showingPointsSheet.toggle()
-                print("stars!")
+                showingAvatarSheet.toggle()
+                print("avatarView")
             }) {
                 pointsButton
+            }.sheet(isPresented: $showingAvatarSheet) {
+                AvatarSelectionView(onboardingSteps: $onboardingSteps, firstLoad: false, accesoryLoad: true).environmentObject(authModel)
             }
             .buttonStyle(PlainButtonStyle())
-            // .sheet(isPresented: $showingPointsSheet) {
-            // PointsView()
-            // }
             .shadow(color: .gray, radius: 2, x: 0, y: 1)
-            .padding(.horizontal, 5.0)
+            .offset(y: -10)
         }
+        .padding(5.0)
     }
     
     var pointsButton: some View {
         ZStack {
-            Text("0")
+            Text("\(coins)")
                 .font(.custom("Nunito-Light", size: 12))
                 .frame(width: 100, height: 30)
                 .foregroundColor(Color.black)
                 .background(Color.white.opacity(0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-            Image("pointsStarIcon").accessibilityLabel("pointsStarIcon")
+            Image("pointsStarIcon")
+                .accessibilityLabel("pointsStarIcon")
                 .padding(.trailing, 65.0)
         }
     }
@@ -236,6 +264,7 @@ public struct HeaderHome: View {
                 self.displayName = authModel.profile?.displayName ?? ""
                 self.avatar = authModel.profile?.avatar ?? ""
                 self.userId = authModel.profile?.id ?? "00000"
+                coins = UserDefaults.standard.integer(forKey: "\(profileUser.id)_coins")
             }
         }
 #else
@@ -250,6 +279,7 @@ public struct HeaderHome: View {
                 self.avatar = authModel.profile?.avatar ??
                 "avatar_1"
                 self.userId = authModel.profile?.id ?? "00000"
+                self.coins = UserDefaults.standard.integer(forKey: "\(self.userId)_coins")
             }
         }
 #endif

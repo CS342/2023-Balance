@@ -85,8 +85,8 @@ class SpotifyViewController: UIViewController {
     
     private var lastPlayerState: SPTAppRemotePlayerState?
     
-//    var activityLogEntry: ActivityLogEntry?
-    
+    var activityLogEntry: ActivityLogEntry?
+        
     // MARK: - Subviews
     let stackView = UIStackView()
     let stackInstallView = UIStackView()
@@ -104,11 +104,13 @@ class SpotifyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
+        // Read Boolean
         print("Spotify view start")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        activityLogEntry?.addAction(actionDescription: "Opened Playing Spotify")
         updateViewBasedOnConnected()
     }
     
@@ -119,6 +121,7 @@ class SpotifyViewController: UIViewController {
                 appRemote.playerAPI?.pause(nil)
             }
         }
+        activityLogEntry?.endLog(actionDescription: "Closed Playing Spotify")
     }
     
     @objc
@@ -443,6 +446,8 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
     
     func reconnect(uri: String) {
         if self.isOnScreen {
+            UserDefaults.standard.set(true, forKey: StorageKeys.spotifyConnect)
+
 //            activityLogEntry?.addAction(actionDescription: "Connecting Spotify")
             self.currentUri = uri
             configuration.playURI = self.currentUri

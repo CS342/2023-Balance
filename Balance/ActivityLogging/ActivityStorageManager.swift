@@ -20,23 +20,25 @@ import Foundation
  total duration:
  */
 
-// swiftlint:disable implicit_return
-// swiftlint:disable force_unwrapping
-// swiftlint:disable todo
-// swiftlint:disable untyped_error_in_catch
+// swiftlint:disable all
 
 struct LogAction {
-    let id: String
+    let sessionID: String
+    let sessionStartTime: Date
+    let sessionEndTime: Date
+    let sessionDuration: Int
+    let description: String
     let startTime: Date
     let endTime: Date
-    let duration: TimeInterval
-    let actionTime: Date
-    let actionDesc: String
+    let duration: Int
 }
 
 struct Action: Codable {
-    let time: Date
+    var id = UUID().uuidString
     let description: String
+    let startTime: Date
+    var endTime = Date.now
+    var duration: Int = 0
 }
 
 class ActivityLogEntry: ObservableObject, Codable {
@@ -47,49 +49,92 @@ class ActivityLogEntry: ObservableObject, Codable {
         case duration
         case actions
     }
-    
+
     var id = UUID().uuidString
-    var startTime = Date(timeIntervalSinceReferenceDate: 0)
-    var endTime = Date(timeIntervalSinceReferenceDate: 0)
-    var duration: TimeInterval = 0
+    var startTime = Date()
+    var endTime = Date.now
+    var duration: Int = 0
     var actions: [Action] = []
     
     func reset() {
         id = UUID().uuidString
-        startTime = Date(timeIntervalSinceReferenceDate: 0)
+        startTime = Date()
         endTime = startTime
         duration = 0
         actions = []
     }
     
     func isEmpty() -> Bool {
-        return getDuration() == TimeInterval(0)
+        return getDuration() == 0
     }
     
     func addAction(actionDescription: String) {
         let currentDate = Date.now
-        actions.append(Action(time: currentDate, description: actionDescription))
-        
-        // set start time if this is the first action
-        startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
+        actions.append(Action(description: actionDescription, startTime: currentDate))
     }
     
     func addActionButton(actionDescription: String) {
         let currentDate = Date.now
-        actions.append(Action(time: currentDate, description: actionDescription))
-        
+        actions.append(
+            Action(
+                description: actionDescription,
+                startTime: currentDate,
+                endTime: currentDate,
+                duration: 0
+            )
+        )
         // set start time if this is the first action
-        startTime = startTime == Date(timeIntervalSinceReferenceDate: 0) ? currentDate : startTime
-        endTime = startTime
-        duration = getDuration()
+        startTime = currentDate
+        endTime = currentDate
+
+        duration = 0
     }
     
     func endLog(actionDescription: String) {
-        addAction(actionDescription: actionDescription)
-        endTime = actions.last!.time
-        duration = getDuration()
+        let currentEndDate = Date.now
+        let startAction = actions.last(where: {
+            $0.description == actionDescription.replacingOccurrences(of: "Closed", with: "Opened")
+        })
+        
+        if startAction == nil {
+            return
+        }
+        let interval = currentEndDate - startAction!.startTime
+        actions.append(
+            Action(
+                description: actionDescription.replacingOccurrences(of: "Closed ", with: ""),
+                startTime: startAction!.startTime,
+                endTime: currentEndDate,
+                duration: interval.second ?? 0
+            )
+        )
+        actions = actions.filter( {
+            $0.id != startAction?.id
+        })
+        
+        if actionDescription.contains("Closed Image Highlight") ||
+            actionDescription.contains("Closed Image Selected") ||
+            actionDescription.contains("Closed Video Highlight") ||
+            actionDescription.contains("Closed Video Selected") ||
+            actionDescription.contains("Closed Sudoku Game") ||
+            actionDescription.contains("Closed Crossover Game") ||
+            actionDescription.contains("Closed Guess the Emotion") ||
+            actionDescription.contains("Closed How is your mood") ||
+            actionDescription.contains("Closed Draw Something") ||
+            actionDescription.contains("Closed Coloring Something") ||
+            actionDescription.contains("Closed Playing Spotify") {
+            if (interval.second ?? 0)  > coinsTime {
+                NotificationCenter.default.post(name: Notification.Name.coinsUpdate, object: nil)
+            }
+        }
+        
+        print(interval.second ?? 0)
+        startTime = actions.first!.startTime
+        endTime = actions.last!.endTime
+        let intervalSession = endTime - startTime
+        duration = intervalSession.second ?? 0
     }
-    
+        
     func getDuration() -> TimeInterval {
         return endTime.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
     }
@@ -104,7 +149,7 @@ class ActivityLogEntry: ObservableObject, Codable {
         var actionsStr = ""
         
         for action in actions {
-            actionsStr.append("\(dateToString(date: action.time) + " " + action.description)\n")
+            actionsStr.append("\(dateToString(date: action.startTime) + " " + action.description)\n")
         }
         
         return (idStr, [startStr, actionsStr, durationStr, endStr].joined(separator: "\n"))

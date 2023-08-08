@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// swiftlint:disable attributes
 struct GuessView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss)
+    var dismiss
     @State var selected = 10
     @State var questionIndex = 0
     @State var stopUserInteraction = false
@@ -22,35 +22,33 @@ struct GuessView: View {
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
-  
+    
     var body: some View {
-        ActivityLogContainer {
-            ZStack {
-                backgroundColor.edgesIgnoringSafeArea(.all)
-                VStack {
-                    HeaderMenu(title: "Feeling learning")
-                    Spacer()
-                    ZStack(alignment: .topLeading) {
-                        questionNumber
-                        imageView
-                    }
-                    Spacer()
-                    titleText
-                    Spacer()
-                    optionsButtons
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                HeaderMenu(title: "Feeling learning")
+                Spacer()
+                ZStack(alignment: .topLeading) {
+                    questionNumber
+                    imageView
                 }
+                Spacer()
+                titleText
+                Spacer()
+                optionsButtons
             }
-            .onAppear(perform: {
-                questions = questionArray.prefix(cantAnswer).shuffled()
-            })
-            .disabled(stopUserInteraction)
-            .alert("You got \(correctAnswer)/\(cantAnswer) right on the first try!", isPresented: $showingAlert) {
-                Button("Close", role: .cancel) {
-                    correctAnswer = 0
-                    firstTry = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        dismiss()
-                    }
+        }
+        .onAppear(perform: {
+            questions = questionArray.prefix(cantAnswer).shuffled()
+        })
+        .disabled(stopUserInteraction)
+        .alert("You got \(correctAnswer)/\(cantAnswer) right on the first try!", isPresented: $showingAlert) {
+            Button("Close", role: .cancel) {
+                correctAnswer = 0
+                firstTry = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    dismiss()
                 }
             }
         }
