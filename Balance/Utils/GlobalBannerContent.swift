@@ -13,7 +13,7 @@ struct GlobalBannerContent: View {
     var body: some View {
         ZStack {
             HStack {
-                Image(systemName: "scribble.variable")
+                Image(systemName: "star.circle")
                 VStack(alignment: .leading, spacing: 2) {
                     Text(bannerManager.banner?.title ?? "")
                         .bold()
