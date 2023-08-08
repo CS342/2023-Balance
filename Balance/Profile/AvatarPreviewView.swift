@@ -243,12 +243,23 @@ struct AvatarPreviewView: View {
             }
         }
         
+        var coins = UserDefaults.standard.integer(forKey: "\(self.profile.id)_coins")
+        coins -= accesorySelection.value
+
+        if coins < 0 {
+            print("No coins to buy accesory")
+            NotificationCenter.default.post(name: Notification.Name.coinsAlert, object: nil)
+            return
+        }
+        
         UserProfileRepositoryToLocal.shared.createProfile(profile: profile) { profile, error in
             loading = false
             if let error = error {
                 print("Error while fetching the user profile: \(error)")
                 return
             } else {
+                UserDefaults.standard.set(coins, forKey: "\(self.profile.id)_coins")
+                NotificationCenter.default.post(name: Notification.Name.coinsRefresh, object: nil)
                 self.profile = profile ?? ProfileUser()
                 authModel.profile = profile
                 print("User: " + (profile?.description() ?? "-"))

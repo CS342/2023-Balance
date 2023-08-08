@@ -128,10 +128,9 @@ extension UIApplication {
 
 extension Notification.Name {
     static let goBackground = Notification.Name("goBackground")
-}
-
-extension Notification.Name {
     static let coinsUpdate = Notification.Name("coinsUpdate")
+    static let coinsRefresh = Notification.Name("coinsRefresh")
+    static let coinsAlert = Notification.Name("coinsAlert")
 }
 
 // swiftlint:disable operator_whitespace

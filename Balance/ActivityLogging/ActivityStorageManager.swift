@@ -112,6 +112,23 @@ class ActivityLogEntry: ObservableObject, Codable {
             $0.id != startAction?.id
         })
         
+        if actionDescription.contains("Closed Image Highlight") ||
+            actionDescription.contains("Closed Image Selected") ||
+            actionDescription.contains("Closed Video Highlight") ||
+            actionDescription.contains("Closed Video Selected") ||
+            actionDescription.contains("Closed Sudoku Game") ||
+            actionDescription.contains("Closed Crossover Game") ||
+            actionDescription.contains("Closed Guess the Emotion") ||
+            actionDescription.contains("Closed How is your mood") ||
+            actionDescription.contains("Closed Draw Something") ||
+            actionDescription.contains("Closed Coloring Something") ||
+            actionDescription.contains("Closed Playing Spotify") {
+            if (interval.second ?? 0)  > 5 {
+                NotificationCenter.default.post(name: Notification.Name.coinsUpdate, object: nil)
+            }
+        }
+        
+        print(interval.second ?? 0)
         startTime = actions.first!.startTime
         endTime = actions.last!.endTime
         let intervalSession = endTime - startTime

@@ -42,7 +42,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            CellView(image: "drawingIcon", text: "Coloring something")
+            DistractionCellView(image: "drawingIcon", text: "Coloring something", pointVal: "5")
         }
     }
     
@@ -56,7 +56,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            CellView(image: "writesIcon", text: "Drawing something")
+            DistractionCellView(image: "writesIcon", text: "Drawing something", pointVal: "5")
         }
     }
     
@@ -70,7 +70,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            CellView(image: "sudokuIcon", text: "Games")
+            DistractionCellView(image: "sudokuIcon", text: "Games", pointVal: "5")
         }
     }
     
@@ -84,7 +84,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            CellView(image: "videosIcon", text: "Look at videos")
+            DistractionCellView(image: "videosIcon", text: "Look at videos", pointVal: "5")
         }
     }
     
@@ -98,7 +98,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            CellView(image: "musicIcon", text: "Listen to music")
+            DistractionCellView(image: "musicIcon", text: "Listen to music", pointVal: "5")
         }
     }
     
@@ -112,7 +112,7 @@ struct DistractionView: View {
                 }
             )
         ) {
-            CellView(image: "picturesIcon", text: "Look at pictures")
+            DistractionCellView(image: "picturesIcon", text: "Look at pictures", pointVal: "5")
         }
     }
 }

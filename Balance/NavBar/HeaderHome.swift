@@ -17,6 +17,7 @@ public struct HeaderHome: View {
     @SceneStorage(StorageKeys.onboardingFlowStep)
     private var onboardingSteps: [OnboardingFlow.Step] = []
     @EnvironmentObject var authModel: AuthViewModel
+    @EnvironmentObject var banerManager: PresentBannerManager
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
     @State private var showingAvatarSheet = false
@@ -24,6 +25,7 @@ public struct HeaderHome: View {
     @State private var avatar = ""
     @State private var userId = ""
     @State private var coins = 0
+    @State private var showingHUD = false
 
     private var quotes = [
         "“We cannot solve problems with the kind of thinking we employed when we came up with them.” — Albert Einstein",
@@ -36,16 +38,18 @@ public struct HeaderHome: View {
     ]
     
     public var body: some View {
-        VStack(spacing: 0) {
-            if UIDevice.current.hasNotch {
-                Spacer().frame(height: notch)
-            }
-            headerView
-            Spacer()
-            buttonsView
-//            Spacer()
-//            quotasView
-            Spacer()
+        ZStack {
+            VStack(spacing: 0) {
+                if UIDevice.current.hasNotch {
+                    Spacer().frame(height: notch)
+                }
+                headerView
+                Spacer()
+                buttonsView
+                //            Spacer()
+                //            quotasView
+                Spacer()
+            }.zIndex(-1)
         }
         .frame(maxWidth: .infinity)
         .ignoresSafeArea(edges: .all)
@@ -73,6 +77,20 @@ public struct HeaderHome: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.coinsUpdate)) { _ in
             coins = UserDefaults.standard.integer(forKey: "\(userId)_coins")
+            coins += 5
+            UserDefaults.standard.set(coins, forKey: "\(userId)_coins")
+            self.banerManager.banner = .init(
+                title: "Coins!",
+                message: "You have earned 5 coins!!"
+            )
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.coinsRefresh)) { _ in
+            coins = UserDefaults.standard.integer(forKey: "\(userId)_coins")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.coinsAlert)) { _ in
+            self.banerManager.banner = .init(
+                title: "Coins!",
+                message: "You need more coins to buy this accessory!!")
         }
     }
     
@@ -93,11 +111,6 @@ public struct HeaderHome: View {
             
             Button(action: {
                 showingAvatarSheet.toggle()
-                
-                UserDefaults.standard.set(150, forKey: "\(userId)_coins")
-                
-                NotificationCenter.default.post(name: Notification.Name.coinsUpdate, object: nil)
-                
                 print("avatarView")
             }) {
                 pointsButton
@@ -250,6 +263,7 @@ public struct HeaderHome: View {
                 self.displayName = authModel.profile?.displayName ?? ""
                 self.avatar = authModel.profile?.avatar ?? ""
                 self.userId = authModel.profile?.id ?? "00000"
+                coins = UserDefaults.standard.integer(forKey: "\(profileUser.id)_coins")
             }
         }
 #else
@@ -264,6 +278,7 @@ public struct HeaderHome: View {
                 self.avatar = authModel.profile?.avatar ??
                 "avatar_1"
                 self.userId = authModel.profile?.id ?? "00000"
+                self.coins = UserDefaults.standard.integer(forKey: "\(self.userId)_coins")
             }
         }
 #endif

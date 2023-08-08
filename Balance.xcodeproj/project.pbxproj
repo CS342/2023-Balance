@@ -103,6 +103,8 @@
 		6C58B25029F6B673000FE8DD /* DrawHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B24F29F6B673000FE8DD /* DrawHighlightView.swift */; };
 		6C58B25229F7293A000FE8DD /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C58B25129F7293A000FE8DD /* NavigationUtil.swift */; };
 		6C60EFA12A16548F00A01862 /* ShakeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C60EFA02A16548F00A01862 /* ShakeGesture.swift */; };
+		6C738BDD2A82795F009B359E /* PresentBannerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C738BDC2A82795F009B359E /* PresentBannerManager.swift */; };
+		6C738BDF2A827B67009B359E /* GlobalBannerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C738BDE2A827B67009B359E /* GlobalBannerContent.swift */; };
 		6C80C01829CCF90B003DD5B9 /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C00829CCF8FA003DD5B9 /* Nunito-SemiBoldItalic.ttf */; };
 		6C80C01929CCF90B003DD5B9 /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C00929CCF8FB003DD5B9 /* Nunito-BlackItalic.ttf */; };
 		6C80C01A29CCF90B003DD5B9 /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C80C00A29CCF8FD003DD5B9 /* Nunito-MediumItalic.ttf */; };
@@ -284,6 +286,8 @@
 		6C58B24F29F6B673000FE8DD /* DrawHighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHighlightView.swift; sourceTree = "<group>"; };
 		6C58B25129F7293A000FE8DD /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		6C60EFA02A16548F00A01862 /* ShakeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGesture.swift; sourceTree = "<group>"; };
+		6C738BDC2A82795F009B359E /* PresentBannerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentBannerManager.swift; sourceTree = "<group>"; };
+		6C738BDE2A827B67009B359E /* GlobalBannerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalBannerContent.swift; sourceTree = "<group>"; };
 		6C80C00829CCF8FA003DD5B9 /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		6C80C00929CCF8FB003DD5B9 /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
 		6C80C00A29CCF8FD003DD5B9 /* Nunito-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -709,6 +713,8 @@
 				6C3BB1F22A151D1F008FEB93 /* SearchBar.swift */,
 				6C60EFA02A16548F00A01862 /* ShakeGesture.swift */,
 				6C92E3C12A17C84E003FE239 /* RoundedCorner.swift */,
+				6C738BDC2A82795F009B359E /* PresentBannerManager.swift */,
+				6C738BDE2A827B67009B359E /* GlobalBannerContent.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1098,6 +1104,7 @@
 				6C47338B29FAB89900DC72D0 /* SignUpView.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2720084329A843B90052908D /* Note.swift in Sources */,
+				6C738BDD2A82795F009B359E /* PresentBannerManager.swift in Sources */,
 				6CFB02492A4486C2000045E1 /* VideoArray.swift in Sources */,
 				6C55243A29F8722B00F802D9 /* AuthViewModel.swift in Sources */,
 				6CB5181E29E6F395007AADB4 /* ImageView.swift in Sources */,
@@ -1143,6 +1150,7 @@
 				894A884529B7B27600CB347B /* NavigationView.swift in Sources */,
 				6C5523F529F8094C00F802D9 /* PasswordUpdateView.swift in Sources */,
 				2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */,
+				6C738BDF2A827B67009B359E /* GlobalBannerContent.swift in Sources */,
 				6CB5181C29E45C0C007AADB4 /* BalanceExtensions.swift in Sources */,
 				6C55242629F86D9200F802D9 /* BalanceAccount.swift in Sources */,
 				6C9980732A45EADD00351F7C /* PhotoUploadView.swift in Sources */,

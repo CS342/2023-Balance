@@ -9,6 +9,7 @@
 import CardinalKit
 import SwiftUI
 
+// swiftlint:disable closure_body_length
 @main
 struct Balance: App {
     @UIApplicationDelegateAdaptor(BalanceAppDelegate.self)
@@ -23,7 +24,8 @@ struct Balance: App {
     @StateObject var logStore = ActivityLogStore()
 #endif
     @StateObject var activityLogEntry = ActivityLogEntry()
-    
+    @StateObject var bannerManager = PresentBannerManager()
+
     @Environment(\.scenePhase)
     var scenePhase
     
@@ -34,6 +36,9 @@ struct Balance: App {
                     HomeView()
                 } else {
                     OnboardingFlow()
+                }
+                if bannerManager.isPresented {
+                    GlobalBannerContent(bannerManager: bannerManager)
                 }
             }
             .testingSetup()
@@ -46,7 +51,7 @@ struct Balance: App {
             .environmentObject(logStore)
 #endif
             .environmentObject(activityLogEntry)
-
+            .environmentObject(bannerManager)
             .onChange(of: scenePhase) { phase in
                 switch phase {
                 case .active:
