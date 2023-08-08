@@ -96,7 +96,7 @@ struct AvatarSelectionView: View {
     
     var accesoryListView: some View {
         Group {
-            Text("Choose your accesory")
+            Text("Choose your accessory")
                 .foregroundColor(violetColor)
                 .font(.custom("Nunito-Bold", size: 24))
             Spacer().frame(height: 50)
