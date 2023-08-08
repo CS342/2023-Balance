@@ -35,8 +35,8 @@ struct AvatarSelectionView: View {
             backgroundColor.edgesIgnoringSafeArea(.all)
             VStack {
                 ScrollView {
-                    Spacer().frame(height: 50)
                     if !accesoryLoad {
+                        Spacer().frame(height: 50)
                         avatarListView
                     }
                     if !firstLoad {
@@ -44,7 +44,17 @@ struct AvatarSelectionView: View {
                         accesoryListView
                     }
                 }
-                selectButton.background(.clear)
+                
+                let minElement = accesoryManager.accesories.min(by: { lhs, rhs in
+                    if lhs.value < rhs.value {
+                        return true
+                    } else {
+                        return false
+                    }
+                })
+                if userCoins >= minElement?.value ?? 25 {
+                    selectButton.background(.clear)
+                }
             }.sheet(isPresented: $showingAvatarPreviewSheet) {
                 AvatarPreviewView(
                     onboardingSteps: $onboardingSteps,
