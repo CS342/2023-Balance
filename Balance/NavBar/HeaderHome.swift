@@ -90,7 +90,7 @@ public struct HeaderHome: View {
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.coinsAlert)) { _ in
             self.banerManager.banner = .init(
                 title: "Coins!",
-                message: "You need more coins to buy this accessory!!"
+                message: "You need moare coins to buy this accessory!!"
             )
         }
     }
