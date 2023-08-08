@@ -44,17 +44,7 @@ struct AvatarSelectionView: View {
                         accesoryListView
                     }
                 }
-                
-                let minElement = accesoryManager.accesories.min(by: { lhs, rhs in
-                    if lhs.value < rhs.value {
-                        return true
-                    } else {
-                        return false
-                    }
-                })
-                if userCoins >= minElement?.value ?? 25 {
-                    selectButton.background(.clear)
-                }
+                saveButton
             }.sheet(isPresented: $showingAvatarPreviewSheet) {
                 AvatarPreviewView(
                     onboardingSteps: $onboardingSteps,
@@ -67,6 +57,26 @@ struct AvatarSelectionView: View {
             .onAppear {
                 self.profile = authModel.profile ?? ProfileUser()
                 userCoins = UserDefaults.standard.integer(forKey: "\(self.profile.id)_coins")
+            }
+        }
+    }
+    
+    var saveButton: some View {
+        Group {
+            if accesoryLoad {
+                let minElement = accesoryManager.accesories.min(by: { lhs, rhs in
+                    if lhs.value < rhs.value {
+                        return true
+                    } else {
+                        return false
+                    }
+                })
+                
+                if userCoins >= minElement?.value ?? 25 {
+                    selectButton.background(.clear)
+                }
+            } else {
+                selectButton.background(.clear)
             }
         }
     }

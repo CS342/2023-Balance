@@ -74,3 +74,5 @@ let silentTrack = "spotify:track:7p5bQJB4XsZJEEn6Tb7EaL"
 let cantAnswer = 10
 
 let spotifyURL = "https://itunes.com/apps/spotifyltd"
+
+let coinsValue = 50
