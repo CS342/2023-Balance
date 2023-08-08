@@ -18,9 +18,11 @@ struct AvatarSelectionView: View {
     @State private var showingAvatarPreviewSheet = false
     @ObservedObject var avatarManager = AvatarManager()
     @State private var avatarSelection: Avatar.ID?
+    @State private var avatarNameSelection: String?
     @State private var avatarSelected = Avatar(name: "")
     @ObservedObject var accesoryManager = AccesoryManager()
     @State private var accesorySelection: Accesory.ID?
+    @State private var accesoryNameSelection: String?
     @State private var accesorySelected = Accesory(name: "")
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
     @State private var profile = ProfileUser()
@@ -57,6 +59,8 @@ struct AvatarSelectionView: View {
             .onAppear {
                 self.profile = authModel.profile ?? ProfileUser()
                 userCoins = UserDefaults.standard.integer(forKey: "\(self.profile.id)_coins")
+                self.avatarNameSelection = self.profile.avatar
+                self.accesoryNameSelection = self.profile.accesory
             }
         }
     }
@@ -87,14 +91,16 @@ struct AvatarSelectionView: View {
                 .foregroundColor(violetColor)
                 .font(.custom("Nunito-Bold", size: 34))
             Spacer().frame(height: 50)
+            
             LazyVGrid(columns: gridItemLayout, spacing: 40) {
                 ForEach($avatarManager.avatars) { $item in
-                    AvatarView(item: $item, selectedItem: $avatarSelection)
+                    AvatarView(item: $item, selectedItem: $avatarSelection, selectedNameItem: $avatarNameSelection)
                         .onTapGesture {
                             if let ndx = avatarManager.avatars.firstIndex(where: { $0.id == avatarSelection }) {
                                 avatarManager.avatars[ndx].state = false
                             }
                             avatarSelection = item.id
+                            avatarNameSelection = item.name
                             item.state = true
                             avatarSelected = item
                         }
@@ -112,13 +118,14 @@ struct AvatarSelectionView: View {
             Spacer().frame(height: 50)
             LazyVGrid(columns: gridItemLayout, spacing: 40) {
                 ForEach($accesoryManager.accesories) { $item in
-                    AccesoryView(item: $item, selectedItem: $accesorySelection)
+                    AccesoryView(item: $item, selectedItem: $accesorySelection, selectedNameItem: $accesoryNameSelection)
                         .onTapGesture {
                             if userCoins >= item.value {
                                 if let ndx = accesoryManager.accesories.firstIndex(where: { $0.id == accesorySelection }) {
                                     accesoryManager.accesories[ndx].state = false
                                 }
                                 accesorySelection = item.id
+                                accesoryNameSelection = item.name
                                 item.state = true
                                 accesorySelected = item
                             } else {

@@ -112,13 +112,31 @@ struct AvatarPreviewView: View {
                 }
             }
             if !firstLoad {
-                Image(accesorySelection.name)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 130, height: 130)
-                    .clipped()
-                    .accessibilityLabel("accesoryPreview")
-                    .offset(x: 80, y: 80)
+                if accesorySelection.name.isEmpty {
+                    Image(profile.accesory)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 130, height: 130)
+                        .clipped()
+                        .offset(x: 80, y: 80)
+                        .accessibilityLabel("accesoryPreview")
+                } else {
+                    Image(accesorySelection.name)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 130, height: 130)
+                        .clipped()
+                        .offset(x: 80, y: 80)
+                        .accessibilityLabel("accesoryPreview")
+                }
+                
+//                Image(accesorySelection.name)
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: 130, height: 130)
+//                    .clipped()
+//                    .accessibilityLabel("accesoryPreview")
+//                    .offset(x: 80, y: 80)
             }
             Image("stars1")
                 .resizable()
@@ -190,11 +208,11 @@ struct AvatarPreviewView: View {
             onboardingSteps.remove(at: 1)
             onboardingSteps.remove(at: 0)
         } else {
-            withAnimation(.easeInOut(duration: 1.0)) {
-                self.profile = profile
-                loading = false
-            }
-            NavigationUtil.dismiss(2)
+//            withAnimation(.easeInOut(duration: 1.0)) {
+//                self.profile = profile
+//                loading = false
+//            }
+//            NavigationUtil.dismiss(2)
         }
     }
     
@@ -237,11 +255,13 @@ struct AvatarPreviewView: View {
             profile.accesory = accesorySelection.name
         }
         
-        if accesoryBuy {
-            if accesorySelection.name == "" {
-                profile.accesory = ""
-            }
-        }
+//        if accesoryBuy {
+//            if accesorySelection.name == "" {
+//                if !profile.accesory.isEmpty {
+//                    profile.accesory = ""
+//                }
+//            }
+//        }
         
         var coins = UserDefaults.standard.integer(forKey: "\(self.profile.id)_coins")
         coins -= accesorySelection.value
@@ -263,6 +283,7 @@ struct AvatarPreviewView: View {
                 self.profile = profile ?? ProfileUser()
                 authModel.profile = profile
                 print("User: " + (profile?.description() ?? "-"))
+                NavigationUtil.dismiss(2)
             }
         }
     }

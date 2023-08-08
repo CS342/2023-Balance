@@ -75,4 +75,5 @@ let cantAnswer = 10
 
 let spotifyURL = "https://itunes.com/apps/spotifyltd"
 
-let coinsValue = 50
+let coinsValue = 5
+let coinsTime = 15

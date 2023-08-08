@@ -81,7 +81,7 @@ public struct HeaderHome: View {
             UserDefaults.standard.set(coins, forKey: "\(userId)_coins")
             self.banerManager.banner = .init(
                 title: "Coins!",
-                message: "You have earned "\(coinsValue)" coins!!"
+                message: "You have earned \(coinsValue) coins!!"
             )
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.coinsRefresh)) { _ in

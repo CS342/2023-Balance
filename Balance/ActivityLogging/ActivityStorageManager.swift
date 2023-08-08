@@ -123,7 +123,7 @@ class ActivityLogEntry: ObservableObject, Codable {
             actionDescription.contains("Closed Draw Something") ||
             actionDescription.contains("Closed Coloring Something") ||
             actionDescription.contains("Closed Playing Spotify") {
-            if (interval.second ?? 0)  > 5 {
+            if (interval.second ?? 0)  > coinsTime {
                 NotificationCenter.default.post(name: Notification.Name.coinsUpdate, object: nil)
             }
         }

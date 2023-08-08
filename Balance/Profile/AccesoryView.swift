@@ -10,6 +10,7 @@ import SwiftUI
 struct AccesoryView: View {
     @Binding var item: Accesory
     @Binding var selectedItem: Accesory.ID?
+    @Binding var selectedNameItem: String?
     @State var userCoins = 0
     @State var userId = ""
     
@@ -20,7 +21,7 @@ struct AccesoryView: View {
                 .scaledToFit()
                 .accessibilityLabel(item.name)
             if userCoins >= item.value {
-                Image((item.id == selectedItem) ? "checkFill" : "check")
+                Image((item.name == selectedNameItem) ? "checkFill" : "check")
                     .resizable()
                     .frame(width: 40, height: 40)
                     .clipped()
