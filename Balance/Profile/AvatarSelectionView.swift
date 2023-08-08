@@ -27,7 +27,7 @@ struct AvatarSelectionView: View {
     @State private var userCoins = 0
     var firstLoad: Bool
     var accesoryLoad: Bool
-
+    
     private var gridItemLayout = [GridItem(.fixed(150)), GridItem(.fixed(150))]
     
     var body: some View {
