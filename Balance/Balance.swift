@@ -25,6 +25,7 @@ struct Balance: App {
 #endif
     @StateObject var activityLogEntry = ActivityLogEntry()
     @StateObject var bannerManager = PresentBannerManager()
+    @StateObject let workoutManager = WorkoutManager.shared
 
     @Environment(\.scenePhase)
     var scenePhase
@@ -52,6 +53,7 @@ struct Balance: App {
 #endif
             .environmentObject(activityLogEntry)
             .environmentObject(bannerManager)
+            .environmentObject(workoutManager)
             .onChange(of: scenePhase) { phase in
                 switch phase {
                 case .active:
