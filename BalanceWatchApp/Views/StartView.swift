@@ -16,17 +16,13 @@ struct StartView: View {
     
     var body: some View {
         List(workoutTypes) { workoutType in
-            NavigationLink(workoutType.name) {
-                SessionPagingView()
-            }.padding(EdgeInsets(top: 15, leading: 5, bottom: 15, trailing: 5))
-
-//            NavigationLink(
-//                workoutType.name,
-//                destination: SessionPagingView(),
-//                tag: workoutType,
-//                selection: $workoutManager.selectedWorkout
-//            )
-//            .padding(EdgeInsets(top: 15, leading: 5, bottom: 15, trailing: 5))
+            NavigationLink(
+                workoutType.name,
+                destination: SessionPagingView(),
+                tag: workoutType,
+                selection: $workoutManager.selectedWorkout
+            )
+            .padding(EdgeInsets(top: 15, leading: 5, bottom: 15, trailing: 5))
         }
         .listStyle(.carousel)
         .navigationBarTitle("Balance Workout")
@@ -47,7 +43,7 @@ extension HKWorkoutActivityType: Identifiable {
     var name: String {
         switch self {
         case .mindAndBody:
-            return "•Mind&Body Start•"
+            return "• Mind&Body Start •"
         default:
             return ""
         }
