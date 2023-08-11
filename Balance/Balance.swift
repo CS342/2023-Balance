@@ -9,7 +9,6 @@
 import CardinalKit
 import SwiftUI
 
-// swiftlint:disable closure_body_length
 @main
 struct Balance: App {
     @UIApplicationDelegateAdaptor(BalanceAppDelegate.self)
@@ -25,7 +24,7 @@ struct Balance: App {
 #endif
     @StateObject var activityLogEntry = ActivityLogEntry()
     @StateObject var bannerManager = PresentBannerManager()
-
+    
     @Environment(\.scenePhase)
     var scenePhase
     
@@ -55,20 +54,28 @@ struct Balance: App {
             .onChange(of: scenePhase) { phase in
                 switch phase {
                 case .active:
-                    print("ScenePhase: active")
-                    UserDefaults.standard.set(false, forKey: StorageKeys.spotifyConnect)
+                    activeApp()
                 case .background:
-                    print("ScenePhase: background")
-                    let value = UserDefaults.standard.bool(forKey: StorageKeys.spotifyConnect)
-                    if value == false {
-                        activityLogEntry.reset()
-                    }
+                    backgroundApp()
                 case .inactive:
-                    print("ScenePhase: inactive")
+                    inactiveApp()
                 @unknown default:
                     print("ScenePhase: unexpected state")
                 }
             }
         }
+    }
+    
+    func inactiveApp() { }
+    
+    func backgroundApp() {
+        let value = UserDefaults.standard.bool(forKey: StorageKeys.spotifyConnect)
+        if value == false {
+            activityLogEntry.reset()
+        }
+    }
+    
+    func activeApp() {
+        UserDefaults.standard.set(false, forKey: StorageKeys.spotifyConnect)
     }
 }

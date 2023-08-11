@@ -9,7 +9,7 @@ import Combine
 import WatchConnectivity
 
 class SessionDelegater: NSObject, WCSessionDelegate {
-    let countSubject: PassthroughSubject<Double, Never>
+    private let countSubject: PassthroughSubject<Double, Never>
     
     init(countSubject: PassthroughSubject<Double, Never>) {
         self.countSubject = countSubject

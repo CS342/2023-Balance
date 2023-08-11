@@ -8,8 +8,8 @@
 @testable import BalanceWatchApp
 import XCTest
 
+// swiftlint:disable empty_xctest_method
 final class BalanceWatchAppTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -32,5 +32,4 @@ final class BalanceWatchAppTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

@@ -9,6 +9,7 @@ import Foundation
 import HealthKit
 import SwiftUI
 
+// swiftlint:disable unused_closure_parameter
 struct ActivityRingsView: WKInterfaceObjectRepresentable {
     let healthStore: HKHealthStore
 

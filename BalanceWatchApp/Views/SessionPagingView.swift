@@ -9,13 +9,14 @@ import SwiftUI
 import WatchKit
 
 struct SessionPagingView: View {
-    @EnvironmentObject var workoutManager: WorkoutManager
-    @Environment(\.isLuminanceReduced) var isLuminanceReduced
-    @State private var selection: Tab = .metrics
-
     enum Tab {
         case controls, metrics
     }
+    
+    @EnvironmentObject var workoutManager: WorkoutManager
+    @Environment(\.isLuminanceReduced)
+    var isLuminanceReduced
+    @State private var selection: Tab = .metrics
 
     var body: some View {
         TabView(selection: $selection) {

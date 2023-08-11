@@ -1,28 +1,36 @@
 /*
-See LICENSE folder for this sample’s licensing information.
+ See LICENSE folder for this sample’s licensing information.
+ 
+ Abstract:
+ The start view.
+ */
 
-Abstract:
-The start view.
-*/
-
-import SwiftUI
 import HealthKit
+import SwiftUI
 
 struct StartView: View {
     @EnvironmentObject var workoutManager: WorkoutManager
     @EnvironmentObject var counter: Counter
-
-    var workoutTypes: [HKWorkoutActivityType] = [.cycling, .running, .walking]
-
+    
+    var workoutTypes: [HKWorkoutActivityType] = [.mindAndBody]
+    
     var body: some View {
         List(workoutTypes) { workoutType in
-            NavigationLink(workoutType.name, destination: SessionPagingView(),
-                           tag: workoutType, selection: $workoutManager.selectedWorkout)
-                .padding(EdgeInsets(top: 15, leading: 5, bottom: 15, trailing: 5))
+            NavigationLink(workoutType.name) {
+                SessionPagingView()
+            }.padding(EdgeInsets(top: 15, leading: 5, bottom: 15, trailing: 5))
+
+//            NavigationLink(
+//                workoutType.name,
+//                destination: SessionPagingView(),
+//                tag: workoutType,
+//                selection: $workoutManager.selectedWorkout
+//            )
+//            .padding(EdgeInsets(top: 15, leading: 5, bottom: 15, trailing: 5))
         }
         .listStyle(.carousel)
-        .navigationBarTitle("Workouts")
-        .onChange(of: workoutManager.heartRate, perform: { newValue in
+        .navigationBarTitle("Balance Workout")
+        .onChange(of: workoutManager.heartRate, perform: { _ in
             counter.sendValue(val: workoutManager.heartRate)
         })
         .onAppear {
@@ -35,15 +43,11 @@ extension HKWorkoutActivityType: Identifiable {
     public var id: UInt {
         rawValue
     }
-
+    
     var name: String {
         switch self {
-        case .running:
-            return "Run"
-        case .cycling:
-            return "Bike"
-        case .walking:
-            return "Walk"
+        case .mindAndBody:
+            return "•Mind&Body Start•"
         default:
             return ""
         }

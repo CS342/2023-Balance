@@ -7,6 +7,7 @@ Description about what the file includes goes here.
 
 import ClockKit
 
+// swiftlint:disable discouraged_optional_collection
 class ComplicationController: NSObject, CLKComplicationDataSource {
     // MARK: - Complication Configuration
 
@@ -43,8 +44,12 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         handler(nil)
     }
     
-    func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int,
-                            withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
+    func getTimelineEntries(
+        for complication: CLKComplication,
+        after date: Date,
+        limit: Int,
+        withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void
+    ) {
         // Call the handler with the timeline entries after the given date
         handler(nil)
     }

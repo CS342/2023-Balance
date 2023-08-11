@@ -10,16 +10,20 @@ import Foundation
 import HealthKit
 import WatchConnectivity
 
+// swiftlint:disable unused_closure_parameter
+// swiftlint:disable force_unwrapping
+// swiftlint:disable type_contents_order
 class WorkoutManager: NSObject, ObservableObject {
-
     var selectedWorkout: HKWorkoutActivityType? {
         didSet {
-            guard let selectedWorkout = selectedWorkout else { return }
+            guard let selectedWorkout = selectedWorkout else {
+                return
+            }
             startWorkout(workoutType: selectedWorkout)
         }
     }
     
-    @Published var showingSummaryView: Bool = false {
+    @Published var showingSummaryView = false {
         didSet {
             if showingSummaryView == false {
                 resetWorkout()
@@ -58,13 +62,15 @@ class WorkoutManager: NSObject, ObservableObject {
         builder?.delegate = self
         
         // Set the workout builder's data source.
-        builder?.dataSource = HKLiveWorkoutDataSource(healthStore: healthStore,
-                                                      workoutConfiguration: configuration)
+        builder?.dataSource = HKLiveWorkoutDataSource(
+            healthStore: healthStore,
+            workoutConfiguration: configuration
+        )
         
         // Start the workout session and begin data collection.
         let startDate = Date()
         session?.startActivity(with: startDate)
-        builder?.beginCollection(withStart: startDate) { (success, error) in
+        builder?.beginCollection(withStart: startDate) { success, error in
             // The workout has started.
         }
     }
@@ -86,7 +92,7 @@ class WorkoutManager: NSObject, ObservableObject {
         ]
         
         // Request authorization for those quantity types.
-        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
+        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { success, error in
             // Handle error.
         }
     }
@@ -118,7 +124,9 @@ class WorkoutManager: NSObject, ObservableObject {
     }
     
     func updateForStatistics(_ statistics: HKStatistics?) {
-        guard let statistics = statistics else { return }
+        guard let statistics = statistics else {
+            return
+        }
         
         DispatchQueue.main.async {
             switch statistics.quantityType {
@@ -152,16 +160,20 @@ class WorkoutManager: NSObject, ObservableObject {
 
 // MARK: - HKWorkoutSessionDelegate
 extension WorkoutManager: HKWorkoutSessionDelegate {
-    func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState,
-                        from fromState: HKWorkoutSessionState, date: Date) {
+    func workoutSession(
+        _ workoutSession: HKWorkoutSession,
+        didChangeTo toState: HKWorkoutSessionState,
+        from fromState: HKWorkoutSessionState,
+        date: Date
+    ) {
         DispatchQueue.main.async {
             self.running = toState == .running
         }
         
         // Wait for the session to transition states before ending the builder.
         if toState == .ended {
-            builder?.endCollection(withEnd: date) { (success, error) in
-                self.builder?.finishWorkout { (workout, error) in
+            builder?.endCollection(withEnd: date) { success, error in
+                self.builder?.finishWorkout { workout, error in
                     DispatchQueue.main.async {
                         self.workout = workout
                     }
@@ -170,16 +182,12 @@ extension WorkoutManager: HKWorkoutSessionDelegate {
         }
     }
     
-    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
-        
-    }
+    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) { }
 }
 
 // MARK: - HKLiveWorkoutBuilderDelegate
 extension WorkoutManager: HKLiveWorkoutBuilderDelegate {
-    func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {
-        
-    }
+    func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) { }
     
     func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
         for type in collectedTypes {

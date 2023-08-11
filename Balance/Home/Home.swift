@@ -47,7 +47,7 @@ struct HomeView: View {
                     loadUser()
                 }
             }
-            .onChange(of: counter.count, perform: { newValue in
+            .onChange(of: counter.count, perform: { _ in
                 if counter.count > 100 {
                     print(counter.count)
                     alertHeartRate()

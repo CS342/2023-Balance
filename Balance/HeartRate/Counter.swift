@@ -5,14 +5,15 @@
 //  Created by Gonzalo Perisset on 10/08/2023.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 import WatchConnectivity
 
+// swiftlint:disable weak_delegate
 final class Counter: ObservableObject {
     var session: WCSession
     let delegate: WCSessionDelegate
-    let subject = PassthroughSubject<Double, Never>()
+    private let subject = PassthroughSubject<Double, Never>()
     
     @Published private(set) var count: Double = 0.0
     

@@ -11,7 +11,7 @@ import class FHIR.FHIR
 import Onboarding
 import SwiftUI
 
-// swiftlint:disable all
+// swiftlint:disable type_body_length
 struct AvatarPreviewView: View {
     @Environment(\.dismiss)
     private var dismiss
@@ -81,12 +81,7 @@ struct AvatarPreviewView: View {
     
     var avatarSelected: some View {
         ZStack {
-            Image("stars2")
-                .resizable()
-                .frame(width: 50.0, height: 50.0)
-                .clipped()
-                .accessibilityLabel("star2")
-                .offset(x: -100, y: -50)
+            backImageTop
             if accesoryBuy {
                 Image(profile.avatar)
                     .resizable()
@@ -111,6 +106,30 @@ struct AvatarPreviewView: View {
                         .accessibilityLabel("avatarPreview")
                 }
             }
+            firsloadView
+            backImageBottom
+        }
+    }
+    var backImageTop: some View {
+        Image("stars2")
+            .resizable()
+            .frame(width: 50.0, height: 50.0)
+            .clipped()
+            .accessibilityLabel("star2")
+            .offset(x: -100, y: -50)
+    }
+    
+    var backImageBottom: some View {
+        Image("stars1")
+            .resizable()
+            .frame(width: 50.0, height: 50.0)
+            .clipped()
+            .accessibilityLabel("star1")
+            .offset(x: 100, y: 50)
+    }
+    
+    var firsloadView: some View {
+        Group {
             if !firstLoad {
                 if accesorySelection.name.isEmpty {
                     Image(profile.accesory)
@@ -119,7 +138,7 @@ struct AvatarPreviewView: View {
                         .frame(width: 130, height: 130)
                         .clipped()
                         .offset(x: 80, y: 80)
-                        .accessibilityLabel("accesoryPreview")
+                        .accessibilityLabel("profile.accesory")
                 } else {
                     Image(accesorySelection.name)
                         .resizable()
@@ -127,23 +146,9 @@ struct AvatarPreviewView: View {
                         .frame(width: 130, height: 130)
                         .clipped()
                         .offset(x: 80, y: 80)
-                        .accessibilityLabel("accesoryPreview")
+                        .accessibilityLabel("accesorySelection")
                 }
-                
-//                Image(accesorySelection.name)
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: 130, height: 130)
-//                    .clipped()
-//                    .accessibilityLabel("accesoryPreview")
-//                    .offset(x: 80, y: 80)
             }
-            Image("stars1")
-                .resizable()
-                .frame(width: 50.0, height: 50.0)
-                .clipped()
-                .accessibilityLabel("star1")
-                .offset(x: 100, y: 50)
         }
     }
     
@@ -195,7 +200,13 @@ struct AvatarPreviewView: View {
         .padding(.horizontal, 20.0)
     }
     
-    init(onboardingSteps: Binding<[OnboardingFlow.Step]>, avatarSelection: Binding<Avatar>, accesorySelection: Binding<Accesory>, firstLoad: Bool, accesoryBuy: Bool) {
+    init(
+        onboardingSteps: Binding<[OnboardingFlow.Step]>,
+        avatarSelection: Binding<Avatar>,
+        accesorySelection: Binding<Accesory>,
+        firstLoad: Bool,
+        accesoryBuy: Bool
+    ) {
         self._onboardingSteps = onboardingSteps
         self._avatarSelection = avatarSelection
         self._accesorySelection = accesorySelection
@@ -208,11 +219,11 @@ struct AvatarPreviewView: View {
             onboardingSteps.remove(at: 1)
             onboardingSteps.remove(at: 0)
         } else {
-//            withAnimation(.easeInOut(duration: 1.0)) {
-//                self.profile = profile
-//                loading = false
-//            }
-//            NavigationUtil.dismiss(2)
+            //            withAnimation(.easeInOut(duration: 1.0)) {
+            //                self.profile = profile
+            //                loading = false
+            //            }
+            //            NavigationUtil.dismiss(2)
         }
     }
     
@@ -248,24 +259,16 @@ struct AvatarPreviewView: View {
     
     func updateLocalProfile() {
         print("User: " + profile.description())
-        if avatarSelection.name != "" {
+        if !avatarSelection.name.isEmpty {
             profile.avatar = avatarSelection.name
         }
-        if accesorySelection.name != "" {
+        if !accesorySelection.name.isEmpty {
             profile.accesory = accesorySelection.name
         }
         
-//        if accesoryBuy {
-//            if accesorySelection.name == "" {
-//                if !profile.accesory.isEmpty {
-//                    profile.accesory = ""
-//                }
-//            }
-//        }
-        
         var coins = UserDefaults.standard.integer(forKey: "\(self.profile.id)_coins")
         coins -= accesorySelection.value
-
+        
         if coins < 0 {
             print("No coins to buy accesory")
             NotificationCenter.default.post(name: Notification.Name.coinsAlert, object: nil)
