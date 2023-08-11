@@ -10,13 +10,15 @@ import Account
 import SwiftUI
 import class FHIR.FHIR
 import FirebaseAccount
+import WatchConnectivity
 
 struct HomeView: View {
-//    @EnvironmentObject var account: Account
-//    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
+    //    @EnvironmentObject var account: Account
+    //    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
     @State var showMe = false
     @State var profile = ProfileUser()
+    @StateObject var counter = Counter()
     var clipsToBounds = false
     
     var body: some View {
@@ -25,7 +27,7 @@ struct HomeView: View {
                 backgroundColor.edgesIgnoringSafeArea(.all)
                 NavigationStack {
                     VStack(spacing: 0) {
-                        HeaderHome()
+                        HeaderHome().environmentObject(counter)
                         menuOptions
                         Spacer()
                     }
@@ -45,6 +47,12 @@ struct HomeView: View {
                     loadUser()
                 }
             }
+            .onChange(of: counter.count, perform: { newValue in
+                if counter.count > 100 {
+                    print(counter.count)
+                    alertHeartRate()
+                }
+            })
         }
     }
     
@@ -203,6 +211,16 @@ struct HomeView: View {
         ) {
             NavView(image: "distractMeIcon", text: "Distract me")
         }
+    }
+    
+    func alertHeartRate() {
+        let content = UNMutableNotificationContent()
+        content.title = "BALANCE"
+        content.subtitle = "Your heart rate are to up! Please relax with Balance!"
+        content.sound = UNNotificationSound.default
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
     }
     
     func loadUser() {

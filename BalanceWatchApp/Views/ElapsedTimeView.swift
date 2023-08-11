@@ -1,22 +1,22 @@
 /*
-See the LICENSE.txt file for this sample’s licensing information.
+See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-A SwiftUI view that shows the elapsed time.
+The elapsed time.
 */
 
 import SwiftUI
 
 struct ElapsedTimeView: View {
     var elapsedTime: TimeInterval = 0
-    var showSubseconds = true
+    var showSubseconds: Bool = true
     @State private var timeFormatter = ElapsedTimeFormatter()
 
     var body: some View {
         Text(NSNumber(value: elapsedTime), formatter: timeFormatter)
             .fontWeight(.semibold)
-            .onChange(of: showSubseconds) { (oldValue, newValue) in
-                timeFormatter.showSubseconds = newValue
+            .onChange(of: showSubseconds) {
+                timeFormatter.showSubseconds = $0
             }
     }
 }
@@ -46,5 +46,11 @@ class ElapsedTimeFormatter: Formatter {
         }
 
         return formattedString
+    }
+}
+
+struct ElapsedTime_Previews: PreviewProvider {
+    static var previews: some View {
+        ElapsedTimeView()
     }
 }

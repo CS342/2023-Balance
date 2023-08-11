@@ -1,8 +1,8 @@
 /*
-See the LICENSE.txt file for this sample’s licensing information.
+See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-A view representable that shows the activity rings view in watchOS.
+SwiftUI wrapper for WKInterfaceActivityRing.
 */
 
 import Foundation
@@ -10,11 +10,12 @@ import HealthKit
 import SwiftUI
 
 struct ActivityRingsView: WKInterfaceObjectRepresentable {
-    @Environment(\.calendar) private var calendar
     let healthStore: HKHealthStore
 
     func makeWKInterfaceObject(context: Context) -> some WKInterfaceObject {
         let activityRingsObject = WKInterfaceActivityRing()
+
+        let calendar = Calendar.current
         var components = calendar.dateComponents([.era, .year, .month, .day], from: Date())
         components.calendar = calendar
 
@@ -24,10 +25,11 @@ struct ActivityRingsView: WKInterfaceObjectRepresentable {
                 activityRingsObject.setActivitySummary(summaries?.first, animated: true)
             }
         }
+
         healthStore.execute(query)
+
         return activityRingsObject
     }
 
-    func updateWKInterfaceObject(_ wkInterfaceObject: WKInterfaceObjectType, context: Context) {
-    }
+    func updateWKInterfaceObject(_ wkInterfaceObject: WKInterfaceObjectType, context: Context) { }
 }

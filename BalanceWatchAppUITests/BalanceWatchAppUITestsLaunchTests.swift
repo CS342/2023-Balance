@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class BalanceWatch_Watch_AppUITestsLaunchTests: XCTestCase {
+final class BalanceWatchAppUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

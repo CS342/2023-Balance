@@ -11,6 +11,7 @@ import class FHIR.FHIR
 import FirebaseAccount
 
 // swiftlint:disable line_length
+// swiftlint:disable type_body_length
 public struct HeaderHome: View {
     @AppStorage("fromSOS")
     var fromSOS = false
@@ -18,6 +19,7 @@ public struct HeaderHome: View {
     private var onboardingSteps: [OnboardingFlow.Step] = []
     @EnvironmentObject var authModel: AuthViewModel
     @EnvironmentObject var banerManager: PresentBannerManager
+    @EnvironmentObject var counter: Counter
     @State private var showingHomeSheet = false
     @State private var showingPointsSheet = false
     @State private var showingAvatarSheet = false
@@ -120,9 +122,33 @@ public struct HeaderHome: View {
             }
             .buttonStyle(PlainButtonStyle())
             .shadow(color: .gray, radius: 2, x: 0, y: 1)
-            .offset(y: -10)
+            Spacer().frame(width: 50)
+            Button(action: {
+                print("heartRateView")
+            }) {
+                heartRateButton
+            }
+            .buttonStyle(PlainButtonStyle())
+            .shadow(color: .gray, radius: 2, x: 0, y: 1)
         }
         .padding(5.0)
+    }
+    
+    var heartRateButton: some View {
+        ZStack {
+            Text(String(format: "  %.0f BPM", counter.count))
+                .font(.custom("Nunito-Light", size: 12))
+                .frame(width: 100, height: 30)
+                .foregroundColor(Color.black)
+                .background(Color.white.opacity(0.8))
+                .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+            Image("heart")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
+                .accessibilityLabel("heart")
+                .padding(.trailing, 65.0)
+        }
     }
     
     var pointsButton: some View {
@@ -134,6 +160,9 @@ public struct HeaderHome: View {
                 .background(Color.white.opacity(0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
             Image("pointsStarIcon")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
                 .accessibilityLabel("pointsStarIcon")
                 .padding(.trailing, 65.0)
         }
