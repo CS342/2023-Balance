@@ -102,7 +102,7 @@ struct DrawView: View {
         ) { didChange in
             print("Did change: \(didChange)")
             if didChange == false {
-                ink = PKInkingTool(.pen, color: UIColor(color), width: lineWidth)
+                ink = PKInkingTool(type, color: UIColor(color), width: lineWidth)
             }
         }
         .padding(.horizontal, 60)
@@ -165,7 +165,7 @@ struct DrawView: View {
     
     var pencilView: some View {
         Button(action: {
-            showLineWith = false
+            showLineWith = true
             isEraser = false
             isdraw = true
             type = .pencil

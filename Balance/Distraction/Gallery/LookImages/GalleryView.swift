@@ -74,14 +74,14 @@ struct GalleryView: View {
             backgroundColor.edgesIgnoringSafeArea(.all)
             VStack {
                 HeaderMenu(title: "Look at Pictures")
-                VStack(alignment: .center, spacing: 10) {
+                VStack(alignment: .center, spacing: 5) {
                     highlightsTitle
                     imagePaging
                     HStack {
-                        categoriesTitle.padding(10)
+                        categoriesTitle
                         Spacer()
                         if isUpload == true {
-                            uploadButton.padding(10)
+                            uploadButton
                         }
                     }
                     tagsView
@@ -159,7 +159,9 @@ struct GalleryView: View {
                     }
                 }
             }
-            ImageCollectionView(imageArray: filtered, category: selectedCategory).padding(.horizontal, 10.0)
+            ScrollView(.vertical) {
+                ImageCollectionView(imageArray: filtered, category: selectedCategory).padding(.horizontal, 10.0)
+            }
         }
     }
     

@@ -28,7 +28,6 @@ struct AvatarPreviewView: View {
         ZStack {
             backgroundColor.edgesIgnoringSafeArea(.all)
             VStack {
-                Spacer().frame(height: 50)
                 titlePreview
                 Spacer()
                 avatarSelected

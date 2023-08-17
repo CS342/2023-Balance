@@ -94,7 +94,7 @@ struct HomeView: View {
                 }
                 .zIndex(1)
                 Spacer()
-                cloudImage.zIndex(-1)
+//                cloudImage.zIndex(-1)
             }
             accesoryImage.zIndex(2)
         }

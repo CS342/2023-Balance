@@ -157,7 +157,7 @@ struct AvatarSelectionView: View {
                         .frame(height: 44.0)
                         .background(primaryColor)
                         .cornerRadius(10)
-                        .padding(.horizontal, 20.0)
+                        .padding(.all, 20.0)
                 }
             } else {
                 Button(action: {
@@ -170,7 +170,7 @@ struct AvatarSelectionView: View {
                         .frame(height: 44.0)
                         .background(primaryColor)
                         .cornerRadius(10)
-                        .padding(.horizontal, 20.0)
+                        .padding(.all, 20.0)
                 }
             }
         }

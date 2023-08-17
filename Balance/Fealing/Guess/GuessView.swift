@@ -97,7 +97,7 @@ struct GuessView: View {
                 Image(questions[questionIndex].image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 220, height: 220, alignment: .center)
+                    .frame(width: 200, height: 200, alignment: .center)
                     .accessibilityLabel(questions[questionIndex].image)
                     .frame(alignment: .center)
                     .zIndex(1)

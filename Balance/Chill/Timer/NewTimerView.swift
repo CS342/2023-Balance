@@ -353,7 +353,7 @@ struct NewTimerView: View {
                 ZStack {
                     Circle()
                         .fill(.white)
-                        .frame(width: 80, height: 80)
+                        .frame(width: 70, height: 70)
                         .shadow(color: .gray.opacity(0.5), radius: 10, x: 7, y: 7)
                     Image(systemName: "play")
                         .resizable()
@@ -365,7 +365,7 @@ struct NewTimerView: View {
                 ZStack {
                     Circle()
                         .fill(.white)
-                        .frame(width: 80, height: 80)
+                        .frame(width: 70, height: 70)
                         .shadow(color: .gray.opacity(0.5), radius: 10, x: 7, y: 7)
                     Image(systemName: "pause")
                         .resizable()

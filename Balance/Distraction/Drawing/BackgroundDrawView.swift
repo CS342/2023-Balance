@@ -69,7 +69,8 @@ struct BackgroundDrawView: View {
                         viewName: "Mandala Highlight Selected: " + mandala.name,
                         isDirectChildToContainer: true,
                         content: {
-                            DrawView(currentDraw: $currentDraw, isNewDraw: true, isColoring: true)
+                            DrawSketch(backgroundImage: mandala.name)
+//                            DrawView(currentDraw: $currentDraw, isNewDraw: true, isColoring: true)
                         }
                     )
                 ) {
@@ -111,7 +112,9 @@ struct BackgroundDrawView: View {
                     }
                 }
             }
-            MandalaCollectionView(currentDraw: $currentDraw, images: $filtered).padding(.horizontal, 10.0)
+            ScrollView(.vertical) {
+                MandalaCollectionView(currentDraw: $currentDraw, images: $filtered).padding(.horizontal, 10.0)
+            }
         }
     }
 }

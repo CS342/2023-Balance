@@ -187,7 +187,7 @@ struct LoginViewLocal: View {
         .buttonBorderShape(.roundedRectangle(radius: 10))
         .background(primaryColor)
         .cornerRadius(10)
-        .padding(.horizontal, 20)
+        .padding(.all, 20)
     }
     
     init(onboardingSteps: Binding<[OnboardingFlow.Step]>) {

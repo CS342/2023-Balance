@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController storyboardIdentifier="Home" id="vXZ-lx-hvc" customClass="ViewController" customModule="Balance" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ay-I4-9kx">
+                                <rect key="frame" x="0.0" y="221" width="414" height="454"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3b-cD-37b" userLabel="SketchView" customClass="SketchView" customModule="Balance">
+                                        <rect key="frame" x="20" y="40" width="374" height="374"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="o3b-cD-37b" secondAttribute="height" multiplier="1:1" id="0cS-6D-ZPE"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="o3b-cD-37b" firstAttribute="leading" secondItem="8Ay-I4-9kx" secondAttribute="leading" constant="20" id="0pX-W7-XEo"/>
+                                    <constraint firstItem="o3b-cD-37b" firstAttribute="centerY" secondItem="8Ay-I4-9kx" secondAttribute="centerY" id="I9W-YW-afb"/>
+                                    <constraint firstItem="o3b-cD-37b" firstAttribute="centerX" secondItem="8Ay-I4-9kx" secondAttribute="centerX" id="cPh-by-Anh"/>
+                                    <constraint firstAttribute="width" secondItem="8Ay-I4-9kx" secondAttribute="height" multiplier="207:227" id="gYy-cn-lgJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="o3b-cD-37b" secondAttribute="trailing" constant="20" id="hf9-nC-jGT"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8Ay-I4-9kx" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="CRQ-eP-F0Z"/>
+                            <constraint firstItem="8Ay-I4-9kx" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="Q7K-C2-C8P"/>
+                            <constraint firstAttribute="trailing" secondItem="8Ay-I4-9kx" secondAttribute="trailing" id="cWk-8e-gs8"/>
+                            <constraint firstItem="8Ay-I4-9kx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="iht-G0-q4c"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="sketchView" destination="o3b-cD-37b" id="zhk-cy-bIe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-23" y="-27"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -86,7 +86,7 @@ struct MoodEditorView: View {
         .buttonBorderShape(.roundedRectangle(radius: 10))
         .background(primaryColor)
         .cornerRadius(10)
-        .padding(.horizontal, 20.0)
+        .padding(.all, 20.0)
     }
     
     var saveView: some View {
