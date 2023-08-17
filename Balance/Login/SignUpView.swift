@@ -5,18 +5,12 @@
 //  Created by Gonzalo Perisset on 27/04/2023.
 //
 
-import Account
-import class FHIR.FHIR
-import FirebaseAccount
-import Foundation
 import Onboarding
 import SwiftUI
 
 // swiftlint: disable type_body_length
 struct SignUpView: View {
-    @EnvironmentObject var account: Account
     @EnvironmentObject private var authModel: AuthViewModel
-    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
     @Environment(\.dismiss)

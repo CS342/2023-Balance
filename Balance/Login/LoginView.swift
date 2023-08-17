@@ -5,19 +5,14 @@
 //  Created by Gonzalo Perisset on 28/04/2023.
 //
 
-import Account
 import Combine
-import class FHIR.FHIR
-import FirebaseAccount
 import Onboarding
 import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject private var authModel: AuthViewModel
-    @EnvironmentObject var account: Account
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
-    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @Binding var onboardingSteps: [OnboardingFlow.Step]
     @State private var emailAddress: String = ""
     @State private var password: String = ""
@@ -53,14 +48,6 @@ struct LoginView: View {
         }
         .disabled(loading)
         .onAppear(perform: listen)
-        .onChange(of: account.signedIn) { value in
-            print(value)
-            if account.signedIn {
-                loading = false
-                NavigationUtil.popToRootView()
-                completedOnboardingFlow = true
-            }
-        }
         .onChange(of: authModel.authError) { value in
             if !value.isEmpty {
                 loading = false

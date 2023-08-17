@@ -69,7 +69,7 @@ struct BackgroundDrawView: View {
                         viewName: "Mandala Highlight Selected: " + mandala.name,
                         isDirectChildToContainer: true,
                         content: {
-                            DrawSketch(backgroundImage: mandala.name)
+                            DrawSketch(draw: currentDraw)
 //                            DrawView(currentDraw: $currentDraw, isNewDraw: true, isColoring: true)
                         }
                     )

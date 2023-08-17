@@ -10,12 +10,14 @@ import UIKit
 
 // swiftlint: disable force_cast
 struct Storyboardview: UIViewControllerRepresentable {
-    var backgroundImage: String
-    
+    @EnvironmentObject var coloringStore: ColoringStore
+    var draw: Draw
+
     func makeUIViewController(context: Context) -> some UIViewController {
         let storyboar = UIStoryboard(name: "Main", bundle: Bundle.main)
         let controller = storyboar.instantiateViewController(withIdentifier: "Home") as! ViewController
-        controller.backgroundImage = backgroundImage
+        controller.coloringStore = coloringStore
+        controller.draw = draw
         return controller
     }
     
@@ -23,14 +25,14 @@ struct Storyboardview: UIViewControllerRepresentable {
 }
 
 struct DrawSketch: View {
-    var backgroundImage: String
-    
+    var draw: Draw
+
     var body: some View {
         ZStack {
             Color.white.edgesIgnoringSafeArea(.all)
             VStack(spacing: 0) {
                 HeaderMenu(title: "Coloring Something")
-                Storyboardview(backgroundImage: backgroundImage).edgesIgnoringSafeArea(.all)
+                Storyboardview(draw: draw).edgesIgnoringSafeArea(.all)
             }
         }
     }

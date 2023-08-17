@@ -5,9 +5,6 @@
 //  Created by Gonzalo Perisset on 25/04/2023.
 //
 
-import Account
-import FirebaseAccount
-import class FHIR.FHIR
 import SwiftUI
 
 // swiftlint:disable type_body_length
@@ -19,8 +16,6 @@ struct ProfileView: View {
     @SceneStorage(StorageKeys.onboardingFlowStep)
     private var onboardingSteps: [OnboardingFlow.Step] = []
     @State private var showingAvatarSheet = false
-    @EnvironmentObject var account: Account
-    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
     @EnvironmentObject var noteStore: NoteStore
     @EnvironmentObject var drawStore: DrawStore
@@ -55,13 +50,6 @@ struct ProfileView: View {
 #else
             loadUser()
 #endif
-        }
-        .onReceive(account.objectWillChange) {
-            if account.signedIn {
-                completedOnboardingFlow = true
-            } else {
-                completedOnboardingFlow = false
-            }
         }
         .onChange(of: authModel.profile) { profile in
             withAnimation(.easeInOut(duration: 1.0)) {

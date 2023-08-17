@@ -5,17 +5,13 @@
 //  Created by Gonzalo Perisset on 28/04/2023.
 //
 
-import Account
 import Combine
-import class FHIR.FHIR
-import FirebaseAccount
 import Onboarding
 import SwiftUI
 
 // swiftlint:disable line_length
 struct LoginViewLocal: View {
     @EnvironmentObject private var authModel: AuthViewModel
-    @EnvironmentObject var account: Account
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
     @Binding var onboardingSteps: [OnboardingFlow.Step]
@@ -40,13 +36,6 @@ struct LoginViewLocal: View {
                 } label: {
                     Text("")
                 }
-            }
-        }
-        .onChange(of: account.signedIn) { value in
-            print(value)
-            if account.signedIn {
-                NavigationUtil.popToRootView()
-                completedOnboardingFlow = true
             }
         }
         .onChange(of: authModel.authError) { value in
@@ -164,7 +153,6 @@ struct LoginViewLocal: View {
                 
                 Task {
                     await authModel.signInLocal(patientID: patientID, name: name, email: email) {
-                        account.signedIn = true
                         NavigationUtil.popToRootView()
                         authModel.isLoggedIn = true
                         completedOnboardingFlow = true

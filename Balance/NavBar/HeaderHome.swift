@@ -7,8 +7,6 @@
 //
 
 import SwiftUI
-import class FHIR.FHIR
-import FirebaseAccount
 
 // swiftlint:disable line_length
 // swiftlint:disable type_body_length

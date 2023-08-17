@@ -16,7 +16,12 @@ protocol ButtonViewInterface: AnyObject {
     func tapRedoButton()
     func tapClearButton()
     func tapPaletteButton()
-    func tapFillButton()
+    func tapFillButton()    
+    func tapBlueButton()
+    func tapRedButton()
+    func tapPinkButton()
+    func tapOrangeButton()
+    func tapPurpleButton()
 }
 
 class ButtonView: UIView {
@@ -70,4 +75,25 @@ class ButtonView: UIView {
     @IBAction func tapFillButton(_ sender: Any) {
         delegate?.tapFillButton()
     }
+    
+    @IBAction func tapBlueButton(_ sender: Any) {
+        delegate?.tapBlueButton()
+    }
+
+    @IBAction func tapOrangeButton(_ sender: Any) {
+        delegate?.tapOrangeButton()
+    }
+
+    @IBAction func tapPinkButton(_ sender: Any) {
+        delegate?.tapPinkButton()
+    }
+
+    @IBAction func tapPurpleButton(_ sender: Any) {
+        delegate?.tapPurpleButton()
+    }
+    
+    @IBAction func tapRedButton(_ sender: Any) {
+        delegate?.tapRedButton()
+    }
+    
 }

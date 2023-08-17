@@ -6,9 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import Account
-import class FHIR.FHIR
-import FirebaseAccount
 import Onboarding
 import SwiftUI
 
@@ -16,17 +13,11 @@ struct BalanceAccount: View {
     @Binding private var onboardingSteps: [OnboardingFlow.Step]
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
-    @EnvironmentObject var account: Account
     
     var body: some View {
         Group {
 #if DEMO
             LoginViewLocal(onboardingSteps: $onboardingSteps)
-                .onReceive(account.objectWillChange) {
-                    if account.signedIn {
-                        completedOnboardingFlow = true
-                    }
-                }
 #else
             LoginView(onboardingSteps: $onboardingSteps)
                 .onReceive(account.objectWillChange) {
@@ -53,8 +44,6 @@ struct AccountSetup_Previews: PreviewProvider {
     
     static var previews: some View {
         BalanceAccount(onboardingSteps: $path)
-            .environmentObject(Account(accountServices: []))
-            .environmentObject(FirebaseAccountConfiguration<FHIR>(emulatorSettings: (host: "localhost", port: 9099)))
     }
 }
 #endif

@@ -47,8 +47,8 @@ public class SketchView: UIView {
     private var currentPoint: CGPoint?
     private var previousPoint1: CGPoint?
     private var previousPoint2: CGPoint?
-    private var image: UIImage?
-    private var backgroundImage: UIImage?
+    var image: UIImage?
+    var backgroundImage: UIImage?
     private var drawMode: ImageRenderingMode = .original
 
     public override init(frame: CGRect) {
@@ -216,7 +216,7 @@ public class SketchView: UIView {
     func resetTool() {
         currentTool = nil
     }
-
+    
     public func clear() {
         resetTool()
         bufferArray.removeAllObjects()

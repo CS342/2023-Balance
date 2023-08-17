@@ -105,7 +105,7 @@ struct ColoringHomeView: View {
                     Button(action: {
                         self.currentDraw = draw
                     }) {
-                        PastEntryView(draw)
+                        PastColoringEntryView(draw)
                     }
                     
                     NavigationLink(
@@ -113,7 +113,8 @@ struct ColoringHomeView: View {
                             viewName: "Coloring Something Feature",
                             isDirectChildToContainer: true,
                             content: {
-                                DrawView(currentDraw: $currentDraw, isColoring: true)
+                                DrawSketch(draw: currentDraw)
+//                                DrawView(currentDraw: $currentDraw, isColoring: true)
                             }
                         )
                     ) {
@@ -125,20 +126,6 @@ struct ColoringHomeView: View {
             .onDelete(perform: delete)
         }
         .listStyle(.plain)
-    }
-    
-    var drawCell: some View {
-        NavigationLink(
-            destination: ActivityLogBaseView(
-                viewName: "Coloring Something Feature",
-                isDirectChildToContainer: true,
-                content: {
-                    DrawView(currentDraw: $currentDraw, isColoring: true)
-                }
-            )
-        ) {
-            EmptyView()
-        }
     }
     
     func delete(indexSet: IndexSet) {
