@@ -63,7 +63,7 @@
 		6C3248482A8D85AB00223F8C /* SketchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3248422A8D85AB00223F8C /* SketchView.swift */; };
 		6C32484C2A8D85CE00223F8C /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C32484A2A8D85CE00223F8C /* ButtonView.swift */; };
 		6C32484D2A8D85CE00223F8C /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C32484B2A8D85CE00223F8C /* ButtonView.xib */; };
-		6C3248532A8D85D900223F8C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3248502A8D85D900223F8C /* ViewController.swift */; };
+		6C3248532A8D85D900223F8C /* SketchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3248502A8D85D900223F8C /* SketchViewController.swift */; };
 		6C3248552A8D86B700223F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C3248542A8D86B700223F8C /* Main.storyboard */; };
 		6C3248572A8D8A3400223F8C /* DrawSketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3248562A8D8A3400223F8C /* DrawSketch.swift */; };
 		6C3248592A8E5B6700223F8C /* ButtonViewOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C3248582A8E5B6700223F8C /* ButtonViewOld.xib */; };
@@ -256,7 +256,7 @@
 		6C3248422A8D85AB00223F8C /* SketchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchView.swift; sourceTree = "<group>"; };
 		6C32484A2A8D85CE00223F8C /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		6C32484B2A8D85CE00223F8C /* ButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
-		6C3248502A8D85D900223F8C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6C3248502A8D85D900223F8C /* SketchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchViewController.swift; sourceTree = "<group>"; };
 		6C3248542A8D86B700223F8C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6C3248562A8D8A3400223F8C /* DrawSketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawSketch.swift; sourceTree = "<group>"; };
 		6C3248582A8E5B6700223F8C /* ButtonViewOld.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonViewOld.xib; sourceTree = "<group>"; };
@@ -625,7 +625,7 @@
 			isa = PBXGroup;
 			children = (
 				6C32484A2A8D85CE00223F8C /* ButtonView.swift */,
-				6C3248502A8D85D900223F8C /* ViewController.swift */,
+				6C3248502A8D85D900223F8C /* SketchViewController.swift */,
 				6C3248542A8D86B700223F8C /* Main.storyboard */,
 				6C32484B2A8D85CE00223F8C /* ButtonView.xib */,
 				6C3248582A8E5B6700223F8C /* ButtonViewOld.xib */,
@@ -1219,7 +1219,7 @@
 				6C58B25029F6B673000FE8DD /* DrawHighlightView.swift in Sources */,
 				6CC177282A3A6BA900121B72 /* CellView.swift in Sources */,
 				5E03E9A329BC933B0041DD1C /* ActivityLogButtonStyle.swift in Sources */,
-				6C3248532A8D85D900223F8C /* ViewController.swift in Sources */,
+				6C3248532A8D85D900223F8C /* SketchViewController.swift in Sources */,
 				6CF6BEE82A31103A00A337F3 /* StorageKeys.swift in Sources */,
 				6C3BB1F32A151D1F008FEB93 /* SearchBar.swift in Sources */,
 				6CBE75D22A0BCA4E00A1747D /* FaceView.swift in Sources */,

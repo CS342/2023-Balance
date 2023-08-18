@@ -15,7 +15,7 @@ struct Storyboardview: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> some UIViewController {
         let storyboar = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let controller = storyboar.instantiateViewController(withIdentifier: "Home") as! ViewController
+        let controller = storyboar.instantiateViewController(withIdentifier: "Home") as! SketchViewController
         controller.coloringStore = coloringStore
         controller.draw = draw
         return controller
