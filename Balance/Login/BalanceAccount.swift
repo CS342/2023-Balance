@@ -17,7 +17,7 @@ struct BalanceAccount: View {
     var body: some View {
         Group {
 #if DEMO
-            LoginViewLocal(onboardingSteps: $onboardingSteps)
+            LoginViewLocal()
 #else
             LoginView(onboardingSteps: $onboardingSteps)
                 .onReceive(account.objectWillChange) {

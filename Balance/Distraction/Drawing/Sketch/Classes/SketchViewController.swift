@@ -6,8 +6,8 @@
 //  Copyright (c) 2018 daihase. All rights reserved.
 //
 import Combine
-import UIKit
 import PencilKit
+import UIKit
 
 // swiftlint:disable all
 class SketchViewController: UIViewController, ButtonViewInterface {
