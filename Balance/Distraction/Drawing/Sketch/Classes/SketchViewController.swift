@@ -16,7 +16,7 @@ class SketchViewController: UIViewController, ButtonViewInterface {
     var scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
     var cancellable: AnyCancellable?
     var draw : Draw?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         buttonView = ButtonView.instanceFromNib(self)
@@ -174,6 +174,26 @@ extension SketchViewController {
     
     func tapRedButton() {
         self.sketchView.lineColor = .red
+    }
+    
+    func tapGreenButton() {
+        self.sketchView.lineColor = .green
+    }
+    
+    func tapYellowButton() {
+        self.sketchView.lineColor = .yellow
+    }
+    
+    func tapWhiteButton() {
+        self.sketchView.lineColor = .white
+    }
+    
+    func tapGrayButton() {
+        self.sketchView.lineColor = .gray
+    }
+    
+    func tapBlackButton() {
+        self.sketchView.lineColor = .black
     }
     
     private func setImageLocally() {

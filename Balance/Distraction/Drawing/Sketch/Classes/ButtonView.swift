@@ -22,6 +22,11 @@ protocol ButtonViewInterface: AnyObject {
     func tapPinkButton()
     func tapOrangeButton()
     func tapPurpleButton()
+    func tapGreenButton()
+    func tapYellowButton()
+    func tapWhiteButton()
+    func tapGrayButton()
+    func tapBlackButton()
 }
 
 class ButtonView: UIView {
@@ -38,6 +43,11 @@ class ButtonView: UIView {
         
         buttonView.delegate = delegate
         
+        
+        buttonView.viewWithTag(101)?.layer.borderWidth = 1.0;
+        buttonView.viewWithTag(101)?.layer.borderColor = UIColor.lightGray.cgColor;
+        buttonView.viewWithTag(101)?.layer.cornerRadius = 5.0;
+
         return buttonView
     }
     
@@ -96,4 +106,23 @@ class ButtonView: UIView {
         delegate?.tapRedButton()
     }
     
+    @IBAction func tapGreenButton(_ sender: Any) {
+        delegate?.tapGreenButton()
+    }
+    
+    @IBAction func tapYellowButton(_ sender: Any) {
+        delegate?.tapYellowButton()
+    }
+    
+    @IBAction func tapWhiteButton(_ sender: Any) {
+        delegate?.tapWhiteButton()
+    }
+    
+    @IBAction func tapGrayButton(_ sender: Any) {
+        delegate?.tapGrayButton()
+    }
+    
+    @IBAction func tapBlackButton(_ sender: Any) {
+        delegate?.tapBlackButton()
+    }
 }
