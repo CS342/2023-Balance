@@ -34,18 +34,28 @@ struct PastColoringEntryView: View {
     var loadImages: some View {
         HStack {
             let image = UIImage(data: draw.image)
-//            let drawing = try? PKDrawing(data: draw.image)
-//            let image = drawing?.image(from: .init(x: 0, y: 0, width: 350, height: 350), scale: 1)
-            
-            ZStack {
-//                Image(draw.backImage)
-//                    .resizable()
-//                    .scaledToFit()
-//                    .clipped()
-//                    .frame(width: 80, height: 80)
-//                    .accessibilityLabel("backString")
-//                    .zIndex(0)
-                
+            if image == nil {
+                let drawing = try? PKDrawing(data: draw.image)
+                let imageDraw = drawing?.image(from: .init(x: 0, y: 0, width: 350, height: 350), scale: 1)
+                ZStack {
+                    Image(draw.backImage)
+                        .resizable()
+                        .scaledToFit()
+                        .clipped()
+                        .frame(width: 80, height: 80)
+                        .accessibilityLabel("backString")
+                        .zIndex(0)
+                    
+                    Image(uiImage: imageDraw ?? UIImage())
+                        .resizable()
+                        .scaledToFit()
+                        .clipped()
+                        .background(.clear)
+                        .frame(width: 80, height: 80)
+                        .accessibilityLabel("base64Cell")
+                        .zIndex(1)
+                }
+            } else {
                 Image(uiImage: image ?? UIImage())
                     .resizable()
                     .scaledToFit()

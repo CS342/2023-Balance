@@ -7,6 +7,7 @@
 //
 import Combine
 import UIKit
+import PencilKit
 
 // swiftlint:disable all
 class SketchViewController: UIViewController, ButtonViewInterface {
@@ -198,7 +199,18 @@ extension SketchViewController {
     
     private func setImageLocally() {
         if !(draw?.image.isEmpty)! {
-            self.sketchView.loadImage(image: UIImage(data: draw!.image)!, drawMode: .scale)
+            let image = UIImage(data: draw!.image)
+            if image == nil {
+                let drawing = try? PKDrawing(data: draw!.image)
+                let imageDraw = (drawing?.image(from: .init(x: 0, y: 0, width: 350, height: 350), scale: 1))!
+                
+                let backImage = UIImage(named: draw!.backImage)!
+                let mergeImage = backImage.mergeWith(topImage: imageDraw)
+                self.sketchView.loadImage(image: mergeImage, drawMode: .scale)
+//                self.sketchView.loadImage(image: UIImage(named: draw!.backImage)!, drawMode: .scale)
+            } else {
+                self.sketchView.loadImage(image: image!, drawMode: .scale)
+            }
             return
         }
         
