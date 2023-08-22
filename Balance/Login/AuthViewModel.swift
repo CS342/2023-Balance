@@ -267,17 +267,6 @@ final class AuthViewModel: ObservableObject {
         let userExist = UserProfileRepositoryToLocal.shared.existingProfile(userId: uid)
         return userExist
     }
-//    
-//    func existLocalUser(uid: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-//        UserProfileRepositoryToLocal.shared.fetchProfile(userId: uid) { profile, error in
-//            if profile != nil {
-//                onError("error userExist\(String(describing: error?.localizedDescription))" )
-//                return
-//            }
-//            onSuccess()
-//            return
-//        }
-//    }
     
     deinit {
         unbind()
