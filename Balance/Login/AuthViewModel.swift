@@ -86,21 +86,6 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
-    //    func signInLocal
-    //    (
-    //        patientID: String,
-    //        name: String,
-    //        email: String,
-    //        onSuccess: @escaping() -> Void,
-    //        onError: @escaping(_ errorMessage: String) -> Void
-    //    ) async {
-    //        loginUser(uid: patientID, name: name, email: email) {
-    //            onSuccess()
-    //        } onError: { errorMessage in
-    //            self.authError = "Login Error"
-    //            print("Login error")
-    //        }
-    //    }
     
     func signUp(userData: ProfileUser) {
         Auth.auth().createUser(withEmail: userData.email, password: userData.password) { result, error in
