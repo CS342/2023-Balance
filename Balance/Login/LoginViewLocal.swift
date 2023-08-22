@@ -105,7 +105,7 @@ struct LoginViewLocal: View {
                 .padding(.horizontal, 20)
             HStack {
                 Spacer()
-                Text("Existing a user? ")
+                Text("Existing user? ")
                     .font(.custom("Montserrat", size: 17))
                     .foregroundColor(lightGrayColor)
                 Image(systemName: isChecked ? "checkmark.square.fill" : "square")
