@@ -38,7 +38,6 @@ struct DistractionView: View {
                 viewName: "Coloring Something Feature",
                 isDirectChildToContainer: true,
                 content: {
-//                    DrawSketch()
                     ColoringHomeView()
                 }
             )
