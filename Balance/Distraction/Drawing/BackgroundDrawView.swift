@@ -70,7 +70,6 @@ struct BackgroundDrawView: View {
                         isDirectChildToContainer: true,
                         content: {
                             DrawSketch(draw: currentDraw)
-//                            DrawView(currentDraw: $currentDraw, isNewDraw: true, isColoring: true)
                         }
                     )
                 ) {
