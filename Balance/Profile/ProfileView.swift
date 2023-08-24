@@ -5,9 +5,6 @@
 //  Created by Gonzalo Perisset on 25/04/2023.
 //
 
-import Account
-import FirebaseAccount
-import class FHIR.FHIR
 import SwiftUI
 
 // swiftlint:disable type_body_length
@@ -19,8 +16,6 @@ struct ProfileView: View {
     @SceneStorage(StorageKeys.onboardingFlowStep)
     private var onboardingSteps: [OnboardingFlow.Step] = []
     @State private var showingAvatarSheet = false
-    @EnvironmentObject var account: Account
-    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
     @EnvironmentObject var noteStore: NoteStore
     @EnvironmentObject var drawStore: DrawStore
@@ -56,13 +51,6 @@ struct ProfileView: View {
             loadUser()
 #endif
         }
-        .onReceive(account.objectWillChange) {
-            if account.signedIn {
-                completedOnboardingFlow = true
-            } else {
-                completedOnboardingFlow = false
-            }
-        }
         .onChange(of: authModel.profile) { profile in
             withAnimation(.easeInOut(duration: 1.0)) {
                 self.displayName = profile?.displayName ?? ""
@@ -79,14 +67,20 @@ struct ProfileView: View {
             Text(self.displayName)
                 .font(.custom("Nunito-Bold", size: 36))
                 .foregroundColor(darkBlueColor)
+                .minimumScaleFactor(0.1)
+                .lineLimit(1)
             Spacer().frame(height: 10)
             Text(self.email)
                 .font(.custom("Montserrat-Thin", size: 20))
                 .foregroundColor(darkBlueColor)
+                .minimumScaleFactor(0.1)
+                .lineLimit(1)
             Spacer().frame(height: 10)
             Text("ParticipantID: " + self.patientID)
                 .font(.custom("Montserrat-Thin", size: 20))
                 .foregroundColor(darkBlueColor)
+                .minimumScaleFactor(0.1)
+                .lineLimit(1)
             Spacer().frame(height: 20)
         }
     }

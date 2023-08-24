@@ -12,12 +12,9 @@ import class FHIR.FHIR
 import FirebaseAccount
 
 struct HomeView: View {
-//    @EnvironmentObject var account: Account
-//    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
     @State var showMe = false
     @State var profile = ProfileUser()
-    var clipsToBounds = false
     
     var body: some View {
         ActivityLogContainer {
@@ -49,7 +46,6 @@ struct HomeView: View {
     }
     
     @ViewBuilder private var loadingOverlay: some View {
-        //        if account.signedIn {
         let user = authModel.user
         let isFirstLoadKey = (user?.uid ?? "0") + "isFirstLoad"
         let isFirstLoad = UserDefaults.standard.bool(forKey: isFirstLoadKey)
@@ -94,7 +90,6 @@ struct HomeView: View {
                 }
                 .zIndex(1)
                 Spacer()
-                cloudImage.zIndex(-1)
             }
             accesoryImage.zIndex(2)
         }
@@ -122,11 +117,11 @@ struct HomeView: View {
         VStack {
             Button(action: {
                 print("SOS!")
-#if !DEMO
-                let user = firebaseAccountConfiguration.user
-                let isFirstLoadKey = (user?.uid ?? "0") + "isFirstLoad"
-                UserDefaults.standard.set(true, forKey: isFirstLoadKey)
-#endif
+// #if !DEMO
+//                let user = firebaseAccountConfiguration.user
+//                let isFirstLoadKey = (user?.uid ?? "0") + "isFirstLoad"
+//                UserDefaults.standard.set(true, forKey: isFirstLoadKey)
+// #endif
                 withAnimation(Animation.spring().speed(0.2)) {
                     showMe.toggle()
                 }
@@ -229,13 +224,3 @@ struct HomeView: View {
 #endif
     }
 }
-
-#if DEBUG
-struct Home_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-            .environmentObject(Account(accountServices: []))
-            .environmentObject(FirebaseAccountConfiguration<FHIR>(emulatorSettings: (host: "localhost", port: 9099)))
-    }
-}
-#endif

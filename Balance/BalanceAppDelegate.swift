@@ -35,8 +35,6 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
             if HKHealthStore.isHealthDataAvailable() {
                 healthKit
             }
-#else
-            FirebaseAccountConfiguration()
 #endif
         }
     }

@@ -5,17 +5,12 @@
 //  Created by Gonzalo Perisset on 28/04/2023.
 //
 
-import Account
 import SwiftUI
-import class FHIR.FHIR
-import FirebaseAccount
 
 struct PersonalDataView: View {
     @Environment(\.dismiss)
     var dismiss
-    @EnvironmentObject var firebaseAccountConfiguration: FirebaseAccountConfiguration<FHIR>
     @EnvironmentObject var authModel: AuthViewModel
-    @EnvironmentObject var account: Account
     @State private var showingAvatarSheet = false
     @State private var displayName = ""
     @State private var parentEmail = ""
@@ -158,7 +153,6 @@ struct PersonalDataView: View {
                 self.showingAlert = true
                 authModel.signOut(onSuccess: {
                     dismiss()
-                    account.signedIn = false
                 }) { error in
                     print(error)
                 }

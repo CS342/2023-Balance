@@ -46,12 +46,23 @@ class UserProfileRepositoryToLocal: ObservableObject {
 
                 // Decode Note
                 let profile = try decoder.decode(ProfileUser.self, from: data)
+                UserDefaults.standard.set(profile.id, forKey: "lastPatient")
                 completion(profile, nil)
             } catch {
                 print("Unable to Decode User (\(error))")
                 completion(nil, error)
             }
         }
+        completion(nil, nil)
+    }
+    
+    func existingProfile(userId: String) -> Bool {
+        let userID = userId
+
+        if UserDefaults.standard.data(forKey: userID) != nil {
+            return true
+        }
+        return false
     }
     
     func fetchCurrentProfile(completion: @escaping (_ profile: ProfileUser?, _ error:
@@ -80,7 +91,6 @@ class UserProfileRepositoryToLocal: ObservableObject {
             return
         }
         
-        UserDefaults.standard.removeObject(forKey: userID)
         UserDefaults.standard.removeObject(forKey: "lastPatient")
     }
 }

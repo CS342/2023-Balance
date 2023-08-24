@@ -5,7 +5,6 @@
 //  Created by sdecarli on 5/8/22.
 //
 
-import Account
 import Combine
 import FirebaseAuth
 import FirebaseCore
@@ -87,38 +86,6 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
-    func signInLocal
-    (
-        patientID: String,
-        name: String,
-        email: String,
-        onSuccess: @escaping() -> Void,
-        onError: @escaping(_ errorMessage: String) -> Void
-    ) async {
-        let profileUser = ProfileUser(
-            id: patientID,
-            displayName: name,
-            email: email,
-            parentEmail: "",
-            birthday: "",
-            country: "",
-            phone: "",
-            avatar: "avatar_" + String(Int.random(in: 1..<7)),
-            accesory: "",
-            password: ""
-        )
-        
-        UserProfileRepositoryToLocal.shared.createProfile(profile: profileUser) { profile, error in
-            if let error = error {
-                print("Error while fetching the user profile: \(error)")
-                onError(error.localizedDescription)
-            } else {
-                print("User: " + (profile?.description() ?? "-"))
-                self.profile = profile
-                onSuccess()
-            }
-        }
-    }
     
     func signUp(userData: ProfileUser) {
         Auth.auth().createUser(withEmail: userData.email, password: userData.password) { result, error in
@@ -236,10 +203,70 @@ final class AuthViewModel: ObservableObject {
             } else {
                 print("User: " + (profile?.description() ?? "-"))
                 self.profile = profile
+                return
             }
         }
     }
     
+    func createLocalUser(
+        uid: String,
+        name: String,
+        email: String,
+        onSuccess: @escaping() -> Void,
+        onError: @escaping(_ errorMessage: String) -> Void
+    ) {
+        let profileUser = ProfileUser(
+            id: uid,
+            displayName: name,
+            email: email,
+            parentEmail: "",
+            birthday: "",
+            country: "",
+            phone: "",
+            avatar: "avatar_" + String(Int.random(in: 1..<7)),
+            accesory: "",
+            password: ""
+        )
+        
+        UserProfileRepositoryToLocal.shared.createProfile(profile: profileUser) { profile, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                onError(error.localizedDescription)
+                return
+            } else {
+                print("User: " + (profile?.description() ?? "-"))
+                self.profile = profile
+                self.isLoggedIn = true
+                onSuccess()
+                return
+            }
+        }
+    }
+    
+    func loginLocalUser(uid: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+        UserProfileRepositoryToLocal.shared.fetchProfile(userId: uid) { profile, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                onError(error.localizedDescription)
+                return
+            } else if profile == nil && error == nil {
+                print("Error while fetching the user profile: profile==error==nulo")
+                onError("noUser")
+                return
+            } else {
+                print("User: " + (profile?.description() ?? "-"))
+                self.isLoggedIn = true
+                self.profile = profile
+                onSuccess()
+                return
+            }
+        }
+    }
+    
+    func existLocalUser(uid: String) -> Bool {
+        let userExist = UserProfileRepositoryToLocal.shared.existingProfile(userId: uid)
+        return userExist
+    }
     
     deinit {
         unbind()

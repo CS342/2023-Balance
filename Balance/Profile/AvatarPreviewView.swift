@@ -5,9 +5,6 @@
 //  Created by Gonzalo Perisset on 14/04/2023.
 //
 
-import Account
-import FirebaseAccount
-import class FHIR.FHIR
 import Onboarding
 import SwiftUI
 
@@ -28,7 +25,6 @@ struct AvatarPreviewView: View {
         ZStack {
             backgroundColor.edgesIgnoringSafeArea(.all)
             VStack {
-                Spacer().frame(height: 50)
                 titlePreview
                 Spacer()
                 avatarSelected

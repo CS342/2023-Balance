@@ -21,7 +21,7 @@ struct MandalaCollectionView: View {
                             viewName: "Mandala Selected: " + images[index].name,
                             isDirectChildToContainer: true,
                             content: {
-                                DrawView(currentDraw: $currentDraw, isNewDraw: true, isColoring: true)
+                                DrawSketch(draw: currentDraw)
                             }
                         )
                     ) {

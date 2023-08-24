@@ -66,7 +66,7 @@ struct VideoGalleryView: View {
             backgroundColor.edgesIgnoringSafeArea(.all)
             VStack {
                 HeaderMenu(title: "Look Videos")
-                VStack(alignment: .center, spacing: 10) {
+                VStack(alignment: .center, spacing: 5) {
                     highlightsTitle
                     videoPaging
                     categoriesTitle
@@ -134,7 +134,9 @@ struct VideoGalleryView: View {
                     }
                 }
             }
-            VideoCollectionView(videosArray: filtered).padding(.horizontal, 10.0)
+            ScrollView(.vertical) {
+                VideoCollectionView(videosArray: filtered).padding(.horizontal, 10.0)
+            }
         }
     }
 }
