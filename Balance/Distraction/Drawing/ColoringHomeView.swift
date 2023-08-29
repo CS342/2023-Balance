@@ -48,12 +48,6 @@ struct ColoringHomeView: View {
         }
     }
     
-    var drawView: some View {
-        DrawView(
-            currentDraw: $currentDraw
-        )
-    }
-    
     var previusView: some View {
         Text("Previous Entries")
             .font(.custom("Nunito-Bold", size: 18))
@@ -100,45 +94,30 @@ struct ColoringHomeView: View {
     
     var drawList: some View {
         List {
-            ForEach(store.coloringDraws, id: \.self) { draw in
+            ForEach(store.coloringDraws) { draw in
                 ZStack {
-                    Button(action: {
-                        self.currentDraw = draw
-                    }) {
-                        PastEntryView(draw)
-                    }
-                    
+                    PastColoringEntryView(draw)
                     NavigationLink(
                         destination: ActivityLogBaseView(
-                            viewName: "Coloring Something Feature",
+                            viewName: "Coloring Saved Feature",
                             isDirectChildToContainer: true,
                             content: {
-                                DrawView(currentDraw: $currentDraw, isColoring: true)
+                                DrawSketch(draw: draw)
                             }
                         )
                     ) {
                         EmptyView()
-                    }.opacity(0.0)
+                    }
+                    .opacity(0)
+                    .buttonStyle(PlainButtonStyle())
                 }
+                .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
             }
             .onDelete(perform: delete)
         }
+        .scrollContentBackground(.hidden)
         .listStyle(.plain)
-    }
-    
-    var drawCell: some View {
-        NavigationLink(
-            destination: ActivityLogBaseView(
-                viewName: "Coloring Something Feature",
-                isDirectChildToContainer: true,
-                content: {
-                    DrawView(currentDraw: $currentDraw, isColoring: true)
-                }
-            )
-        ) {
-            EmptyView()
-        }
     }
     
     func delete(indexSet: IndexSet) {

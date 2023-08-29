@@ -25,7 +25,7 @@ struct DrawingView: UIViewRepresentable {
     func makeUIView(context: Context) -> PKCanvasView {
         canvas.drawingPolicy = .anyInput
         canvas.tool = isdraw ? ink : eraser
-        canvas.minimumZoomScale = 0.2
+        canvas.minimumZoomScale = 1
         canvas.maximumZoomScale = 10
         canvas.contentSize = CGSize(width: 1000, height: 1000)
         canvas.contentInset = UIEdgeInsets(top: 500, left: 500, bottom: 500, right: 500)
@@ -97,12 +97,12 @@ struct DrawView: View {
     var sliderLineView: some View {
         Slider(
             value: $lineWidth,
-            in: 3...30,
+            in: 0.5...30,
             step: 5
         ) { didChange in
             print("Did change: \(didChange)")
             if didChange == false {
-                ink = PKInkingTool(.pen, color: UIColor(color), width: lineWidth)
+                ink = PKInkingTool(type, color: UIColor(color), width: lineWidth)
             }
         }
         .padding(.horizontal, 60)
@@ -165,7 +165,7 @@ struct DrawView: View {
     
     var pencilView: some View {
         Button(action: {
-            showLineWith = false
+            showLineWith = true
             isEraser = false
             isdraw = true
             type = .pencil
@@ -197,11 +197,11 @@ struct DrawView: View {
     
     var markerView: some View {
         Button(action: {
-            showLineWith = false
+            showLineWith = true
             isEraser = false
             isdraw = true
             type = .marker
-            ink = PKInkingTool(type, color: UIColor(color))
+            ink = PKInkingTool(type, color: UIColor(color), width: lineWidth)
         }) {
             Label {
                 Text("Marker")
@@ -361,11 +361,7 @@ struct DrawView: View {
     func colorButton(color: Color) -> some View {
         Button {
             self.color = color
-            if type == .pen {
-                ink = PKInkingTool(type, color: UIColor(color), width: lineWidth)
-            } else {
-                ink = PKInkingTool(type, color: UIColor(color))
-            }
+            ink = PKInkingTool(type, color: UIColor(color), width: lineWidth)
         } label: {
             Image(systemName: "circle.fill")
                 .resizable()

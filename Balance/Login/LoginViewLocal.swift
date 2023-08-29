@@ -5,26 +5,23 @@
 //  Created by Gonzalo Perisset on 28/04/2023.
 //
 
-import Account
 import Combine
-import class FHIR.FHIR
-import FirebaseAccount
 import Onboarding
 import SwiftUI
 
 // swiftlint:disable line_length
+// swiftlint:disable closure_body_length
 struct LoginViewLocal: View {
     @EnvironmentObject private var authModel: AuthViewModel
-    @EnvironmentObject var account: Account
     @AppStorage(StorageKeys.onboardingFlowComplete)
     var completedOnboardingFlow = false
-    @Binding var onboardingSteps: [OnboardingFlow.Step]
     @State private var patientID: String = ""
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var alertMessage: String = ""
     @State private var showingAlert = false
     @State private var isEmailValid = true
+    @State private var isChecked = false
     
     var body: some View {
         Group {
@@ -33,20 +30,6 @@ struct LoginViewLocal: View {
                     signInView
                         .adaptsToKeyboard()
                 }
-            } else {
-                Button {
-                    NavigationUtil.popToRootView()
-                    completedOnboardingFlow = true
-                } label: {
-                    Text("")
-                }
-            }
-        }
-        .onChange(of: account.signedIn) { value in
-            print(value)
-            if account.signedIn {
-                NavigationUtil.popToRootView()
-                completedOnboardingFlow = true
             }
         }
         .onChange(of: authModel.authError) { value in
@@ -91,23 +74,25 @@ struct LoginViewLocal: View {
                 .foregroundColor(darkGrayColor)
             Spacer().frame(height: 30)
             fieldsView
-            Spacer().frame(height: 50)
+        }.safeAreaInset(edge: VerticalEdge.bottom) {
             loginButton
         }
     }
     
     var fieldsView: some View {
         Group {
-            TextField("Name", text: $name)
-                .textInputAutocapitalization(.never)
-                .disableAutocorrection(true)
-                .keyboardType(.default)
-                .font(.custom("Montserrat", size: 17))
-                .foregroundColor(darkGrayColor)
-                .padding(.horizontal, 20)
-            Divider()
-                .padding(.horizontal, 20)
-            emailField
+            if isChecked == false {
+                TextField("Name", text: $name)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+                    .keyboardType(.default)
+                    .font(.custom("Montserrat", size: 17))
+                    .foregroundColor(darkGrayColor)
+                    .padding(.horizontal, 20)
+                Divider()
+                    .padding(.horizontal, 20)
+                emailField
+            }
             Spacer().frame(height: 20)
             TextField("ParticipantID", text: $patientID)
                 .textInputAutocapitalization(.never)
@@ -118,6 +103,18 @@ struct LoginViewLocal: View {
                 .padding(.horizontal, 20)
             Divider()
                 .padding(.horizontal, 20)
+            HStack {
+                Spacer()
+                Text("Existing user? ")
+                    .font(.custom("Montserrat", size: 17))
+                    .foregroundColor(lightGrayColor)
+                Image(systemName: isChecked ? "checkmark.square.fill" : "square")
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(isChecked ? primaryColor : Color.secondary)
+                    .onTapGesture {
+                        self.isChecked.toggle()
+                    }
+            }.padding(.horizontal, 20)
         }
     }
     
@@ -148,31 +145,58 @@ struct LoginViewLocal: View {
     var loginButton: some View {
         Button(
             action: {
-                if $name.wrappedValue.isEmpty ||
-                    $email.wrappedValue.isEmpty ||
-                    $patientID.wrappedValue.isEmpty {
+                if $patientID.wrappedValue.isEmpty {
                     self.alertMessage = "All the information is required"
                     showingAlert = true
                     return
                 }
                 
-                if !self.isEmailValid {
-                    self.alertMessage = "Email is NOT Valid"
-                    showingAlert = true
-                    return
-                }
-                
-                Task {
-                    await authModel.signInLocal(patientID: patientID, name: name, email: email) {
-                        account.signedIn = true
-                        NavigationUtil.popToRootView()
-                        authModel.isLoggedIn = true
-                        completedOnboardingFlow = true
-                        name = ""
-                        patientID = ""
-                        email = ""
-                    } onError: { errorMessage in
-                        print("Login error " + errorMessage)
+                if isChecked == true {
+                    authModel.loginLocalUser(
+                        uid: patientID,
+                        onSuccess: {
+                            completedOnboardingFlow = true
+                        }, onError: { errorMessage in
+                            self.alertMessage = "No user with that PatiendID"
+                            showingAlert = true
+                            print("Login error " + errorMessage)
+                        }
+                    )
+                } else {
+                    if $name.wrappedValue.isEmpty || $email.wrappedValue.isEmpty {
+                        self.alertMessage = "All the information is required"
+                        showingAlert = true
+                        return
+                    }
+                    
+                    if !self.isEmailValid {
+                        self.alertMessage = "Email is NOT Valid"
+                        showingAlert = true
+                        return
+                    }
+                    
+                    if authModel.existLocalUser(uid: patientID) == false {
+                        authModel.createLocalUser(
+                            uid: patientID,
+                            name: name,
+                            email: email,
+                            onSuccess: {
+                                completedOnboardingFlow = true
+                                name = ""
+                                patientID = ""
+                                email = ""
+                            }, onError: { errorMessage in
+                                print("Error while creating the new user \(errorMessage)")
+                                self.alertMessage = "Error while creating the new user"
+                                showingAlert = true
+                                return
+                            }
+                        )
+                    } else {
+                        print("Login error there is already a user with that PatiendID ")
+                        self.alertMessage = "There is already a user with that PatiendID"
+                        showingAlert = true
+                        return
                     }
                 }
             }
@@ -187,11 +211,7 @@ struct LoginViewLocal: View {
         .buttonBorderShape(.roundedRectangle(radius: 10))
         .background(primaryColor)
         .cornerRadius(10)
-        .padding(.horizontal, 20)
-    }
-    
-    init(onboardingSteps: Binding<[OnboardingFlow.Step]>) {
-        self._onboardingSteps = onboardingSteps
+        .padding(.all, 20)
     }
     
     func textFieldValidatorEmail(_ string: String) -> Bool {
@@ -202,13 +222,5 @@ struct LoginViewLocal: View {
         // let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailFormat)
         return emailPredicate.evaluate(with: string)
-    }
-}
-
-struct LoginViewLocal_Previews: PreviewProvider {
-    @State private static var path: [OnboardingFlow.Step] = []
-    
-    static var previews: some View {
-        LoginViewLocal(onboardingSteps: $path)
     }
 }

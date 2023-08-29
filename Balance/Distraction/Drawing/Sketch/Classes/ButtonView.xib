@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="zno-2E-1Ho" userLabel="ButtonView" customClass="ButtonView" customModule="Balance" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="460" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VrN-fS-tuL">
+                    <rect key="frame" x="10" y="0.0" width="440" height="100"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="47" translatesAutoresizingMaskIntoConstraints="NO" id="mCx-Ic-Cwm">
+                            <rect key="frame" x="0.0" y="0.0" width="440" height="34.333333333333336"/>
+                            <subviews>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vue-Y2-COy" userLabel="Pen">
+                                    <rect key="frame" x="0.0" y="0.33333333333333215" width="0.0" height="34"/>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <connections>
+                                        <action selector="tapPenButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="mEK-my-mGR"/>
+                                    </connections>
+                                </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLe-2C-NT3" userLabel="Eraser">
+                                    <rect key="frame" x="0.0" y="0.33333333333333215" width="0.0" height="34"/>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <connections>
+                                        <action selector="tapEraserButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="gDC-cG-GfR"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWc-Gd-SRf" userLabel="Clear">
+                                    <rect key="frame" x="0.0" y="2.9999999999999982" width="74.666666666666671" height="28.333333333333329"/>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="trash" catalog="system">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapClearButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="Gas-1y-Cfk"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pct-JJ-fLS">
+                                    <rect key="frame" x="121.66666666666666" y="4.9999999999999982" width="75" height="24.333333333333329"/>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="arrow.uturn.backward" catalog="system">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapUndoButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="nWD-lZ-JIK"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czJ-mb-Vl1" userLabel="Redo">
+                                    <rect key="frame" x="243.66666666666666" y="4.9999999999999982" width="74.666666666666657" height="24.333333333333329"/>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="arrow.uturn.forward" catalog="system">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapRedoButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="0yr-c3-yNZ"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaI-V6-jIs">
+                                    <rect key="frame" x="365.33333333333331" y="1.9999999999999982" width="74.666666666666686" height="30.333333333333329"/>
+                                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="paintbrush.fill" catalog="system">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapFillButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="Leb-6o-j3r"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="pct-JJ-fLS" firstAttribute="top" secondItem="czJ-mb-Vl1" secondAttribute="top" id="3vg-pz-keQ"/>
+                                <constraint firstItem="fWc-Gd-SRf" firstAttribute="top" secondItem="mCx-Ic-Cwm" secondAttribute="top" constant="3" id="DD0-FS-FXD"/>
+                                <constraint firstItem="TaI-V6-jIs" firstAttribute="top" secondItem="mCx-Ic-Cwm" secondAttribute="top" constant="2" id="DjD-nA-X9f"/>
+                                <constraint firstItem="pct-JJ-fLS" firstAttribute="top" secondItem="mCx-Ic-Cwm" secondAttribute="top" constant="5" id="y9x-2T-UXo"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="47" translatesAutoresizingMaskIntoConstraints="NO" id="wUP-ks-Qxg">
+                            <rect key="frame" x="0.0" y="34.333333333333336" width="440" height="31.333333333333336"/>
+                            <subviews>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3RA-bt-lOL" userLabel="Pen">
+                                    <rect key="frame" x="0.0" y="-1.3333333333333357" width="0.0" height="34"/>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="key-22-d6q" userLabel="Eraser">
+                                    <rect key="frame" x="0.0" y="-1.3333333333333357" width="0.0" height="34"/>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <connections>
+                                        <action selector="tapEraserButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="BsL-Lb-adS"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLd-aX-EZn" userLabel="Clear">
+                                    <rect key="frame" x="0.0" y="1.6666666666666643" width="74.666666666666671" height="28"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Clear">
+                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapClearButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="wJx-zw-uJN"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fry-KA-u87">
+                                    <rect key="frame" x="121.66666666666666" y="3" width="75" height="25.333333333333332"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Undo">
+                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapUndoButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="xd0-qF-RCV"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duZ-vz-kLa" userLabel="Redo">
+                                    <rect key="frame" x="243.66666666666666" y="3" width="74.666666666666657" height="25.333333333333332"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Redo">
+                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapRedoButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="gzq-ut-D6E"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SV2-cy-QeQ">
+                                    <rect key="frame" x="365.33333333333331" y="0.0" width="74.666666666666686" height="31.333333333333332"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Fill">
+                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="tapFillButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="zUg-uU-lAE"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="fry-KA-u87" firstAttribute="top" secondItem="duZ-vz-kLa" secondAttribute="top" id="QUL-fK-Qch"/>
+                                <constraint firstItem="fry-KA-u87" firstAttribute="top" secondItem="wUP-ks-Qxg" secondAttribute="top" constant="3" id="TBY-g4-vco"/>
+                                <constraint firstItem="SV2-cy-QeQ" firstAttribute="top" secondItem="wUP-ks-Qxg" secondAttribute="top" id="t02-h2-FEi"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="center" distribution="fillEqually" spacing="11" id="46C-Je-sqM">
+                            <rect key="frame" x="0.0" y="65.666666666666671" width="440" height="34.333333333333329"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <subviews>
+                                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5C1-Um-fxv">
+                                    <rect key="frame" x="0.0" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                            <integer key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="0"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="tapWhiteButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="ETb-KZ-iBD"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OY0-rO-MMe">
+                                    <rect key="frame" x="41" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" systemColor="systemYellowColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <connections>
+                                        <action selector="tapYellowButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="Qen-jm-Crl"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYA-On-6nt">
+                                    <rect key="frame" x="82" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" systemColor="systemOrangeColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <connections>
+                                        <action selector="tapOrangeButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="g5P-Gk-oig"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9s-1N-8Fa">
+                                    <rect key="frame" x="123" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" systemColor="systemGreenColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <connections>
+                                        <action selector="tapGreenButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="lAt-sE-ArC"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGz-Te-WFJ">
+                                    <rect key="frame" x="164" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" systemColor="systemBlueColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <connections>
+                                        <action selector="tapBlueButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="dq6-pa-Y0j"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COg-ix-3G3">
+                                    <rect key="frame" x="205" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" systemColor="systemRedColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <connections>
+                                        <action selector="tapRedButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="qhC-Bl-wfX"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbh-h8-DqP">
+                                    <rect key="frame" x="246" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" systemColor="systemPinkColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <connections>
+                                        <action selector="tapPinkButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="Rfi-xX-uf5"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y50-Wg-1vj">
+                                    <rect key="frame" x="287" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" systemColor="systemPurpleColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <connections>
+                                        <action selector="tapPurpleButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="KL8-dH-CTK"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmH-vA-Bxf">
+                                    <rect key="frame" x="328" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" systemColor="systemGrayColor"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <connections>
+                                        <action selector="tapGrayButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="v21-ZR-dUy"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3Y-rG-WTv">
+                                    <rect key="frame" x="369" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <connections>
+                                        <action selector="tapBlackButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="qt8-WN-agn"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2W-Vj-IMR">
+                                    <rect key="frame" x="410" y="0.0" width="30" height="34.333333333333336"/>
+                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <buttonConfiguration key="configuration" style="tinted"/>
+                                    <connections>
+                                        <action selector="tapPaletteButton:" destination="zno-2E-1Ho" eventType="touchUpInside" id="kiB-3Y-XIV"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <viewLayoutGuide key="safeArea" id="gBo-hv-bqC"/>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="wUP-ks-Qxg" firstAttribute="centerY" secondItem="VrN-fS-tuL" secondAttribute="centerY" id="3fh-Fm-g9J"/>
+                        <constraint firstItem="mCx-Ic-Cwm" firstAttribute="top" secondItem="VrN-fS-tuL" secondAttribute="top" id="JZS-b5-Hel"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Z4c-q5-Ylm"/>
+            <constraints>
+                <constraint firstItem="VrN-fS-tuL" firstAttribute="leading" secondItem="Z4c-q5-Ylm" secondAttribute="leading" constant="10" id="9BM-aZ-teC"/>
+                <constraint firstAttribute="bottom" secondItem="VrN-fS-tuL" secondAttribute="bottom" id="OEx-cQ-bGh"/>
+                <constraint firstItem="Z4c-q5-Ylm" firstAttribute="trailing" secondItem="VrN-fS-tuL" secondAttribute="trailing" constant="10" id="v5d-8W-4sk"/>
+                <constraint firstItem="VrN-fS-tuL" firstAttribute="top" secondItem="zno-2E-1Ho" secondAttribute="top" id="yrI-A4-ym0"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="311.59420289855075" y="218.97321428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow.uturn.backward" catalog="system" width="128" height="113"/>
+        <image name="arrow.uturn.forward" catalog="system" width="128" height="113"/>
+        <image name="paintbrush.fill" catalog="system" width="122" height="128"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

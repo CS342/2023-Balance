@@ -56,7 +56,17 @@
 		6C0A4BF029E9B0CD003007C7 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0A4BEF29E9B0CD003007C7 /* AvatarView.swift */; };
 		6C0A4BF229E9B10F003007C7 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0A4BF129E9B10F003007C7 /* Avatar.swift */; };
 		6C0A4BF529E9BCC1003007C7 /* Accesory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0A4BF429E9BCC1003007C7 /* Accesory.swift */; };
+		6C0BA5932A8ECF8F00D147CB /* PastColoringEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0BA5922A8ECF8F00D147CB /* PastColoringEntryView.swift */; };
 		6C0F8E4929CA57B5003C7D8B /* HeaderHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F8E4829CA57B5003C7D8B /* HeaderHome.swift */; };
+		6C3248452A8D85AB00223F8C /* UIImage+fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C32483F2A8D85AA00223F8C /* UIImage+fill.swift */; };
+		6C3248472A8D85AB00223F8C /* SketchTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3248412A8D85AB00223F8C /* SketchTool.swift */; };
+		6C3248482A8D85AB00223F8C /* SketchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3248422A8D85AB00223F8C /* SketchView.swift */; };
+		6C32484C2A8D85CE00223F8C /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C32484A2A8D85CE00223F8C /* ButtonView.swift */; };
+		6C32484D2A8D85CE00223F8C /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C32484B2A8D85CE00223F8C /* ButtonView.xib */; };
+		6C3248532A8D85D900223F8C /* SketchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3248502A8D85D900223F8C /* SketchViewController.swift */; };
+		6C3248552A8D86B700223F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C3248542A8D86B700223F8C /* Main.storyboard */; };
+		6C3248572A8D8A3400223F8C /* DrawSketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3248562A8D8A3400223F8C /* DrawSketch.swift */; };
+		6C3248592A8E5B6700223F8C /* ButtonViewOld.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C3248582A8E5B6700223F8C /* ButtonViewOld.xib */; };
 		6C370AAB29D23B95001781B3 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C370AAA29D23B95001781B3 /* Constant.swift */; };
 		6C370AAD29D38F7F001781B3 /* ChillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C370AAC29D38F7F001781B3 /* ChillView.swift */; };
 		6C370AAF29D393FA001781B3 /* DistractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C370AAE29D393FA001781B3 /* DistractionView.swift */; };
@@ -302,7 +312,17 @@
 		6C0A4BEF29E9B0CD003007C7 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		6C0A4BF129E9B10F003007C7 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		6C0A4BF429E9BCC1003007C7 /* Accesory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accesory.swift; sourceTree = "<group>"; };
+		6C0BA5922A8ECF8F00D147CB /* PastColoringEntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastColoringEntryView.swift; sourceTree = "<group>"; };
 		6C0F8E4829CA57B5003C7D8B /* HeaderHome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderHome.swift; sourceTree = "<group>"; };
+		6C32483F2A8D85AA00223F8C /* UIImage+fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+fill.swift"; sourceTree = "<group>"; };
+		6C3248412A8D85AB00223F8C /* SketchTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchTool.swift; sourceTree = "<group>"; };
+		6C3248422A8D85AB00223F8C /* SketchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchView.swift; sourceTree = "<group>"; };
+		6C32484A2A8D85CE00223F8C /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		6C32484B2A8D85CE00223F8C /* ButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
+		6C3248502A8D85D900223F8C /* SketchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SketchViewController.swift; sourceTree = "<group>"; };
+		6C3248542A8D86B700223F8C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		6C3248562A8D8A3400223F8C /* DrawSketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawSketch.swift; sourceTree = "<group>"; };
+		6C3248582A8E5B6700223F8C /* ButtonViewOld.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonViewOld.xib; sourceTree = "<group>"; };
 		6C370AAA29D23B95001781B3 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		6C370AAC29D38F7F001781B3 /* ChillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChillView.swift; sourceTree = "<group>"; };
 		6C370AAE29D393FA001781B3 /* DistractionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistractionView.swift; sourceTree = "<group>"; };
@@ -709,6 +729,30 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		6C32483D2A8D85AA00223F8C /* Sketch */ = {
+			isa = PBXGroup;
+			children = (
+				6C32483E2A8D85AA00223F8C /* Classes */,
+			);
+			path = Sketch;
+			sourceTree = "<group>";
+		};
+		6C32483E2A8D85AA00223F8C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6C32484A2A8D85CE00223F8C /* ButtonView.swift */,
+				6C3248502A8D85D900223F8C /* SketchViewController.swift */,
+				6C3248542A8D86B700223F8C /* Main.storyboard */,
+				6C32484B2A8D85CE00223F8C /* ButtonView.xib */,
+				6C3248582A8E5B6700223F8C /* ButtonViewOld.xib */,
+				6C32483F2A8D85AA00223F8C /* UIImage+fill.swift */,
+				6C3248412A8D85AB00223F8C /* SketchTool.swift */,
+				6C3248422A8D85AB00223F8C /* SketchView.swift */,
+				6C3248562A8D8A3400223F8C /* DrawSketch.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		6C39EA1A29C9EA150095573E /* SOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -781,6 +825,7 @@
 		6C8C5EFF29F1D2AF00D4DF77 /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
+				6C32483D2A8D85AA00223F8C /* Sketch */,
 				6CFB02502A4491FB000045E1 /* Mandala.swift */,
 				6CFB024E2A44918D000045E1 /* MandalaArray.swift */,
 				6C8C5EFD29F1D04F00D4DF77 /* DrawView.swift */,
@@ -790,6 +835,7 @@
 				6CFDD58B2A0D9F4A009D7E56 /* ColoringStore.swift */,
 				6C8C5F0629F2CF4400D4DF77 /* Draw.swift */,
 				6C8C5F0829F2CFBF00D4DF77 /* PastEntryView.swift */,
+				6C0BA5922A8ECF8F00D147CB /* PastColoringEntryView.swift */,
 				6C58B24B29F6B174000FE8DD /* BackgroundDrawView.swift */,
 				6C58B24D29F6B492000FE8DD /* MandalaCollectionView.swift */,
 				6C58B24F29F6B673000FE8DD /* DrawHighlightView.swift */,
@@ -1244,6 +1290,7 @@
 			files = (
 				6C55241D29F86C2700F802D9 /* ConsentDocument.md.license in Resources */,
 				6C80C01A29CCF90B003DD5B9 /* Nunito-MediumItalic.ttf in Resources */,
+				6C3248592A8E5B6700223F8C /* ButtonViewOld.xib in Resources */,
 				6C80C01D29CCF90B003DD5B9 /* Nunito-Italic.ttf in Resources */,
 				6C80C01829CCF90B003DD5B9 /* Nunito-SemiBoldItalic.ttf in Resources */,
 				6C47338829FAB53B00DC72D0 /* Montserrat-Bold.ttf in Resources */,
@@ -1258,10 +1305,12 @@
 				6C47338529FAB53B00DC72D0 /* Montserrat-Light.ttf in Resources */,
 				6C80C02029CCF90B003DD5B9 /* Nunito-ExtraLightItalic.ttf in Resources */,
 				653A255528338800005D4D48 /* Assets.xcassets in Resources */,
+				6C32484D2A8D85CE00223F8C /* ButtonView.xib in Resources */,
 				6C80C02429CCF90B003DD5B9 /* Nunito-LightItalic.ttf in Resources */,
 				2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */,
 				6C80C02629CCF90B003DD5B9 /* Nunito-SemiBold.ttf in Resources */,
 				6C55241E29F86C2700F802D9 /* ConsentDocument.md in Resources */,
+				6C3248552A8D86B700223F8C /* Main.storyboard in Resources */,
 				2F9056EA299E2D8A003D3802 /* GoogleService-Info.plist in Resources */,
 				6C80C02329CCF90B003DD5B9 /* Nunito-ExtraBold.ttf in Resources */,
 				6C47338429FAB53400DC72D0 /* Montserrat-Thin.ttf in Resources */,
@@ -1353,6 +1402,7 @@
 				6C55243029F86DD800F802D9 /* InterestingModules.swift in Sources */,
 				6C47339129FC5C7D00DC72D0 /* PersonalDataView.swift in Sources */,
 				6C370AAB29D23B95001781B3 /* Constant.swift in Sources */,
+				6C3248452A8D85AB00223F8C /* UIImage+fill.swift in Sources */,
 				27525EB729B68B7100D1DF51 /* DiaryHomeView.swift in Sources */,
 				27525EB629B68B6100D1DF51 /* BurnedView.swift in Sources */,
 				27525EB529B68B5400D1DF51 /* SpotifyConfig.swift in Sources */,
@@ -1378,11 +1428,13 @@
 				2720083B29A7E57F0052908D /* DiaryNoteEntryView.swift in Sources */,
 				6C47338D29FB09E400DC72D0 /* ProfileUser.swift in Sources */,
 				2FC975A82978F11A00BA99FE /* Home.swift in Sources */,
+				6C3248472A8D85AB00223F8C /* SketchTool.swift in Sources */,
 				6C5523F929F8126000F802D9 /* ProfileCellView.swift in Sources */,
 				4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */,
 				6CAA076729EAF04200541F87 /* FeelingView.swift in Sources */,
 				4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */,
 				2761584629A6448C006C7AC1 /* SceneDelegate.swift in Sources */,
+				6C3248572A8D8A3400223F8C /* DrawSketch.swift in Sources */,
 				6C47338B29FAB89900DC72D0 /* SignUpView.swift in Sources */,
 				2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */,
 				2720084329A843B90052908D /* Note.swift in Sources */,
@@ -1423,6 +1475,7 @@
 				6C55242829F86D9200F802D9 /* UserView.swift in Sources */,
 				6C0A4BF029E9B0CD003007C7 /* AvatarView.swift in Sources */,
 				6C55242E29F86DD800F802D9 /* Consent.swift in Sources */,
+				6C32484C2A8D85CE00223F8C /* ButtonView.swift in Sources */,
 				6C3BB1F52A1646C5008FEB93 /* PasswordResetView.swift in Sources */,
 				6CB5180D29DF5800007AADB4 /* GamesWebView.swift in Sources */,
 				6C8C5F0329F2CECF00D4DF77 /* DrawHomeView.swift in Sources */,
@@ -1441,12 +1494,14 @@
 				6C55242F29F86DD800F802D9 /* String+ModuleLocalized.swift in Sources */,
 				6C55770F2A3A505F003FD6EE /* SpotifyDataController.swift in Sources */,
 				6CB5181A29E45678007AADB4 /* ImageCollectionView.swift in Sources */,
+				6C3248482A8D85AB00223F8C /* SketchView.swift in Sources */,
 				6C55243829F8722B00F802D9 /* ContentView.swift in Sources */,
 				6CC177262A3A5E2900121B72 /* ActivityLogStore.swift in Sources */,
 				89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */,
 				6C58B25029F6B673000FE8DD /* DrawHighlightView.swift in Sources */,
 				6CC177282A3A6BA900121B72 /* CellView.swift in Sources */,
 				5E03E9A329BC933B0041DD1C /* ActivityLogButtonStyle.swift in Sources */,
+				6C3248532A8D85D900223F8C /* SketchViewController.swift in Sources */,
 				6CF6BEE82A31103A00A337F3 /* StorageKeys.swift in Sources */,
 				6C3BB1F32A151D1F008FEB93 /* SearchBar.swift in Sources */,
 				6CBE75D22A0BCA4E00A1747D /* FaceView.swift in Sources */,
@@ -1461,6 +1516,7 @@
 				6CB5181529E44E52007AADB4 /* GalleryView.swift in Sources */,
 				6CAA076529E9FB3D00541F87 /* AvatarPreviewView.swift in Sources */,
 				6C0A4BF529E9BCC1003007C7 /* Accesory.swift in Sources */,
+				6C0BA5932A8ECF8F00D147CB /* PastColoringEntryView.swift in Sources */,
 				6C370AAD29D38F7F001781B3 /* ChillView.swift in Sources */,
 				6CBE75D02A0AD70B00A1747D /* FacesScreenView.swift in Sources */,
 				6C8867F12A39F26500000647 /* UserProfileRepositoryLocal.swift in Sources */,
@@ -1702,6 +1758,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This message should never appear. Please adjust this when you start using location information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This message should never appear. Please adjust this when you start using microphone information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "This message should never appear. Please adjust this when you start using motion information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This message should never appear. Please adjust this when you start using camera information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This message should never appear. Please adjust this when you start using speecg information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -1765,6 +1822,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This message should never appear. Please adjust this when you start using location information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This message should never appear. Please adjust this when you start using microphone information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "This message should never appear. Please adjust this when you start using motion information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This message should never appear. Please adjust this when you start using camera information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This message should never appear. Please adjust this when you start using speecg information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;

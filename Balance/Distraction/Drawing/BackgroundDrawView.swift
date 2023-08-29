@@ -66,10 +66,10 @@ struct BackgroundDrawView: View {
             ForEach(highlightArray, id: \.self) { mandala in
                 NavigationLink(
                     destination: ActivityLogBaseView(
-                        viewName: "Mandala Highlight Selected: " + mandala.name,
+                        viewName: "Mandala Selected: " + mandala.name,
                         isDirectChildToContainer: true,
                         content: {
-                            DrawView(currentDraw: $currentDraw, isNewDraw: true, isColoring: true)
+                            DrawSketch(draw: currentDraw)
                         }
                     )
                 ) {
@@ -111,7 +111,9 @@ struct BackgroundDrawView: View {
                     }
                 }
             }
-            MandalaCollectionView(currentDraw: $currentDraw, images: $filtered).padding(.horizontal, 10.0)
+            ScrollView(.vertical) {
+                MandalaCollectionView(currentDraw: $currentDraw, images: $filtered).padding(.horizontal, 10.0)
+            }
         }
     }
 }

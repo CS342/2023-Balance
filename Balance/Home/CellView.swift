@@ -26,8 +26,9 @@ struct CellView: View {
     
     var textView: some View {
         Text(text)
+            .minimumScaleFactor(0.5)
             .font(.custom("Nunito-Bold", size: 18))
-            .lineLimit(2)
+            .lineLimit(1)
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 100)

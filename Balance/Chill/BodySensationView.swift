@@ -192,7 +192,7 @@ struct BodySensationView: View {
         Image("bodyAvatar")
             .resizable()
             .scaledToFit()
-            .frame(width: 250, height: 250, alignment: .center)
+            .frame(width: 230, height: 230, alignment: .center)
             .accessibilityLabel("imageBS")
     }
     
@@ -201,22 +201,21 @@ struct BodySensationView: View {
             .font(.custom("Nunito-Bold", size: 25))
             .foregroundColor(violetColor)
             .multilineTextAlignment(.center)
-            .lineLimit(4)
+            .lineLimit(3, reservesSpace: true)
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding(.horizontal, 30.0)
             .background(.clear)
     }
     
     var subTitleText: some View {
-        Text("Select which part of your body you would like to work on")
-            .font(.custom("Nunito-Medium", size: 16))
-            .foregroundColor(lightGrayColor)
+        Text("Relax yourself and choose a part of your body to focus on")
+            .font(.custom("Nunito-Bold", size: 23))
+            .foregroundColor(violetColor)
             .multilineTextAlignment(.center)
-            .lineLimit(2)
+            .lineLimit(3, reservesSpace: true)
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding(.horizontal, 30.0)
             .background(.clear)
-            .frame(height: 50)
     }
 }
 

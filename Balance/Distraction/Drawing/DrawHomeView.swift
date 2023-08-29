@@ -69,7 +69,7 @@ struct DrawHomeView: View {
                     .font(.custom("Nunito-Bold", size: 15))
                 NavigationLink(
                     destination: ActivityLogBaseView(
-                        viewName: "Draw Something Feature",
+                        viewName: "New Draw Feature",
                         isDirectChildToContainer: true,
                         content: {
                             DrawView(currentDraw: $currentDraw)
@@ -108,7 +108,7 @@ struct DrawHomeView: View {
                     
                     NavigationLink(
                         destination: ActivityLogBaseView(
-                            viewName: "Draw Something Feature",
+                            viewName: "Draw Saved Feature",
                             isDirectChildToContainer: true,
                             content: {
                                 DrawView(currentDraw: $currentDraw)

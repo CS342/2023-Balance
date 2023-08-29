@@ -7,8 +7,6 @@
 //
 
 import SwiftUI
-import class FHIR.FHIR
-import FirebaseAccount
 
 // swiftlint:disable line_length
 // swiftlint:disable type_body_length
@@ -43,19 +41,19 @@ public struct HeaderHome: View {
         ZStack {
             VStack(spacing: 0) {
                 if UIDevice.current.hasNotch {
-                    Spacer().frame(height: notch)
+                    Spacer().frame(height: notchHeight)
+                } else {
+                    Spacer().frame(height: statusBarHeight)
                 }
                 headerView
                 Spacer()
                 buttonsView
-                //            Spacer()
-                //            quotasView
                 Spacer()
             }.zIndex(-1)
         }
         .frame(maxWidth: .infinity)
         .ignoresSafeArea(edges: .all)
-        .frame(height: navigationBarHeightHome + (UIDevice.current.hasNotch ? notch : 0.0))
+        .frame(height: navigationBarHeightHome + (UIDevice.current.hasNotch ? statusBarHeight : 0.0))
         .background(primaryColor)
         .cornerRadius(15, corners: [.bottomLeft, .bottomRight])
         .navigationBarHidden(true)
@@ -239,11 +237,11 @@ public struct HeaderHome: View {
                 }
             )
         ) {
-            Text("SOS")
+            Text("GO!")
                 .font(.custom("Nunito-Bold", size: 14))
                 .frame(width: 40, height: 40)
                 .foregroundColor(Color.white)
-                .background(Color.pink)
+                .background(Color.green)
                 .clipShape(Circle())
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
@@ -274,10 +272,14 @@ public struct HeaderHome: View {
                 .font(.custom("Nunito-Light", size: 18))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .minimumScaleFactor(0.1)
+                .lineLimit(1)
             Text("Hi, " + (self.displayName.isEmpty ? "Demo" : self.displayName))
                 .font(.custom("Nunito-Bold", size: 25))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .minimumScaleFactor(0.1)
+                .lineLimit(1)
         }
     }
     

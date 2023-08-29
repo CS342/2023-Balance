@@ -120,8 +120,10 @@ class ActivityLogEntry: ObservableObject, Codable {
             actionDescription.contains("Closed Crossover Game") ||
             actionDescription.contains("Closed Guess the Emotion") ||
             actionDescription.contains("Closed How is your mood") ||
-            actionDescription.contains("Closed Draw Something") ||
-            actionDescription.contains("Closed Coloring Something") ||
+            actionDescription.contains("Closed New Draw") ||
+            actionDescription.contains("Closed Mandala Selected") ||
+            actionDescription.contains("Closed Coloring Saved") ||
+            actionDescription.contains("Closed Draw Saved") ||
             actionDescription.contains("Closed Playing Spotify") {
             if (interval.second ?? 0)  > coinsTime {
                 NotificationCenter.default.post(name: Notification.Name.coinsUpdate, object: nil)

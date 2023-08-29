@@ -26,7 +26,7 @@ public struct OnboardingFlow: View {
                     switch onboardingStep {
                     case .login:
 #if DEMO
-                        LoginViewLocal(onboardingSteps: $onboardingSteps)
+                        LoginViewLocal()
 #else
                         LoginView(onboardingSteps: $onboardingSteps)
 #endif

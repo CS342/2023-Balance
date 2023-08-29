@@ -15,6 +15,7 @@ struct NavView: View {
     var body: some View {
         HStack {
             Text(text)
+                .minimumScaleFactor(0.5)
                 .font(.custom("Nunito-Bold", size: 25))
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)

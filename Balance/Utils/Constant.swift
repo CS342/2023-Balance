@@ -54,10 +54,11 @@ enum DistractMeOption: UInt32 {
 
 let balWidth = UIScreen.main.bounds.width
 let balHeight = UIScreen.main.bounds.height
-let notch = 50.0
+let notchHeight = 50.0
+let statusBarHeight = 30.0
 
 let primaryColor = Color(#colorLiteral(red: Float(0.30), green: Float(0.79), blue: Float(0.94), alpha: Float(1.00)))
-let navigationBarHeightHome = 150.0
+let navigationBarHeightHome = 180.0
 let navigationBarHeight = 90.0
 let darkBlueColor = Color(red: 0.25, green: 0.38, blue: 0.50, opacity: 1.00)
 let backgroundColor = Color(#colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9882352941, alpha: 1))
