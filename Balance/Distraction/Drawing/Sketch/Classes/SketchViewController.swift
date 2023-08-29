@@ -13,13 +13,12 @@ import UIKit
 class SketchViewController: UIViewController, ButtonViewInterface, UIScrollViewDelegate {
     @IBOutlet var sketchView: SketchView!
     @IBOutlet var sketchScrollView: UIScrollView!
-    
     var coloringStore: ColoringStore?
     var buttonView: ButtonView!
     var scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
     var cancellable: AnyCancellable?
     var draw : Draw?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         buttonView = ButtonView.instanceFromNib(self)
@@ -36,7 +35,6 @@ class SketchViewController: UIViewController, ButtonViewInterface, UIScrollViewD
         sketchView.layer.borderWidth = 5
         sketchView.layer.borderColor = UIColor.gray.cgColor
         sketchView.isUserInteractionEnabled = true
-    
         sketchView.drawTool = .fill
     }
     
@@ -193,7 +191,6 @@ extension SketchViewController {
                 let backImage = UIImage(named: draw!.backImage)!
                 let mergeImage = backImage.mergeWith(topImage: imageDraw)
                 self.sketchView.loadImage(image: mergeImage, drawMode: .scale)
-                //                self.sketchView.loadImage(image: UIImage(named: draw!.backImage)!, drawMode: .scale)
             } else {
                 self.sketchView.loadImage(image: image!, drawMode: .scale)
             }
