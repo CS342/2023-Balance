@@ -25,7 +25,7 @@ struct DrawingView: UIViewRepresentable {
     func makeUIView(context: Context) -> PKCanvasView {
         canvas.drawingPolicy = .anyInput
         canvas.tool = isdraw ? ink : eraser
-        canvas.minimumZoomScale = 0.2
+        canvas.minimumZoomScale = 1
         canvas.maximumZoomScale = 10
         canvas.contentSize = CGSize(width: 1000, height: 1000)
         canvas.contentInset = UIEdgeInsets(top: 500, left: 500, bottom: 500, right: 500)

@@ -66,7 +66,7 @@ struct BackgroundDrawView: View {
             ForEach(highlightArray, id: \.self) { mandala in
                 NavigationLink(
                     destination: ActivityLogBaseView(
-                        viewName: "Mandala Highlight Selected: " + mandala.name,
+                        viewName: "Mandala Selected: " + mandala.name,
                         isDirectChildToContainer: true,
                         content: {
                             DrawSketch(draw: currentDraw)

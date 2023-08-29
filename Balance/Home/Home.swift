@@ -161,14 +161,14 @@ struct HomeView: View {
     var fealingLearningOption: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Feeling learning Feature",
+                viewName: "All the feels Feature",
                 isDirectChildToContainer: true,
                 content: {
                     FeelingView()
                 }
             )
         ) {
-            NavView(image: "learningIcon", text: "Feeling learning")
+            NavView(image: "learningIcon", text: "All the feels")
         }
     }
     

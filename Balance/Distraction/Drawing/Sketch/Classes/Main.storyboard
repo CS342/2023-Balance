@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,26 +19,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ay-I4-9kx">
-                                <rect key="frame" x="0.0" y="221" width="414" height="454"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="jAm-Wd-5rQ">
+                                <rect key="frame" x="32" y="273" width="350" height="350"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3b-cD-37b" userLabel="SketchView" customClass="SketchView" customModule="Balance">
-                                        <rect key="frame" x="20" y="40" width="374" height="374"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="o3b-cD-37b" secondAttribute="height" multiplier="1:1" id="0cS-6D-ZPE"/>
+                                            <constraint firstAttribute="height" constant="350" id="9gb-Wz-KoG"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="o3b-cD-37b" firstAttribute="leading" secondItem="8Ay-I4-9kx" secondAttribute="leading" constant="20" id="0pX-W7-XEo"/>
-                                    <constraint firstItem="o3b-cD-37b" firstAttribute="centerY" secondItem="8Ay-I4-9kx" secondAttribute="centerY" id="I9W-YW-afb"/>
-                                    <constraint firstItem="o3b-cD-37b" firstAttribute="centerX" secondItem="8Ay-I4-9kx" secondAttribute="centerX" id="cPh-by-Anh"/>
-                                    <constraint firstAttribute="width" secondItem="8Ay-I4-9kx" secondAttribute="height" multiplier="207:227" id="gYy-cn-lgJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="o3b-cD-37b" secondAttribute="trailing" constant="20" id="hf9-nC-jGT"/>
+                                    <constraint firstItem="o3b-cD-37b" firstAttribute="bottom" secondItem="ZJE-rn-yPV" secondAttribute="bottom" id="0xY-qR-agU"/>
+                                    <constraint firstAttribute="height" constant="350" id="14o-Bi-mtA"/>
+                                    <constraint firstItem="o3b-cD-37b" firstAttribute="top" secondItem="ZJE-rn-yPV" secondAttribute="top" id="7mo-il-5gc"/>
+                                    <constraint firstItem="jL4-HL-6es" firstAttribute="width" secondItem="o3b-cD-37b" secondAttribute="width" id="GW2-Ai-mZD"/>
+                                    <constraint firstItem="o3b-cD-37b" firstAttribute="leading" secondItem="ZJE-rn-yPV" secondAttribute="leading" id="d0b-Yb-Tu9"/>
+                                    <constraint firstAttribute="width" constant="350" id="e4n-AI-XN1"/>
+                                    <constraint firstItem="o3b-cD-37b" firstAttribute="trailing" secondItem="ZJE-rn-yPV" secondAttribute="trailing" id="f2W-Ob-YLA"/>
                                 </constraints>
-                            </view>
+                                <viewLayoutGuide key="contentLayoutGuide" id="ZJE-rn-yPV"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="jL4-HL-6es"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="u92-QC-S2R"/>
+                                </connections>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWS-wj-bz5">
                                 <rect key="frame" x="40" y="786" width="334" height="36"/>
                                 <color key="tintColor" red="0.2666509151" green="0.78627187009999999" blue="0.94962674380000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -65,25 +70,19 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="vWS-wj-bz5" secondAttribute="trailing" constant="20" id="6ka-4g-1ag"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="vWS-wj-bz5" secondAttribute="bottom" constant="40" id="CB1-p3-466"/>
-                            <constraint firstItem="8Ay-I4-9kx" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="CRQ-eP-F0Z"/>
-                            <constraint firstItem="8Ay-I4-9kx" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="Q7K-C2-C8P"/>
-                            <constraint firstAttribute="trailing" secondItem="8Ay-I4-9kx" secondAttribute="trailing" id="cWk-8e-gs8"/>
-                            <constraint firstItem="8Ay-I4-9kx" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="iht-G0-q4c"/>
+                            <constraint firstItem="jAm-Wd-5rQ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Q2V-2O-xYu"/>
+                            <constraint firstItem="jAm-Wd-5rQ" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="fHJ-W3-cHI"/>
                             <constraint firstItem="vWS-wj-bz5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="20" id="qNa-S2-NiW"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="sketchScrollView" destination="jAm-Wd-5rQ" id="wzv-sz-KZs"/>
                         <outlet property="sketchView" destination="o3b-cD-37b" id="zhk-cy-bIe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23" y="-27"/>
+            <point key="canvasLocation" x="-23.188405797101453" y="-27.455357142857142"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
