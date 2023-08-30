@@ -10,8 +10,9 @@ import PencilKit
 import UIKit
 
 // swiftlint:disable all
-class SketchViewController: UIViewController, ButtonViewInterface {
+class SketchViewController: UIViewController, ButtonViewInterface, UIScrollViewDelegate {
     @IBOutlet var sketchView: SketchView!
+    @IBOutlet var sketchScrollView: UIScrollView!
     var coloringStore: ColoringStore?
     var buttonView: ButtonView!
     var scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
@@ -34,13 +35,6 @@ class SketchViewController: UIViewController, ButtonViewInterface {
         sketchView.layer.borderWidth = 5
         sketchView.layer.borderColor = UIColor.gray.cgColor
         sketchView.isUserInteractionEnabled = true
-        
-        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchHandler))
-        sketchView.addGestureRecognizer(pinchGestureRecognizer)
-        
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        self.sketchView.addGestureRecognizer(panGesture)
-        
         sketchView.drawTool = .fill
     }
     
@@ -53,19 +47,9 @@ class SketchViewController: UIViewController, ButtonViewInterface {
         super.didReceiveMemoryWarning()
     }
     
-    @objc func handlePan(_ sender: UIPanGestureRecognizer? = nil) {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         sketchView.resetTool()
-        let translation = sender?.translation(in: self.view)
-        sender?.view!.center = CGPoint(x: (sender?.view!.center.x)! + translation!.x, y: (sender?.view!.center.y)! + translation!.y)
-        sender?.setTranslation(CGPoint.zero, in: self.view)
-    }
-    
-    @objc func pinchHandler(recognizer : UIPinchGestureRecognizer) {
-        sketchView.resetTool()
-        if let view = self.sketchView {
-            view.transform = view.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
-            recognizer.scale = 1
-        }
+        return self.sketchView
     }
     
     @IBAction func saveImage(_ sender: Any) {
@@ -207,7 +191,6 @@ extension SketchViewController {
                 let backImage = UIImage(named: draw!.backImage)!
                 let mergeImage = backImage.mergeWith(topImage: imageDraw)
                 self.sketchView.loadImage(image: mergeImage, drawMode: .scale)
-//                self.sketchView.loadImage(image: UIImage(named: draw!.backImage)!, drawMode: .scale)
             } else {
                 self.sketchView.loadImage(image: image!, drawMode: .scale)
             }

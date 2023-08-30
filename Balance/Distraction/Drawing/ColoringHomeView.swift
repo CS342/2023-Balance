@@ -99,7 +99,7 @@ struct ColoringHomeView: View {
                     PastColoringEntryView(draw)
                     NavigationLink(
                         destination: ActivityLogBaseView(
-                            viewName: "Coloring Something Feature",
+                            viewName: "Coloring Saved Feature",
                             isDirectChildToContainer: true,
                             content: {
                                 DrawSketch(draw: draw)

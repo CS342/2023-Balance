@@ -209,11 +209,11 @@ public struct HeaderHome: View {
                 }
             )
         ) {
-            Text("SOS")
+            Text("GO!")
                 .font(.custom("Nunito-Bold", size: 14))
                 .frame(width: 40, height: 40)
                 .foregroundColor(Color.white)
-                .background(Color.pink)
+                .background(Color.green)
                 .clipShape(Circle())
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
