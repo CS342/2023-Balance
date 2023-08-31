@@ -175,6 +175,7 @@ struct DrawView: View {
                 Text("Pencil")
             } icon: {
                 Image(systemName: "pencil")
+                    .accessibility(hidden: true)
             }
         }
     }
@@ -191,6 +192,7 @@ struct DrawView: View {
                 Text("Pen")
             } icon: {
                 Image(systemName: "pencil.tip")
+                    .accessibility(hidden: true)
             }
         }
     }
@@ -207,6 +209,7 @@ struct DrawView: View {
                 Text("Marker")
             } icon: {
                 Image(systemName: "highlighter")
+                    .accessibility(hidden: true)
             }
         }
     }

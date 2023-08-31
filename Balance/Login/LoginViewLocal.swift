@@ -109,6 +109,7 @@ struct LoginViewLocal: View {
                     .font(.custom("Montserrat", size: 17))
                     .foregroundColor(lightGrayColor)
                 Image(systemName: isChecked ? "checkmark.square.fill" : "square")
+                    .accessibility(hidden: true)
                     .frame(width: 40, height: 40)
                     .foregroundColor(isChecked ? primaryColor : Color.secondary)
                     .onTapGesture {

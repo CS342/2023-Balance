@@ -14,6 +14,7 @@ struct GlobalBannerContent: View {
         ZStack {
             HStack {
                 Image(systemName: "star.circle")
+                    .accessibility(hidden: true)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(bannerManager.banner?.title ?? "")
                         .bold()
