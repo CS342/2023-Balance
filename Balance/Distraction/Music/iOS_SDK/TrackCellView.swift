@@ -65,6 +65,7 @@ struct TrackCellView: View {
                 placeholder: {
                     Image(systemName: "headphones.circle.fill")
                         .tint(lightGrayColor)
+                        .accessibility(hidden: true)
                 }
             )
             .frame(height: 120.0)

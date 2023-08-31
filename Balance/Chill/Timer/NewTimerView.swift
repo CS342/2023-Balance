@@ -320,6 +320,7 @@ struct NewTimerView: View {
                 .resizable()
                 .tint(lightGrayColor)
                 .frame(width: 30, height: 30)
+                .accessibilityLabel("goforward")
         }
     }
     
@@ -331,6 +332,7 @@ struct NewTimerView: View {
                 .resizable()
                 .tint(lightGrayColor)
                 .frame(width: 30, height: 30)
+                .accessibilityLabel("gobackward")
         }
     }
     
@@ -360,6 +362,7 @@ struct NewTimerView: View {
                         .background(.white)
                         .tint(lightGrayColor)
                         .frame(width: 25, height: 30)
+                        .accessibilityLabel("play")
                 }
             } else {
                 ZStack {
@@ -372,6 +375,7 @@ struct NewTimerView: View {
                         .background(.white)
                         .tint(lightGrayColor)
                         .frame(width: 25, height: 30)
+                        .accessibilityLabel("pause")
                 }
             }
         }

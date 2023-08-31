@@ -63,6 +63,7 @@ struct VideoCollectionView: View {
                             placeholder: {
                                 Image(systemName: "photo.fill")
                                     .tint(lightGrayColor)
+                                    .accessibility(hidden: true)
                             }
                         )
                         .clipped()

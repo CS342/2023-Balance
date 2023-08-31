@@ -89,6 +89,7 @@ struct MeditationView: View {
                         placeholder: {
                             Image(systemName: "photo.fill")
                                 .tint(lightGrayColor)
+                                .accessibilityLabel(vidID)
                         }
                     )
                     .clipped()
