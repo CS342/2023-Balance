@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+//swiftlint:disable accessibility_label_for_image
 struct HeaderMenu: View {
     @State private var showingSOSSheet = false
     @Environment(\.presentationMode)
