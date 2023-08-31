@@ -23,7 +23,7 @@ struct FaceView: View {
                 .background(backColor)
                 .cornerRadius(15, corners: .allCorners)
                 .shadow(color: .gray, radius: 5)
-                .accessibilityLabel(faceImage)
+                .accessibility(hidden: true)
             Text(faceTitle)
                 .font(.custom("Montserrat-Medium", size: 16))
                 .foregroundColor(facesGrayColor)

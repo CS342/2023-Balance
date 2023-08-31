@@ -59,6 +59,7 @@ struct VideoCollectionView: View {
                             content: { image in
                                 image.resizable()
                                     .scaledToFill()
+                                    .accessibility(hidden: true)
                             },
                             placeholder: {
                                 Image(systemName: "photo.fill")
@@ -69,7 +70,7 @@ struct VideoCollectionView: View {
                         .clipped()
                         .frame(width: 110, height: 110, alignment: .center)
                         .cornerRadius(10)
-                        .accessibilityLabel(videos[index].videoId)
+                        .accessibility(hidden: true)
                     }
                 }
             }

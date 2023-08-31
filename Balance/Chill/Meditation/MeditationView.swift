@@ -85,17 +85,18 @@ struct MeditationView: View {
                         content: { image in
                             image.resizable()
                                 .scaledToFill()
+                                .accessibility(hidden: true)
                         },
                         placeholder: {
                             Image(systemName: "photo.fill")
                                 .tint(lightGrayColor)
-                                .accessibilityLabel(vidID)
+                                .accessibility(hidden: true)
                         }
                     )
                     .clipped()
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(10)
-                    .accessibilityLabel(vidID)
+                    .accessibility(hidden: true)
                 }
             }
         }.tabViewStyle(.page(indexDisplayMode: .never))

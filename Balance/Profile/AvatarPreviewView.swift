@@ -81,7 +81,7 @@ struct AvatarPreviewView: View {
                 .resizable()
                 .frame(width: 50.0, height: 50.0)
                 .clipped()
-                .accessibilityLabel("star2")
+                .accessibility(hidden: true)
                 .offset(x: -100, y: -50)
             if accesoryBuy {
                 Image(profile.avatar)
@@ -89,7 +89,7 @@ struct AvatarPreviewView: View {
                     .scaledToFit()
                     .frame(width: 200, height: 200)
                     .clipped()
-                    .accessibilityLabel("avatarPreview")
+                    .accessibility(hidden: true)
             } else {
                 if avatarSelection.name.isEmpty {
                     Image(profile.avatar)
@@ -97,14 +97,14 @@ struct AvatarPreviewView: View {
                         .scaledToFit()
                         .frame(width: 200, height: 200)
                         .clipped()
-                        .accessibilityLabel("avatarPreview")
+                        .accessibility(hidden: true)
                 } else {
                     Image(avatarSelection.name)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
                         .clipped()
-                        .accessibilityLabel("avatarPreview")
+                        .accessibility(hidden: true)
                 }
             }
             if !firstLoad {
@@ -115,7 +115,7 @@ struct AvatarPreviewView: View {
                         .frame(width: 130, height: 130)
                         .clipped()
                         .offset(x: 80, y: 80)
-                        .accessibilityLabel("accesoryPreview")
+                        .accessibility(hidden: true)
                 } else {
                     Image(accesorySelection.name)
                         .resizable()
@@ -123,7 +123,7 @@ struct AvatarPreviewView: View {
                         .frame(width: 130, height: 130)
                         .clipped()
                         .offset(x: 80, y: 80)
-                        .accessibilityLabel("accesoryPreview")
+                        .accessibility(hidden: true)
                 }
                 
 //                Image(accesorySelection.name)
@@ -138,7 +138,7 @@ struct AvatarPreviewView: View {
                 .resizable()
                 .frame(width: 50.0, height: 50.0)
                 .clipped()
-                .accessibilityLabel("star1")
+                .accessibility(hidden: true)
                 .offset(x: 100, y: 50)
         }
     }

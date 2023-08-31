@@ -24,7 +24,7 @@ struct NavView: View {
             Image(image)
                 .resizable()
                 .scaledToFit()
-                .accessibilityLabel(Text(text))
+                .accessibility(hidden: true)
                 .frame(maxWidth: .infinity)
         }
         .padding(EdgeInsets(top: 24, leading: 24, bottom: 24, trailing: 0))

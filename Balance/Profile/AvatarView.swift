@@ -17,7 +17,7 @@ struct AvatarView: View {
             Image(item.name)
                 .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
                 .scaledToFit()
-                .accessibilityLabel(item.name)
+                .accessibility(hidden: true)
 //            Image((item.id == selectedItem) ? "checkFill" : "check")
 //                .resizable()
 //                .frame(width: 40, height: 40)
@@ -29,7 +29,7 @@ struct AvatarView: View {
                 .frame(width: 40, height: 40)
                 .clipped()
                 .offset(x: -50, y: -50)
-                .accessibilityLabel("avatarCheck")
+                .accessibility(hidden: true)
         }
         .padding(15.0)
         .frame(maxWidth: 100, maxHeight: 100)

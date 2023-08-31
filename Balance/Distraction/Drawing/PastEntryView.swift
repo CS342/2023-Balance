@@ -43,7 +43,7 @@ struct PastEntryView: View {
                     .scaledToFit()
                     .clipped()
                     .frame(width: 80, height: 80)
-                    .accessibilityLabel("backString")
+                    .accessibility(hidden: true)
                     .zIndex(0)
                 
                 Image(uiImage: image ?? UIImage())
@@ -52,7 +52,7 @@ struct PastEntryView: View {
                     .clipped()
                     .background(.clear)
                     .frame(width: 80, height: 80)
-                    .accessibilityLabel("base64Cell")
+                    .accessibility(hidden: true)
                     .zIndex(1)
             }
             Spacer().frame(width: 20)

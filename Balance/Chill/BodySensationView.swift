@@ -193,7 +193,7 @@ struct BodySensationView: View {
             .resizable()
             .scaledToFit()
             .frame(width: 230, height: 230, alignment: .center)
-            .accessibilityLabel("imageBS")
+            .accessibility(hidden: true)
     }
     
     var titleText: some View {

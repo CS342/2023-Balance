@@ -71,7 +71,7 @@ struct DiaryHomeView: View {
     var newDiaryView: some View {
         HStack {
             Image("DiaryIcon")
-                .accessibilityLabel(Text("Diary icon"))
+                .accessibility(hidden: true)
                 .offset(x: -6, y: 2)
             VStack(alignment: .leading) {
                 Text("Write in your diary")

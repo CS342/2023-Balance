@@ -78,7 +78,7 @@ struct BackgroundDrawView: View {
                         .cornerRadius(20)
                         .aspectRatio(contentMode: .fit)
                         .padding(5)
-                        .accessibilityLabel(mandala.name)
+                        .accessibility(hidden: true)
                         .tag(mandala.id)
                 }.simultaneousGesture(TapGesture().onEnded {
                     self.currentDraw.backImage = mandala.name

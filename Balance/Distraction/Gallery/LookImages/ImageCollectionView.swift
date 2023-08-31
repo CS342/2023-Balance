@@ -33,7 +33,7 @@ struct ImageCollectionView: View {
                                 .clipped()
                                 .frame(width: 110, height: 110, alignment: .center)
                                 .cornerRadius(10)
-                                .accessibilityLabel(images[index].name)
+                                .accessibility(hidden: true)
                         } else {
                             if let uiImage = UIImage(data: images[index].imageData) {
                                 Image(uiImage: uiImage)
@@ -43,7 +43,7 @@ struct ImageCollectionView: View {
                                     .clipped()
                                     .frame(width: 110, height: 110, alignment: .center)
                                     .cornerRadius(10)
-                                    .accessibilityLabel(images[index].name)
+                                    .accessibility(hidden: true)
                             }
                         }
                     }

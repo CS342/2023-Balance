@@ -133,7 +133,7 @@ public struct HeaderHome: View {
                 .background(Color.white.opacity(0.8))
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
             Image("pointsStarIcon")
-                .accessibilityLabel("pointsStarIcon")
+                .accessibility(hidden: true)
                 .padding(.trailing, 65.0)
         }
     }
@@ -148,7 +148,7 @@ public struct HeaderHome: View {
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
             Image(systemName: "house.fill")
                 .foregroundColor(Color.purple.opacity(0.8))
-                .accessibilityLabel("house.fill")
+                .accessibility(hidden: true)
                 .padding(.trailing, 65.0)
         }
     }
@@ -234,7 +234,7 @@ public struct HeaderHome: View {
             .tint(.gray)
             .frame(width: 100, height: 100)
             .padding(.leading, 20.0)
-            .accessibilityLabel("avatar")
+            .accessibility(hidden: true)
             .shadow(color: darkGrayColor, radius: 6)
     }
     
