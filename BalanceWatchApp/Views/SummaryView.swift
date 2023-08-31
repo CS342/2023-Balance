@@ -64,7 +64,7 @@ struct SummaryView: View {
                         title: "Avg. Heart Rate",
                         value: workoutManager.averageHeartRate.formatted(.number.precision(.fractionLength(0))) + " bpm"
                     )
-                    .foregroundStyle(.red)
+                    .foregroundStyle(.green)
 //                    Text("Activity Rings")
 //                    ActivityRingsView(healthStore: workoutManager.healthStore)
 //                        .frame(width: 50, height: 50)

@@ -25,7 +25,7 @@ struct StartView: View {
             .padding(EdgeInsets(top: 15, leading: 5, bottom: 15, trailing: 5))
         }
         .listStyle(.carousel)
-        .navigationBarTitle("Balance Workout")
+        .navigationBarTitle("BALANCE")
         .onChange(of: workoutManager.heartRate, perform: { _ in
             counter.sendValue(val: workoutManager.heartRate)
         })
@@ -43,7 +43,7 @@ extension HKWorkoutActivityType: Identifiable {
     var name: String {
         switch self {
         case .mindAndBody:
-            return "• Mind&Body Start •"
+            return "• Mind&Body START •"
         default:
             return ""
         }

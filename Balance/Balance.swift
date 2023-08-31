@@ -9,6 +9,7 @@
 import CardinalKit
 import SwiftUI
 
+// swiftlint:disable closure_body_length
 @main
 struct Balance: App {
     @UIApplicationDelegateAdaptor(BalanceAppDelegate.self)
@@ -51,6 +52,11 @@ struct Balance: App {
 #endif
             .environmentObject(activityLogEntry)
             .environmentObject(bannerManager)
+            .onAppear(perform: {
+                if !userModel.existLocalUser(uid: demoID) {
+                    userModel.createDemoUser()
+                }
+            })
             .onChange(of: scenePhase) { phase in
                 switch phase {
                 case .active:
@@ -76,6 +82,7 @@ struct Balance: App {
     }
     
     func activeApp() {
+        UIApplication.shared.applicationIconBadgeNumber = 0
         UserDefaults.standard.set(false, forKey: StorageKeys.spotifyConnect)
     }
 }

@@ -12,6 +12,8 @@ import class FHIR.FHIR
 import FirebaseAccount
 import WatchConnectivity
 
+// swiftlint:disable closure_body_length
+// swiftlint:disable multiline_arguments_brackets
 struct HomeView: View {
     @EnvironmentObject var authModel: AuthViewModel
     @State var showMe = false
@@ -45,11 +47,23 @@ struct HomeView: View {
                 }
             }
             .onChange(of: counter.count, perform: { _ in
-                if counter.count > 100 {
+                if counter.count > 90 {
                     print(counter.count)
                     alertHeartRate()
                 }
             })
+            .onAppear {
+                UNUserNotificationCenter.current().requestAuthorization(
+                    options: [[.alert, .sound, .badge]],
+                    completionHandler: { granted, error in
+                        if error != nil {
+                            print("LocalNotification error: \(String(describing: error))")
+                        } else {
+                            print("LocalNotification access granted...")
+                        }
+                    }
+                )
+            }
         }
     }
     
@@ -210,12 +224,19 @@ struct HomeView: View {
     
     func alertHeartRate() {
         let content = UNMutableNotificationContent()
-        content.title = "BALANCE"
-        content.subtitle = "Your heart rate are to up! Please relax with Balance!"
-        content.sound = UNNotificationSound.default
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request)
+         content.title = "BALANCE"
+         content.subtitle = "Please chill!"
+         content.body = "Your heart rate are to up! Please relax with Balance!"
+         content.badge = 1
+
+         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+         let requestIdentifier = "BALANCENotification"
+         let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
+
+         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+             print("LocalNotification error: \(String(describing: error))")
+         })
     }
     
     func loadUser() {

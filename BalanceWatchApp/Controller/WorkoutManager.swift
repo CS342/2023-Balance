@@ -111,6 +111,7 @@ class WorkoutManager: NSObject, ObservableObject {
     }
     
     func pause() {
+        self.heartRate = 0
         session?.pause()
     }
     
@@ -121,6 +122,7 @@ class WorkoutManager: NSObject, ObservableObject {
     func endWorkout() {
         session?.end()
         showingSummaryView = true
+        self.heartRate = 0
     }
     
     func updateForStatistics(_ statistics: HKStatistics?) {

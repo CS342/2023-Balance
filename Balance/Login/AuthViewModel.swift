@@ -11,6 +11,8 @@ import FirebaseCore
 import FirebaseFirestore
 import SwiftUI
 
+// swiftlint:disable function_parameter_count
+// swiftlint:disable type_body_length
 struct User {
     var uid: String
     var email: String?
@@ -208,10 +210,36 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
+    func createDemoUser() {
+        let profileUser = ProfileUser(
+            id: demoID,
+            displayName: "Demo",
+            email: "demo@balance.com",
+            parentEmail: "",
+            birthday: "",
+            country: "",
+            phone: "",
+            avatar: "avatar_" + String(Int.random(in: 1..<7)),
+            accesory: "",
+            password: "demo"
+        )
+        
+        UserProfileRepositoryToLocal.shared.createProfile(profile: profileUser) { profile, error in
+            if let error = error {
+                print("Error while fetching the user profile: \(error)")
+                return
+            } else {
+                print("User: " + (profile?.description() ?? "-"))
+                return
+            }
+        }
+    }
+    
     func createLocalUser(
         uid: String,
         name: String,
         email: String,
+        password: String,
         onSuccess: @escaping() -> Void,
         onError: @escaping(_ errorMessage: String) -> Void
     ) {
@@ -225,7 +253,7 @@ final class AuthViewModel: ObservableObject {
             phone: "",
             avatar: "avatar_" + String(Int.random(in: 1..<7)),
             accesory: "",
-            password: ""
+            password: password
         )
         
         UserProfileRepositoryToLocal.shared.createProfile(profile: profileUser) { profile, error in
@@ -243,21 +271,26 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
-    func loginLocalUser(uid: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    func loginLocalUser(uid: String, password: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         UserProfileRepositoryToLocal.shared.fetchProfile(userId: uid) { profile, error in
             if let error = error {
                 print("Error while fetching the user profile: \(error)")
-                onError(error.localizedDescription)
+                onError("The patientID or password are incorrect.")
                 return
             } else if profile == nil && error == nil {
                 print("Error while fetching the user profile: profile==error==nulo")
-                onError("noUser")
+                onError("The patientID or password are incorrect.")
                 return
             } else {
                 print("User: " + (profile?.description() ?? "-"))
-                self.isLoggedIn = true
-                self.profile = profile
-                onSuccess()
+                if profile?.password == password {
+                    self.isLoggedIn = true
+                    self.profile = profile
+                    onSuccess()
+                } else {
+                    print("Password Incorrect")
+                    onError("The patientID or password are incorrect.")
+                }
                 return
             }
         }
