@@ -53,7 +53,7 @@ struct BodySensationView: View {
                     NewTimerView(
                         chillType: .head,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -77,7 +77,7 @@ struct BodySensationView: View {
                     NewTimerView(
                         chillType: .feet,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -101,7 +101,7 @@ struct BodySensationView: View {
                     NewTimerView(
                         chillType: .shoulders,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -125,7 +125,7 @@ struct BodySensationView: View {
                     NewTimerView(
                         chillType: .hands,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -149,7 +149,7 @@ struct BodySensationView: View {
                     NewTimerView(
                         chillType: .knee,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -173,7 +173,7 @@ struct BodySensationView: View {
                     NewTimerView(
                         chillType: .legs,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
