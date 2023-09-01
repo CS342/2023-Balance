@@ -47,7 +47,7 @@ struct BodySensationView: View {
     var headButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Head",
+                viewName: "Body sensations Part Head",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
@@ -71,7 +71,7 @@ struct BodySensationView: View {
     var feetButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Feet",
+                viewName: "Body sensations Part Feet",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
@@ -95,7 +95,7 @@ struct BodySensationView: View {
     var shouldersButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Shoulders",
+                viewName: "Body sensations Part Shoulders",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
@@ -119,7 +119,7 @@ struct BodySensationView: View {
     var handsButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Hands",
+                viewName: "Body sensations Part Hands",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
@@ -143,7 +143,7 @@ struct BodySensationView: View {
     var kneeButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Knee",
+                viewName: "Body sensations Part Knee",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
@@ -167,7 +167,7 @@ struct BodySensationView: View {
     var legsButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Legs",
+                viewName: "Body sensations Part Legs",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
