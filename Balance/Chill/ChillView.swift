@@ -48,7 +48,7 @@ struct ChillView: View {
                 }
             )
         ) {
-            NavView(image: "writeIcon", text: "Write Something")
+            ChillCellView(image: "writeIcon", text: "Write Something", pointVal: "5")
         }
     }
     
@@ -62,7 +62,7 @@ struct ChillView: View {
                 }
             )
         ) {
-            NavView(image: "meditationIcon", text: "Guided Meditation")
+            ChillCellView(image: "meditationIcon", text: "Guided Meditation", pointVal: "5")
         }
     }
     
@@ -76,7 +76,7 @@ struct ChillView: View {
                 }
             )
         ) {
-            NavView(image: "breathIcon", text: "Breathing")
+            ChillCellView(image: "breathIcon", text: "Breathing", pointVal: "5")
         }
     }
     
@@ -90,7 +90,7 @@ struct ChillView: View {
                 }
             )
         ) {
-            NavView(image: "bodySensationIcon", text: "Body Sensations")
+            ChillCellView(image: "bodySensationIcon", text: "Body Sensations", pointVal: "5")
         }
     }
 }
