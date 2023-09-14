@@ -40,7 +40,7 @@ struct ProfileCellView: View {
             .resizable()
             .scaledToFit()
             .padding(15.0)
-            .accessibilityLabel(Text(text))
+            .accessibility(hidden: true)
             .frame(width: 60, height: 60)
             .background(Color.random.opacity(0.4))
             .cornerRadius(15, corners: [.bottomLeft, .topLeft])

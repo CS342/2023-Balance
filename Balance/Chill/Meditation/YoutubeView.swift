@@ -48,16 +48,18 @@ struct YoutubeView: View {
                             content: { image in
                                 image.resizable()
                                     .scaledToFill()
+                                    .accessibility(hidden: true)
                             },
                             placeholder: {
                                 Image(systemName: "photo.fill")
                                     .tint(lightGrayColor)
+                                    .accessibilityLabel(vidID)
                             }
                         )
                         .clipped()
                         .frame(width: 360, height: 120, alignment: .center)
                         .cornerRadius(10)
-                        .accessibilityLabel(vidID)
+                        .accessibility(hidden: true)
                     }
                 }
             }

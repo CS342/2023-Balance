@@ -20,7 +20,7 @@ struct SOSView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100.0, height: 100.0)
-                .accessibilityLabel("Diary")
+                .accessibility(hidden: true)
             textView
             ScrollView {
                 SOSCellView(

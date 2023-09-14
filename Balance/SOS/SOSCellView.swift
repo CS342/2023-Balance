@@ -20,6 +20,7 @@ struct SOSCellView: View {
                     VStack {
                         Spacer()
                         Image(systemName: isChecked ? "checkmark.square" : "square")
+                            .accessibility(hidden: true)
                         Spacer()
                     }
                     VStack {

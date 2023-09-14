@@ -124,7 +124,10 @@ class ActivityLogEntry: ObservableObject, Codable {
             actionDescription.contains("Closed Mandala Selected") ||
             actionDescription.contains("Closed Coloring Saved") ||
             actionDescription.contains("Closed Draw Saved") ||
-            actionDescription.contains("Closed Playing Spotify") {
+            actionDescription.contains("Closed Playing Spotify") ||
+            actionDescription.contains("Closed Body sensations Part") ||
+            actionDescription.contains("Closed Breathing Feature") ||
+            actionDescription.contains("Closed Guided meditation Feature") {
             if (interval.second ?? 0)  > coinsTime {
                 NotificationCenter.default.post(name: Notification.Name.coinsUpdate, object: nil)
             }

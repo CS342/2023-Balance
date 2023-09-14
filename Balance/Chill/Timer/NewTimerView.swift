@@ -144,14 +144,14 @@ struct NewTimerView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Pony1")
+                    .accessibility(hidden: true)
             } else {
                 Image("Pony2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Pony2")
+                    .accessibility(hidden: true)
             }
         }
         .onReceive(timerAnimation) { _ in
@@ -168,14 +168,14 @@ struct NewTimerView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Duck1")
+                    .accessibility(hidden: true)
             } else {
                 Image("Duck2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Duck2")
+                    .accessibility(hidden: true)
             }
         }
         .onReceive(timerAnimation) { _ in
@@ -192,14 +192,14 @@ struct NewTimerView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Flamingo1")
+                    .accessibility(hidden: true)
             } else {
                 Image("Flamingo2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Flamingo2")
+                    .accessibility(hidden: true)
             }
         }
         .onReceive(timerAnimation) { _ in
@@ -216,14 +216,14 @@ struct NewTimerView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Gecko1")
+                    .accessibility(hidden: true)
             } else {
                 Image("Gecko2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Gecko2")
+                    .accessibility(hidden: true)
             }
         }
         .onReceive(timerAnimation) { _ in
@@ -240,14 +240,14 @@ struct NewTimerView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Elephant1")
+                    .accessibility(hidden: true)
             } else {
                 Image("Elephant2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Elephant2")
+                    .accessibility(hidden: true)
             }
         }
         .onReceive(timerAnimation) { _ in
@@ -264,14 +264,14 @@ struct NewTimerView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Gorilla1")
+                    .accessibility(hidden: true)
             } else {
                 Image("Gorilla2")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .clipped()
-                    .accessibilityLabel("Gorilla2")
+                    .accessibility(hidden: true)
             }
         }
         .onReceive(timerAnimation) { _ in
@@ -320,6 +320,7 @@ struct NewTimerView: View {
                 .resizable()
                 .tint(lightGrayColor)
                 .frame(width: 30, height: 30)
+                .accessibility(hidden: true)
         }
     }
     
@@ -331,6 +332,7 @@ struct NewTimerView: View {
                 .resizable()
                 .tint(lightGrayColor)
                 .frame(width: 30, height: 30)
+                .accessibility(hidden: true)
         }
     }
     
@@ -360,6 +362,7 @@ struct NewTimerView: View {
                         .background(.white)
                         .tint(lightGrayColor)
                         .frame(width: 25, height: 30)
+                        .accessibility(hidden: true)
                 }
             } else {
                 ZStack {
@@ -372,6 +375,7 @@ struct NewTimerView: View {
                         .background(.white)
                         .tint(lightGrayColor)
                         .frame(width: 25, height: 30)
+                        .accessibility(hidden: true)
                 }
             }
         }

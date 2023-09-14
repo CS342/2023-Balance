@@ -235,7 +235,7 @@ struct ProfileView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 180, height: 180)
-                .accessibilityLabel("avatar")
+                .accessibility(hidden: true)
                 .shadow(color: darkGrayColor, radius: 6)
             plusIcon
         }
@@ -249,7 +249,7 @@ struct ProfileView: View {
             .background(Color.white)
             .clipShape(Circle())
             .frame(width: 180, height: 180)
-            .accessibilityLabel("avatarPlaceholder")
+            .accessibility(hidden: true)
             .shadow(color: darkGrayColor, radius: 6)
             .overlay(
                 Circle()
@@ -264,7 +264,7 @@ struct ProfileView: View {
             .background(Color.blue)
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 2))
-            .accessibilityLabel("profilePlus")
+            .accessibility(hidden: true)
     }
     
     func loadUser() {

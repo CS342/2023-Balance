@@ -49,7 +49,7 @@ struct SearchBar: View {
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.leading, 20)
                         .offset(x: 10)
-             
+                        .accessibility(hidden: true)
                     if isEditing {
                         Button(action: {
                             self.text = ""
@@ -58,6 +58,7 @@ struct SearchBar: View {
                                 .foregroundColor(.gray)
                                 .padding(.trailing, 20)
                                 .offset(x: -10)
+                                .accessibility(hidden: true)
                         }
                     }
                 }

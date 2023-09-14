@@ -121,7 +121,7 @@ struct GalleryView: View {
                         .cornerRadius(20)
                         .aspectRatio(contentMode: .fit)
                         .padding(5)
-                        .accessibilityLabel(img.name)
+                        .accessibility(hidden: true)
                         .tag(img)
                 }
             }

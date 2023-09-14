@@ -175,6 +175,7 @@ struct DrawView: View {
                 Text("Pencil")
             } icon: {
                 Image(systemName: "pencil")
+                    .accessibility(hidden: true)
             }
         }
     }
@@ -191,6 +192,7 @@ struct DrawView: View {
                 Text("Pen")
             } icon: {
                 Image(systemName: "pencil.tip")
+                    .accessibility(hidden: true)
             }
         }
     }
@@ -207,6 +209,7 @@ struct DrawView: View {
                 Text("Marker")
             } icon: {
                 Image(systemName: "highlighter")
+                    .accessibility(hidden: true)
             }
         }
     }
@@ -223,7 +226,7 @@ struct DrawView: View {
                     .scaledToFit()
                     .clipped()
                     .frame(width: 40, height: 40)
-                    .accessibilityLabel("pencilIcon")
+                    .accessibility(hidden: true)
                     .foregroundColor(.gray)
                 Text("Paint")
                     .font(.custom("Nunito-Bold", size: 14))
@@ -249,7 +252,7 @@ struct DrawView: View {
                     .scaledToFit()
                     .clipped()
                     .frame(width: 40, height: 40)
-                    .accessibilityLabel("trashIcon")
+                    .accessibility(hidden: true)
                     .foregroundColor(.gray)
                 Text("Clear")
                     .font(.custom("Nunito-Bold", size: 14))
@@ -274,7 +277,7 @@ struct DrawView: View {
                     .scaledToFit()
                     .clipped()
                     .frame(width: 40, height: 40)
-                    .accessibilityLabel("erasecon")
+                    .accessibility(hidden: true)
                     .foregroundColor(.gray)
                 Text("Erase")
                     .font(.custom("Nunito-Bold", size: 14))
@@ -297,7 +300,7 @@ struct DrawView: View {
                     .scaledToFit()
                     .clipped()
                     .frame(width: 40, height: 40)
-                    .accessibilityLabel("undoIcon")
+                    .accessibility(hidden: true)
                     .foregroundColor(.gray)
                 Text("Undo")
                     .font(.custom("Nunito-Bold", size: 14))
@@ -320,7 +323,7 @@ struct DrawView: View {
                     .scaledToFit()
                     .clipped()
                     .frame(width: 40, height: 40)
-                    .accessibilityLabel("redoIcon")
+                    .accessibility(hidden: true)
                     .foregroundColor(.gray)
                 Text("Redo")
                     .font(.custom("Nunito-Bold", size: 14))
@@ -349,7 +352,7 @@ struct DrawView: View {
                 .scaledToFit()
                 .clipped()
                 .frame(width: drawingSize.width, height: drawingSize.height)
-                .accessibilityLabel("base64String")
+                .accessibility(hidden: true)
             let imageView = UIImageView(image: img.asUIImage())
             let subView = self.canvas.subviews[0]
             subView.addSubview(imageView)
@@ -370,6 +373,7 @@ struct DrawView: View {
                 .frame(width: 30, height: 30)
                 .font(.largeTitle)
                 .foregroundColor(color)
+                .accessibility(hidden: true)
         }
     }
     

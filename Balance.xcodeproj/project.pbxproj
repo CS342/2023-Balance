@@ -186,6 +186,7 @@
 		6CDC412F2A8439E4005E4012 /* BalanceWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6CDC410C2A8439DF005E4012 /* BalanceWatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6CE62D552A014BF300BB4F90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */; };
 		6CE62D572A028F3400BB4F90 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE62D562A028F3400BB4F90 /* Country.swift */; };
+		6CE8A7892AA291A4003CD727 /* ChillCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8A7882AA291A4003CD727 /* ChillCellView.swift */; };
 		6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF510BF29C8FD25008A2F55 /* LocationView.swift */; };
 		6CF6BEE62A31103A00A337F3 /* Bundle+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF6BEE12A31103A00A337F3 /* Bundle+Image.swift */; };
 		6CF6BEE72A31103A00A337F3 /* FeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF6BEE22A31103A00A337F3 /* FeatureFlags.swift */; };
@@ -442,6 +443,7 @@
 		6CDC41762A850E8B005E4012 /* BalanceWatchApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BalanceWatchApp-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CE62D562A028F3400BB4F90 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		6CE8A7882AA291A4003CD727 /* ChillCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChillCellView.swift; path = Balance/Chill/ChillCellView.swift; sourceTree = SOURCE_ROOT; };
 		6CF510BF29C8FD25008A2F55 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		6CF6BEE12A31103A00A337F3 /* Bundle+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Image.swift"; sourceTree = "<group>"; };
 		6CF6BEE22A31103A00A337F3 /* FeatureFlags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureFlags.swift; sourceTree = "<group>"; };
@@ -981,6 +983,7 @@
 			children = (
 				4ACC786029AC0B590048D1D1 /* Meditation */,
 				6C370AAC29D38F7F001781B3 /* ChillView.swift */,
+				6CE8A7882AA291A4003CD727 /* ChillCellView.swift */,
 				6CE62D5D2A030B6800BB4F90 /* Timer */,
 				6C85C6DD2A0554610053F759 /* BodySensationView.swift */,
 			);
@@ -1492,6 +1495,7 @@
 				6C55770F2A3A505F003FD6EE /* SpotifyDataController.swift in Sources */,
 				6CB5181A29E45678007AADB4 /* ImageCollectionView.swift in Sources */,
 				6C3248482A8D85AB00223F8C /* SketchView.swift in Sources */,
+				6CE8A7892AA291A4003CD727 /* ChillCellView.swift in Sources */,
 				6C55243829F8722B00F802D9 /* ContentView.swift in Sources */,
 				6CC177262A3A5E2900121B72 /* ActivityLogStore.swift in Sources */,
 				89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */,
@@ -1746,7 +1750,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Balance/Supporting Files/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Balance;
+				INFOPLIST_KEY_CFBundleDisplayName = "CTK Balance";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This message should never appear. Please adjust this when you start using camera information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "The CS342 2023 Balance Team Application uses the step count to demonstrate CardinalKit's integration with HealthKit.";
@@ -1809,7 +1813,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "DEMO=1";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Balance/Supporting Files/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Balance;
+				INFOPLIST_KEY_CFBundleDisplayName = "CTK Balance";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This message should never appear. Please adjust this when you start using camera information. We have to put this in here as ResearchKit has the possibility to use it and not putting it here returns an error on AppStore Connect.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "The CS342 2023 Balance Team Application uses the step count to demonstrate CardinalKit's integration with HealthKit.";

@@ -95,16 +95,18 @@ struct VideoGalleryView: View {
                         content: { image in
                             image.resizable()
                                 .scaledToFill()
+                                .accessibility(hidden: true)
                         },
                         placeholder: {
                             Image(systemName: "photo.fill")
                                 .tint(lightGrayColor)
+                                .accessibility(hidden: true)
                         }
                     )
                     .clipped()
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(10)
-                    .accessibilityLabel(idData.videoId)
+                    .accessibility(hidden: true)
                 }
             }
         }.tabViewStyle(.page(indexDisplayMode: .never))

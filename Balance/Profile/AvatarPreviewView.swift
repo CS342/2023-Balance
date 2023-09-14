@@ -78,13 +78,19 @@ struct AvatarPreviewView: View {
     var avatarSelected: some View {
         ZStack {
             backImageTop
+            Image("stars2")
+                .resizable()
+                .frame(width: 50.0, height: 50.0)
+                .clipped()
+                .accessibility(hidden: true)
+                .offset(x: -100, y: -50)
             if accesoryBuy {
                 Image(profile.avatar)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 200)
                     .clipped()
-                    .accessibilityLabel("avatarPreview")
+                    .accessibility(hidden: true)
             } else {
                 if avatarSelection.name.isEmpty {
                     Image(profile.avatar)
@@ -92,14 +98,14 @@ struct AvatarPreviewView: View {
                         .scaledToFit()
                         .frame(width: 200, height: 200)
                         .clipped()
-                        .accessibilityLabel("avatarPreview")
+                        .accessibility(hidden: true)
                 } else {
                     Image(avatarSelection.name)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
                         .clipped()
-                        .accessibilityLabel("avatarPreview")
+                        .accessibility(hidden: true)
                 }
             }
             firsloadView
@@ -134,7 +140,7 @@ struct AvatarPreviewView: View {
                         .frame(width: 130, height: 130)
                         .clipped()
                         .offset(x: 80, y: 80)
-                        .accessibilityLabel("profile.accesory")
+                        .accessibility(hidden: true)
                 } else {
                     Image(accesorySelection.name)
                         .resizable()
@@ -142,9 +148,15 @@ struct AvatarPreviewView: View {
                         .frame(width: 130, height: 130)
                         .clipped()
                         .offset(x: 80, y: 80)
-                        .accessibilityLabel("accesorySelection")
+                        .accessibility(hidden: true)
                 }
             }
+            Image("stars1")
+                .resizable()
+                .frame(width: 50.0, height: 50.0)
+                .clipped()
+                .accessibility(hidden: true)
+                .offset(x: 100, y: 50)
         }
     }
     

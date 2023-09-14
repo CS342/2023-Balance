@@ -32,7 +32,7 @@ struct MandalaCollectionView: View {
                             .clipped()
                             .frame(width: 110, height: 110, alignment: .center)
                             .cornerRadius(10)
-                            .accessibilityLabel(images[index].name)
+                            .accessibility(hidden: true)
                     }.simultaneousGesture(TapGesture().onEnded {
                         self.currentDraw.backImage = images[index].name
                     })

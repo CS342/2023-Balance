@@ -57,6 +57,7 @@ struct HeaderMenu: View {
                     .padding(.leading, 20)
                     .background(Color.clear)
                     .frame(width: 33, height: 33)
+                    .accessibility(hidden: true)
                 Text("Back")
                     .font(.custom("Nunito", size: 18))
                     .foregroundColor(Color.white)

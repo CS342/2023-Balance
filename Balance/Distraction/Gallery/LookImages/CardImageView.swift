@@ -20,14 +20,14 @@ struct CardImageView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .clipped()
-                            .accessibilityLabel(image)
+                            .accessibility(hidden: true)
                     } else {
                         if let uiImage = UIImage(data: imageData) {
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .clipped()
-                                .accessibilityLabel(UUID().uuidString)
+                                .accessibility(hidden: true)
                         }
                     }
                 }
@@ -39,7 +39,7 @@ struct CardImageView: View {
                 .shadow(color: Color.black.opacity(0.50), radius: 3, x: 2, y: 2)
                 Image("stiky")
                     .offset(y: -190)
-                    .accessibilityLabel("stiky")
+                    .accessibility(hidden: true)
             }
         }
     }

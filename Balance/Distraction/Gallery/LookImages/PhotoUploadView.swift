@@ -39,13 +39,6 @@ struct PhotoUploadView: View {
                     }
                 }
             }
-        
-//        if let selectedImageData, let uiImage = UIImage(data: selectedImageData) {
-////            Image(uiImage: uiImage)
-////                .resizable()
-////                .scaledToFit()
-////                .frame(width: 250, height: 250)
-//        }
     }
     
     func loadUser() {
