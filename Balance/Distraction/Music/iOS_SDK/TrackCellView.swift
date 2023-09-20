@@ -61,14 +61,16 @@ struct TrackCellView: View {
                 content: { image in
                     image.resizable()
                         .scaledToFill()
+                        .accessibility(hidden: true)
                 },
                 placeholder: {
                     Image(systemName: "headphones.circle.fill")
                         .tint(lightGrayColor)
+                        .accessibility(hidden: true)
                 }
             )
             .frame(height: 120.0)
-            .accessibilityLabel(Text(text))
+            .accessibility(hidden: true)
             .background(Color.random.opacity(0.4))
             .cornerRadius(15, corners: [.bottomLeft, .topLeft])
             Image("Spotify_icon")
@@ -76,7 +78,7 @@ struct TrackCellView: View {
                 .frame(width: 30, height: 30)
                 .scaledToFit()
                 .padding(10)
-                .accessibilityLabel("Spotify_icon")
+                .accessibility(hidden: true)
         }
     }
 }

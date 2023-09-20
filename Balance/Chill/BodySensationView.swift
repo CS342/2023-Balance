@@ -47,13 +47,13 @@ struct BodySensationView: View {
     var headButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Head",
+                viewName: "Body sensations Part Head",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
                         chillType: .head,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -71,13 +71,13 @@ struct BodySensationView: View {
     var feetButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Feet",
+                viewName: "Body sensations Part Feet",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
                         chillType: .feet,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -95,13 +95,13 @@ struct BodySensationView: View {
     var shouldersButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Shoulders",
+                viewName: "Body sensations Part Shoulders",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
                         chillType: .shoulders,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -119,13 +119,13 @@ struct BodySensationView: View {
     var handsButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Hands",
+                viewName: "Body sensations Part Hands",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
                         chillType: .hands,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -143,13 +143,13 @@ struct BodySensationView: View {
     var kneeButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Knee",
+                viewName: "Body sensations Part Knee",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
                         chillType: .knee,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -167,13 +167,13 @@ struct BodySensationView: View {
     var legsButton: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
-                viewName: "Body sensations Legs",
+                viewName: "Body sensations Part Legs",
                 isDirectChildToContainer: true,
                 content: {
                     NewTimerView(
                         chillType: .legs,
                         navTitleText: "Body sensations",
-                        subTitleText: "Relax your self and focus on this part of your body"
+                        subTitleText: "Relax yourself and focus on this part of your body"
                     )
                 }
             )
@@ -193,7 +193,7 @@ struct BodySensationView: View {
             .resizable()
             .scaledToFit()
             .frame(width: 230, height: 230, alignment: .center)
-            .accessibilityLabel("imageBS")
+            .accessibility(hidden: true)
     }
     
     var titleText: some View {

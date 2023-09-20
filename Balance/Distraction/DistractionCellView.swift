@@ -55,7 +55,8 @@ struct DistractionCellView: View {
                 .background(primaryColor .opacity(0.4))
                 .cornerRadius(5)
                 .offset(x: -10)
-            Image("pointsStarIcon").accessibilityLabel("pointsStarIcon")
+            Image("pointsStarIcon")
+                .accessibility(hidden: true)
         }.offset(y: 10)
     }
     
@@ -65,7 +66,7 @@ struct DistractionCellView: View {
             .scaledToFit()
             .padding(15.0)
             .frame(height: 120.0)
-            .accessibilityLabel(Text(text))
+            .accessibility(hidden: true)
             .frame(maxWidth: 120)
             .background(Color.random.opacity(0.4))
             .cornerRadius(15, corners: [.bottomLeft, .topLeft])

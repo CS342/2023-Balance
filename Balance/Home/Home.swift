@@ -62,7 +62,7 @@ struct HomeView: View {
                     }
                     ZStack {
                         Image("popHelp")
-                            .accessibilityLabel("popHelp")
+                            .accessibility(hidden: true)
                             .offset(y: -40)
                         Text("You can use it when you need help, we will guide you to help you control the emotions you are feeling at the moment.")
                             .font(.custom("Nunito", size: 18))
@@ -98,7 +98,7 @@ struct HomeView: View {
     var accesoryImage: some View {
         Image(profile.accesory)
             .resizable()
-            .accessibilityLabel("acc_icon")
+            .accessibility(hidden: true)
             .scaledToFit()
             .clipped()
             .frame(width: 150, height: 150)
@@ -108,7 +108,7 @@ struct HomeView: View {
     
     var cloudImage: some View {
         Image("cloud")
-            .accessibilityLabel("cloud")
+            .accessibility(hidden: true)
             .clipped()
             .background(Color.clear)
     }

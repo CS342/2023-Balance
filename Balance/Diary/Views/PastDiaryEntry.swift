@@ -28,6 +28,7 @@ public struct PastDiaryEntry: View {
             }
             Image(systemName: "chevron.right")
                 .foregroundColor(darkBlueColor)
+                .accessibility(hidden: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(20)

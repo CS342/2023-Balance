@@ -41,7 +41,7 @@ struct CellView: View {
             .resizable()
             .scaledToFit()
             .padding(15.0)
-            .accessibilityLabel(Text(text))
+            .accessibility(hidden: true)
             .frame(maxWidth: 120)
             .background(Color.random.opacity(0.4))
             .cornerRadius(15, corners: [.bottomLeft, .topLeft])

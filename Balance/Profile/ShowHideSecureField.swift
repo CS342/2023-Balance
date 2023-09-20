@@ -26,6 +26,7 @@ struct ShowHideSecureField: View {
             }) {
                 Image(systemName: self.isSecured ? "eye.slash" : "eye")
                     .accentColor(.gray)
+                    .accessibility(hidden: true)
             }
         }
     }

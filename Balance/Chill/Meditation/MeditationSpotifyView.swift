@@ -85,7 +85,7 @@ struct MeditationSpotifyView: View {
                                     .resizable()
                                     .frame(width: 130, height: 130, alignment: .leading)
                                     .aspectRatio(contentMode: .fill)
-                                    .accessibilityLabel("Thumbnail for song")
+                                    .accessibility(hidden: true)
                                 VStack(alignment: .leading) {
                                     Text(song.title).font(.custom("Nunito-Bold", size: 15))
                                     Text(song.artist).font(.custom("Nunito-Bold", size: 10))
