@@ -28,6 +28,8 @@ struct HeaderMenu: View {
                     Text("Back")
                         .foregroundColor(.white)
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Back")
                 Text("Diary")
                     .font(.title.bold())
                     .foregroundColor(.white)
@@ -35,6 +37,7 @@ struct HeaderMenu: View {
                     .offset(x: -32)
                 Image(systemName: "")
                     .foregroundColor(.white)
+                    .accessibilityHidden(true)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .center)
