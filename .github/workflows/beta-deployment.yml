@@ -21,10 +21,9 @@ jobs:
   iosapptestflightdeployment:
     name: iOS App TestFlight Deployment
     needs: buildandtest
-    uses: CS342/.github/.github/workflows/xcodebuild-or-fastlane.yml@v1
+    uses: CS342/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
     secrets: inherit
     with:
       artifactname: Balance.xcresult
-      runsonlabels: '["macos-latest"]'
       fastlanelane: beta
       setupsigning: true
