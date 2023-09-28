@@ -17,8 +17,15 @@ platform :ios do
   desc "Build and test"
   lane :test do
     run_tests(
-      code_coverage: true,
+      skip_build: true,
       derived_data_path: ".derivedData",
+      code_coverage: true,
+      devices: ["iPhone 15 Pro", "Apple Watch Series 9 (45mm)"],
+      force_quit_simulator: true,
+      reset_simulator: true,
+      prelaunch_simulator: false,
+      concurrent_workers: 1,
+      max_concurrent_simulators: 1,
       result_bundle: true,
       output_directory: "."
     )
@@ -27,8 +34,23 @@ platform :ios do
   desc "Build app"
   lane :build do
     build_app(
-      derived_data_path: ".derivedData"
+      derived_data_path: ".derivedData",
+      destination: "generic/platform=iOS",
+      output_directory: ".build",
+      archive_path: ".build/Balance.xcarchive",
     )
+    # This is an unfortunate workaround for a bug in fastlane: https://github.com/fastlane/fastlane/pull/21319
+    Dir.chdir("..") do
+      sh(
+        "
+        xcodebuild \
+          -exportArchive \
+          -exportOptionsPlist ./fastlane/ExportOptions.plist \
+          -archivePath ./.build/Balance.xcarchive \
+          -exportPath ./.build
+        "
+      )
+    end
   end
 
   desc "Sign in to the App Store Connect API"
@@ -44,13 +66,15 @@ platform :ios do
   desc "Publish a beta release to internal TestFlight testers"
   lane :beta do
     signin
-    increment_build_number({
-      build_number: latest_testflight_build_number + 1,
-      xcodeproj: "Balance.xcodeproj"
-    })
+    increment_build_number(
+      {
+        build_number: latest_testflight_build_number + 1
+      }
+    )
     build
     commit = last_git_commit
     upload_to_testflight(
+      ipa: "./.build/Balance.ipa",
       distribute_external: true,
       groups: [
         "CS342 2023"
