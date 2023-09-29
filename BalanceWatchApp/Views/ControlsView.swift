@@ -23,7 +23,7 @@ struct ControlsView: View {
                 .tint(.red)
                 .font(.title2)
                 Text("End")
-            }
+            }.accessibilityElement()
             VStack {
                 Button {
                     workoutManager.togglePause()
@@ -35,7 +35,7 @@ struct ControlsView: View {
                 .tint(.yellow)
                 .font(.title2)
                 Text(workoutManager.running ? "Pause" : "Resume")
-            }
+            }.accessibilityElement()
         }
     }
 }
