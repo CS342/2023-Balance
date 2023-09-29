@@ -39,7 +39,7 @@
 		2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FC9759E2978E39600BA99FE /* Localizable.strings */; };
 		2FC975A82978F11A00BA99FE /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC975A72978F11A00BA99FE /* Home.swift */; };
 		2FE3025C2AC510AB00763567 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE3025B2AC510AB00763567 /* Assets.xcassets */; };
-		2FE302782AC510AB00763567 /* Balance.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2FE302552AC510A900763567 /* Balance.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2FE302782AC510AB00763567 /* BalanceWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2FE302552AC510A900763567 /* BalanceWatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88429B3F9F2006A52A1 /* MeditationSpotifyView.swift */; };
 		4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88A29B413F4006A52A1 /* YoutubeView.swift */; };
 		4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88C29B4151B006A52A1 /* SleepView.swift */; };
@@ -230,7 +230,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				2FE302782AC510AB00763567 /* Balance.app in Embed Watch Content */,
+				2FE302782AC510AB00763567 /* BalanceWatchApp.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,7 +257,7 @@
 		2FC94CD4298B0A1D009C8209 /* Balance.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Balance.xctestplan; sourceTree = "<group>"; };
 		2FC9759E2978E39600BA99FE /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		2FC975A72978F11A00BA99FE /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		2FE302552AC510A900763567 /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FE302552AC510A900763567 /* BalanceWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FE3025B2AC510AB00763567 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A45C88429B3F9F2006A52A1 /* MeditationSpotifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationSpotifyView.swift; sourceTree = "<group>"; };
 		4A45C88A29B413F4006A52A1 /* YoutubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeView.swift; sourceTree = "<group>"; };
@@ -596,7 +596,7 @@
 			children = (
 				653A254D283387FE005D4D48 /* Balance.app */,
 				653A255D28338800005D4D48 /* BalanceTests.xctest */,
-				2FE302552AC510A900763567 /* Balance.app */,
+				2FE302552AC510A900763567 /* BalanceWatchApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -973,7 +973,7 @@
 			);
 			name = BalanceWatchApp;
 			productName = "BalanceWatchApp Watch App";
-			productReference = 2FE302552AC510A900763567 /* Balance.app */;
+			productReference = 2FE302552AC510A900763567 /* BalanceWatchApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		653A254C283387FE005D4D48 /* Balance */ = {
@@ -1361,9 +1361,9 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BalanceWatchApp;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "$(PRODUCT_NAME) would like to capture a snap shot of your heart rate for the purpose of using the data in a clinical research study. Please grant this permission to continue participating.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "$(PRODUCT_NAME) would like to update your health usage with heart rate data. Actually we never do anything of the kind but it seems Apple has lost control of X-Code and has few if any answers, so we will ask this permission.";
-				INFOPLIST_KEY_CFBundleDisplayName = BalanceWatchApp;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = edu.stanford.cs342.2023.balance;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
@@ -1381,7 +1381,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1404,9 +1404,9 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BalanceWatchApp;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "$(PRODUCT_NAME) would like to capture a snap shot of your heart rate for the purpose of using the data in a clinical research study. Please grant this permission to continue participating.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "$(PRODUCT_NAME) would like to update your health usage with heart rate data. Actually we never do anything of the kind but it seems Apple has lost control of X-Code and has few if any answers, so we will ask this permission.";
-				INFOPLIST_KEY_CFBundleDisplayName = BalanceWatchApp;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = edu.stanford.cs342.2023.balance;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
@@ -1425,7 +1425,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
