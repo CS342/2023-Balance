@@ -48,7 +48,7 @@ struct MetricsView: View {
                         .foregroundColor(.red)
                         .frame(height: 40)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .accessibilityLabel("heart")
+                        .accessibilityHidden(true)
                         .scaleEffect(animationAmount)
                         .animation(
                             .linear(duration: 0.1)

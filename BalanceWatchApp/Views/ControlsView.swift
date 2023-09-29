@@ -17,6 +17,7 @@ struct ControlsView: View {
                     workoutManager.endWorkout()
                 } label: {
                     Image(systemName: "xmark")
+                        .accessibilityHidden(true)
                 }
                 .tint(.red)
                 .font(.title2)
@@ -27,6 +28,7 @@ struct ControlsView: View {
                     workoutManager.togglePause()
                 } label: {
                     Image(systemName: workoutManager.running ? "pause" : "play")
+                        .accessibilityHidden(true)
                 }
                 .tint(.yellow)
                 .font(.title2)
