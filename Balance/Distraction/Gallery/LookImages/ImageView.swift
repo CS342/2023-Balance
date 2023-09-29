@@ -184,7 +184,7 @@ struct ImageView: View {
                 tapLike = false
             }
         }) {
-            Image("heartImage")
+            Image("heart3")
                 .resizable()
                 .frame(width: 30, height: 30)
                 .foregroundColor(.white)

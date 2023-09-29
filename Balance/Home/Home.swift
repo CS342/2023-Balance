@@ -13,7 +13,6 @@ import FirebaseAccount
 import WatchConnectivity
 
 // swiftlint:disable closure_body_length
-// swiftlint:disable multiline_arguments_brackets
 struct HomeView: View {
     @EnvironmentObject var authModel: AuthViewModel
     @State var showMe = false
@@ -59,7 +58,7 @@ struct HomeView: View {
                         if error != nil {
                             print("LocalNotification error: \(String(describing: error))")
                         } else {
-                            print("LocalNotification access granted...")
+                            print("LocalNotification access granted...\( granted.description)")
                         }
                     }
                 )
