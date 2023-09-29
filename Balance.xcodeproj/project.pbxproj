@@ -36,10 +36,12 @@
 		2F9056F1299E3181003D3802 /* FirestoreDataStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F0299E3181003D3802 /* FirestoreDataStorage */; };
 		2F9056F3299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */; };
 		2F9056F5299E3205003D3802 /* FHIRToFirestoreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */; };
-		2F9056F8299E3267003D3802 /* XCTHealthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F7299E3267003D3802 /* XCTHealthKit */; };
-		2F9056FB299E329C003D3802 /* XCTestExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056FA299E329C003D3802 /* XCTestExtensions */; };
 		2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FC9759E2978E39600BA99FE /* Localizable.strings */; };
 		2FC975A82978F11A00BA99FE /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC975A72978F11A00BA99FE /* Home.swift */; };
+		2FE302582AC510AA00763567 /* BalanceWatchAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE302572AC510AA00763567 /* BalanceWatchAppApp.swift */; };
+		2FE3025A2AC510AA00763567 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE302592AC510AA00763567 /* ContentView.swift */; };
+		2FE3025C2AC510AB00763567 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE3025B2AC510AB00763567 /* Assets.xcassets */; };
+		2FE302782AC510AB00763567 /* BalanceWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2FE302552AC510A900763567 /* BalanceWatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4A45C88529B3F9F2006A52A1 /* MeditationSpotifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88429B3F9F2006A52A1 /* MeditationSpotifyView.swift */; };
 		4A45C88B29B413F4006A52A1 /* YoutubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88A29B413F4006A52A1 /* YoutubeView.swift */; };
 		4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88C29B4151B006A52A1 /* SleepView.swift */; };
@@ -194,6 +196,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2FE302762AC510AB00763567 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 653A2545283387FE005D4D48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2FE302542AC510A900763567;
+			remoteInfo = "BalanceWatchApp Watch App";
+		};
 		653A255E28338800005D4D48 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 653A2545283387FE005D4D48 /* Project object */;
@@ -201,14 +210,21 @@
 			remoteGlobalIDString = 653A254C283387FE005D4D48;
 			remoteInfo = Blance;
 		};
-		653A256828338800005D4D48 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 653A2545283387FE005D4D48 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 653A254C283387FE005D4D48;
-			remoteInfo = Blance;
-		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2FE3027C2AC510AB00763567 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				2FE302782AC510AB00763567 /* BalanceWatchApp.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2720083529A7E4C20052908D /* DiaryHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryHomeView.swift; sourceTree = "<group>"; };
@@ -230,6 +246,10 @@
 		2FC94CD4298B0A1D009C8209 /* Balance.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Balance.xctestplan; sourceTree = "<group>"; };
 		2FC9759E2978E39600BA99FE /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		2FC975A72978F11A00BA99FE /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		2FE302552AC510A900763567 /* BalanceWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FE302572AC510AA00763567 /* BalanceWatchAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceWatchAppApp.swift; sourceTree = "<group>"; };
+		2FE302592AC510AA00763567 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2FE3025B2AC510AB00763567 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A45C88429B3F9F2006A52A1 /* MeditationSpotifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationSpotifyView.swift; sourceTree = "<group>"; };
 		4A45C88A29B413F4006A52A1 /* YoutubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeView.swift; sourceTree = "<group>"; };
 		4A45C88C29B4151B006A52A1 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
@@ -244,7 +264,6 @@
 		653A255428338800005D4D48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		653A255D28338800005D4D48 /* BalanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A256128338800005D4D48 /* BalanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTests.swift; sourceTree = "<group>"; };
-		653A256728338800005D4D48 /* BalanceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalanceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		653A258928339462005D4D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C0A4BED29E9B053003007C7 /* AvatarSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSelectionView.swift; sourceTree = "<group>"; };
 		6C0A4BEF29E9B0CD003007C7 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
@@ -387,6 +406,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2FE302522AC510A900763567 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		653A254A283387FE005D4D48 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -415,15 +441,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		653A256428338800005D4D48 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2F9056F8299E3267003D3802 /* XCTHealthKit in Frameworks */,
-				2F9056FB299E329C003D3802 /* XCTestExtensions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +516,16 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2FE302562AC510AA00763567 /* BalanceWatchApp */ = {
+			isa = PBXGroup;
+			children = (
+				2FE302572AC510AA00763567 /* BalanceWatchAppApp.swift */,
+				2FE302592AC510AA00763567 /* ContentView.swift */,
+				2FE3025B2AC510AB00763567 /* Assets.xcassets */,
+			);
+			path = BalanceWatchApp;
+			sourceTree = "<group>";
+		};
 		4ACC786029AC0B590048D1D1 /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,7 +555,7 @@
 				2FC94CD4298B0A1D009C8209 /* Balance.xctestplan */,
 				653A254F283387FE005D4D48 /* Balance */,
 				653A256028338800005D4D48 /* BalanceTests */,
-				653A256A28338800005D4D48 /* BalanceUITests */,
+				2FE302562AC510AA00763567 /* BalanceWatchApp */,
 				653A254E283387FE005D4D48 /* Products */,
 				653A258B283395A7005D4D48 /* Frameworks */,
 			);
@@ -539,7 +566,7 @@
 			children = (
 				653A254D283387FE005D4D48 /* Balance.app */,
 				653A255D28338800005D4D48 /* BalanceTests.xctest */,
-				653A256728338800005D4D48 /* BalanceUITests.xctest */,
+				2FE302552AC510A900763567 /* BalanceWatchApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -576,13 +603,6 @@
 				653A256128338800005D4D48 /* BalanceTests.swift */,
 			);
 			path = BalanceTests;
-			sourceTree = "<group>";
-		};
-		653A256A28338800005D4D48 /* BalanceUITests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BalanceUITests;
 			sourceTree = "<group>";
 		};
 		653A258B283395A7005D4D48 /* Frameworks */ = {
@@ -900,6 +920,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2FE302542AC510A900763567 /* BalanceWatchApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2FE302792AC510AB00763567 /* Build configuration list for PBXNativeTarget "BalanceWatchApp" */;
+			buildPhases = (
+				2FE302512AC510A900763567 /* Sources */,
+				2FE302522AC510A900763567 /* Frameworks */,
+				2FE302532AC510A900763567 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BalanceWatchApp;
+			productName = "BalanceWatchApp Watch App";
+			productReference = 2FE302552AC510A900763567 /* BalanceWatchApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		653A254C283387FE005D4D48 /* Balance */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 653A257128338800005D4D48 /* Build configuration list for PBXNativeTarget "Balance" */;
@@ -908,10 +945,12 @@
 				653A254A283387FE005D4D48 /* Frameworks */,
 				653A254B283387FE005D4D48 /* Resources */,
 				27525EB329B673BD00D1DF51 /* ShellScript */,
+				2FE3027C2AC510AB00763567 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2FE302772AC510AB00763567 /* PBXTargetDependency */,
 			);
 			name = Balance;
 			packageProductDependencies = (
@@ -955,28 +994,6 @@
 			productReference = 653A255D28338800005D4D48 /* BalanceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		653A256628338800005D4D48 /* BalanceUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 653A257728338800005D4D48 /* Build configuration list for PBXNativeTarget "BalanceUITests" */;
-			buildPhases = (
-				653A256328338800005D4D48 /* Sources */,
-				653A256428338800005D4D48 /* Frameworks */,
-				653A256528338800005D4D48 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				653A256928338800005D4D48 /* PBXTargetDependency */,
-			);
-			name = BalanceUITests;
-			packageProductDependencies = (
-				2F9056F7299E3267003D3802 /* XCTHealthKit */,
-				2F9056FA299E329C003D3802 /* XCTestExtensions */,
-			);
-			productName = TemplateApplicationUITests;
-			productReference = 653A256728338800005D4D48 /* BalanceUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -984,18 +1001,17 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					2FE302542AC510A900763567 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					653A254C283387FE005D4D48 = {
 						CreatedOnToolsVersion = 13.4;
 						LastSwiftMigration = 1420;
 					};
 					653A255C28338800005D4D48 = {
-						CreatedOnToolsVersion = 13.4;
-						TestTargetID = 653A254C283387FE005D4D48;
-					};
-					653A256628338800005D4D48 = {
 						CreatedOnToolsVersion = 13.4;
 						TestTargetID = 653A254C283387FE005D4D48;
 					};
@@ -1023,13 +1039,21 @@
 			projectRoot = "";
 			targets = (
 				653A254C283387FE005D4D48 /* Balance */,
+				2FE302542AC510A900763567 /* BalanceWatchApp */,
 				653A255C28338800005D4D48 /* BalanceTests */,
-				653A256628338800005D4D48 /* BalanceUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2FE302532AC510A900763567 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FE3025C2AC510AB00763567 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		653A254B283387FE005D4D48 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1075,13 +1099,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		653A256528338800005D4D48 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1105,6 +1122,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2FE302512AC510A900763567 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FE3025A2AC510AA00763567 /* ContentView.swift in Sources */,
+				2FE302582AC510AA00763567 /* BalanceWatchAppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		653A2549283387FE005D4D48 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1253,29 +1279,100 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		653A256328338800005D4D48 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2FE302772AC510AB00763567 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2FE302542AC510A900763567 /* BalanceWatchApp */;
+			targetProxy = 2FE302762AC510AB00763567 /* PBXContainerItemProxy */;
+		};
 		653A255F28338800005D4D48 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 653A254C283387FE005D4D48 /* Balance */;
 			targetProxy = 653A255E28338800005D4D48 /* PBXContainerItemProxy */;
 		};
-		653A256928338800005D4D48 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 653A254C283387FE005D4D48 /* Balance */;
-			targetProxy = 653A256828338800005D4D48 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		2FE3027A2AC510AB00763567 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 637867499T;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BalanceWatchApp;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = edu.stanford.cs342.2023.balance;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance.watchApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		2FE3027B2AC510AB00763567 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=watchos*]" = 637867499T;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BalanceWatchApp;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = edu.stanford.cs342.2023.balance;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance.watchApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "CS342 2023 Balance Team Watch Application";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		653A256F28338800005D4D48 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1393,6 +1490,7 @@
 		653A257228338800005D4D48 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -1401,7 +1499,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = AQVHZ8757N;
+				DEVELOPMENT_TEAM = 637867499T;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1440,7 +1538,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.celteeka.balance;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1458,6 +1556,7 @@
 		653A257328338800005D4D48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -1531,9 +1630,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator watchos watchsimulator";
+				SUPPORTS_MACCATALYST = YES;
 				"SWIFT_ELicenseRef-TemplateApplication_LOC_STRINGS" = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,4";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Balance.app/Balance";
 			};
 			name = Debug;
@@ -1551,54 +1652,27 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator watchos watchsimulator";
+				SUPPORTS_MACCATALYST = YES;
 				"SWIFT_ELicenseRef-TemplateApplication_LOC_STRINGS" = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,4";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Balance.app/Balance";
-			};
-			name = Release;
-		};
-		653A257828338800005D4D48 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 637867499T;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance.uitests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				"SWIFT_ELicenseRef-TemplateApplication_LOC_STRINGS" = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Balance;
-			};
-			name = Debug;
-		};
-		653A257928338800005D4D48 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 637867499T;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance.uitests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				"SWIFT_ELicenseRef-TemplateApplication_LOC_STRINGS" = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Balance;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2FE302792AC510AB00763567 /* Build configuration list for PBXNativeTarget "BalanceWatchApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FE3027A2AC510AB00763567 /* Debug */,
+				2FE3027B2AC510AB00763567 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		653A2548283387FE005D4D48 /* Build configuration list for PBXProject "Balance" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1622,15 +1696,6 @@
 			buildConfigurations = (
 				653A257528338800005D4D48 /* Debug */,
 				653A257628338800005D4D48 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		653A257728338800005D4D48 /* Build configuration list for PBXNativeTarget "BalanceUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				653A257828338800005D4D48 /* Debug */,
-				653A257928338800005D4D48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1758,16 +1823,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
 			productName = FHIRToFirestoreAdapter;
-		};
-		2F9056F7299E3267003D3802 /* XCTHealthKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */;
-			productName = XCTHealthKit;
-		};
-		2F9056FA299E329C003D3802 /* XCTestExtensions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */;
-			productName = XCTestExtensions;
 		};
 		5AAFCE1929A75990006CCD66 /* LocalStorage */ = {
 			isa = XCSwiftPackageProductDependency;
