@@ -35,22 +35,19 @@ platform :ios do
   lane :build do
     build_app(
       derived_data_path: ".derivedData",
-      destination: "generic/platform=iOS",
       output_directory: ".build",
       archive_path: ".build/Balance.xcarchive",
+      configuration: "Release",
+      export_options: {
+        method: "app-store",
+        signingStyle: "manual",
+        signingCertificate: "Apple Distribution: Paul Schmiedmayer (637867499T)",
+        provisioningProfiles: {
+          "edu.stanford.cs342.2023.balance" => "CS342 2023 Balance Team Application",
+          "edu.stanford.cs342.2023.balance.watchApp" => "CS342 2023 Balance Team Watch Application"
+        }
+      }
     )
-    # This is an unfortunate workaround for a bug in fastlane: https://github.com/fastlane/fastlane/pull/21319
-    Dir.chdir("..") do
-      sh(
-        "
-        xcodebuild \
-          -exportArchive \
-          -exportOptionsPlist ./fastlane/ExportOptions.plist \
-          -archivePath ./.build/Balance.xcarchive \
-          -exportPath ./.build
-        "
-      )
-    end
   end
 
   desc "Sign in to the App Store Connect API"
@@ -74,7 +71,6 @@ platform :ios do
     build
     commit = last_git_commit
     upload_to_testflight(
-      ipa: "./.build/Balance.ipa",
       distribute_external: true,
       groups: [
         "CS342 2023"
