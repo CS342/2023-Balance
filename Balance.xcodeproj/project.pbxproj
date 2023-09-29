@@ -1363,6 +1363,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "$(PRODUCT_NAME) would like to capture a snap shot of your heart rate for the purpose of using the data in a clinical research study. Please grant this permission to continue participating.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "$(PRODUCT_NAME) would like to update your health usage with heart rate data. Actually we never do anything of the kind but it seems Apple has lost control of X-Code and has few if any answers, so we will ask this permission.";
+				INFOPLIST_KEY_CFBundleDisplayName = BalanceWatchApp;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = edu.stanford.cs342.2023.balance;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
@@ -1373,7 +1374,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance.watchApp;
-				PRODUCT_NAME = Balance;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -1405,6 +1406,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "$(PRODUCT_NAME) would like to capture a snap shot of your heart rate for the purpose of using the data in a clinical research study. Please grant this permission to continue participating.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "$(PRODUCT_NAME) would like to update your health usage with heart rate data. Actually we never do anything of the kind but it seems Apple has lost control of X-Code and has few if any answers, so we will ask this permission.";
+				INFOPLIST_KEY_CFBundleDisplayName = BalanceWatchApp;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = edu.stanford.cs342.2023.balance;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
@@ -1415,7 +1417,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance.watchApp;
-				PRODUCT_NAME = Balance;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=watchos*]" = "CS342 2023 Balance Team Watch Application";
 				SDKROOT = watchos;
