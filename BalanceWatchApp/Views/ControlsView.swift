@@ -18,24 +18,22 @@ struct ControlsView: View {
                 } label: {
                     Image(systemName: "xmark")
                         .accessibility(hidden: true)
-                        .accessibilityLabel("xmark")
                 }
                 .tint(.red)
                 .font(.title2)
                 Text("End")
-            }.accessibilityElement()
+            }.accessibilityElement(children: .ignore)
             VStack {
                 Button {
                     workoutManager.togglePause()
                 } label: {
                     Image(systemName: workoutManager.running ? "pause" : "play")
                         .accessibility(hidden: true)
-                        .accessibilityLabel("actionButton")
                 }
                 .tint(.yellow)
                 .font(.title2)
                 Text(workoutManager.running ? "Pause" : "Resume")
-            }.accessibilityElement()
+            }.accessibilityElement(children: .ignore)
         }
     }
 }
