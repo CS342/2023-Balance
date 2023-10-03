@@ -39,6 +39,7 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
         }
     }
     
+#if !DEMO
     private var firestore: Firestore<FHIR> {
         let settings = FirestoreSettings()
         if FeatureFlags.useFirebaseEmulator {
@@ -55,7 +56,7 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
             settings: settings
         )
     }
-    
+#endif
     
     private var healthKit: HealthKit<FHIR> {
         HealthKit {

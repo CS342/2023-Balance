@@ -10,19 +10,22 @@ import Account
 import SwiftUI
 import class FHIR.FHIR
 import FirebaseAccount
+import WatchConnectivity
 
+// swiftlint:disable closure_body_length
 struct HomeView: View {
     @EnvironmentObject var authModel: AuthViewModel
     @State var showMe = false
     @State var profile = ProfileUser()
-    
+    @StateObject var counter = Counter()
+
     var body: some View {
         ActivityLogContainer {
             ZStack {
                 backgroundColor.edgesIgnoringSafeArea(.all)
                 NavigationStack {
                     VStack(spacing: 0) {
-                        HeaderHome()
+                        HeaderHome().environmentObject(counter)
                         menuOptions
                         Spacer()
                     }
@@ -41,6 +44,24 @@ struct HomeView: View {
                 withAnimation(.easeInOut(duration: 1.0)) {
                     loadUser()
                 }
+            }
+            .onChange(of: counter.count, perform: { _ in
+                if counter.count > 90 {
+                    print(counter.count)
+                    alertHeartRate()
+                }
+            })
+            .onAppear {
+                UNUserNotificationCenter.current().requestAuthorization(
+                    options: [[.alert, .sound, .badge]],
+                    completionHandler: { granted, error in
+                        if error != nil {
+                            print("LocalNotification error: \(String(describing: error))")
+                        } else {
+                            print("LocalNotification access granted...\( granted.description)")
+                        }
+                    }
+                )
             }
         }
     }
@@ -198,6 +219,23 @@ struct HomeView: View {
         ) {
             NavView(image: "distractMeIcon", text: "Distract me")
         }
+    }
+    
+    func alertHeartRate() {
+        let content = UNMutableNotificationContent()
+         content.title = "BALANCE"
+         content.subtitle = "Please chill!"
+         content.body = "Your heart rate are to up! Please relax with Balance!"
+         content.badge = 1
+
+         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+         let requestIdentifier = "BALANCENotification"
+         let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
+
+         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+             print("LocalNotification error: \(String(describing: error))")
+         })
     }
     
     func loadUser() {

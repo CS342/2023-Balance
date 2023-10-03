@@ -71,5 +71,11 @@
 	<string>Light</string>
 	<key>View controller-based status bar appearance</key>
 	<string>NO</string>
+	<key>WKApplication</key>
+	<true/>
+    <key>NSHealthShareUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like to capture a snap shot of your heart rate for the purpose of using the data in a clinical research study. Please grant this permission to continue participating.</string>
+    <key>NSHealthUpdateUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like to update your health usage with heart rate data. Actually we never do anything of the kind but it seems Apple has lost control of X-Code and has few if any answers, so we will ask this permission.</string>
 </dict>
 </plist>

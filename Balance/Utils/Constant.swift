@@ -78,3 +78,5 @@ let spotifyURL = "https://itunes.com/apps/spotifyltd"
 
 let coinsValue = 5
 let coinsTime = 15
+
+let demoID = "0"

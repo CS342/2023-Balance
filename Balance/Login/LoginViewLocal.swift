@@ -18,6 +18,7 @@ struct LoginViewLocal: View {
     @State private var patientID: String = ""
     @State private var name: String = ""
     @State private var email: String = ""
+    @State private var password: String = ""
     @State private var alertMessage: String = ""
     @State private var showingAlert = false
     @State private var isEmailValid = true
@@ -82,41 +83,62 @@ struct LoginViewLocal: View {
     var fieldsView: some View {
         Group {
             if isChecked == false {
-                TextField("Name", text: $name)
-                    .textInputAutocapitalization(.never)
-                    .disableAutocorrection(true)
-                    .keyboardType(.default)
-                    .font(.custom("Montserrat", size: 17))
-                    .foregroundColor(darkGrayColor)
-                    .padding(.horizontal, 20)
+                nameField
                 Divider()
-                    .padding(.horizontal, 20)
                 emailField
+                Divider()
             }
             Spacer().frame(height: 20)
-            TextField("ParticipantID", text: $patientID)
-                .textInputAutocapitalization(.never)
-                .disableAutocorrection(true)
-                .keyboardType(.default)
-                .font(.custom("Montserrat", size: 17))
-                .foregroundColor(darkGrayColor)
-                .padding(.horizontal, 20)
+            participantField
             Divider()
-                .padding(.horizontal, 20)
-            HStack {
-                Spacer()
-                Text("Existing user? ")
-                    .font(.custom("Montserrat", size: 17))
-                    .foregroundColor(lightGrayColor)
-                Image(systemName: isChecked ? "checkmark.square.fill" : "square")
-                    .accessibility(hidden: true)
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(isChecked ? primaryColor : Color.secondary)
-                    .onTapGesture {
-                        self.isChecked.toggle()
-                    }
-            }.padding(.horizontal, 20)
-        }
+            Spacer().frame(height: 20)
+            passwordField
+            Divider()
+            existingUser
+        }.padding(.horizontal, 20)
+    }
+    
+    var existingUser: some View {
+        HStack {
+            Spacer()
+            Text("Existing user? ")
+                .font(.custom("Montserrat", size: 17))
+                .foregroundColor(lightGrayColor)
+            Image(systemName: isChecked ? "checkmark.square.fill" : "square")
+                .accessibility(hidden: true)
+                .frame(width: 40, height: 40)
+                .foregroundColor(isChecked ? primaryColor : Color.secondary)
+                .onTapGesture {
+                    self.isChecked.toggle()
+                }
+        }.padding(.horizontal, 20)
+    }
+    
+    var passwordField: some View {
+        SecureField("Password", text: $password)
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
+            .keyboardType(.default)
+            .font(.custom("Montserrat", size: 17))
+            .foregroundColor(darkGrayColor)
+    }
+    
+    var participantField: some View {
+        TextField("ParticipantID", text: $patientID)
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
+            .keyboardType(.default)
+            .font(.custom("Montserrat", size: 17))
+            .foregroundColor(darkGrayColor)
+    }
+    
+    var nameField: some View {
+        TextField("Name", text: $name)
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
+            .keyboardType(.default)
+            .font(.custom("Montserrat", size: 17))
+            .foregroundColor(darkGrayColor)
     }
     
     var emailField: some View {
@@ -137,9 +159,6 @@ struct LoginViewLocal: View {
             .keyboardType(.default)
             .font(.custom("Montserrat", size: 17))
             .foregroundColor(darkGrayColor)
-            .padding(.horizontal, 20)
-            Divider()
-                .padding(.horizontal, 20)
         }
     }
     
@@ -152,13 +171,20 @@ struct LoginViewLocal: View {
                     return
                 }
                 
+                if $password.wrappedValue.isEmpty {
+                    self.alertMessage = "The password is required"
+                    showingAlert = true
+                    return
+                }
+                
                 if isChecked == true {
                     authModel.loginLocalUser(
                         uid: patientID,
+                        password: password,
                         onSuccess: {
                             completedOnboardingFlow = true
                         }, onError: { errorMessage in
-                            self.alertMessage = "No user with that PatiendID"
+                            self.alertMessage = errorMessage
                             showingAlert = true
                             print("Login error " + errorMessage)
                         }
@@ -181,11 +207,13 @@ struct LoginViewLocal: View {
                             uid: patientID,
                             name: name,
                             email: email,
+                            password: password,
                             onSuccess: {
                                 completedOnboardingFlow = true
                                 name = ""
                                 patientID = ""
                                 email = ""
+                                password = ""
                             }, onError: { errorMessage in
                                 print("Error while creating the new user \(errorMessage)")
                                 self.alertMessage = "Error while creating the new user"
