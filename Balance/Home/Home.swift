@@ -46,7 +46,7 @@ struct HomeView: View {
                 }
             }
             .onChange(of: counter.count, perform: { _ in
-                if counter.count > 90 {
+                if counter.count > 100 {
                     print(counter.count)
                     alertHeartRate()
                 }
@@ -223,10 +223,10 @@ struct HomeView: View {
     
     func alertHeartRate() {
         let content = UNMutableNotificationContent()
-         content.title = "BALANCE"
-         content.subtitle = "Please chill!"
-         content.body = "Your heart rate are to up! Please relax with Balance!"
-         content.badge = 1
+        content.title = "Find some Balance"
+        content.subtitle = "Heads Up!"
+        content.body = "Your ❤️ heart's racing—time to find your Balance!"
+        content.badge = 1
 
          let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 
