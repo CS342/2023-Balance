@@ -80,3 +80,6 @@ let coinsValue = 5
 let coinsTime = 15
 
 let demoID = "0"
+
+let bpmKEY = "bpmKEY"
+let defaultBPM = 100.0

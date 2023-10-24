@@ -56,6 +56,9 @@ struct Balance: App {
                 if !userModel.existLocalUser(uid: demoID) {
                     userModel.createDemoUser()
                 }
+                if (UserDefaults.standard.value(forKey: bpmKEY) == nil) {
+                    UserDefaults.standard.setValue(defaultBPM, forKey: bpmKEY)
+                }
             })
             .onChange(of: scenePhase) { phase in
                 switch phase {

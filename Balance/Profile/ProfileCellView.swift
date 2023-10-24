@@ -16,7 +16,7 @@ struct ProfileCellView: View {
             iconView
             textView
         }
-        .frame(maxWidth: 300)
+        .frame(maxWidth: UIScreen.screenWidth - 20)
         .frame(height: 60)
         .foregroundColor(darkBlueColor)
         .background(RoundedRectangle(cornerRadius: 20).fill(.white))

@@ -29,6 +29,7 @@ struct DrawingView: UIViewRepresentable {
         canvas.maximumZoomScale = 10
         canvas.contentSize = CGSize(width: 1000, height: 1000)
         canvas.contentInset = UIEdgeInsets(top: 500, left: 500, bottom: 500, right: 500)
+        canvas.isScrollEnabled = false
         return canvas
     }
     
@@ -64,7 +65,7 @@ struct DrawView: View {
     @State var eraserWidth: Double = 99.0
     @State var lineWidth: CGFloat = 1.0
     @State var showLineWith = false
-    
+
     var body: some View {
         ZStack {
             Color.white.edgesIgnoringSafeArea(.all)
@@ -125,7 +126,9 @@ struct DrawView: View {
             if self.title.isEmpty {
                 self.emptyDrawAlert = true
             } else {
-                saveImage()
+                Task {
+                    await saveImage()
+                }
             }
         } label: {
             Text("Save")
@@ -143,7 +146,11 @@ struct DrawView: View {
         .buttonStyle(ActivityLogButtonStyle(activityDescription: isColoring == true ? "Coloring Draw SAVED" : "Draw SAVED"))
         .alert("Enter the title of the drawing", isPresented: $emptyDrawAlert) {
             TextField("Title", text: $title)
-            Button("OK", action: saveImage)
+            Button("OK") {
+                Task {
+                    await saveImage()
+                }
+            }
         }
     }
     
@@ -377,7 +384,7 @@ struct DrawView: View {
         }
     }
     
-    func saveImage() {
+    func saveImage() async {
         let newDraw = Draw(
             id: currentDraw.id,
             title: title,

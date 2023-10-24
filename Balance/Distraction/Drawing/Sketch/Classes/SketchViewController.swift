@@ -63,16 +63,20 @@ class SketchViewController: UIViewController, ButtonViewInterface, UIScrollViewD
             alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
                 let textField = alert?.textFields![0]
                 self.draw?.title = textField!.text!
-                self.save()
+                Task {
+                    await self.save()
+                }
             }))
             
             self.present(alert, animated: true, completion: nil)
         } else {
-            save()
+            Task {
+                await save()
+            }
         }
     }
     
-    func save() {
+    func save() async{
         let imageData = (self.sketchView.image?.pngData())!
         self.draw?.image = imageData
         self.coloringStore!.saveDraw((self.draw)!)
