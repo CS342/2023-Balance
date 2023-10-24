@@ -315,7 +315,6 @@ struct ProfileView: View {
             value = 100.0
         }
         UserDefaults.standard.set(value, forKey: bpmKEY)
-
     }
     
     func readBPM() {

@@ -56,7 +56,9 @@ struct Balance: App {
                 if !userModel.existLocalUser(uid: demoID) {
                     userModel.createDemoUser()
                 }
-                if (UserDefaults.standard.value(forKey: bpmKEY) == nil) {
+                
+                let bmpStep = UserDefaults.standard.value(forKey: bpmKEY)
+                if bmpStep == nil {
                     UserDefaults.standard.setValue(defaultBPM, forKey: bpmKEY)
                 }
             })
