@@ -25,7 +25,8 @@ struct DistractionCellView: View {
                 Spacer()
             }
         }
-        .frame(maxWidth: 311, maxHeight: 120)
+        .frame(maxWidth: UIScreen.screenWidth - 20)
+        .frame(height: 120)
         .foregroundColor(darkBlueColor)
         .background(RoundedRectangle(cornerRadius: 20).fill(.white))
         .clipped()

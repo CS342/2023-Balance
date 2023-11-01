@@ -31,7 +31,10 @@ struct ProfileView: View {
     @State private var showAlert = false
     @State private var logs = [ActivityLogEntry]()
     @State private var logsIsEmpty = true
-    
+    @State private var sliderValue: Float = 0.0
+    @State private var isEditing = false
+    @State private var sliderStringValue: String = ""
+
     var body: some View {
         ZStack {
             VStack(alignment: .center, spacing: 0) {
@@ -39,11 +42,13 @@ struct ProfileView: View {
                     .background(primaryColor)
                 avatarChangeView
                 userData
+                bpmView
                 cellsView
                 Spacer()
             }
         }
         .onAppear {
+            loadBPM()
 #if DEMO
             loadUserLocal()
             loadLogs()
@@ -58,6 +63,29 @@ struct ProfileView: View {
                 self.patientID = profile?.id ?? "0000"
                 self.avatar = profile?.avatar ?? ""
             }
+        }
+    }
+    
+    var bpmView: some View {
+        VStack(spacing: 20) {
+            Text("BPM Alert at: \(sliderStringValue)")
+                .font(.custom("Nunito-Bold", size: 20))
+                .foregroundColor(darkBlueColor)
+            Slider(value: $sliderValue, in: 0...4, step: 1) {
+                Text("Slider")
+            } minimumValueLabel: {
+                Text("80")
+                    .font(.custom("Montserrat-Thin", size: 20))
+                    .foregroundColor(darkBlueColor)
+            } maximumValueLabel: {
+                Text("120")
+                    .font(.custom("Montserrat-Thin", size: 20))
+                    .foregroundColor(darkBlueColor)
+            } onEditingChanged: { editing in
+                isEditing = editing
+                readBPM()
+            }.tint(primaryColor)
+                .padding(.horizontal, 50)
         }
     }
     
@@ -88,6 +116,7 @@ struct ProfileView: View {
     var cellsView: some View {
         ScrollView(.vertical) {
             VStack(spacing: 20) {
+                Spacer().frame(height: 10)
 #if !DEMO
                 infoOption
                 updateOption
@@ -206,6 +235,8 @@ struct ProfileView: View {
             //            coloringStore.removeStore()
             // #endif
             //            dismiss()
+            
+            UserDefaults.standard.setValue(defaultBPM, forKey: bpmKEY)
             authModel.signOut()
             completedOnboardingFlow = false
             //            account.signedIn = false
@@ -265,6 +296,66 @@ struct ProfileView: View {
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 2))
             .accessibility(hidden: true)
+    }
+    
+    func saveBPM() {
+        var value = 100.0
+        switch sliderValue {
+        case 0:
+            value = 80.0
+        case 1:
+            value = 90.0
+        case 2:
+            value = 100.0
+        case 3:
+            value = 110.0
+        case 4:
+            value = 120.0
+        default:
+            value = 100.0
+        }
+        UserDefaults.standard.set(value, forKey: bpmKEY)
+    }
+    
+    func readBPM() {
+        switch sliderValue {
+        case 0:
+            sliderStringValue = "80"
+        case 1:
+            sliderStringValue = "90"
+        case 2:
+            sliderStringValue = "100"
+        case 3:
+            sliderStringValue = "110"
+        case 4:
+            sliderStringValue = "120"
+        default:
+            sliderStringValue = "100"
+        }
+        saveBPM()
+    }
+    
+    func loadBPM() {
+        switch UserDefaults.standard.float(forKey: bpmKEY) {
+        case 80.0:
+            sliderValue = 0
+            sliderStringValue = "80"
+        case 90.0:
+            sliderValue = 1
+            sliderStringValue = "90"
+        case 100.0:
+            sliderValue = 2
+            sliderStringValue = "100"
+        case 110.0:
+            sliderValue = 3
+            sliderStringValue = "110"
+        case 120.0:
+            sliderValue = 4
+            sliderStringValue = "120"
+        default:
+            sliderValue = 2
+            sliderStringValue = "100"
+        }
     }
     
     func loadUser() {

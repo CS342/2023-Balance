@@ -46,7 +46,7 @@ struct HomeView: View {
                 }
             }
             .onChange(of: counter.count, perform: { _ in
-                if counter.count > 100 {
+                if counter.count > UserDefaults.standard.double(forKey: bpmKEY) {
                     print(counter.count)
                     alertHeartRate()
                 }

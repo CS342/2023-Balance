@@ -36,7 +36,8 @@ struct ChillCellView: View {
             }
         }
         .padding(EdgeInsets(top: 24, leading: 24, bottom: 24, trailing: 0))
-        .frame(maxWidth: 311, maxHeight: 114)
+        .frame(maxWidth: UIScreen.screenWidth - 20)
+        .frame(height: 120)
         .foregroundColor(darkBlueColor)
         .background(RoundedRectangle(cornerRadius: 20).fill(.white))
         .clipped()
