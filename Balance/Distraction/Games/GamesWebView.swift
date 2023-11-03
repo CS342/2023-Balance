@@ -13,16 +13,19 @@ struct GamesWebView: View {
     var titleGame: String
     
     var body: some View {
-        HeaderMenu(title: titleGame)
-        WebView(webView: webViewStore.webView)
-            .edgesIgnoringSafeArea(.bottom)
-            .onAppear {
-                guard let sudokuLink = URL(string: gameLink) else {
-                    return
+        VStack(spacing: 0) {
+            HeaderMenu(title: titleGame)
+            WebView(webView: webViewStore.webView)
+                .edgesIgnoringSafeArea(.bottom)
+                .offset(x: 0, y: -22)
+                .onAppear {
+                    guard let sudokuLink = URL(string: gameLink) else {
+                        return
+                    }
+                    self.webViewStore.webView.load(URLRequest(url: sudokuLink))
                 }
-                self.webViewStore.webView.load(URLRequest(url: sudokuLink))
-            }
-            .background(backgroundColor)
+                .background(backgroundColor)
+        }
     }
     
     init(gameLink: String, titleGame: String) {
