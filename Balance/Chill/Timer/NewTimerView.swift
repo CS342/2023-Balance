@@ -79,13 +79,9 @@ struct NewTimerView: View {
         }
     }
     
-    // swiftlint: disable vertical_parameter_alignment_on_call
     var sliderView: some View {
         VStack {
-            Slider(
-                value: $sliderValue,
-                in: 0...Float(self.countTo)
-            ) {
+            Slider(value: $sliderValue, in: 0...Float(self.countTo), step: 1) {
                 Text("Speed")
             } minimumValueLabel: {
                 Text(String(toMinutes()))
@@ -97,9 +93,8 @@ struct NewTimerView: View {
                     .foregroundColor(darkGrayColor)
             } onEditingChanged: { _ in
                 self.counter = Int(self.sliderValue)
-            }
-            .tint(primaryColor)
-            .padding(.horizontal, 50)
+            }.tint(primaryColor)
+                .padding(.horizontal, 50)
         }
     }
     
