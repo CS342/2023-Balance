@@ -17,7 +17,6 @@ struct GamesWebView: View {
             HeaderMenu(title: titleGame)
             WebView(webView: webViewStore.webView)
                 .edgesIgnoringSafeArea(.bottom)
-                .offset(x: 0, y: -22)
                 .onAppear {
                     guard let sudokuLink = URL(string: gameLink) else {
                         return

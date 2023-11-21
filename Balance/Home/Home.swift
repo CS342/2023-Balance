@@ -12,7 +12,6 @@ import class FHIR.FHIR
 import FirebaseAccount
 import WatchConnectivity
 
-// swiftlint:disable closure_body_length
 struct HomeView: View {
     @EnvironmentObject var authModel: AuthViewModel
     @State var showMe = false
@@ -52,16 +51,7 @@ struct HomeView: View {
                 }
             })
             .onAppear {
-                UNUserNotificationCenter.current().requestAuthorization(
-                    options: [[.alert, .sound, .badge]],
-                    completionHandler: { granted, error in
-                        if error != nil {
-                            print("LocalNotification error: \(String(describing: error))")
-                        } else {
-                            print("LocalNotification access granted...\( granted.description)")
-                        }
-                    }
-                )
+                localNotification()
             }
         }
     }
@@ -117,14 +107,15 @@ struct HomeView: View {
     }
     
     var accesoryImage: some View {
-        Image(profile.accesory)
-            .resizable()
-            .accessibility(hidden: true)
-            .scaledToFit()
-            .clipped()
-            .frame(width: 150, height: 150)
-            .background(Color.clear)
-            .offset(x: -30, y: -10)
+        var accX = UserDefaults.standard.double(forKey: accesoryX)
+        var accY = UserDefaults.standard.double(forKey: accesoryY)
+
+        if UserDefaults.standard.object(forKey: accesoryX) == nil {
+            accX = accesoryDefaultX
+            accY = accesoryDefaultY
+        }
+        
+        return DraggableAccesoryView(location: CGPoint(x: accX, y: accY), imageName: profile.accesory)
     }
     
     var cloudImage: some View {
@@ -260,5 +251,18 @@ struct HomeView: View {
             }
         }
 #endif
+    }
+    
+    func localNotification() {
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [[.alert, .sound, .badge]],
+            completionHandler: { granted, error in
+                if error != nil {
+                    print("LocalNotification error: \(String(describing: error))")
+                } else {
+                    print("LocalNotification access granted...\( granted.description)")
+                }
+            }
+        )
     }
 }
