@@ -236,6 +236,8 @@ struct ProfileView: View {
             // #endif
             //            dismiss()
             
+            UserDefaults.standard.removeObject(forKey: accesoryX)
+            UserDefaults.standard.removeObject(forKey: accesoryY)
             UserDefaults.standard.setValue(defaultBPM, forKey: bpmKEY)
             authModel.signOut()
             completedOnboardingFlow = false
