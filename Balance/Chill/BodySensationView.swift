@@ -14,14 +14,15 @@ struct BodySensationView: View {
             VStack {
                 HeaderMenu(title: "Body sensations")
                 Spacer()
-                titleText
-                Spacer()
-                imageView
-                Spacer()
-                subTitleText
-                bodyButtons
+                ScrollView {
+                    titleText
+                    Spacer()
+                    imageView
+                    Spacer()
+                    subTitleText
+                    bodyButtons
+                }
             }
-            Spacer()
         }
     }
     

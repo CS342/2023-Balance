@@ -18,13 +18,9 @@ struct GamesView: View {
                         sudokuGame
                         crossoverGame
                         solitaireGame
-                        mahjongGame
                         twocerofoureightGame
                         bouncingGame
-                        dailyWordGame
                         simonGame
-                        colorsGame
-                        bejeweledGame
                         tetrisGame
                     }
                     .padding(10)
@@ -33,35 +29,7 @@ struct GamesView: View {
             }
         }
     }
-    
-    var notesGame: some View {
-        NavigationLink(
-            destination: ActivityLogBaseView(
-                viewName: "Random Notes Games",
-                isDirectChildToContainer: true,
-                content: {
-                    // define action
-                }
-            )
-        ) {
-            GamesCellView(image: "notesIcon", text: "Random Notes")
-        }
-    }
 
-    var bejeweledGame: some View {
-        NavigationLink(
-            destination: ActivityLogBaseView(
-                viewName: "Bejeweled Game",
-                isDirectChildToContainer: true,
-                content: {
-                    GamesWebView(gameLink: "https://www.bubbleshooter.net/game/bejeweled/", titleGame: "Bejeweled")
-                }
-            )
-        ) {
-            GamesCellView(image: "bejeweledIcon", text: "Bejeweled")
-        }
-    }
-    
     var tetrisGame: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
@@ -76,20 +44,6 @@ struct GamesView: View {
         }
     }
     
-    var colorsGame: some View {
-        NavigationLink(
-            destination: ActivityLogBaseView(
-                viewName: "4Colors Game",
-                isDirectChildToContainer: true,
-                content: {
-                    GamesWebView(gameLink: "https://freegames.org/4-colors/", titleGame: "4 Colors")
-                }
-            )
-        ) {
-            GamesCellView(image: "colorsIcon", text: "4 Colors")
-        }
-    }
-    
     var simonGame: some View {
         NavigationLink(
             destination: ActivityLogBaseView(
@@ -101,20 +55,6 @@ struct GamesView: View {
             )
         ) {
             GamesCellView(image: "simonIcon", text: "Simon Says")
-        }
-    }
-    
-    var dailyWordGame: some View {
-        NavigationLink(
-            destination: ActivityLogBaseView(
-                viewName: "Daily Word Game",
-                isDirectChildToContainer: true,
-                content: {
-                    GamesWebView(gameLink: "https://freegames.org/daily-word-search/", titleGame: "Daily Word")
-                }
-            )
-        ) {
-            GamesCellView(image: "wordIcon", text: "Daily Word")
         }
     }
     
@@ -143,20 +83,6 @@ struct GamesView: View {
             )
         ) {
             GamesCellView(image: "2048Icon", text: "2048")
-        }
-    }
-    
-    var mahjongGame: some View {
-        NavigationLink(
-            destination: ActivityLogBaseView(
-                viewName: "Mahjong Game",
-                isDirectChildToContainer: true,
-                content: {
-                    GamesWebView(gameLink: "https://freegames.org/mahjong/", titleGame: "Mahjong")
-                }
-            )
-        ) {
-            GamesCellView(image: "mahjongIcon", text: "Mahjong")
         }
     }
     

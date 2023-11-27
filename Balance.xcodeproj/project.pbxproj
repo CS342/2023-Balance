@@ -180,6 +180,7 @@
 		6CE62D552A014BF300BB4F90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */; };
 		6CE62D572A028F3400BB4F90 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE62D562A028F3400BB4F90 /* Country.swift */; };
 		6CE8A7892AA291A4003CD727 /* ChillCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8A7882AA291A4003CD727 /* ChillCellView.swift */; };
+		6CEC85782B0CF63C001022C4 /* DraggableAccesoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC85772B0CF63C001022C4 /* DraggableAccesoryView.swift */; };
 		6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF510BF29C8FD25008A2F55 /* LocationView.swift */; };
 		6CF6BEE62A31103A00A337F3 /* Bundle+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF6BEE12A31103A00A337F3 /* Bundle+Image.swift */; };
 		6CF6BEE72A31103A00A337F3 /* FeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF6BEE22A31103A00A337F3 /* FeatureFlags.swift */; };
@@ -400,6 +401,7 @@
 		6CE62D542A014BF300BB4F90 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CE62D562A028F3400BB4F90 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		6CE8A7882AA291A4003CD727 /* ChillCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChillCellView.swift; path = Balance/Chill/ChillCellView.swift; sourceTree = SOURCE_ROOT; };
+		6CEC85772B0CF63C001022C4 /* DraggableAccesoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableAccesoryView.swift; sourceTree = "<group>"; };
 		6CF510BF29C8FD25008A2F55 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		6CF6BEE12A31103A00A337F3 /* Bundle+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Image.swift"; sourceTree = "<group>"; };
 		6CF6BEE22A31103A00A337F3 /* FeatureFlags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureFlags.swift; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 				2FC975A72978F11A00BA99FE /* Home.swift */,
 				6CF510BF29C8FD25008A2F55 /* LocationView.swift */,
 				894A884429B7B27600CB347B /* NavigationView.swift */,
+				6CEC85772B0CF63C001022C4 /* DraggableAccesoryView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1041,7 +1044,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					2FE302542AC510A900763567 = {
 						CreatedOnToolsVersion = 15.0;
@@ -1219,6 +1222,7 @@
 				6C85C6DE2A0554610053F759 /* BodySensationView.swift in Sources */,
 				6CADE4412A563E8B0074F6A6 /* Question.swift in Sources */,
 				27525EB429B68B5100D1DF51 /* Date.swift in Sources */,
+				6CEC85782B0CF63C001022C4 /* DraggableAccesoryView.swift in Sources */,
 				6CF6BEEA2A31103A00A337F3 /* Binding+Negate.swift in Sources */,
 				6CBE75D62A0BE5B000A1747D /* AdaptsToKeyboard.swift in Sources */,
 				6C5523F729F80E8800F802D9 /* ShowHideSecureField.swift in Sources */,
@@ -1433,6 +1437,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1493,6 +1498,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

@@ -83,3 +83,8 @@ let demoID = "0"
 
 let bpmKEY = "bpmKEY"
 let defaultBPM = 100.0
+
+let accesoryX = "accesoryX"
+let accesoryY = "accesoryY"
+let accesoryDefaultX = balWidth - 120
+let accesoryDefaultY = balHeight - 300

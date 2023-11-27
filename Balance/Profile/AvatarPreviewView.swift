@@ -31,6 +31,7 @@ struct AvatarPreviewView: View {
                 Spacer()
                 saveButton
                 cancelButton
+                Spacer().frame(height: 50)
             }
             if loading {
                 loadingView
@@ -181,14 +182,12 @@ struct AvatarPreviewView: View {
                     .font(.custom("Montserrat-SemiBold", size: 17))
                     .padding(.horizontal, 10.0)
                     .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
+                    .frame(width: 300)
                     .frame(height: 44.0)
             }
         )
-        .overlay( RoundedRectangle(cornerRadius: 10)
-            .stroke(primaryColor, lineWidth: 2))
         .background(primaryColor)
-        .padding(.horizontal, 20.0)
+        .cornerRadius(10)
     }
     
     var cancelButton: some View {
@@ -199,13 +198,13 @@ struct AvatarPreviewView: View {
                 .font(.custom("Montserrat-SemiBold", size: 17))
                 .padding(.horizontal, 10.0)
                 .foregroundColor(primaryColor)
-                .frame(maxWidth: .infinity)
+                .frame(width: 300)
                 .frame(height: 44.0)
         }
+        
         .overlay( RoundedRectangle(cornerRadius: 10)
             .stroke(primaryColor, lineWidth: 2))
         .background(.white)
-        .padding(.horizontal, 20.0)
     }
     
     init(
