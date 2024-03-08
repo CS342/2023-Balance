@@ -90,9 +90,7 @@ class ActivityLogStore: ObservableObject {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let logs):
-                self.logs = logs.filter({
-                    $0.id != log.id
-                })
+                self.logs = logs.filter { $0.id != log.id }
                 self.logs.append(log)
                 
                 ActivityLogStore.save(logs: self.logs) { result in
