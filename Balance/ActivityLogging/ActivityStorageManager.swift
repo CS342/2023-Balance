@@ -118,6 +118,11 @@ class ActivityLogEntry: ObservableObject, Codable {
             actionDescription.contains("Closed Video Selected") ||
             actionDescription.contains("Closed Sudoku Game") ||
             actionDescription.contains("Closed Crossover Game") ||
+            actionDescription.contains("Closed Tetris Game") ||
+            actionDescription.contains("Closed Simon Says Game") ||
+            actionDescription.contains("Closed Bouncing Ball Game") ||
+            actionDescription.contains("Closed 2048 Game") ||
+            actionDescription.contains("Closed Solitaire Game") ||
             actionDescription.contains("Closed Guess the Emotion") ||
             actionDescription.contains("Closed How is your mood") ||
             actionDescription.contains("Closed New Draw") ||
