@@ -28,5 +28,9 @@ jobs:
     name: Upload Coverage Report
     needs: buildandtest
     uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
+    permissions:
+      contents: read
     with:
       coveragereports: Balance.xcresult
+    secrets:
+      token: ${{ secrets.CODECOV_TOKEN }}
