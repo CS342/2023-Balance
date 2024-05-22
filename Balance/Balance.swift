@@ -28,6 +28,7 @@ struct Balance: App {
     
     @Environment(\.scenePhase)
     var scenePhase
+    @State var heartAlert = false
     
     var body: some Scene {
         WindowGroup {
@@ -74,6 +75,10 @@ struct Balance: App {
                     print("ScenePhase: unexpected state")
                 }
             }
+            .onReceive( NotificationCenter.default.publisher( for: Notification.Name.heartAlert)) { _ in
+                self.heartAlert = true
+                appEvent(description: "App Opened via Heart Rate notification")
+            }
         }
     }
     
@@ -84,10 +89,28 @@ struct Balance: App {
         if value == false {
             activityLogEntry.reset()
         }
+        self.heartAlert = false
     }
     
     func activeApp() {
+        if heartAlert == false {
+            appEvent(description: "App Opened manually")
+        }
         UIApplication.shared.applicationIconBadgeNumber = 0
         UserDefaults.standard.set(false, forKey: StorageKeys.spotifyConnect)
+    }
+    
+    func appEvent(description: String) {
+        activityLogEntry.addActionButton(actionDescription: description)
+#if DEMO
+        logStore.saveLog(activityLogEntry)
+        ActivityLogStore.save(logs: logStore.logs) { result in
+            if case .failure(let error) = result {
+                print(error.localizedDescription)
+            }
+        }
+#else
+        ActivityStorageManager.shared.uploadActivity(activityLogEntry: activityLogEntry)
+#endif
     }
 }

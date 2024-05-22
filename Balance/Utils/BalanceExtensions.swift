@@ -131,6 +131,7 @@ extension Notification.Name {
     static let coinsUpdate = Notification.Name("coinsUpdate")
     static let coinsRefresh = Notification.Name("coinsRefresh")
     static let coinsAlert = Notification.Name("coinsAlert")
+    static let heartAlert = Notification.Name("heartAlert")
 }
 
 // swiftlint:disable operator_whitespace
@@ -157,4 +158,11 @@ extension UIScreen {
    static let screenWidth = UIScreen.main.bounds.size.width
    static let screenHeight = UIScreen.main.bounds.size.height
    static let screenSize = UIScreen.main.bounds.size
+}
+
+extension Array {
+    func first(elementCount: Int) -> Array {
+          let min = Swift.min(elementCount, count)
+          return Array(self[0..<min])
+    }
 }

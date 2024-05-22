@@ -79,4 +79,16 @@ class BalanceAppDelegate: CardinalKitAppDelegate {
         sceneConfig.delegateClass = SceneDelegate.self
         return sceneConfig
     }
+    
+    // swiftlint:disable:next discouraged_optional_collection
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        UNUserNotificationCenter.current().delegate = self
+        return true
+    }
+}
+
+extension BalanceAppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        NotificationCenter.default.post(name: Notification.Name.heartAlert, object: nil)
+    }
 }
