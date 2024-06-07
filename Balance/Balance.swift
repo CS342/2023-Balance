@@ -6,7 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import CardinalKit
 import SwiftUI
 
 // swiftlint:disable closure_body_length
@@ -43,7 +42,6 @@ struct Balance: App {
                 }
             }
             .testingSetup()
-            .cardinalKit(appDelegate)
             .environmentObject(noteStore)
             .environmentObject(drawStore)
             .environmentObject(coloringStore)

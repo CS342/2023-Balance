@@ -6,75 +6,43 @@
 // SPDX-License-Identifier: MIT
 //
 
-import CardinalKit
-import FHIR
-import FHIRToFirestoreAdapter
-import FirebaseAccount
-import class FirebaseFirestore.FirestoreSettings
-import FirestoreDataStorage
-import FirestoreStoragePrefixUserIdAdapter
-import HealthKit
-import HealthKitDataSource
-import HealthKitToFHIRAdapter
-import Questionnaires
-import Scheduler
+import Spezi
+import SpeziFirestore
 import SwiftUI
 
-class BalanceAppDelegate: CardinalKitAppDelegate {
+class BalanceAppDelegate: SpeziAppDelegate {
     override var configuration: Configuration {
-        Configuration(standard: FHIR()) {
-#if !DEMO
+        Configuration {
+            #if !DEMO
             if !FeatureFlags.disableFirebase {
-                if FeatureFlags.useFirebaseEmulator {
-                    FirebaseAccountConfiguration(emulatorSettings: (host: "localhost", port: 9099))
-                } else {
-                    FirebaseAccountConfiguration()
-                }
                 firestore
             }
-            if HKHealthStore.isHealthDataAvailable() {
-                healthKit
-            }
-#endif
+            #endif
         }
     }
     
-#if !DEMO
-    private var firestore: Firestore<FHIR> {
+    
+    #if !DEMO
+    private var firestore: Firestore {
         let settings = FirestoreSettings()
         if FeatureFlags.useFirebaseEmulator {
             settings.host = "localhost:8080"
-            settings.isPersistenceEnabled = false
+            settings.cacheSettings = MemoryCacheSettings()
             settings.isSSLEnabled = false
         }
         
         return Firestore(
-            adapter: {
-                FHIRToFirestoreAdapter()
-                FirestoreStoragePrefixUserIdAdapter()
-            },
             settings: settings
         )
     }
-#endif
+    #endif
     
-    private var healthKit: HealthKit<FHIR> {
-        HealthKit {
-            CollectSample(
-                HKQuantityType(.stepCount),
-                deliverySetting: .anchorQuery(.afterAuthorizationAndApplicationWillLaunch)
-            )
-        } adapter: {
-            HealthKitToFHIRAdapter()
-        }
-    }
-
-
-    func application(
+    override func application(
       _ application: UIApplication,
       configurationForConnecting connectingSceneSession: UISceneSession,
       options: UIScene.ConnectionOptions
     ) -> UISceneConfiguration {
+        _ = super.application(application, configurationForConnecting: connectingSceneSession, options: options)
         let sceneConfig = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
         sceneConfig.delegateClass = SceneDelegate.self
         return sceneConfig

@@ -5,12 +5,10 @@
 //  Created by Gonzalo Perisset on 28/04/2023.
 //
 
-import FHIR
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import Foundation
-import LocalStorage
 import SwiftUI
 
 class UserProfileRepositoryToLocal: ObservableObject {

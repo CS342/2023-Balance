@@ -6,10 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-import Account
 import SwiftUI
-import class FHIR.FHIR
-import FirebaseAccount
 import WatchConnectivity
 
 struct HomeView: View {

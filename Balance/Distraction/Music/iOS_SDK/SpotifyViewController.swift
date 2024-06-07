@@ -217,7 +217,7 @@ class SpotifyViewController: UIViewController {
         guard let sessionManager = sessionManager else {
             return
         }
-        sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
+        sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly, campaign: nil)
     }
     
     @objc
@@ -454,7 +454,7 @@ extension SpotifyViewController: UITableViewDelegate, UITableViewDataSource {
             guard let sessionManager = sessionManager else {
                 return
             }
-            sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly)
+            sessionManager.initiateSession(with: SpotifyConfig.scopes, options: .clientOnly, campaign: nil)
         }
     }
     
