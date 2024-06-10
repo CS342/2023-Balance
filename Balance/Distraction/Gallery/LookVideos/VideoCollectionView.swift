@@ -17,7 +17,6 @@ struct YoutubeModalView: View {
             let youTubePlayer = YouTubePlayer(
                 source: .video(id: videoID),
                 configuration: .init(
-                    fullscreenMode: .system,
                     autoPlay: true,
                     showControls: true
                 )
