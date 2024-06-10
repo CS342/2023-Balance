@@ -21,21 +21,12 @@
 		2761584B29A6548B006C7AC1 /* SpotifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584A29A6548B006C7AC1 /* SpotifyView.swift */; };
 		2761584D29A654FD006C7AC1 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2761584C29A654FD006C7AC1 /* Music.swift */; };
 		276222BD29B0E3E100FCB4C5 /* NoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276222BC29B0E3E100FCB4C5 /* NoteStore.swift */; };
-		2F49B7762980407C00BCB272 /* CardinalKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7752980407B00BCB272 /* CardinalKit */; };
-		2F49B7782980407C00BCB272 /* FHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7772980407C00BCB272 /* FHIR */; };
-		2F49B77A2980407C00BCB272 /* HealthKitDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7792980407C00BCB272 /* HealthKitDataSource */; };
-		2F49B77C2980407C00BCB272 /* HealthKitToFHIRAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B77B2980407C00BCB272 /* HealthKitToFHIRAdapter */; };
-		2F49B77E2980407C00BCB272 /* Scheduler in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B77D2980407C00BCB272 /* Scheduler */; };
-		2F49B7802980418400BCB272 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B77F2980418400BCB272 /* Onboarding */; };
-		2F49B7822980419C00BCB272 /* Questionnaires in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B7812980419C00BCB272 /* Questionnaires */; };
-		2F49B784298041F300BCB272 /* Contact in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49B783298041F300BCB272 /* Contact */; };
+		2F431C4F2C1391E20079E5D5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2F431C4E2C1391E20079E5D5 /* FirebaseAuth */; };
 		2F4E23832989D51F0013F3D9 /* BalanceAppTestingSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E23822989D51F0013F3D9 /* BalanceAppTestingSetup.swift */; };
 		2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5E32BC297E05EA003432F8 /* BalanceAppDelegate.swift */; };
 		2F9056EA299E2D8A003D3802 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F9056E9299E2D8A003D3802 /* GoogleService-Info.plist */; };
-		2F9056EF299E3180003D3802 /* FirebaseAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056EE299E3180003D3802 /* FirebaseAccount */; };
-		2F9056F1299E3181003D3802 /* FirestoreDataStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F0299E3181003D3802 /* FirestoreDataStorage */; };
-		2F9056F3299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */; };
-		2F9056F5299E3205003D3802 /* FHIRToFirestoreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */; };
+		2FA3A88A2C1393F5008DF2CE /* SpeziOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 2FA3A8892C1393F5008DF2CE /* SpeziOnboarding */; };
+		2FA3A88D2C13982E008DF2CE /* SpeziFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2FA3A88C2C13982E008DF2CE /* SpeziFirestore */; };
 		2FC9759F2978E39600BA99FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FC9759E2978E39600BA99FE /* Localizable.strings */; };
 		2FC975A82978F11A00BA99FE /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC975A72978F11A00BA99FE /* Home.swift */; };
 		2FE3025C2AC510AB00763567 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FE3025B2AC510AB00763567 /* Assets.xcassets */; };
@@ -45,7 +36,6 @@
 		4A45C88D29B4151B006A52A1 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45C88C29B4151B006A52A1 /* SleepView.swift */; };
 		4ACC786229AC0BEC0048D1D1 /* Youtube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786129AC0BEC0048D1D1 /* Youtube.swift */; };
 		4ACC786429AC0C070048D1D1 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC786329AC0C070048D1D1 /* MeditationView.swift */; };
-		5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAFCE1929A75990006CCD66 /* LocalStorage */; };
 		5E03E9A129BC15CF0041DD1C /* ActivityLogBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E03E9A029BC15CF0041DD1C /* ActivityLogBaseView.swift */; };
 		5E03E9A329BC933B0041DD1C /* ActivityLogButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E03E9A229BC933B0041DD1C /* ActivityLogButtonStyle.swift */; };
 		5EF9D78429B5AFF1006C3B22 /* ActivityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF9D78329B5AFF1006C3B22 /* ActivityStorageManager.swift */; };
@@ -97,14 +87,10 @@
 		6C55241D29F86C2700F802D9 /* ConsentDocument.md.license in Resources */ = {isa = PBXBuildFile; fileRef = 6C55241B29F86C2700F802D9 /* ConsentDocument.md.license */; };
 		6C55241E29F86C2700F802D9 /* ConsentDocument.md in Resources */ = {isa = PBXBuildFile; fileRef = 6C55241C29F86C2700F802D9 /* ConsentDocument.md */; };
 		6C55242629F86D9200F802D9 /* BalanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242129F86D9200F802D9 /* BalanceAccount.swift */; };
-		6C55242829F86D9200F802D9 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242329F86D9200F802D9 /* UserView.swift */; };
-		6C55242E29F86DD800F802D9 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242929F86DD800F802D9 /* Consent.swift */; };
 		6C55242F29F86DD800F802D9 /* String+ModuleLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242A29F86DD800F802D9 /* String+ModuleLocalized.swift */; };
 		6C55243029F86DD800F802D9 /* InterestingModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242B29F86DD800F802D9 /* InterestingModules.swift */; };
 		6C55243129F86DD800F802D9 /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242C29F86DD800F802D9 /* OnboardingFlow.swift */; };
-		6C55243229F86DD800F802D9 /* HealthKitPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55242D29F86DD800F802D9 /* HealthKitPermissions.swift */; };
 		6C55243729F8722B00F802D9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55243329F8722900F802D9 /* MainView.swift */; };
-		6C55243829F8722B00F802D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55243429F8722A00F802D9 /* ContentView.swift */; };
 		6C55243929F8722B00F802D9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55243529F8722A00F802D9 /* LoginView.swift */; };
 		6C55243A29F8722B00F802D9 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55243629F8722A00F802D9 /* AuthViewModel.swift */; };
 		6C55770F2A3A505F003FD6EE /* SpotifyDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C55770E2A3A505F003FD6EE /* SpotifyDataController.swift */; };
@@ -321,14 +307,10 @@
 		6C55241B29F86C2700F802D9 /* ConsentDocument.md.license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ConsentDocument.md.license; sourceTree = "<group>"; };
 		6C55241C29F86C2700F802D9 /* ConsentDocument.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ConsentDocument.md; sourceTree = "<group>"; };
 		6C55242129F86D9200F802D9 /* BalanceAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceAccount.swift; sourceTree = "<group>"; };
-		6C55242329F86D9200F802D9 /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
-		6C55242929F86DD800F802D9 /* Consent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Consent.swift; sourceTree = "<group>"; };
 		6C55242A29F86DD800F802D9 /* String+ModuleLocalized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ModuleLocalized.swift"; sourceTree = "<group>"; };
 		6C55242B29F86DD800F802D9 /* InterestingModules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestingModules.swift; sourceTree = "<group>"; };
 		6C55242C29F86DD800F802D9 /* OnboardingFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
-		6C55242D29F86DD800F802D9 /* HealthKitPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitPermissions.swift; sourceTree = "<group>"; };
 		6C55243329F8722900F802D9 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		6C55243429F8722A00F802D9 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6C55243529F8722A00F802D9 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6C55243629F8722A00F802D9 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		6C55770E2A3A505F003FD6EE /* SpotifyDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyDataController.swift; sourceTree = "<group>"; };
@@ -443,22 +425,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				89EB7BAD29B45381000470FC /* FirebaseFirestore in Frameworks */,
-				2F49B7822980419C00BCB272 /* Questionnaires in Frameworks */,
-				2F49B77E2980407C00BCB272 /* Scheduler in Frameworks */,
-				2F9056F1299E3181003D3802 /* FirestoreDataStorage in Frameworks */,
-				2F49B77A2980407C00BCB272 /* HealthKitDataSource in Frameworks */,
-				5AAFCE1A29A75990006CCD66 /* LocalStorage in Frameworks */,
+				2F431C4F2C1391E20079E5D5 /* FirebaseAuth in Frameworks */,
+				2FA3A88D2C13982E008DF2CE /* SpeziFirestore in Frameworks */,
 				6CAA076329E8983A00541F87 /* YouTubePlayerKit in Frameworks */,
-				2F9056F3299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter in Frameworks */,
-				2F49B784298041F300BCB272 /* Contact in Frameworks */,
+				2FA3A88A2C1393F5008DF2CE /* SpeziOnboarding in Frameworks */,
 				5EF9D78629B5CC58006C3B22 /* FirebaseStorage in Frameworks */,
-				2F49B7782980407C00BCB272 /* FHIR in Frameworks */,
-				2F49B7802980418400BCB272 /* Onboarding in Frameworks */,
-				2F49B7762980407C00BCB272 /* CardinalKit in Frameworks */,
-				2F49B77C2980407C00BCB272 /* HealthKitToFHIRAdapter in Frameworks */,
-				2F9056F5299E3205003D3802 /* FHIRToFirestoreAdapter in Frameworks */,
 				2761584929A6512E006C7AC1 /* SpotifyiOS in Frameworks */,
-				2F9056EF299E3180003D3802 /* FirebaseAccount in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,18 +680,14 @@
 			isa = PBXGroup;
 			children = (
 				6C55243629F8722A00F802D9 /* AuthViewModel.swift */,
-				6C55243429F8722A00F802D9 /* ContentView.swift */,
 				6C55243329F8722900F802D9 /* MainView.swift */,
 				6C55243529F8722A00F802D9 /* LoginView.swift */,
 				6C8868AC2A3A011A00000647 /* LoginViewLocal.swift */,
 				6C47338A29FAB89900DC72D0 /* SignUpView.swift */,
-				6C55242929F86DD800F802D9 /* Consent.swift */,
-				6C55242D29F86DD800F802D9 /* HealthKitPermissions.swift */,
 				6C55242B29F86DD800F802D9 /* InterestingModules.swift */,
 				6C55242C29F86DD800F802D9 /* OnboardingFlow.swift */,
 				6C55242A29F86DD800F802D9 /* String+ModuleLocalized.swift */,
 				6C55242129F86D9200F802D9 /* BalanceAccount.swift */,
-				6C55242329F86D9200F802D9 /* UserView.swift */,
 				6C47338C29FB09E400DC72D0 /* ProfileUser.swift */,
 				6CE62D562A028F3400BB4F90 /* Country.swift */,
 			);
@@ -999,23 +967,13 @@
 			);
 			name = Balance;
 			packageProductDependencies = (
-				2F49B7752980407B00BCB272 /* CardinalKit */,
-				2F49B7772980407C00BCB272 /* FHIR */,
-				2F49B7792980407C00BCB272 /* HealthKitDataSource */,
-				2F49B77B2980407C00BCB272 /* HealthKitToFHIRAdapter */,
-				2F49B77D2980407C00BCB272 /* Scheduler */,
-				2F49B77F2980418400BCB272 /* Onboarding */,
-				2F49B7812980419C00BCB272 /* Questionnaires */,
-				2F49B783298041F300BCB272 /* Contact */,
-				2F9056EE299E3180003D3802 /* FirebaseAccount */,
-				2F9056F0299E3181003D3802 /* FirestoreDataStorage */,
-				2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */,
-				2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */,
-				5AAFCE1929A75990006CCD66 /* LocalStorage */,
 				2F39333629A8A5690035A05C /* FirebaseFirestore */,
 				2761584829A6512E006C7AC1 /* SpotifyiOS */,
 				5EF9D78529B5CC58006C3B22 /* FirebaseStorage */,
 				6CAA076229E8983A00541F87 /* YouTubePlayerKit */,
+				2F431C4E2C1391E20079E5D5 /* FirebaseAuth */,
+				2FA3A8892C1393F5008DF2CE /* SpeziOnboarding */,
+				2FA3A88C2C13982E008DF2CE /* SpeziFirestore */,
 			);
 			productName = TemplateApplication;
 			productReference = 653A254D283387FE005D4D48 /* Balance.app */;
@@ -1072,12 +1030,13 @@
 			);
 			mainGroup = 653A2544283387FE005D4D48;
 			packageReferences = (
-				2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */,
 				2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */,
 				2F9056F9299E329C003D3802 /* XCRemoteSwiftPackageReference "XCTestExtensions" */,
 				2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2761584729A6512E006C7AC1 /* XCRemoteSwiftPackageReference "ios-sdk" */,
 				6CAA076129E8983A00541F87 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
+				2FA3A8882C1393F5008DF2CE /* XCRemoteSwiftPackageReference "SpeziOnboarding" */,
+				2FA3A88B2C13982E008DF2CE /* XCRemoteSwiftPackageReference "SpeziFirebase" */,
 			);
 			productRefGroup = 653A254E283387FE005D4D48 /* Products */;
 			projectDirPath = "";
@@ -1250,7 +1209,6 @@
 				6CB5181E29E6F395007AADB4 /* ImageView.swift in Sources */,
 				6C92E3C22A17C84E003FE239 /* RoundedCorner.swift in Sources */,
 				896C65D629B92EF800F30BA2 /* Config.swift in Sources */,
-				6C55243229F86DD800F802D9 /* HealthKitPermissions.swift in Sources */,
 				6CB5181129E1B13E007AADB4 /* GamesView.swift in Sources */,
 				2F5E32BD297E05EA003432F8 /* BalanceAppDelegate.swift in Sources */,
 				6CA4EFE629EDEBB000877850 /* AccesoryView.swift in Sources */,
@@ -1278,9 +1236,7 @@
 				6CF510C029C8FD25008A2F55 /* LocationView.swift in Sources */,
 				6CF6BEE72A31103A00A337F3 /* FeatureFlags.swift in Sources */,
 				2761584D29A654FD006C7AC1 /* Music.swift in Sources */,
-				6C55242829F86D9200F802D9 /* UserView.swift in Sources */,
 				6C0A4BF029E9B0CD003007C7 /* AvatarView.swift in Sources */,
-				6C55242E29F86DD800F802D9 /* Consent.swift in Sources */,
 				6C32484C2A8D85CE00223F8C /* ButtonView.swift in Sources */,
 				6C3BB1F52A1646C5008FEB93 /* PasswordResetView.swift in Sources */,
 				6CB5180D29DF5800007AADB4 /* GamesWebView.swift in Sources */,
@@ -1302,7 +1258,6 @@
 				6CB5181A29E45678007AADB4 /* ImageCollectionView.swift in Sources */,
 				6C3248482A8D85AB00223F8C /* SketchView.swift in Sources */,
 				6CE8A7892AA291A4003CD727 /* ChillCellView.swift in Sources */,
-				6C55243829F8722B00F802D9 /* ContentView.swift in Sources */,
 				6CC177262A3A5E2900121B72 /* ActivityLogStore.swift in Sources */,
 				89EB7BB129B45D2B000470FC /* HeaderMenu.swift in Sources */,
 				6CC177282A3A6BA900121B72 /* CellView.swift in Sources */,
@@ -1389,7 +1344,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1433,7 +1387,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -1488,13 +1441,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -1543,13 +1497,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -1597,7 +1552,6 @@
 				INFOPLIST_KEY_UITemplateApplicationlicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UITemplateApplicationlicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1661,7 +1615,6 @@
 				INFOPLIST_KEY_UITemplateApplicationlicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UITemplateApplicationlicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1692,7 +1645,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 637867499T;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1714,7 +1666,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 637867499T;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.cs342.2023.balance.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1785,14 +1736,6 @@
 				minimumVersion = 10.5.0;
 			};
 		};
-		2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/StanfordBDHG/CardinalKit";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.3.1;
-			};
-		};
 		2F9056F6299E3267003D3802 /* XCRemoteSwiftPackageReference "XCTHealthKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/StanfordBDHG/XCTHealthKit";
@@ -1806,7 +1749,23 @@
 			repositoryURL = "https://github.com/StanfordBDHG/XCTestExtensions";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.3.0;
+				minimumVersion = 0.4.10;
+			};
+		};
+		2FA3A8882C1393F5008DF2CE /* XCRemoteSwiftPackageReference "SpeziOnboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/StanfordSpezi/SpeziOnboarding.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+		2FA3A88B2C13982E008DF2CE /* XCRemoteSwiftPackageReference "SpeziFirebase" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/StanfordSpezi/SpeziFirebase.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
 			};
 		};
 		6CAA076129E8983A00541F87 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
@@ -1830,70 +1789,20 @@
 			package = 2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		2F49B7752980407B00BCB272 /* CardinalKit */ = {
+		2F431C4E2C1391E20079E5D5 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = CardinalKit;
+			package = 2F39333529A8A5690035A05C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
-		2F49B7772980407C00BCB272 /* FHIR */ = {
+		2FA3A8892C1393F5008DF2CE /* SpeziOnboarding */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = FHIR;
+			package = 2FA3A8882C1393F5008DF2CE /* XCRemoteSwiftPackageReference "SpeziOnboarding" */;
+			productName = SpeziOnboarding;
 		};
-		2F49B7792980407C00BCB272 /* HealthKitDataSource */ = {
+		2FA3A88C2C13982E008DF2CE /* SpeziFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = HealthKitDataSource;
-		};
-		2F49B77B2980407C00BCB272 /* HealthKitToFHIRAdapter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = HealthKitToFHIRAdapter;
-		};
-		2F49B77D2980407C00BCB272 /* Scheduler */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = Scheduler;
-		};
-		2F49B77F2980418400BCB272 /* Onboarding */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = Onboarding;
-		};
-		2F49B7812980419C00BCB272 /* Questionnaires */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = Questionnaires;
-		};
-		2F49B783298041F300BCB272 /* Contact */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = Contact;
-		};
-		2F9056EE299E3180003D3802 /* FirebaseAccount */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = FirebaseAccount;
-		};
-		2F9056F0299E3181003D3802 /* FirestoreDataStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = FirestoreDataStorage;
-		};
-		2F9056F2299E3181003D3802 /* FirestoreStoragePrefixUserIdAdapter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = FirestoreStoragePrefixUserIdAdapter;
-		};
-		2F9056F4299E3205003D3802 /* FHIRToFirestoreAdapter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = FHIRToFirestoreAdapter;
-		};
-		5AAFCE1929A75990006CCD66 /* LocalStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2F49B7742980407B00BCB272 /* XCRemoteSwiftPackageReference "CardinalKit" */;
-			productName = LocalStorage;
+			package = 2FA3A88B2C13982E008DF2CE /* XCRemoteSwiftPackageReference "SpeziFirebase" */;
+			productName = SpeziFirestore;
 		};
 		5EF9D78529B5CC58006C3B22 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;

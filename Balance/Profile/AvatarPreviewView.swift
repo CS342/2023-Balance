@@ -5,7 +5,6 @@
 //  Created by Gonzalo Perisset on 14/04/2023.
 //
 
-import Onboarding
 import SwiftUI
 
 // swiftlint:disable type_body_length

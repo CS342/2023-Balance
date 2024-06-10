@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-import Onboarding
+import SpeziOnboarding
 import SwiftUI
 
 

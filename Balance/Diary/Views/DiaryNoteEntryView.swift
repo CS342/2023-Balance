@@ -6,7 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import CardinalKit
 import SwiftUI
 
 struct DiaryNoteEntryView: View {
