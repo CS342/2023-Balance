@@ -1,5 +1,5 @@
 {
-  "originHash" : "9a2ec0153ac68a34b7437f77b1581088266f22c19125dfe889c09bd915b8fdc2",
+  "originHash" : "046d81b689bb9375e29ad15d6c5df7442a32fff88a2e2a791c2d3b5622b82ada",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -139,7 +139,7 @@
     {
       "identity" : "spezifirebase",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/StanfordSpezi/SpeziFirebase.git",
+      "location" : "https://github.com/StanfordSpezi/SpeziFirebase",
       "state" : {
         "revision" : "f05c859f75d317dca9b378b7f8a7cfa8e135df04",
         "version" : "1.1.1"
@@ -157,7 +157,7 @@
     {
       "identity" : "spezionboarding",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/StanfordSpezi/SpeziOnboarding.git",
+      "location" : "https://github.com/StanfordSpezi/SpeziOnboarding",
       "state" : {
         "revision" : "8d6dda3501720a1952573439b21a503cbecd9e0f",
         "version" : "1.2.0"
@@ -231,8 +231,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SvenTiigi/YouTubePlayerKit.git",
       "state" : {
-        "revision" : "5ade0dfbabaf7456069b4e8f604de261bf6d7c67",
-        "version" : "1.8.0"
+        "revision" : "7f5e23ef5948041bc2acba9f47b8f2128f93adca",
+        "version" : "1.0.0"
       }
     }
   ],

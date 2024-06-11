@@ -8,6 +8,7 @@
 import SwiftUI
 
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 struct ProfileView: View {
     @Environment(\.dismiss)
     private var dismiss
@@ -34,7 +35,9 @@ struct ProfileView: View {
     @State private var sliderValue: Float = 0.0
     @State private var isEditing = false
     @State private var sliderStringValue: String = ""
-
+//    @State private var postData = [PostCount]()
+    @State private var valuesData = [Double]()
+    @State private var namesData = [String]()
     var body: some View {
         ZStack {
             VStack(alignment: .center, spacing: 0) {
@@ -121,17 +124,40 @@ struct ProfileView: View {
                 infoOption
                 updateOption
 #else
-                resetOption
+                statsView
                 if logsIsEmpty == false {
                     shareOption
                     shareLink
                 }
+                resetOption
 #endif
                 logoutOption
             }
             .padding(10)
             .ignoresSafeArea(.all)
         }
+    }
+    
+    var statsView: some View {
+        NavigationLink(
+            destination: ActivityLogBaseView(
+                viewName: "Stats View",
+                isDirectChildToContainer: true,
+                content: {
+                    StatsView(valuesData: valuesData, namesData: namesData)
+                }
+            )
+        ) {
+            ProfileCellView(image: "chart.pie", text: "How I used the App")
+        }.simultaneousGesture(TapGesture().onEnded {
+//            self.postData = topActions()
+//            
+//            for val in postData {
+//                self.valuesData.append(Double(val.count))
+//                self.namesData.append(val.eventName)
+//            }
+            topActions()
+        })
     }
     
     var avatarChangeView: some View {
@@ -472,5 +498,35 @@ struct ProfileView: View {
             noteAsCSV.append(contentsOf: "\"\(action.sessionID)\",\"\(DateFormatter.sharedDateFormatter.string(from: action.sessionStartTime))\",\"\(DateFormatter.sharedDateFormatter.string(from: action.sessionEndTime))\",\"\(action.sessionDuration)\",\"\(action.description)\",\"\(DateFormatter.sharedDateFormatter.string(from: action.startTime))\",\"\(DateFormatter.sharedDateFormatter.string(from: action.endTime))\",\"\(action.duration)\"\n")
         }
         return noteAsCSV
+    }
+    
+    func topActions() {
+        var byEvent: [PostCount] = []
+        var logActions = [String]()
+        var counts: [String: Int] = [:]
+
+        for log in logs {
+            for action in log.actions {
+                logActions.append(action.description)
+            }
+        }
+        for item in logActions {
+            counts[item] = (counts[item] ?? 0) + 1
+        }
+        
+        for (key, value) in counts {
+            byEvent.append(PostCount(eventName: key, count: value))
+        }
+        
+        let sortedEvents = byEvent.sorted {
+            $0.count > $1.count
+        }
+        
+        for val in sortedEvents.first(elementCount: 5) {
+            self.valuesData.append(Double(val.count))
+            self.namesData.append(val.eventName)
+        }
+        return
+//        return sortedEvents.first(elementCount: 5)
     }
 }
