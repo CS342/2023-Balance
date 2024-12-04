@@ -204,7 +204,7 @@ struct ProfileView: View {
                 file: convertToCSV(),
                 fileName: self.patientID + ".csv",
                 plainText: convertToPlainText(),
-                to: ["cmirand@stanford.edu"]
+                to: ["acogburn@stanford.edu"]
             )
         }) {
             ProfileCellView(image: "mail", text: "E-Mail data")
