@@ -6,6 +6,10 @@
 // SPDX-License-Identifier: MIT
 //
 
+// -----------------------------------------------------------
+//  TestFlight Release Date: Mar/01/2025
+//  (Bumping the date and merging will redeploy in TestFligh)
+// -----------------------------------------------------------
 import SwiftUI
 
 // swiftlint:disable closure_body_length
