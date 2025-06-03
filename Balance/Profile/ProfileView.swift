@@ -177,7 +177,7 @@ struct ProfileView: View {
         } label: {
             ProfileCellView(image: "info", text: "Reset user")
         }.confirmationDialog("Reset User", isPresented: $showAlert) {
-            Button("Canel", role: .cancel) {
+            Button("Cancel", role: .cancel) {
                 showAlert = false
             }
             Button("Reset") {
