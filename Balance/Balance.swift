@@ -95,9 +95,13 @@ struct Balance: App {
     }
     
     func activeApp() {
-        if heartAlert == false {
-            appEvent(description: "App Opened manually")
+        let patientId = UserDefaults.standard.string(forKey: "lastPatient") ?? ""
+        if patientId.isEmpty {
+            if heartAlert == false {
+                appEvent(description: "App Opened manually")
+            }
         }
+        
         UIApplication.shared.applicationIconBadgeNumber = 0
         UserDefaults.standard.set(false, forKey: StorageKeys.spotifyConnect)
     }
