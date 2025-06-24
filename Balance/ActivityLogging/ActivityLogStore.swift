@@ -18,13 +18,13 @@ enum ActivityLogError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .fileURLNotFound:
-            return "No se pudo obtener la URL del directorio de documentos."
+            return "Could not get the URL for the documents directory."
         case .decodingError(let error):
-            return "Error al decodificar los datos: \(error.localizedDescription)"
+            return "Error decoding data: \(error.localizedDescription)"
         case .encodingError(let error):
-            return "Error al codificar los datos: \(error.localizedDescription)"
+            return "Error encoding data: \(error.localizedDescription)"
         case .fileAccessError(let error):
-            return "Error al acceder al archivo: \(error.localizedDescription)"
+            return "Error accessing file: \(error.localizedDescription)"
         }
     }
 }
@@ -33,6 +33,7 @@ class ActivityLogStore: ObservableObject {
     static let shared = ActivityLogStore()
     @Published var logs: [ActivityLogEntry] = []
     
+    // Serial queue for all file operations
     private let fileQueue = DispatchQueue(label: "com.balance.activitylog.filequeue")
     
     private static func fileURL() throws -> URL {
@@ -43,21 +44,22 @@ class ActivityLogStore: ObservableObject {
         return documentDirectory.appendingPathComponent("\(patientId)_activityLog.data")
     }
     
+    // Improved load function with serial queue
     static func load(completion: @escaping (Result<[ActivityLogEntry], Error>) -> Void) {
-        // Ejecuta la carga en la cola serial para evitar conflictos de acceso al archivo
+        // Execute the load on the serial queue to prevent file access conflicts
         ActivityLogStore.shared.fileQueue.async {
             do {
                 let fileURL = try fileURL()
                 
-                // Verifica si el archivo existe antes de intentar leerlo
+                // Check if the file exists before attempting to read it
                 guard FileManager.default.fileExists(atPath: fileURL.path) else {
                     DispatchQueue.main.async {
-                        completion(.success([])) // Si no existe, no es un error, simplemente no hay logs
+                        completion(.success([])) // If it doesn't exist, it's not an error, simply no logs
                     }
                     return
                 }
                 
-                let data = try Data(contentsOf: fileURL) // Leer directamente la data del archivo
+                let data = try Data(contentsOf: fileURL) // Read data directly from the file
                 let logs = try JSONDecoder().decode([ActivityLogEntry].self, from: data)
                 
                 DispatchQueue.main.async {
@@ -71,13 +73,14 @@ class ActivityLogStore: ObservableObject {
         }
     }
     
+    // Improved save function with serial queue
     static func save(logs: [ActivityLogEntry], completion: @escaping(Result<Int, Error>) -> Void) {
-        // Ejecuta el guardado en la cola serial para evitar conflictos
+        // Execute the save on the serial queue to prevent conflicts
         ActivityLogStore.shared.fileQueue.async {
             do {
                 let data = try JSONEncoder().encode(logs)
                 let outfile = try fileURL()
-                try data.write(to: outfile, options: [.atomicWrite]) // .atomicWrite para mayor seguridad
+                try data.write(to: outfile, options: [.atomicWrite]) // .atomicWrite for increased safety
                 
                 DispatchQueue.main.async {
                     completion(.success(logs.count))
@@ -90,20 +93,21 @@ class ActivityLogStore: ObservableObject {
         }
     }
     
+    // removeStore improved with serial queue and better error handling
     func removeStore() {
-        // Asegura que la operación de borrado también sea serializada
+        // Ensure the delete operation is also serialized
         fileQueue.async {
             do {
-                // Primero, vaciar los logs en memoria (esto NO los guarda inmediatamente)
-                // Se hará al reescribir con el array vacío.
-                let data = try JSONEncoder().encode([ActivityLogEntry]()) // Codificar un array vacío
+                // First, clear the logs in memory (this does NOT save them immediately)
+                // It will be done by overwriting with the empty array.
+                let data = try JSONEncoder().encode([ActivityLogEntry]()) // Encode an empty array
                 let outfile = try ActivityLogStore.fileURL()
-                try data.write(to: outfile, options: [.atomicWrite]) // Sobrescribir con datos vacíos
+                try data.write(to: outfile, options: [.atomicWrite]) // Overwrite with empty data
                 
-                // Actualizar el estado publicado en el hilo principal
+                // Update the published state on the main thread
                 DispatchQueue.main.async {
-                    self.logs.removeAll() // Limpiar el array en memoria después de guardar el vacío
-                    print("ActivityLogStore removeStore OK: Archivo vaciado.")
+                    self.logs.removeAll() // Clear the array in memory after saving the empty one
+                    print("ActivityLogStore removeStore OK: File emptied.")
                 }
             } catch {
                 DispatchQueue.main.async {
@@ -113,49 +117,51 @@ class ActivityLogStore: ObservableObject {
         }
     }
     
+    // deleteLog (the internal logic does not need the serial queue if it only modifies the array in memory,
+    // but the call to saveLog will use the queue)
     func deleteLog(_ id: String) {
-        // Modifica logs en el hilo principal ya que es una @Published var
+        // Modify logs on the main thread as it is an @Published var
         DispatchQueue.main.async {
-            self.logs.removeAll { $0.id == id } // Remover el log directamente
-            // Luego, guardar los logs actualizados
+            self.logs.removeAll { $0.id == id } // Remove the log directly
+            // Then, save the updated logs
             ActivityLogStore.save(logs: self.logs) { result in
                 if case .failure(let error) = result {
-                    print("Error al guardar logs después de eliminar: \(error.localizedDescription)")
+                    print("Error saving logs after deletion: \(error.localizedDescription)")
                 }
             }
         }
     }
     
-    // saveLog mejorada: carga, modifica, guarda, todo serializado
+    // Improved saveLog: load, modify, save, all serialized
     func saveLog(_ log: ActivityLogEntry) {
-        // Todas las operaciones de archivo deben ir a través de la cola serial
+        // All file operations must go through the serial queue
         fileQueue.async {
             do {
                 let fileURL = try ActivityLogStore.fileURL()
                 var currentLogs: [ActivityLogEntry] = []
                 
-                // Intentar cargar los logs existentes de forma sincrónica en la cola serial
+                // Attempt to load existing logs synchronously in the serial queue
                 if FileManager.default.fileExists(atPath: fileURL.path) {
                     let data = try Data(contentsOf: fileURL)
                     currentLogs = try JSONDecoder().decode([ActivityLogEntry].self, from: data)
                 }
                 
-                // Modificar el array en memoria de forma segura
+                // Modify the array in memory safely
                 currentLogs.removeAll { $0.id == log.id } // Eliminar si ya existe
                 currentLogs.append(log) // Añadir el nuevo o actualizado log
                 
-                // Guardar los logs modificados
+                // Save the modified logs
                 let encodedData = try JSONEncoder().encode(currentLogs)
                 try encodedData.write(to: fileURL, options: [.atomicWrite])
                 
-                // Actualizar el estado publicado en el hilo principal
+                // Update the published state on the main thread
                 DispatchQueue.main.async {
                     self.logs = currentLogs
-                    print("Log guardado y store actualizado en memoria.")
+                    print("Log saved and store updated in memory.")
                 }
             } catch {
                 DispatchQueue.main.async {
-                    print("Error en saveLog: \(error.localizedDescription)")
+                    print("Error in saveLog: \(error.localizedDescription)")
                 }
             }
         }
