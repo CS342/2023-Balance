@@ -7,7 +7,7 @@
 //
 
 // -----------------------------------------------------------
-//  TestFlight Release Date: Jun/03/2025
+//  TestFlight Release Date: Jun/24/2025
 //  (Bumping the date and merging will redeploy in TestFligh)
 // -----------------------------------------------------------
 import SwiftUI
@@ -95,9 +95,13 @@ struct Balance: App {
     }
     
     func activeApp() {
-        if heartAlert == false {
-            appEvent(description: "App Opened manually")
+        let patientId = UserDefaults.standard.string(forKey: "lastPatient") ?? ""
+        if patientId.isEmpty {
+            if heartAlert == false {
+                appEvent(description: "App Opened manually")
+            }
         }
+        
         UIApplication.shared.applicationIconBadgeNumber = 0
         UserDefaults.standard.set(false, forKey: StorageKeys.spotifyConnect)
     }
