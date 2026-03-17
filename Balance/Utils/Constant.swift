@@ -43,7 +43,7 @@ enum DistractMeOption: UInt32 {
                 maxValue += 1
             }
             return maxValue
-        }()
+    }()
 
         static func randomSection() -> DistractMeOption {
             // pick and return a new value

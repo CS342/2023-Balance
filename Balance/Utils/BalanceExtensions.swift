@@ -134,7 +134,7 @@ extension Notification.Name {
     static let heartAlert = Notification.Name("heartAlert")
 }
 
-// swiftlint:disable operator_whitespace
+// swiftlint:disable function_name_whitespace
 // swiftlint:disable large_tuple
 extension Date {
     static func -(recent: Date, previous: Date) -> (hour: Int?, minute: Int?, second: Int?) {
