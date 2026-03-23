@@ -23,7 +23,11 @@ jobs:
     with:
       artifactname: Balance.xcresult
       setupfirebaseemulator: true
-      customcommand: "firebase emulators:exec 'fastlane test'"
+      customcommand: |
+        export JAVA_HOME="$JAVA_HOME_21_arm64"
+        export PATH="$JAVA_HOME/bin:$PATH"
+        java -version
+        firebase emulators:exec 'fastlane test'
   uploadcoveragereport:
     name: Upload Coverage Report
     needs: buildandtest
