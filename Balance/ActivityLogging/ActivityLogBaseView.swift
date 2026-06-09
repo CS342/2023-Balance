@@ -56,7 +56,9 @@ struct ActivityLogBaseView<Content>: View where Content: View {
 #if DEBUG
                 print("[ActivityLogBaseView][didBecomeActive] - View: \(viewName), isVisible: \(isVisible)")
 #endif
-                guard isVisible else { return }
+                guard isVisible else {
+                    return
+                }
                 if activityLogEntry.pendingEntry?.description != viewName {
 #if DEBUG
                     print("[ActivityLogBaseView][didBecomeActive] - Re-pushing view: \(viewName)")
