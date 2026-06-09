@@ -17,6 +17,7 @@ struct HomeView: View {
 
     var body: some View {
         ActivityLogContainer {
+            ActivityLogBaseView(viewName: "Home", isDirectChildToContainer: true) {
             ZStack {
                 backgroundColor.edgesIgnoringSafeArea(.all)
                 NavigationStack {
@@ -50,6 +51,7 @@ struct HomeView: View {
             .onAppear {
                 localNotification()
             }
+        }
         }
     }
     

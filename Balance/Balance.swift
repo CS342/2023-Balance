@@ -87,14 +87,24 @@ struct Balance: App {
     func inactiveApp() { }
     
     func backgroundApp() {
+        print("[Balance][backgroundApp] - App going to BG")
         let value = UserDefaults.standard.bool(forKey: StorageKeys.spotifyConnect)
         if value == false {
-            activityLogEntry.reset()
+            activityLogEntry.finalizeOpenActions()
+            if !activityLogEntry.isEmpty() {
+#if DEMO
+                print("[Balance::backgroundApp] - DEMO Mode ON. Saving values")
+                logStore.saveLog(activityLogEntry)
+#else
+                ActivityStorageManager.shared.uploadActivity(activityLogEntry: activityLogEntry)
+#endif
+            }
         }
         self.heartAlert = false
     }
     
     func activeApp() {
+        print("[Balance][activeApp] - App activating")
         let patientId = UserDefaults.standard.string(forKey: "lastPatient") ?? ""
         if patientId.isEmpty {
             if heartAlert == false {
@@ -110,11 +120,11 @@ struct Balance: App {
         activityLogEntry.addActionButton(actionDescription: description)
 #if DEMO
         logStore.saveLog(activityLogEntry)
-        ActivityLogStore.save(logs: logStore.logs) { result in
-            if case .failure(let error) = result {
-                print(error.localizedDescription)
-            }
-        }
+//        ActivityLogStore.save(logs: logStore.logs) { result in
+//            if case .failure(let error) = result {
+//                print(error.localizedDescription)
+//            }
+//        }
 #else
         ActivityStorageManager.shared.uploadActivity(activityLogEntry: activityLogEntry)
 #endif

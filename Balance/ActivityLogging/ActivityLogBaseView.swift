@@ -25,43 +25,46 @@ struct ActivityLogContainer<Content>: View where Content: View {
 struct ActivityLogBaseView<Content>: View where Content: View {
     @EnvironmentObject var activityLogEntry: ActivityLogEntry
     @EnvironmentObject var logStore: ActivityLogStore
+    @State private var isVisible = false
     private let viewName: String
     private let isDirectChildToContainer: Bool
     private let content: Content
-    
+
     var body: some View {
         content
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name.goBackground)) { _ in
-                activityLogEntry.reset()
-            }
             .onAppear(perform: {
-                activityLogEntry.addAction(actionDescription: "Opened \(viewName)")
 #if DEBUG
-                print("Opened \(viewName)")
+                print("[ActivityLogBaseView][onAppear] - View: \(viewName)")
 #endif
+                isVisible = true
+                activityLogEntry.addAction(actionDescription: "Opened \(viewName)")
             })
             .onDisappear(perform: {
+#if DEBUG
+                print("[ActivityLogBaseView][onDisappear] - View: \(viewName)")
+#endif
+                isVisible = false
                 activityLogEntry.endLog(actionDescription: "Closed \(viewName)")
-                
+
                 if isDirectChildToContainer {
-#if DEMO
                     logStore.saveLog(activityLogEntry)
-#else
-                    ActivityStorageManager.shared.uploadActivity(activityLogEntry: activityLogEntry)
-#endif
-                    // for debugging
-                    let activityLogEntryString = activityLogEntry.toString()
-#if DEBUG
-                    print("Sending activity log to storage manager: \(activityLogEntryString)")
-#endif
                 }
-                
-#if DEBUG
-                print("Closed \(viewName)")
-#endif
             })
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+#if DEBUG
+                    print("[ActivityLogBaseView][didBecomeActive]: \(viewName)")
+#endif
+                guard isVisible else { return }
+                let alreadyLogged = activityLogEntry.actions.contains { $0.description == "Opened \(viewName)" }
+                if !alreadyLogged {
+#if DEBUG
+                    print("[ActivityLogBaseView][didBecomeActive] - View is Visible and wasn't logged yet. Readding view: \(viewName)")
+#endif
+                    activityLogEntry.addAction(actionDescription: "Opened \(viewName)")
+                }
+            }
     }
-    
+
     public init(viewName: String, isDirectChildToContainer: Bool = false, @ViewBuilder content: () -> Content) {
         self.viewName = viewName
         self.isDirectChildToContainer = isDirectChildToContainer

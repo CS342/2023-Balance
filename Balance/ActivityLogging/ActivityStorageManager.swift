@@ -22,7 +22,7 @@ import Foundation
 
 // swiftlint:disable all
 
-struct LogAction {
+struct LogAction: Codable {
     let sessionID: String
     let sessionStartTime: Date
     let sessionEndTime: Date
@@ -55,7 +55,26 @@ class ActivityLogEntry: ObservableObject, Codable {
     var endTime = Date.now
     var duration: Int = 0
     var actions: [Action] = []
-    
+
+    init() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+    }
+
+    @objc private func handleWillEnterForeground() {
+        let spotifyWasActive = UserDefaults.standard.bool(forKey: StorageKeys.spotifyConnect)
+        if !spotifyWasActive {
+#if DEBUG
+            print("[ActivityLogEntry][handleWillEnterForeground] - Resetting entry")
+#endif
+            reset()
+        }
+    }
+
     func reset() {
         id = UUID().uuidString
         startTime = Date()
@@ -71,6 +90,10 @@ class ActivityLogEntry: ObservableObject, Codable {
     func addAction(actionDescription: String) {
         let currentDate = Date.now
         actions.append(Action(description: actionDescription, startTime: currentDate))
+        print("[ActivityStorageManager][addAction] - Action count: \(actions.count)")
+        print("[ActivityStorageManager][addAction] - ------------------------------")
+        print("[ActivityStorageManager][addAction] - \(actions.toJSON())")
+        print("[ActivityStorageManager][addAction] - ------------------------------")
     }
     
     func addActionButton(actionDescription: String) {
@@ -84,12 +107,36 @@ class ActivityLogEntry: ObservableObject, Codable {
             )
         )
         // set start time if this is the first action
-        startTime = currentDate
-        endTime = currentDate
-
-        duration = 0
+//        startTime = currentDate
+//        endTime = currentDate
+//        duration = 0
+        print("[ActivityStorageManager][addActionButton] - Action count: \(actions.count)")
+        print("[ActivityStorageManager][addActionButton] - ------------------------------")
+        print("[ActivityStorageManager][addActionButton] - \(actions.toJSON())")
+        print("[ActivityStorageManager][addActionButton] - ------------------------------")
+        
     }
     
+    func finalizeOpenActions() {
+        print("[ActivityStorageManager][finalizeOpenActions] - Action count: \(actions.count)")
+        guard let lastAction = actions.last, lastAction.description.hasPrefix("Opened ") else { return }
+        print("[ActivityStorageManager][finalizeOpenActions] - Last action: { \(lastAction.toJSON()) }")
+        let now = Date.now
+        let interval = now - lastAction.startTime
+        actions.append(
+            Action(
+                description: lastAction.description.replacingOccurrences(of: "Opened ", with: ""),
+                startTime: lastAction.startTime,
+                endTime: now,
+                duration: interval.second ?? 0
+            )
+        )
+        actions = actions.filter { $0.id != lastAction.id }
+        startTime = actions.first!.startTime
+        endTime = actions.last!.endTime
+        duration = ((endTime - startTime).second ?? 0)
+    }
+
     func endLog(actionDescription: String) {
         let currentEndDate = Date.now
         let startAction = actions.last(where: {
@@ -138,11 +185,12 @@ class ActivityLogEntry: ObservableObject, Codable {
             }
         }
         
-        print(interval.second ?? 0)
+        print("[ActiityLogEntry][endLog] - \(interval.second ?? 0)")
         startTime = actions.first!.startTime
         endTime = actions.last!.endTime
         let intervalSession = endTime - startTime
         duration = intervalSession.second ?? 0
+        print("[endLog] - Action count: \(actions.count)")
     }
         
     func getDuration() -> TimeInterval {
@@ -205,3 +253,4 @@ class ActivityStorageManager {
         }
     }
 }
+
