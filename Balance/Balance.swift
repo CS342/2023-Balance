@@ -90,7 +90,7 @@ struct Balance: App {
         print("[Balance][backgroundApp] - App going to BG")
         let value = UserDefaults.standard.bool(forKey: StorageKeys.spotifyConnect)
         if value == false {
-            activityLogEntry.finalizeOpenActions()
+            activityLogEntry.finalizePending()
             if !activityLogEntry.isEmpty() {
 #if DEMO
                 print("[Balance::backgroundApp] - DEMO Mode ON. Saving values")
@@ -117,7 +117,7 @@ struct Balance: App {
     }
     
     func appEvent(description: String) {
-        activityLogEntry.addActionButton(actionDescription: description)
+        activityLogEntry.addButtonEvent(description: description)
 #if DEMO
         logStore.saveLog(activityLogEntry)
 //        ActivityLogStore.save(logs: logStore.logs) { result in

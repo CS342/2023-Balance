@@ -17,14 +17,15 @@ struct HomeView: View {
 
     var body: some View {
         ActivityLogContainer {
-            ActivityLogBaseView(viewName: "Home", isDirectChildToContainer: true) {
             ZStack {
                 backgroundColor.edgesIgnoringSafeArea(.all)
                 NavigationStack {
-                    VStack(spacing: 0) {
-                        HeaderHome().environmentObject(counter)
-                        menuOptions
-                        Spacer()
+                    ActivityLogBaseView(viewName: "Home", isDirectChildToContainer: true) {
+                        VStack(spacing: 0) {
+                            HeaderHome().environmentObject(counter)
+                            menuOptions
+                            Spacer()
+                        }
                     }
                     .navigationTitle("")
                     .navigationBarTitle("", displayMode: .inline)
@@ -44,14 +45,12 @@ struct HomeView: View {
             }
             .onChange(of: counter.count, perform: { _ in
                 if counter.count > UserDefaults.standard.double(forKey: bpmKEY) {
-//                    print(counter.count)
                     alertHeartRate()
                 }
             })
             .onAppear {
                 localNotification()
             }
-        }
         }
     }
     

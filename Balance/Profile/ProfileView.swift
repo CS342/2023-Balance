@@ -182,7 +182,6 @@ struct ProfileView: View {
             }
             Button("Reset") {
                 activityLogEntry.reset()
-                // NotificationCenter.default.post(name: Notification.Name.goBackground, object: nil)
                 self.logs.removeAll()
                 logsIsEmpty = true
                 UserImageCache.remove(key: self.patientID.appending("UploadedArray"))
@@ -198,24 +197,35 @@ struct ProfileView: View {
     
     var shareOption: some View {
         Button(action: {
-            EmailHelper.shared.send(
-                subject: "Balance Export",
-                body: "ParticipantID: " + self.patientID + "\n",
-                file: convertToCSV(),
-                fileName: self.patientID + ".csv",
-                plainText: convertToPlainText(),
-                to: ["acogburn@stanford.edu"]
-            )
+            ActivityLogStore.load { result in
+                if case .success(let freshLogs) = result {
+                    self.logs = freshLogs
+                    EmailHelper.shared.send(
+                        subject: "Balance Export",
+                        body: "ParticipantID: " + self.patientID + "\n",
+                        file: self.convertToCSV(),
+                        fileName: self.patientID + ".csv",
+                        plainText: self.convertToPlainText(),
+                        to: ["acogburn@stanford.edu"]
+                    )
+                }
+            }
         }) {
             ProfileCellView(image: "mail", text: "E-Mail data")
         }
     }
-    
+
     var shareLink: some View {
-        ShareLink(
-            item: convertToCSV(),
-            subject: Text("Balance Export: ParticipantID: " + self.patientID)
-        ) {
+        Button(action: {
+            ActivityLogStore.load { result in
+                if case .success(let freshLogs) = result {
+                    self.logs = freshLogs
+                    let url = self.convertToCSV()
+                    let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                    UIApplication.shared.currentUIWindow()?.rootViewController?.present(activityVC, animated: true)
+                }
+            }
+        }) {
             ProfileCellView(image: "square.and.arrow.up", text: "Share data")
         }
     }
@@ -426,6 +436,7 @@ struct ProfileView: View {
                 print(error.localizedDescription)
             case .success(let logs):
                 self.logs = logs
+                print("[ProfileView][loadLogs]: Dump: \(self.logs.toJSON())")
                 if self.logs.isEmpty {
                     logsIsEmpty = true
                 } else {
@@ -435,66 +446,50 @@ struct ProfileView: View {
         }
     }
     
-    func convertToCSV() -> URL {
+    private func buildLogActions() -> [LogAction] {
         var logActions = [LogAction]()
-        var noteAsCSV = "sessionID, sessionStartTime, sessionEndTime, sessionDuration, description, startTime, endTime, duration\n"
         for log in logs {
-            for action in log.actions {
+            for entry in log.entries {
                 logActions.append(
                     LogAction(
                         sessionID: log.id,
                         sessionStartTime: log.startTime,
                         sessionEndTime: log.endTime,
                         sessionDuration: log.duration,
-                        description: action.description,
-                        startTime: action.startTime,
-                        endTime: action.endTime,
-                        duration: action.duration
+                        description: entry.description,
+                        startTime: entry.startTime,
+                        endTime: entry.endTime,
+                        duration: entry.duration
                     )
                 )
             }
         }
-        
-        for action in logActions.sorted(by: { $0.startTime.compare($1.startTime) == .orderedAscending }) {
+        return logActions.sorted { $0.startTime.compare($1.startTime) == .orderedAscending }
+    }
+
+    func convertToCSV() -> URL {
+        let logActions = buildLogActions()
+        var noteAsCSV = "sessionID, sessionStartTime, sessionEndTime, sessionDuration, description, startTime, endTime, duration\n"
+        for action in logActions {
             noteAsCSV.append(contentsOf: "\"\(action.sessionID)\",\"\(DateFormatter.sharedDateFormatter.string(from: action.sessionStartTime))\",\"\(DateFormatter.sharedDateFormatter.string(from: action.sessionEndTime))\",\"\(action.sessionDuration)\",\"\(action.description)\",\"\(DateFormatter.sharedDateFormatter.string(from: action.startTime))\",\"\(DateFormatter.sharedDateFormatter.string(from: action.endTime))\",\"\(action.duration)\"\n")
         }
-        
         let fileManager = FileManager.default
         do {
             let path = try fileManager.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil, create: false)
             let fileURL = path.appendingPathComponent(self.patientID + ".csv")
             try noteAsCSV.write(to: fileURL, atomically: true, encoding: .utf8)
-            
             return fileURL
         } catch {
             print("error creating file")
         }
         return URL(fileURLWithPath: "")
     }
-    
+
     func convertToPlainText() -> String {
+        let logActions = buildLogActions()
         var noteAsCSV = "ParticipantID: " + self.patientID + "\n"
         noteAsCSV.append(contentsOf: "sessionID, sessionStartTime, sessionEndTime, sessionDuration, description, startTime, endTime, duration\n")
-        
-        var logActions = [LogAction]()
-        for log in logs {
-            for action in log.actions {
-                logActions.append(
-                    LogAction(
-                        sessionID: log.id,
-                        sessionStartTime: log.startTime,
-                        sessionEndTime: log.endTime,
-                        sessionDuration: log.duration,
-                        description: action.description,
-                        startTime: action.startTime,
-                        endTime: action.endTime,
-                        duration: action.duration
-                    )
-                )
-            }
-        }
-        
-        for action in logActions.sorted(by: { $0.startTime.compare($1.startTime) == .orderedAscending }) {
+        for action in logActions {
             noteAsCSV.append(contentsOf: "\"\(action.sessionID)\",\"\(DateFormatter.sharedDateFormatter.string(from: action.sessionStartTime))\",\"\(DateFormatter.sharedDateFormatter.string(from: action.sessionEndTime))\",\"\(action.sessionDuration)\",\"\(action.description)\",\"\(DateFormatter.sharedDateFormatter.string(from: action.startTime))\",\"\(DateFormatter.sharedDateFormatter.string(from: action.endTime))\",\"\(action.duration)\"\n")
         }
         return noteAsCSV
@@ -506,8 +501,8 @@ struct ProfileView: View {
         var counts: [String: Int] = [:]
 
         for log in logs {
-            for action in log.actions {
-                logActions.append(action.description)
+            for entry in log.entries {
+                logActions.append(entry.description)
             }
         }
         for item in logActions {
