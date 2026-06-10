@@ -110,7 +110,7 @@ class SpotifyViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        activityLogEntry?.addAction(actionDescription: "Opened Playing Spotify")
+        activityLogEntry?.push(viewName: "Playing Spotify")
         updateViewBasedOnConnected()
     }
     
@@ -121,7 +121,7 @@ class SpotifyViewController: UIViewController {
                 appRemote.playerAPI?.pause(nil)
             }
         }
-        activityLogEntry?.endLog(actionDescription: "Closed Playing Spotify")
+        activityLogEntry?.finalizePending()
     }
     
     @objc

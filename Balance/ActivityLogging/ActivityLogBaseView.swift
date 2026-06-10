@@ -11,57 +11,63 @@ import SwiftUI
 struct ActivityLogContainer<Content>: View where Content: View {
     @EnvironmentObject var activityLogEntry: ActivityLogEntry
     private let content: Content
-    
+
     var body: some View {
         content.environmentObject(activityLogEntry)
     }
-    
+
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
 }
 
-// This base view implements functionality to log information that will be send to the ActivityStorageManager
 struct ActivityLogBaseView<Content>: View where Content: View {
     @EnvironmentObject var activityLogEntry: ActivityLogEntry
     @EnvironmentObject var logStore: ActivityLogStore
+    @State private var isVisible = false
     private let viewName: String
     private let isDirectChildToContainer: Bool
     private let content: Content
-    
+
     var body: some View {
         content
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name.goBackground)) { _ in
-                activityLogEntry.reset()
+            .onAppear {
+#if DEBUG
+                print("[ActivityLogBaseView][onAppear] - View: \(viewName)")
+#endif
+                isVisible = true
+                activityLogEntry.push(viewName: viewName)
             }
-            .onAppear(perform: {
-                activityLogEntry.addAction(actionDescription: "Opened \(viewName)")
+            .onDisappear {
 #if DEBUG
-                print("Opened \(viewName)")
+                print("[ActivityLogBaseView][onDisappear] - View: \(viewName)")
 #endif
-            })
-            .onDisappear(perform: {
-                activityLogEntry.endLog(actionDescription: "Closed \(viewName)")
-                
-                if isDirectChildToContainer {
-#if DEMO
-                    logStore.saveLog(activityLogEntry)
-#else
-                    ActivityStorageManager.shared.uploadActivity(activityLogEntry: activityLogEntry)
-#endif
-                    // for debugging
-                    let activityLogEntryString = activityLogEntry.toString()
-#if DEBUG
-                    print("Sending activity log to storage manager: \(activityLogEntryString)")
-#endif
+                isVisible = false
+                // On forward nav, push() already finalized this view before onDisappear fires.
+                // Only finalize if pendingEntry still matches — i.e. this is a back navigation.
+                if activityLogEntry.pendingEntry?.description == viewName {
+                    activityLogEntry.finalizePending()
                 }
-                
+                if isDirectChildToContainer {
+                    logStore.saveLog(activityLogEntry)
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
 #if DEBUG
-                print("Closed \(viewName)")
+                print("[ActivityLogBaseView][didBecomeActive] - View: \(viewName), isVisible: \(isVisible)")
 #endif
-            })
+                guard isVisible else {
+                    return
+                }
+                if activityLogEntry.pendingEntry?.description != viewName {
+#if DEBUG
+                    print("[ActivityLogBaseView][didBecomeActive] - Re-pushing view: \(viewName)")
+#endif
+                    activityLogEntry.push(viewName: viewName)
+                }
+            }
     }
-    
+
     public init(viewName: String, isDirectChildToContainer: Bool = false, @ViewBuilder content: () -> Content) {
         self.viewName = viewName
         self.isDirectChildToContainer = isDirectChildToContainer

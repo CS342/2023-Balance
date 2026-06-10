@@ -8,7 +8,7 @@
 
 import Foundation
 
-// swiftlint:disable convenience_type force_unwrapping
+// swiftlint:disable convenience_type
 struct SpotifyConfig {
     static let accessTokenKey = "access-token-key"
     static let redirectUri = URL(string: "balanceapp://spotify")!

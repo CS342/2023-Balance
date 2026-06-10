@@ -19,14 +19,14 @@ struct ActivityLogButtonStyle: PrimitiveButtonStyle {
         configuration.label
             .onTapGesture {
                 configuration.trigger()
-                activityLogEntry.addActionButton(actionDescription: "Button " + activityDescription)
+                activityLogEntry.addButtonEvent(description: "Button " + activityDescription)
 #if DEMO
                     logStore.saveLog(activityLogEntry)
-                    ActivityLogStore.save(logs: logStore.logs) { result in
-                        if case .failure(let error) = result {
-                            print(error.localizedDescription)
-                        }
-                    }
+//                    ActivityLogStore.save(logs: logStore.logs) { result in
+//                        if case .failure(let error) = result {
+//                            print(error.localizedDescription)
+//                        }
+//                    }
 #else
                     ActivityStorageManager.shared.uploadActivity(activityLogEntry: activityLogEntry)
 #endif

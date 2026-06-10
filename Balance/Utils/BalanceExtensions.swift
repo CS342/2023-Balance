@@ -166,3 +166,18 @@ extension Array {
           return Array(self[0..<min])
     }
 }
+
+#if DEBUG
+extension Encodable {
+    func toJSON() -> String {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        encoder.dateEncodingStrategy = .iso8601
+        guard let data = try? encoder.encode(self),
+              let json = String(data: data, encoding: .utf8) else {
+            return "<toJSON encoding failed>"
+        }
+        return json
+    }
+}
+#endif
