@@ -1371,7 +1371,7 @@
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "BalanceWatchApp would like to capture a snap shot of your heart rate for the purpose of using the data in a clinical research study. Please grant this permission to continue participating.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "BalanceWatchApp would like to update your health usage with heart rate data. Actually we never do anything of the kind but it seems Apple has lost control of X-Code and has few if any answers, so we will ask this permission.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.celteeka.cs342.2023.balance;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = edu.stanford.cs342.2023.balance;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
