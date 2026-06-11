@@ -436,7 +436,9 @@ struct ProfileView: View {
                 print(error.localizedDescription)
             case .success(let logs):
                 self.logs = logs
+#if DEBUG
                 print("[ProfileView][loadLogs]: Dump: \(self.logs.toJSON())")
+#endif
                 if self.logs.isEmpty {
                     logsIsEmpty = true
                 } else {
