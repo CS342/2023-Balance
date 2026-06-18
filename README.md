@@ -52,7 +52,7 @@ The application includes continuous integration (CI) and continuous delivery (CD
 - Automatically build and test the application on every pull request before deploying it.
 - An automated setup to deploy the application to TestFlight every time there is a new commit on the repository's main branch.
 - Ensure a coherent code style by checking the conformance to the SwiftLint rules defined in `.swiftlint.yml` on every pull request and commit.
-- Ensure conformance to the [REUSE Spacification]() to property license the application and all related code.
+- Ensure conformance to the [REUSE Specification]() to properly license the application and all related code.
 
 Please refer to the [StanfordBDHG Template Application](https://github.com/StanfordBDHG/Balance) and the [ContinousDelivery Example by Paul Schmiedmayer](https://github.com/PSchmiedmayer/ContinousDelivery) for more background about the CI and CD setup for the CardinalKit Template Application.
 
